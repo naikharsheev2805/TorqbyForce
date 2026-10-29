@@ -1,0 +1,50 @@
+{
+  "papers": [
+    {
+      "id": "main-2025-jan-s1-sh1-22jan",
+      "exam": "main",
+      "year": 2025,
+      "session": "Jan-S1",
+      "session_number": 1,
+      "shift": 1,
+      "shift_label": "Shift 1",
+      "date": "2025-01-22",
+      "file": "data/main-2025-jan-s1-sh1-22jan.json",
+      "question_count": 75,
+      "subjects": {
+        "Maths": 25,
+        "Physics": 25,
+        "Chemistry": 25
+      },
+      "difficulty_counts": {
+        "easy": 17,
+        "medium": 39,
+        "hard": 19
+      },
+      "verified": false
+    },
+    {
+      "id": "main-2025-jan-s1-sh2-22jan",
+      "exam": "main",
+      "year": 2025,
+      "session": "Jan-S1",
+      "session_number": 1,
+      "shift": 2,
+      "shift_label": "Shift 2",
+      "date": "2025-01-22",
+      "file": "data/main-2025-jan-s1-sh2-22jan.json",
+      "question_count": 75,
+      "subjects": {
+        "Maths": 25,
+        "Physics": 25,
+        "Chemistry": 25
+      },
+      "difficulty_counts": {
+        "easy": 19,
+        "medium": 34,
+        "hard": 22
+      },
+      "verified": false
+    }
+  ]
+}
