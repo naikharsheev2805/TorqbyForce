@@ -564,6 +564,12 @@ button:focus:not(:focus-visible), [role="button"]:focus:not(:focus-visible){ out
 /* ---------- Tau image: crop the picture's outer edge so its coloured border is cut away ---------- */
 .header .logo, .onb-top .logo, .spl-logo{ border-radius:12px; object-fit:cover; transform:none; clip-path:none; box-shadow:none; }
 
+/* ---------- Frozen streak: held at yesterday's count until today is answered ---------- */
+.streak.frozen .sk-n{ color:var(--muted); }
+.streak.frozen .sk-l{ color:var(--muted); }
+.streak.frozen .sd.on{ background:var(--surface-2); box-shadow:inset 0 0 0 1px var(--border); }
+.streak.frozen .sd.today{ outline-color:var(--border); }
+
 .intwrap{margin:12px 0 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .intin{font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);width:180px}
 .intin.ok{border-color:var(--ok,#2a9d5c)} .intin.bad{border-color:var(--bad,#d64545)}
@@ -813,12 +819,18 @@ function attemptsWhere(fn){ return store.attempts.filter(a=>{ const q=QMAP[a.q];
 const chapterStats = c => statsOf(attemptsWhere(q=>q.chapter===c));
 const subjectStats = s => statsOf(attemptsWhere(q=>q.subject===s));
 const topicStats = (c,t) => statsOf(attemptsWhere(q=>q.chapter===c && q.topic===t));
-function streak(){
+// Days in a row. While today is still open the streak is held (frozen) at yesterday's count.
+function streakInfo(){
   const days = new Set(store.attempts.map(a=>a.d));
-  let n=0; const d=new Date();
+  const d = new Date();
+  let frozen = false;
+  if(!days.has(dayKey(d))){ d.setDate(d.getDate()-1); frozen = true; }
+  let n = 0;
   while(days.has(dayKey(d))){ n++; d.setDate(d.getDate()-1); }
-  return n;
+  return {n, frozen};
 }
+function streak(){ return streakInfo().n; }
+
 function dailyQueue(){ return shuffle(QUESTIONS, rng(seed('daily-'+dayKey()))).slice(0,10); }
 function weakChapter(){
   const c = ALL_CHAPTERS.map(name=>({name, s:chapterStats(name)})).filter(x=>x.s.total>=2);
@@ -1640,7 +1652,7 @@ function onboardView(){
   stage.appendChild(el('<div class="onb-hero">'
     +'<div class="onb-top">'+logoImg()+'<div class="brand-lock">'+torqWordmark('wm-md')+'<span class="brand-sub">JEE companion</span></div><span class="onb-step">Step 1 of 1</span></div>'
     +'<div class="onb-eyebrow">JEE Main \u00B7 Previous-year papers</div>'
-    +'<h1 class="onb-title"><span class="w">JEE</span><span class="w onb-outline">Crack</span><em class="w">with intent.</em></h1>'
+    +'<h1 class="onb-title"><span class="w onb-outline">Crack</span><span class="w">JEE</span><em class="w">with intent.</em></h1>'
     +'<p class="onb-sub">Real papers, shift by shift, and timed mocks that feel like exam day. Tell us a little about you to begin.</p>'
     +'<div class="onb-tags"><span>Shift-wise PYQs</span><span>Timed mocks</span><span>Chapter drills</span></div>'
     +'</div>'));
@@ -1655,7 +1667,7 @@ function onboardView(){
 function profilePart(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="eyebrow" style="margin:6px 0 10px">Your profile</div>'));
-  w.appendChild(profileForm(store.profile||{exam:'main'}, 'Save changes', p=>{ store.profile = p; persist(); go('me',{meTab:'profile'}); }));
+  w.appendChild(profileForm(store.profile||{exam:'main'}, 'Save changes', (p,av)=>{ store.profile = p; persist(); cacheUser({avatar: av||null}); go('me',{meTab:'profile'}); }, true));
   return w;
 }
 
@@ -2031,7 +2043,8 @@ function flair(w, pct, answered, goodAt){
 let qotdOpen = false;
 function streakStrip(){
   const days = new Set(store.attempts.map(a=>a.d));
-  const n = streak();
+  const info = streakInfo();
+  const n = info.n;
   const todayDone = days.has(dayKey());
   const tiles = [];
   for(let i=6;i>=0;i--){
@@ -2042,7 +2055,7 @@ function streakStrip(){
   const nudge = n>0 && !todayDone ? 'Study today to keep your '+n+'-day streak alive.'
               : n>0 ? 'You are on fire. Keep it going tomorrow.'
               : 'Answer one question today to start a streak.';
-  return el('<div class="card streak"><div class="sk-top"><div class="sk-n">'+n+'</div>'
+  return el('<div class="card streak'+(info.frozen?' frozen':'')+'"><div class="sk-top"><div class="sk-n">'+n+'</div>'
     +'<div><div class="sk-l">Day streak</div><div class="note-line" style="margin:3px 0 0">'+esc(nudge)+'</div></div></div>'
     +'<div class="sk-days">'+tiles.join('')+'</div></div>');
 }
