@@ -948,7 +948,56 @@ let ALL_CHAPTERS = [];
 const STORE_KEY = 'pyq_store_v1';
 let store = {bookmarks:[], errorLog:[], notes:{}, attempts:[]};
 function loadLocal(){ try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || null; }catch(e){ return null; } }
-function persist(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){} }
+function persist(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){} markCloudDirty(); }
+
+// ----- Cloud save: the whole progress (streak, notes, quote, answers) is kept on the server too -----
+let cloudReady = false, cloudDirty = false, cloudTimer = null, cloudChain = Promise.resolve();
+function markCloudDirty(){
+  cloudDirty = true;
+  if(!sbSession) return;
+  clearTimeout(cloudTimer);
+  cloudTimer = setTimeout(flushCloud, 300);
+}
+// Sends the current progress if it changed. Never runs before the saved copy has been read, so nothing is overwritten by mistake.
+function flushCloud(){
+  clearTimeout(cloudTimer);
+  if(!cloudReady || !cloudDirty || !sbSession) return cloudChain;
+  const db = sbClient(); if(!db) return cloudChain;
+  cloudDirty = false;
+  const uid = sbSession.user.id;
+  cloudChain = cloudChain.then(async ()=>{
+    let quote = null; try{ quote = JSON.parse(localStorage.getItem(QUOTE_KEY)); }catch(e){}
+    const { error } = await db.from('user_state').upsert({ user_id: uid, data: { store: store, quote: quote }, updated_at: new Date().toISOString() }, { onConflict: 'user_id' });
+    if(error){ cloudDirty = true; console.error('Cloud save failed, will retry', error); }
+  }).catch(e=>{ cloudDirty = true; console.error(e); });
+  return cloudChain;
+}
+// Reads the saved progress and merges it with this device. Nothing is written back until this succeeds.
+async function restoreCloudState(uid){
+  const db = sbClient(); if(!db || !uid) return;
+  const { data, error } = await db.from('user_state').select('data').eq('user_id', uid).maybeSingle();
+  if(error){ console.error('Could not read saved progress', error); return; }
+  const saved = data && data.data;
+  if(saved && saved.store){
+    const s = saved.store;
+    const have = new Set(store.attempts.filter(Boolean).map(a => a.q + '|' + a.at));
+    (s.attempts || []).forEach(a => { if(!a) return; const k = a.q + '|' + a.at; if(!have.has(k)){ have.add(k); store.attempts.push(a); } });
+    Object.keys(s).forEach(k => {
+      if(k === 'attempts') return;
+      const sv = s[k], lv = store[k];
+      if(lv === undefined || lv === null) store[k] = sv;
+      else if(Array.isArray(lv) && Array.isArray(sv)) store[k] = Array.from(new Set([...lv, ...sv]));
+      else if(typeof lv === 'number' && typeof sv === 'number') store[k] = Math.max(lv, sv);
+      else if(typeof lv === 'object' && !Array.isArray(lv) && sv && typeof sv === 'object') store[k] = Object.assign({}, sv, lv);
+    });
+  }
+  if(saved && saved.quote){
+    try{ if(!localStorage.getItem(QUOTE_KEY)) localStorage.setItem(QUOTE_KEY, JSON.stringify(saved.quote)); }catch(e){}
+  }
+  cloudReady = true;
+  persist();
+  markCloudDirty();
+}
 
 // ---------- App state ----------
 let view = 'home';
@@ -960,6 +1009,7 @@ const TAB_OF = {leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq'
 function go(v, patch){
   if(TAB_OF[v]) nav.tab = TAB_OF[v];
   Object.assign(nav, patch||{});
+  if(cloudDirty) flushCloud();
   view = v; render(); window.scrollTo(0,0);
 }
 function setCfg(patch){ nav.cfg = Object.assign({}, nav.cfg, patch); render(); }
@@ -1198,7 +1248,18 @@ function submitMock(){
 }
 function setConf(qid, conf){
   const a = session.answers[qid];
-  if(a && a.att) a.att.conf = a.att.conf===conf ? null : conf;
+  if(a && a.att){
+    const next = a.att.conf===conf ? null : conf;
+    a.att.conf = next;
+    a.att.dirty = true;
+    // Points depend on sure / guess, so recalculate this answer when the choice changes
+    if(a.pts !== undefined && a.correct !== undefined && !a.skip){
+      const newPts = scoreFor(!!a.correct, next || 'guess', a.time || 0);
+      addPoints(newPts - a.pts);
+      a.pts = newPts;
+    }
+    scheduleUpload();
+  }
   persist(); render();
 }
 function saveNote(qid, text){
@@ -1256,6 +1317,17 @@ function syncProfile(){ if(store.profile) return saveRemote(store.profile, loadA
 let __upTimer = null, __upBusy = false, __upAgain = false;
 function scheduleUpload(){ clearTimeout(__upTimer); __upTimer = setTimeout(()=>{ if(sbSession) uploadPending(); }, 800); }
 // Uploads every attempt that has not gone up yet (answers, skips). Safe to call often.
+// The columns stored for one answer on the server
+function attemptFields(a){
+  return {
+    is_correct: a.skipped ? null : !!a.c,
+    skipped: !!a.skipped,
+    time_ms: a.t != null ? Math.round(a.t * 1000) : null,
+    confidence: (a.conf === 'sure' || a.conf === 'guess') ? a.conf : null,
+    points: a.skipped ? 0 : scoreFor(!!a.c, a.conf, a.t || 0),
+    created_at: a.at ? new Date(a.at).toISOString() : (a.d ? new Date(a.d + 'T12:00:00').toISOString() : new Date().toISOString())
+  };
+}
 async function uploadPending(){
   if(__upBusy){ __upAgain = true; return; }
   const db = sbClient(); if(!db || !sbSession) return;
@@ -1265,22 +1337,22 @@ async function uploadPending(){
     // Devices that uploaded before this version already sent everything up to now
     const legacy = 'torq_uploaded_' + uid;
     try{ if(localStorage.getItem(legacy)){ store.attempts.forEach(a=>{ if(a) a.up = true; }); persist(); } }catch(e){}
+    // Answers whose sure / guess choice changed after they were sent: update their row
+    const changed = store.attempts.filter(a => a && a.q && a.up && a.dirty);
+    for(const a of changed){
+      const f = attemptFields(a);
+      const { error } = await db.from('attempts').update(f).eq('user_id', uid).eq('question_id', String(a.q)).eq('created_at', f.created_at);
+      if(error){ console.error('Update failed, will retry', error); return; }
+      a.dirty = false;
+    }
+    if(changed.length) persist();
     const todo = store.attempts.filter(a => a && a.q && !a.up);
     for(let i = 0; i < todo.length; i += 500){
       const chunk = todo.slice(i, i + 500);
-      const rows = chunk.map(a => ({
-        user_id: uid,
-        question_id: String(a.q),
-        is_correct: a.skipped ? null : !!a.c,
-        skipped: !!a.skipped,
-        time_ms: a.t != null ? Math.round(a.t * 1000) : null,
-        confidence: (a.conf === 'sure' || a.conf === 'guess') ? a.conf : null,
-        points: a.skipped ? 0 : scoreFor(!!a.c, a.conf, a.t || 0),
-        created_at: a.at ? new Date(a.at).toISOString() : (a.d ? new Date(a.d + 'T12:00:00').toISOString() : new Date().toISOString())
-      }));
+      const rows = chunk.map(a => Object.assign({ user_id: uid, question_id: String(a.q) }, attemptFields(a)));
       const { error } = await db.from('attempts').insert(rows);
       if(error){ console.error('Upload failed, will retry', error); return; }
-      chunk.forEach(a => { a.up = true; });
+      chunk.forEach(a => { a.up = true; a.dirty = false; });
       persist();
     }
     try{ localStorage.setItem(legacy, '1'); }catch(e){}
@@ -1364,6 +1436,7 @@ async function restoreFromServer(uid){
       persist();
     }
   }
+  await restoreCloudState(uid);
   // Practice history: every attempt the server holds that this device does not have yet
   const rows = [];
   for(let from = 0; ; from += 1000){
@@ -2148,7 +2221,7 @@ function profileForm(p, btnLabel, onSave, withAvatar, withEmail){
     authBusy = false;
     btn.disabled = false;
     if(res.taken) return fail('That username is taken. Try another.');
-    if(res.error) return fail('Could not save. Check your connection and try again.');
+    if(res.error) return fail('Could not save: ' + (res.error.message || 'unknown error') + '. Check the message and try again.');
     try{ localStorage.removeItem(DRAFT_KEY); }catch(e){}
     onSave(profile, avatarState.data);
   };
@@ -2287,6 +2360,7 @@ function profilePart(){
 }
 // Log out and delete account live here, along with setting a password for accounts that have none
 function clearLocalData(){
+  cloudReady = false; cloudDirty = false; clearTimeout(cloudTimer);
   try{ localStorage.removeItem(STORE_KEY); localStorage.removeItem(USER_CACHE_KEY); localStorage.removeItem('torq_profile_draft_v1'); }catch(e){}
   store = {bookmarks:[], errorLog:[], notes:{}, attempts:[]};
   sbSession = null;
@@ -3165,6 +3239,14 @@ function cloudSync(){
   applyTheme(saved || 'claude-dark');
   sbClient();
   setTimeout(()=>{ if(authState === 'unknown'){ authState = 'offline'; render(); } }, 5000);
+  // Autosave every 15 seconds; if the saved copy has not been read yet, read it first
+  setInterval(()=>{
+    if(!sbSession) return;
+    if(!cloudReady){ restoreCloudState(sbSession.user.id).then(()=>{ if(typeof render==='function' && !authBusy) render(); }); }
+    else flushCloud();
+  }, 15000);
+  document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState === 'hidden') flushCloud(); });
+  window.addEventListener('pagehide', ()=>{ flushCloud(); });
 
   const TL = el(splashHTML());
   document.body.appendChild(TL);
