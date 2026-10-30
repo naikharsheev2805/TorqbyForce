@@ -1337,7 +1337,8 @@ function renderInner(){
   document.querySelectorAll('.bottomnav').forEach(n=>n.remove());
   const app = document.getElementById('app');
   app.innerHTML = '';
-  const needSignIn = authState === 'ready' && !sbSession;
+  // A profile saved on this device opens the app directly; sign-in is only asked when there is no local profile.
+  const needSignIn = authState === 'ready' && !sbSession && !store.profile;
   app.classList.toggle('is-onb', needSignIn || !store.profile);
   if(view!=='practice' && store.profile && !needSignIn) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
   const V = {leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
