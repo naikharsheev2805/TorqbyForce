@@ -1,4 +1,22 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="manifest" href="manifest.json">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+/* ---------- Leaderboard + visibility toggle ---------- */
+.lb-row{ display:flex; align-items:center; gap:var(--sp-3); }
+.lb-rank{ width:28px; text-align:center; font-weight:600; color:var(--muted); font-variant-numeric:tabular-nums; flex-shrink:0; }
+.lb-av{ width:36px; height:36px; border-radius:50%; overflow:hidden; background:var(--surface-2); display:grid; place-items:center; flex-shrink:0; font-weight:600; color:var(--muted); }
+.lb-av img{ width:100%; height:100%; object-fit:cover; display:block; }
+.lb-name{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:500; }
+.lb-name small{ color:var(--muted); font-weight:400; }
+.lb-pts{ font-variant-numeric:tabular-nums; font-weight:600; flex-shrink:0; }
+.lb-me{ background:var(--accent-soft); }
+.lb-prev{ background:var(--surface-2); border-radius:var(--r-md); padding:var(--sp-3); margin-top:var(--sp-2); cursor:default; }
+.vis-toggle{ display:flex; align-items:center; gap:var(--sp-3); margin-top:var(--sp-2); cursor:pointer; }
+.vis-toggle input{ position:absolute; opacity:0; width:1px; height:1px; }
+.vis-sw{ width:42px; height:24px; border-radius:99px; background:var(--surface-2); border:1px solid var(--border); position:relative; flex-shrink:0; transition:background var(--dur-fast); }
+.vis-sw::after{ content:""; position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%; background:var(--text); transition:transform var(--dur-fast); }
+.vis-toggle input:checked + .vis-sw{ background:var(--accent); }
+.vis-toggle input:checked + .vis-sw::after{ transform:translateX(18px); background:var(--accent-ink); }
+.vis-toggle input:focus-visible + .vis-sw{ outline:2px solid var(--accent); outline-offset:2px; }
+</style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -689,6 +707,60 @@ svg.wm-lg{ --torq-stroke:1.9; }
 .intin.ok{border-color:var(--ok,#2a9d5c)} .intin.bad{border-color:var(--bad,#d64545)}
 .qimg{display:block;max-width:100%;height:auto;margin:10px 0;border-radius:10px}
 .qimg-opt{max-width:100%;height:auto;vertical-align:middle}
+
+/* ---------- Leaderboard: boards, periods, podium ---------- */
+.lb-boards{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-2); margin:0 0 var(--sp-3); }
+.lb-tile{ position:relative; display:flex; flex-direction:column; align-items:flex-start; gap:3px; min-width:0; text-align:left; font:inherit; color:var(--text); background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:12px 14px; cursor:pointer; transition:border-color .15s, background .15s, box-shadow .15s; }
+.lb-tile b{ font:600 var(--fs-2) Inter,sans-serif; }
+.lb-tile small{ font:400 12px/1.35 Inter,sans-serif; opacity:.7; }
+.lb-tile:hover{ border-color:var(--accent); }
+.lb-tile.on{ background:var(--accent-soft); border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent); }
+.lb-bar{ margin:0 0 var(--sp-3); }
+.lb-bar .picker{ width:100%; }
+.lb-podium{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-3); margin:var(--sp-3) 0 var(--sp-4); }
+.lb-card{ position:relative; overflow:hidden; isolation:isolate; min-width:0; display:flex; flex-direction:column; align-items:center; text-align:center; gap:var(--sp-2);
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--sp-4) var(--sp-3);
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 22%,transparent), 0 6px 20px color-mix(in srgb,var(--accent) 12%,transparent);
+  animation:lbRise .6s var(--ease) both, lbGlow 3.4s ease-in-out infinite; }
+.lb-card::before{ content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:linear-gradient(105deg, transparent 38%, color-mix(in srgb,var(--text) 16%,transparent) 50%, transparent 62%);
+  transform:translateX(-120%); animation:lbGlint 3.8s ease-in-out infinite; }
+.lb-r2::before{ animation-delay:.9s; } .lb-r3::before{ animation-delay:1.8s; }
+.lb-r2, .lb-r3{ min-height:176px; animation-delay:.1s, .3s; }
+.lb-r2, .lb-r3{ animation-delay:0s, 0s; }
+.lb-r3{ animation-delay:.12s, 1s; }
+.lb-r2{ animation-delay:.06s, .8s; }
+.lb-card .lb-av{ width:54px; height:54px; border-radius:50%; overflow:hidden; background:var(--surface-2); display:grid; place-items:center; color:var(--muted); font-weight:600; font-size:var(--fs-4); }
+.lb-card .lb-av img{ width:100%; height:100%; object-fit:cover; display:block; }
+.lb-medal{ font:500 var(--fs-2) Lora,Georgia,serif; color:var(--muted); font-variant-numeric:tabular-nums; }
+.lb-who{ display:flex; flex-direction:column; min-width:0; max-width:100%; }
+.lb-who .lb-name{ font:500 var(--fs-4) Lora,Georgia,serif; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:100%; }
+.lb-who small{ color:var(--muted); font-size:var(--fs-1); }
+.lb-score{ font:500 var(--fs-5) Lora,Georgia,serif; font-variant-numeric:tabular-nums; color:var(--accent); }
+/* Rank 1: the showpiece */
+.lb-r1{ grid-column:1/-1; padding:40px var(--sp-4) var(--sp-5); border-color:var(--accent);
+  box-shadow:0 0 0 1px var(--accent), 0 10px 34px color-mix(in srgb,var(--accent) 34%,transparent);
+  animation:lbRise .7s var(--ease) both, lbGlowStrong 2.6s ease-in-out infinite; }
+.lb-r1 .lb-av{ width:84px; height:84px; box-shadow:0 0 0 3px var(--accent), 0 0 18px color-mix(in srgb,var(--accent) 50%,transparent); }
+.lb-r1 .lb-who .lb-name{ font-size:21px; }
+.lb-r1::before{ background:linear-gradient(100deg, transparent 30%, color-mix(in srgb,var(--accent) 45%,transparent) 50%, transparent 70%); animation-duration:2.8s; }
+.lb-r1::after{ content:""; position:absolute; inset:-1px; z-index:-1; pointer-events:none; border-radius:inherit;
+  background:radial-gradient(circle at 50% 0%, color-mix(in srgb,var(--accent) 26%,transparent), transparent 62%); animation:lbPulse 2.6s ease-in-out infinite; }
+.lb-r1 .lb-score{ font-size:26px; background:linear-gradient(90deg,var(--accent),var(--text) 48%,var(--accent)); background-size:220% 100%;
+  -webkit-background-clip:text; background-clip:text; color:transparent; animation:lbShimmer 3.2s linear infinite; }
+.lb-crown{ position:absolute; top:12px; left:50%; color:var(--accent); animation:lbCrown 2.6s ease-in-out infinite; transform-origin:center; }
+.lb-crown svg{ display:block; }
+.lb-card.lb-me{ outline:1px dashed var(--accent); outline-offset:3px; }
+@keyframes lbRise{ from{ opacity:0; transform:translateY(12px) scale(.98); } }
+@keyframes lbGlint{ 0%,50%{ transform:translateX(-120%); } 100%{ transform:translateX(120%); } }
+@keyframes lbGlow{ 0%,100%{ box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 22%,transparent), 0 6px 20px color-mix(in srgb,var(--accent) 12%,transparent); }
+  50%{ box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 40%,transparent), 0 10px 28px color-mix(in srgb,var(--accent) 24%,transparent); } }
+@keyframes lbGlowStrong{ 0%,100%{ box-shadow:0 0 0 1px var(--accent), 0 10px 30px color-mix(in srgb,var(--accent) 30%,transparent); }
+  50%{ box-shadow:0 0 0 2px var(--accent), 0 14px 46px color-mix(in srgb,var(--accent) 58%,transparent); } }
+@keyframes lbPulse{ 0%,100%{ opacity:.55; } 50%{ opacity:1; } }
+@keyframes lbCrown{ 0%,100%{ transform:translate(-50%,0) rotate(-5deg); } 50%{ transform:translate(-50%,-4px) rotate(5deg); } }
+@keyframes lbShimmer{ to{ background-position:220% 0; } }
+@media (min-width:700px){ .lb-podium{ gap:var(--sp-4); } .lb-r2, .lb-r3{ min-height:200px; } }
 </style>
 </head>
 <body>
@@ -878,7 +950,7 @@ let view = 'home';
 let session = null;
 let nav = {tab:'home', subject:SUBJECTS[0], pyqTab:'questions', paper:null, meTab:'analysis', cfg:null,
            mockCfg:{subjects:[...SUBJECTS], perSubject:5, minutes:60}};
-const TAB_OF = {home:'home', pyq:'pyq', chapter:'pyq', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
+const TAB_OF = {leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
 
 function go(v, patch){
   if(TAB_OF[v]) nav.tab = TAB_OF[v];
@@ -926,12 +998,26 @@ function recordAttempt(q, ok, time){
   const att = {q:q.id, c:ok, conf:null, t:time, d:dayKey(), at:Date.now()};
   store.attempts.push(att);
   if(store.attempts.length>3000) store.attempts.shift();
+  scheduleUpload();
   if(ok) store.errorLog = store.errorLog.filter(id=>id!==q.id);
   else if(store.errorLog.indexOf(q.id)<0) store.errorLog.push(q.id);
   persist();
   return att;
 }
+// A question left unanswered when the session ends counts as skipped (for the leaderboard only)
+function recordSkip(q, time){
+  store.attempts.push({q:q.id, c:null, skipped:true, t:time||0, d:dayKey(), at:Date.now()});
+  if(store.attempts.length>3000) store.attempts.shift();
+  scheduleUpload(); persist();
+}
+function finalizeSkips(){
+  if(!session || session.skipsDone) return;
+  session.skipsDone = true;
+  if(session.mode==='mock') return; // mocks record skips in submitMock
+  session.queue.forEach(q=>{ if(!session.answers[q.id]) recordSkip(q, 0); });
+}
 function statsOf(list){
+  list = list.filter(a=>!a.skipped);
   const total=list.length, correct=list.filter(a=>a.c).length;
   const time=list.reduce((s,a)=>s+(a.t||0),0);
   return {total, correct, acc: total?Math.round(correct/total*100):null,
@@ -1061,7 +1147,7 @@ function tickMock(){
   if(arc){ arc.style.strokeDashoffset = Math.min(100,100-remain/session.limit*100).toFixed(1); arc.parentNode.parentNode.classList.toggle('warn', remain<=300); }
   if(remain===300) announce('5 minutes left'); else if(remain===60) announce('1 minute left');
 }
-function exitSession(){ if(window.__t) clearInterval(window.__t); session=null; go('home'); }
+function exitSession(){ if(window.__t) clearInterval(window.__t); finalizeSkips(); session=null; go('home'); }
 
 function answerPYQ(i){
   const q = session.queue[session.idx];
@@ -1099,7 +1185,7 @@ function submitMock(){
   store.mocksDone = (store.mocksDone || 0) + 1;
   session.queue.forEach(q=>{
     const a = session.answers[q.id];
-    if(!a) return;
+    if(!a){ recordSkip(q, Math.round(session.times[q.id]||0)); return; }
     a.correct = q.type==='integer' ? sameAnswer(a.sel, q.answer) : a.sel===q.correct;
     a.att = recordAttempt(q, a.correct, Math.round(session.times[q.id]||0));
   });
@@ -1133,33 +1219,68 @@ function sbClient(){
     sbInst.auth.onAuthStateChange((evt, session)=>{
       sbSession = session;
       authState = 'ready';
-      if(session) uploadOnce(session.user.id);
+      if(session && evt==='SIGNED_IN'){ uploadPending(); syncProfile(); }
       if(typeof render === 'function') render();
     });
   }
   return sbInst;
 }
 // Existing device attempts go up once per account. Points use the same scoring as the app.
-async function uploadOnce(uid){
-  const flag = 'torq_uploaded_' + uid;
-  try{ if(localStorage.getItem(flag)) return; }catch(e){}
-  const rows = store.attempts.filter(a => a && a.q).map(a => ({
-    user_id: uid,
-    question_id: String(a.q),
-    is_correct: !!a.c,
-    skipped: false,
-    time_ms: a.t != null ? Math.round(a.t * 1000) : null,
-    confidence: (a.conf === 'sure' || a.conf === 'guess') ? a.conf : null,
-    points: scoreFor(!!a.c, a.conf, a.t || 0),
-    created_at: a.at ? new Date(a.at).toISOString() : (a.d ? new Date(a.d + 'T12:00:00').toISOString() : new Date().toISOString())
-  }));
-  const db = sbClient();
-  if(!db) return;
-  for(let i = 0; i < rows.length; i += 500){
-    const { error } = await db.from('attempts').insert(rows.slice(i, i + 500));
-    if(error){ console.error('Upload failed, will retry next sign-in', error); return; }
+// Save the profile row (and the photo) to Supabase. Returns {taken:true} if the username is already used.
+async function saveRemote(p, av){
+  const db = sbClient(); if(!db || !sbSession) return {};
+  const uid = sbSession.user.id;
+  let avatarPath = null;
+  if(av && av.indexOf('data:')===0){
+    const blob = await (await fetch(av)).blob();
+    const path = uid+'/avatar.jpg';
+    const up = await db.storage.from('avatars').upload(path, blob, {upsert:true, contentType:'image/jpeg'});
+    if(up.error){ console.error(up.error); return {error:up.error}; }
+    avatarPath = path;
   }
-  try{ localStorage.setItem(flag, '1'); }catch(e){}
+  const row = {id:uid, username:(p.username||'').toLowerCase(), first_name:p.name||null,
+    hide_from_leaderboard: p.visible===false, birthdate:p.birthdate||null, updated_at:new Date().toISOString()};
+  if(avatarPath) row.avatar_path = avatarPath;
+  const {error} = await db.from('profiles').upsert(row, {onConflict:'id'});
+  if(error){ console.error(error); return {error, taken: error.code==='23505'}; }
+  return {};
+}
+function syncProfile(){ if(store.profile) return saveRemote(store.profile, loadAvatarCache()); }
+let __upTimer = null, __upBusy = false, __upAgain = false;
+function scheduleUpload(){ clearTimeout(__upTimer); __upTimer = setTimeout(()=>{ if(sbSession) uploadPending(); }, 800); }
+// Uploads every attempt that has not gone up yet (answers, skips). Safe to call often.
+async function uploadPending(){
+  if(__upBusy){ __upAgain = true; return; }
+  const db = sbClient(); if(!db || !sbSession) return;
+  __upBusy = true;
+  try{
+    const uid = sbSession.user.id;
+    // Devices that uploaded before this version already sent everything up to now
+    const legacy = 'torq_uploaded_' + uid;
+    try{ if(localStorage.getItem(legacy)){ store.attempts.forEach(a=>{ if(a) a.up = true; }); persist(); } }catch(e){}
+    const todo = store.attempts.filter(a => a && a.q && !a.up);
+    for(let i = 0; i < todo.length; i += 500){
+      const chunk = todo.slice(i, i + 500);
+      const rows = chunk.map(a => ({
+        user_id: uid,
+        question_id: String(a.q),
+        is_correct: a.skipped ? null : !!a.c,
+        skipped: !!a.skipped,
+        time_ms: a.t != null ? Math.round(a.t * 1000) : null,
+        confidence: (a.conf === 'sure' || a.conf === 'guess') ? a.conf : null,
+        points: a.skipped ? 0 : scoreFor(!!a.c, a.conf, a.t || 0),
+        created_at: a.at ? new Date(a.at).toISOString() : (a.d ? new Date(a.d + 'T12:00:00').toISOString() : new Date().toISOString())
+      }));
+      const { error } = await db.from('attempts').insert(rows);
+      if(error){ console.error('Upload failed, will retry', error); return; }
+      chunk.forEach(a => { a.up = true; });
+      persist();
+    }
+    try{ localStorage.setItem(legacy, '1'); }catch(e){}
+  } finally {
+    __upBusy = false;
+    if(__upAgain){ __upAgain = false; uploadPending(); }
+  }
 }
 function signinView(){
   // Same screen as the welcome page (background, orbs, formulas, layout); only the copy and the card change.
@@ -1219,7 +1340,7 @@ function renderInner(){
   const needSignIn = authState === 'ready' && !sbSession;
   app.classList.toggle('is-onb', needSignIn || !store.profile);
   if(view!=='practice' && store.profile && !needSignIn) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
-  const V = {home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
+  const V = {leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
              me:meView, practice:practiceView, results:resultsView};
   app.appendChild(needSignIn ? signinView() : (!store.profile ? onboardView() : (V[view]||homeView)()));
   if(view==='pyq') app.appendChild(el('<div class="foot">'+esc(BANK_ERROR || ('PYQ bank: '+QUESTIONS.length+' questions'))+'</div>'));
@@ -1240,7 +1361,7 @@ const TABS = [
   {id:'pyq', label:'PYQs', icon:'<path d="M5 4h10l4 4v12H5z"/><path d="M14 4v5h5M9 13h6M9 17h4"/>'},
   {id:'syllabus', label:'Syllabus', icon:'<path d="M4 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>'},
   {id:'mocks', label:'Mocks', icon:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>'},
-  {id:'leaderboard', label:'Leaderboard', disabled:true, icon:'<path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M5 5H3v2a3 3 0 0 0 3 3M19 5h2v2a3 3 0 0 1-3 3M10 14h4v4h-4zM8 20h8"/>'},
+  {id:'leaderboard', label:'Leaderboard', disabled:false, icon:'<path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M5 5H3v2a3 3 0 0 0 3 3M19 5h2v2a3 3 0 0 1-3 3M10 14h4v4h-4zM8 20h8"/>'},
   {id:'me', label:'Me', icon:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>'}
 ];
 function registerSW(){
@@ -1838,11 +1959,18 @@ function readAvatar(file, done){
 function profileForm(p, btnLabel, onSave, withAvatar){
   const f = el('<form class="profile-form" autocomplete="off"></form>');
   const g = n=>f.querySelector('[name="'+n+'"]');
-  f.innerHTML = '<label class="pf"><span class="eyebrow">Name</span><input name="name" maxlength="40" value="'+esc(p.name||'')+'"></label>'
+  const vis = p.visible !== false;
+  f.innerHTML = '<label class="pf"><span class="eyebrow">Username</span><input name="username" maxlength="20" placeholder="e.g. rahul_jee" value="'+esc(p.username||'')+'"></label>'
+    +'<p class="note-line" style="margin:-6px 0 12px">3 to 20 letters, numbers or underscores. Shown on the leaderboard.</p>'
+    +'<label class="pf"><span class="eyebrow">Name</span><input name="name" maxlength="40" value="'+esc(p.name||'')+'"></label>'
     +'<label class="pf"><span class="eyebrow">Surname</span><input name="surname" maxlength="40" value="'+esc(p.surname||'')+'"></label>'
+    +'<label class="pf"><span class="eyebrow">Birthdate <small style="opacity:.6">(optional)</small></span><input name="birthdate" type="date" min="1940-01-01" value="'+esc(p.birthdate||'')+'"></label>'
     +'<label class="pf"><span class="eyebrow">Age</span><input name="age" type="number" min="10" max="60" inputmode="numeric" value="'+esc(p.age||'')+'"></label>'
     +'<label class="pf"><span class="eyebrow">Standard</span><select name="standard">'+STD_OPTS.map(s=>'<option'+(p.standard===s?' selected':'')+'>'+s+'</option>').join('')+'</select></label>'
     +'<div class="pf"><span class="eyebrow">Exam you are preparing for</span><div class="seg exam-seg"><button type="button" data-v="main">JEE Main</button><button type="button" data-v="adv">JEE Main + Advanced</button></div></div>'
+    +'<div class="pf vis-block"><span class="eyebrow">Show me on the leaderboard</span>'
+    +'<label class="vis-toggle"><input type="checkbox" name="visible"'+(vis?' checked':'')+'><span class="vis-sw" aria-hidden="true"></span><span class="vis-lbl">'+(vis?'Visible to others':'Anonymous to others')+'</span></label>'
+    +'<div class="vis-preview" aria-live="polite"></div></div>'
     +'<p class="note-line err" hidden></p>'
     +'<button class="btn block" type="submit">'+btnLabel+'</button>';
   let exam = p.exam || 'main';
@@ -1850,13 +1978,30 @@ function profileForm(p, btnLabel, onSave, withAvatar){
   const sync = ()=>btns.forEach(b=>b.classList.toggle('on', b.dataset.v===exam));
   btns.forEach(b=>b.onclick = ()=>{ exam = b.dataset.v; sync(); });
   sync();
+
+  // Live preview: how this user looks to others on the leaderboard
+  const prev = f.querySelector('.vis-preview'), vcb = g('visible');
+  const paintPreview = ()=>{
+    const on = vcb.checked;
+    f.querySelector('.vis-lbl').textContent = on ? 'Visible to others' : 'Anonymous to others';
+    const uname = (g('username').value.trim() || 'your_username');
+    const av = loadAvatarCache();
+    const pic = (on && av) ? '<img alt="" src="'+av+'">' : (on ? '<i>'+esc((g('name').value||'?').trim().charAt(0).toUpperCase()||'?')+'</i>' : ANON_SVG);
+    prev.innerHTML = '<div class="lb-row lb-prev"><span class="lb-av">'+pic+'</span><span class="lb-name">'
+      +(on ? esc(uname) : 'Anonymous User')+'</span><span class="lb-pts">— pts</span></div>'
+      +'<p class="note-line">'+(on ? 'Others see your username and photo.' : 'Others see a generic avatar and "Anonymous User". Your points still count.')+'</p>';
+  };
+  vcb.onchange = paintPreview;
+  ['name','username'].forEach(n=>g(n).addEventListener('input', paintPreview));
+  paintPreview();
+
   const avatarState = {data: null};
   if(withAvatar){
     avatarState.data = loadAvatarCache();
     const av = el('<label class="av-pick"><input type="file" accept="image/*" hidden><span class="av-circle"></span>'
       +'<span class="av-text"><b>Add a photo</b><small>Optional. Kept on this device for now.</small></span></label>');
     const circle = av.querySelector('.av-circle');
-    const paint = ()=>{ circle.innerHTML = avatarState.data ? '<img alt="" src="'+avatarState.data+'">' : '<i>+</i>'; };
+    const paint = ()=>{ circle.innerHTML = avatarState.data ? '<img alt="" src="'+avatarState.data+'">' : '<i>+</i>'; paintPreview(); };
     paint();
     av.querySelector('input').onchange = e=>{
       const file = e.target.files && e.target.files[0];
@@ -1864,16 +2009,30 @@ function profileForm(p, btnLabel, onSave, withAvatar){
     };
     f.insertBefore(av, f.firstChild);
   }
-  f.onsubmit = e=>{
+  f.onsubmit = async e=>{
     e.preventDefault();
     const err = f.querySelector('.err');
+    const fail = m=>{ err.textContent = m; err.hidden = false; };
+    const username = g('username').value.trim();
     const name = g('name').value.trim();
-    const age = parseInt(g('age').value, 10);
     const surname = g('surname').value.trim();
-    if(!name){ err.textContent='Please enter your name.'; err.hidden=false; return; }
-    if(!surname){ err.textContent='Please enter your surname.'; err.hidden=false; return; }
-    if(!(age>=10 && age<=60)){ err.textContent='Please enter an age between 10 and 60.'; err.hidden=false; return; }
-    onSave({name, surname, age, standard:g('standard').value, exam}, avatarState.data);
+    const age = parseInt(g('age').value, 10);
+    const bd = g('birthdate').value;
+    if(!/^[A-Za-z0-9_]{3,20}$/.test(username)){ return fail('Username must be 3 to 20 letters, numbers or underscores.'); }
+    if(!name) return fail('Please enter your name.');
+    if(!surname) return fail('Please enter your surname.');
+    if(!(age>=10 && age<=60)) return fail('Please enter an age between 10 and 60.');
+    if(bd){
+      const d = new Date(bd+'T00:00:00'), now = new Date();
+      if(isNaN(d) || d>now) return fail('Birthdate cannot be in the future.');
+    }
+    const profile = {username, name, surname, age, birthdate: bd||null, standard:g('standard').value, exam, visible: vcb.checked};
+    const btn = f.querySelector('button[type="submit"]'); btn.disabled = true;
+    const res = await saveRemote(profile, avatarState.data);
+    btn.disabled = false;
+    if(res.taken) return fail('That username is taken. Try another.');
+    if(res.error) return fail('Could not save. Check your connection and try again.');
+    onSave(profile, avatarState.data);
   };
   return f;
 }
@@ -1911,6 +2070,96 @@ function onboardView(){
   w.appendChild(stage);
   return w;
 }
+
+// ----- Leaderboard -----
+const ANON_SVG = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="9" r="4" fill="currentColor"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6z" fill="currentColor"/></svg>';
+const LB_BOARDS = [
+  {k:'time',   l:'Most time',             sub:'Minutes answered',        note:'Total minutes spent answering in this period.'},
+  {k:'points', l:'Most points',           sub:'Points earned',           note:'Points from correct answers. Quicker and sure answers earn more.'},
+  {k:'speed',  l:'Quickest',              sub:'Fastest correct answers', note:'Average seconds per correct answer. Lower is faster. Needs 5 or more answers.'},
+  {k:'clean',  l:'Least skipped & right', sub:'Accuracy incl. skips',    note:'Correct answers as a share of every question in the period, skips included. Needs 5 or more answers.'}
+];
+const LB_PERIODS = [['day','Today'],['week','This week'],['month','This month'],['3m','Last 3 months'],['6m','Last 6 months'],['year','Last year'],['all','All time']];
+let lbState = {board:'points', period:'all', cache:{}};
+const LB_TTL = 60000;
+function avatarUrl(path){ return path ? SB_URL+'/storage/v1/object/public/avatars/'+path : null; }
+function lbKey(){ return lbState.board+'|'+lbState.period; }
+function setC(key, v){ v.at = Date.now(); lbState.cache[key] = v; }
+function lbFmt(board, s){
+  if(s==null || isNaN(s)) return '–';
+  if(board==='points') return (Math.round(s*10)/10)+' pts';
+  if(board==='clean') return Math.round(s)+'%';
+  if(board==='speed') return (Math.round(s*10)/10)+' s avg';
+  const m = Math.round(s);
+  return m>=60 ? Math.floor(m/60)+' h '+(m%60)+' min' : m+' min';
+}
+function lbFetch(){
+  const key = lbKey(), c = lbState.cache[key];
+  if(c && (c.loading || Date.now()-c.at < LB_TTL)) return;
+  const db = sbClient();
+  if(!db || !sbSession){ setC(key, {err:'Sign in to see the leaderboard.'}); return; }
+  setC(key, {loading:true});
+  db.rpc('leaderboard', {p_board:lbState.board, p_period:lbState.period, p_limit:50}).then(({data,error})=>{
+    if(error){ console.error(error); setC(key, {err:'Could not load the leaderboard. Check your connection and try again.'}); return; }
+    const rows = (data||[]).map(r=>({place:Number(r.place), name:r.username||'Anonymous User', first:r.first_name,
+      avatar:avatarUrl(r.avatar_path), anon:!!r.is_anonymous, me:!!r.is_me, score:Number(r.score)}));
+    // Remember our all-time points rank so future awards can taper for top ranks.
+    if(lbState.board==='points' && lbState.period==='all'){
+      const me = rows.find(r=>r.me);
+      store.lbRank = me ? me.place : null;
+      persist();
+    }
+    setC(key, {rows});
+  }).catch(()=>setC(key, {err:'Could not load the leaderboard.'})).finally(()=>render());
+}
+function lbAvHTML(r){
+  return r.avatar ? '<img alt="" src="'+esc(r.avatar)+'">' : (r.anon ? ANON_SVG : '<i>'+esc((r.name||'?').charAt(0).toUpperCase())+'</i>');
+}
+function lbCardHTML(r, cls){
+  const crown = cls==='lb-r1' ? '<span class="lb-crown" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z" fill="currentColor"/></svg></span>' : '';
+  return '<div class="lb-card '+cls+(r.me?' lb-me':'')+'" role="listitem" aria-label="Rank '+r.place+', '+esc(r.name)+', '+esc(lbFmt(lbState.board,r.score))+'">'+crown
+    +'<span class="lb-medal">'+r.place+'</span>'
+    +'<span class="lb-av">'+lbAvHTML(r)+'</span>'
+    +'<span class="lb-who"><b class="lb-name">'+esc(r.name)+(r.me?' <small>(you)</small>':'')+'</b>'+(r.first && !r.anon?'<small>'+esc(r.first)+'</small>':'')+'</span>'
+    +'<span class="lb-score">'+esc(lbFmt(lbState.board,r.score))+'</span></div>';
+}
+function lbRowHTML(r){
+  return '<div class="row lb-row'+(r.me?' lb-me':'')+'" role="listitem" style="cursor:default"><span class="lb-rank">'+r.place+'</span><span class="lb-av">'+lbAvHTML(r)+'</span><span class="lb-name">'+esc(r.name)+(r.me?' <small>(you)</small>':'')+'</span><span class="lb-pts">'+esc(lbFmt(lbState.board,r.score))+'</span></div>';
+}
+function leaderboardView(){
+  const w = el('<div></div>');
+  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Leaderboard</div><h1 class="hm-title">Who is <em>leading?</em></h1></div>'));
+  const boards = el('<div class="lb-boards" role="tablist" aria-label="Ranking type"></div>');
+  LB_BOARDS.forEach(b=>{
+    const on = lbState.board===b.k;
+    const x = el('<button role="tab" aria-selected="'+on+'" class="lb-tile'+(on?' on':'')+'"><b>'+esc(b.l)+'</b><small>'+esc(b.sub)+'</small></button>');
+    x.onclick = ()=>{ lbState.board = b.k; render(); };
+    boards.appendChild(x);
+  });
+  w.appendChild(boards);
+  const bar = el('<div class="lb-bar"></div>');
+  bar.appendChild(pickerField('Time range', LB_PERIODS.map(p=>({v:p[0], l:p[1]})), lbState.period, v=>{ lbState.period = v; render(); }));
+  w.appendChild(bar);
+
+  lbFetch();
+  const c = lbState.cache[lbKey()];
+  if(!c || c.loading){ w.appendChild(el('<div class="empty">Loading…</div>')); return w; }
+  if(c.err){ w.appendChild(el('<div class="card"><p class="sub" style="margin:0">'+esc(c.err)+'</p></div>')); return w; }
+  if(!c.rows.length){ w.appendChild(el('<div class="empty">Nobody here yet for this period. Answer a few questions to take the top spot.</div>')); return w; }
+
+  const pod = el('<div class="lb-podium" role="list"></div>');
+  c.rows.slice(0,3).forEach((r,i)=>pod.appendChild(el(lbCardHTML(r, 'lb-r'+(i+1)))));
+  w.appendChild(pod);
+  if(c.rows.length>3){
+    const list = el('<div class="list" role="list"></div>');
+    c.rows.slice(3).forEach(r=>list.appendChild(el(lbRowHTML(r))));
+    w.appendChild(list);
+  }
+  const meta = LB_BOARDS.find(b=>b.k===lbState.board);
+  w.appendChild(el('<p class="note-line">'+esc(meta.note)+'</p>'));
+  return w;
+}
+
 function profilePart(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="eyebrow" style="margin:6px 0 10px">Your profile</div>'));
@@ -2188,6 +2437,7 @@ function mockPractice(w){
 function resultsView(){
   const w = el('<div></div>');
   if(!session){ go('home'); return w; }
+  finalizeSkips();
   if(session.mode==='mock') mockResults(w); else pyqResults(w);
   const row = el('<div class="row" style="margin-top:14px;padding:0;border:none"></div>');
   const an = el('<button class="btn secondary">Analysis</button>');
@@ -2466,11 +2716,21 @@ function clockLabel(answered, elapsed, left){
 function ringOffset(sec){ return (113*(1-Math.min(1, sec/120))).toFixed(1); }
 // Points: a correct answer is worth 4, plus up to 2 for speed (under 2 minutes).
 // Sure adds 1 and guessing takes 1 away. A wrong answer gives 0. Skipping gives 1.
+// Top ranks taper slightly so the leaderboard rewards steady consistency over time.
+function rankMult(){
+  const r = store.lbRank;
+  if(!r) return 1;
+  if(r===1) return 0.8;
+  if(r<=3) return 0.85;
+  if(r<=10) return 0.9;
+  if(r<=25) return 0.95;
+  return 1;
+}
 function scoreFor(ok, conf, sec){
   if(!ok) return 0;
   const speed = Math.max(0, Math.min(2, 2*(120-sec)/120));
   const base = 4 + speed;
-  return Math.round((conf==='sure' ? base+1 : base-1) * 10) / 10;
+  return Math.round((conf==='sure' ? base+1 : base-1) * rankMult() * 10) / 10;
 }
 function addPoints(p){
   if(!p) return;
