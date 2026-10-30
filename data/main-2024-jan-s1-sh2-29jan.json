@@ -286,15 +286,18 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-05.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-05.webp"
+    ],
     "tags": [
       "vertical circle",
       "energy"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 112
   },
   {
     "id": "main-2024-jan-s1-sh2-29jan-p-06",
@@ -701,14 +704,17 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-12.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-12.webp"
+    ],
     "tags": [
       "circuits"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 126
   },
   {
     "id": "main-2024-jan-s1-sh2-29jan-p-13",
@@ -1148,23 +1154,27 @@
     "options": [
       {
         "key": "1",
-        "text": "Truth table (1) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-20-opt-1.webp",
+        "image_display_width_px": 43
       },
       {
         "key": "2",
-        "text": "Truth table (2) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-20-opt-2.webp",
+        "image_display_width_px": 43
       },
       {
         "key": "3",
-        "text": "Truth table (3) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-20-opt-3.webp",
+        "image_display_width_px": 43
       },
       {
         "key": "4",
-        "text": "Truth table (4) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-20-opt-4.webp",
+        "image_display_width_px": 43
       }
     ],
     "correct_answer": [
@@ -1175,14 +1185,21 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-20.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-20.webp",
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-20-opt-1.webp",
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-20-opt-2.webp",
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-20-opt-3.webp",
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-20-opt-4.webp"
+    ],
     "tags": [
       "logic gates"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 128
   },
   {
     "id": "main-2024-jan-s1-sh2-29jan-p-21",
@@ -1365,14 +1382,17 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-25.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-25.webp"
+    ],
     "tags": [
       "circuits"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 92
   },
   {
     "id": "main-2024-jan-s1-sh2-29jan-p-26",
@@ -1479,15 +1499,18 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-28.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-28.webp"
+    ],
     "tags": [
       "capacitor",
       "circuit"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 67
   },
   {
     "id": "main-2024-jan-s1-sh2-29jan-p-29",
@@ -1616,14 +1639,17 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-31.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-31.webp"
+    ],
     "tags": [
       "spectral series"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 135
   },
   {
     "id": "main-2024-jan-s1-sh2-29jan-p-32",
@@ -1793,14 +1819,17 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-34.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-34.webp"
+    ],
     "tags": [
       "iupac"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 56
   },
   {
     "id": "main-2024-jan-s1-sh2-29jan-p-35",
@@ -1852,14 +1881,17 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-35.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-35.webp"
+    ],
     "tags": [
       "acidity"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 209
   },
   {
     "id": "main-2024-jan-s1-sh2-29jan-p-36",
@@ -1911,15 +1943,18 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-36.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-36.webp"
+    ],
     "tags": [
       "acidity",
       "pka"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 148
   },
   {
     "id": "main-2024-jan-s1-sh2-29jan-p-37",
@@ -1944,23 +1979,27 @@
     "options": [
       {
         "key": "1",
-        "text": "Structure (1) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-37-opt-1.webp",
+        "image_display_width_px": 35
       },
       {
         "key": "2",
-        "text": "Structure (2) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-37-opt-2.webp",
+        "image_display_width_px": 55
       },
       {
         "key": "3",
-        "text": "Structure (3) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-37-opt-3.webp",
+        "image_display_width_px": 48
       },
       {
         "key": "4",
-        "text": "Structure (4) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-37-opt-4.webp",
+        "image_display_width_px": 37
       }
     ],
     "correct_answer": [
@@ -1972,7 +2011,12 @@
     "solution": null,
     "solution_source": null,
     "image": null,
-    "figure_refs": [],
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-37-opt-1.webp",
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-37-opt-2.webp",
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-37-opt-3.webp",
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-37-opt-4.webp"
+    ],
     "tags": [
       "geometrical isomerism"
     ],
@@ -2444,14 +2488,17 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-45.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-45.webp"
+    ],
     "tags": [
       "reagents"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 220
   },
   {
     "id": "main-2024-jan-s1-sh2-29jan-p-46",
@@ -2476,18 +2523,21 @@
     "options": [
       {
         "key": "1",
-        "text": "$\\mathrm{CH_3CH_2CH_2NH_2}\\xrightarrow{\\mathrm{HNO_2}}\\mathrm{CH_3CH_2OH}+\\mathrm{N_2}+\\mathrm{HCl}$ (reaction (1))",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-46-opt-1.webp",
+        "image_display_width_px": 159
       },
       {
         "key": "2",
-        "text": "Alkene + HI addition product (reaction (2)) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-46-opt-2.webp",
+        "image_display_width_px": 141
       },
       {
         "key": "3",
-        "text": "Cyclohexene + Br2 product (reaction (3)) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-46-opt-3.webp",
+        "image_display_width_px": 135
       },
       {
         "key": "4",
@@ -2504,7 +2554,11 @@
     "solution": null,
     "solution_source": null,
     "image": null,
-    "figure_refs": [],
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-46-opt-1.webp",
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-46-opt-2.webp",
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-46-opt-3.webp"
+    ],
     "tags": [
       "organic reactions"
     ],
@@ -2535,23 +2589,27 @@
     "options": [
       {
         "key": "1",
-        "text": "Structure (1) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-47-opt-1.webp",
+        "image_display_width_px": 49
       },
       {
         "key": "2",
-        "text": "Structure (2) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-47-opt-2.webp",
+        "image_display_width_px": 49
       },
       {
         "key": "3",
-        "text": "Structure (3) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-47-opt-3.webp",
+        "image_display_width_px": 51
       },
       {
         "key": "4",
-        "text": "Structure (4) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-47-opt-4.webp",
+        "image_display_width_px": 49
       }
     ],
     "correct_answer": [
@@ -2562,14 +2620,21 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-47.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-47.webp",
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-47-opt-1.webp",
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-47-opt-2.webp",
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-47-opt-3.webp",
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-47-opt-4.webp"
+    ],
     "tags": [
       "sandmeyer"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 142
   },
   {
     "id": "main-2024-jan-s1-sh2-29jan-p-48",
@@ -2739,15 +2804,18 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-29jan-p-50.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-29jan-p-50.webp"
+    ],
     "tags": [
       "biomolecules",
       "matching"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 135
   },
   {
     "id": "main-2024-jan-s1-sh2-29jan-p-51",

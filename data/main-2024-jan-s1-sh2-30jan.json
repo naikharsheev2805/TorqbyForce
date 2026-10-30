@@ -167,15 +167,18 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-03.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-03.webp"
+    ],
     "tags": [
       "tension",
       "pulling"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. Transcribed from the page image; verify wording and options against the PDF.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 150
   },
   {
     "id": "main-2024-jan-s1-sh2-30jan-p-04",
@@ -287,15 +290,18 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-05.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-05.webp"
+    ],
     "tags": [
       "friction",
       "incline"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. Transcribed from the page image; verify wording and options against the PDF.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 60
   },
   {
     "id": "main-2024-jan-s1-sh2-30jan-p-06",
@@ -379,23 +385,27 @@
     "options": [
       {
         "key": "1",
-        "text": "Graph (1) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-07-opt-1.webp",
+        "image_display_width_px": 69
       },
       {
         "key": "2",
-        "text": "Graph (2) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-07-opt-2.webp",
+        "image_display_width_px": 69
       },
       {
         "key": "3",
-        "text": "Graph (3) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-07-opt-3.webp",
+        "image_display_width_px": 73
       },
       {
         "key": "4",
-        "text": "Graph (4) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-07-opt-4.webp",
+        "image_display_width_px": 69
       }
     ],
     "correct_answer": [
@@ -407,7 +417,12 @@
     "solution": null,
     "solution_source": null,
     "image": null,
-    "figure_refs": [],
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-07-opt-1.webp",
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-07-opt-2.webp",
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-07-opt-3.webp",
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-07-opt-4.webp"
+    ],
     "tags": [
       "phase change"
     ],
@@ -465,15 +480,18 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-08.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-08.webp"
+    ],
     "tags": [
       "adiabatic",
       "isothermal"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. Transcribed from the page image; verify wording and options against the PDF.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 70
   },
   {
     "id": "main-2024-jan-s1-sh2-30jan-p-09",
@@ -941,14 +959,17 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-16.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-16.webp"
+    ],
     "tags": [
       "photoelectric"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. Transcribed from the page image; verify wording and options against the PDF.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 79
   },
   {
     "id": "main-2024-jan-s1-sh2-30jan-p-17",
@@ -1119,14 +1140,17 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-19.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-19.webp"
+    ],
     "tags": [
       "diodes"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. Transcribed from the page image; verify wording and options against the PDF.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 104
   },
   {
     "id": "main-2024-jan-s1-sh2-30jan-p-20",
@@ -1559,14 +1583,17 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-30.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-30.webp"
+    ],
     "tags": [
       "lens"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. Transcribed from the page image; verify wording and options against the PDF.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 99
   },
   {
     "id": "main-2024-jan-s1-sh2-30jan-p-31",
@@ -1796,14 +1823,17 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-34.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-34.webp"
+    ],
     "tags": [
       "iupac"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Transcribed from the page image; verify wording and options against the PDF.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 97
   },
   {
     "id": "main-2024-jan-s1-sh2-30jan-p-35",
@@ -1946,23 +1976,27 @@
     "options": [
       {
         "key": "1",
-        "text": "Structure (1) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-37-opt-1.webp",
+        "image_display_width_px": 116
       },
       {
         "key": "2",
-        "text": "Structure (2) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-37-opt-2.webp",
+        "image_display_width_px": 127
       },
       {
         "key": "3",
-        "text": "Structure (3) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-37-opt-3.webp",
+        "image_display_width_px": 111
       },
       {
         "key": "4",
-        "text": "Structure (4) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-37-opt-4.webp",
+        "image_display_width_px": 104
       }
     ],
     "correct_answer": [
@@ -1973,15 +2007,22 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-37.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-37.webp",
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-37-opt-1.webp",
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-37-opt-2.webp",
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-37-opt-3.webp",
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-37-opt-4.webp"
+    ],
     "tags": [
       "hydroboration",
       "oxymercuration"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. Transcribed from the page image; verify wording and options against the PDF. Some options are placeholders or uncertain; see PDF.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 182
   },
   {
     "id": "main-2024-jan-s1-sh2-30jan-p-38",
@@ -2599,8 +2640,9 @@
     "options": [
       {
         "key": "1",
-        "text": "(1) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-48-opt-1.webp",
+        "image_display_width_px": 77
       },
       {
         "key": "2",
@@ -2627,7 +2669,9 @@
     "solution": null,
     "solution_source": null,
     "image": null,
-    "figure_refs": [],
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-48-opt-1.webp"
+    ],
     "tags": [
       "reimer tiemann"
     ],
@@ -2658,23 +2702,27 @@
     "options": [
       {
         "key": "1",
-        "text": "Product (1) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-49-opt-1.webp",
+        "image_display_width_px": 81
       },
       {
         "key": "2",
-        "text": "Product (2) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-49-opt-2.webp",
+        "image_display_width_px": 103
       },
       {
         "key": "3",
-        "text": "Product (3) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-49-opt-3.webp",
+        "image_display_width_px": 90
       },
       {
         "key": "4",
-        "text": "Product (4) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-49-opt-4.webp",
+        "image_display_width_px": 103
       }
     ],
     "correct_answer": [
@@ -2686,7 +2734,12 @@
     "solution": null,
     "solution_source": null,
     "image": null,
-    "figure_refs": [],
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-49-opt-1.webp",
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-49-opt-2.webp",
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-49-opt-3.webp",
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-49-opt-4.webp"
+    ],
     "tags": [
       "cannizzaro"
     ],
@@ -2717,23 +2770,27 @@
     "options": [
       {
         "key": "1",
-        "text": "A = m-nitro aniline, B = phenol (see PDF)",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-50-opt-1.webp",
+        "image_display_width_px": 99
       },
       {
         "key": "2",
-        "text": "A = aniline, B = phenol (see PDF)",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-50-opt-2.webp",
+        "image_display_width_px": 95
       },
       {
         "key": "3",
-        "text": "A = m-nitrophenol, B = phenol (see PDF)",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-50-opt-3.webp",
+        "image_display_width_px": 119
       },
       {
         "key": "4",
-        "text": "A = phenyl hydrazine, B = aniline (see PDF)",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-50-opt-4.webp",
+        "image_display_width_px": 99
       }
     ],
     "correct_answer": [
@@ -2744,14 +2801,21 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-50.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-50.webp",
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-50-opt-1.webp",
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-50-opt-2.webp",
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-50-opt-3.webp",
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-50-opt-4.webp"
+    ],
     "tags": [
       "aromatic reactions"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. Transcribed from the page image; verify wording and options against the PDF. Some options are placeholders or uncertain; see PDF.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 293
   },
   {
     "id": "main-2024-jan-s1-sh2-30jan-p-51",
@@ -2934,14 +2998,17 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh2-30jan-p-55.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh2-30jan-p-55.webp"
+    ],
     "tags": [
       "geometrical isomerism"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. Transcribed from the page image; verify wording and options against the PDF.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 97
   },
   {
     "id": "main-2024-jan-s1-sh2-30jan-p-56",

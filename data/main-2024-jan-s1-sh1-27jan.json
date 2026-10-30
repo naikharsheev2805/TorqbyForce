@@ -1099,23 +1099,27 @@
     "options": [
       {
         "key": "1",
-        "text": "[circuit diagram — see PDF]",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-19-opt-1.webp",
+        "image_display_width_px": 63
       },
       {
         "key": "2",
-        "text": "[circuit diagram — see PDF]",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-19-opt-2.webp",
+        "image_display_width_px": 54
       },
       {
         "key": "3",
-        "text": "[circuit diagram — see PDF]",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-19-opt-3.webp",
+        "image_display_width_px": 54
       },
       {
         "key": "4",
-        "text": "[circuit diagram — see PDF]",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-19-opt-4.webp",
+        "image_display_width_px": 75
       }
     ],
     "correct_answer": [
@@ -1127,7 +1131,12 @@
     "solution": null,
     "solution_source": null,
     "image": null,
-    "figure_refs": [],
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-19-opt-1.webp",
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-19-opt-2.webp",
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-19-opt-3.webp",
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-19-opt-4.webp"
+    ],
     "tags": [
       "diode",
       "reverse bias"
@@ -1419,15 +1428,18 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-26.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-26.webp"
+    ],
     "tags": [
       "capacitor",
       "circuit"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF text layer; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 99
   },
   {
     "id": "main-2024-jan-s1-sh1-27jan-p-27",
@@ -1458,15 +1470,18 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-27.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-27.webp"
+    ],
     "tags": [
       "magnetic field",
       "current"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF text layer; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 60
   },
   {
     "id": "main-2024-jan-s1-sh1-27jan-p-28",
@@ -1536,15 +1551,18 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-29.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-29.webp"
+    ],
     "tags": [
       "refraction",
       "apparent depth"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF text layer; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 81
   },
   {
     "id": "main-2024-jan-s1-sh1-27jan-p-30",
@@ -1788,23 +1806,27 @@
     "options": [
       {
         "key": "1",
-        "text": "Aniline (NH$_2$ on benzene)",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-34-opt-1.webp",
+        "image_display_width_px": 32
       },
       {
         "key": "2",
-        "text": "Diphenylamine",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-34-opt-2.webp",
+        "image_display_width_px": 80
       },
       {
         "key": "3",
-        "text": "Pyrrole",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-34-opt-3.webp",
+        "image_display_width_px": 40
       },
       {
         "key": "4",
-        "text": "Pyrrolidine",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-34-opt-4.webp",
+        "image_display_width_px": 32
       }
     ],
     "correct_answer": [
@@ -1816,7 +1838,12 @@
     "solution": null,
     "solution_source": null,
     "image": null,
-    "figure_refs": [],
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-34-opt-1.webp",
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-34-opt-2.webp",
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-34-opt-3.webp",
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-34-opt-4.webp"
+    ],
     "tags": [
       "basicity",
       "amines"
@@ -2055,15 +2082,18 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-38.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-38.webp"
+    ],
     "tags": [
       "classification",
       "alicyclic"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF text layer; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 45
   },
   {
     "id": "main-2024-jan-s1-sh1-27jan-p-39",
@@ -2088,23 +2118,27 @@
     "options": [
       {
         "key": "1",
-        "text": "[structure — see PDF]",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-39-opt-1.webp",
+        "image_display_width_px": 90
       },
       {
         "key": "2",
-        "text": "[structure — see PDF]",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-39-opt-2.webp",
+        "image_display_width_px": 116
       },
       {
         "key": "3",
-        "text": "[structure — see PDF]",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-39-opt-3.webp",
+        "image_display_width_px": 90
       },
       {
         "key": "4",
-        "text": "[structure — see PDF]",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-39-opt-4.webp",
+        "image_display_width_px": 103
       }
     ],
     "correct_answer": [
@@ -2116,7 +2150,12 @@
     "solution": null,
     "solution_source": null,
     "image": null,
-    "figure_refs": [],
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-39-opt-1.webp",
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-39-opt-2.webp",
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-39-opt-3.webp",
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-39-opt-4.webp"
+    ],
     "tags": [
       "acidity",
       "carbonyl"
@@ -2144,7 +2183,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Rated from the stem: electron-withdrawing and donating effects on phenol acidity.",
-    "text": "The ascending order of acidity of $-$OH group in the following compounds is : (A) Bu $-$ OH; (B), (C), (D), (E) [structures — see PDF]. Choose the correct answer from the options given below :",
+    "text": "The ascending order of acidity of $-$OH group in the following compounds is : (A) Bu $-$ OH; (B), (C), (D), (E) [structures —]. Choose the correct answer from the options given below :",
     "options": [
       {
         "key": "1",
@@ -2175,15 +2214,18 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-40.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-40.webp"
+    ],
     "tags": [
       "acidity",
       "phenols"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF text layer; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 69
   },
   {
     "id": "main-2024-jan-s1-sh1-27jan-p-41",
@@ -2208,23 +2250,27 @@
     "options": [
       {
         "key": "1",
-        "text": "[structure — see PDF]",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-41-opt-1.webp",
+        "image_display_width_px": 51
       },
       {
         "key": "2",
-        "text": "[structure — see PDF]",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-41-opt-2.webp",
+        "image_display_width_px": 51
       },
       {
         "key": "3",
-        "text": "[structure — see PDF]",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-41-opt-3.webp",
+        "image_display_width_px": 29
       },
       {
         "key": "4",
-        "text": "[structure — see PDF]",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-41-opt-4.webp",
+        "image_display_width_px": 51
       }
     ],
     "correct_answer": [
@@ -2236,7 +2282,12 @@
     "solution": null,
     "solution_source": null,
     "image": null,
-    "figure_refs": [],
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-41-opt-1.webp",
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-41-opt-2.webp",
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-41-opt-3.webp",
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-41-opt-4.webp"
+    ],
     "tags": [
       "enol",
       "tautomerism"
@@ -3008,15 +3059,18 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2024-jan-s1-sh1-27jan-p-56.webp",
+    "figure_refs": [
+      "assets/q/main-2024-jan-s1-sh1-27jan-p-56.webp"
+    ],
     "tags": [
       "aromaticity",
       "huckel"
     ],
     "source_notes": "Text and answer key taken from the MathonGo PDF text layer; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
-    "verified_against": "text layer and printed answer key; second-pass check pending"
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "image_display_width_px": 76
   },
   {
     "id": "main-2024-jan-s1-sh1-27jan-p-57",

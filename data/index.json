@@ -160,6 +160,52 @@
         "medium": 31
       },
       "verified": false
+    },
+    {
+      "id": "main-2024-jan-s1-sh1-31jan",
+      "exam": "main",
+      "year": 2024,
+      "session": "Jan-S1",
+      "session_number": 1,
+      "shift": 1,
+      "shift_label": "Shift 1",
+      "date": "2024-01-31",
+      "file": "data/main-2024-jan-s1-sh1-31jan.json",
+      "question_count": 90,
+      "subjects": {
+        "Physics": 30,
+        "Chemistry": 30,
+        "Maths": 30
+      },
+      "difficulty_counts": {
+        "easy": 16,
+        "medium": 37,
+        "hard": 37
+      },
+      "verified": false
+    },
+    {
+      "id": "main-2024-jan-s1-sh2-31jan",
+      "exam": "main",
+      "year": 2024,
+      "session": "Jan-S1",
+      "session_number": 1,
+      "shift": 2,
+      "shift_label": "Shift 2",
+      "date": "2024-01-31",
+      "file": "data/main-2024-jan-s1-sh2-31jan.json",
+      "question_count": 90,
+      "subjects": {
+        "Physics": 30,
+        "Chemistry": 30,
+        "Maths": 30
+      },
+      "difficulty_counts": {
+        "easy": 8,
+        "medium": 36,
+        "hard": 46
+      },
+      "verified": false
     }
   ]
 }
