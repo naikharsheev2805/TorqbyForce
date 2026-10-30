@@ -5,6 +5,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="TORQ">
+<link rel="apple-touch-startup-image" href="icons/splash-iphone-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="icons/splash-iphone-1290x2796.png" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="icons/splash-iphone-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="icons/splash-ipad-1640x2360.png" media="(device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
 </head><body>
 <!DOCTYPE html>
 <html lang="en">
@@ -611,17 +615,18 @@ button:focus:not(:focus-visible), [role="button"]:focus:not(:focus-visible){ out
 .qnav-tab.open{ left:min(300px,86vw); }
 .qnav-drawer{ position:fixed; top:0; bottom:0; left:0; width:min(300px,86vw); z-index:55; background:var(--surface); border-right:1px solid var(--border); box-shadow:0 0 40px -10px var(--shadow); transform:translateX(-102%); transition:transform .3s ease; padding:24px 18px; overflow-y:auto; }
 .qnav-drawer.open{ transform:none; }
+@media (min-width:960px){ .qnav-tab{ width:34px; height:88px; font-size:28px; border-radius:0 16px 16px 0; } }
 .qnav-head b{ display:block; font:600 20px Lora,Georgia,serif; }
 .qnav-head small{ display:block; color:var(--muted); margin-top:2px; }
 .qnav-grid{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; margin:16px 0; }
 .qn{ aspect-ratio:1; border-radius:12px; border:1px solid var(--border); background:var(--surface-2); color:var(--text); font:600 14px Inter,sans-serif; cursor:pointer; padding:0; }
 .qn.ok{ background:var(--c-easy); color:#1f1e1d; border-color:transparent; }
 .qn.bad{ background:var(--c-hard); color:#1f1e1d; border-color:transparent; }
-.qn.skip{ color:var(--muted); border-style:dashed; }
+.qn.skip{ background:var(--c-medium); color:#1f1e1d; border-color:transparent; }
 .qn.cur{ outline:2px solid var(--accent); outline-offset:2px; }
 .qnav-legend{ display:grid; grid-template-columns:1fr 1fr; gap:8px; color:var(--muted); font-size:12.5px; }
 .lg{ display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; vertical-align:middle; background:var(--surface-2); }
-.lg.ok{ background:var(--c-easy); } .lg.bad{ background:var(--c-hard); } .lg.skip{ border:1px dashed var(--muted); background:transparent; }
+.lg.ok{ background:var(--c-easy); } .lg.bad{ background:var(--c-hard); } .lg.skip{ background:var(--c-medium); }
 .sk-pts{ margin-top:10px; font:600 13px Inter,sans-serif; color:var(--muted); }
 .gutter{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; display:none; }
 .gf{ position:absolute; font:italic 500 16px Lora,Georgia,serif; color:var(--text); opacity:.13; white-space:nowrap; transform:rotate(var(--r,0deg)); animation:fdrift 22s ease-in-out infinite; }
@@ -656,7 +661,7 @@ figure.qcard .qtext{ font-size:clamp(22px,6vw,26px); line-height:1.4; font-weigh
 
 /* ---------- Thought of the day on tablets and wide screens: the largest text on the page ---------- */
 @media (min-width:700px){
-  figure.qcard{ margin:0; padding:clamp(30px,3.4vw,52px) clamp(30px,4vw,60px); }
+  figure.qcard{ margin:0 0 16px; padding:clamp(30px,3.4vw,52px) clamp(30px,4vw,60px); }
   figure.qcard .qtext{ font-size:clamp(34px,4.4vw,60px); line-height:1.25; font-weight:500; max-width:none; }
   figure.qcard .qmark{ font-size:clamp(120px,14vw,200px); }
   .hm-title{ font-size:clamp(18px,1.9vw,22px); font-weight:400; }
@@ -690,6 +695,7 @@ svg.wm-lg{ --torq-stroke:1.9; }
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
 // ---------- Data paths (adjust here if the folder layout changes) ----------
 // Serve the repo root with a local server (e.g. `python3 -m http.server`); opening the file directly blocks fetch().
@@ -917,7 +923,7 @@ function defaultCfg(o){
 
 // Attempt bookkeeping: every answer is an attempt; analysis is derived from these
 function recordAttempt(q, ok, time){
-  const att = {q:q.id, c:ok, conf:null, t:time, d:dayKey()};
+  const att = {q:q.id, c:ok, conf:null, t:time, d:dayKey(), at:Date.now()};
   store.attempts.push(att);
   if(store.attempts.length>3000) store.attempts.shift();
   if(ok) store.errorLog = store.errorLog.filter(id=>id!==q.id);
@@ -1117,6 +1123,77 @@ function toggleBookmark(qid){
 // ---------- Rendering ----------
 // Every screen change is recorded in the browser history, so the phone's back gesture steps back
 // through the app (previous screen, previous question) instead of closing the page.
+// ---------- Sign-in (Supabase magic link) ----------
+const SB_URL = 'https://kubwggwhzkvbphmqibxq.supabase.co';
+const SB_KEY = 'sb_publishable_Hq8evbOYaW4iC2fB9isYRQ_1muTjI2y';
+let sbInst = null, authState = 'unknown', sbSession = null, authMsg = '', lastEmail = '';
+function sbClient(){
+  if(!sbInst && window.supabase && window.supabase.createClient){
+    sbInst = window.supabase.createClient(SB_URL, SB_KEY);
+    sbInst.auth.onAuthStateChange((evt, session)=>{
+      sbSession = session;
+      authState = 'ready';
+      if(session) uploadOnce(session.user.id);
+      if(typeof render === 'function') render();
+    });
+  }
+  return sbInst;
+}
+// Existing device attempts go up once per account. Points use the same scoring as the app.
+async function uploadOnce(uid){
+  const flag = 'torq_uploaded_' + uid;
+  try{ if(localStorage.getItem(flag)) return; }catch(e){}
+  const rows = store.attempts.filter(a => a && a.q).map(a => ({
+    user_id: uid,
+    question_id: String(a.q),
+    is_correct: !!a.c,
+    skipped: false,
+    time_ms: a.t != null ? Math.round(a.t * 1000) : null,
+    confidence: (a.conf === 'sure' || a.conf === 'guess') ? a.conf : null,
+    points: scoreFor(!!a.c, a.conf, a.t || 0),
+    created_at: a.at ? new Date(a.at).toISOString() : (a.d ? new Date(a.d + 'T12:00:00').toISOString() : new Date().toISOString())
+  }));
+  const db = sbClient();
+  if(!db) return;
+  for(let i = 0; i < rows.length; i += 500){
+    const { error } = await db.from('attempts').insert(rows.slice(i, i + 500));
+    if(error){ console.error('Upload failed, will retry next sign-in', error); return; }
+  }
+  try{ localStorage.setItem(flag, '1'); }catch(e){}
+}
+function signinView(){
+  // Same screen as the welcome page (background, orbs, formulas, layout); only the copy and the card change.
+  const w = onboardView();
+  const hero = w.querySelector('.onb-hero');
+  hero.innerHTML = '<div class="onb-top"><div class="brand-lock">'+torqWordmark('wm-md')+'<span class="brand-sub">JEE companion</span></div></div>'
+    +'<div class="onb-eyebrow">JEE Main \u00B7 Previous-year papers</div>'
+    +'<h1 class="onb-title"><span class="w onb-outline">Prepare</span><span class="w">with</span><em class="w">intent.</em></h1>'
+    +'<p class="onb-sub">Sign in to keep your progress safe and to appear on the leaderboard.</p>'
+    +'<div class="onb-tags"><span>Shift-wise PYQs</span><span>Timed mocks</span><span>Chapter drills</span></div>';
+  const card = w.querySelector('.onb-card');
+  card.innerHTML = '';
+  card.appendChild(el('<div class="onb-cardhead">Sign in with email</div>'));
+  card.appendChild(el('<div class="onb-cardsub">We will email you a sign-in link. No password needed.</div>'));
+  const inp = el('<input class="intin" type="email" autocomplete="email" placeholder="you@example.com" style="width:100%;margin-top:4px">');
+  inp.value = lastEmail;
+  card.appendChild(inp);
+  const btn = el('<button class="btn" style="margin-top:14px">Send sign-in link</button>');
+  btn.onclick = async ()=>{
+    const email = inp.value.trim();
+    lastEmail = email;
+    if(!/^\S+@\S+\.\S+$/.test(email)){ authMsg = 'Enter a valid email address.'; render(); return; }
+    authMsg = 'Sending link...';
+    render();
+    const db = sbClient();
+    const { error } = db ? await db.auth.signInWithOtp({ email, options: { emailRedirectTo: window.location.origin + window.location.pathname } })
+                         : { error: { message: 'Sign-in is unavailable right now.' } };
+    authMsg = error ? ('Could not send the link: ' + error.message) : ('Link sent to ' + email + '. Open it on this device.');
+    render();
+  };
+  card.appendChild(btn);
+  if(authMsg) card.appendChild(el('<p class="onb-cardsub" style="margin-top:12px">'+esc(authMsg)+'</p>'));
+  return w;
+}
 function render(){ renderInner(); histSync(); }
 function navKey(){
   const o = {};
@@ -1139,13 +1216,14 @@ function renderInner(){
   document.querySelectorAll('.bottomnav').forEach(n=>n.remove());
   const app = document.getElementById('app');
   app.innerHTML = '';
-  app.classList.toggle('is-onb', !store.profile);
-  if(view!=='practice' && store.profile) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
+  const needSignIn = authState === 'ready' && !sbSession;
+  app.classList.toggle('is-onb', needSignIn || !store.profile);
+  if(view!=='practice' && store.profile && !needSignIn) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
   const V = {home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
              me:meView, practice:practiceView, results:resultsView};
-  app.appendChild(!store.profile ? onboardView() : (V[view]||homeView)());
+  app.appendChild(needSignIn ? signinView() : (!store.profile ? onboardView() : (V[view]||homeView)()));
   if(view==='pyq') app.appendChild(el('<div class="foot">'+esc(BANK_ERROR || ('PYQ bank: '+QUESTIONS.length+' questions'))+'</div>'));
-  if(view!=='practice' && store.profile) document.body.appendChild(bottomNav());
+  if(view!=='practice' && store.profile && !needSignIn) document.body.appendChild(bottomNav());
   enhance(app);
   if(view==='results' && session && !session.revealed){ session.revealed = true; revealResult(app); }
   if(fi>=0){ const o = app.querySelectorAll('.opt')[fi]; if(o) o.focus({preventScroll:true}); }
@@ -2643,6 +2721,8 @@ function cloudSync(){
 (function init(){
   let saved=null; try{ saved=localStorage.getItem('torque_theme'); }catch(e){}
   applyTheme(saved || 'claude-dark');
+  sbClient();
+  setTimeout(()=>{ if(authState === 'unknown'){ authState = 'offline'; render(); } }, 5000);
 
   const TL = el(splashHTML());
   document.body.appendChild(TL);
