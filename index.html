@@ -1,4 +1,11 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#262624">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TORQ">
+</head><body>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -461,7 +468,7 @@ button:focus:not(:focus-visible), [role="button"]:focus:not(:focus-visible){ out
 .sd{ flex:1; height:12px; border-radius:99px; background:var(--surface-2); }
 .sd.on{ background:linear-gradient(90deg,var(--accent),var(--c-medium)); }
 .sd.today{ outline:1.5px solid var(--accent); outline-offset:2px; }
-.qotd .qclamp{ display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; font-size:16px; }
+.qotd .qclamp{ display:block; font-size:16px; }
 .qotd-actions{ display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
 .badges{ display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:10px; }
 .badge{ border:1px solid var(--border); border-radius:var(--r-xl); padding:16px 14px; background:linear-gradient(160deg,var(--surface),var(--surface-2)); }
@@ -630,6 +637,16 @@ button:focus:not(:focus-visible), [role="button"]:focus:not(:focus-visible){ out
 /* ---------- Focus and question text ---------- */
 .qtext:focus, .title:focus, [tabindex="-1"]:focus{ outline:none; }
 @media (min-width:960px){ .qcard .qtext{ max-width:none; } }
+
+/* ---------- Question of the day and greeting: the thought leads on wide screens ---------- */
+.stmt-break{ display:block; height:.9em; }
+@media (min-width:960px){
+  .hm-title{ font-size:clamp(22px,2.2vw,30px); font-weight:500; }
+  .hm-eyebrow{ font-size:10.5px; }
+  figure.qcard .qtext{ font-size:clamp(30px,3vw,46px); line-height:1.3; font-weight:500; max-width:none; }
+  figure.qcard{ padding:clamp(28px,3vw,44px) clamp(28px,3.4vw,52px); }
+}
+.bn.disabled{ opacity:.38; cursor:not-allowed; }
 
 .intwrap{margin:12px 0 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .intin{font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);width:180px}
@@ -945,6 +962,24 @@ function applyTheme(id){
   if(!THEMES.some(t=>t.id===id)) id='claude-dark';
   document.documentElement.setAttribute('data-theme', id);
   try{ localStorage.setItem('torque_theme', id); }catch(e){}
+  updateFavicon();
+}
+// Browser tab icon: the tau mark, drawn in the active theme's colours
+function updateFavicon(){
+  const cs = getComputedStyle(document.documentElement);
+  const bg = cs.getPropertyValue('--surface-2').trim() || '#3a3a37';
+  const fg = cs.getPropertyValue('--accent').trim() || '#d97757';
+  const c = document.createElement('canvas'); c.width = 64; c.height = 64;
+  const g = c.getContext('2d');
+  g.fillStyle = bg;
+  g.beginPath(); g.roundRect ? g.roundRect(0,0,64,64,14) : g.rect(0,0,64,64); g.fill();
+  g.strokeStyle = fg; g.lineWidth = 7; g.lineCap = 'round';
+  g.beginPath(); g.moveTo(17,20); g.lineTo(47,20); g.stroke();
+  g.beginPath(); g.moveTo(32,20); g.lineTo(32,47); g.stroke();
+  let link = document.querySelector('link[rel="icon"]');
+  if(!link){ link = document.createElement('link'); link.rel = 'icon'; document.head.appendChild(link); }
+  link.type = 'image/png';
+  link.href = c.toDataURL('image/png');
 }
 
 function setTheme(id){ applyTheme(id); render(); }
@@ -1062,7 +1097,7 @@ function render(){
   const app = document.getElementById('app');
   app.innerHTML = '';
   app.classList.toggle('is-onb', !store.profile);
-  if(view!=='practice' && store.profile) app.appendChild(el('<div class="header">'+logoImg()+'<div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
+  if(view!=='practice' && store.profile) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
   const V = {home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
              me:meView, practice:practiceView, results:resultsView};
   app.appendChild(!store.profile ? onboardView() : (V[view]||homeView)());
@@ -1084,13 +1119,17 @@ const TABS = [
   {id:'pyq', label:'PYQs', icon:'<path d="M5 4h10l4 4v12H5z"/><path d="M14 4v5h5M9 13h6M9 17h4"/>'},
   {id:'syllabus', label:'Syllabus', icon:'<path d="M4 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>'},
   {id:'mocks', label:'Mocks', icon:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>'},
+  {id:'leaderboard', label:'Leaderboard', disabled:true, icon:'<path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M5 5H3v2a3 3 0 0 0 3 3M19 5h2v2a3 3 0 0 1-3 3M10 14h4v4h-4zM8 20h8"/>'},
   {id:'me', label:'Me', icon:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>'}
 ];
+function registerSW(){
+  if('serviceWorker' in navigator && location.protocol.indexOf('http')===0){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+}
 function bottomNav(){
   const bar = el('<nav class="bottomnav"></nav>');
   TABS.forEach(t=>{
-    const b = el('<button class="bn '+(nav.tab===t.id?'on':'')+'"><svg viewBox="0 0 24 24">'+t.icon+'</svg><span>'+t.label+'</span></button>');
-    b.onclick = ()=>go(t.id);
+    const b = el('<button class="bn '+(nav.tab===t.id?'on':'')+(t.disabled?' disabled':'')+'"'+(t.disabled?' disabled aria-disabled="true" title="Leaderboard, coming soon"':'')+'><svg viewBox="0 0 24 24">'+t.icon+'</svg><span>'+t.label+'</span></button>');
+    if(!t.disabled) b.onclick = ()=>go(t.id);
     bar.appendChild(b);
   });
   return bar;
@@ -1262,22 +1301,34 @@ function syllabusView(){
 
 // ---------- Time-of-day welcome and quotes ----------
 const TIME_MOODS = [
-  {from:0,  mood:'Midnight mood',         hi:n=>'Midnight, '+n+'? Even the moon is yawning.'},
-  {from:3,  mood:'The hour before dawn',  hi:n=>'Shhh, '+n+'. The whole city is still dreaming.'},
-  {from:5,  mood:'First light',           hi:n=>'Up before the sun, '+n+'? Legend behaviour.'},
-  {from:8,  mood:'Morning momentum',      hi:n=>'Morning, '+n+'! Coffee is ready and so is your brain.'},
-  {from:11, mood:'High noon',             hi:n=>'High noon, '+n+'. Your brain is at full sunshine.'},
-  {from:14, mood:'The afternoon grind',   hi:n=>'Afternoon, '+n+'. Slump? Not on my watch.'},
-  {from:17, mood:'Golden hour',           hi:n=>'Golden hour, '+n+'. Looking sharp today.'},
-  {from:19, mood:'Lamplight hours',       hi:n=>'Evening, '+n+'. Dinner is done, now let us make it count.'},
-  {from:22, mood:'Last call for the day', hi:n=>'Late night, '+n+'. Only the legends show up now.'}
+  {mood:'Midnight mood', hi:n=>'Midnight, '+n+'. Even the moon is yawning.'},
+  {mood:'Deep night', hi:n=>'1 a.m., '+n+'. Only the owls and the very dedicated are up.'},
+  {mood:'Deep night', hi:n=>'2 a.m., '+n+'. The house is asleep. You are not, apparently.'},
+  {mood:'The hour before dawn', hi:n=>'3 a.m., '+n+'. The whole city is still dreaming.'},
+  {mood:'The hour before dawn', hi:n=>'4 a.m., '+n+'. Dawn is still rehearsing.'},
+  {mood:'First light', hi:n=>'5 a.m., '+n+'. Up before the sun? Legend behaviour.'},
+  {mood:'Sunrise hours', hi:n=>'6 a.m., '+n+'. The day is just getting started.'},
+  {mood:'Morning momentum', hi:n=>'7 a.m., '+n+'! Coffee is ready and so is your brain.'},
+  {mood:'Morning momentum', hi:n=>'8 a.m., '+n+'. Fresh mind, fresh start.'},
+  {mood:'Morning focus', hi:n=>'9 a.m., '+n+'. The best hours for hard problems.'},
+  {mood:'Morning focus', hi:n=>'10 a.m., '+n+'. Sharp and steady.'},
+  {mood:'Almost noon', hi:n=>'11 a.m., '+n+'. Stretch, sip water, keep going.'},
+  {mood:'High noon', hi:n=>'Noon, '+n+'. Your brain is at full sunshine.'},
+  {mood:'Lunch break', hi:n=>'1 p.m., '+n+'. A short walk does wonders.'},
+  {mood:'The afternoon grind', hi:n=>'2 p.m., '+n+'. Slump? Not on my watch.'},
+  {mood:'The afternoon grind', hi:n=>'3 p.m., '+n+'. One more set before the tea.'},
+  {mood:'Late afternoon', hi:n=>'4 p.m., '+n+'. Strong finish time.'},
+  {mood:'Golden hour', hi:n=>'5 p.m., '+n+'. Looking sharp today.'},
+  {mood:'Golden hour', hi:n=>'6 p.m., '+n+'. Warm light, steady pace.'},
+  {mood:'Lamplight hours', hi:n=>'7 p.m., '+n+'. Dinner is done, now let us make it count.'},
+  {mood:'Lamplight hours', hi:n=>'8 p.m., '+n+'. A focused hour before the night.'},
+  {mood:'Night mode', hi:n=>'9 p.m., '+n+'. Quiet house, clear mind.'},
+  {mood:'Last call for the day', hi:n=>'10 p.m., '+n+'. Only the legends show up now.'},
+  {mood:'Last call for the day', hi:n=>'11 p.m., '+n+'. One more question, then rest.'}
 ];
-function timeMood(){
-  const h = new Date().getHours();
-  let m = TIME_MOODS[0];
-  TIME_MOODS.forEach(x=>{ if(h>=x.from) m = x; });
-  return m;
-}
+// One entry per hour, so the greeting always matches the clock
+function timeMood(){ return TIME_MOODS[new Date().getHours()]; }
+
 const QUOTES = [
   {q:"You are in danger of living a life so comfortable and soft that you will die without ever realizing your true potential.", a:"David Goggins", s:"Can't Hurt Me"},
   {q:"Those who have a 'why' to live, can bear with almost any 'how'.", a:"Viktor Frankl", s:"Man's Search for Meaning"},
@@ -1352,7 +1403,7 @@ function advanceQuote(now = Date.now()){
   try{ localStorage.setItem(QUOTE_KEY, JSON.stringify(quoteState)); }catch(e){}
 }
 // Refresh the quote on screen while the app stays open on the home view.
-setInterval(()=>{ if(view === 'home' && store.profile && quoteDue()) render(); }, 60000);
+setInterval(()=>{ if(view === 'home' && store.profile && (quoteDue() || window.__hour !== new Date().getHours())) render(); }, 60000);
 
 function quoteCard(){
   if(quoteDue()) advanceQuote();
@@ -1366,6 +1417,7 @@ function quoteCard(){
 
 function homeView(){
   const w = el('<div></div>');
+  window.__hour = new Date().getHours();
   const mood = timeMood();
   const firstName = (store.profile && store.profile.name ? store.profile.name : '').split(' ')[0];
   const clock = new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
@@ -1724,7 +1776,7 @@ function onboardView(){
   }
   w.appendChild(bg);
   stage.appendChild(el('<div class="onb-hero">'
-    +'<div class="onb-top">'+logoImg()+'<div class="brand-lock">'+torqWordmark('wm-md')+'<span class="brand-sub">JEE companion</span></div><span class="onb-step">Step 1 of 1</span></div>'
+    +'<div class="onb-top"><div class="brand-lock">'+torqWordmark('wm-md')+'<span class="brand-sub">JEE companion</span></div><span class="onb-step">Step 1 of 1</span></div>'
     +'<div class="onb-eyebrow">JEE Main \u00B7 Previous-year papers</div>'
     +'<h1 class="onb-title"><span class="w onb-outline">Crack</span><span class="w">JEE</span><em class="w">with intent.</em></h1>'
     +'<p class="onb-sub">Real papers, shift by shift, and timed mocks that feel like exam day. Tell us a little about you to begin.</p>'
@@ -1880,7 +1932,7 @@ function pyqPractice(w){
 
   const card = el('<div class="card qcard" style="--bar:'+(SUBJ_VAR[q.subject]||'')+'"></div>');
   card.appendChild(el('<div class="tags"><span class="tag shift">'+q.year+' · '+SHIFT_NAME[q.shift]+'</span><span class="tag diff diff-'+q.difficulty.toLowerCase()+'">'+q.difficulty+'</span><span class="tag">'+esc(q.topic)+'</span></div>'));
-  card.appendChild(el('<div class="qtext">'+esc(q.text)+'</div>'));
+  card.appendChild(el('<div class="qtext">'+qtextHTML(q.text)+'</div>'));
   if(q.image) card.appendChild(qImage(q.image));
 
   if(!answered){
@@ -1975,7 +2027,7 @@ function mockPractice(w){
   mb.onclick = ()=>{ session.marks[q.id] = !marked; render(); };
   mk.appendChild(mb);
   card.appendChild(mk);
-  card.appendChild(el('<div class="qtext">'+esc(q.text)+'</div>'));
+  card.appendChild(el('<div class="qtext">'+qtextHTML(q.text)+'</div>'));
   if(q.image) card.appendChild(qImage(q.image));
   if(q.type==='integer'){
     card.appendChild(numpad(q, a ? String(a.sel) : '', v=>setNumeric(v), null, false, ''));
@@ -2177,7 +2229,7 @@ function qotdCard(){
     +'<div class="tags"><span class="tag subj subj-'+q.subject.toLowerCase()+'">'+esc(q.subject)+'</span>'
     +'<span class="tag shift">'+esc(q.year+' · '+SHIFT_NAME[q.shift])+'</span>'
     +'<span class="tag diff diff-'+q.difficulty.toLowerCase()+'">'+esc(q.difficulty)+'</span></div>'
-    +'<div class="qtext qclamp">'+esc(q.text)+'</div></div>');
+    +'<div class="qtext qclamp">'+qtextHTML(q.text)+'</div></div>');
   if(qotdOpen) c.appendChild(el('<div class="note">Answer: '+esc(answerLabel(q))+'. '+esc(q.explanation)+'</div>'));
   const actions = el('<div class="qotd-actions"></div>');
   const rv = el('<button class="btn secondary small">'+(qotdOpen?'Hide answer':'Reveal answer')+'</button>');
@@ -2402,6 +2454,11 @@ function buildGutter(){
   document.body.insertBefore(g, document.body.firstChild);
 }
 
+// Layout for question text: statements and the closing line start on their own lines
+function qtextHTML(t){
+  return esc(t).replace(/\s*(Statement[\s-]*(?:I{1,2}|1|2)\s*:|Assertion\s*\(A\)\s*:|Reason\s*\(R\)\s*:|In the light of)/gi,
+    (m, p1, off)=> off===0 ? p1 : '<span class="stmt-break"></span>'+p1);
+}
 const CONF_GLYPHS = ['\u03C0','\u2211','\u0394','\u03BB','\u03A9','\u222B','\u221A','\u03B8','\u03BC','\u221E'];
 function confetti(){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches || view!=='results') return;
@@ -2503,7 +2560,6 @@ function splashHTML(){
   const id = document.documentElement.getAttribute('data-theme') || 'claude-dark';
   const src = LOGOS[id] || LOGOS['claude-dark'];
   return '<div id="tauLoader" role="status" aria-live="polite"><div class="spl-bg" aria-hidden="true"><i></i><i></i><i></i></div><div class="spl-inner">'
-    +'<div class="spl-ring"><img class="spl-logo" alt="" src="'+src+'"></div>'
     +'<div class="spl-eyebrow">JEE · Previous-year papers</div>'
     +torqWordmark('wm-lg')
     +'<div class="spl-bar" aria-hidden="true"><i></i></div>'
@@ -2568,6 +2624,7 @@ function cloudSync(){
   (async ()=>{
     await loadBank();
     buildGutter();
+    registerSW();
     for(const st of steps){
       msg.textContent = st.label;
       try{ await withTimeout(Promise.resolve().then(st.run), 3000); }catch(e){}
