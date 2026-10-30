@@ -654,6 +654,22 @@ figure.qcard .qtext{ font-size:clamp(22px,6vw,26px); line-height:1.4; font-weigh
 .qotd .qtext{ max-width:none; }
 @media (min-width:960px){ .qotd .qclamp{ font-size:18px; line-height:1.6; } }
 
+/* ---------- Thought of the day on tablets and wide screens: the largest text on the page ---------- */
+@media (min-width:700px){
+  figure.qcard{ margin:0; padding:clamp(30px,3.4vw,52px) clamp(30px,4vw,60px); }
+  figure.qcard .qtext{ font-size:clamp(34px,4.4vw,60px); line-height:1.25; font-weight:500; max-width:none; }
+  figure.qcard .qmark{ font-size:clamp(120px,14vw,200px); }
+  .hm-title{ font-size:clamp(18px,1.9vw,22px); font-weight:400; }
+}
+@media (min-width:960px){
+  figure.qcard .qtext{ font-size:clamp(44px,4.8vw,76px); }
+}
+
+/* ---------- Loading screen: the TORQ wordmark at a proper size ---------- */
+#tauLoader .spl-inner svg.wm-lg{ width:min(78vw,420px); height:auto; display:block; margin:6px auto 0; }
+/* ---------- Torque arc: thinner on the large loading wordmark so the arrow stays clear ---------- */
+svg.wm-lg{ --torq-stroke:1.9; }
+#tauLoader svg.wm-lg polygon{ transform-box:view-box; }
 .intwrap{margin:12px 0 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .intin{font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);width:180px}
 .intin.ok{border-color:var(--ok,#2a9d5c)} .intin.bad{border-color:var(--bad,#d64545)}
@@ -956,7 +972,7 @@ function torqWordmark(cls){
   const head = [tip,b1,b2].map(q=>q[0].toFixed(2)+','+q[1].toFixed(2)).join(' ');
   return '<svg class="wm '+cls+'" viewBox="0 0 128 40" role="img" aria-label="TORQ" focusable="false">'
     +'<text x="0" y="31" font-family="Lora, Georgia, serif" font-weight="600" font-size="31" fill="currentColor">T</text>'
-    +'<path d="'+arc+'" fill="none" stroke="var(--accent)" stroke-width="3.2" stroke-linecap="round"/>'
+    +'<path d="'+arc+'" fill="none" stroke="var(--accent)" style="stroke-width:var(--torq-stroke,3.2)" stroke-linecap="round"/>'
     +'<polygon points="'+head+'" fill="var(--accent)"/>'
     +'<text x="62" y="31" font-family="Lora, Georgia, serif" font-weight="600" font-size="31" fill="currentColor">R</text>'
     +'<text x="94" y="31" font-family="Lora, Georgia, serif" font-weight="600" font-size="31" fill="currentColor">Q</text>'
@@ -968,24 +984,6 @@ function applyTheme(id){
   if(!THEMES.some(t=>t.id===id)) id='claude-dark';
   document.documentElement.setAttribute('data-theme', id);
   try{ localStorage.setItem('torque_theme', id); }catch(e){}
-  updateFavicon();
-}
-// Browser tab icon: the tau mark, drawn in the active theme's colours
-function updateFavicon(){
-  const cs = getComputedStyle(document.documentElement);
-  const bg = cs.getPropertyValue('--surface-2').trim() || '#3a3a37';
-  const fg = cs.getPropertyValue('--accent').trim() || '#d97757';
-  const c = document.createElement('canvas'); c.width = 64; c.height = 64;
-  const g = c.getContext('2d');
-  g.fillStyle = bg;
-  g.beginPath(); g.roundRect ? g.roundRect(0,0,64,64,14) : g.rect(0,0,64,64); g.fill();
-  g.strokeStyle = fg; g.lineWidth = 7; g.lineCap = 'round';
-  g.beginPath(); g.moveTo(17,20); g.lineTo(47,20); g.stroke();
-  g.beginPath(); g.moveTo(32,20); g.lineTo(32,47); g.stroke();
-  let link = document.querySelector('link[rel="icon"]');
-  if(!link){ link = document.createElement('link'); link.rel = 'icon'; document.head.appendChild(link); }
-  link.type = 'image/png';
-  link.href = c.toDataURL('image/png');
 }
 
 function setTheme(id){ applyTheme(id); render(); }
