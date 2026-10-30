@@ -720,6 +720,11 @@ svg.wm-lg{ --torq-stroke:1.9; }
   .onb-sub{ max-width:none; }
   .onb-card{ justify-self:end; max-width:540px; }
 }
+/* The app is not copyable: text cannot be selected, but typing fields still work */
+html, body, #app, #app *{ -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
+input, textarea, select, [contenteditable="true"]{ -webkit-user-select:text; user-select:text; -webkit-touch-callout:default; }
+img{ -webkit-user-drag:none; }
+
 /* ---------- Leaderboard: boards, periods, podium ---------- */
 .lb-boards{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-2); margin:0 0 var(--sp-3); }
 .lb-tile{ position:relative; display:flex; flex-direction:column; align-items:flex-start; gap:3px; min-width:0; text-align:left; font:inherit; color:var(--text); background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:12px 14px; cursor:pointer; transition:border-color .15s, background .15s, box-shadow .15s; }
