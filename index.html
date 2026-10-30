@@ -440,7 +440,7 @@ button:focus:not(:focus-visible), [role="button"]:focus:not(:focus-visible){ out
 .hm-orbs i{ position:absolute; top:-60px; right:-50px; width:170px; height:170px; border-radius:50%; background:var(--accent); filter:blur(30px); opacity:.5; animation:orbFloat 16s ease-in-out infinite; }
 .hm-orbs i:nth-child(2){ top:auto; right:auto; bottom:-56px; left:-40px; width:130px; height:130px; background:var(--c-chem); animation-delay:-6s; }
 .hm-eyebrow{ color:var(--accent); text-transform:uppercase; letter-spacing:.18em; font-size:11px; font-weight:700; margin-bottom:10px; }
-.hm-title{ font:600 clamp(30px,8.5vw,40px)/1.08 Lora,Georgia,serif; letter-spacing:-.02em; margin:0; overflow-wrap:anywhere; }
+.hm-title{ font:500 clamp(22px,6vw,28px)/1.12 Lora,Georgia,serif; letter-spacing:-.01em; margin:0; overflow-wrap:anywhere; }
 .hm-title em{ font-style:italic; font-weight:500; color:var(--accent); }
 .hm-daily{ border:1.5px solid transparent; border-radius:calc(var(--r-xl) + 4px);
   background:linear-gradient(var(--surface),var(--surface)) padding-box, linear-gradient(135deg,var(--accent),var(--c-phys),var(--c-chem)) border-box; }
@@ -647,6 +647,12 @@ button:focus:not(:focus-visible), [role="button"]:focus:not(:focus-visible){ out
   figure.qcard{ padding:clamp(28px,3vw,44px) clamp(28px,3.4vw,52px); }
 }
 .bn.disabled{ opacity:.38; cursor:not-allowed; }
+
+/* ---------- Home hierarchy: the thought of the day leads, the greeting steps back ---------- */
+figure.qcard .qtext{ font-size:clamp(22px,6vw,26px); line-height:1.4; font-weight:500; max-width:none; }
+/* the question of the day uses the whole width of its card */
+.qotd .qtext{ max-width:none; }
+@media (min-width:960px){ .qotd .qclamp{ font-size:18px; line-height:1.6; } }
 
 .intwrap{margin:12px 0 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .intin{font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);width:180px}
@@ -1088,7 +1094,23 @@ function toggleBookmark(qid){
 }
 
 // ---------- Rendering ----------
-function render(){
+// Every screen change is recorded in the browser history, so the phone's back gesture steps back
+// through the app (previous screen, previous question) instead of closing the page.
+function render(){ renderInner(); histSync(); }
+function navKey(){
+  const o = {};
+  Object.keys(nav).forEach(k=>{ if(k!=='cfg' && k!=='mockCfg') o[k] = nav[k]; });
+  return JSON.stringify({view, idx: (session && session.mode) ? session.idx : null, nav:o});
+}
+function histSync(){
+  const key = navKey();
+  const state = {torq:1, key, view, idx: (session && session.mode) ? session.idx : null, nav: JSON.parse(JSON.stringify(nav))};
+  const prev = history.state;
+  // a real change of screen or question adds a history step; a settings tweak only updates the current one
+  if(prev && prev.torq && prev.key!==key) history.pushState(state, '');
+  else history.replaceState(state, '');
+}
+function renderInner(){
   const fi = [...document.querySelectorAll('.opt')].indexOf(document.activeElement);
   document.body.classList.toggle('has-nav', view!=='practice' && !!store.profile);
   if(view!=='results') document.querySelectorAll('.confetti').forEach(c=>c.remove());
@@ -2459,6 +2481,20 @@ function qtextHTML(t){
   return esc(t).replace(/\s*(Statement[\s-]*(?:I{1,2}|1|2)\s*:|Assertion\s*\(A\)\s*:|Reason\s*\(R\)\s*:|In the light of)/gi,
     (m, p1, off)=> off===0 ? p1 : '<span class="stmt-break"></span>'+p1);
 }
+window.addEventListener('popstate', e=>{
+  const st = e.state;
+  if(!st || !st.torq) return;
+  // a practice or results screen with no live session cannot be shown; step past it
+  if((st.view==='practice' || st.view==='results') && (!session || (st.view==='practice' && session.submitted))){
+    history.back(); return;
+  }
+  view = st.view;
+  Object.keys(nav).forEach(k=>{ if(!(k in st.nav)) delete nav[k]; });
+  Object.assign(nav, st.nav);
+  if(st.idx!=null && session) session.idx = st.idx;
+  renderInner();
+  window.scrollTo(0,0);
+});
 const CONF_GLYPHS = ['\u03C0','\u2211','\u0394','\u03BB','\u03A9','\u222B','\u221A','\u03B8','\u03BC','\u221E'];
 function confetti(){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches || view!=='results') return;
