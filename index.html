@@ -1226,7 +1226,7 @@ function sbClient(){
       sbSession = session;
       authState = 'ready';
       if(session && evt==='SIGNED_IN'){ uploadPending(); syncProfile(); }
-      if(session && evt==='SIGNED_IN' && !store.profile){ restoreProfile(session.user.id).then(()=>{ if(typeof render==='function' && !authBusy) render(); }); }
+      if(session && (evt==='INITIAL_SESSION' || evt==='SIGNED_IN')){ restoreFromServer(session.user.id).then(()=>{ if(typeof render==='function' && !authBusy) render(); }); }
       if(typeof render === 'function' && !authBusy) render();
     });
   }
@@ -1341,7 +1341,7 @@ function loginForm(){
       const { data, error } = await db.auth.signInWithPassword({ email, password: pw });
       if(error || !data.session) return fail('Wrong email or password.');
       sbSession = data.session;
-      await restoreProfile(data.session.user.id);
+      await restoreFromServer(data.session.user.id);
       render();
     } catch(ex){
       fail('Could not log in. Check your connection and try again.');
@@ -1351,15 +1351,44 @@ function loginForm(){
   };
   return f;
 }
-// After logging in on a device, bring the saved profile down so the app opens with it.
-async function restoreProfile(uid){
-  const db = sbClient(); if(!db) return;
-  const { data } = await db.from('profiles').select('username, first_name, birthdate, hide_from_leaderboard').eq('id', uid).maybeSingle();
-  if(!data) return;
-  const age = data.birthdate ? Math.floor((Date.now() - new Date(data.birthdate+'T00:00:00').getTime())/(365.25*864e5)) : '';
-  store.profile = {username: data.username||'', name: data.first_name||'', surname: '', age: age||'', birthdate: data.birthdate||null,
-    standard: '', exam: 'main', visible: !data.hide_from_leaderboard};
-  persist();
+// After logging in (or returning with a session), bring the saved profile, photo and practice history down from the server.
+async function restoreFromServer(uid){
+  const db = sbClient(); if(!db || !uid) return;
+  if(!store.profile){
+    const { data } = await db.from('profiles').select('username, first_name, birthdate, hide_from_leaderboard, avatar_path').eq('id', uid).maybeSingle();
+    if(data){
+      const age = data.birthdate ? Math.floor((Date.now() - new Date(data.birthdate+'T00:00:00').getTime())/(365.25*864e5)) : '';
+      store.profile = {username: data.username||'', name: data.first_name||'', surname: '', age: age||'', birthdate: data.birthdate||null,
+        standard: '', exam: 'main', visible: !data.hide_from_leaderboard};
+      if(data.avatar_path && !loadAvatarCache()) cacheUser({avatar: avatarUrl(data.avatar_path)});
+      persist();
+    }
+  }
+  // Practice history: every attempt the server holds that this device does not have yet
+  const rows = [];
+  for(let from = 0; ; from += 1000){
+    const { data, error } = await db.from('attempts').select('question_id,is_correct,skipped,time_ms,confidence,points,created_at')
+      .eq('user_id', uid).order('created_at', {ascending:true}).range(from, from+999);
+    if(error || !data) break;
+    rows.push(...data);
+    if(data.length < 1000) break;
+  }
+  if(!rows.length) return;
+  const have = new Set(store.attempts.filter(Boolean).map(a => a.q + '|' + a.at));
+  let added = 0;
+  rows.forEach(r=>{
+    const at = Date.parse(r.created_at);
+    const key = r.question_id + '|' + at;
+    if(have.has(key)) return;
+    have.add(key); added++;
+    store.attempts.push({q: r.question_id, c: !!r.is_correct, skipped: !!r.skipped, t: r.time_ms != null ? r.time_ms/1000 : null,
+      conf: r.confidence || undefined, at, d: dayKey(new Date(at)), up: true});
+  });
+  if(added){
+    const total = rows.reduce((s,r)=>s + (Number(r.points)||0), 0);
+    store.points = Math.max(store.points||0, Math.round(total*10)/10);
+    persist();
+  }
 }
 function render(){ renderInner(); histSync(); }
 function navKey(){
