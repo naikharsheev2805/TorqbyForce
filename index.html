@@ -1245,7 +1245,7 @@ async function saveRemote(p, av){
     if(up.error){ console.error(up.error); return {error:up.error}; }
     avatarPath = path;
   }
-  const row = {id:uid, username:(p.username||'').toLowerCase(), first_name:p.name||null,
+  const row = {id:uid, username:(p.username||'').toLowerCase(), first_name:p.name||null, surname:p.surname||null, standard:p.standard||null, exam:p.exam||null, age:parseInt(p.age,10)||null,
     hide_from_leaderboard: p.visible===false, birthdate:p.birthdate||null, updated_at:new Date().toISOString()};
   if(avatarPath) row.avatar_path = avatarPath;
   const {error} = await db.from('profiles').upsert(row, {onConflict:'id'});
@@ -1355,11 +1355,11 @@ function loginForm(){
 async function restoreFromServer(uid){
   const db = sbClient(); if(!db || !uid) return;
   if(!store.profile){
-    const { data } = await db.from('profiles').select('username, first_name, birthdate, hide_from_leaderboard, avatar_path').eq('id', uid).maybeSingle();
+    const { data } = await db.from('profiles').select('username, first_name, surname, standard, exam, age, birthdate, hide_from_leaderboard, avatar_path').eq('id', uid).maybeSingle();
     if(data){
-      const age = data.birthdate ? Math.floor((Date.now() - new Date(data.birthdate+'T00:00:00').getTime())/(365.25*864e5)) : '';
-      store.profile = {username: data.username||'', name: data.first_name||'', surname: '', age: age||'', birthdate: data.birthdate||null,
-        standard: '', exam: 'main', visible: !data.hide_from_leaderboard};
+      const age = data.age || (data.birthdate ? Math.floor((Date.now() - new Date(data.birthdate+'T00:00:00').getTime())/(365.25*864e5)) : '');
+      store.profile = {username: data.username||'', name: data.first_name||'', surname: data.surname||'', age: age||'', birthdate: data.birthdate||null,
+        standard: data.standard||'', exam: data.exam||'main', visible: !data.hide_from_leaderboard};
       if(data.avatar_path && !loadAvatarCache()) cacheUser({avatar: avatarUrl(data.avatar_path)});
       persist();
     }
@@ -2282,6 +2282,70 @@ function profilePart(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="eyebrow" style="margin:6px 0 10px">Your profile</div>'));
   w.appendChild(profileForm(store.profile||{exam:'main'}, 'Save changes', (p,av)=>{ store.profile = p; persist(); cacheUser({avatar: av||null}); go('me',{meTab:'profile'}); }, true));
+  w.appendChild(accountBlock());
+  return w;
+}
+// Log out and delete account live here, along with setting a password for accounts that have none
+function clearLocalData(){
+  try{ localStorage.removeItem(STORE_KEY); localStorage.removeItem(USER_CACHE_KEY); localStorage.removeItem('torq_profile_draft_v1'); }catch(e){}
+  store = {bookmarks:[], errorLog:[], notes:{}, attempts:[]};
+  sbSession = null;
+}
+async function logOutNow(){
+  const db = sbClient();
+  if(db){ try{ await db.auth.signOut(); }catch(e){} }
+  clearLocalData();
+  render();
+}
+function accountBlock(){
+  const w = el('<div class="account-block"></div>');
+  w.appendChild(el('<div class="eyebrow" style="margin:22px 0 10px">Account</div>'));
+  if(!sbSession){
+    w.appendChild(el('<p class="note-line">Log in to manage your account.</p>'));
+    return w;
+  }
+  w.appendChild(el('<p class="note-line" style="margin:0 0 10px">Signed in as '+esc(sbSession.user.email||'your account')+'</p>'));
+
+  // Password: lets accounts made with Google or the old email link set one
+  const pwForm = el('<form class="profile-form" autocomplete="off"></form>');
+  pwForm.innerHTML = '<div class="pf"><span class="eyebrow">New password <small style="opacity:.6">(8+ characters)</small></span><input name="pw" type="password" autocomplete="new-password"></div>'
+    +'<div class="pf"><span class="eyebrow">Confirm new password</span><input name="pw2" type="password" autocomplete="new-password"></div>'
+    +'<p class="note-line err" hidden></p><p class="note-line ok" hidden></p>'
+    +'<button class="btn block" type="submit">Set password</button>';
+  pwForm.onsubmit = async e=>{
+    e.preventDefault();
+    const err = pwForm.querySelector('.err'), ok = pwForm.querySelector('.ok');
+    err.hidden = true; ok.hidden = true;
+    const pw = pwForm.querySelector('[name="pw"]').value;
+    if(pw.length < 8){ err.textContent = 'Password must be at least 8 characters.'; err.hidden = false; return; }
+    if(pw !== pwForm.querySelector('[name="pw2"]').value){ err.textContent = 'The two passwords do not match.'; err.hidden = false; return; }
+    const db = sbClient();
+    const { error } = await db.auth.updateUser({ password: pw });
+    if(error){ err.textContent = 'Could not set password: ' + error.message; err.hidden = false; return; }
+    ok.textContent = 'Password saved. You can now log in with your email and password.'; ok.hidden = false;
+    pwForm.reset();
+  };
+  w.appendChild(pwForm);
+
+  const logout = el('<button class="btn block" type="button" style="margin-top:14px">Log out</button>');
+  logout.onclick = ()=>{
+    if(!confirm('Log out? Answers that have not synced yet will be removed from this device.')) return;
+    logOutNow();
+  };
+  w.appendChild(logout);
+
+  const del = el('<button class="btn block" type="button" style="margin-top:10px;background:transparent;color:#e5484d;border:1px solid #e5484d;box-shadow:none">Delete account</button>');
+  del.onclick = async ()=>{
+    if(!confirm('Delete your account? Your profile, photo and practice history will be erased. This cannot be undone.')) return;
+    if(!confirm('Are you sure? This is permanent.')) return;
+    const db = sbClient();
+    const { error } = await db.rpc('delete_my_account');
+    if(error){ alert('Could not delete the account: ' + error.message); return; }
+    try{ await db.auth.signOut(); }catch(e){}
+    clearLocalData();
+    render();
+  };
+  w.appendChild(del);
   return w;
 }
 
