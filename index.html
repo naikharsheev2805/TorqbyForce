@@ -570,6 +570,67 @@ button:focus:not(:focus-visible), [role="button"]:focus:not(:focus-visible){ out
 .streak.frozen .sd.on{ background:var(--surface-2); box-shadow:inset 0 0 0 1px var(--border); }
 .streak.frozen .sd.today{ outline-color:var(--border); }
 
+/* ---------- Practice: clock, bounded option images, keypad, navigation, wide-screen gutters ---------- */
+.optbox{ display:flex; align-items:center; width:100%; height:112px; overflow:hidden; }
+.optbox .qimg-opt{ max-width:100%; max-height:112px; width:auto; height:auto; object-fit:contain; display:block; }
+.opt.hasimg{ align-items:center; }
+.opt{ align-items:center; }
+.qclock{ display:flex; align-items:center; gap:12px; padding:10px 14px; margin:6px 0 10px; border:1px solid var(--border); border-radius:var(--r-lg); background:var(--surface); }
+.qclock svg{ width:40px; height:40px; transform:rotate(-90deg); flex-shrink:0; }
+.qc-bg{ fill:none; stroke:var(--surface-2); stroke-width:4; }
+.qc-fg{ fill:none; stroke:var(--accent); stroke-width:4; stroke-linecap:round; stroke-dasharray:113; transition:stroke-dashoffset .9s linear, stroke .3s ease; }
+.qclock.warn .qc-fg{ stroke:var(--c-medium); }
+.qclock.over .qc-fg{ stroke:var(--c-hard); }
+.qc-txt{ flex:1; display:flex; flex-direction:column; gap:2px; min-width:0; }
+.qc-txt span{ font:600 15px/1.2 Lora,Georgia,serif; font-variant-numeric:tabular-nums; }
+.qc-txt small{ color:var(--muted); font-size:12px; line-height:1.35; }
+.qc-pts{ font:600 14px Inter,sans-serif; color:var(--accent); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.numwrap{ margin-top:12px; }
+.numdisp{ width:100%; min-height:64px; text-align:left; padding:12px 16px; border-radius:var(--r-lg); border:1.5px dashed var(--accent); background:var(--surface-2); color:var(--text); font:600 26px/1.2 Lora,Georgia,serif; cursor:pointer; }
+.numdisp i{ font-style:normal; font:500 15px Inter,sans-serif; color:var(--muted); }
+.numdisp.open{ border-style:solid; }
+.numdisp.locked{ cursor:default; }
+.numdisp.ok{ border-color:var(--c-easy); border-style:solid; }
+.numdisp.bad{ border-color:var(--c-hard); border-style:solid; }
+.numpad{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin-top:10px; }
+.nk{ min-height:54px; border-radius:14px; border:1px solid var(--border); background:var(--surface); color:var(--text); font:600 20px Inter,sans-serif; cursor:pointer; }
+.nk:active{ transform:scale(.96); }
+.nk.fn{ color:var(--muted); font-size:15px; }
+.nk.check{ grid-column:1 / -1; background:var(--accent); color:#1f1e1d; border-color:transparent; font-size:16px; }
+.qnav-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:18px; flex-wrap:wrap; }
+.skipnote{ margin-top:12px; }
+.ptsline{ font:600 13px Inter,sans-serif; color:var(--accent); margin-bottom:6px; }
+.qnav-tab{ position:fixed; left:0; top:50%; transform:translateY(-50%); z-index:60; width:24px; height:64px; border:1px solid var(--border); border-left:0; border-radius:0 12px 12px 0; background:var(--surface); color:var(--accent); font:700 20px Inter,sans-serif; cursor:pointer; box-shadow:0 12px 24px -14px var(--shadow); transition:left .3s ease; }
+.qnav-tab.open{ left:min(300px,86vw); }
+.qnav-drawer{ position:fixed; top:0; bottom:0; left:0; width:min(300px,86vw); z-index:55; background:var(--surface); border-right:1px solid var(--border); box-shadow:0 0 40px -10px var(--shadow); transform:translateX(-102%); transition:transform .3s ease; padding:24px 18px; overflow-y:auto; }
+.qnav-drawer.open{ transform:none; }
+.qnav-head b{ display:block; font:600 20px Lora,Georgia,serif; }
+.qnav-head small{ display:block; color:var(--muted); margin-top:2px; }
+.qnav-grid{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; margin:16px 0; }
+.qn{ aspect-ratio:1; border-radius:12px; border:1px solid var(--border); background:var(--surface-2); color:var(--text); font:600 14px Inter,sans-serif; cursor:pointer; padding:0; }
+.qn.ok{ background:var(--c-easy); color:#1f1e1d; border-color:transparent; }
+.qn.bad{ background:var(--c-hard); color:#1f1e1d; border-color:transparent; }
+.qn.skip{ color:var(--muted); border-style:dashed; }
+.qn.cur{ outline:2px solid var(--accent); outline-offset:2px; }
+.qnav-legend{ display:grid; grid-template-columns:1fr 1fr; gap:8px; color:var(--muted); font-size:12.5px; }
+.lg{ display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; vertical-align:middle; background:var(--surface-2); }
+.lg.ok{ background:var(--c-easy); } .lg.bad{ background:var(--c-hard); } .lg.skip{ border:1px dashed var(--muted); background:transparent; }
+.sk-pts{ margin-top:10px; font:600 13px Inter,sans-serif; color:var(--muted); }
+.gutter{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; display:none; }
+.gf{ position:absolute; font:italic 500 16px Lora,Georgia,serif; color:var(--text); opacity:.13; white-space:nowrap; transform:rotate(var(--r,0deg)); animation:fdrift 22s ease-in-out infinite; }
+#app{ position:relative; z-index:1; }
+@media (min-width:960px){
+  .gutter{ display:block; }
+  #app{ max-width:1180px; }
+  .qcard{ max-width:820px; margin-left:auto; margin-right:auto; }
+  .qclock{ max-width:820px; margin-left:auto; margin-right:auto; }
+}
+@media (prefers-reduced-motion: reduce){ .gf{ animation:none; } .qc-fg{ transition:none; } }
+
+/* ---------- Focus and question text ---------- */
+.qtext:focus, .title:focus, [tabindex="-1"]:focus{ outline:none; }
+@media (min-width:960px){ .qcard .qtext{ max-width:none; } }
+
 .intwrap{margin:12px 0 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .intin{font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);width:180px}
 .intin.ok{border-color:var(--ok,#2a9d5c)} .intin.bad{border-color:var(--bad,#d64545)}
@@ -676,7 +737,7 @@ function buildIndexes(){
 function answerLabel(q){ return q.type === 'integer' ? q.answer : L(q.correct); }
 function optBody(q, i){
   const img = q.optionImages && q.optionImages[i];
-  if(img && !q.options[i]) return '<img class="qimg-opt" src="'+esc(img)+'" alt="Option '+L(i)+'" loading="lazy">';
+  if(img && !q.options[i]) return '<span class="optbox"><img class="qimg-opt" src="'+esc(img)+'" alt="Option '+L(i)+'" loading="lazy" onerror="this.parentNode.parentNode.classList.remove(\'hasimg\');this.parentNode.remove()"></span>';
   return '<span>'+esc(q.options[i])+'</span>';
 }
 function qImage(src){
@@ -685,7 +746,7 @@ function qImage(src){
   return im;
 }
 function sameAnswer(a, b){
-  const x = String(a).trim(), y = String(b).trim();
+  const x = String(a).replace(/\u2212/g,'-').trim(), y = String(b).replace(/\u2212/g,'-').trim();
   const nx = Number(x), ny = Number(y);
   if(x !== '' && y !== '' && !isNaN(nx) && !isNaN(ny)) return Math.abs(nx - ny) < 1e-9;
   return x.toLowerCase() === y.toLowerCase();
@@ -704,12 +765,18 @@ function intInput(q, a, val, onSubmit, locked){
 }
 function answerNumeric(v){
   const q = session.queue[session.idx];
-  if(session.answers[q.id]) return;
-  const time = Math.round((Date.now()-session.qStart)/1000);
-  const ok = sameAnswer(v, q.answer);
+  const prev = session.answers[q.id];
+  if(prev && !prev.skip) return;
+  const val = String(v).replace(/\u2212/g,'-');
+  const sec = Math.round((Date.now()-qStartOf(q))/1000);
+  const ok = sameAnswer(val, q.answer);
+  const conf = session.conf[q.id] || 'guess';
+  const pts = scoreFor(ok, conf, sec);
   if(navigator.vibrate) navigator.vibrate(ok ? 12 : [30,50,30]);
-  const att = recordAttempt(q, ok, time);
-  session.answers[q.id] = {sel:v, correct:ok, time:time, att:att, at:Date.now()};
+  const att = recordAttempt(q, ok, sec); att.conf = session.conf[q.id] || null;
+  session.answers[q.id] = {sel:val, correct:ok, time:sec, att:att, at:Date.now(), pts:pts};
+  session.draft[q.id] = '';
+  addPoints(pts - ((prev && prev.pts) || 0));
   checkDailyDone();
   render();
 }
@@ -792,11 +859,12 @@ function poolFor(cfg){
     (!cfg.topic || q.topic===cfg.topic) &&
     yrs.indexOf(q.year)>=0 &&
     (cfg.diff==='All' || q.difficulty===cfg.diff) &&
-    (cfg.shift==='All' || q.shift===cfg.shift));
+    (cfg.shift==='All' || q.shift===cfg.shift) &&
+    (!cfg.qtype || cfg.qtype==='All' || (cfg.qtype==='MCQs' ? q.type==='single' : q.type==='integer')));
 }
 function defaultCfg(o){
   return Object.assign({subject:null, chapter:null, topic:null, yearMode:'all',
-    from:ALL_YEARS[ALL_YEARS.length-1], to:ALL_YEARS[0], diff:'All', shift:'All'}, o);
+    from:ALL_YEARS[ALL_YEARS.length-1], to:ALL_YEARS[0], diff:'All', shift:'All', qtype:'All'}, o);
 }
 
 // Attempt bookkeeping: every answer is an attempt; analysis is derived from these
@@ -898,10 +966,11 @@ function themePart(){
 // ---------- Session control ----------
 function startSession(o){
   if(!o.queue.length){ alert('No questions match this selection yet.'); return; }
-  session = {mode:o.mode, title:o.title, queue:o.queue, idx:0, answers:{}, hints:{}, marks:{}, times:{},
+  session = {mode:o.mode, title:o.title, queue:o.queue, idx:0, answers:{}, hints:{}, marks:{}, times:{}, draft:{}, conf:{}, pad:{}, started:{}, points:0, navOpen:false,
              qStart:Date.now(), sessionStart:Date.now(), limit:o.limit||0, submitted:false};
   go('practice');
   if(session.limit){ if(window.__t) clearInterval(window.__t); window.__t=setInterval(tickMock,1000); tickMock(); }
+  else { if(window.__t) clearInterval(window.__t); window.__t=setInterval(tickQ,1000); tickQ(); }
 }
 function startMock(o){
   const queue=[], warn=[];
@@ -928,12 +997,16 @@ function exitSession(){ if(window.__t) clearInterval(window.__t); session=null; 
 
 function answerPYQ(i){
   const q = session.queue[session.idx];
-  if(session.answers[q.id]) return;
-  const time = Math.round((Date.now()-session.qStart)/1000);
+  const prev = session.answers[q.id];
+  if(prev && !prev.skip) return;
+  const sec = Math.round((Date.now()-qStartOf(q))/1000);
   const ok = i===q.correct;
+  const conf = session.conf[q.id] || 'guess';
+  const pts = scoreFor(ok, conf, sec);
   if(navigator.vibrate) navigator.vibrate(ok ? 12 : [30,50,30]);
-  const att = recordAttempt(q, ok, time);
-  session.answers[q.id] = {sel:i, correct:ok, time:time, att:att, at:Date.now()};
+  const att = recordAttempt(q, ok, sec); att.conf = session.conf[q.id] || null;
+  session.answers[q.id] = {sel:i, correct:ok, time:sec, att:att, at:Date.now(), pts:pts};
+  addPoints(pts - ((prev && prev.pts) || 0));
   checkDailyDone();
   render();
 }
@@ -1508,6 +1581,7 @@ function setupView(){
   card.appendChild(pk('Shift', [['All','All'],['Jan','January'],['April','April']].map(p=>({v:p[0],l:p[1]})), cfg.shift, 'shift'));
 
   card.appendChild(pk('Difficulty', ['All','Easy','Medium','Hard'].map(d=>({v:d,l:d})), cfg.diff, 'diff'));
+  card.appendChild(pk('Question type', [['All','All'],['MCQs','MCQs only'],['Integer','Integer only']].map(p=>({v:p[0],l:p[1]})), cfg.qtype || 'All', 'qtype'));
 
   const pool = sortQs(poolFor(cfg));
   card.appendChild(el('<div class="counter"><b>'+pool.length+'</b> question'+(pool.length===1?'':'s')+' match</div>'));
@@ -1787,35 +1861,65 @@ function practiceView(){
 function pyqPractice(w){
   const q = session.queue[session.idx];
   const a = session.answers[q.id];
+  const answered = !!(a && !a.skip);
   const n = session.queue.length;
+  const elapsed = answered && a.time!=null ? a.time : Math.floor((Date.now()-qStartOf(q))/1000);
+  const left = 120 - elapsed;
+  const fresh = !!(answered && a.at && Date.now()-a.at < 900);
+  const doneCount = session.queue.filter(x=>{ const y=session.answers[x.id]; return y && !y.skip; }).length;
   w.appendChild(topRow(session.title, '<span class="tag">'+(session.idx+1)+' / '+n+'</span>',
     ()=>{ if(confirm('Leave this session? Answers so far are saved.')) exitSession(); }));
-  w.appendChild(el('<div class="progress"><i style="width:'+Math.round(session.idx/n*100)+'%"></i></div>'));
+  w.appendChild(el('<div class="progress"><i style="width:'+Math.round(doneCount/n*100)+'%"></i></div>'));
+  const over = !answered && left<0, warn = !answered && left<=20 && left>=0;
+  w.appendChild(el('<div class="qclock'+(over?' over':(warn?' warn':''))+'">'
+    +'<svg viewBox="0 0 44 44" aria-hidden="true"><circle class="qc-bg" cx="22" cy="22" r="18"/>'
+    +'<circle id="qArc" class="qc-fg" cx="22" cy="22" r="18" style="stroke-dashoffset:'+ringOffset(elapsed)+'"/></svg>'
+    +'<div class="qc-txt"><span id="qTimer">'+clockLabel(answered, elapsed, left)+'</span>'
+    +'<small>'+(answered?'The exam expects this in under 2 minutes':'Aim to solve this in under 2 minutes')+'</small></div>'
+    +'<div class="qc-pts">'+(session.points||0)+' pts</div></div>'));
 
   const card = el('<div class="card qcard" style="--bar:'+(SUBJ_VAR[q.subject]||'')+'"></div>');
   card.appendChild(el('<div class="tags"><span class="tag shift">'+q.year+' · '+SHIFT_NAME[q.shift]+'</span><span class="tag diff diff-'+q.difficulty.toLowerCase()+'">'+q.difficulty+'</span><span class="tag">'+esc(q.topic)+'</span></div>'));
   card.appendChild(el('<div class="qtext">'+esc(q.text)+'</div>'));
-  const fresh = !!(a && a.at && Date.now()-a.at < 900);
   if(q.image) card.appendChild(qImage(q.image));
+
+  if(!answered){
+    const pre = session.conf[q.id] || '';
+    card.appendChild(el('<div class="field">Before you answer</div>'));
+    const cr0 = el('<div class="chips"></div>');
+    [['sure','Sure'],['guess','Guessing']].forEach(p=>{
+      const b = el('<button class="chip '+(pre===p[0]?'on':'')+'">'+p[1]+'</button>');
+      b.onclick = ()=>{ session.conf[q.id] = pre===p[0] ? null : p[0]; render(); };
+      cr0.appendChild(b);
+    });
+    card.appendChild(cr0);
+  }
+
   if(q.type==='integer'){
-    card.appendChild(intInput(q, a, a ? a.sel : '', answerNumeric, !!a));
+    const val = answered ? String(a.sel||'') : (session.draft[q.id]||'');
+    const state = answered ? (a.correct?'ok':'bad') : '';
+    card.appendChild(numpad(q, val, v=>{ session.draft[q.id]=v; render(); },
+      ()=>{ const v = session.draft[q.id]; if(v) answerNumeric(v); }, answered, state));
   } else q.options.forEach((o,i)=>{
-    const cls = a ? (i===q.correct ? 'ok' : (i===a.sel ? 'bad' : '')) : '';
-    const row = el('<div class="opt '+cls+(fresh?' fx':'')+'"><span class="k">'+L(i)+'</span>'+optBody(q,i)+'</div>');
-    if(!a) row.onclick = ()=>answerPYQ(i);
+    const cls = answered ? (i===q.correct ? 'ok' : (i===a.sel ? 'bad' : '')) : '';
+    const row = el('<div class="opt '+cls+(fresh?' fx':'')+(q.optionImages && q.optionImages[i] ? ' hasimg' : '')+'"><span class="k">'+L(i)+'</span>'+optBody(q,i)+'</div>');
+    if(!answered) row.onclick = ()=>answerPYQ(i);
     card.appendChild(row);
   });
 
-  if(!a){
-    if(!q.hint){ /* no hint in the data */ } else if(!session.hints[q.id]){
-      const hb = el('<button class="linkish" style="margin-top:6px">Show hint</button>');
-      hb.onclick = ()=>{ session.hints[q.id]=true; render(); };
-      card.appendChild(hb);
-    } else {
-      card.appendChild(el('<div class="hint">Hint: '+esc(q.hint)+'</div>'));
+  let noteTa = null;
+  if(!answered){
+    if(q.hint){
+      if(!session.hints[q.id]){
+        const hb = el('<button class="linkish" style="margin-top:6px">Show hint</button>');
+        hb.onclick = ()=>{ session.hints[q.id]=true; render(); };
+        card.appendChild(hb);
+      } else card.appendChild(el('<div class="hint">Hint: '+esc(q.hint)+'</div>'));
     }
+    if(a && a.skip) card.appendChild(el('<div class="note skipnote">Skipped. Leaving a question you are unsure of is the right call. It still earns '+a.pts+' point.</div>'));
   } else {
-    card.appendChild(el('<div class="note '+(a.correct?'ok':'bad')+'"><div class="verdict">'+(a.correct?'Correct':'Not quite. The answer is '+answerLabel(q))+'</div>'+esc(q.explanation)+'</div>'));
+    const ptsLine = a.pts!=null ? '<div class="ptsline">+'+a.pts+' points</div>' : '';
+    card.appendChild(el('<div class="note '+(a.correct?'ok':'bad')+'"><div class="verdict">'+(a.correct?'Correct':'Not quite. The answer is '+answerLabel(q))+'</div>'+ptsLine+esc(q.explanation)+'</div>'));
     card.appendChild(el('<div class="field">How sure were you?</div>'));
     const cr = el('<div class="chips"></div>');
     [['sure','Sure'],['guess','Guessed']].forEach(p=>{
@@ -1824,24 +1928,31 @@ function pyqPractice(w){
       cr.appendChild(b);
     });
     card.appendChild(cr);
-    const ta = el('<textarea placeholder="Add a note"></textarea>');
-    ta.value = store.notes[q.id] || '';
+    noteTa = el('<textarea placeholder="Add a note"></textarea>');
+    noteTa.value = store.notes[q.id] || '';
     card.appendChild(el('<div class="field">Note</div>'));
-    card.appendChild(ta);
+    card.appendChild(noteTa);
     const saved = store.bookmarks.indexOf(q.id)>=0;
-    const actions = el('<div class="row" style="justify-content:space-between;margin-top:18px;padding:0;border:none"></div>');
+    const bmRow = el('<div class="row" style="justify-content:flex-start;margin-top:12px;padding:0;border:none"></div>');
     const bm = el('<button class="linkish">'+(saved?'★ Saved':'☆ Save for later')+'</button>');
-    bm.onclick = ()=>{ saveNote(q.id, ta.value); toggleBookmark(q.id); };
-    const nx = el('<button class="btn">'+(session.idx<n-1?'Next':'See results')+'</button>');
-    nx.onclick = ()=>{
-      saveNote(q.id, ta.value);
-      if(session.idx<n-1){ session.idx++; session.qStart=Date.now(); render(); }
-      else go('results');
-    };
-    actions.appendChild(bm); actions.appendChild(nx);
-    card.appendChild(actions);
+    bm.onclick = ()=>{ saveNote(q.id, noteTa.value); toggleBookmark(q.id); };
+    bmRow.appendChild(bm);
+    card.appendChild(bmRow);
   }
+
+  const last = session.idx===n-1;
+  const nv = el('<div class="qnav-row"></div>');
+  const prev = el('<button class="btn secondary"'+(session.idx===0?' disabled':'')+'>Previous</button>');
+  prev.onclick = ()=>goQ(session.idx-1);
+  const skip = el('<button class="linkish"'+(answered?' style="visibility:hidden"':'')+'>Skip</button>');
+  skip.onclick = ()=>skipQ();
+  const next = el('<button class="btn">'+(last?'See results':'Next')+'</button>');
+  next.onclick = ()=>{ if(noteTa) saveNote(q.id, noteTa.value); if(last) go('results'); else goQ(session.idx+1); };
+  nv.appendChild(prev); nv.appendChild(skip); nv.appendChild(next);
+  card.appendChild(nv);
+
   w.appendChild(card);
+  w.appendChild(qNavDrawer());
   return w;
 }
 function mockPractice(w){
@@ -1867,7 +1978,7 @@ function mockPractice(w){
   card.appendChild(el('<div class="qtext">'+esc(q.text)+'</div>'));
   if(q.image) card.appendChild(qImage(q.image));
   if(q.type==='integer'){
-    card.appendChild(intInput(q, a, a ? a.sel : '', setNumeric, false));
+    card.appendChild(numpad(q, a ? String(a.sel) : '', v=>setNumeric(v), null, false, ''));
   } else q.options.forEach((o,i)=>{
     const row = el('<div class="opt '+(a && a.sel===i?'sel':'')+'"><span class="k">'+L(i)+'</span>'+optBody(q,i)+'</div>');
     row.onclick = ()=>selectMock(i);
@@ -1947,7 +2058,7 @@ function mockResults(w){
 }
 function pyqResults(w){
   const total = session.queue.length;
-  const answered = session.queue.filter(q=>session.answers[q.id]);
+  const answered = session.queue.filter(q=>session.answers[q.id] && !session.answers[q.id].skip);
   const correct = answered.filter(q=>session.answers[q.id].correct).length;
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Session results'+nameSuffix()+'</div><h1 class="hm-title">'+esc(session.title)+'</h1></div>'));
   { const pc = answered.length?Math.round(correct/answered.length*100):0; w.appendChild(ringEl(pc, pc+'%', correct+' of '+total+' correct')); flair(w, pc, answered.length, 75); }
@@ -2057,7 +2168,7 @@ function streakStrip(){
               : 'Answer one question today to start a streak.';
   return el('<div class="card streak'+(info.frozen?' frozen':'')+'"><div class="sk-top"><div class="sk-n">'+n+'</div>'
     +'<div><div class="sk-l">Day streak</div><div class="note-line" style="margin:3px 0 0">'+esc(nudge)+'</div></div></div>'
-    +'<div class="sk-days">'+tiles.join('')+'</div></div>');
+    +'<div class="sk-days">'+tiles.join('')+'</div><div class="sk-pts">'+(store.points||0)+' points</div></div>');
 }
 function qotdCard(){
   if(!QUESTIONS.length) return el('<div></div>');
@@ -2167,6 +2278,128 @@ function chapterMap(){
     w.appendChild(g);
   });
   return w;
+}
+
+// ---------- Practice: clock, points, keypad, skip and the question drawer ----------
+function qStartOf(q){
+  if(!session.started) session.started = {};
+  if(!session.started[q.id]) session.started[q.id] = Date.now();
+  return session.started[q.id];
+}
+function clockLabel(answered, elapsed, left){
+  if(answered) return 'Answered in '+fmtTime(elapsed);
+  return left>=0 ? fmtTime(left)+' left' : 'Past 2 minutes';
+}
+function ringOffset(sec){ return (113*(1-Math.min(1, sec/120))).toFixed(1); }
+// Points: a correct answer is worth 4, plus up to 2 for speed (under 2 minutes).
+// Sure adds 1 and guessing takes 1 away. A wrong answer gives 0. Skipping gives 1.
+function scoreFor(ok, conf, sec){
+  if(!ok) return 0;
+  const speed = Math.max(0, Math.min(2, 2*(120-sec)/120));
+  const base = 4 + speed;
+  return Math.round((conf==='sure' ? base+1 : base-1) * 10) / 10;
+}
+function addPoints(p){
+  if(!p) return;
+  session.points = (session.points||0) + p;
+  store.points = (store.points||0) + p;
+  persist();
+  cacheUser({points: store.points});
+}
+function skipQ(){
+  const q = session.queue[session.idx];
+  const prev = session.answers[q.id];
+  if(prev && !prev.skip) return;
+  const sec = Math.round((Date.now()-qStartOf(q))/1000);
+  session.answers[q.id] = {skip:true, time:sec, pts:1};
+  addPoints(1 - ((prev && prev.pts) || 0));
+  checkDailyDone();
+  if(session.idx < session.queue.length-1) session.idx++;
+  render();
+}
+function goQ(i){ session.idx = i; render(); }
+function tickQ(){
+  if(!session || session.mode==='mock' || session.submitted) return;
+  const q = session.queue[session.idx];
+  if(!q) return;
+  const a = session.answers[q.id];
+  if(a && !a.skip) return;
+  const sec = Math.floor((Date.now()-qStartOf(q))/1000);
+  const t = document.getElementById('qTimer'); if(t) t.textContent = clockLabel(false, sec, 120-sec);
+  const arc = document.getElementById('qArc'); if(arc) arc.style.strokeDashoffset = ringOffset(sec);
+  const clock = document.querySelector('.qclock');
+  if(clock){ clock.classList.toggle('over', sec>=120); clock.classList.toggle('warn', sec>=100 && sec<120); }
+}
+// Our own keypad: the answer box is not a text field, so the phone's keyboard never opens
+function editValue(v, k){
+  if(k==='⌫') return v.slice(0,-1);
+  if(k==='Clear') return '';
+  if(k==='\u2212') return v.charAt(0)==='\u2212' ? v.slice(1) : '\u2212'+v;
+  if(k==='.'){
+    if(v.indexOf('.')>=0) return v;
+    return (v===''||v==='\u2212') ? v+'0.' : v+'.';
+  }
+  if(v.replace('\u2212','').length>=8) return v;
+  return v+k;
+}
+function numpad(q, value, onChange, onCheck, locked, state){
+  const wrap = el('<div class="numwrap"></div>');
+  const open = !locked && !!session.pad[q.id];
+  const disp = el('<button type="button" class="numdisp'+(open?' open':'')+(locked?' locked':'')+(state?' '+state:'')+'"></button>');
+  disp.innerHTML = value ? '<span>'+esc(value)+'</span>' : '<i>Tap to enter your answer</i>';
+  disp.onclick = ()=>{ if(!locked){ session.pad[q.id] = !open; render(); } };
+  wrap.appendChild(disp);
+  if(open){
+    const pad = el('<div class="numpad" role="group" aria-label="Number keypad"></div>');
+    ['1','2','3','4','5','6','7','8','9','\u2212','0','.','⌫','Clear'].forEach(k=>{
+      const b = el('<button type="button" class="nk'+((k==='⌫'||k==='Clear')?' fn':'')+'">'+esc(k)+'</button>');
+      b.onclick = ()=>onChange(editValue(value, k));
+      pad.appendChild(b);
+    });
+    if(onCheck){
+      const ck = el('<button type="button" class="nk check">Check answer</button>');
+      ck.onclick = onCheck;
+      pad.appendChild(ck);
+    }
+    wrap.appendChild(pad);
+  }
+  return wrap;
+}
+// The question list: a small tab on the left edge that slides the drawer out
+function qNavDrawer(){
+  const open = !!session.navOpen;
+  const wrap = el('<div class="qnav-wrap"></div>');
+  const tab = el('<button type="button" class="qnav-tab'+(open?' open':'')+'" aria-expanded="'+open+'" aria-label="'+(open?'Close':'Open')+' question list">'+(open?'‹':'›')+'</button>');
+  tab.onclick = ()=>{ session.navOpen = !open; render(); };
+  const drawer = el('<div class="qnav-drawer'+(open?' open':'')+'"><div class="qnav-head"><b>Questions</b><small>'+esc(session.title)+'</small></div>'
+    +'<div class="qnav-grid"></div>'
+    +'<div class="qnav-legend"><span><i class="lg ok"></i>Correct</span><span><i class="lg bad"></i>Wrong</span><span><i class="lg skip"></i>Skipped</span><span><i class="lg todo"></i>Not yet</span></div></div>');
+  const grid = drawer.querySelector('.qnav-grid');
+  session.queue.forEach((x,i)=>{
+    const y = session.answers[x.id];
+    const s = !y ? 'todo' : (y.skip ? 'skip' : (y.correct ? 'ok' : 'bad'));
+    const b = el('<button type="button" class="qn '+s+(i===session.idx?' cur':'')+'">'+(i+1)+'</button>');
+    b.onclick = ()=>{ session.navOpen = false; goQ(i); };
+    grid.appendChild(b);
+  });
+  wrap.appendChild(tab); wrap.appendChild(drawer);
+  return wrap;
+}
+// Wide screens: drifting formulas fill the side margins
+function buildGutter(){
+  if(document.querySelector('.gutter')) return;
+  const g = el('<div class="gutter" aria-hidden="true"></div>');
+  for(let r=0; r<16; r++){
+    for(let c=0; c<2; c++){
+      const t = el('<span class="gf">'+esc(BG_FORMULAS[(r*2+c) % BG_FORMULAS.length])+'</span>');
+      t.style.left = (c===0 ? (2 + (r%3)*4 + (r%2)*3) : (84 + (r%3)*4 + (r%2)*3)) + '%';
+      t.style.top = (r*6.4) + '%';
+      t.style.animationDelay = (-(r*1.3 + c)) + 's';
+      t.style.setProperty('--r', ((r%2?1:-1)*(3+(r%4)*2)) + 'deg');
+      g.appendChild(t);
+    }
+  }
+  document.body.insertBefore(g, document.body.firstChild);
 }
 
 const CONF_GLYPHS = ['\u03C0','\u2211','\u0394','\u03BB','\u03A9','\u222B','\u221A','\u03B8','\u03BC','\u221E'];
@@ -2334,6 +2567,7 @@ function cloudSync(){
 
   (async ()=>{
     await loadBank();
+    buildGutter();
     for(const st of steps){
       msg.textContent = st.label;
       try{ await withTimeout(Promise.resolve().then(st.run), 3000); }catch(e){}
