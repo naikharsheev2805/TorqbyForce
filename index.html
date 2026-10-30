@@ -708,6 +708,11 @@ svg.wm-lg{ --torq-stroke:1.9; }
 .qimg{display:block;max-width:100%;height:auto;margin:10px 0;border-radius:10px}
 .qimg-opt{max-width:100%;height:auto;vertical-align:middle}
 
+.google-wrap{ margin:0 0 6px; }
+.google-btn{ background:var(--surface) !important; color:var(--text) !important; border:1px solid var(--border) !important; box-shadow:none !important; }
+.or-line{ display:flex; align-items:center; gap:10px; margin:14px 0 2px; color:var(--muted); font-size:13px; }
+.or-line::before,.or-line::after{ content:''; flex:1; height:1px; background:var(--border); }
+
 /* ---------- Leaderboard: boards, periods, podium ---------- */
 .lb-boards{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-2); margin:0 0 var(--sp-3); }
 .lb-tile{ position:relative; display:flex; flex-direction:column; align-items:flex-start; gap:3px; min-width:0; text-align:left; font:inherit; color:var(--text); background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:12px 14px; cursor:pointer; transition:border-color .15s, background .15s, box-shadow .15s; }
@@ -1221,6 +1226,7 @@ function sbClient(){
       sbSession = session;
       authState = 'ready';
       if(session && evt==='SIGNED_IN'){ uploadPending(); syncProfile(); }
+      if(session && evt==='SIGNED_IN' && !store.profile){ restoreProfile(session.user.id).then(()=>{ if(typeof render==='function' && !authBusy) render(); }); }
       if(typeof render === 'function' && !authBusy) render();
     });
   }
@@ -1295,6 +1301,18 @@ function authView(){
     b.onclick = ()=>{ authMode = b.dataset.m; render(); };
   });
   card.appendChild(seg);
+  const gwrap = el('<div class="google-wrap"></div>');
+  const gbtn = el('<button type="button" class="btn ghost block google-btn">Continue with Google</button>');
+  const gmsg = el('<p class="note-line" hidden></p>');
+  gbtn.onclick = async ()=>{
+    const db = sbClient();
+    if(!db){ gmsg.textContent = 'Google sign-in is unavailable right now. Check your connection.'; gmsg.hidden = false; return; }
+    const { error } = await db.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.origin + window.location.pathname } });
+    if(error){ gmsg.textContent = 'Could not start Google sign-in: ' + error.message; gmsg.hidden = false; }
+  };
+  gwrap.appendChild(gbtn); gwrap.appendChild(gmsg);
+  gwrap.appendChild(el('<div class="or-line"><span>or</span></div>'));
+  card.appendChild(gwrap);
   card.appendChild(el('<div class="onb-cardhead">'+(signup ? 'Create your account' : 'Log in')+'</div>'));
   card.appendChild(signup
     ? profileForm({exam:'main'}, 'Create account', (p,av)=>{ store.profile = p; persist(); cacheUser({avatar: av||null}); render(); }, true, true)
