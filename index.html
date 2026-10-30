@@ -1283,38 +1283,65 @@ async function uploadPending(){
     if(__upAgain){ __upAgain = false; uploadPending(); }
   }
 }
-function signinView(){
-  // Same screen as the welcome page (background, orbs, formulas, layout); only the copy and the card change.
+function authView(){
   const w = onboardView();
-  const hero = w.querySelector('.onb-hero');
-  hero.innerHTML = '<div class="onb-top"><div class="brand-lock">'+torqWordmark('wm-md')+'<span class="brand-sub">JEE companion</span></div></div>'
-    +'<div class="onb-eyebrow">JEE Main \u00B7 Previous-year papers</div>'
-    +'<h1 class="onb-title"><span class="w onb-outline">Prepare</span><span class="w">with</span><em class="w">intent.</em></h1>'
-    +'<p class="onb-sub">Sign in to keep your progress safe and to appear on the leaderboard.</p>'
-    +'<div class="onb-tags"><span>Shift-wise PYQs</span><span>Timed mocks</span><span>Chapter drills</span></div>';
+  const signup = authMode !== 'login';
   const card = w.querySelector('.onb-card');
   card.innerHTML = '';
-  card.appendChild(el('<div class="onb-cardhead">Sign in with email</div>'));
-  card.appendChild(el('<div class="onb-cardsub">We will email you a sign-in link. No password needed.</div>'));
-  const inp = el('<input class="intin" type="email" autocomplete="email" placeholder="you@example.com" style="width:100%;margin-top:4px">');
-  inp.value = lastEmail;
-  card.appendChild(inp);
-  const btn = el('<button class="btn" style="margin-top:14px">Send sign-in link</button>');
-  btn.onclick = async ()=>{
-    const email = inp.value.trim();
-    lastEmail = email;
-    if(!/^\S+@\S+\.\S+$/.test(email)){ authMsg = 'Enter a valid email address.'; render(); return; }
-    authMsg = 'Sending link...';
-    render();
-    const db = sbClient();
-    const { error } = db ? await db.auth.signInWithOtp({ email, options: { emailRedirectTo: window.location.origin + window.location.pathname } })
-                         : { error: { message: 'Sign-in is unavailable right now.' } };
-    authMsg = error ? ('Could not send the link: ' + error.message) : ('Link sent to ' + email + '. Open it on this device.');
-    render();
-  };
-  card.appendChild(btn);
-  if(authMsg) card.appendChild(el('<p class="onb-cardsub" style="margin-top:12px">'+esc(authMsg)+'</p>'));
+  const seg = el('<div class="seg auth-seg" role="tablist"><button type="button" data-m="signup">Sign up</button><button type="button" data-m="login">Log in</button></div>');
+  seg.querySelectorAll('button').forEach(b=>{
+    const on = b.dataset.m === (signup ? 'signup' : 'login');
+    b.classList.toggle('on', on); b.setAttribute('aria-selected', on ? 'true' : 'false');
+    b.onclick = ()=>{ authMode = b.dataset.m; render(); };
+  });
+  card.appendChild(seg);
+  card.appendChild(el('<div class="onb-cardhead">'+(signup ? 'Create your account' : 'Log in')+'</div>'));
+  card.appendChild(signup
+    ? profileForm({exam:'main'}, 'Create account', (p,av)=>{ store.profile = p; persist(); cacheUser({avatar: av||null}); render(); }, true, true)
+    : loginForm());
   return w;
+}
+function loginForm(){
+  const f = el('<form class="profile-form" autocomplete="on"></form>');
+  f.innerHTML = '<div class="pf"><span class="eyebrow">Email</span><input name="id" type="email" autocomplete="email" placeholder="you@example.com" value="'+esc(lastEmail)+'"></div>'
+    +'<div class="pf"><span class="eyebrow">Password</span><input name="pw" type="password" autocomplete="current-password"></div>'
+    +'<p class="note-line err" hidden></p>'
+    +'<button class="btn block" type="submit">Log in</button>';
+  f.onsubmit = async e=>{
+    e.preventDefault();
+    const err = f.querySelector('.err');
+    const fail = m=>{ err.textContent = m; err.hidden = false; };
+    const id = f.querySelector('[name="id"]').value.trim();
+    const pw = f.querySelector('[name="pw"]').value;
+    if(!id || !pw) return fail('Enter your email and password.');
+    const db = sbClient();
+    if(!db) return fail('Log-in is unavailable right now. Check your connection and try again.');
+    const btn = f.querySelector('button[type="submit"]'); btn.disabled = true; authBusy = true;
+    try{
+      const email = id;
+      lastEmail = email;
+      const { data, error } = await db.auth.signInWithPassword({ email, password: pw });
+      if(error || !data.session) return fail('Wrong email or password.');
+      sbSession = data.session;
+      await restoreProfile(data.session.user.id);
+      render();
+    } catch(ex){
+      fail('Could not log in. Check your connection and try again.');
+    } finally {
+      authBusy = false; btn.disabled = false;
+    }
+  };
+  return f;
+}
+// After logging in on a device, bring the saved profile down so the app opens with it.
+async function restoreProfile(uid){
+  const db = sbClient(); if(!db) return;
+  const { data } = await db.from('profiles').select('username, first_name, birthdate, hide_from_leaderboard').eq('id', uid).maybeSingle();
+  if(!data) return;
+  const age = data.birthdate ? Math.floor((Date.now() - new Date(data.birthdate+'T00:00:00').getTime())/(365.25*864e5)) : '';
+  store.profile = {username: data.username||'', name: data.first_name||'', surname: '', age: age||'', birthdate: data.birthdate||null,
+    standard: '', exam: 'main', visible: !data.hide_from_leaderboard};
+  persist();
 }
 function render(){ renderInner(); histSync(); }
 function navKey(){
@@ -1339,12 +1366,13 @@ function renderInner(){
   const app = document.getElementById('app');
   app.innerHTML = '';
   // Email verification now happens inside the profile form, so there is no separate sign-in screen.
-  const needSignIn = false;
+  // No saved profile and no account session: show the sign-up / log-in screen first.
+  const needSignIn = !store.profile && !sbSession;
   app.classList.toggle('is-onb', needSignIn || !store.profile);
   if(view!=='practice' && store.profile && !needSignIn) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
   const V = {leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
              me:meView, practice:practiceView, results:resultsView};
-  app.appendChild(needSignIn ? signinView() : (!store.profile ? onboardView() : (V[view]||homeView)()));
+  app.appendChild(needSignIn ? authView() :(!store.profile ? onboardView() : (V[view]||homeView)()));
   if(view==='pyq') app.appendChild(el('<div class="foot">'+esc(BANK_ERROR || ('PYQ bank: '+QUESTIONS.length+' questions'))+'</div>'));
   if(view!=='practice' && store.profile && !needSignIn) document.body.appendChild(bottomNav());
   enhance(app);
@@ -1931,8 +1959,8 @@ function mocksView(){
 
 // ----- Profile + onboarding -----
 const STD_OPTS = ['Class 11','Class 12','Dropper / repeater','Other'];
-// Email code step state; kept outside the form so it survives redraws
-let otpState = {sent:false, email:''};
+// Which panel the auth screen shows: 'signup' or 'login'
+let authMode = 'signup';
 // Cached user data kept on this device, ready for when online comparison arrives
 const USER_CACHE_KEY = 'torq_user_cache_v1';
 function cacheUser(patch){
@@ -1971,8 +1999,8 @@ function profileForm(p, btnLabel, onSave, withAvatar, withEmail){
   const vis = p.visible !== false;
   const emailBlock = needOtp
     ? '<div class="pf"><span class="eyebrow">Email</span><input name="email" type="email" autocomplete="email" maxlength="120" placeholder="you@example.com" value="'+esc(draft.email||'')+'"></div>'
-      +'<div class="pf otp-field" hidden><span class="eyebrow">6-digit code</span><input name="code" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="123456"></div>'
-      +'<p class="note-line otp-info" hidden></p>'
+      +'<div class="pf"><span class="eyebrow">Password <small style="opacity:.6">(8+ characters)</small></span><input name="password" type="password" autocomplete="new-password"></div>'
+      +'<div class="pf"><span class="eyebrow">Confirm password</span><input name="password2" type="password" autocomplete="new-password"></div>'
     : '';
   f.innerHTML = emailBlock + '<label class="pf"><span class="eyebrow">Username</span><input name="username" maxlength="20" placeholder="e.g. rahul_jee" value="'+esc(p.username||'')+'"></label>'
     +'<p class="note-line" style="margin:-6px 0 12px">3 to 20 letters, numbers or underscores. Shown on the leaderboard.</p>'
@@ -2004,16 +2032,6 @@ function profileForm(p, btnLabel, onSave, withAvatar, withEmail){
   f.addEventListener('input', saveDraft);
   f.addEventListener('change', saveDraft);
   btns.forEach(b=>b.addEventListener('click', saveDraft));
-  if(needOtp){
-    const sb = f.querySelector('button[type="submit"]');
-    if(otpState.sent){
-      sb.textContent = 'Verify and start';
-      f.querySelector('.otp-field').hidden = false;
-      const info = f.querySelector('.otp-info');
-      info.textContent = 'We sent a 6-digit code to '+otpState.email+'. Check your inbox and spam folder, then enter it above.';
-      info.hidden = false;
-    } else sb.textContent = 'Send code to continue';
-  }
 
   // Live preview: how this user looks to others on the leaderboard
   const prev = f.querySelector('.vis-preview'), vcb = g('visible');
@@ -2063,41 +2081,27 @@ function profileForm(p, btnLabel, onSave, withAvatar, withEmail){
       if(isNaN(d) || d>now) return fail('Birthdate cannot be in the future.');
     }
     const profile = {username, name, surname, age, birthdate: bd||null, standard:g('standard').value, exam, visible: vcb.checked};
-    const btn = f.querySelector('button[type="submit"]'); btn.disabled = true;
+    const btn = f.querySelector('button[type="submit"]');
     if(needOtp && !sbSession){
       const db = sbClient();
       const email = g('email').value.trim();
-      btn.disabled = false;
-      if(!db) return fail('Sign-in is unavailable right now. Check your connection and try again.');
+      const pw = g('password').value;
+      if(!db) return fail('Sign-up is unavailable right now. Check your connection and try again.');
       if(!/^\S+@\S+\.\S+$/.test(email)) return fail('Enter a valid email address.');
-      if(!otpState.sent || otpState.email !== email){
-        btn.disabled = true;
-        const { error } = await db.auth.signInWithOtp({ email });
-        btn.disabled = false;
-        if(error) return fail('Could not send the code: ' + error.message);
-        otpState = {sent:true, email};
-        f.querySelector('.otp-field').hidden = false;
-        const info = f.querySelector('.otp-info');
-        info.textContent = 'We sent a 6-digit code to '+email+'. Check your inbox and spam folder, then enter it above.';
-        info.hidden = false;
-        btn.textContent = 'Verify and start';
-        g('code').focus();
-        return;
-      }
-      const token = g('code').value.trim();
-      if(!/^\d{6}$/.test(token)) return fail('Enter the 6-digit code from your email.');
-      btn.disabled = true;
-      authBusy = true;
-      const { data, error } = await db.auth.verifyOtp({ email, token, type: 'email' });
-      if(error || !data || !data.session){ authBusy = false; btn.disabled = false; return fail('That code is wrong or has expired. Check it, or tap Send code again.'); }
+      if(pw.length < 8) return fail('Password must be at least 8 characters.');
+      if(pw !== g('password2').value) return fail('The two passwords do not match.');
+      btn.disabled = true; authBusy = true;
+      const { data, error } = await db.auth.signUp({ email, password: pw });
+      if(error){ authBusy = false; btn.disabled = false; return fail(error.message); }
+      if(!data.session){ authBusy = false; btn.disabled = false; return fail('Account created. Confirm your email from the message we sent, then log in. What you typed is kept on this device.'); }
       sbSession = data.session;
     }
+    btn.disabled = true; authBusy = true;
     const res = await saveRemote(profile, avatarState.data);
     authBusy = false;
     btn.disabled = false;
     if(res.taken) return fail('That username is taken. Try another.');
     if(res.error) return fail('Could not save. Check your connection and try again.');
-    otpState = {sent:false, email:''};
     try{ localStorage.removeItem(DRAFT_KEY); }catch(e){}
     onSave(profile, avatarState.data);
   };
