@@ -670,6 +670,15 @@ figure.qcard .qtext{ font-size:clamp(22px,6vw,26px); line-height:1.4; font-weigh
 /* ---------- Torque arc: thinner on the large loading wordmark so the arrow stays clear ---------- */
 svg.wm-lg{ --torq-stroke:1.9; }
 #tauLoader svg.wm-lg polygon{ transform-box:view-box; }
+/* ---------- Loading: the torque arrow spins around the O ---------- */
+@keyframes torqSpin{ to{ transform:rotate(360deg); } }
+.torq-arc{ transform-box:view-box; transform-origin:42px 20px; }
+#tauLoader .torq-arc{ animation:torqSpin 1.3s linear infinite; }
+.torq-spinner .torq-arc{ transform-origin:22px 22px; animation:torqSpin 1s linear infinite; }
+@media (prefers-reduced-motion: reduce){ #tauLoader .torq-arc, .torq-spinner .torq-arc{ animation:none; } }
+/* ---------- Quote card: full width on tablets and wide screens ---------- */
+@media (min-width:960px){ figure.qcard{ max-width:none; } }
+
 .intwrap{margin:12px 0 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .intin{font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);width:180px}
 .intin.ok{border-color:var(--ok,#2a9d5c)} .intin.bad{border-color:var(--bad,#d64545)}
@@ -686,7 +695,7 @@ svg.wm-lg{ --torq-stroke:1.9; }
 // Serve the repo root with a local server (e.g. `python3 -m http.server`); opening the file directly blocks fetch().
 const PATHS = {
   index: 'data/index.json',  // lists every paper; each paper's "file" field points at its question JSON
-  solutions: 'solutions/'    // one file per paper: solutions/<paper-id>.json
+  solutions: 'data/solutions/'    // one file per paper: data/solutions/<paper-id>.json
 };
 
 // ---------- Question bank (filled from data/ at startup) ----------
@@ -972,11 +981,25 @@ function torqWordmark(cls){
   const head = [tip,b1,b2].map(q=>q[0].toFixed(2)+','+q[1].toFixed(2)).join(' ');
   return '<svg class="wm '+cls+'" viewBox="0 0 128 40" role="img" aria-label="TORQ" focusable="false">'
     +'<text x="0" y="31" font-family="Lora, Georgia, serif" font-weight="600" font-size="31" fill="currentColor">T</text>'
-    +'<path d="'+arc+'" fill="none" stroke="var(--accent)" style="stroke-width:var(--torq-stroke,3.2)" stroke-linecap="round"/>'
-    +'<polygon points="'+head+'" fill="var(--accent)"/>'
+    +'<g class="torq-arc"><path d="'+arc+'" fill="none" stroke="var(--accent)" style="stroke-width:var(--torq-stroke,3.2)" stroke-linecap="round"/>'
+    +'<polygon points="'+head+'" fill="var(--accent)"/></g>'
     +'<text x="62" y="31" font-family="Lora, Georgia, serif" font-weight="600" font-size="31" fill="currentColor">R</text>'
     +'<text x="94" y="31" font-family="Lora, Georgia, serif" font-weight="600" font-size="31" fill="currentColor">Q</text>'
     +'</svg>';
+}
+// The torque arrow as a loading circle: the same arc and arrowhead, spinning
+function torqSpinner(px){
+  const cx = 22, cy = 22, r = 15, a0 = -0.9, a1 = 4.2;
+  const pt = a => [cx + r*Math.cos(a), cy + r*Math.sin(a)];
+  const [x0,y0] = pt(a0), [x1,y1] = pt(a1);
+  const arc = 'M'+x0.toFixed(2)+' '+y0.toFixed(2)+' A'+r+' '+r+' 0 1 1 '+x1.toFixed(2)+' '+y1.toFixed(2);
+  const tx = -Math.sin(a1), ty = Math.cos(a1), nx = Math.cos(a1), ny = Math.sin(a1);
+  const tip = [x1 + tx*5, y1 + ty*5], b1 = [x1 + nx*3.4, y1 + ny*3.4], b2 = [x1 - nx*3.4, y1 - ny*3.4];
+  const head = [tip,b1,b2].map(q=>q[0].toFixed(2)+','+q[1].toFixed(2)).join(' ');
+  const s = px || 48;
+  return '<svg class="torq-spinner" width="'+s+'" height="'+s+'" viewBox="0 0 44 44" role="img" aria-label="Loading" focusable="false">'
+    +'<g class="torq-arc"><path d="'+arc+'" fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round"/>'
+    +'<polygon points="'+head+'" fill="var(--accent)"/></g></svg>';
 }
 function logoImg(){ const id = document.documentElement.getAttribute('data-theme') || 'claude-dark'; return '<img class="logo" alt="" src="' + (LOGOS[id] || LOGOS['claude-dark']) + '">'; }
 function currentTheme(){ return document.documentElement.getAttribute('data-theme') || 'claude-dark'; }
