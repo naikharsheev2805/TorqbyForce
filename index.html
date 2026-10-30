@@ -1213,6 +1213,7 @@ function toggleBookmark(qid){
 const SB_URL = 'https://kubwggwhzkvbphmqibxq.supabase.co';
 const SB_KEY = 'sb_publishable_Hq8evbOYaW4iC2fB9isYRQ_1muTjI2y';
 let sbInst = null, authState = 'unknown', sbSession = null, authMsg = '', lastEmail = '';
+let authBusy = false; // true while a code is being verified and saved, so the form is not redrawn mid-submit
 function sbClient(){
   if(!sbInst && window.supabase && window.supabase.createClient){
     sbInst = window.supabase.createClient(SB_URL, SB_KEY);
@@ -1220,7 +1221,7 @@ function sbClient(){
       sbSession = session;
       authState = 'ready';
       if(session && evt==='SIGNED_IN'){ uploadPending(); syncProfile(); }
-      if(typeof render === 'function') render();
+      if(typeof render === 'function' && !authBusy) render();
     });
   }
   return sbInst;
@@ -1337,8 +1338,8 @@ function renderInner(){
   document.querySelectorAll('.bottomnav').forEach(n=>n.remove());
   const app = document.getElementById('app');
   app.innerHTML = '';
-  // A profile saved on this device opens the app directly; sign-in is only asked when there is no local profile.
-  const needSignIn = authState === 'ready' && !sbSession && !store.profile;
+  // Email verification now happens inside the profile form, so there is no separate sign-in screen.
+  const needSignIn = false;
   app.classList.toggle('is-onb', needSignIn || !store.profile);
   if(view!=='practice' && store.profile && !needSignIn) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
   const V = {leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
@@ -1930,6 +1931,8 @@ function mocksView(){
 
 // ----- Profile + onboarding -----
 const STD_OPTS = ['Class 11','Class 12','Dropper / repeater','Other'];
+// Email code step state; kept outside the form so it survives redraws
+let otpState = {sent:false, email:''};
 // Cached user data kept on this device, ready for when online comparison arrives
 const USER_CACHE_KEY = 'torq_user_cache_v1';
 function cacheUser(patch){
@@ -1957,11 +1960,21 @@ function readAvatar(file, done){
   fr.readAsDataURL(file);
 }
 
-function profileForm(p, btnLabel, onSave, withAvatar){
+function profileForm(p, btnLabel, onSave, withAvatar, withEmail){
   const f = el('<form class="profile-form" autocomplete="off"></form>');
   const g = n=>f.querySelector('[name="'+n+'"]');
+  // Onboarding keeps what was typed on this device, so closing the browser does not lose it
+  const DRAFT_KEY = 'torq_profile_draft_v1';
+  let draft = {};
+  if(withEmail){ try{ draft = JSON.parse(localStorage.getItem(DRAFT_KEY)) || {}; }catch(e){ draft = {}; } p = Object.assign({exam:'main'}, draft, p && p.username ? p : {}); }
+  const needOtp = !!withEmail && !sbSession;
   const vis = p.visible !== false;
-  f.innerHTML = '<label class="pf"><span class="eyebrow">Username</span><input name="username" maxlength="20" placeholder="e.g. rahul_jee" value="'+esc(p.username||'')+'"></label>'
+  const emailBlock = needOtp
+    ? '<div class="pf"><span class="eyebrow">Email</span><input name="email" type="email" autocomplete="email" maxlength="120" placeholder="you@example.com" value="'+esc(draft.email||'')+'"></div>'
+      +'<div class="pf otp-field" hidden><span class="eyebrow">6-digit code</span><input name="code" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="123456"></div>'
+      +'<p class="note-line otp-info" hidden></p>'
+    : '';
+  f.innerHTML = emailBlock + '<label class="pf"><span class="eyebrow">Username</span><input name="username" maxlength="20" placeholder="e.g. rahul_jee" value="'+esc(p.username||'')+'"></label>'
     +'<p class="note-line" style="margin:-6px 0 12px">3 to 20 letters, numbers or underscores. Shown on the leaderboard.</p>'
     +'<label class="pf"><span class="eyebrow">Name</span><input name="name" maxlength="40" value="'+esc(p.name||'')+'"></label>'
     +'<label class="pf"><span class="eyebrow">Surname</span><input name="surname" maxlength="40" value="'+esc(p.surname||'')+'"></label>'
@@ -1979,6 +1992,28 @@ function profileForm(p, btnLabel, onSave, withAvatar){
   const sync = ()=>btns.forEach(b=>b.classList.toggle('on', b.dataset.v===exam));
   btns.forEach(b=>b.onclick = ()=>{ exam = b.dataset.v; sync(); });
   sync();
+
+  // Save the form as the user types, so nothing is lost if the browser closes
+  const saveDraft = ()=>{
+    if(!withEmail) return;
+    const em = f.querySelector('[name="email"]');
+    const d = {email: em ? em.value.trim() : '', username: g('username').value, name: g('name').value, surname: g('surname').value,
+      birthdate: g('birthdate').value, age: g('age').value, standard: g('standard').value, exam, visible: g('visible').checked};
+    try{ localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); }catch(e){}
+  };
+  f.addEventListener('input', saveDraft);
+  f.addEventListener('change', saveDraft);
+  btns.forEach(b=>b.addEventListener('click', saveDraft));
+  if(needOtp){
+    const sb = f.querySelector('button[type="submit"]');
+    if(otpState.sent){
+      sb.textContent = 'Verify and start';
+      f.querySelector('.otp-field').hidden = false;
+      const info = f.querySelector('.otp-info');
+      info.textContent = 'We sent a 6-digit code to '+otpState.email+'. Check your inbox and spam folder, then enter it above.';
+      info.hidden = false;
+    } else sb.textContent = 'Send code to continue';
+  }
 
   // Live preview: how this user looks to others on the leaderboard
   const prev = f.querySelector('.vis-preview'), vcb = g('visible');
@@ -2029,10 +2064,41 @@ function profileForm(p, btnLabel, onSave, withAvatar){
     }
     const profile = {username, name, surname, age, birthdate: bd||null, standard:g('standard').value, exam, visible: vcb.checked};
     const btn = f.querySelector('button[type="submit"]'); btn.disabled = true;
+    if(needOtp && !sbSession){
+      const db = sbClient();
+      const email = g('email').value.trim();
+      btn.disabled = false;
+      if(!db) return fail('Sign-in is unavailable right now. Check your connection and try again.');
+      if(!/^\S+@\S+\.\S+$/.test(email)) return fail('Enter a valid email address.');
+      if(!otpState.sent || otpState.email !== email){
+        btn.disabled = true;
+        const { error } = await db.auth.signInWithOtp({ email });
+        btn.disabled = false;
+        if(error) return fail('Could not send the code: ' + error.message);
+        otpState = {sent:true, email};
+        f.querySelector('.otp-field').hidden = false;
+        const info = f.querySelector('.otp-info');
+        info.textContent = 'We sent a 6-digit code to '+email+'. Check your inbox and spam folder, then enter it above.';
+        info.hidden = false;
+        btn.textContent = 'Verify and start';
+        g('code').focus();
+        return;
+      }
+      const token = g('code').value.trim();
+      if(!/^\d{6}$/.test(token)) return fail('Enter the 6-digit code from your email.');
+      btn.disabled = true;
+      authBusy = true;
+      const { data, error } = await db.auth.verifyOtp({ email, token, type: 'email' });
+      if(error || !data || !data.session){ authBusy = false; btn.disabled = false; return fail('That code is wrong or has expired. Check it, or tap Send code again.'); }
+      sbSession = data.session;
+    }
     const res = await saveRemote(profile, avatarState.data);
+    authBusy = false;
     btn.disabled = false;
     if(res.taken) return fail('That username is taken. Try another.');
     if(res.error) return fail('Could not save. Check your connection and try again.');
+    otpState = {sent:false, email:''};
+    try{ localStorage.removeItem(DRAFT_KEY); }catch(e){}
     onSave(profile, avatarState.data);
   };
   return f;
@@ -2066,7 +2132,7 @@ function onboardView(){
   const card = el('<div class="onb-card"></div>');
   card.appendChild(el('<div class="onb-cardhead">Set up your profile</div>'));
   card.appendChild(el('<div class="onb-cardsub">Takes under a minute. You can change it later.</div>'));
-  card.appendChild(profileForm({exam:'main'}, 'Start preparing', (p,av)=>{ store.profile = p; persist(); cacheUser({avatar: av||null}); render(); }, true));
+  card.appendChild(profileForm({exam:'main'}, 'Start preparing', (p,av)=>{ store.profile = p; persist(); cacheUser({avatar: av||null}); render(); }, true, true));
   stage.appendChild(card);
   w.appendChild(stage);
   return w;
