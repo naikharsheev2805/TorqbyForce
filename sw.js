@@ -1,6 +1,6 @@
 // TORQ service worker: keeps the app usable offline and lets the browser offer installation.
 // Network first, so updates reach the device; the cache is the fallback when offline.
-const CACHE = 'torq-v1';
+const CACHE = 'torq-v2';
 const SHELL = ['./', './index.html', './manifest.json', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'];
 
 self.addEventListener('install', e => {
@@ -10,6 +10,7 @@ self.addEventListener('activate', e => {
   e.waitUntil(self.clients.claim());
 });
 self.addEventListener('fetch', e => {
+  if(new URL(e.request.url).origin !== self.location.origin) return;
   if(e.request.method !== 'GET') return;
   e.respondWith(
     fetch(e.request).then(res => {

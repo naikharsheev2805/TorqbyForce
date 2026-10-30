@@ -713,6 +713,13 @@ svg.wm-lg{ --torq-stroke:1.9; }
 .or-line{ display:flex; align-items:center; gap:10px; margin:14px 0 2px; color:var(--muted); font-size:13px; }
 .or-line::before,.or-line::after{ content:''; flex:1; height:1px; background:var(--border); }
 
+@media (min-width:900px){
+  .onb-stage{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; gap:64px; padding:56px 7vw; }
+  .onb-stage > *{ max-width:none; margin:0; width:100%; }
+  .onb-hero{ justify-self:start; max-width:520px; }
+  .onb-sub{ max-width:none; }
+  .onb-card{ justify-self:end; max-width:540px; }
+}
 /* ---------- Leaderboard: boards, periods, podium ---------- */
 .lb-boards{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-2); margin:0 0 var(--sp-3); }
 .lb-tile{ position:relative; display:flex; flex-direction:column; align-items:flex-start; gap:3px; min-width:0; text-align:left; font:inherit; color:var(--text); background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:12px 14px; cursor:pointer; transition:border-color .15s, background .15s, box-shadow .15s; }
@@ -1295,23 +1302,25 @@ function sbClient(){
 }
 // Existing device attempts go up once per account. Points use the same scoring as the app.
 // Save the profile row (and the photo) to Supabase. Returns {taken:true} if the username is already used.
-async function saveRemote(p, av){
+async function saveRemote(p, newPhoto){
   const db = sbClient(); if(!db || !sbSession) return {};
   const uid = sbSession.user.id;
-  let avatarPath = null;
-  if(av && av.indexOf('data:')===0){
-    const blob = await (await fetch(av)).blob();
-    const path = uid+'/avatar.jpg';
-    const up = await db.storage.from('avatars').upload(path, blob, {upsert:true, contentType:'image/jpeg'});
-    if(up.error){ console.error(up.error); return {error:up.error}; }
-    avatarPath = path;
+  let avatarPath = null, avatarAddress = null;
+  if(newPhoto && newPhoto.indexOf('data:') === 0){
+    const blob = await (await fetch(newPhoto)).blob();
+    // A new name each time, so the browser never shows an old photo from its cache
+    const path = uid + '/avatar-' + Date.now() + '.jpg';
+    const up = await db.storage.from('avatars').upload(path, blob, {contentType:'image/jpeg', upsert:false});
+    if(up.error){ console.error(up.error); return {error: up.error}; }
+    avatarPath = path; avatarAddress = avatarUrl(path);
   }
   const row = {id:uid, username:(p.username||'').toLowerCase(), first_name:p.name||null, surname:p.surname||null, standard:p.standard||null, exam:p.exam||null, age:parseInt(p.age,10)||null,
     hide_from_leaderboard: p.visible===false, birthdate:p.birthdate||null, updated_at:new Date().toISOString()};
   if(avatarPath) row.avatar_path = avatarPath;
   const {error} = await db.from('profiles').upsert(row, {onConflict:'id'});
   if(error){ console.error(error); return {error, taken: error.code==='23505'}; }
-  return {};
+  if(avatarAddress) cacheUser({avatar: avatarAddress});
+  return {avatar: avatarAddress};
 }
 function syncProfile(){ if(store.profile) return saveRemote(store.profile, loadAvatarCache()); }
 let __upTimer = null, __upBusy = false, __upAgain = false;
@@ -1344,6 +1353,7 @@ async function uploadPending(){
       const { error } = await db.from('attempts').update(f).eq('user_id', uid).eq('question_id', String(a.q)).eq('created_at', f.created_at);
       if(error){ console.error('Update failed, will retry', error); return; }
       a.dirty = false;
+      lbState.cache = {};
     }
     if(changed.length) persist();
     const todo = store.attempts.filter(a => a && a.q && !a.up);
@@ -1354,7 +1364,9 @@ async function uploadPending(){
       if(error){ console.error('Upload failed, will retry', error); return; }
       chunk.forEach(a => { a.up = true; a.dirty = false; });
       persist();
+      lbState.cache = {};
     }
+    if((changed.length || todo.length) && view === 'leaderboard') render();
     try{ localStorage.setItem(legacy, '1'); }catch(e){}
   } finally {
     __upBusy = false;
@@ -1426,9 +1438,10 @@ function loginForm(){
 // After logging in (or returning with a session), bring the saved profile, photo and practice history down from the server.
 async function restoreFromServer(uid){
   const db = sbClient(); if(!db || !uid) return;
-  if(!store.profile){
+  {
     const { data } = await db.from('profiles').select('username, first_name, surname, standard, exam, age, birthdate, hide_from_leaderboard, avatar_path').eq('id', uid).maybeSingle();
-    if(data){
+    if(data && data.avatar_path) cacheUser({avatar: avatarUrl(data.avatar_path)});
+    if(data && !store.profile){
       const age = data.age || (data.birthdate ? Math.floor((Date.now() - new Date(data.birthdate+'T00:00:00').getTime())/(365.25*864e5)) : '');
       store.profile = {username: data.username||'', name: data.first_name||'', surname: data.surname||'', age: age||'', birthdate: data.birthdate||null,
         standard: data.standard||'', exam: data.exam||'main', visible: !data.hide_from_leaderboard};
@@ -2094,9 +2107,12 @@ function loadAvatarCache(){
 }
 // Shrink a chosen photo to a 256px square JPEG before it is cached
 function readAvatar(file, done){
+  if(!file || !file.type || file.type.indexOf('image/') !== 0){ alert('Please choose a photo (JPG or PNG).'); return; }
   const fr = new FileReader();
+  fr.onerror = ()=>alert('That photo could not be read. Try another one.');
   fr.onload = ()=>{
     const img = new Image();
+    img.onerror = ()=>alert('That photo could not be opened. Try a JPG or PNG.');
     img.onload = ()=>{
       const S = 256, m = Math.min(img.width, img.height);
       const c = document.createElement('canvas'); c.width = S; c.height = S;
@@ -2169,17 +2185,17 @@ function profileForm(p, btnLabel, onSave, withAvatar, withEmail){
   ['name','username'].forEach(n=>g(n).addEventListener('input', paintPreview));
   paintPreview();
 
-  const avatarState = {data: null};
+  const avatarState = {data: null, fresh: false};
   if(withAvatar){
     avatarState.data = loadAvatarCache();
     const av = el('<label class="av-pick"><input type="file" accept="image/*" hidden><span class="av-circle"></span>'
-      +'<span class="av-text"><b>Add a photo</b><small>Optional. Kept on this device for now.</small></span></label>');
+      +'<span class="av-text"><b>Add a photo</b></span></label>');
     const circle = av.querySelector('.av-circle');
     const paint = ()=>{ circle.innerHTML = avatarState.data ? '<img alt="" src="'+avatarState.data+'">' : '<i>+</i>'; paintPreview(); };
     paint();
     av.querySelector('input').onchange = e=>{
       const file = e.target.files && e.target.files[0];
-      if(file) readAvatar(file, d=>{ avatarState.data = d; paint(); });
+      if(file) readAvatar(file, d=>{ avatarState.data = d; avatarState.fresh = true; paint(); });
     };
     f.insertBefore(av, f.firstChild);
   }
@@ -2217,13 +2233,13 @@ function profileForm(p, btnLabel, onSave, withAvatar, withEmail){
       sbSession = data.session;
     }
     btn.disabled = true; authBusy = true;
-    const res = await saveRemote(profile, avatarState.data);
+    const res = await saveRemote(profile, avatarState.fresh ? avatarState.data : null);
     authBusy = false;
     btn.disabled = false;
     if(res.taken) return fail('That username is taken. Try another.');
     if(res.error) return fail('Could not save: ' + (res.error.message || 'unknown error') + '. Check the message and try again.');
     try{ localStorage.removeItem(DRAFT_KEY); }catch(e){}
-    onSave(profile, avatarState.data);
+    onSave(profile, res.avatar || avatarState.data);
   };
   return f;
 }
@@ -3243,7 +3259,7 @@ function cloudSync(){
   setInterval(()=>{
     if(!sbSession) return;
     if(!cloudReady){ restoreCloudState(sbSession.user.id).then(()=>{ if(typeof render==='function' && !authBusy) render(); }); }
-    else flushCloud();
+    else { flushCloud(); uploadPending(); }
   }, 15000);
   document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState === 'hidden') flushCloud(); });
   window.addEventListener('pagehide', ()=>{ flushCloud(); });
