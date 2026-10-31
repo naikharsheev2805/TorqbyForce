@@ -733,6 +733,13 @@ svg.wm-lg{ --torq-stroke:1.9; }
 .nt-p{ line-height:1.6; margin:8px 0; }
 .nt-ex{ background:var(--surface-2); border-radius:var(--r-md); padding:10px 12px; margin-top:10px; line-height:1.55; font-size:14.5px; }
 
+/* ---------- Mistake Mirror, logic, explain-it-back, chapter story ---------- */
+.logic-row{ display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid var(--border); font-size:14px; }
+.logic-row:last-child{ border-bottom:0; }
+.logic-row span{ color:var(--muted); text-align:right; }
+.explain-box{ margin-top:12px; background:var(--surface-2); border-radius:var(--r-md); padding:10px 12px; }
+.story{ border-left:3px solid var(--accent); }
+
 .intwrap{margin:12px 0 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .intin{font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);width:180px}
 .intin.ok{border-color:var(--ok,#2a9d5c)} .intin.bad{border-color:var(--bad,#d64545)}
@@ -859,7 +866,8 @@ function normaliseQuestion(raw, paper, solution){
     id: raw.id,
     paperId: paper.id,
     subject: raw.subject,
-    chapter: raw.chapter || 'Other',
+    chapter: canonChapter(raw.subject, raw.chapter || 'Other'),
+    rawChapter: raw.chapter || null,
     topic: raw.topic || '',
     year: raw.year,
     shift: monthKey(raw.session_month || paper.session),
@@ -971,11 +979,15 @@ const FORMULAS = {
 };
 
 // ---------- Syllabus (chapter names; questions are added per chapter later) ----------
-const SYLLABUS = {
- Physics:['Units and Measurements','Mechanics','Gravitation','Properties of Matter','Thermodynamics','Kinetic Theory of Gases','Oscillations and Waves','Electrostatics','Current Electricity','Magnetism','Electromagnetic Induction and AC','Electromagnetic Waves','Ray Optics','Wave Optics','Dual Nature of Matter','Atoms and Nuclei','Semiconductor Electronics','Communication Systems'],
- Chemistry:['Some Basic Concepts','Atomic Structure','Chemical Bonding','States of Matter','Chemical Thermodynamics','Chemical Equilibrium','Ionic Equilibrium','Electrochemistry','Chemical Kinetics','Surface Chemistry','Solutions','Periodic Table','Hydrogen and s-Block','p-Block Elements','d and f-Block Elements','Coordination Compounds','Metallurgy','Environmental Chemistry','Organic Chemistry','Hydrocarbons','Haloalkanes and Haloarenes','Alcohols, Phenols and Ethers','Aldehydes, Ketones and Acids','Amines','Biomolecules','Polymers','Chemistry in Everyday Life'],
- Maths:['Sets, Relations and Functions','Complex Numbers','Quadratic Equations','Sequences and Series','Permutations and Combinations','Binomial Theorem','Matrices and Determinants','Trigonometry','Inverse Trigonometry','Limits, Continuity and Differentiability','Calculus','Differential Equations','Coordinate Geometry','Vector Algebra','3D Geometry','Probability','Statistics','Mathematical Reasoning']
-};
+// Canonical chapters (JEE Main 2027 syllabus, Paper 1). Generated from checker/syllabus_map.json.
+const SYLLABUS = {"Physics": ["Units and Measurements", "Kinematics", "Laws of Motion", "Work, Energy and Power", "Rotational Motion", "Gravitation", "Properties of Solids and Liquids", "Thermodynamics", "Kinetic Theory of Gases", "Oscillations and Waves", "Electrostatics", "Current Electricity", "Magnetic Effects of Current and Magnetism", "Electromagnetic Induction and Alternating Currents", "Electromagnetic Waves", "Optics", "Dual Nature of Matter and Radiation", "Atoms and Nuclei", "Electronic Devices", "Experimental Skills"], "Chemistry": ["Some Basic Concepts in Chemistry", "Atomic Structure", "Chemical Bonding and Molecular Structure", "Chemical Thermodynamics", "Solutions", "Equilibrium", "Redox Reactions and Electrochemistry", "Chemical Kinetics", "Classification of Elements and Periodicity in Properties", "p-Block Elements", "d- and f-Block Elements", "Coordination Compounds", "Purification and Characterisation of Organic Compounds", "Some Basic Principles of Organic Chemistry", "Hydrocarbons", "Organic Compounds Containing Halogens", "Organic Compounds Containing Oxygen", "Organic Compounds Containing Nitrogen", "Biomolecules", "Principles Related to Practical Chemistry"], "Maths": ["Sets, Relations and Functions", "Complex Numbers and Quadratic Equations", "Matrices and Determinants", "Permutations and Combinations", "Binomial Theorem", "Sequence and Series", "Limit, Continuity and Differentiability", "Integral Calculus", "Differential Equations", "Co-ordinate Geometry", "Three Dimensional Geometry", "Vector Algebra", "Statistics and Probability", "Trigonometry"]};
+const CANON_ALIAS = {"Physics": {"Ray Optics": "Optics", "Waves": "Oscillations and Waves", "Heat and Thermodynamics": "Thermodynamics", "Electromagnetism": "Magnetic Effects of Current and Magnetism", "Magnetism": "Magnetic Effects of Current and Magnetism", "Electromagnetic Induction": "Electromagnetic Induction and Alternating Currents", "Alternating Currents": "Electromagnetic Induction and Alternating Currents", "Modern Physics": "Dual Nature of Matter and Radiation", "Atomic Physics": "Atoms and Nuclei", "Nuclear Physics": "Atoms and Nuclei", "Semiconductors": "Electronic Devices", "Fluids": "Properties of Solids and Liquids", "Elasticity": "Properties of Solids and Liquids", "Gravity": "Gravitation", "Circular Motion": "Laws of Motion", "Friction": "Laws of Motion", "Center of Mass": "Rotational Motion", "Centre of Mass": "Rotational Motion", "Work and Energy": "Work, Energy and Power", "Energy": "Work, Energy and Power", "Capacitors": "Electrostatics", "Electric Circuits": "Current Electricity", "Circuits": "Current Electricity"}, "Chemistry": {"Some Basic Concepts": "Some Basic Concepts in Chemistry", "Periodicity": "Classification of Elements and Periodicity in Properties", "Electrochemistry": "Redox Reactions and Electrochemistry", "Redox Reactions": "Redox Reactions and Electrochemistry", "d and f Block Elements": "d- and f-Block Elements", "d-block Elements": "d- and f-Block Elements", "f-block Elements": "d- and f-Block Elements", "Coordination Chemistry": "Coordination Compounds", "Co-ordination Compounds": "Coordination Compounds", "Stereochemistry": "Some Basic Principles of Organic Chemistry", "Organic Nomenclature": "Some Basic Principles of Organic Chemistry", "Organic Basics": "Some Basic Principles of Organic Chemistry", "Aromatic Compounds": "Hydrocarbons", "Alkanes": "Hydrocarbons", "Alkenes": "Hydrocarbons", "Alkynes": "Hydrocarbons", "Aldehydes and Ketones": "Organic Compounds Containing Oxygen", "Alcohols and Phenols": "Organic Compounds Containing Oxygen", "Carboxylic Acids": "Organic Compounds Containing Oxygen", "Amines": "Organic Compounds Containing Nitrogen", "Haloalkanes and Haloarenes": "Organic Compounds Containing Halogens", "Haloalkanes": "Organic Compounds Containing Halogens", "Nuclear Chemistry (Kinetics)": "Chemical Kinetics", "Nuclear Chemistry": "Atomic Structure", "Chemical Equilibrium": "Equilibrium", "Ionic Equilibrium": "Equilibrium", "Chemical Thermodynamics and Equilibrium": "Chemical Thermodynamics", "Thermochemistry": "Chemical Thermodynamics", "Solution": "Solutions", "Mole Concept": "Some Basic Concepts in Chemistry", "Stoichiometry": "Some Basic Concepts in Chemistry", "Chemical Bonding": "Chemical Bonding and Molecular Structure", "Hydrogen Bonding": "Chemical Bonding and Molecular Structure", "Surface Chemistry": "Principles Related to Practical Chemistry", "Biology in Chemistry": "Biomolecules"}, "Maths": {"Sets, Relations and Function": "Sets, Relations and Functions", "Sets and Relations": "Sets, Relations and Functions", "Complex Numbers": "Complex Numbers and Quadratic Equations", "Quadratic Equations": "Complex Numbers and Quadratic Equations", "Matrices": "Matrices and Determinants", "Determinants": "Matrices and Determinants", "Permutations and Combinations": "Permutations and Combinations", "Permutation and Combination": "Permutations and Combinations", "Binomial Theorem and its Simple Applications": "Binomial Theorem", "Sequence": "Sequence and Series", "Series": "Sequence and Series", "Limits and Continuity": "Limit, Continuity and Differentiability", "Differentiability": "Limit, Continuity and Differentiability", "Continuity and Differentiability": "Limit, Continuity and Differentiability", "Differentiation": "Limit, Continuity and Differentiability", "Application of Derivatives": "Limit, Continuity and Differentiability", "Logarithmic and Exponential Functions": "Limit, Continuity and Differentiability", "Integration": "Integral Calculus", "Integrals": "Integral Calculus", "Definite Integrals": "Integral Calculus", "Area under curves": "Integral Calculus", "Differential Equation": "Differential Equations", "Coordinate Geometry": "Co-ordinate Geometry", "Co-ordinate geometry": "Co-ordinate Geometry", "Straight Lines": "Co-ordinate Geometry", "Straight Line": "Co-ordinate Geometry", "Conic Sections": "Co-ordinate Geometry", "Circles": "Co-ordinate Geometry", "Parabola": "Co-ordinate Geometry", "Ellipse": "Co-ordinate Geometry", "Hyperbola": "Co-ordinate Geometry", "3D Geometry": "Three Dimensional Geometry", "3-D Geometry": "Three Dimensional Geometry", "Vectors": "Vector Algebra", "Vector": "Vector Algebra", "Probability": "Statistics and Probability", "Statistics": "Statistics and Probability", "Inverse Trigonometric Functions": "Trigonometry", "Trigonometric Functions": "Trigonometry", "Trigonometric Equations": "Trigonometry", "Sets": "Sets, Relations and Functions", "Relations and Functions": "Sets, Relations and Functions", "Complex Number": "Complex Numbers and Quadratic Equations"}};
+function canonChapter(subject, name){
+  const list = SYLLABUS[subject]||[];
+  if(list.indexOf(name)>=0) return name;
+  const hit = (CANON_ALIAS[subject]||{})[name];
+  return hit || name;
+}
 
 // ---------- Lookups ----------
 const SUBJECTS = ['Physics','Chemistry','Maths'];
@@ -1577,7 +1589,7 @@ const CH_ICONS = {
  'Laws of Motion': '<rect x="4" y="9" width="7" height="7" rx="1"/><path d="M11 12.5 H20"/><path d="M17 9.5 L20 12.5 L17 15.5"/>',
  'Work, Energy and Power': '<path d="M9 18 h6 M10 21 h4"/><path d="M12 3 a6 6 0 0 0 -3.5 10.9 V15 h7 v-1.1 A6 6 0 0 0 12 3 z"/>',
  'Rotational Motion': '<rect x="7" y="7" width="10" height="10" rx="1"/><path d="M4 12 A8 8 0 0 1 12 4"/><path d="M12 1.5 L12 4 L14.5 4"/>',
- 'Gravitation': '<circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(-20 12 12)"/>',
+ 'Gravitation': '<circle cx="12" cy="12" r="3.2" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9.5" ry="4.2" transform="rotate(-25 12 12)"/><circle cx="15.96" cy="6.52" r="1.7" fill="currentColor" stroke="none"/>',
  'Properties of Solids and Liquids': '<path d="M3 12 H6 L8 6 L11 18 L14 6 L17 18 L19 12 H21"/>',
  'Thermodynamics': '<path d="M10 14 V5 a2 2 0 0 1 4 0 V14 a4 4 0 1 1 -4 0 z"/><path d="M12 9 V17"/>'
 };
@@ -1758,6 +1770,7 @@ function sylUnits(units){
 
 function syllabusView(){
   const w = el('<div></div>');
+  if(Object.keys(NOTES).length){ const nc = el('<div class="card"><div class="eyebrow">Revision notes</div></div>'); Object.keys(NOTES).forEach(k=>{ const rb = el('<div class="row"><div class="name">'+esc(k)+'</div><div class="end">Open</div></div>'); rb.onclick = ()=>go('notes',{chapter:k}); nc.appendChild(rb); }); w.appendChild(nc); }
   w.appendChild(el('<h1 class="title">Syllabus</h1>'));
   const paper = sylPapersShown().find(p=>p.id===SYL_PAPER) || SYL_PAPERS[0];
   w.appendChild(el('<p class="sub">'+esc(paper.sub)+'</p>'));
@@ -1936,6 +1949,7 @@ function homeView(){
 
 
   w.appendChild(dailyGoalCard());
+  { const xb = el('<button class="btn secondary block" style="margin:0 0 16px">Exam-day mode: 9 fresh questions, 2 minutes each</button>'); xb.onclick = startExamDay; w.appendChild(xb); }
   w.appendChild(streakStrip());
   w.appendChild(qotdCard());
   const daily = dailyQueue();
@@ -2035,7 +2049,7 @@ function pyqView(){
     const st = chapterStats(c);
     const row = barRow(c, st.acc, n+' question'+(n>1?'s':''));
     row.style.cursor='pointer';
-    if(CH_ICONS[c]) row.insertBefore(el(chIcon(c)), row.firstChild);
+    if(CH_ICONS[c]){ const main = row.firstChild; const grp = el('<div style="display:flex;align-items:center;min-width:0;flex:1"></div>'); grp.appendChild(el(chIcon(c))); grp.appendChild(main); row.insertBefore(grp, row.firstChild); }
     row.onclick = ()=>go('chapter',{chapter:c});
     list.appendChild(row);
   });
@@ -2084,6 +2098,78 @@ function paperView(){
   return w;
 }
 
+// ---------- Mistake Mirror, explain-it-back, chapter stories, exam-day mode ----------
+const MISTAKE_TYPES = [['sign','Sign slip'],['unit','Unit slip'],['misread','Misread the question'],['concept','Concept gap'],['calc','Calculation slip'],['careless','Careless']];
+const CH_STORY = {
+ 'Units and Measurements': 'Every number in physics carries a unit, and the units must agree before anything else happens.',
+ 'Kinematics': 'Motion is change of position over time, and every graph is a story about that change.',
+ 'Laws of Motion': 'A force is a push or pull; the same push changes a light object far more than a heavy one.',
+ 'Work, Energy and Power': 'Energy is the currency of motion: work moves it from one place to another.',
+ 'Rotational Motion': 'Rotation is motion where distance from the axis matters as much as the push itself.',
+ 'Gravitation': 'Everything pulls on everything, and the pull weakens with distance in a precise way.',
+ 'Properties of Solids and Liquids': 'Solids spring back when stretched, and liquids flow, but both push back in their own way.',
+ 'Thermodynamics': 'Heat and work are two ways of moving energy; the system keeps a careful account of both.'
+};
+function mistakeMirrorUI(q, parent){
+  store.mistakes = store.mistakes || {};
+  const cur = store.mistakes[q.id] || {type:null, text:''};
+  parent.appendChild(el('<div class="field">Mistake Mirror</div>'));
+  parent.appendChild(el('<div class="note-line" style="margin:0 0 8px">If you got it wrong, name the slip. Patterns in your slips matter more than any single one.</div>'));
+  const chips = el('<div class="chips"></div>');
+  MISTAKE_TYPES.forEach(m=>{
+    const b = el('<button class="chip '+(cur.type===m[0]?'on':'')+'">'+esc(m[1])+'</button>');
+    b.onclick = ()=>{ store.mistakes[q.id] = Object.assign({}, cur, {type: cur.type===m[0]?null:m[0], d: dayKey()}); persist(); render(); };
+    chips.appendChild(b);
+  });
+  parent.appendChild(chips);
+  const ta = el('<textarea placeholder="What exactly went wrong? One line is enough."></textarea>');
+  ta.value = cur.text || '';
+  parent.appendChild(ta);
+  const sv = el('<button class="linkish">Save mirror note</button>');
+  sv.onclick = ()=>{ store.mistakes[q.id] = Object.assign({}, cur, {text: ta.value.trim(), d: dayKey()}); if(!store.mistakes[q.id].text && !store.mistakes[q.id].type) delete store.mistakes[q.id]; persist(); sv.innerText = 'Saved'; };
+  parent.appendChild(sv);
+}
+// Logic: the chapters and subtopics this question draws on, and what each covers here
+function logicBlock(q, parent){
+  const subs = Array.isArray(q.subtopics) && q.subtopics.length ? q.subtopics : [{chapter:q.chapter, subtopic:q.topic || q.chapter}];
+  const chs = Array.isArray(q.chapters) && q.chapters.length ? q.chapters : [q.chapter];
+  parent.appendChild(el('<div class="field">Logic used</div>'));
+  parent.appendChild(el('<div class="note-line" style="margin:0 0 6px">Chapters: '+esc(chs.join(', '))+'</div>'));
+  subs.forEach(x=>parent.appendChild(el('<div class="logic-row"><b>'+esc(x.subtopic)+'</b><span>'+esc(x.chapter)+'</span></div>')));
+}
+function patternsPart(){
+  const w = el('<div></div>');
+  const counts = {};
+  Object.values(store.mistakes || {}).forEach(m=>{ if(m.type) counts[m.type] = (counts[m.type]||0)+1; });
+  const ranked = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,3);
+  const card = el('<div class="card"><div class="eyebrow">Your top slips</div></div>');
+  if(!ranked.length) card.appendChild(el('<p class="note-line">No mistakes named yet. Name a slip under a wrong answer to start seeing patterns.</p>'));
+  ranked.forEach(([k,n])=>{ const lab = (MISTAKE_TYPES.find(m=>m[0]===k)||[k,k])[1]; card.appendChild(el('<div class="fx-row"><div class="fx-eq">'+esc(lab)+'</div><div class="meta">'+n+' time'+(n>1?'s':'')+'</div></div>')); });
+  w.appendChild(card);
+  const sure = {n:0, ok:0}, guess = {n:0, ok:0};
+  store.attempts.forEach(a=>{ if(a.conf==='sure'){ sure.n++; if(a.c) sure.ok++; } else if(a.conf==='guess'){ guess.n++; if(a.c) guess.ok++; } });
+  const pct = o => o.n ? Math.round(o.ok/o.n*100)+'%' : 'no data yet';
+  const cal = el('<div class="card"><div class="eyebrow">Confidence calibration</div></div>');
+  cal.appendChild(el('<div class="fx-row"><div class="fx-eq">When you were sure</div><div class="meta">'+pct(sure)+' right ('+sure.n+')</div></div>'));
+  cal.appendChild(el('<div class="fx-row"><div class="fx-eq">When you were guessing</div><div class="meta">'+pct(guess)+' right ('+guess.n+')</div></div>'));
+  cal.appendChild(el('<p class="note-line">The gap between these two numbers is how well you judge your own answers. Guessing is cheap only when you know you are guessing.</p>'));
+  w.appendChild(cal);
+  return w;
+}
+function startExamDay(){
+  const pool = QUESTIONS.filter(q=>!store.attempts.some(a=>a.q===q.id));
+  const src = pool.length >= 9 ? pool : QUESTIONS;
+  const queue = shuffle(src).slice(0,9);
+  startSession({mode:'pyq', title:'Exam-day mode', queue});
+}
+function storyCard(c){
+  if(!CH_STORY[c] || (store.storySeen||{})[c]) return null;
+  const card = el('<div class="card story"><div class="eyebrow">Chapter story</div><p class="nt-p">'+esc(CH_STORY[c])+'</p></div>');
+  const dismiss = el('<button class="linkish">Got it</button>');
+  dismiss.onclick = ()=>{ store.storySeen = store.storySeen || {}; store.storySeen[c] = true; persist(); card.remove(); };
+  card.appendChild(dismiss);
+  return card;
+}
 function notesView(){
   const c = nav.chapter, data = NOTES[c];
   const w = el('<div></div>');
@@ -2099,6 +2185,15 @@ function notesView(){
     card.appendChild(el('<div class="nt-analogy">'+esc(k.analogy)+'</div>'));
     k.body.forEach(p=>card.appendChild(el('<p class="nt-p">'+esc(p)+'</p>')));
     card.appendChild(el('<div class="nt-ex"><b>Worked example.</b> '+esc(k.example.q)+'<br><b>Solution.</b> '+esc(k.example.a)+'</div>'));
+    const eb = el('<div class="explain-box"><div class="field">Explain it back, in one sentence</div></div>');
+    const et = el('<textarea placeholder="Say the idea in your own words, as if to a friend."></textarea>');
+    const key = c+'|'+k.title;
+    store.explain = store.explain || {};
+    et.value = store.explain[key] || '';
+    const eSave = el('<button class="linkish">Save my explanation</button>');
+    eSave.onclick = ()=>{ const t = et.value.trim(); if(t) store.explain[key] = t; else delete store.explain[key]; persist(); eSave.innerText = 'Saved'; };
+    eb.appendChild(et); eb.appendChild(eSave);
+    card.appendChild(eb);
     w.appendChild(card);
   });
   return w;
@@ -2109,6 +2204,7 @@ function chapterView(){
   w.appendChild(back('PYQs', ()=>go('pyq')));
   w.appendChild(el('<div class="eyebrow">'+esc(s)+'</div>'));
   w.appendChild(el('<h1 class="title">'+esc(c)+'</h1>'));
+  { const sc = storyCard(c); if(sc) w.appendChild(sc); }
   const st = chapterStats(c);
   w.appendChild(el('<p class="sub">'+(st.total?st.acc+'% accuracy over '+st.total+' attempts':'Not attempted yet')+'</p>'));
   const pb = el('<button class="btn block">Practice whole chapter</button>');
@@ -2569,7 +2665,7 @@ function meView(){
     +'<div class="hm-eyebrow">Your space</div>'
     +'<h1 class="hm-title">'+(first ? 'Me, <em>'+esc(first)+'.</em>' : 'Me<em>.</em>')+'</h1></div>'));
   const tabs = el('<div class="ctabs" role="tablist"></div>');
-  [['analysis','Analysis'],['badges','Badges'],['saved','Saved'],['mysol','My solutions'],['redo','Redo'],['profile','Profile'],['theme','Theme']].forEach(p=>{
+  [['analysis','Analysis'],['badges','Badges'],['saved','Saved'],['mysol','My solutions'],['patterns','Patterns'],['redo','Redo'],['profile','Profile'],['theme','Theme']].forEach(p=>{
     const on = nav.meTab === p[0];
     const b = el('<button role="tab" aria-selected="'+on+'" class="ctab'+(on?' on':'')+'">'+p[1]+'</button>');
     b.onclick = ()=>go('me',{meTab:p[0]});
@@ -2582,6 +2678,7 @@ function meView(){
   else if(nav.meTab==='badges') panel.appendChild(badgesPart());
   else if(nav.meTab==='saved') panel.appendChild(savedPart());
   else if(nav.meTab==='mysol') panel.appendChild(mySolPart());
+  else if(nav.meTab==='patterns') panel.appendChild(patternsPart());
   else if(nav.meTab==='redo') panel.appendChild(redoPart());
   else panel.appendChild(analysisPart());
   w.appendChild(panel);
@@ -2767,6 +2864,7 @@ function pyqPractice(w){
     noteTa.value = store.notes[q.id] || '';
     card.appendChild(el('<div class="field">Note</div>'));
     card.appendChild(noteTa);
+    logicBlock(q, card);
     card.appendChild(el('<div class="field">My solution</div>'));
     const mysTa = el('<textarea placeholder="Your own, better way to solve this. Only you can see it."></textarea>');
     mysTa.value = (store.mySol && store.mySol[q.id]) || '';
@@ -2774,6 +2872,7 @@ function pyqPractice(w){
     const mysBtn = el('<button class="linkish">Save my solution</button>');
     mysBtn.onclick = ()=>{ store.mySol = store.mySol || {}; const t = mysTa.value.trim(); if(t) store.mySol[q.id] = t; else delete store.mySol[q.id]; persist(); mysBtn.innerText = 'Saved'; };
     card.appendChild(mysBtn);
+    mistakeMirrorUI(q, card);
     const saved = store.bookmarks.indexOf(q.id)>=0;
     const bmRow = el('<div class="row" style="justify-content:flex-start;margin-top:12px;padding:0;border:none"></div>');
     const bm = el('<button class="linkish">'+(saved?'★ Saved':'☆ Save for later')+'</button>');
