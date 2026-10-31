@@ -14,6 +14,15 @@
   "question_number": 1,
   "subject": "Maths",
   "chapter": "Matrices and Determinants",
+  "chapters": [
+   "Matrices and Determinants"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Matrices and Determinants",
+    "subtopic": "Matrices and algebra of matrices"
+   }
+  ],
   "topic": "Trace and determinant of adjugate",
   "question_type": "single",
   "difficulty": "hard",
@@ -75,6 +84,19 @@
   "question_number": 2,
   "subject": "Maths",
   "chapter": "Permutations and Combinations",
+  "chapters": [
+   "Permutations and Combinations"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Permutations and Combinations",
+    "subtopic": "Permutations"
+   },
+   {
+    "chapter": "Permutations and Combinations",
+    "subtopic": "Fundamental principle of counting"
+   }
+  ],
   "topic": "Queue arrangements with blocks",
   "question_type": "single",
   "difficulty": "medium",
@@ -135,6 +157,15 @@
   "question_number": 3,
   "subject": "Maths",
   "chapter": "Binomial Theorem",
+  "chapters": [
+   "Binomial Theorem"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Binomial Theorem",
+    "subtopic": "General term"
+   }
+  ],
   "topic": "Coefficients in binomial expansion and linear system",
   "question_type": "single",
   "difficulty": "hard",
@@ -195,6 +226,15 @@
   "question_number": 4,
   "subject": "Maths",
   "chapter": "Three Dimensional Geometry",
+  "chapters": [
+   "Three Dimensional Geometry"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Three Dimensional Geometry",
+    "subtopic": "Equation of a line in space"
+   }
+  ],
   "topic": "Line through points and area of triangle",
   "question_type": "single",
   "difficulty": "hard",
@@ -254,7 +294,16 @@
   "paper_section": null,
   "question_number": 5,
   "subject": "Maths",
-  "chapter": "Probability",
+  "chapter": "Statistics and Probability",
+  "chapters": [
+   "Statistics and Probability"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Statistics and Probability",
+    "subtopic": "Probability of an event"
+   }
+  ],
   "topic": "Conditional probability with roots of quadratic",
   "question_type": "single",
   "difficulty": "hard",
@@ -315,6 +364,15 @@
   "question_number": 6,
   "subject": "Maths",
   "chapter": "Integral Calculus",
+  "chapters": [
+   "Integral Calculus"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Integral Calculus",
+    "subtopic": "Integration by parts"
+   }
+  ],
   "topic": "Indefinite integral and evaluation at 1/2",
   "question_type": "single",
   "difficulty": "hard",
@@ -374,7 +432,21 @@
   "paper_section": null,
   "question_number": 7,
   "subject": "Maths",
-  "chapter": "Area Under Curves",
+  "chapter": "Integral Calculus",
+  "chapters": [
+   "Integral Calculus",
+   "Co-ordinate Geometry"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Integral Calculus",
+    "subtopic": "Determining areas of regions bounded by simple curves in standard forms"
+   },
+   {
+    "chapter": "Co-ordinate Geometry",
+    "subtopic": "Sections of conics: parabola, ellipse and hyperbola in standard forms"
+   }
+  ],
   "topic": "Area enclosed by parabola and parabola",
   "question_type": "single",
   "difficulty": "medium",
@@ -434,7 +506,21 @@
   "paper_section": null,
   "question_number": 8,
   "subject": "Maths",
-  "chapter": "Application of Derivatives",
+  "chapter": "Limit, Continuity and Differentiability",
+  "chapters": [
+   "Limit, Continuity and Differentiability",
+   "Integral Calculus"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Limit, Continuity and Differentiability",
+    "subtopic": "Maxima and minima of functions of one variable"
+   },
+   {
+    "chapter": "Integral Calculus",
+    "subtopic": "Fundamental theorem of calculus"
+   }
+  ],
   "topic": "Local maxima and minima of integral function",
   "question_type": "single",
   "difficulty": "hard",
@@ -494,7 +580,16 @@
   "paper_section": null,
   "question_number": 9,
   "subject": "Maths",
-  "chapter": "Conic Sections",
+  "chapter": "Co-ordinate Geometry",
+  "chapters": [
+   "Co-ordinate Geometry"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Co-ordinate Geometry",
+    "subtopic": "Sections of conics: parabola, ellipse and hyperbola in standard forms"
+   }
+  ],
   "topic": "Area of focal chord quadrilateral in parabola",
   "question_type": "single",
   "difficulty": "hard",
@@ -556,6 +651,19 @@
   "question_number": 10,
   "subject": "Maths",
   "chapter": "Vector Algebra",
+  "chapters": [
+   "Vector Algebra"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Vector Algebra",
+    "subtopic": "Scalar product"
+   },
+   {
+    "chapter": "Vector Algebra",
+    "subtopic": "Addition of vectors"
+   }
+  ],
   "topic": "Perpendicular vectors with angle constraint",
   "question_type": "single",
   "difficulty": "medium",
@@ -615,7 +723,16 @@
   "paper_section": null,
   "question_number": 11,
   "subject": "Maths",
-  "chapter": "Limits",
+  "chapter": "Limit, Continuity and Differentiability",
+  "chapters": [
+   "Limit, Continuity and Differentiability"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Limit, Continuity and Differentiability",
+    "subtopic": "Limits"
+   }
+  ],
   "topic": "Limit of power of expression equals alpha",
   "question_type": "single",
   "difficulty": "hard",
@@ -676,6 +793,19 @@
   "question_number": 12,
   "subject": "Maths",
   "chapter": "Sets, Relations and Functions",
+  "chapters": [
+   "Sets, Relations and Functions"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Sets, Relations and Functions",
+    "subtopic": "Functions"
+   },
+   {
+    "chapter": "Sets, Relations and Functions",
+    "subtopic": "One-one, into and onto functions"
+   }
+  ],
   "topic": "Many-one functions with condition on range",
   "question_type": "single",
   "difficulty": "medium",
@@ -736,6 +866,15 @@
   "question_number": 13,
   "subject": "Maths",
   "chapter": "Sequence and Series",
+  "chapters": [
+   "Sequence and Series"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Sequence and Series",
+    "subtopic": "Arithmetic progression"
+   }
+  ],
   "topic": "AP with sums of odd and even terms",
   "question_type": "single",
   "difficulty": "medium",
@@ -796,6 +935,19 @@
   "question_number": 14,
   "subject": "Maths",
   "chapter": "Three Dimensional Geometry",
+  "chapters": [
+   "Three Dimensional Geometry"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Three Dimensional Geometry",
+    "subtopic": "Equation of a line in space"
+   },
+   {
+    "chapter": "Three Dimensional Geometry",
+    "subtopic": "Distance between two points in space"
+   }
+  ],
   "topic": "Perpendicular distance of point from line",
   "question_type": "single",
   "difficulty": "medium",
@@ -856,6 +1008,15 @@
   "question_number": 15,
   "subject": "Maths",
   "chapter": "Matrices and Determinants",
+  "chapters": [
+   "Matrices and Determinants"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Matrices and Determinants",
+    "subtopic": "Test of consistency of linear equations"
+   }
+  ],
   "topic": "System of equations with infinitely many solutions",
   "question_type": "single",
   "difficulty": "medium",
@@ -916,6 +1077,15 @@
   "question_number": 16,
   "subject": "Maths",
   "chapter": "Differential Equations",
+  "chapters": [
+   "Differential Equations"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Differential Equations",
+    "subtopic": "Solution of linear differential equations of the type dy/dx + p(x)y = q(x)"
+   }
+  ],
   "topic": "Solution of differential equation with f(0)=1",
   "question_type": "single",
   "difficulty": "hard",
@@ -975,7 +1145,20 @@
   "paper_section": null,
   "question_number": 17,
   "subject": "Maths",
-  "chapter": "Quadratic Equations",
+  "chapter": "Complex Numbers and Quadratic Equations",
+  "chapters": [
+   "Complex Numbers and Quadratic Equations"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Complex Numbers and Quadratic Equations",
+    "subtopic": "Relations between roots and coefficients"
+   },
+   {
+    "chapter": "Complex Numbers and Quadratic Equations",
+    "subtopic": "Nature of roots"
+   }
+  ],
   "topic": "Sum of fourth powers of roots min and max",
   "question_type": "single",
   "difficulty": "hard",
@@ -1036,6 +1219,15 @@
   "question_number": 18,
   "subject": "Maths",
   "chapter": "Trigonometry",
+  "chapters": [
+   "Trigonometry"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Trigonometry",
+    "subtopic": "Trigonometrical functions"
+   }
+  ],
   "topic": "Sum of trigonometric solutions in interval",
   "question_type": "single",
   "difficulty": "hard",
@@ -1094,7 +1286,20 @@
   "paper_section": null,
   "question_number": 19,
   "subject": "Maths",
-  "chapter": "Complex Numbers",
+  "chapter": "Complex Numbers and Quadratic Equations",
+  "chapters": [
+   "Complex Numbers and Quadratic Equations"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Complex Numbers and Quadratic Equations",
+    "subtopic": "Argand diagram"
+   },
+   {
+    "chapter": "Complex Numbers and Quadratic Equations",
+    "subtopic": "Representation of complex numbers in the form a + ib and in a plane"
+   }
+  ],
   "topic": "Area of region split by curve in complex plane",
   "question_type": "single",
   "difficulty": "hard",
@@ -1154,7 +1359,16 @@
   "paper_section": null,
   "question_number": 20,
   "subject": "Maths",
-  "chapter": "Conic Sections",
+  "chapter": "Co-ordinate Geometry",
+  "chapters": [
+   "Co-ordinate Geometry"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Co-ordinate Geometry",
+    "subtopic": "Sections of conics: parabola, ellipse and hyperbola in standard forms"
+   }
+  ],
   "topic": "Ellipse and hyperbola with eccentricity ratio",
   "question_type": "single",
   "difficulty": "hard",
@@ -1216,6 +1430,15 @@
   "question_number": 21,
   "subject": "Maths",
   "chapter": "Binomial Theorem",
+  "chapters": [
+   "Binomial Theorem"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Binomial Theorem",
+    "subtopic": "Binomial theorem for a positive integral index"
+   }
+  ],
   "topic": "Sum of squared binomial terms",
   "question_type": "integer",
   "difficulty": "medium",
@@ -1255,6 +1478,15 @@
   "question_number": 22,
   "subject": "Maths",
   "chapter": "Sets, Relations and Functions",
+  "chapters": [
+   "Sets, Relations and Functions"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Sets, Relations and Functions",
+    "subtopic": "Relations and types of relations"
+   }
+  ],
   "topic": "Relations on set with reflexive and transitive properties",
   "question_type": "integer",
   "difficulty": "medium",
@@ -1293,7 +1525,20 @@
   "paper_section": null,
   "question_number": 23,
   "subject": "Maths",
-  "chapter": "Coordinate Geometry",
+  "chapter": "Co-ordinate Geometry",
+  "chapters": [
+   "Co-ordinate Geometry"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Co-ordinate Geometry",
+    "subtopic": "Locus and its equation"
+   },
+   {
+    "chapter": "Co-ordinate Geometry",
+    "subtopic": "Co-ordinates of centroid, orthocentre and circumcentre of a triangle"
+   }
+  ],
   "topic": "Orthocentre and centroid of triangle",
   "question_type": "integer",
   "difficulty": "hard",
@@ -1333,6 +1578,15 @@
   "question_number": 24,
   "subject": "Maths",
   "chapter": "Differential Equations",
+  "chapters": [
+   "Differential Equations"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Differential Equations",
+    "subtopic": "Solution of linear differential equations of the type dy/dx + p(x)y = q(x)"
+   }
+  ],
   "topic": "Initial value problem with integral condition",
   "question_type": "integer",
   "difficulty": "hard",
@@ -1371,7 +1625,20 @@
   "paper_section": null,
   "question_number": 25,
   "subject": "Maths",
-  "chapter": "Coordinate Geometry",
+  "chapter": "Co-ordinate Geometry",
+  "chapters": [
+   "Co-ordinate Geometry"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Co-ordinate Geometry",
+    "subtopic": "Distance of a point from a line"
+   },
+   {
+    "chapter": "Co-ordinate Geometry",
+    "subtopic": "Locus and its equation"
+   }
+  ],
   "topic": "Equilateral triangle between parallel lines",
   "question_type": "integer",
   "difficulty": "hard",
@@ -1410,7 +1677,16 @@
   "paper_section": null,
   "question_number": 26,
   "subject": "Physics",
-  "chapter": "Magnetic Effects of Current",
+  "chapter": "Magnetic Effects of Current and Magnetism",
+  "chapters": [
+   "Magnetic Effects of Current and Magnetism"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Magnetic Effects of Current and Magnetism",
+    "subtopic": "Moving coil galvanometer, its sensitivity and conversion to ammeter and voltmeter"
+   }
+  ],
   "topic": "Galvanometer shunt for higher current range",
   "question_type": "single",
   "difficulty": "medium",
@@ -1471,7 +1747,21 @@
   "paper_section": null,
   "question_number": 27,
   "subject": "Physics",
-  "chapter": "Work, Energy and Power",
+  "chapter": "Kinematics",
+  "chapters": [
+   "Kinematics",
+   "Work, Energy and Power"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Kinematics",
+    "subtopic": "Projectile motion"
+   },
+   {
+    "chapter": "Work, Energy and Power",
+    "subtopic": "Kinetic energy"
+   }
+  ],
   "topic": "Kinetic energy at highest point of projectile",
   "question_type": "single",
   "difficulty": "easy",
@@ -1532,6 +1822,15 @@
   "question_number": 28,
   "subject": "Physics",
   "chapter": "Electrostatics",
+  "chapters": [
+   "Electrostatics"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Electrostatics",
+    "subtopic": "Electric field due to a point charge"
+   }
+  ],
   "topic": "Electrostatic potential energy of two charges",
   "question_type": "single",
   "difficulty": "medium",
@@ -1591,7 +1890,16 @@
   "paper_section": null,
   "question_number": 29,
   "subject": "Physics",
-  "chapter": "Ray Optics",
+  "chapter": "Optics",
+  "chapters": [
+   "Optics"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Optics",
+    "subtopic": "Lens maker's formula"
+   }
+  ],
   "topic": "Power of a part of cut biconvex lens",
   "question_type": "single",
   "difficulty": "medium",
@@ -1652,6 +1960,15 @@
   "question_number": 30,
   "subject": "Physics",
   "chapter": "Electrostatics",
+  "chapters": [
+   "Electrostatics"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Electrostatics",
+    "subtopic": "Electric dipole and electric field due to a dipole"
+   }
+  ],
   "topic": "Electric potential and field of a short dipole",
   "question_type": "single",
   "difficulty": "medium",
@@ -1712,7 +2029,16 @@
   "paper_section": null,
   "question_number": 31,
   "subject": "Physics",
-  "chapter": "Ray Optics",
+  "chapter": "Optics",
+  "chapters": [
+   "Optics"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Optics",
+    "subtopic": "Refraction at plane and spherical surfaces"
+   }
+  ],
   "topic": "Minimum thickness of anti-reflection film",
   "question_type": "single",
   "difficulty": "medium",
@@ -1773,6 +2099,15 @@
   "question_number": 32,
   "subject": "Physics",
   "chapter": "Thermodynamics",
+  "chapters": [
+   "Thermodynamics"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Thermodynamics",
+    "subtopic": "Heat, work and internal energy"
+   }
+  ],
   "topic": "Extensive and intensive variables",
   "question_type": "single",
   "difficulty": "easy",
@@ -1832,6 +2167,15 @@
   "question_number": 33,
   "subject": "Physics",
   "chapter": "Atoms and Nuclei",
+  "chapters": [
+   "Atoms and Nuclei"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Atoms and Nuclei",
+    "subtopic": "Energy levels"
+   }
+  ],
   "topic": "Radius of electron orbit in magnetic field with Bohr quantisation",
   "question_type": "single",
   "difficulty": "hard",
@@ -1891,7 +2235,16 @@
   "paper_section": null,
   "question_number": 34,
   "subject": "Physics",
-  "chapter": "Wave Optics",
+  "chapter": "Optics",
+  "chapters": [
+   "Optics"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Optics",
+    "subtopic": "Interference: Young's double-slit experiment and fringe width"
+   }
+  ],
   "topic": "Fringe width and wavelength assertion-reason",
   "question_type": "single",
   "difficulty": "easy",
@@ -1951,7 +2304,20 @@
   "paper_section": null,
   "question_number": 35,
   "subject": "Physics",
-  "chapter": "Electromagnetic Induction",
+  "chapter": "Electromagnetic Induction and Alternating Currents",
+  "chapters": [
+   "Electromagnetic Induction and Alternating Currents"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Electromagnetic Induction and Alternating Currents",
+    "subtopic": "Faraday's law"
+   },
+   {
+    "chapter": "Electromagnetic Induction and Alternating Currents",
+    "subtopic": "Lenz's law"
+   }
+  ],
   "topic": "Induced emf graph for loop leaving field",
   "question_type": "single",
   "difficulty": "medium",
@@ -2012,6 +2378,19 @@
   "question_number": 36,
   "subject": "Physics",
   "chapter": "Work, Energy and Power",
+  "chapters": [
+   "Work, Energy and Power"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Work, Energy and Power",
+    "subtopic": "Work-energy theorem"
+   },
+   {
+    "chapter": "Work, Energy and Power",
+    "subtopic": "Kinetic energy"
+   }
+  ],
   "topic": "Decrease in kinetic energy of projectile to highest point",
   "question_type": "single",
   "difficulty": "easy",
@@ -2071,7 +2450,21 @@
   "paper_section": null,
   "question_number": 37,
   "subject": "Physics",
-  "chapter": "Circular Motion",
+  "chapter": "Work, Energy and Power",
+  "chapters": [
+   "Work, Energy and Power",
+   "Laws of Motion"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Work, Energy and Power",
+    "subtopic": "Motion in a vertical circle"
+   },
+   {
+    "chapter": "Laws of Motion",
+    "subtopic": "Centripetal force and its applications"
+   }
+  ],
   "topic": "Ratio of kinetic energies on vertical circle",
   "question_type": "single",
   "difficulty": "hard",
@@ -2131,7 +2524,21 @@
   "paper_section": null,
   "question_number": 38,
   "subject": "Physics",
-  "chapter": "Oscillations",
+  "chapter": "Oscillations and Waves",
+  "chapters": [
+   "Oscillations and Waves",
+   "Gravitation"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Oscillations and Waves",
+    "subtopic": "Simple pendulum and derivation of its time period"
+   },
+   {
+    "chapter": "Gravitation",
+    "subtopic": "Acceleration due to gravity and its variation with altitude and depth"
+   }
+  ],
   "topic": "Pendulum time period on planet assertion-reason",
   "question_type": "single",
   "difficulty": "medium",
@@ -2191,7 +2598,20 @@
   "paper_section": null,
   "question_number": 39,
   "subject": "Physics",
-  "chapter": "Alternating Currents",
+  "chapter": "Electromagnetic Induction and Alternating Currents",
+  "chapters": [
+   "Electromagnetic Induction and Alternating Currents"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Electromagnetic Induction and Alternating Currents",
+    "subtopic": "Resonance"
+   },
+   {
+    "chapter": "Electromagnetic Induction and Alternating Currents",
+    "subtopic": "LCR series circuit"
+   }
+  ],
   "topic": "Resonant current with doubled resistance",
   "question_type": "single",
   "difficulty": "easy",
@@ -2252,6 +2672,15 @@
   "question_number": 40,
   "subject": "Physics",
   "chapter": "Units and Measurements",
+  "chapters": [
+   "Units and Measurements"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Units and Measurements",
+    "subtopic": "Dimensions of physical quantities"
+   }
+  ],
   "topic": "Dimensional formula of capacitance",
   "question_type": "single",
   "difficulty": "easy",
@@ -2311,7 +2740,16 @@
   "paper_section": null,
   "question_number": 41,
   "subject": "Physics",
-  "chapter": "Fluid Mechanics",
+  "chapter": "Properties of Solids and Liquids",
+  "chapters": [
+   "Properties of Solids and Liquids"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Properties of Solids and Liquids",
+    "subtopic": "Bernoulli's principle and its applications"
+   }
+  ],
   "topic": "Velocity of water in tapering tube",
   "question_type": "single",
   "difficulty": "easy",
@@ -2372,6 +2810,15 @@
   "question_number": 42,
   "subject": "Physics",
   "chapter": "Dual Nature of Matter and Radiation",
+  "chapters": [
+   "Dual Nature of Matter and Radiation"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Dual Nature of Matter and Radiation",
+    "subtopic": "Einstein's photoelectric equation"
+   }
+  ],
   "topic": "Photoelectric maximum KE at half wavelength",
   "question_type": "single",
   "difficulty": "medium",
@@ -2431,6 +2878,15 @@
   "question_number": 43,
   "subject": "Physics",
   "chapter": "Units and Measurements",
+  "chapters": [
+   "Units and Measurements"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Units and Measurements",
+    "subtopic": "Errors in measurements"
+   }
+  ],
   "topic": "Maximum percentage error in density of wire",
   "question_type": "single",
   "difficulty": "medium",
@@ -2491,6 +2947,15 @@
   "question_number": 44,
   "subject": "Physics",
   "chapter": "Kinetic Theory of Gases",
+  "chapters": [
+   "Kinetic Theory of Gases"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Kinetic Theory of Gases",
+    "subtopic": "Applications to specific heat capacities of gases"
+   }
+  ],
   "topic": "Adiabatic index for diatomic gases with vibrational modes",
   "question_type": "single",
   "difficulty": "easy",
@@ -2551,6 +3016,15 @@
   "question_number": 45,
   "subject": "Physics",
   "chapter": "Work, Energy and Power",
+  "chapters": [
+   "Work, Energy and Power"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Work, Energy and Power",
+    "subtopic": "Work done by a constant force"
+   }
+  ],
   "topic": "Value of b for zero work",
   "question_type": "single",
   "difficulty": "easy",
@@ -2610,7 +3084,16 @@
   "paper_section": null,
   "question_number": 46,
   "subject": "Physics",
-  "chapter": "Magnetic Effects of Current",
+  "chapter": "Magnetic Effects of Current and Magnetism",
+  "chapters": [
+   "Magnetic Effects of Current and Magnetism"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Magnetic Effects of Current and Magnetism",
+    "subtopic": "Force on a moving charge in uniform magnetic and electric fields"
+   }
+  ],
   "topic": "Proton motion in crossed fields then circular path",
   "question_type": "integer",
   "difficulty": "medium",
@@ -2650,6 +3133,15 @@
   "question_number": 47,
   "subject": "Physics",
   "chapter": "Current Electricity",
+  "chapters": [
+   "Current Electricity"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Current Electricity",
+    "subtopic": "Kirchhoff's laws and their applications"
+   }
+  ],
   "topic": "Net current in circuit with resistor network",
   "question_type": "integer",
   "difficulty": "hard",
@@ -2689,6 +3181,15 @@
   "question_number": 48,
   "subject": "Physics",
   "chapter": "Electromagnetic Waves",
+  "chapters": [
+   "Electromagnetic Waves"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Electromagnetic Waves",
+    "subtopic": "Displacement current"
+   }
+  ],
   "topic": "Displacement current in capacitor",
   "question_type": "integer",
   "difficulty": "medium",
@@ -2728,6 +3229,15 @@
   "question_number": 49,
   "subject": "Physics",
   "chapter": "Rotational Motion",
+  "chapters": [
+   "Rotational Motion"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Rotational Motion",
+    "subtopic": "Basic concepts of rotational motion"
+   }
+  ],
   "topic": "Angular velocity of rotating liquid tube",
   "question_type": "integer",
   "difficulty": "hard",
@@ -2766,7 +3276,16 @@
   "paper_section": null,
   "question_number": 50,
   "subject": "Physics",
-  "chapter": "Magnetic Effects of Current",
+  "chapter": "Magnetic Effects of Current and Magnetism",
+  "chapters": [
+   "Magnetic Effects of Current and Magnetism"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Magnetic Effects of Current and Magnetism",
+    "subtopic": "Ampere's law and its applications to infinitely long straight wire and solenoid"
+   }
+  ],
   "topic": "Resultant magnetic field from two parallel wires",
   "question_type": "integer",
   "difficulty": "medium",
@@ -2806,6 +3325,19 @@
   "question_number": 51,
   "subject": "Chemistry",
   "chapter": "Purification and Characterisation of Organic Compounds",
+  "chapters": [
+   "Purification and Characterisation of Organic Compounds"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Purification and Characterisation of Organic Compounds",
+    "subtopic": "Qualitative analysis: detection of nitrogen, sulphur, phosphorus and halogens"
+   },
+   {
+    "chapter": "Purification and Characterisation of Organic Compounds",
+    "subtopic": "Quantitative analysis: estimation of carbon, hydrogen, nitrogen, halogens, sulphur and phosphorus"
+   }
+  ],
   "topic": "Lassaigne test for elements",
   "question_type": "single",
   "difficulty": "medium",
@@ -2866,6 +3398,15 @@
   "question_number": 52,
   "subject": "Chemistry",
   "chapter": "Solutions",
+  "chapters": [
+   "Solutions"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Solutions",
+    "subtopic": "Molality, molarity, mole fraction and percentage (by volume and by mass)"
+   }
+  ],
   "topic": "Molality of 3 M NaCl solution",
   "question_type": "single",
   "difficulty": "medium",
@@ -2926,6 +3467,15 @@
   "question_number": 53,
   "subject": "Chemistry",
   "chapter": "Coordination Compounds",
+  "chapters": [
+   "Coordination Compounds"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Coordination Compounds",
+    "subtopic": "Basic ideas of crystal field theory"
+   }
+  ],
   "topic": "CFSE order of complexes",
   "question_type": "single",
   "difficulty": "medium",
@@ -2985,7 +3535,16 @@
   "paper_section": null,
   "question_number": 54,
   "subject": "Chemistry",
-  "chapter": "Electrochemistry",
+  "chapter": "Redox Reactions and Electrochemistry",
+  "chapters": [
+   "Redox Reactions and Electrochemistry"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Redox Reactions and Electrochemistry",
+    "subtopic": "Electrolytic and Galvanic cells"
+   }
+  ],
   "topic": "Corrosion statements",
   "question_type": "single",
   "difficulty": "easy",
@@ -3046,6 +3605,15 @@
   "question_number": 55,
   "subject": "Chemistry",
   "chapter": "Chemical Kinetics",
+  "chapters": [
+   "Chemical Kinetics"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Chemical Kinetics",
+    "subtopic": "Elementary and complex reactions"
+   }
+  ],
   "topic": "Energy profile of reaction",
   "question_type": "single",
   "difficulty": "easy",
@@ -3105,7 +3673,16 @@
   "paper_section": null,
   "question_number": 56,
   "subject": "Chemistry",
-  "chapter": "Haloalkanes and Haloarenes",
+  "chapter": "Organic Compounds Containing Halogens",
+  "chapters": [
+   "Organic Compounds Containing Halogens"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Organic Compounds Containing Halogens",
+    "subtopic": "Properties and reactions"
+   }
+  ],
   "topic": "Alkyl halides giving 2-methylbutane",
   "question_type": "single",
   "difficulty": "medium",
@@ -3165,7 +3742,16 @@
   "paper_section": null,
   "question_number": 57,
   "subject": "Chemistry",
-  "chapter": "Redox Reactions",
+  "chapter": "Redox Reactions and Electrochemistry",
+  "chapters": [
+   "Redox Reactions and Electrochemistry"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Redox Reactions and Electrochemistry",
+    "subtopic": "Redox reactions and oxidation number"
+   }
+  ],
   "topic": "Species not undergoing disproportionation",
   "question_type": "single",
   "difficulty": "easy",
@@ -3226,6 +3812,15 @@
   "question_number": 58,
   "subject": "Chemistry",
   "chapter": "Equilibrium",
+  "chapters": [
+   "Equilibrium"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Equilibrium",
+    "subtopic": "Solubility of sparingly soluble salts and solubility product"
+   }
+  ],
   "topic": "Molar solubility of zirconium phosphate",
   "question_type": "single",
   "difficulty": "hard",
@@ -3286,6 +3881,15 @@
   "question_number": 59,
   "subject": "Chemistry",
   "chapter": "Coordination Compounds",
+  "chapters": [
+   "Coordination Compounds"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Coordination Compounds",
+    "subtopic": "Basic ideas of crystal field theory"
+   }
+  ],
   "topic": "Low spin homoleptic complexes",
   "question_type": "single",
   "difficulty": "medium",
@@ -3346,6 +3950,19 @@
   "question_number": 60,
   "subject": "Chemistry",
   "chapter": "Chemical Thermodynamics",
+  "chapters": [
+   "Chemical Thermodynamics"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Chemical Thermodynamics",
+    "subtopic": "Spontaneity of processes"
+   },
+   {
+    "chapter": "Chemical Thermodynamics",
+    "subtopic": "Standard Gibbs energy change and equilibrium constant"
+   }
+  ],
   "topic": "Partial derivatives matched to thermodynamic quantities",
   "question_type": "single",
   "difficulty": "medium",
@@ -3407,6 +4024,15 @@
   "question_number": 61,
   "subject": "Chemistry",
   "chapter": "Biomolecules",
+  "chapters": [
+   "Biomolecules"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Biomolecules",
+    "subtopic": "Aldoses and ketoses"
+   }
+  ],
   "topic": "Structures correlated to D-glyceraldehyde",
   "question_type": "single",
   "difficulty": "medium",
@@ -3467,6 +4093,15 @@
   "question_number": 62,
   "subject": "Chemistry",
   "chapter": "Atomic Structure",
+  "chapters": [
+   "Atomic Structure"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Atomic Structure",
+    "subtopic": "Spectrum of hydrogen atom"
+   }
+  ],
   "topic": "Spectral line for 2px to 2py transition",
   "question_type": "single",
   "difficulty": "easy",
@@ -3526,7 +4161,16 @@
   "paper_section": null,
   "question_number": 63,
   "subject": "Chemistry",
-  "chapter": "s and p Block Elements",
+  "chapter": "p-Block Elements",
+  "chapters": [
+   "p-Block Elements"
+  ],
+  "subtopics": [
+   {
+    "chapter": "p-Block Elements",
+    "subtopic": "General trends in physical and chemical properties"
+   }
+  ],
   "topic": "Acidic oxides and acids formed with water",
   "question_type": "single",
   "difficulty": "medium",
@@ -3586,7 +4230,16 @@
   "paper_section": null,
   "question_number": 64,
   "subject": "Chemistry",
-  "chapter": "Aldehydes and Ketones",
+  "chapter": "Organic Compounds Containing Oxygen",
+  "chapters": [
+   "Organic Compounds Containing Oxygen"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Organic Compounds Containing Oxygen",
+    "subtopic": "Nucleophilic addition to the carbonyl group"
+   }
+  ],
   "topic": "Products of toluene oxidation sequence",
   "question_type": "single",
   "difficulty": "medium",
@@ -3654,6 +4307,15 @@
   "question_number": 65,
   "subject": "Chemistry",
   "chapter": "Hydrocarbons",
+  "chapters": [
+   "Hydrocarbons"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Hydrocarbons",
+    "subtopic": "Classification and isomerism of hydrocarbons"
+   }
+  ],
   "topic": "Alkane with two secondary hydrogens",
   "question_type": "single",
   "difficulty": "medium",
@@ -3714,6 +4376,15 @@
   "question_number": 66,
   "subject": "Chemistry",
   "chapter": "Hydrocarbons",
+  "chapters": [
+   "Hydrocarbons"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Hydrocarbons",
+    "subtopic": "Mechanism of halogenation of alkanes"
+   }
+  ],
   "topic": "Major product of free radical bromination",
   "question_type": "single",
   "difficulty": "medium",
@@ -3773,7 +4444,16 @@
   "paper_section": null,
   "question_number": 67,
   "subject": "Chemistry",
-  "chapter": "Reaction Intermediates",
+  "chapter": "Some Basic Principles of Organic Chemistry",
+  "chapters": [
+   "Some Basic Principles of Organic Chemistry"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Some Basic Principles of Organic Chemistry",
+    "subtopic": "Stability of carbocations and free radicals"
+   }
+  ],
   "topic": "Most stable carbocation",
   "question_type": "single",
   "difficulty": "easy",
@@ -3833,7 +4513,16 @@
   "paper_section": null,
   "question_number": 68,
   "subject": "Chemistry",
-  "chapter": "Amines",
+  "chapter": "Organic Compounds Containing Nitrogen",
+  "chapters": [
+   "Organic Compounds Containing Nitrogen"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Organic Compounds Containing Nitrogen",
+    "subtopic": "Diazonium salts and their importance in synthetic organic chemistry"
+   }
+  ],
   "topic": "Reagents for reduction of compounds to amines",
   "question_type": "single",
   "difficulty": "medium",
@@ -3894,6 +4583,15 @@
   "question_number": 69,
   "subject": "Chemistry",
   "chapter": "Chemical Bonding and Molecular Structure",
+  "chapters": [
+   "Chemical Bonding and Molecular Structure"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "subtopic": "Dipole moment"
+   }
+  ],
   "topic": "Increasing order of dipole moment",
   "question_type": "single",
   "difficulty": "easy",
@@ -3953,6 +4651,15 @@
   "question_number": 70,
   "subject": "Chemistry",
   "chapter": "Chemical Bonding and Molecular Structure",
+  "chapters": [
+   "Chemical Bonding and Molecular Structure"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "subtopic": "Bond order, bond length and bond energy"
+   }
+  ],
   "topic": "Maximum covalency of group 15 element with weakest E-E bond",
   "question_type": "single",
   "difficulty": "easy",
@@ -4013,6 +4720,15 @@
   "question_number": 71,
   "subject": "Chemistry",
   "chapter": "Hydrocarbons",
+  "chapters": [
+   "Hydrocarbons"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Hydrocarbons",
+    "subtopic": "Structure and aromaticity of benzene"
+   }
+  ],
   "topic": "Electrons in benzene-type compound",
   "question_type": "integer",
   "difficulty": "medium",
@@ -4051,7 +4767,16 @@
   "paper_section": null,
   "question_number": 72,
   "subject": "Chemistry",
-  "chapter": "Some Basic Concepts",
+  "chapter": "Solutions",
+  "chapters": [
+   "Solutions"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Solutions",
+    "subtopic": "Molality, molarity, mole fraction and percentage (by volume and by mass)"
+   }
+  ],
   "topic": "Final molarity after mixing NaOH solutions",
   "question_type": "integer",
   "difficulty": "easy",
@@ -4090,7 +4815,16 @@
   "paper_section": null,
   "question_number": 73,
   "subject": "Chemistry",
-  "chapter": "Thermochemistry",
+  "chapter": "Chemical Thermodynamics",
+  "chapters": [
+   "Chemical Thermodynamics"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Chemical Thermodynamics",
+    "subtopic": "Hess's law of constant heat summation"
+   }
+  ],
   "topic": "Standard enthalpy of formation of ethane",
   "question_type": "integer",
   "difficulty": "hard",
@@ -4129,7 +4863,16 @@
   "paper_section": null,
   "question_number": 74,
   "subject": "Chemistry",
-  "chapter": "d and f Block Elements",
+  "chapter": "d- and f-Block Elements",
+  "chapters": [
+   "d- and f-Block Elements"
+  ],
+  "subtopics": [
+   {
+    "chapter": "d- and f-Block Elements",
+    "subtopic": "Colour, catalytic behaviour and magnetic properties of transition elements"
+   }
+  ],
   "topic": "Electrons in 4d orbitals of Nb and Ru",
   "question_type": "integer",
   "difficulty": "easy",
@@ -4169,6 +4912,15 @@
   "question_number": 75,
   "subject": "Chemistry",
   "chapter": "Coordination Compounds",
+  "chapters": [
+   "Coordination Compounds"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Coordination Compounds",
+    "subtopic": "Ligands"
+   }
+  ],
   "topic": "Hydrogen atoms in Ni-dimethylglyoxime complex",
   "question_type": "integer",
   "difficulty": "easy",

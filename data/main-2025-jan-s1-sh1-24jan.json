@@ -1,0 +1,5223 @@
+[
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-01",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 1,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Co-ordinate Geometry",
+    "chapters": [
+      "Co-ordinate Geometry"
+    ],
+    "topic": "Length of arc AB on circle",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: length of arc ab on circle.",
+    "text": "Let circle $C$ be the image of $x^2+y^2-2x+4y-4=0$ in the line $2x-3y+5=0$ and $A$ be the point on $C$ such that $OA$ is parallel to $x$-axis and $A$ lies on the right hand side of the centre $O$ of $C$. If $B(\\alpha,\\beta)$, with $\\beta<4$, lies on $C$ such that the length of the arc $AB$ is $(1/6)^{th}$ of the perimeter of $C$, then $\\beta-\\sqrt3\\alpha$ is equal to:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$3+\\sqrt3$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "4",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$4-\\sqrt3$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "3",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "circles",
+      "image"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Co-ordinate Geometry",
+        "subtopic": "Standard form of equation of a circle"
+      },
+      {
+        "chapter": "Co-ordinate Geometry",
+        "subtopic": "General form of equation of a circle; its radius and centre"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-02",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 2,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Co-ordinate Geometry",
+    "chapters": [
+      "Co-ordinate Geometry",
+      "Three Dimensional Geometry"
+    ],
+    "topic": "Area of triangle ABC",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: area of triangle abc.",
+    "text": "Let in a $\\triangle ABC$, the length of the side $AC$ be $6$, the vertex $B$ be $(1,2,3)$ and the vertices $A$, $C$ lie on the line $\\frac{x-6}3=\\frac{y-7}2=\\frac{z-7}2$. Then the area (in sq. units) of $\\triangle ABC$ is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "17",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "21",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "56",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "42",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "3d geometry",
+      "area"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Three Dimensional Geometry",
+        "subtopic": "Equation of a line in space"
+      },
+      {
+        "chapter": "Three Dimensional Geometry",
+        "subtopic": "Distance between two points in space"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-03",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 3,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Co-ordinate Geometry",
+    "chapters": [
+      "Co-ordinate Geometry"
+    ],
+    "topic": "Product of focal distances",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: product of focal distances.",
+    "text": "Let the product of the focal distances of the point $(\\sqrt3,\\frac12)$ on the ellipse $\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1$, $(a>b)$, be $\\frac74$. Then the absolute difference of the eccentricities of two such ellipses is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$\\frac{1-\\sqrt3}{\\sqrt2}$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$\\frac{3-2\\sqrt2}{2\\sqrt3}$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$\\frac{3-2\\sqrt2}{3\\sqrt2}$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$\\frac{1-2\\sqrt2}{\\sqrt3}$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "ellipse"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Co-ordinate Geometry",
+        "subtopic": "Sections of conics: parabola, ellipse and hyperbola in standard forms"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-04",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 4,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Matrices and Determinants",
+    "chapters": [
+      "Matrices and Determinants"
+    ],
+    "topic": "Value of mu minus 2 lambda",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: value of mu minus 2 lambda.",
+    "text": "If the system of equations $5x+\\lambda y+3z=12$, $2x-y+z=4$, $100x-47y+\\mu z=212$ has infinitely many solutions, then $\\mu-2\\lambda$ is equal to:",
+    "options": [
+      {
+        "key": "1",
+        "text": "57",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "59",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "55",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "56",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "linear equations"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Matrices and Determinants",
+        "subtopic": "Test of consistency of linear equations"
+      },
+      {
+        "chapter": "Matrices and Determinants",
+        "subtopic": "Evaluation of determinants"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-05",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 5,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Binomial Theorem",
+    "chapters": [
+      "Binomial Theorem",
+      "Sequence and Series"
+    ],
+    "topic": "Largest coefficient in binomial expansion",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: largest coefficient in binomial expansion.",
+    "text": "For some $n\\neq10$, let the coefficients of the $5^{th}$, $6^{th}$ and $7^{th}$ terms in the binomial expansion of $(1+x)^{n+4}$ be in an A.P. Then the largest coefficient in the expansion of $(1+x)^{n+4}$ is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "20",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "10",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "35",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "70",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "binomial",
+      "ap"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Binomial Theorem",
+        "subtopic": "General term"
+      },
+      {
+        "chapter": "Sequence and Series",
+        "subtopic": "Arithmetic progression"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-06",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 6,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Complex Numbers and Quadratic Equations",
+    "chapters": [
+      "Complex Numbers and Quadratic Equations"
+    ],
+    "topic": "Product of rational roots",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: product of rational roots.",
+    "text": "The product of all the rational roots of the equation $(x^2-9x+11)^2-(x-4)(x-5)=3$, is equal to:",
+    "options": [
+      {
+        "key": "1",
+        "text": "14",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "21",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "28",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "7",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "quadratic equations"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Complex Numbers and Quadratic Equations",
+        "subtopic": "Quadratic equations in real and complex number systems and their solutions"
+      },
+      {
+        "chapter": "Complex Numbers and Quadratic Equations",
+        "subtopic": "Relations between roots and coefficients"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-07",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 7,
+    "subject": "Maths",
+    "unit": "Vectors & 3D Geometry",
+    "chapter": "Three Dimensional Geometry",
+    "chapters": [
+      "Three Dimensional Geometry"
+    ],
+    "topic": "Distance of point P from Q",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: distance of point p from q.",
+    "text": "Let the line passing through the points $(-1,2,1)$ and parallel to the line $\\frac{x+2}3=\\frac{y-3}2=\\frac{z-4}1$ intersect the line $\\frac{x}{1}=\\frac{y+2}{2}=\\frac{z+5}{?}$ at the point $P$. Then the distance of $P$ from the point $Q(4,-5,1)$ is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "5",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$5\\sqrt5$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$5\\sqrt6$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "10",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "3d geometry"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Stem has a garbled third denominator on the page; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Three Dimensional Geometry",
+        "subtopic": "Equation of a line in space"
+      },
+      {
+        "chapter": "Three Dimensional Geometry",
+        "subtopic": "Distance between two points in space"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-08",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 8,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Co-ordinate Geometry",
+    "chapters": [
+      "Co-ordinate Geometry"
+    ],
+    "topic": "Image point concurrence",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: image point concurrence.",
+    "text": "Let the lines $3x-4y-\\alpha=0$, $8x-11y-33=0$ and $2x-3y+\\lambda=0$ be concurrent. If the image of the point $(1,2)$ in the line $2x-3y+\\lambda=0$ is $\\left(\\frac{57}{13},-\\frac{40}{13}\\right)$, then $|\\alpha\\lambda|$ is equal to:",
+    "options": [
+      {
+        "key": "1",
+        "text": "84",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "113",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "91",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "101",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "concurrence",
+      "image"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Co-ordinate Geometry",
+        "subtopic": "Conditions for concurrence of three lines"
+      },
+      {
+        "chapter": "Co-ordinate Geometry",
+        "subtopic": "Intersection of lines"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-09",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 9,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Complex Numbers and Quadratic Equations",
+    "chapters": [
+      "Complex Numbers and Quadratic Equations"
+    ],
+    "topic": "Value of complex expression",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: value of complex expression.",
+    "text": "Let $\\alpha$ and $\\beta$ are the roots of the equation $2z^2-3z-2i=0$, where $i=\\sqrt{-1}$, then $16\\cdot\\mathrm{Re}\\left(\\frac{\\alpha^{19}+\\beta^{19}+\\alpha^{11}+\\beta^{11}}{\\alpha^{15}+\\beta^{15}}\\right)\\cdot\\mathrm{Im}\\left(\\frac{\\alpha^{19}+\\beta^{19}+\\alpha^{11}+\\beta^{11}}{\\alpha^{15}+\\beta^{15}}\\right)$ is equal to:",
+    "options": [
+      {
+        "key": "1",
+        "text": "441",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "398",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "312",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "409",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "complex numbers"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Complex Numbers and Quadratic Equations",
+        "subtopic": "Algebra of complex numbers"
+      },
+      {
+        "chapter": "Complex Numbers and Quadratic Equations",
+        "subtopic": "Representation of complex numbers in the form a + ib and in a plane"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-10",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 10,
+    "subject": "Maths",
+    "unit": "Statistics & Probability",
+    "chapter": "Statistics and Probability",
+    "chapters": [
+      "Statistics and Probability"
+    ],
+    "topic": "Variance of corrected data",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: variance of corrected data.",
+    "text": "For a statistical data $x_1,x_2,\\ldots,x_{10}$ of $10$ values, a student obtained the mean as $5.5$ and $\\sum_{i=1}^{10}x_i^2=371$. He later found that he had noted two values in the data incorrectly as $4$ and $5$, instead of the correct values $6$ and $8$, respectively. The variance of the corrected data is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "9",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "5",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "7",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "4",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "variance",
+      "statistics"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Statistics and Probability",
+        "subtopic": "Standard deviation, variance and mean deviation for grouped and ungrouped data"
+      },
+      {
+        "chapter": "Statistics and Probability",
+        "subtopic": "Mean, median and mode of grouped and ungrouped data"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-11",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 11,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Integral Calculus",
+    "chapters": [
+      "Integral Calculus",
+      "Co-ordinate Geometry"
+    ],
+    "topic": "Area of region bounded by inequalities",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: area of region bounded by inequalities.",
+    "text": "The area of the region $\\{(x,y): x^2+4x+2\\le y\\le|x+2|\\}$ is equal to:",
+    "options": [
+      {
+        "key": "1",
+        "text": "7",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "5",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$\\frac{24}5$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$\\frac{20}3$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "area"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Integral Calculus",
+        "subtopic": "Determining areas of regions bounded by simple curves in standard forms"
+      },
+      {
+        "chapter": "Co-ordinate Geometry",
+        "subtopic": "Standard form of equation of a circle"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-12",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 12,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Sequence and Series",
+    "chapters": [
+      "Sequence and Series"
+    ],
+    "topic": "Absolute difference of 20th and 15th terms",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: absolute difference of 20th and 15th terms.",
+    "text": "Let $S_n=\\frac1{1}+\\frac1{1+2}+\\frac1{1+2+3}+\\frac1{1+2+3+4}+\\ldots$ upto $n$ terms. If the sum of the first six terms of an A.P. with first term $-p$ and common difference $p$ is $\\sqrt{2026\\,S_{2025}}$, then the absolute difference between $20^{th}$ and $15^{th}$ terms of the A.P. is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "20",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "90",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "45",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "25",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "series",
+      "ap"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Sequence and Series",
+        "subtopic": "Arithmetic progression"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-13",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 13,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Limit, Continuity and Differentiability",
+    "chapters": [
+      "Limit, Continuity and Differentiability",
+      "Sets, Relations and Functions"
+    ],
+    "topic": "Value of 6 f(...) functional equation",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: value of 6 f(...) functional equation.",
+    "text": "Let $f:R\\setminus\\{0\\}\\to R$ be a function such that $f(x)-6f\\left(\\frac1x\\right)=\\frac{35}{3x}-\\frac52$. If $\\lim_{x\\to0}\\left(\\frac1{\\alpha x}+f(x)\\right)=\\beta$; $\\alpha,\\beta\\in R$, then $\\alpha+2\\beta$ is equal to:",
+    "options": [
+      {
+        "key": "1",
+        "text": "5",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "3",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "4",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "6",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "limits",
+      "functional equation"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Limit, Continuity and Differentiability",
+        "subtopic": "Limits"
+      },
+      {
+        "chapter": "Sets, Relations and Functions",
+        "subtopic": "Functions"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-14",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 14,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Integral Calculus",
+    "chapters": [
+      "Integral Calculus"
+    ],
+    "topic": "Relation of integrals I(m,n)",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: relation of integrals i(m,n).",
+    "text": "Let $I(m,n)=\\int_0^1x^{m-1}(1-x)^{n-1}dx$, $m,n>0$. Then $I(9,14)+I(10,13)$ is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$I(19,27)$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$I(9,1)$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$I(1,13)$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$I(9,13)$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "beta function",
+      "definite integral"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Integral Calculus",
+        "subtopic": "Evaluation of definite integrals"
+      },
+      {
+        "chapter": "Integral Calculus",
+        "subtopic": "Properties of definite integrals"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-15",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 15,
+    "subject": "Maths",
+    "unit": "Statistics & Probability",
+    "chapter": "Statistics and Probability",
+    "chapters": [
+      "Statistics and Probability"
+    ],
+    "topic": "Probability A wins",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: probability a wins.",
+    "text": "$A$ and $B$ alternately throw a pair of dice. $A$ wins if he throws a sum of $5$ before $B$ throws a sum of $8$, and $B$ wins if he throws a sum of $8$ before $A$ throws a sum of $5$. The probability that $A$ wins if $A$ makes the first throw, is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$\\frac8{17}$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$\\frac9{19}$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$\\frac9{17}$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$\\frac8{19}$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "probability"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Statistics and Probability",
+        "subtopic": "Probability of an event"
+      },
+      {
+        "chapter": "Statistics and Probability",
+        "subtopic": "Multiplication theorem of probability"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-16",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 16,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Sequence and Series",
+    "chapters": [
+      "Sequence and Series"
+    ],
+    "topic": "Value of 8 f sum",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: value of 8 f sum.",
+    "text": "Let $f(x)=\\frac{x^2-2x+16}{2^{2x+1}+2^{x+1}\\cdot32}$. Then the value of $8\\left(f\\left(\\frac1{15}\\right)+f\\left(\\frac2{15}\\right)+\\ldots+f\\left(\\frac{59}{15}\\right)\\right)$ is equal to:",
+    "options": [
+      {
+        "key": "1",
+        "text": "92",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "118",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "102",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "108",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "series"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Sequence and Series",
+        "subtopic": "Geometric progression"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-17",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 17,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Differential Equations",
+    "chapters": [
+      "Differential Equations"
+    ],
+    "topic": "Value of y at sqrt3",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: value of y at sqrt3.",
+    "text": "Let $y=y(x)$ be the solution of the differential equation $(xy-5x^2\\sqrt{1+x^2})dx+(1+x^2)dy=0$, $y(0)=0$. Then $y(\\sqrt3)$ is equal to:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$\\frac{\\sqrt{15}}2$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$\\frac{5\\sqrt3}2$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$2\\sqrt2$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$\\sqrt{\\frac{14}3}$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "differential equations",
+      "linear"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Differential Equations",
+        "subtopic": "Solution of linear differential equations of the type dy/dx + p(x)y = q(x)"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-18",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 18,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Limit, Continuity and Differentiability",
+    "chapters": [
+      "Limit, Continuity and Differentiability"
+    ],
+    "topic": "Limit of cosec expression",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: limit of cosec expression.",
+    "text": "$\\lim_{x\\to0}\\mathrm{cosec}\\,x\\left(\\sqrt{2\\cos^2x+3\\cos x}-\\sqrt{\\cos^2x+\\sin x+4}\\right)$ is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "0",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$\\frac1{\\sqrt{15}}$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$\\frac1{2\\sqrt5}$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$\\frac1{2\\sqrt5}$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "limits"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Options (3) and (4) look alike on the page; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Limit, Continuity and Differentiability",
+        "subtopic": "Limits"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-19",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 19,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Limit, Continuity and Differentiability",
+    "chapters": [
+      "Limit, Continuity and Differentiability",
+      "Integral Calculus"
+    ],
+    "topic": "Area of largest rectangle inscribed in region",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: area of largest rectangle inscribed in region.",
+    "text": "Consider the region $R=\\{(x,y): x\\le9-\\frac{11}4x^2, x\\ge0\\}$. The area, of the largest rectangle of sides parallel to the coordinate axes and inscribed in $R$, is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "730/119",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "625/111",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "821/123",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "567/121",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "maxima",
+      "area"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Limit, Continuity and Differentiability",
+        "subtopic": "Maxima and minima of functions of one variable"
+      },
+      {
+        "chapter": "Integral Calculus",
+        "subtopic": "Determining areas of regions bounded by simple curves in standard forms"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-20",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 20,
+    "subject": "Maths",
+    "unit": "Vectors & 3D Geometry",
+    "chapter": "Vector Algebra",
+    "chapters": [
+      "Vector Algebra"
+    ],
+    "topic": "Value of modulus of C vector",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: value of modulus of c vector.",
+    "text": "Let $\\vec a=\\hat i+2\\hat j+3\\hat k$, $\\vec b=3\\hat i+\\hat j-\\hat k$ and $\\vec c$ be three vectors such that $\\vec c$ is coplanar with $\\vec a$ and $\\vec b$. If the vector $\\vec C$ is perpendicular to $\\vec b$ and $\\vec a\\cdot\\vec c=5$, then $|\\vec c|$ is equal to:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$\\sqrt{\\frac16}$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$\\frac1{3\\sqrt2}$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "16",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "18",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "vectors"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Vector Algebra",
+        "subtopic": "Scalar product"
+      },
+      {
+        "chapter": "Vector Algebra",
+        "subtopic": "Components of a vector in two dimensions and three-dimensional space"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-21",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 21,
+    "subject": "Maths",
+    "unit": "Statistics & Probability",
+    "chapter": "Permutations and Combinations",
+    "chapters": [
+      "Permutations and Combinations",
+      "Sets, Relations and Functions"
+    ],
+    "topic": "Ordered pairs with x dividing y",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: ordered pairs with x dividing y.",
+    "text": "Let $S=\\{p_1,p_2,\\ldots,p_{10}\\}$ be the set of first ten prime numbers. Let $A=S\\cup P$, where $P$ is the set of all possible products of distinct elements of $S$. Then the number of all ordered pairs $(x,y)$, $x\\in S$, $y\\in A$, such that $x$ divides $y$, is ______.",
+    "options": [],
+    "correct_answer": [
+      "5120"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "counting",
+      "primes"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Numeric stem partly read; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Permutations and Combinations",
+        "subtopic": "Fundamental principle of counting"
+      },
+      {
+        "chapter": "Sets, Relations and Functions",
+        "subtopic": "Sets and their representation"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-22",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 22,
+    "subject": "Maths",
+    "unit": "Trigonometry",
+    "chapter": "Complex Numbers and Quadratic Equations",
+    "chapters": [
+      "Complex Numbers and Quadratic Equations",
+      "Trigonometry"
+    ],
+    "topic": "Value of alpha squared plus beta squared",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: value of alpha squared plus beta squared.",
+    "text": "If for some $\\alpha,\\beta$; $\\alpha\\le\\beta$, $\\alpha+\\beta-8$ and $\\sec^2(\\tan^{-1}\\alpha)+\\mathrm{cosec}^2(\\cot^{-1}\\beta)-36$, then $\\alpha^2+\\beta^2$ is ______.",
+    "options": [],
+    "correct_answer": [
+      "14"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "inverse trig"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Numeric stem partly read; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Trigonometry",
+        "subtopic": "Inverse trigonometrical functions and their properties"
+      },
+      {
+        "chapter": "Complex Numbers and Quadratic Equations",
+        "subtopic": "Relations between roots and coefficients"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-23",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 23,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Matrices and Determinants",
+    "chapters": [
+      "Matrices and Determinants"
+    ],
+    "topic": "Value of alpha squared plus beta squared plus gamma squared",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: value of alpha squared plus beta squared plus gamma squared.",
+    "text": "Let $A$ be a $3\\times3$ matrix such that $X^TAX=O$ for all nonzero $3\\times1$ matrices $X$. If $A\\begin{bmatrix}1\\\\1\\\\1\\end{bmatrix}=\\begin{bmatrix}1\\\\4\\\\-5\\end{bmatrix}$, $A\\begin{bmatrix}1\\\\2\\\\1\\end{bmatrix}=\\begin{bmatrix}0\\\\4\\\\-8\\end{bmatrix}$ and $\\det(\\mathrm{adj}(2(A+1)))=2^{\\alpha}3^{\\beta}5^{\\gamma}$, $\\alpha,\\beta,\\gamma\\in N$, then $\\alpha^2+\\beta^2+\\gamma^2$ is ______.",
+    "options": [],
+    "correct_answer": [
+      "44"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "matrices",
+      "determinants"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Numeric stem partly read; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Matrices and Determinants",
+        "subtopic": "Matrices and algebra of matrices"
+      },
+      {
+        "chapter": "Matrices and Determinants",
+        "subtopic": "Adjoint and inverse of a square matrix"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-24",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 24,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Differential Equations",
+    "chapters": [
+      "Differential Equations",
+      "Integral Calculus"
+    ],
+    "topic": "Value of f at 2",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: value of f at 2.",
+    "text": "Let $f$ be a differentiable function such that $2(x+2)^2f(x)-3(x+2)^2=10\\int_0^x(t+2)f(t)dt$, $x\\ge0$. Then $f(2)$ is equal to ______.",
+    "options": [],
+    "correct_answer": [
+      "19"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "differential equations",
+      "integrals"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Numeric stem partly read; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Differential Equations",
+        "subtopic": "Solution of linear differential equations of the type dy/dx + p(x)y = q(x)"
+      },
+      {
+        "chapter": "Integral Calculus",
+        "subtopic": "Fundamental theorem of calculus"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-25",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 25,
+    "subject": "Maths",
+    "unit": "Statistics & Probability",
+    "chapter": "Permutations and Combinations",
+    "chapters": [
+      "Permutations and Combinations"
+    ],
+    "topic": "Number of 3-digit numbers divisible by 2 and 3 but not 4 and 9",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: number of 3-digit numbers divisible by 2 and 3 but not 4 and 9.",
+    "text": "The number of $3$-digit numbers, that are divisible by $2$ and $3$, but not divisible by $4$ and $9$, is ______.",
+    "options": [],
+    "correct_answer": [
+      "125"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "counting",
+      "divisibility"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Numeric stem partly read; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Permutations and Combinations",
+        "subtopic": "Fundamental principle of counting"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-26",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 26,
+    "subject": "Physics",
+    "unit": "Modern Physics",
+    "chapter": "Atoms and Nuclei",
+    "chapters": [
+      "Atoms and Nuclei",
+      "Dual Nature of Matter and Radiation"
+    ],
+    "topic": "Wavelength of emitted radiation in Bohr atom",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: wavelength of emitted radiation in bohr atom.",
+    "text": "During the transition of electron from state A to state C of a Bohr atom, the wavelength of emitted radiation is $2000$ Å and it becomes $6000$ Å when the electron jumps from state B to state C. Then the wavelength of the radiation emitted during the transition of electrons from state A to state B is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "4000 Å",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "2000 Å",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "3000 Å",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "6000 Å",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "bohr model",
+      "spectra"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Atoms and Nuclei",
+        "subtopic": "Bohr model"
+      },
+      {
+        "chapter": "Atoms and Nuclei",
+        "subtopic": "Energy levels"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-27",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 27,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electronic Devices",
+    "chapters": [
+      "Electronic Devices"
+    ],
+    "topic": "Statements on solar cell and LED",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: statements on solar cell and led.",
+    "text": "Consider the following statements: A. The junction area of solar cell is made very narrow compared to a photo diode. B. Solar cells are not connected with any external bias. C. LED is made of lightly doped p-n junction. D. Increase of forward current results in continuous increase of LED light intensity. E. LEDs have to be connected in forward bias for emission of light. Choose the correct answer from the options given below:",
+    "options": [
+      {
+        "key": "1",
+        "text": "B, E Only",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "B, D, E Only",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "A, C Only",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "A, C, E Only",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "led",
+      "solar cell"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electronic Devices",
+        "subtopic": "Solar cell"
+      },
+      {
+        "chapter": "Electronic Devices",
+        "subtopic": "I-V characteristics of LED"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-28",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 28,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electromagnetic Induction and Alternating Currents",
+    "chapters": [
+      "Electromagnetic Induction and Alternating Currents",
+      "Oscillations and Waves"
+    ],
+    "topic": "RMS current of alternating current",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: rms current of alternating current.",
+    "text": "An alternating current is given by $I=I_A\\sin\\omega t+I_B\\cos\\omega t$. The r.m.s. current will be:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$\\frac{|I_A+I_B|}{\\sqrt2}$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$\\sqrt{\\frac{I_A^2+I_B^2}{2}}$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$\\sqrt{I_A^2+I_B^2}$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$\\sqrt{\\frac{I_A^2+I_B^2}{2}}$ (see PDF)",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "rms current"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electromagnetic Induction and Alternating Currents",
+        "subtopic": "Peak and RMS value of alternating current and voltage"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-29",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 29,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Laws of Motion",
+    "chapters": [
+      "Laws of Motion",
+      "Work, Energy and Power"
+    ],
+    "topic": "Coefficient of friction on banked road",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: coefficient of friction on banked road.",
+    "text": "A car of mass $m$ moves on a banked road having radius $r$ and banking angle $\\theta$. To avoid slipping from banked road, the maximum permissible speed of the car is $v_0$. The coefficient of friction $\\mu$ between the wheels of the car and the banked road is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$\\mu=\\frac{v_0^2+rg\\tan\\theta}{rg+v_0^2\\tan\\theta}$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$\\mu=\\frac{v_0^2-rg\\tan\\theta}{rg-v_0^2\\tan\\theta}$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$\\mu=\\frac{v_0^2-rg\\tan\\theta}{rg+v_0^2\\tan\\theta}$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$\\mu=\\frac{v_0^2+rg\\tan\\theta}{rg-v_0^2\\tan\\theta}$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "banking",
+      "friction"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Option text partly read from the page image; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Laws of Motion",
+        "subtopic": "Vehicle on a banked road"
+      },
+      {
+        "chapter": "Laws of Motion",
+        "subtopic": "Static friction"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-30",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 30,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Gravitation",
+    "chapters": [
+      "Gravitation"
+    ],
+    "topic": "Change in time period of second satellite",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: change in time period of second satellite.",
+    "text": "A satellite is launched into a circular orbit of radius $R$ around the earth. A second satellite is launched into an orbit of radius $1.03R$. The time period of revolution of the second satellite is larger than the first one approximately by:",
+    "options": [
+      {
+        "key": "1",
+        "text": "9%",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "3%",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "4.5%",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "2.5%",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "satellite",
+      "kepler"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Gravitation",
+        "subtopic": "Motion of a satellite"
+      },
+      {
+        "chapter": "Gravitation",
+        "subtopic": "Time period and energy of a satellite"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-31",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 31,
+    "subject": "Physics",
+    "unit": "Thermodynamics & Kinetic Theory",
+    "chapter": "Thermodynamics",
+    "chapters": [
+      "Thermodynamics"
+    ],
+    "topic": "Process statements for ideal gas",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: process statements for ideal gas.",
+    "text": "An ideal gas goes from an initial state to final state. During the process, the pressure of gas increases linearly with temperature. A. The work done by gas during the process is zero. B. The heat added to gas is different from change in its internal energy. C. The volume of the gas is increased. D. The internal energy of the gas is increased. E. The process is isochoric (constant volume process). Choose the correct answer from the options given below:",
+    "options": [
+      {
+        "key": "1",
+        "text": "E Only",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "A, B, C, D Only",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "A, D, E Only",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "A, C Only",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "thermodynamics"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Thermodynamics",
+        "subtopic": "First law of thermodynamics"
+      },
+      {
+        "chapter": "Thermodynamics",
+        "subtopic": "Heat, work and internal energy"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-32",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 32,
+    "subject": "Physics",
+    "unit": "Thermodynamics & Kinetic Theory",
+    "chapter": "Dual Nature of Matter and Radiation",
+    "chapters": [
+      "Dual Nature of Matter and Radiation"
+    ],
+    "topic": "Electron in electric field de Broglie wavelength",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: electron in electric field de broglie wavelength.",
+    "text": "An electron of mass $m$ with an initial velocity $\\vec v=v_0\\hat i$ ($v_0>0$) enters an electric field $\\vec E=-E_0\\hat k$. If the initial de Broglie wavelength is $\\lambda_0$, the value after time $t$ would be:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$\\frac{\\lambda_0}{\\sqrt{1+\\frac{e^2E_0^2t^2}{m^2v_0^2}}}$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$\\lambda_0\\sqrt{1+\\frac{e^2E_0^2t^2}{m^2v_0^2}}$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$\\frac{\\lambda_0}{\\sqrt{1-\\frac{e^2E_0^2t^2}{m^2v_0^2}}}$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$\\lambda_0$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "de broglie",
+      "electric field"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Dual Nature of Matter and Radiation",
+        "subtopic": "de Broglie relation"
+      },
+      {
+        "chapter": "Dual Nature of Matter and Radiation",
+        "subtopic": "Matter waves"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-33",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 33,
+    "subject": "Physics",
+    "unit": "Optics & Waves",
+    "chapter": "Optics",
+    "chapters": [
+      "Optics"
+    ],
+    "topic": "Relative decrease in focal length of lens",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: relative decrease in focal length of lens.",
+    "text": "What is the relative decrease in focal length of a lens for an increase in optical power by $0.1$ D from $2.5$ D? ['D' stands for dioptre]",
+    "options": [
+      {
+        "key": "1",
+        "text": "0.01",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "0.04",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "0.40",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "0.1",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "lens power"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Optics",
+        "subtopic": "Power of a lens"
+      },
+      {
+        "chapter": "Optics",
+        "subtopic": "Thin lens formula"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-34",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 34,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Work, Energy and Power",
+    "chapters": [
+      "Work, Energy and Power"
+    ],
+    "topic": "Value of beta in force law",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: value of beta in force law.",
+    "text": "A force $\\vec F=\\alpha+\\beta x^2$ acts on an object in the $x$-direction. The work done by the force is $5$ J when the object is displaced by $1$ m. If the constant $\\alpha=1$ N then $\\beta$ will be:",
+    "options": [
+      {
+        "key": "1",
+        "text": "15 N/m$^2$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "12 N/m$^2$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "8 N/m$^2$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "10 N/m$^2$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "work variable force"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Work, Energy and Power",
+        "subtopic": "Work done by a variable force"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-35",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 35,
+    "subject": "Physics",
+    "unit": "Optics & Waves",
+    "chapter": "Optics",
+    "chapters": [
+      "Optics"
+    ],
+    "topic": "Radius of curvature of silver coated plano-convex lens",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: radius of curvature of silver coated plano-convex lens.",
+    "text": "A thin plano convex lens made of glass of refractive index $1.5$ is immersed in a liquid of refractive index $1.2$. When the plane side of the lens is silver coated for complete reflection, the lens immersed in the liquid behaves like a concave mirror of focal length $0.2$ m. The radius of curvature of the curved surface of the lens is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "0.20 m",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "0.25 m",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "0.15 m",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "0.10 m",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "lens",
+      "mirror"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Optics",
+        "subtopic": "Lens maker's formula"
+      },
+      {
+        "chapter": "Optics",
+        "subtopic": "Spherical mirrors and mirror formula"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-36",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 36,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Oscillations and Waves",
+    "chapters": [
+      "Oscillations and Waves",
+      "Kinematics"
+    ],
+    "topic": "Ratio of distances for SHM particle",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: ratio of distances for shm particle.",
+    "text": "A particle is executing simple harmonic motion with time period $2$ s and amplitude $1$ cm. If $D$ and $d$ are the total distance and displacement covered by the particle in $12.5$ s, then $\\frac Dd$ is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$\\frac{16}{5}$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "10",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$\\frac{15}{4}$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "25",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "shm"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Oscillations and Waves",
+        "subtopic": "Oscillations and periodic motion"
+      },
+      {
+        "chapter": "Oscillations and Waves",
+        "subtopic": "Simple harmonic motion (S.H.M.) and its equation"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-37",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 37,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Work, Energy and Power",
+    "chapters": [
+      "Work, Energy and Power",
+      "Properties of Solids and Liquids"
+    ],
+    "topic": "Work to break big drop into smaller drops",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: work to break big drop into smaller drops.",
+    "text": "The amount of work done to break a big water drop of radius $R$ into $27$ small drops of equal radius is $10$ J. The work done required to break the same big drop into $64$ small drops of equal radius will be:",
+    "options": [
+      {
+        "key": "1",
+        "text": "15 J",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "5 J",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "20 J",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "10 J",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "surface energy"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Properties of Solids and Liquids",
+        "subtopic": "Surface energy and surface tension"
+      },
+      {
+        "chapter": "Properties of Solids and Liquids",
+        "subtopic": "Application of surface tension: drops, bubbles and capillary rise"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-38",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 38,
+    "subject": "Physics",
+    "unit": "Optics & Waves",
+    "chapter": "Optics",
+    "chapters": [
+      "Optics"
+    ],
+    "topic": "Ratio of focal lengths of plano-convex lenses",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: ratio of focal lengths of plano-convex lenses.",
+    "text": "A plano-convex lens having radius of curvature of first surface $2$ cm exhibits focal length of $f_1$ in air. Another plano-convex lens with first surface radius of curvature $3$ cm has focal length of $f_2$ when it is immersed in a liquid of refractive index $1.2$. If both the lenses are made of same glass of refractive index $1.5$, the ratio of $f_1$ and $f_2$ will be:",
+    "options": [
+      {
+        "key": "1",
+        "text": "1:2",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "1:3",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "3:5",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "2:3",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "lens maker"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Optics",
+        "subtopic": "Lens maker's formula"
+      },
+      {
+        "chapter": "Optics",
+        "subtopic": "Refraction at plane and spherical surfaces"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-39",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 39,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Properties of Solids and Liquids",
+    "chapters": [
+      "Properties of Solids and Liquids"
+    ],
+    "topic": "Surface tension of liquid from bubble pressure",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: surface tension of liquid from bubble pressure.",
+    "text": "An air bubble of radius $0.1$ cm lies at a depth of $20$ cm below the free surface of a liquid of density $1000$ kg/m$^3$. If the pressure inside the bubble is $2100$ N/m$^2$ greater than the atmospheric pressure, then the surface tension of the liquid in SI unit is (use $g=10$ m/s$^2$):",
+    "options": [
+      {
+        "key": "1",
+        "text": "0.1",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "0.05",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "0.02",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "0.25",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "surface tension",
+      "fluid pressure"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Properties of Solids and Liquids",
+        "subtopic": "Excess of pressure across a curved surface"
+      },
+      {
+        "chapter": "Properties of Solids and Liquids",
+        "subtopic": "Pressure due to a fluid column"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-40",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 40,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Rotational Motion",
+    "chapters": [
+      "Rotational Motion",
+      "Laws of Motion",
+      "Work, Energy and Power"
+    ],
+    "topic": "Linear acceleration of rolling cylinder",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: linear acceleration of rolling cylinder.",
+    "text": "A uniform solid cylinder of mass $m$ and radius $r$ rolls along an inclined rough plane of inclination $45^\\circ$. If it starts to roll from rest from the top of the plane then the linear acceleration of the cylinder's axis will be:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$\\frac1{\\sqrt2}g$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$\\frac1{3\\sqrt2}g$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$\\frac{\\sqrt2g}{3}$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$\\sqrt2g$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "rolling motion"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Rotational Motion",
+        "subtopic": "Moment of inertia of simple geometrical objects"
+      },
+      {
+        "chapter": "Laws of Motion",
+        "subtopic": "Rolling friction"
+      },
+      {
+        "chapter": "Work, Energy and Power",
+        "subtopic": "Conservation of mechanical energy"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-41",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 41,
+    "subject": "Physics",
+    "unit": "Optics & Waves",
+    "chapter": "Optics",
+    "chapters": [
+      "Optics"
+    ],
+    "topic": "Least number of bright fringes for coincidence",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: least number of bright fringes for coincidence.",
+    "text": "The Young's double slit interference experiment is performed using light consisting of $480$ nm and $600$ nm wavelengths to form interference patterns. The least number of the bright fringes of $480$ nm light that are required for the first coincidence with the bright fringes formed by $600$ nm light is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "5",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "4",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "6",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "8",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "interference",
+      "coincidence"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Optics",
+        "subtopic": "Interference: Young's double-slit experiment and fringe width"
+      },
+      {
+        "chapter": "Optics",
+        "subtopic": "Coherent sources and sustained interference of light"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-42",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 42,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electrostatics",
+    "chapters": [
+      "Electrostatics"
+    ],
+    "topic": "Potential energy stored between parallel plates",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: potential energy stored between parallel plates.",
+    "text": "A parallel plate capacitor was made with two rectangular plates, each with a length of $l=3$ cm and breath of $b=1$ cm. The distance between the plates is $3\\mu$m. Out of the following, which are the ways to increase the capacitance by a factor of $10$? A. $l=30$ cm, $b=1$ cm, $d=1\\mu$m B. $l=3$ cm, $b=1$ cm, $d=30\\mu$m C. $l=6$ cm, $b=5$ cm, $d=3\\mu$m D. $l=1$ cm, $b=5$ cm, $d=10\\mu$m E. $l=5$ cm, $b=2$ cm, $d=1\\mu$m. Choose the correct answer from the options given below:",
+    "options": [
+      {
+        "key": "1",
+        "text": "A only",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "C only",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "B and D only",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "C and E only",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "capacitance"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electrostatics",
+        "subtopic": "Capacitance of a parallel plate capacitor with and without dielectric"
+      },
+      {
+        "chapter": "Electrostatics",
+        "subtopic": "Capacitors and capacitance"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-43",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 43,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electrostatics",
+    "chapters": [
+      "Electrostatics"
+    ],
+    "topic": "Potential energy stored in capacitor",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: potential energy stored in capacitor.",
+    "text": "Consider a parallel plate capacitor of area $A$ (of each plate) and separation $d$ between the plates. If $E$ is the electric field and $\\varepsilon_0$ is the permittivity of free space between the plates, then potential energy stored in the capacitor is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$\\varepsilon_0E^2Ad$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$\\frac12\\varepsilon_0E^2Ad$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$\\frac14\\varepsilon_0E^2Ad$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$\\frac34\\varepsilon_0E^2Ad$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "capacitor energy"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electrostatics",
+        "subtopic": "Energy stored in a capacitor"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-44",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 44,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Laws of Motion",
+    "chapters": [
+      "Laws of Motion",
+      "Work, Energy and Power",
+      "Rotational Motion",
+      "Kinematics"
+    ],
+    "topic": "Angular momentum of projectile at maximum height",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: angular momentum of projectile at maximum height.",
+    "text": "An object of mass $m$ is projected from origin in a vertical $xy$ plane at an angle $45^\\circ$ with the $x$ axis with an initial velocity $v_0$. The magnitude and direction of the angular momentum of the object with respect to origin, when it reaches at the maximum height, will be [$g$ is acceleration due to gravity]:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$\\frac{mv_0^3}{2\\sqrt2g}$ along negative $z$-axis",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$\\frac{mv_0^3}{4\\sqrt2g}$ along positive $z$-axis",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$\\frac{mv_0^3}{4\\sqrt2g}$ along negative $z$-axis",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$\\frac{mv_0^3}{2\\sqrt2g}$ along positive $z$-axis",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "angular momentum",
+      "projectile"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Rotational Motion",
+        "subtopic": "Angular momentum"
+      },
+      {
+        "chapter": "Kinematics",
+        "subtopic": "Projectile motion"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-45",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 45,
+    "subject": "Physics",
+    "unit": "Units & Measurements",
+    "chapter": "Units and Measurements",
+    "chapters": [
+      "Units and Measurements"
+    ],
+    "topic": "Experimental expression with significant digits",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: experimental expression with significant digits.",
+    "text": "For an experimental expression $y=\\frac{32.3\\times1125}{27.4}$, where all the digits are significant. Then to report the value of $y$ we should write:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$y=1326.19$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$y=1330$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$y=1326.186$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$y=1326.2$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "significant figures"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Units and Measurements",
+        "subtopic": "Significant figures"
+      },
+      {
+        "chapter": "Units and Measurements",
+        "subtopic": "Errors in measurements"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-46",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 46,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electromagnetic Induction and Alternating Currents",
+    "chapters": [
+      "Electromagnetic Induction and Alternating Currents",
+      "Magnetic Effects of Current and Magnetism"
+    ],
+    "topic": "Magnetic field at centre of square loop",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: magnetic field at centre of square loop.",
+    "text": "A current of $5$ A exists in a square loop of side $\\frac1{\\sqrt2}$ m. Then the magnitude of the magnetic field $B$ at the centre of the square loop will be $p\\times10^{-6}$ T, where value of $p$ is ______. [Take $\\mu_0=4\\pi\\times10^{-7}$ TmA$^{-1}$].",
+    "options": [],
+    "correct_answer": [
+      "8"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "biot savart"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Numeric stem partly read; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Magnetic Effects of Current and Magnetism",
+        "subtopic": "Biot-Savart law and its application to a current-carrying circular loop"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-47",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 47,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electrostatics",
+    "chapters": [
+      "Electrostatics"
+    ],
+    "topic": "Flux through shaded region of square loop",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: flux through shaded region of square loop.",
+    "text": "A square loop of sides $a=1$ m is held normally in front of a point charge $q=1$ C. The flux of the electric field through the shaded region is $\\frac5p\\times\\frac1{\\varepsilon_0}\\frac{\\mathrm{Nm}^2}{\\mathrm C}$, where the value of $p$ is ______.",
+    "options": [],
+    "correct_answer": [
+      "48"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-47.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-47.webp"
+    ],
+    "tags": [
+      "gauss law",
+      "flux"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. Figure not extracted; see PDF.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electrostatics",
+        "subtopic": "Electric flux"
+      },
+      {
+        "chapter": "Electrostatics",
+        "subtopic": "Gauss's law and its applications"
+      }
+    ],
+    "image_display_width_px": 49
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-48",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 48,
+    "subject": "Physics",
+    "unit": "Thermodynamics & Kinetic Theory",
+    "chapter": "Thermodynamics",
+    "chapters": [
+      "Thermodynamics",
+      "Kinetic Theory of Gases"
+    ],
+    "topic": "Ratio of heat and internal energy for monatomic gas",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: ratio of heat and internal energy for monatomic gas.",
+    "text": "The temperature of $1$ mole of an ideal monatomic gas is increased by $50^\\circ$C at constant pressure. The total heat added and change in internal energy are $E_1$ and $E_2$, respectively. If $\\frac{E_1}{E_2}=\\frac{x}{5}$, then the value of $x$ is ______.",
+    "options": [],
+    "correct_answer": [
+      "15"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "thermodynamics",
+      "ideal gas"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Numeric stem partly read; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Thermodynamics",
+        "subtopic": "First law of thermodynamics"
+      },
+      {
+        "chapter": "Kinetic Theory of Gases",
+        "subtopic": "Applications to specific heat capacities of gases"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-49",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 49,
+    "subject": "Physics",
+    "unit": "Units & Measurements",
+    "chapter": "Units and Measurements",
+    "chapters": [
+      "Units and Measurements"
+    ],
+    "topic": "Least count of screw gauge",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: least count of screw gauge.",
+    "text": "The least count of a screw gauge is $0.01$ mm. If the pitch is increased by $75\\%$ and number of divisions on the circular scale is reduced by $50\\%$, the new least count will be ______ $\\times10^{-3}$ mm.",
+    "options": [],
+    "correct_answer": [
+      "35"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "least count"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Numeric stem partly read; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Units and Measurements",
+        "subtopic": "Least count"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-50",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 50,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Current Electricity",
+    "chapters": [
+      "Current Electricity"
+    ],
+    "topic": "Equivalent resistance of equilateral triangle wire",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: equivalent resistance of equilateral triangle wire.",
+    "text": "A wire of resistance $9\\,\\Omega$ is bent to form an equilateral triangle. Then the equivalent resistance across any two vertices will be ______ ohm.",
+    "options": [],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "resistance"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Numeric stem partly read; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Current Electricity",
+        "subtopic": "Series and parallel combinations of resistors"
+      },
+      {
+        "chapter": "Current Electricity",
+        "subtopic": "Electrical resistance"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-51",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 51,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Biomolecules",
+    "chapters": [
+      "Biomolecules"
+    ],
+    "topic": "Ribose sugar characteristics in DNA",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: ribose sugar characteristics in dna.",
+    "text": "The carbohydrate 'Ribose' present in DNA, is: A. a pentose sugar B. present in pyranose form C. in 'D' configuration D. a reducing sugar, when free E. in $\\alpha$-anomeric form. Choose the correct answer from the options given below:",
+    "options": [
+      {
+        "key": "1",
+        "text": "A, D and E Only",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "A, C and D Only",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "A, B and E Only",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "B, D and E Only",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "carbohydrates"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Biomolecules",
+        "subtopic": "Classification of carbohydrates"
+      },
+      {
+        "chapter": "Biomolecules",
+        "subtopic": "Aldoses and ketoses"
+      },
+      {
+        "chapter": "Biomolecules",
+        "subtopic": "Monosaccharides: glucose and fructose"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-52",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 52,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Organic Compounds Containing Halogens",
+    "chapters": [
+      "Organic Compounds Containing Halogens"
+    ],
+    "topic": "Statements on SN1 and SN2 conversion",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: statements on sn1 and sn2 conversion.",
+    "text": "Given below are two statements: Statement I: The conversion proceeds well in the less polar medium. Statement II: The conversion proceeds well in the more polar medium. In the light of the above statements, choose the correct answer from the options given below.",
+    "options": [
+      {
+        "key": "1",
+        "text": "Both Statement I and Statement II are true",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "Statement I is true but Statement II is false",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "Statement I is false but Statement II is true",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "Both Statement I and Statement II are false",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-52.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-52.webp"
+    ],
+    "tags": [
+      "substitution",
+      "solvent effects"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Organic Compounds Containing Halogens",
+        "subtopic": "Mechanisms of substitution reactions"
+      }
+    ],
+    "image_display_width_px": 172
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-53",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 53,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Hydrocarbons",
+    "chapters": [
+      "Hydrocarbons",
+      "Organic Compounds Containing Oxygen"
+    ],
+    "topic": "Product A from alkyne sequence",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: product a from alkyne sequence.",
+    "text": "The product (A) formed in the following reaction sequence is: $\\mathrm{CH_3-C\\equiv CH}$ $\\xrightarrow[\\text{ii) HCN}]{\\text{i) HgSO}_4,\\ \\mathrm H_2\\mathrm{SO}_4}$ ... $\\xrightarrow{\\text{iii) LiAlH}_4}$ (A)",
+    "options": [
+      {
+        "key": "1",
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-1.webp",
+        "image_display_width_px": 32
+      },
+      {
+        "key": "2",
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-2.webp",
+        "image_display_width_px": 37
+      },
+      {
+        "key": "3",
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-3.webp",
+        "image_display_width_px": 49
+      },
+      {
+        "key": "4",
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-4.webp",
+        "image_display_width_px": 50
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-53.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-1.webp",
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-2.webp",
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-3.webp",
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-4.webp",
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-53.webp"
+    ],
+    "tags": [
+      "alkynes",
+      "cyanohydrin"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. Structure options not extracted; see PDF.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Hydrocarbons",
+        "subtopic": "Addition of hydrogen, halogens, water and hydrogen halides to alkynes; polymerization of alkynes"
+      },
+      {
+        "chapter": "Organic Compounds Containing Oxygen",
+        "subtopic": "Nucleophilic addition with HCN, NH3 and its derivatives"
+      }
+    ],
+    "image_display_width_px": 65
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-54",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 54,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Hydrocarbons",
+    "chapters": [
+      "Hydrocarbons",
+      "Organic Compounds Containing Oxygen"
+    ],
+    "topic": "Compound obtained from ozonolysis sequence",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: compound obtained from ozonolysis sequence.",
+    "text": "Aman has been asked to synthesise the molecule (x). He thought of preparing the molecule using an aldol condensation reaction. He found a few cyclic alkenes in his laboratory. He thought of performing ozonolysis reaction on alkene to produce a dicarbonyl compound followed by aldol reaction to prepare (x). Predict the suitable alkene that can lead to the formation of (x).",
+    "options": [
+      {
+        "key": "1",
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-1.webp",
+        "image_display_width_px": 20
+      },
+      {
+        "key": "2",
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-2.webp",
+        "image_display_width_px": 25
+      },
+      {
+        "key": "3",
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-3.webp",
+        "image_display_width_px": 21
+      },
+      {
+        "key": "4",
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-4.webp",
+        "image_display_width_px": 25
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-54.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-1.webp",
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-2.webp",
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-3.webp",
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-4.webp",
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-54.webp"
+    ],
+    "tags": [
+      "ozonolysis",
+      "aldol"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. Structure options not extracted; see PDF.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Hydrocarbons",
+        "subtopic": "Ozonolysis and polymerization of alkenes"
+      },
+      {
+        "chapter": "Organic Compounds Containing Oxygen",
+        "subtopic": "Aldol condensation"
+      }
+    ],
+    "image_display_width_px": 29
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-55",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 55,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Organic Compounds Containing Oxygen",
+    "chapters": [
+      "Organic Compounds Containing Oxygen"
+    ],
+    "topic": "Reactivity order in nucleophilic addition",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: reactivity order in nucleophilic addition.",
+    "text": "Which of the following arrangements with respect to their reactivity in nucleophilic addition reaction is correct?",
+    "options": [
+      {
+        "key": "1",
+        "text": "acetophenone < benzaldehyde < p-tolualdehyde < p-nitrobenzaldehyde",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "benzaldehyde < acetophenone < p-nitrobenzaldehyde < p-tolualdehyde",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "p-nitrobenzaldehyde < benzaldehyde < p-tolualdehyde < acetophenone",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "acetophenone < p-tolualdehyde < benzaldehyde < p-nitrobenzaldehyde",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "carbonyl reactivity"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Organic Compounds Containing Oxygen",
+        "subtopic": "Relative reactivities of aldehydes and ketones"
+      },
+      {
+        "chapter": "Organic Compounds Containing Oxygen",
+        "subtopic": "Nucleophilic addition to the carbonyl group"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-56",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 56,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Chemical Thermodynamics",
+    "chapters": [
+      "Chemical Thermodynamics"
+    ],
+    "topic": "Endothermic non-spontaneous reaction",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: endothermic non-spontaneous reaction.",
+    "text": "Let us consider an endothermic reaction which is non-spontaneous at the freezing point of water. However, the reaction is spontaneous at boiling point of water. Choose the correct option.",
+    "options": [
+      {
+        "key": "1",
+        "text": "Both $\\Delta H$ and $\\Delta S$ are (-ve)",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$\\Delta H$ is (-ve) but $\\Delta S$ is (+ve)",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$\\Delta H$ is (+ve) but $\\Delta S$ is (-ve)",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "Both $\\Delta H$ and $\\Delta S$ are (+ve)",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "spontaneity"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Thermodynamics",
+        "subtopic": "Spontaneity of processes"
+      },
+      {
+        "chapter": "Chemical Thermodynamics",
+        "subtopic": "Change in entropy of universe and Gibbs energy of system as criteria for spontaneity"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-57",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 57,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "d- and f-Block Elements",
+    "chapters": [
+      "d- and f-Block Elements"
+    ],
+    "topic": "Preparation of potassium permanganate",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Rated from the stem: preparation of potassium permanganate.",
+    "text": "Preparation of potassium permanganate from $\\mathrm{MnO_2}$ involves two step process in which the 1st step is a reaction with KOH and KNO$_3$ to produce:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$\\mathrm K_3\\mathrm{MnO_4}$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$\\mathrm K_4[\\mathrm{Mn(OH)_6}]$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$\\mathrm{KMnO_4}$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$\\mathrm K_2\\mathrm{MnO_4}$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "permanganate"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "d- and f-Block Elements",
+        "subtopic": "Preparation, properties and uses of K2Cr2O7 and KMnO4"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-58",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 58,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Chemical Kinetics",
+    "chapters": [
+      "Chemical Kinetics"
+    ],
+    "topic": "Pressure after decomposition at constant volume",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: pressure after decomposition at constant volume.",
+    "text": "For a reaction, $\\mathrm N_2\\mathrm O_{5(g)}\\to2\\mathrm{NO}_{2(g)}+\\frac12\\mathrm O_{2(g)}$ in a constant volume container, no products were present initially. The final pressure of the system when $50\\%$ of reaction gets completed is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "5 times of initial pressure",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "5/2 times of initial pressure",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "7/2 times of initial pressure",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "7/4 times of initial pressure",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "gas phase kinetics"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Kinetics",
+        "subtopic": "Order and molecularity of reactions"
+      },
+      {
+        "chapter": "Chemical Kinetics",
+        "subtopic": "Rate law, rate constant and its units"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-59",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 59,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "Coordination Compounds",
+    "chapters": [
+      "Coordination Compounds"
+    ],
+    "topic": "Structure of octahedral complex with three ions",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: structure of octahedral complex with three ions.",
+    "text": "One mole of the octahedral complex compound $\\mathrm{Co(NH_3)_5Cl_3}$ gives $3$ moles of ions on dissolution in water. One mole of the same complex reacts with excess of $\\mathrm{AgNO_3}$ solution to yield two moles of $\\mathrm{AgCl_{(s)}}$. The structure of the complex is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$[\\mathrm{Co(NH_3)_4Cl_2}]\\cdot\\mathrm{Cl}\\cdot\\mathrm{NH_3}$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$[\\mathrm{Co(NH_3)_3Cl_3}]\\cdot2\\mathrm{NH_3}$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$[\\mathrm{Co(NH_3)_5Cl}]\\mathrm{Cl_2}$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$[\\mathrm{Co(NH_3)_4Cl}]\\cdot\\mathrm{Cl_2}\\cdot\\mathrm{NH_3}$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "werner theory"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Coordination Compounds",
+        "subtopic": "Werner's theory"
+      },
+      {
+        "chapter": "Coordination Compounds",
+        "subtopic": "Coordination number"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-60",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 60,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "d- and f-Block Elements",
+    "chapters": [
+      "d- and f-Block Elements"
+    ],
+    "topic": "Strongest oxidizing agent among ions",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: strongest oxidizing agent among ions.",
+    "text": "Which of the following ions is the strongest oxidizing agent? (Atomic Number of Ce = 58, Eu = 63, Tb = 65, Lu = 71)",
+    "options": [
+      {
+        "key": "1",
+        "text": "Eu$^{2+}$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "Tb$^{4+}$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "Lu$^{3+}$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "Ce$^{3+}$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "lanthanoids",
+      "oxidizing agent"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Verify option text.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "d- and f-Block Elements",
+        "subtopic": "Lanthanoids: electronic configuration, oxidation states and lanthanoid contraction"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-61",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 61,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Equilibrium",
+    "chapters": [
+      "Equilibrium"
+    ],
+    "topic": "Molar solubility of Cr(OH)3",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: molar solubility of cr(oh)3.",
+    "text": "$K_{sp}$ for $\\mathrm{Cr(OH)_3}$ is $1.6\\times10^{-30}$. What is the molar solubility of this salt in water?",
+    "options": [
+      {
+        "key": "1",
+        "text": "$\\frac{1.8\\times10^{-30}}{27}$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$\\sqrt[4]{1.8\\times10^{-30}}$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$\\sqrt[4]{\\frac{1.6\\times10^{-30}}{27}}$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$\\sqrt[4]{1.6\\times10^{-30}}$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "solubility product"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Equilibrium",
+        "subtopic": "Solubility of sparingly soluble salts and solubility product"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-62",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 62,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Classification of Elements and Periodicity in Properties",
+    "chapters": [
+      "Classification of Elements and Periodicity in Properties"
+    ],
+    "topic": "Statements not true about periodic table",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: statements not true about periodic table.",
+    "text": "Which of the following statements are NOT true about the periodic table? A. The properties of elements are function of atomic weights. B. The properties of elements are function of atomic numbers. C. Elements having similar outer electronic configurations are arranged in same period. D. An element's location reflects the quantum numbers of the last filled orbital. E. The number of elements in a period is same as the number of atomic orbitals available in energy level that is being filled. Choose the correct answer from the options given below:",
+    "options": [
+      {
+        "key": "1",
+        "text": "A, C and E Only",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "A and E Only",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "B, C and E Only",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "D and E Only",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "periodic table"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Classification of Elements and Periodicity in Properties",
+        "subtopic": "Modern periodic law and present form of the periodic table"
+      },
+      {
+        "chapter": "Classification of Elements and Periodicity in Properties",
+        "subtopic": "s, p, d and f block elements"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-63",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 63,
+    "subject": "Chemistry",
+    "unit": "Chemistry (other)",
+    "chapter": "Some Basic Concepts in Chemistry",
+    "chapters": [
+      "Some Basic Concepts in Chemistry",
+      "Purification and Characterisation of Organic Compounds"
+    ],
+    "topic": "Dumas method statements",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: dumas method statements.",
+    "text": "Given below are two statements I and II. Statement I: Dumas method is used for estimation of 'Nitrogen' in an organic compound. Statement II: Dumas method involves the formation of ammonium sulphate by heating the organic compound with conc $\\mathrm H_2\\mathrm{SO}_4$. In the light of the above statements, choose the correct answer from the options given below.",
+    "options": [
+      {
+        "key": "1",
+        "text": "Statement I is true but Statement II is false",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "Both Statement I and Statement II are false",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "Statement I is false but Statement II is true",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "Both Statement I and Statement II are true",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "estimation of nitrogen"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Purification and Characterisation of Organic Compounds",
+        "subtopic": "Quantitative analysis: estimation of carbon, hydrogen, nitrogen, halogens, sulphur and phosphorus"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-64",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 64,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "chapters": [
+      "Chemical Bonding and Molecular Structure"
+    ],
+    "topic": "Statements on H2O, NH3 and CH4",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: statements on h2o, nh3 and ch4.",
+    "text": "Which of the following statement is true with respect to $\\mathrm{H_2O}$, $\\mathrm{NH_3}$ and $\\mathrm{CH_4}$? A. The central atoms of all the molecules are $sp^3$ hybridized. B. The H-O-H, H-N-H and H-C-H angles in the above molecules are $104.5^\\circ$, $107.5^\\circ$ and $109.5^\\circ$, respectively. C. The increasing order of dipole moment is $\\mathrm{CH_4}<\\mathrm{NH_3}<\\mathrm{H_2O}$. D. Both $\\mathrm H_2\\mathrm O$ and $\\mathrm{NH_3}$ are Lewis acids and $\\mathrm{CH_4}$ is a Lewis base. E. A solution of $\\mathrm{NH_3}$ in $\\mathrm H_2\\mathrm O$ is basic. Choose the correct answer from the options given below:",
+    "options": [
+      {
+        "key": "1",
+        "text": "A, B and C Only",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "A, D and E Only",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "C, D and E Only",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "A, B, C and E Only",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "vsepr",
+      "hybridisation"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Bonding and Molecular Structure",
+        "subtopic": "VSEPR theory and shapes of simple molecules"
+      },
+      {
+        "chapter": "Chemical Bonding and Molecular Structure",
+        "subtopic": "Hybridization involving s, p and d orbitals"
+      },
+      {
+        "chapter": "Chemical Bonding and Molecular Structure",
+        "subtopic": "Dipole moment"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-65",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 65,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Organic Compounds Containing Oxygen",
+    "chapters": [
+      "Organic Compounds Containing Oxygen",
+      "Some Basic Principles of Organic Chemistry"
+    ],
+    "topic": "Most stable carbocation",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: most stable carbocation.",
+    "text": "Which one of the carbocations from the following is most stable?",
+    "options": [
+      {
+        "key": "1",
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-1.webp",
+        "image_display_width_px": 53
+      },
+      {
+        "key": "2",
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-2.webp",
+        "image_display_width_px": 45
+      },
+      {
+        "key": "3",
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-3.webp",
+        "image_display_width_px": 28
+      },
+      {
+        "key": "4",
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-4.webp",
+        "image_display_width_px": 52
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-1.webp",
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-2.webp",
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-3.webp",
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-4.webp"
+    ],
+    "tags": [
+      "carbocation stability"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. Structure options not extracted; see PDF.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Some Basic Principles of Organic Chemistry",
+        "subtopic": "Stability of carbocations and free radicals"
+      },
+      {
+        "chapter": "Some Basic Principles of Organic Chemistry",
+        "subtopic": "Free radicals, carbocations and carbanions"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-66",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 66,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Hydrocarbons",
+    "chapters": [
+      "Hydrocarbons"
+    ],
+    "topic": "Fastest addition of HBr to alkene",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: fastest addition of hbr to alkene.",
+    "text": "Following are the four molecules 'P', 'Q', 'R' and 'S'. Which one among the four molecules will react with $\\mathrm H-\\mathrm{Br}_{(aq)}$ at the fastest rate?",
+    "options": [
+      {
+        "key": "1",
+        "text": "R",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "P",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "Q",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "S",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-66.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-66.webp"
+    ],
+    "tags": [
+      "electrophilic addition"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. Structure options not extracted; see PDF.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Hydrocarbons",
+        "subtopic": "Mechanism of electrophilic addition to alkenes"
+      },
+      {
+        "chapter": "Hydrocarbons",
+        "subtopic": "Addition of hydrogen, halogens, water and hydrogen halides; Markownikoff's and peroxide effect"
+      }
+    ],
+    "image_display_width_px": 99
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-67",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 67,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Redox Reactions and Electrochemistry",
+    "chapters": [
+      "Redox Reactions and Electrochemistry"
+    ],
+    "topic": "Standard cell potential of Fe2+ with Ag+",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: standard cell potential of fe2+ with ag+.",
+    "text": "For the given cell $\\mathrm{Fe^{2+}_{(aq)}}+\\mathrm{Ag^+_{(aq)}}\\to\\mathrm{Fe^{3+}_{(aq)}}+\\mathrm{Ag}_{(s)}$. The standard cell potential of the above reaction is: Given: $\\mathrm{Ag^+}+e^-\\to\\mathrm{Ag}$, $E^\\circ=x$V; $\\mathrm{Fe^{2+}}+2e^-\\to\\mathrm{Fe}$, $E^\\circ=y$V; $\\mathrm{Fe^{3+}}+3e^-\\to\\mathrm{Fe}$, $E^\\circ=z$V.",
+    "options": [
+      {
+        "key": "1",
+        "text": "$x+y-z$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$x+2y$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$x+2y-3z$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$y-2x$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "standard electrode potential"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Redox Reactions and Electrochemistry",
+        "subtopic": "Standard electrode potential"
+      },
+      {
+        "chapter": "Redox Reactions and Electrochemistry",
+        "subtopic": "Relation between cell potential and Gibbs energy change"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-68",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 68,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "p-Block Elements",
+    "chapters": [
+      "p-Block Elements"
+    ],
+    "topic": "Melting and boiling point difference of oxygen and sulphur",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Rated from the stem: melting and boiling point difference of oxygen and sulphur.",
+    "text": "The large difference between the melting and boiling points of oxygen and sulphur may be explained on the basis of:",
+    "options": [
+      {
+        "key": "1",
+        "text": "Atomicity",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "Electron gain enthalpy",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "Electronegativity",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "Atomic size",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "p-block",
+      "atomicity"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "p-Block Elements",
+        "subtopic": "General trends in physical and chemical properties"
+      },
+      {
+        "chapter": "p-Block Elements",
+        "subtopic": "Unique behaviour of the first element in each group"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-69",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 69,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Solutions",
+    "chapters": [
+      "Solutions"
+    ],
+    "topic": "Graph showing depression of freezing point",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: graph showing depression of freezing point.",
+    "text": "Consider the given plots of vapour pressure (VP) vs temperature (T/K). Which amongst the following options is correct graphical representation showing $\\Delta T_f$, depression in the freezing point of a solvent in a solution?",
+    "options": [
+      {
+        "key": "1",
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-1.webp",
+        "image_display_width_px": 53
+      },
+      {
+        "key": "2",
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-2.webp",
+        "image_display_width_px": 50
+      },
+      {
+        "key": "3",
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-3.webp",
+        "image_display_width_px": 49
+      },
+      {
+        "key": "4",
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-4.webp",
+        "image_display_width_px": 54
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-1.webp",
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-2.webp",
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-3.webp",
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-4.webp"
+    ],
+    "tags": [
+      "freezing point depression",
+      "graphs"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. Graph options not extracted; see PDF.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Solutions",
+        "subtopic": "Depression of freezing point"
+      },
+      {
+        "chapter": "Solutions",
+        "subtopic": "Vapour pressure-composition plots"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-70",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 70,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "chapters": [
+      "Chemical Bonding and Molecular Structure"
+    ],
+    "topic": "Linear combination forming molecular orbitals",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: linear combination forming molecular orbitals.",
+    "text": "Which of the following linear combination of atomic orbitals will lead to formation of molecular orbitals in homonuclear diatomic molecules [internuclear axis in $z$-direction]? A. $2p_x$ and $2p_x$ B. 2 s and $2p_z$ C. $3d_{xy}$ and $3d_{xy}$ D. 2 s and $2p_z$ E. $2p_z$ and $3d_{z^2-y^2}$. Choose the correct answer from the options given below:",
+    "options": [
+      {
+        "key": "1",
+        "text": "A and B Only",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "D Only",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "E Only",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "C and D Only",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "mo theory"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Bonding and Molecular Structure",
+        "subtopic": "Molecular orbital theory and LCAOs"
+      },
+      {
+        "chapter": "Chemical Bonding and Molecular Structure",
+        "subtopic": "Bonding and antibonding molecular orbitals"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-71",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 71,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Organic Compounds Containing Oxygen",
+    "chapters": [
+      "Organic Compounds Containing Oxygen",
+      "Some Basic Concepts in Chemistry"
+    ],
+    "topic": "Volume of CO2 from benzoic acid",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: volume of co2 from benzoic acid.",
+    "text": "Xg of benzoic acid on reaction with aq $\\mathrm{NaHCO_3}$ released $\\mathrm{CO_2}$ that occupied $11.2$ L volume at STP. X is ______ g.",
+    "options": [],
+    "correct_answer": [
+      "61"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "carboxylic acid",
+      "mole concept"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Numeric stem partly read; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Organic Compounds Containing Oxygen",
+        "subtopic": "Acidic strength of carboxylic acids and factors affecting it"
+      },
+      {
+        "chapter": "Some Basic Concepts in Chemistry",
+        "subtopic": "Mole concept and molar mass"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-72",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 72,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "d- and f-Block Elements",
+    "chapters": [
+      "d- and f-Block Elements",
+      "Some Basic Concepts in Chemistry"
+    ],
+    "topic": "Mass of iron produced in blast furnace",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: mass of iron produced in blast furnace.",
+    "text": "Consider the following reaction occurring in the blast furnace: $\\mathrm{Fe_3O_{4(s)}}+4\\mathrm{CO_{(g)}}\\to3\\mathrm{Fe}_{(l)}+4\\mathrm{CO_{2(g)}}$. $x$ kg of iron is produced when $2.32\\times10^3$ kg $\\mathrm{Fe_3O_4}$ and $2.8\\times10^2$ kg CO are brought together in the furnace. The value of $x$ is ______ (nearest integer). Given: molar mass of $\\mathrm{Fe_3O_4}=232$ g mol$^{-1}$, molar mass of CO $=28$ g mol$^{-1}$, molar mass of Fe $=56$ g mol$^{-1}$.",
+    "options": [],
+    "correct_answer": [
+      "420"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "limiting reagent",
+      "stoichiometry"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Numeric stem partly read; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "d- and f-Block Elements",
+        "subtopic": "Occurrence and characteristics of transition elements"
+      },
+      {
+        "chapter": "Some Basic Concepts in Chemistry",
+        "subtopic": "Chemical equations and stoichiometry"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-73",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 73,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Equilibrium",
+    "chapters": [
+      "Equilibrium",
+      "Some Basic Concepts in Chemistry"
+    ],
+    "topic": "Kp of N2O5 decomposition at 500 K",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: kp of n2o5 decomposition at 500 k.",
+    "text": "$37.8$ g $\\mathrm N_2\\mathrm O_5$ was taken in a $1$ L reaction vessel and allowed to undergo the following reaction at $500$ K: $2\\mathrm N_2\\mathrm O_{5(g)}\\rightleftharpoons2\\mathrm N_2\\mathrm O_{4(g)}+\\mathrm O_{2(g)}$. The total pressure at equilibrium was found to be $18.65$ bar. Then, $K_p=$ ______ $\\times10^{-2}$ [nearest integer]. Assume $\\mathrm N_2\\mathrm O_5$ to behave ideally under these conditions. Given: $R=0.082$ bar L mol$^{-1}$ K$^{-1}$.",
+    "options": [],
+    "correct_answer": [
+      "962"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "equilibrium",
+      "kp"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Numeric stem partly read; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Equilibrium",
+        "subtopic": "Equilibrium constants Kp and Kc and their significance"
+      },
+      {
+        "chapter": "Some Basic Concepts in Chemistry",
+        "subtopic": "Mole concept and molar mass"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-74",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 74,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "Coordination Compounds",
+    "chapters": [
+      "Coordination Compounds",
+      "d- and f-Block Elements"
+    ],
+    "topic": "Number of cations giving precipitate with K4[Fe(CN)6]",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: number of cations giving precipitate with k4[fe(cn)6].",
+    "text": "Among the following cations, the number of cations which will give characteristic precipitate in their identification tests with $\\mathrm K_4[\\mathrm{Fe(CN)_6}]$ is ______. $\\mathrm{Cu^{2+}}$, $\\mathrm{Fe^{3+}}$, $\\mathrm{Ba^{2+}}$, $\\mathrm{Ca^{2+}}$, $\\mathrm{NH_4^+}$, $\\mathrm{Mg^{2+}}$, $\\mathrm{Zn^{2+}}$.",
+    "options": [],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "qualitative analysis"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Numeric stem partly read; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Coordination Compounds",
+        "subtopic": "Importance of coordination compounds in qualitative analysis, extraction of metals and biological systems"
+      },
+      {
+        "chapter": "d- and f-Block Elements",
+        "subtopic": "Complex formation by transition elements"
+      }
+    ]
+  },
+  {
+    "id": "main-2025-jan-s1-sh1-24jan-p-75",
+    "exam": "main",
+    "year": 2025,
+    "session": "Jan-S1",
+    "session_number": 1,
+    "session_month": "Jan",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2025-01-24",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 75,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Chemical Thermodynamics",
+    "chapters": [
+      "Chemical Thermodynamics"
+    ],
+    "topic": "Temperature at equilibrium for X2 and Y2 reaction",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: temperature at equilibrium for x2 and y2 reaction.",
+    "text": "Standard entropies of $\\mathrm X_2$, $\\mathrm Y_2$ and $\\mathrm{XY_5}$ are $70$, $50$ and $110$ J K$^{-1}$ mol$^{-1}$ respectively. The temperature in Kelvin at which the reaction $\\frac12\\mathrm X_2+\\frac52\\mathrm Y_2\\rightleftharpoons\\mathrm{XY_5}$, $\\Delta H^\\circ=-35$ kJ mol$^{-1}$ will be at equilibrium is ______. (Nearest integer)",
+    "options": [],
+    "correct_answer": [
+      "700"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "gibbs energy",
+      "equilibrium temperature"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Numeric stem partly read; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Thermodynamics",
+        "subtopic": "Standard Gibbs energy change and equilibrium constant"
+      },
+      {
+        "chapter": "Chemical Thermodynamics",
+        "subtopic": "Entropy"
+      }
+    ]
+  }
+]

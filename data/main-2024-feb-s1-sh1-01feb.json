@@ -15,12 +15,17 @@
   "subject": "Physics",
   "chapter": "Units and Measurements",
   "chapters": [
-   "Units and Measurements"
+   "Units and Measurements",
+   "Current Electricity"
   ],
   "subtopics": [
    {
     "chapter": "Units and Measurements",
     "subtopic": "Errors in measurements"
+   },
+   {
+    "chapter": "Current Electricity",
+    "subtopic": "Electrical resistivity and conductivity"
    }
   ],
   "topic": "Percentage error in resistivity",
@@ -1632,6 +1637,10 @@
    {
     "chapter": "Electrostatics",
     "subtopic": "Dielectrics and electric polarization"
+   },
+   {
+    "chapter": "Electrostatics",
+    "subtopic": "Coulomb's law: forces between point charges"
    }
   ],
   "topic": "Dielectric constant of water",
@@ -2398,14 +2407,14 @@
   "paper_section": null,
   "question_number": 38,
   "subject": "Chemistry",
-  "chapter": "Some Basic Concepts in Chemistry",
+  "chapter": "Principles Related to Practical Chemistry",
   "chapters": [
-   "Some Basic Concepts in Chemistry"
+   "Principles Related to Practical Chemistry"
   ],
   "subtopics": [
    {
-    "chapter": "Some Basic Concepts in Chemistry",
-    "subtopic": "Mole concept and molar mass"
+    "chapter": "Principles Related to Practical Chemistry",
+    "subtopic": "Titrimetric exercises: acids, bases and indicators; oxalic acid vs KMnO4; Mohr's salt vs KMnO4"
    }
   ],
   "topic": "Titration with KHP",
@@ -2547,6 +2556,10 @@
    {
     "chapter": "Some Basic Principles of Organic Chemistry",
     "subtopic": "Covalent bond fission: homolytic and heterolytic"
+   },
+   {
+    "chapter": "Some Basic Principles of Organic Chemistry",
+    "subtopic": "Free radicals, carbocations and carbanions"
    }
   ],
   "topic": "Ionic reactions with organic compounds",
@@ -3174,16 +3187,11 @@
   "paper_section": null,
   "question_number": 49,
   "subject": "Chemistry",
-  "chapter": "Organic Compounds Containing Nitrogen",
+  "chapter": "Hydrocarbons",
   "chapters": [
-   "Organic Compounds Containing Nitrogen",
    "Hydrocarbons"
   ],
   "subtopics": [
-   {
-    "chapter": "Organic Compounds Containing Nitrogen",
-    "subtopic": "Basic character of amines"
-   },
    {
     "chapter": "Hydrocarbons",
     "subtopic": "Directive influence of the functional group in mono-substituted benzene"
@@ -3800,10 +3808,6 @@
    {
     "chapter": "Sets, Relations and Functions",
     "subtopic": "Functions"
-   },
-   {
-    "chapter": "Sets, Relations and Functions",
-    "subtopic": "One-one, into and onto functions"
    }
   ],
   "topic": "Number of elements in S",
@@ -4368,6 +4372,10 @@
    {
     "chapter": "Statistics and Probability",
     "subtopic": "Standard deviation, variance and mean deviation for grouped and ungrouped data"
+   },
+   {
+    "chapter": "Statistics and Probability",
+    "subtopic": "Mean, median and mode of grouped and ungrouped data"
    }
   ],
   "topic": "Mean deviation about median",
@@ -5458,7 +5466,7 @@
   "subtopics": [
    {
     "chapter": "Sets, Relations and Functions",
-    "subtopic": "Power set"
+    "subtopic": "Sets and their representation"
    }
   ],
   "topic": "Number of elements in set S",
