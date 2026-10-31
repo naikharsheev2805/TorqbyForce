@@ -1134,7 +1134,7 @@ function saveLastView(){
   try{ const o = {view, nav: {}}; Object.keys(nav).forEach(k=>{ if(k!=='cfg' && k!=='mockCfg') o.nav[k]=nav[k]; }); localStorage.setItem(LAST_VIEW_KEY, JSON.stringify(o)); }catch(e){}
 }
 function restoreLastView(){
-  try{ const o = JSON.parse(localStorage.getItem(LAST_VIEW_KEY)); if(!o || !o.view || !TAB_OF[o.view]) return; view = o.view; if(o.nav) Object.assign(nav, o.nav); if(TAB_OF[o.view]) nav.tab = TAB_OF[o.view]; }catch(e){}
+  try{ const o = JSON.parse(localStorage.getItem(LAST_VIEW_KEY)); if(!o || !o.view || !TAB_OF[o.view]) return; const dis = TABS.find(t=>t.id===TAB_OF[o.view]); if(dis && dis.disabled) return; view = o.view; if(o.nav) Object.assign(nav, o.nav); if(TAB_OF[o.view]) nav.tab = TAB_OF[o.view]; }catch(e){}
 }
 function go(v, patch){
   if(TAB_OF[v]) nav.tab = TAB_OF[v];
@@ -1650,7 +1650,8 @@ const TABS = [
   {id:'home', label:'Home', icon:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>'},
   {id:'pyq', label:'PYQs', icon:'<path d="M5 4h10l4 4v12H5z"/><path d="M14 4v5h5M9 13h6M9 17h4"/>'},
   {id:'syllabus', label:'Syllabus', icon:'<path d="M4 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>'},
-  {id:'mocks', label:'Mocks', icon:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>'},
+  {id:'leaderboard', label:'Leaderboard', title:'Leaderboard, coming soon', disabled:true, icon:'<path d="M4 20h16"/><path d="M7 20v-6h4v6M13 20V9h4v11"/><path d="M9 11l3-3 3 2"/>'},
+  {id:'mocks', label:'Mocks', title:'Mocks, coming soon (after the neural network)', disabled:true, icon:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>'},
   {id:'notehub', label:'Notes', icon:'<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M8 8h7M8 12h7"/>'},
   {id:'me', label:'Me', icon:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>'}
 ];
@@ -1660,7 +1661,7 @@ function registerSW(){
 function bottomNav(){
   const bar = el('<nav class="bottomnav"></nav>');
   TABS.forEach(t=>{
-    const b = el('<button class="bn '+(nav.tab===t.id?'on':'')+(t.disabled?' disabled':'')+'"'+(t.disabled?' disabled aria-disabled="true" title="Leaderboard, coming soon"':'')+'><svg viewBox="0 0 24 24">'+t.icon+'</svg><span>'+t.label+'</span></button>');
+    const b = el('<button class="bn '+(nav.tab===t.id?'on':'')+(t.disabled?' disabled':'')+'"'+(t.disabled?' disabled aria-disabled="true" title="'+esc(t.title||'Coming soon')+'"':'')+'><svg viewBox="0 0 24 24">'+t.icon+'</svg><span>'+t.label+'</span></button>');
     if(!t.disabled) b.onclick = ()=>go(t.id);
     bar.appendChild(b);
   });
@@ -2109,7 +2110,7 @@ function pyqView(){
   const tabRow = el('<div class="row" style="padding:0;border:none;align-items:center;gap:10px"></div>');
   tabRow.appendChild(tabSeg); tabRow.firstChild.style.flex='1';
   const shareTop = el('<button class="btn secondary small" aria-label="Share TORQ">Share</button>');
-  shareTop.onclick = ()=>{ const t = 'Practising JEE previous year questions on TORQ, with solutions and mock tests.'; if(navigator.share) navigator.share({title:'TORQ', text:t}).catch(()=>{}); else if(navigator.clipboard) navigator.clipboard.writeText(t).catch(()=>{}); };
+  shareTop.onclick = ()=>{ const t = 'Practicing JEE previous year questions on TORQ, with solutions and mock tests.'; if(navigator.share) navigator.share({title:'TORQ', text:t}).catch(()=>{}); else if(navigator.clipboard) navigator.clipboard.writeText(t).catch(()=>{}); };
   tabRow.appendChild(shareTop);
   w.appendChild(tabRow);
   if(nav.pyqTab==='papers'){ w.appendChild(papersPart()); return w; }
@@ -2322,7 +2323,7 @@ function chapterView(){
   if(NOTES[c]){ const nb = el('<button class="btn secondary block" style="margin-top:10px">Revision notes and formula sheet</button>'); nb.onclick = ()=>go('notes',{chapter:c}); w.appendChild(nb); }
 
   w.appendChild(el('<div class="eyebrow" style="margin:24px 0 8px">Subtopics</div>'));
-  w.appendChild(el('<p class="note-line" style="margin:0 0 10px">Tap the subtopics you want, then practise just those.</p>'));
+  w.appendChild(el('<p class="note-line" style="margin:0 0 10px">Tap the subtopics you want, then practice just those.</p>'));
   const sel = nav.topicSel || [];
   const tchips = el('<div class="chips"></div>');
   topicsOf(s,c).forEach(t=>{
@@ -2332,7 +2333,7 @@ function chapterView(){
     tchips.appendChild(b);
   });
   w.appendChild(tchips);
-  const sb = el('<button class="btn block" style="margin-top:12px"'+(sel.length?'':' disabled')+'>'+(sel.length ? 'Practise '+sel.length+' selected subtopic'+(sel.length>1?'s':'') : 'Select subtopics to practise')+'</button>');
+  const sb = el('<button class="btn block" style="margin-top:12px"'+(sel.length?'':' disabled')+'>'+(sel.length ? 'Practice '+sel.length+' selected subtopic'+(sel.length>1?'s':'') : 'Select subtopics to practice')+'</button>');
   sb.onclick = ()=>go('setup',{cfg:defaultCfg({subject:s, chapter:c, topics:sel.slice()})});
   w.appendChild(sb);
 
