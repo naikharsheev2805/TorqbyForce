@@ -715,11 +715,27 @@ svg.wm-lg{ --torq-stroke:1.9; }
 .exam-chip{ font-size:12.5px; padding:6px 11px; border-radius:999px; border:1px solid var(--border); background:var(--surface-2); color:var(--muted); }
 .exam-chip b{ color:var(--accent); font-weight:700; }
 
+/* ---------- Exam countdown cards: login-card look ---------- */
+.exam-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:0 0 14px; }
+.exam-row-one{ grid-template-columns:1fr; }
+.exam-card{ position:relative; overflow:hidden; border-radius:calc(var(--r-xl) + 4px); padding:20px 18px 22px; border:1.5px solid transparent;
+  background:linear-gradient(var(--surface),var(--surface)) padding-box, linear-gradient(135deg,var(--ec),var(--accent)) border-box; min-height:150px; }
+.exam-orb{ position:absolute; right:-28px; bottom:-34px; width:110px; height:110px; border-radius:50%; background:var(--ec); opacity:.22; filter:blur(18px); pointer-events:none; }
+.exam-num{ font:600 58px/1 Lora,Georgia,serif; color:var(--text); margin-top:12px; letter-spacing:-.02em; font-variant-numeric:tabular-nums; position:relative; }
+.exam-unit{ font-size:13px; color:var(--muted); margin-top:6px; position:relative; }
+.exam-card .eyebrow{ color:var(--ec); position:relative; }
+
 /* ---------- Question of the day: tinted and greyed once answered ---------- */
-.qotd.st-ok, .qotd.st-bad, .qotd.st-skip{ filter:saturate(.35); opacity:.92; }
-.qotd.st-ok{ background:linear-gradient(var(--surface),var(--surface)) padding-box, linear-gradient(160deg, color-mix(in srgb,var(--c-easy) 45%, transparent), transparent 70%) ; }
-.qotd.st-bad{ background:linear-gradient(160deg, color-mix(in srgb,var(--c-hard) 28%, var(--surface)), var(--surface) 70%); }
-.qotd.st-skip{ background:linear-gradient(160deg, color-mix(in srgb,var(--c-medium) 22%, var(--surface)), var(--surface) 70%); border-style:dashed; }
+.card.qotd{ position:relative; overflow:hidden; }
+.card.qotd::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:5px; background:var(--qtint, transparent); }
+.card.qotd.st-ok{ --qtint:var(--c-easy); background:linear-gradient(160deg, color-mix(in srgb,var(--c-easy) 30%, var(--surface)), var(--surface) 75%); border-color:color-mix(in srgb,var(--c-easy) 55%, var(--border)); }
+.card.qotd.st-bad{ --qtint:var(--c-hard); background:linear-gradient(160deg, color-mix(in srgb,var(--c-hard) 30%, var(--surface)), var(--surface) 75%); border-color:color-mix(in srgb,var(--c-hard) 55%, var(--border)); }
+.card.qotd.st-skip{ --qtint:var(--c-medium); background:linear-gradient(160deg, color-mix(in srgb,var(--c-medium) 26%, var(--surface)), var(--surface) 75%); border-style:dashed; border-color:color-mix(in srgb,var(--c-medium) 55%, var(--border)); }
+.qotd-status{ display:inline-flex; align-items:center; gap:6px; margin:10px 0 0; padding:5px 12px; border-radius:999px; font:700 12px/1 Inter,sans-serif; letter-spacing:.04em; text-transform:uppercase; color:#fff; }
+.qotd-status.st-ok{ background:var(--c-easy); }
+.qotd-status.st-bad{ background:var(--c-hard); }
+.qotd-status.st-skip{ background:var(--c-medium); }
+.qotd.st-ok .qclamp, .qotd.st-bad .qclamp, .qotd.st-skip .qclamp{ opacity:.85; }
 .qotd-rule{ font-size:13px; color:var(--muted); margin:10px 4px 0; line-height:1.5; }
 .qotd-rule b{ color:var(--text); font-weight:600; }
 
@@ -1100,11 +1116,18 @@ let nav = {tab:'home', subject:SUBJECTS[0], pyqTab:'questions', paper:null, meTa
            mockCfg:{subjects:[...SUBJECTS], perSubject:5, minutes:60}};
 const TAB_OF = {leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', notes:'pyq', notehub:'notehub', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
 
+const LAST_VIEW_KEY = 'torq_last_view_v1';
+function saveLastView(){
+  try{ const o = {view, nav: {}}; Object.keys(nav).forEach(k=>{ if(k!=='cfg' && k!=='mockCfg') o.nav[k]=nav[k]; }); localStorage.setItem(LAST_VIEW_KEY, JSON.stringify(o)); }catch(e){}
+}
+function restoreLastView(){
+  try{ const o = JSON.parse(localStorage.getItem(LAST_VIEW_KEY)); if(!o || !o.view || !TAB_OF[o.view]) return; view = o.view; if(o.nav) Object.assign(nav, o.nav); if(TAB_OF[o.view]) nav.tab = TAB_OF[o.view]; }catch(e){}
+}
 function go(v, patch){
   if(TAB_OF[v]) nav.tab = TAB_OF[v];
   Object.assign(nav, patch||{});
   if(cloudDirty) flushCloud();
-  view = v; render(); window.scrollTo(0,0);
+  view = v; saveLastView(); render(); window.scrollTo(0,0);
 }
 function setCfg(patch){ nav.cfg = Object.assign({}, nav.cfg, patch); render(); }
 
@@ -1932,20 +1955,27 @@ function daysLeft(iso){ return Math.ceil((new Date(iso+'T00:00:00') - new Date()
 // Any subject counts toward the goal; it counts questions answered today
 function dailyGoalCard(){
   const today = dayKey();
-  const done = new Set(store.attempts.filter(a=>a.d===today && !a.skipped && a.c!==null).map(a=>a.q)).size;
+  const done = new Set(store.attempts.filter(a=>a.d===today && !a.skipped && (a.c===true||a.c===false)).map(a=>a.q)).size;
   const pct = Math.min(100, Math.round(done/DAILY_GOAL*100));
   const exams = EXAMS.map(x=>'<span class="exam-chip"><b>'+daysLeft(x.date)+'</b> days to '+esc(x.name)+'</span>').join('');
-  return el('<div class="card dgoal"><div class="dg-top"><div><div class="eyebrow">Daily goal</div>'
+  return el('<div class="card dgoal'+(done>=DAILY_GOAL?' st-ok':'')+'"><div class="dg-top"><div><div class="eyebrow">Daily goal</div>'
     +'<div class="dg-num">'+done+'<span> / '+DAILY_GOAL+' questions</span></div></div></div>'
     +'<div class="goal-bar"><i style="width:'+pct+'%"></i></div>'
     +'<div class="note-line" style="margin-top:8px">Any subject, any chapter. It is your call.</div>'
     +'</div>');
 }
+// Exam countdown cards, styled like the login card: gradient border, a glowing orb and a serif numeral
+function examCardEl(x, i){
+  const tone = i===0 ? 'var(--c-phys)' : 'var(--c-chem)';
+  const d = daysLeft(x.date);
+  return el('<div class="exam-card" style="--ec:'+tone+'"><i class="exam-orb" aria-hidden="true"></i>'
+    +'<div class="eyebrow">'+esc(x.name)+'</div>'
+    +'<div class="exam-num">'+d+'</div>'
+    +'<div class="exam-unit">'+(d===1?'day':'days')+' left</div></div>');
+}
 function examRowEl(){
-  const row = el('<div class="big-row"></div>');
-  EXAMS.forEach(x=>{
-    row.appendChild(el('<div class="big-card exam-big"><div class="eyebrow">'+esc(x.name)+'</div><div class="big-num">'+daysLeft(x.date)+'</div><div class="big-sub">days left</div></div>'));
-  });
+  const row = el('<div class="exam-row"></div>');
+  EXAMS.forEach((x,i)=>row.appendChild(examCardEl(x,i)));
   return row;
 }
 function examDayCardEl(){
@@ -2636,6 +2666,8 @@ function leaderboardView(){
 function profilePart(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="eyebrow" style="margin:6px 0 10px">Your profile</div>'));
+  const chosen = (store.profile && store.profile.exam) === 'adv' ? 1 : 0;
+  w.appendChild(el('<div class="exam-row exam-row-one"></div>')).appendChild(examCardEl(EXAMS[chosen], chosen));
   w.appendChild(profileForm(store.profile||{exam:'main'}, 'Save changes', (p,av)=>{ store.profile = p; persist(); cacheUser({avatar: av||null}); go('me',{meTab:'profile'}); }, true));
   w.appendChild(accountBlock());
   return w;
@@ -3100,7 +3132,7 @@ function ringMarks(score, max){
   return el('<div class="card resultcard"><div class="ring" role="img" aria-label="'+score+' out of '+max+' marks">'
     +'<svg viewBox="0 0 120 120" aria-hidden="true"><circle class="rt" cx="60" cy="60" r="52"/>'
     +'<circle class="rf" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" data-to="'+(100-p)+'"/></svg>'
-    +'<div class="rc"><b>'+score+'</b><span>out of '+max+'</span><em>'+p+'% of marks</em></div></div></div>');
+    +'<div class="rc"><b>'+score+'</b><em>'+p+'% of marks</em><span>out of '+max+'</span></div></div></div>');
 }
 function shareBtn(text){
   const b = el('<button class="btn secondary block" style="margin-top:12px">Share my result</button>');
@@ -3227,6 +3259,7 @@ function qotdCard(){
   if(!st){ actions.appendChild(tr); }
   actions.appendChild(rv);
   c.appendChild(actions);
+  if(st){ const lab = {ok:'Answered correctly', bad:'Answered wrong', skip:'Skipped'}[st]; c.appendChild(el('<div class="qotd-status st-'+st+'">'+lab+'</div>')); }
   const wrap = el('<div></div>');
   wrap.appendChild(c);
   wrap.appendChild(el('<div class="qotd-rule"><b>Keep your streak:</b> answer today\u2019s question, right or wrong. Skipping it or missing the day breaks the streak. The easiest way is to open it first thing.</div>'));
@@ -3604,6 +3637,7 @@ function cloudSync(){
 (function init(){
   let saved=null; try{ saved=localStorage.getItem('torque_theme'); }catch(e){}
   applyTheme(saved || 'claude-dark');
+  restoreLastView();
   sbClient();
   setTimeout(()=>{ if(authState === 'unknown'){ authState = 'offline'; render(); } }, 5000);
   // Autosave every 15 seconds; if the saved copy has not been read yet, read it first
