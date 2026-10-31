@@ -783,7 +783,7 @@ svg.wm-lg{ --torq-stroke:1.9; }
 .intro-orbs i:nth-child(1){ width:min(70vw,320px); height:min(70vw,320px); right:-14vw; top:-10vh; background:var(--accent); }
 .intro-orbs i:nth-child(2){ width:min(60vw,260px); height:min(60vw,260px); left:-14vw; bottom:6vh; background:var(--c-chem); animation-delay:-5s; }
 .intro-orbs i:nth-child(3){ width:min(40vw,180px); height:min(40vw,180px); right:10vw; bottom:-6vh; background:var(--c-maths); animation-delay:-9s; opacity:.35; }
-.intro-skip{ position:absolute; top:calc(14px + env(safe-area-inset-top,0px)); left:16px; background:none; border:0; color:var(--muted); font:600 14px Inter,sans-serif; cursor:pointer; padding:8px; }
+.intro-skip{ position:absolute; top:calc(14px + env(safe-area-inset-top,0px)); left:16px; background:none; border:0; color:var(--muted); font:600 12px Inter,sans-serif; cursor:pointer; padding:8px; }
 .intro-stage{ position:relative; width:min(92vw,460px); flex:1; min-height:0; display:flex; align-items:center; justify-content:center; }
 .intro-slide{ width:100%; animation:introIn .7s cubic-bezier(.2,.7,.2,1) both; }
 .intro-slide > *{ animation:introUp .7s cubic-bezier(.2,.7,.2,1) both; }
@@ -813,7 +813,7 @@ svg.wm-lg{ --torq-stroke:1.9; }
 .intro-title{ font-size:calc(clamp(32px,9vw,44px)*var(--k)); }
 .intro-body{ font-size:calc(16px*var(--k)); line-height:1.6; }
 .intro-next{ min-width:calc(150px*var(--k)); font-size:calc(15px*var(--k)); }
-.intro-skip{ font-size:calc(14px*var(--k)); }
+.intro-skip{ font-size:calc(10px*var(--k)); padding:4px 6px; }
 .intro-dot{ width:calc(8px*var(--k)); height:calc(8px*var(--k)); }
 .intro-dot.on{ width:calc(24px*var(--k)); }
 
@@ -878,6 +878,7 @@ svg.wm-lg{ --torq-stroke:1.9; }
 .navpanel.open{ opacity:1; transform:none; pointer-events:auto; }
 .navpanel .bn{ all:unset; box-sizing:border-box; display:flex; align-items:center; gap:12px; padding:12px 14px; border-radius:12px; color:var(--muted); font:500 15px Inter,sans-serif; cursor:pointer; }
 .navpanel .bn svg{ width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+.navpanel .bn{ position:relative; overflow:hidden; }
 .navpanel .bn:hover{ background:var(--surface-2); }
 .navpanel .bn.on{ background:var(--accent-soft); color:var(--accent); font-weight:600; }
 .navpanel .bn.disabled{ opacity:.45; cursor:default; }
@@ -892,13 +893,7 @@ body.has-nav .navpanel{ top:calc(66px + env(safe-area-inset-top,0px)); left:14px
 body.has-nav .bn{ flex:none; }
 
 /* ---------- Tour drawing (hand-drawn line art) ---------- */
-.intro-art{ position:relative; width:calc(200px*var(--k,1)); height:calc(200px*var(--k,1)); margin:0 auto calc(18px*var(--k,1)); animation:introFloat 9s ease-in-out infinite; }
-.intro-art svg{ width:100%; height:100%; overflow:visible; }
-.intro-art path{ fill:none; stroke:var(--accent); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;
   stroke-dasharray:1; stroke-dashoffset:1; animation:penDraw 1.25s cubic-bezier(.45,0,.25,1) forwards; animation-delay:calc(var(--i)*.22s + .25s); }
-.intro-art path.soft{ stroke:var(--c-chem); opacity:.7; }
-@keyframes penDraw{ to{ stroke-dashoffset:0; } }
-@keyframes introFloat{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-6px); } }
 @media (max-height:520px){ .intro-art{ width:calc(120px*var(--k,1)); height:calc(120px*var(--k,1)); margin-bottom:calc(10px*var(--k,1)); } }
 @media (prefers-reduced-motion: reduce){ .intro-art path{ animation:none; stroke-dashoffset:0; } .intro-art{ animation:none; } }
 .mock-notice{ position:fixed; left:50%; bottom:calc(28px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); z-index:120; max-width:min(92vw,420px);
@@ -937,6 +932,30 @@ body.has-nav .bn{ flex:none; }
 }
 /* ---------- Monochrome borders for the plain tags ---------- */
 .onb-tags span:not(.onb-tag-hot){ border:1px solid color-mix(in srgb, var(--text) 26%, transparent); background:color-mix(in srgb, var(--surface) 92%, var(--text) 8%); box-shadow:inset 0 1px 0 color-mix(in srgb, var(--text) 8%, transparent), 0 8px 18px -14px var(--shadow); }
+.navpanel .navsec{ font:600 11px Inter,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); padding:10px 14px 6px; }
+.navpanel .navdiv{ height:1px; background:var(--border); margin:6px 10px; }
+.navpanel .navsup svg{ opacity:.85; }
+.navpanel .navout{ color:#e5484d; }
+.navpanel .navout svg{ stroke:#e5484d; }
+.navpanel .navout:hover{ background:rgba(229,72,77,.08); }
+.navpanel .navprof{ all:unset; box-sizing:border-box; display:flex; align-items:center; gap:12px; padding:12px 12px; margin:2px 0 4px; border-radius:14px; cursor:pointer;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 16%,var(--surface-2)),var(--surface-2)); border:1px solid var(--border); }
+.navpanel .navprof:hover{ border-color:var(--accent); }
+.navpanel .navprof-av{ width:40px; height:40px; flex-shrink:0; border-radius:50%; overflow:hidden; display:grid; place-items:center; background:var(--accent); color:var(--bg); font:600 17px Lora,Georgia,serif; }
+.navpanel .navprof-av img{ width:100%; height:100%; object-fit:cover; }
+.navpanel .navprof-txt{ display:flex; flex-direction:column; min-width:0; gap:1px; }
+.navpanel .navprof-name{ font:600 15px Lora,Georgia,serif; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.navpanel .navprof-mail{ font-size:12px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.navpanel .navprof-link{ font-size:12px; color:var(--accent); margin-top:3px; }
+/* ---------- Back button: flashy gradient pill ---------- */
+.navback{ padding:10px 18px 10px 14px; border:1.5px solid transparent; border-radius:999px; font:600 14px Inter,sans-serif; letter-spacing:.02em; color:var(--text);
+  background:linear-gradient(var(--surface),var(--surface)) padding-box, linear-gradient(135deg,var(--accent),var(--c-chem) 60%,var(--accent)) border-box;
+  box-shadow:0 0 22px -8px color-mix(in srgb,var(--accent) 55%,transparent), 0 14px 28px -16px var(--shadow); transition:transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease; }
+.navback .nb-arrow{ display:inline-grid; place-items:center; width:24px; height:24px; border-radius:50%; font-size:14px; color:var(--bg); background:var(--accent); box-shadow:0 0 14px -2px var(--accent); transition:transform .3s cubic-bezier(.2,.7,.2,1); }
+.navback:hover{ transform:translateY(-1px); box-shadow:0 0 30px -6px color-mix(in srgb,var(--accent) 70%,transparent), 0 16px 30px -14px var(--shadow); }
+.navback:hover .nb-arrow{ transform:translateX(-3px); }
+.navback:active{ transform:scale(.97); }
+.navback:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
 /* ---------- Share: circular icon button and share sheet ---------- */
 .share-fab{ width:42px; height:42px; flex-shrink:0; border-radius:50%; display:grid; place-items:center; cursor:pointer;
   border:1.5px solid transparent; color:var(--accent); background:linear-gradient(var(--surface),var(--surface)) padding-box, linear-gradient(135deg,var(--accent),var(--c-chem)) border-box;
@@ -1270,12 +1289,17 @@ function chemSection(c){
 }
 // Canonical chapters (JEE Main 2027 syllabus, Paper 1). Generated from checker/syllabus_map.json.
 const SYLLABUS = {"Physics": ["Units and Measurements", "Kinematics", "Laws of Motion", "Work, Energy and Power", "Rotational Motion", "Gravitation", "Properties of Solids and Liquids", "Thermodynamics", "Kinetic Theory of Gases", "Oscillations and Waves", "Electrostatics", "Current Electricity", "Magnetic Effects of Current and Magnetism", "Electromagnetic Induction and Alternating Currents", "Electromagnetic Waves", "Optics", "Dual Nature of Matter and Radiation", "Atoms and Nuclei", "Electronic Devices", "Experimental Skills"], "Chemistry": ["Some Basic Concepts in Chemistry", "Atomic Structure", "Chemical Bonding and Molecular Structure", "Chemical Thermodynamics", "Solutions", "Equilibrium", "Redox Reactions and Electrochemistry", "Chemical Kinetics", "Classification of Elements and Periodicity in Properties", "p-Block Elements", "d- and f-Block Elements", "Coordination Compounds", "Purification and Characterisation of Organic Compounds", "Some Basic Principles of Organic Chemistry", "Hydrocarbons", "Organic Compounds Containing Halogens", "Organic Compounds Containing Oxygen", "Organic Compounds Containing Nitrogen", "Biomolecules", "Principles Related to Practical Chemistry"], "Maths": ["Sets, Relations and Functions", "Complex Numbers and Quadratic Equations", "Matrices and Determinants", "Permutations and Combinations", "Binomial Theorem", "Sequence and Series", "Limit, Continuity and Differentiability", "Integral Calculus", "Differential Equations", "Co-ordinate Geometry", "Three Dimensional Geometry", "Vector Algebra", "Statistics and Probability", "Trigonometry"]};
-const CANON_ALIAS = {"Physics": {"Ray Optics": "Optics", "Waves": "Oscillations and Waves", "Heat and Thermodynamics": "Thermodynamics", "Electromagnetism": "Magnetic Effects of Current and Magnetism", "Magnetism": "Magnetic Effects of Current and Magnetism", "Electromagnetic Induction": "Electromagnetic Induction and Alternating Currents", "Alternating Currents": "Electromagnetic Induction and Alternating Currents", "Modern Physics": "Dual Nature of Matter and Radiation", "Atomic Physics": "Atoms and Nuclei", "Nuclear Physics": "Atoms and Nuclei", "Semiconductors": "Electronic Devices", "Fluids": "Properties of Solids and Liquids", "Elasticity": "Properties of Solids and Liquids", "Gravity": "Gravitation", "Circular Motion": "Laws of Motion", "Friction": "Laws of Motion", "Center of Mass": "Rotational Motion", "Centre of Mass": "Rotational Motion", "Work and Energy": "Work, Energy and Power", "Energy": "Work, Energy and Power", "Capacitors": "Electrostatics", "Electric Circuits": "Current Electricity", "Circuits": "Current Electricity"}, "Chemistry": {"Some Basic Concepts": "Some Basic Concepts in Chemistry", "Periodicity": "Classification of Elements and Periodicity in Properties", "Electrochemistry": "Redox Reactions and Electrochemistry", "Redox Reactions": "Redox Reactions and Electrochemistry", "d and f Block Elements": "d- and f-Block Elements", "d-block Elements": "d- and f-Block Elements", "f-block Elements": "d- and f-Block Elements", "Coordination Chemistry": "Coordination Compounds", "Co-ordination Compounds": "Coordination Compounds", "Stereochemistry": "Some Basic Principles of Organic Chemistry", "Organic Nomenclature": "Some Basic Principles of Organic Chemistry", "Organic Basics": "Some Basic Principles of Organic Chemistry", "Aromatic Compounds": "Hydrocarbons", "Alkanes": "Hydrocarbons", "Alkenes": "Hydrocarbons", "Alkynes": "Hydrocarbons", "Aldehydes and Ketones": "Organic Compounds Containing Oxygen", "Alcohols and Phenols": "Organic Compounds Containing Oxygen", "Carboxylic Acids": "Organic Compounds Containing Oxygen", "Amines": "Organic Compounds Containing Nitrogen", "Haloalkanes and Haloarenes": "Organic Compounds Containing Halogens", "Haloalkanes": "Organic Compounds Containing Halogens", "Nuclear Chemistry (Kinetics)": "Chemical Kinetics", "Nuclear Chemistry": "Atomic Structure", "Chemical Equilibrium": "Equilibrium", "Ionic Equilibrium": "Equilibrium", "Chemical Thermodynamics and Equilibrium": "Chemical Thermodynamics", "Thermochemistry": "Chemical Thermodynamics", "Solution": "Solutions", "Mole Concept": "Some Basic Concepts in Chemistry", "Stoichiometry": "Some Basic Concepts in Chemistry", "Chemical Bonding": "Chemical Bonding and Molecular Structure", "Hydrogen Bonding": "Chemical Bonding and Molecular Structure", "Surface Chemistry": "Principles Related to Practical Chemistry", "Biology in Chemistry": "Biomolecules"}, "Maths": {"Sets, Relations and Function": "Sets, Relations and Functions", "Sets and Relations": "Sets, Relations and Functions", "Complex Numbers": "Complex Numbers and Quadratic Equations", "Quadratic Equations": "Complex Numbers and Quadratic Equations", "Matrices": "Matrices and Determinants", "Determinants": "Matrices and Determinants", "Permutations and Combinations": "Permutations and Combinations", "Permutation and Combination": "Permutations and Combinations", "Binomial Theorem and its Simple Applications": "Binomial Theorem", "Sequence": "Sequence and Series", "Series": "Sequence and Series", "Limits and Continuity": "Limit, Continuity and Differentiability", "Differentiability": "Limit, Continuity and Differentiability", "Continuity and Differentiability": "Limit, Continuity and Differentiability", "Differentiation": "Limit, Continuity and Differentiability", "Application of Derivatives": "Limit, Continuity and Differentiability", "Logarithmic and Exponential Functions": "Limit, Continuity and Differentiability", "Integration": "Integral Calculus", "Integrals": "Integral Calculus", "Definite Integrals": "Integral Calculus", "Area under curves": "Integral Calculus", "Differential Equation": "Differential Equations", "Coordinate Geometry": "Co-ordinate Geometry", "Co-ordinate geometry": "Co-ordinate Geometry", "Straight Lines": "Co-ordinate Geometry", "Straight Line": "Co-ordinate Geometry", "Conic Sections": "Co-ordinate Geometry", "Circles": "Co-ordinate Geometry", "Parabola": "Co-ordinate Geometry", "Ellipse": "Co-ordinate Geometry", "Hyperbola": "Co-ordinate Geometry", "3D Geometry": "Three Dimensional Geometry", "3-D Geometry": "Three Dimensional Geometry", "Vectors": "Vector Algebra", "Vector": "Vector Algebra", "Probability": "Statistics and Probability", "Statistics": "Statistics and Probability", "Inverse Trigonometric Functions": "Trigonometry", "Trigonometric Functions": "Trigonometry", "Trigonometric Equations": "Trigonometry", "Sets": "Sets, Relations and Functions", "Relations and Functions": "Sets, Relations and Functions", "Complex Number": "Complex Numbers and Quadratic Equations"}};
+const CANON_ALIAS = {"Physics": {"Ray Optics": "Optics", "Waves": "Oscillations and Waves", "Heat and Thermodynamics": "Thermodynamics", "Electromagnetism": "Magnetic Effects of Current and Magnetism", "Magnetism": "Magnetic Effects of Current and Magnetism", "Electromagnetic Induction": "Electromagnetic Induction and Alternating Currents", "Alternating Currents": "Electromagnetic Induction and Alternating Currents", "Modern Physics": "Dual Nature of Matter and Radiation", "Atomic Physics": "Atoms and Nuclei", "Nuclear Physics": "Atoms and Nuclei", "Semiconductors": "Electronic Devices", "Fluids": "Properties of Solids and Liquids", "Elasticity": "Properties of Solids and Liquids", "Gravity": "Gravitation", "Circular Motion": "Laws of Motion", "Friction": "Laws of Motion", "Center of Mass": "Rotational Motion", "Centre of Mass": "Rotational Motion", "Work and Energy": "Work, Energy and Power", "Energy": "Work, Energy and Power", "Capacitors": "Electrostatics", "Electric Circuits": "Current Electricity", "Circuits": "Current Electricity", "Units and Dimensions": "Units and Measurements", "Fluid Mechanics": "Properties of Solids and Liquids", "Momentum and Collisions": "Work, Energy and Power", "Magnetic Effects of Current": "Magnetic Effects of Current and Magnetism", "Dual Nature of Matter": "Dual Nature of Matter and Radiation", "Atoms": "Atoms and Nuclei", "Nuclei": "Atoms and Nuclei", "Semiconductor Electronics": "Electronic Devices", "Projectile Motion": "Kinematics", "Oscillations": "Oscillations and Waves", "Capacitance": "Electrostatics", "Moving Charges and Magnetism": "Magnetic Effects of Current and Magnetism", "Wave Optics": "Optics"}, "Chemistry": {"Some Basic Concepts": "Some Basic Concepts in Chemistry", "Periodicity": "Classification of Elements and Periodicity in Properties", "Electrochemistry": "Redox Reactions and Electrochemistry", "Redox Reactions": "Redox Reactions and Electrochemistry", "d and f Block Elements": "d- and f-Block Elements", "d-block Elements": "d- and f-Block Elements", "f-block Elements": "d- and f-Block Elements", "Coordination Chemistry": "Coordination Compounds", "Co-ordination Compounds": "Coordination Compounds", "Stereochemistry": "Some Basic Principles of Organic Chemistry", "Organic Nomenclature": "Some Basic Principles of Organic Chemistry", "Organic Basics": "Some Basic Principles of Organic Chemistry", "Aromatic Compounds": "Hydrocarbons", "Alkanes": "Hydrocarbons", "Alkenes": "Hydrocarbons", "Alkynes": "Hydrocarbons", "Aldehydes and Ketones": "Organic Compounds Containing Oxygen", "Alcohols and Phenols": "Organic Compounds Containing Oxygen", "Carboxylic Acids": "Organic Compounds Containing Oxygen", "Amines": "Organic Compounds Containing Nitrogen", "Haloalkanes and Haloarenes": "Organic Compounds Containing Halogens", "Haloalkanes": "Organic Compounds Containing Halogens", "Nuclear Chemistry (Kinetics)": "Chemical Kinetics", "Nuclear Chemistry": "Atomic Structure", "Chemical Equilibrium": "Equilibrium", "Ionic Equilibrium": "Equilibrium", "Chemical Thermodynamics and Equilibrium": "Chemical Thermodynamics", "Thermochemistry": "Chemical Thermodynamics", "Solution": "Solutions", "Mole Concept": "Some Basic Concepts in Chemistry", "Stoichiometry": "Some Basic Concepts in Chemistry", "Chemical Bonding": "Chemical Bonding and Molecular Structure", "Hydrogen Bonding": "Chemical Bonding and Molecular Structure", "Surface Chemistry": "Principles Related to Practical Chemistry", "Biology in Chemistry": "Biomolecules", "Periodic Table": "Classification of Elements and Periodicity in Properties", "Classification of Elements": "Classification of Elements and Periodicity in Properties", "Noble Gases": "p-Block Elements", "Reactive Intermediates": "Some Basic Principles of Organic Chemistry", "Nomenclature": "Some Basic Principles of Organic Chemistry", "Purification": "Purification and Characterisation of Organic Compounds", "Phenols": "Organic Compounds Containing Oxygen", "Alcohols": "Organic Compounds Containing Oxygen", "Qualitative Analysis": "Principles Related to Practical Chemistry", "Carbohydrates": "Biomolecules", "Thermodynamics": "Chemical Thermodynamics"}, "Maths": {"Sets, Relations and Function": "Sets, Relations and Functions", "Sets and Relations": "Sets, Relations and Functions", "Complex Numbers": "Complex Numbers and Quadratic Equations", "Quadratic Equations": "Complex Numbers and Quadratic Equations", "Matrices": "Matrices and Determinants", "Determinants": "Matrices and Determinants", "Permutations and Combinations": "Permutations and Combinations", "Permutation and Combination": "Permutations and Combinations", "Binomial Theorem and its Simple Applications": "Binomial Theorem", "Sequence": "Sequence and Series", "Series": "Sequence and Series", "Limits and Continuity": "Limit, Continuity and Differentiability", "Differentiability": "Limit, Continuity and Differentiability", "Continuity and Differentiability": "Limit, Continuity and Differentiability", "Differentiation": "Limit, Continuity and Differentiability", "Application of Derivatives": "Limit, Continuity and Differentiability", "Logarithmic and Exponential Functions": "Limit, Continuity and Differentiability", "Integration": "Integral Calculus", "Integrals": "Integral Calculus", "Definite Integrals": "Integral Calculus", "Area under curves": "Integral Calculus", "Differential Equation": "Differential Equations", "Coordinate Geometry": "Co-ordinate Geometry", "Co-ordinate geometry": "Co-ordinate Geometry", "Straight Lines": "Co-ordinate Geometry", "Straight Line": "Co-ordinate Geometry", "Conic Sections": "Co-ordinate Geometry", "Circles": "Co-ordinate Geometry", "Parabola": "Co-ordinate Geometry", "Ellipse": "Co-ordinate Geometry", "Hyperbola": "Co-ordinate Geometry", "3D Geometry": "Three Dimensional Geometry", "3-D Geometry": "Three Dimensional Geometry", "Vectors": "Vector Algebra", "Vector": "Vector Algebra", "Probability": "Statistics and Probability", "Statistics": "Statistics and Probability", "Inverse Trigonometric Functions": "Trigonometry", "Trigonometric Functions": "Trigonometry", "Trigonometric Equations": "Trigonometry", "Sets": "Sets, Relations and Functions", "Relations and Functions": "Sets, Relations and Functions", "Complex Number": "Complex Numbers and Quadratic Equations", "Limits": "Limit, Continuity and Differentiability", "Functions": "Sets, Relations and Functions", "Relations": "Sets, Relations and Functions", "Functions and Integration": "Integral Calculus", "Sequences and Series": "Sequence and Series"}};
+// Chapter names are matched loosely: case, spaces, punctuation and "&" versus "and" are ignored.
+const chapKey = x => String(x||'').toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]/g,'');
 function canonChapter(subject, name){
   const list = SYLLABUS[subject]||[];
   if(list.indexOf(name)>=0) return name;
   const hit = (CANON_ALIAS[subject]||{})[name];
-  return hit || name;
+  if(hit) return hit;
+  const k = chapKey(name);
+  const loose = list.find(c=>chapKey(c)===k);
+  return loose || name;
 }
 
 // ---------- Lookups ----------
@@ -1621,7 +1645,7 @@ const INTRO_SLIDES = [
  {eyebrow:'Formula cards and your notebook', title:'Every formula, <em>one glance away.</em>', body:'Formula cards for each chapter, plus your own solutions. Only you can see what you write.', icon:'<rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 10h8M8 14h5"/>'},
  {eyebrow:'Daily rhythm', title:'A question a day, <em>a streak that means something.</em>', body:'Forty questions counts toward your daily goal, and your streak grows only when you answer the question of the day. Exam countdowns sit right on the home screen.', icon:'<path d="M12 3c2 3 5 5 5 9a5 5 0 0 1-10 0c0-2 1-3 2-4 .5 1.5 1.5 2 2.5 2 0-3 .5-5 .5-7z"/>'}
 ];
-const TOUR_ART = ["<div class=\"intro-art\" aria-hidden=\"true\"><svg viewBox=\"0 0 200 200\"><path pathLength=\"1\" style=\"--i:0\" transform=\"rotate(0 100 100)\" d=\"M100 100 m-72 0 a72 26 0 1 0 144 0 a72 26 0 1 0 -144 0\"/><path pathLength=\"1\" style=\"--i:1\" class=\"soft\" transform=\"rotate(60 100 100)\" d=\"M100 100 m-72 0 a72 26 0 1 0 144 0 a72 26 0 1 0 -144 0\"/><path pathLength=\"1\" style=\"--i:2\" class=\"soft\" transform=\"rotate(-60 100 100)\" d=\"M100 100 m-72 0 a72 26 0 1 0 144 0 a72 26 0 1 0 -144 0\"/><path pathLength=\"1\" style=\"--i:3\" d=\"M100 100 m-9 0 a9 9 0 1 0 18 0 a9 9 0 1 0 -18 0\"/><path pathLength=\"1\" style=\"--i:4\" class=\"soft\" d=\"M164 34 l4 -12 l4 12 l12 4 l-12 4 l-4 12 l-4 -12 l-12 -4z\"/></svg></div>", "<div class=\"intro-art\" aria-hidden=\"true\"><svg viewBox=\"0 0 200 200\"><path pathLength=\"1\" style=\"--i:0\" d=\"M62 58 h76 a10 10 0 0 1 10 10 v64 a10 10 0 0 1 -10 10 h-76 a10 10 0 0 1 -10 -10 v-64 a10 10 0 0 1 10 -10z\"/><path pathLength=\"1\" style=\"--i:1\" d=\"M80 100 l14 14 l28 -32\"/><path pathLength=\"1\" style=\"--i:2\" class=\"soft\" d=\"M52 150 h96\"/><path pathLength=\"1\" style=\"--i:3\" class=\"soft\" d=\"M62 170 h76\"/></svg></div>", "<div class=\"intro-art\" aria-hidden=\"true\"><svg viewBox=\"0 0 200 200\"><path pathLength=\"1\" style=\"--i:0\" d=\"M58 36 h70 a12 12 0 0 1 12 12 v116 h-82 z\"/><path pathLength=\"1\" style=\"--i:1\" d=\"M74 70 h44\"/><path pathLength=\"1\" style=\"--i:2\" d=\"M74 92 h52\"/><path pathLength=\"1\" style=\"--i:3\" d=\"M74 114 h36\"/><path pathLength=\"1\" style=\"--i:4\" class=\"soft\" d=\"M74 140 q9 -14 18 0 t18 0 t18 0\"/></svg></div>", "<div class=\"intro-art\" aria-hidden=\"true\"><svg viewBox=\"0 0 200 200\"><path pathLength=\"1\" style=\"--i:0\" d=\"M100 44 a56 56 0 1 0 0.1 0\"/><path pathLength=\"1\" style=\"--i:1\" d=\"M100 100 v-30\"/><path pathLength=\"1\" style=\"--i:2\" d=\"M100 100 l22 14\"/><path pathLength=\"1\" style=\"--i:3\" d=\"M100 52 v8\"/><path pathLength=\"1\" style=\"--i:4\" d=\"M148 100 h-8\"/><path pathLength=\"1\" style=\"--i:5\" d=\"M100 148 v-8\"/><path pathLength=\"1\" style=\"--i:6\" class=\"soft\" d=\"M52 100 h8\"/></svg></div>", "<div class=\"intro-art\" aria-hidden=\"true\"><svg viewBox=\"0 0 200 200\"><path pathLength=\"1\" style=\"--i:0\" d=\"M86 86 a28 28 0 1 0 0.1 0\"/><path pathLength=\"1\" style=\"--i:1\" d=\"M106 106 l34 34\"/><path pathLength=\"1\" style=\"--i:2\" class=\"soft\" d=\"M50 160 h110\"/><path pathLength=\"1\" style=\"--i:3\" class=\"soft\" d=\"M58 140 l28 -24 l22 14 l36 -36\"/></svg></div>", "<div class=\"intro-art\" aria-hidden=\"true\"><svg viewBox=\"0 0 200 200\"><path pathLength=\"1\" style=\"--i:0\" d=\"M52 66 h96 v70 h-96 z\"/><path pathLength=\"1\" style=\"--i:1\" class=\"soft\" d=\"M66 52 h96 v70\"/><path pathLength=\"1\" style=\"--i:2\" d=\"M80 110 h44\"/><path pathLength=\"1\" style=\"--i:3\" class=\"soft\" d=\"M92 124 h22\"/></svg></div>", "<div class=\"intro-art\" aria-hidden=\"true\"><svg viewBox=\"0 0 200 200\"><path pathLength=\"1\" style=\"--i:0\" d=\"M56 62 h88 v88 h-88 z\"/><path pathLength=\"1\" style=\"--i:1\" d=\"M56 84 h88\"/><path pathLength=\"1\" style=\"--i:2\" d=\"M80 52 v18\"/><path pathLength=\"1\" style=\"--i:3\" d=\"M120 52 v18\"/><path pathLength=\"1\" style=\"--i:4\" d=\"M80 118 l10 10 l22 -22\"/><path pathLength=\"1\" style=\"--i:5\" class=\"soft\" d=\"M114 124 h18\"/></svg></div>"];
+const TOUR_ART = ["","","","","","",""];
 function showIntro(){
   if(document.getElementById('introOv')) return;
   let i = 0;
@@ -2266,7 +2290,7 @@ function addBackCard(){
   if(!c){
     c = document.createElement('button');
     c.id = 'navBack'; c.className = 'navback'; c.type = 'button'; c.setAttribute('aria-label','Back');
-    c.innerHTML = '<span aria-hidden="true">&larr;</span> Back';
+    c.innerHTML = '<span class="nb-arrow" aria-hidden="true">&#8592;</span><span class="nb-label">Back</span>';
     c.onclick = ()=>{ if(mockLocked()){ mockNotice(); return; } if(session && session.review){ exitReview(); return; } requestLeave(()=>{ if((window.__depth||0)>0) history.back(); else go('home'); }); };
     document.body.appendChild(c);
   }
@@ -2348,13 +2372,57 @@ function mountNav(){
   document.body.appendChild(bottomNav());
   setNavOpen(navOpen);
 }
+const SUPPORT_ITEMS = [
+  ['contact','Contact Us','<path d="M4 12a8 8 0 1 1 3 6.2L4 19l.9-3.1A8 8 0 0 1 4 12z"/>'],
+  ['privacy','Privacy Policy','<path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/>'],
+  ['terms','Terms of Service','<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>'],
+  ['disclaimer','Disclaimer','<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>']
+];
+function openLegal(focus){
+  if(mockLocked()){ mockNotice(); return; }
+  setNavOpen(false);
+  window.__legalFocus = focus;
+  go('me', {meTab:'legal'});
+}
+function navProfileEl(){
+  const p = store.profile || {};
+  const name = [p.name, p.surname].filter(Boolean).join(' ') || p.username || 'Your profile';
+  const av = loadAvatarCache();
+  const pic = av ? '<img alt="" src="'+av+'">' : '<i>'+esc((name||'?').trim().charAt(0).toUpperCase())+'</i>';
+  const card = el('<button class="navprof" type="button"><span class="navprof-av">'+pic+'</span>'
+    +'<span class="navprof-txt"><span class="navprof-name">'+esc(name)+'</span>'
+    +'<span class="navprof-mail">'+esc((sbSession && sbSession.user && sbSession.user.email) || '')+'</span>'
+    +'<span class="navprof-link">View Profile &rarr;</span></span></button>');
+  card.onclick = ()=>{ if(mockLocked()){ mockNotice(); return; } setNavOpen(false); go('me', {meTab:'profile'}); };
+  return card;
+}
 function bottomNav(){
   const bar = el('<nav class="bottomnav navpanel" aria-label="Main"></nav>');
+  if(store.profile) bar.appendChild(navProfileEl());
+  bar.appendChild(el('<div class="navsec">Main</div>'));
   TABS.forEach(t=>{
     const b = el('<button class="bn '+(nav.tab===t.id?'on':'')+(t.disabled?' disabled':'')+'"'+(t.disabled?' disabled aria-disabled="true" title="'+esc(t.title||'Coming soon')+'"':'')+'><svg viewBox="0 0 24 24">'+t.icon+'</svg><span>'+t.label+'</span></button>');
     if(!t.disabled) b.onclick = ()=>{ if(mockLocked()){ mockNotice(); return; } setNavOpen(false); go(t.id); };
     bar.appendChild(b);
   });
+  bar.appendChild(el('<div class="navdiv" aria-hidden="true"></div>'));
+  bar.appendChild(el('<div class="navsec">Support</div>'));
+  SUPPORT_ITEMS.forEach(it=>{
+    const b = el('<button class="bn navsup"><svg viewBox="0 0 24 24">'+it[2]+'</svg><span>'+esc(it[1])+'</span></button>');
+    b.onclick = ()=>openLegal(it[0]);
+    bar.appendChild(b);
+  });
+  if(sbSession){
+    bar.appendChild(el('<div class="navdiv" aria-hidden="true"></div>'));
+    const out = el('<button class="bn navout"><svg viewBox="0 0 24 24"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"/><path d="M10 8l-4 4 4 4M6 12h9"/></svg><span>Logout</span></button>');
+    out.onclick = ()=>{
+      if(mockLocked()){ mockNotice(); return; }
+      if(!confirm('Log out? Answers that have not synced yet will be removed from this device.')) return;
+      setNavOpen(false);
+      logOutNow();
+    };
+    bar.appendChild(out);
+  }
   return bar;
 }
 function back(label, fn){ return el('<div></div>'); } // the Back card at the top right replaces the in-page links
@@ -2844,7 +2912,7 @@ function pyqView(){
     tabSeg.appendChild(b);
   });
   const tabRow = el('<div class="row" style="padding:0;border:none;align-items:center;gap:10px"></div>');
-  tabRow.appendChild(tabSeg); tabRow.firstChild.style.flex='1';
+  tabRow.appendChild(tabSeg); tabRow.firstChild.style.flex='1'; tabRow.firstChild.style.margin='0';
   const shareTop = shareFab('Practicing JEE previous year questions on TORQ, with solutions and mock tests.', 'Share TORQ');
   tabRow.appendChild(shareTop);
   w.appendChild(tabRow);
@@ -2856,7 +2924,8 @@ function pyqView(){
   chaptersOf(nav.subject).forEach(c=>{
     if(nav.subject==='Chemistry'){ const sec = chemSection(c); if(sec!==lastSec){ list.appendChild(el('<div class="sec-head">'+esc(sec)+'</div>')); lastSec = sec; } }
     const st = chapterStats(c);
-    const row = barRow(c, st.acc, '');
+    const nq = QUESTIONS.filter(q=>q.subject===nav.subject && q.chapter===c).length;
+    const row = barRow(c, st.acc, nq ? nq+' question'+(nq>1?'s':'') : '');
     row.style.cursor='pointer';
     if(CH_ICONS[c]){ const main = row.firstChild; const grp = el('<div style="display:flex;align-items:center;min-width:0;flex:1"></div>'); grp.appendChild(el(chIcon(c))); grp.appendChild(main); row.insertBefore(grp, row.firstChild); }
     row.onclick = ()=>go('chapter',{chapter:c, topicSel:[]});
@@ -3661,8 +3730,8 @@ function notebookCard(q, showNote){
 }
 
 // ----- About and legal: privacy, contact, copyright and the independence notice -----
-function legalSection(title, paras){
-  const c = el('<div class="card"><div class="eyebrow">'+esc(title)+'</div></div>');
+function legalSection(title, paras, id){
+  const c = el('<div class="card"'+(id?' id="'+id+'"':'')+'><div class="eyebrow">'+esc(title)+'</div></div>');
   paras.forEach(t=>c.appendChild(el('<p class="nt-p" style="margin:8px 0 0">'+esc(t)+'</p>')));
   return c;
 }
@@ -3708,7 +3777,7 @@ function legalPart(){
     'Leaderboard. Other users see only your username and photo, and only if you choose to be visible. Otherwise you appear as Anonymous User.',
     'Your choices. You can change your profile and leaderboard visibility at any time, and ask us to delete your account and data through the contact form.',
     'Children. If you are under 18, please ask a parent or guardian to help you with sign-up and contact details.'
-  ]));
+  ], 'privacy'));
   w.appendChild(legalSection('Copyright', [
     'The app, its design, its notes, formula cards, explanations and worked examples are copyright TORQ, 2026. Please do not copy or redistribute them without permission.',
     'Question papers are the public previous-year papers used for practice. All trademarks and names belong to their owners.'
@@ -3716,8 +3785,24 @@ function legalPart(){
   w.appendChild(legalSection('Independence notice', [
     'TORQ is an independent study app. It is not affiliated with, endorsed by, or approved by the National Testing Agency (NTA), NCERT, the Indian Institutes of Technology (IITs), or any other examination or government body.',
     'For official dates, syllabus, and rules, always check the official websites of the examination authority.'
-  ]));
-  w.appendChild(contactForm());
+  ], 'disclaimer'));
+  w.appendChild(legalSection('Terms of service', [
+    'Draft for review. These terms apply when you use TORQ.',
+    '1. Using TORQ. TORQ is a study app for JEE preparation. You must be able to form a binding agreement, or have a parent or guardian agree for you if you are under 18. You agree to use the app only for lawful, personal study.',
+    '2. Your account. You are responsible for keeping your login details private and for activity on your account. Tell us at once if you think someone else has used it. Provide accurate details, including your age and exam.',
+    '3. What you give us. Your account details, study activity, notes and contact messages, as described in the privacy policy. You keep ownership of your own notes, solutions and profile content, and you give TORQ permission to store and show them to you across your devices.',
+    '4. Leaderboard. If you choose to be visible, your username and photo may be shown to other users. Do not use an offensive name, photo or username. We may remove any content or account that breaks these terms.',
+    '5. Acceptable use. Do not copy, resell or scrape TORQ, its notes, formula cards or explanations, or try to access the app\'s data, servers or other users\' accounts. Do not interfere with the app, bypass its limits or submit false reports.',
+    '6. Study content. TORQ provides practice material, notes and explanations to help you study. It does not guarantee any result in any exam. Check official sources for dates, syllabus and rules.',
+    '7. Independence. TORQ is not affiliated with the National Testing Agency, NCERT, the IITs or any exam body. See the Disclaimer for details.',
+    '8. Ending your account. You can log out or delete your account at any time from your profile. We may suspend an account that breaks these terms.',
+    '9. No warranty. TORQ is provided as is, without warranties of any kind, to the extent the law allows. We are not liable for indirect loss arising from your use of the app.',
+    '10. Changes. We may update these terms. We will show the date of the latest update here. Continued use after an update means you accept the new terms.',
+    '11. Contact. Questions about these terms can be sent through the Contact Us form on this page.'
+  ], 'terms'));
+  const cf = contactForm(); cf.id = 'contact'; w.appendChild(cf);
+  const focus = window.__legalFocus; window.__legalFocus = null;
+  if(focus) setTimeout(()=>{ const t = document.getElementById(focus); if(t) t.scrollIntoView({behavior:'smooth', block:'start'}); }, 80);
   return w;
 }
 function notebooksView(){
