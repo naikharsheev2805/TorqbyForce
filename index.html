@@ -363,11 +363,11 @@ details summary::-webkit-details-marker{display:none;}
 
 /* ---------- Subject cards (PYQs) ---------- */
 .subjgrid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(8px,2vw,14px); margin:0 0 18px; width:100%;}
-.subjcard{position:relative; display:flex; flex-direction:column; min-width:0; padding:0; border:1px solid var(--border); border-radius:var(--r-lg);
+.subjcard{position:relative; overflow:hidden; isolation:isolate; display:flex; flex-direction:column; min-width:0; padding:0; border:1px solid var(--border); border-radius:var(--r-lg);
   overflow:hidden; background:var(--surface); color:var(--text); cursor:pointer; text-align:left; font:inherit; transition:transform .18s, border-color .18s, box-shadow .18s;}
 .subjcard:hover{transform:translateY(-2px); border-color:var(--accent);}
 .subjcard.on{border-color:var(--accent); box-shadow:0 0 0 2px var(--accent-soft);}
-.subjart{position:relative; width:100%; aspect-ratio:4/5; overflow:hidden; background:var(--surface-2);}
+.subjart{position:relative; width:100%; aspect-ratio:4/5; overflow:hidden; background:var(--surface-2); isolation:isolate; -webkit-mask-image:-webkit-radial-gradient(white,black); transform:translateZ(0);}
 .subjart svg{position:absolute; inset:0; width:100%; height:100%; display:block;}
 .subjlabel{padding:clamp(8px,2.2vw,16px) clamp(10px,2.6vw,18px) clamp(10px,2.4vw,16px);}
 .subjlabel b{display:block; font:600 clamp(14px,3.8vw,22px)/1.2 Lora,Georgia,serif; letter-spacing:.005em;}
@@ -1168,6 +1168,7 @@ function poolFor(cfg){
     (!cfg.subject || q.subject===cfg.subject) &&
     (!cfg.chapter || q.chapter===cfg.chapter) &&
     (!cfg.topic || q.topic===cfg.topic) &&
+    (!cfg.topics || !cfg.topics.length || cfg.topics.indexOf(q.topic)>=0) &&
     yrs.indexOf(q.year)>=0 &&
     (cfg.diff==='All' || q.difficulty===cfg.diff) &&
     (cfg.shift==='All' || q.shift===cfg.shift) &&
@@ -2100,7 +2101,7 @@ function pyqView(){
     +'<div class="hm-eyebrow">Previous year questions</div>'
     +'<h1 class="hm-title">Learn from <em>the papers.</em></h1></div>'));
   const tabSeg = el('<div class="seg"></div>');
-  [['questions','Questions'],['papers','Papers']].forEach(p=>{
+  [['questions','Questions'],['papers','Papers'],['custom','Custom test']].forEach(p=>{
     const b = el('<button class="'+(nav.pyqTab===p[0]?'on':'')+'">'+p[1]+'</button>');
     b.onclick = ()=>go('pyq',{pyqTab:p[0]});
     tabSeg.appendChild(b);
@@ -2112,17 +2113,17 @@ function pyqView(){
   tabRow.appendChild(shareTop);
   w.appendChild(tabRow);
   if(nav.pyqTab==='papers'){ w.appendChild(papersPart()); return w; }
+  if(nav.pyqTab==='custom'){ w.appendChild(customTestPart()); return w; }
   w.appendChild(subjectCards());
   const list = el('<div class="list"></div>');
   let lastSec = null;
   chaptersOf(nav.subject).forEach(c=>{
     if(nav.subject==='Chemistry'){ const sec = chemSection(c); if(sec!==lastSec){ list.appendChild(el('<div class="sec-head">'+esc(sec)+'</div>')); lastSec = sec; } }
-    const n = QUESTIONS.filter(q=>q.subject===nav.subject && q.chapter===c).length;
     const st = chapterStats(c);
-    const row = barRow(c, st.acc, n+' question'+(n>1?'s':''));
+    const row = barRow(c, st.acc, '');
     row.style.cursor='pointer';
     if(CH_ICONS[c]){ const main = row.firstChild; const grp = el('<div style="display:flex;align-items:center;min-width:0;flex:1"></div>'); grp.appendChild(el(chIcon(c))); grp.appendChild(main); row.insertBefore(grp, row.firstChild); }
-    row.onclick = ()=>go('chapter',{chapter:c});
+    row.onclick = ()=>go('chapter',{chapter:c, topicSel:[]});
     list.appendChild(row);
   });
   w.appendChild(list);
@@ -2320,17 +2321,20 @@ function chapterView(){
   w.appendChild(pb);
   if(NOTES[c]){ const nb = el('<button class="btn secondary block" style="margin-top:10px">Revision notes and formula sheet</button>'); nb.onclick = ()=>go('notes',{chapter:c}); w.appendChild(nb); }
 
-  w.appendChild(el('<div class="eyebrow" style="margin:24px 0 8px">Topics</div>'));
-  const list = el('<div class="list"></div>');
+  w.appendChild(el('<div class="eyebrow" style="margin:24px 0 8px">Subtopics</div>'));
+  w.appendChild(el('<p class="note-line" style="margin:0 0 10px">Tap the subtopics you want, then practise just those.</p>'));
+  const sel = nav.topicSel || [];
+  const tchips = el('<div class="chips"></div>');
   topicsOf(s,c).forEach(t=>{
-    const n = QUESTIONS.filter(q=>q.subject===s && q.chapter===c && q.topic===t).length;
-    const ts = topicStats(c,t);
-    const row = barRow(t, ts.acc, n+' question'+(n>1?'s':''));
-    row.style.cursor='pointer';
-    row.onclick = ()=>go('setup',{cfg:defaultCfg({subject:s, chapter:c, topic:t})});
-    list.appendChild(row);
+    const on = sel.indexOf(t)>=0;
+    const b = el('<button class="chip '+(on?'on':'')+'" aria-pressed="'+(on?'true':'false')+'">'+esc(t)+'</button>');
+    b.onclick = ()=>{ nav.topicSel = on ? sel.filter(x=>x!==t) : sel.concat([t]); render(); };
+    tchips.appendChild(b);
   });
-  w.appendChild(list);
+  w.appendChild(tchips);
+  const sb = el('<button class="btn block" style="margin-top:12px"'+(sel.length?'':' disabled')+'>'+(sel.length ? 'Practise '+sel.length+' selected subtopic'+(sel.length>1?'s':'') : 'Select subtopics to practise')+'</button>');
+  sb.onclick = ()=>go('setup',{cfg:defaultCfg({subject:s, chapter:c, topics:sel.slice()})});
+  w.appendChild(sb);
 
   const fx = FORMULAS[c] || [];
   const body = fx.map(f=>'<div class="fx"><div class="f">'+esc(f.f)+'</div><div class="fl">'+esc(f.t)+'</div></div>').join('') || '<div class="empty">No formula cards yet.</div>';
@@ -2343,8 +2347,9 @@ function setupView(){
   const cfg = nav.cfg || defaultCfg({});
   const w = el('<div></div>');
   w.appendChild(back(cfg.chapter?cfg.chapter:'PYQs', ()=>go(cfg.chapter?'chapter':'pyq')));
-  const scope = cfg.topic || cfg.chapter || cfg.subject || 'All questions';
-  w.appendChild(el('<div class="eyebrow">'+esc(cfg.topic?cfg.chapter+' · topic':'Set up practice')+'</div>'));
+  const chosen = cfg.topics && cfg.topics.length ? cfg.topics.join(', ') : null;
+  const scope = chosen || cfg.topic || cfg.chapter || cfg.subject || 'All questions';
+  w.appendChild(el('<div class="eyebrow">'+esc(chosen||cfg.topic?cfg.chapter+' · subtopics':'Set up practice')+'</div>'));
   w.appendChild(el('<h1 class="title">'+esc(scope)+'</h1>'));
   w.appendChild(el('<p class="sub">Choose the years and filters, then start.</p>'));
 
@@ -2377,6 +2382,43 @@ function setupView(){
 }
 
 // ----- Mocks -----
+
+// Custom test: pick chapters across subjects, then a length and time
+function customTestPart(){
+  const tc = testCfg();
+  const w = el('<div></div>');
+  w.appendChild(el('<div class="eyebrow" style="margin:6px 0 10px">Custom test</div>'));
+  w.appendChild(el('<p class="note-line" style="margin:0 0 12px">Choose the chapters you want in the paper. Questions are drawn at random from them.</p>'));
+  const cc = el('<div class="card"></div>');
+  SUBJECTS.forEach(sub=>{
+    const chs = (SYLLABUS[sub]||[]);
+    if(!chs.length) return;
+    cc.appendChild(el('<div class="field">'+sub+'</div>'));
+    const row = el('<div class="chips"></div>');
+    chs.forEach(c=>{
+      const on = tc.chapters.indexOf(c)>=0;
+      const b = el('<button class="chip '+(on?'on':'')+'" aria-pressed="'+(on?'true':'false')+'">'+esc(c)+'</button>');
+      b.onclick = ()=>{ tc.chapters = on ? tc.chapters.filter(x=>x!==c) : tc.chapters.concat([c]); render(); };
+      row.appendChild(b);
+    });
+    cc.appendChild(row);
+  });
+  const tw = el('<div class="two" style="margin-top:6px"></div>');
+  tw.appendChild(pickerField('Questions', [10,20,30,40].map(n=>({v:n,l:n+' questions'})), tc.n, v=>{ tc.n = v; render(); }));
+  tw.appendChild(pickerField('Time', [30,60,90,120].map(n=>({v:n,l:n+' minutes'})), tc.minutes, v=>{ tc.minutes = v; render(); }));
+  cc.appendChild(tw);
+  cc.appendChild(el('<p class="note-line">'+(tc.chapters.length ? tc.chapters.length+' chapter'+(tc.chapters.length>1?'s':'')+' selected' : 'Select one or more chapters to begin.')+'</p>'));
+  const cb = el('<button class="btn block" style="margin-top:14px"'+(tc.chapters.length?'':' disabled')+'>Start my test</button>');
+  cb.onclick = ()=>{
+    const pool = shuffle(QUESTIONS.filter(q=>tc.chapters.indexOf(q.chapter)>=0));
+    if(!pool.length){ alert('No questions in the chosen chapters yet.'); return; }
+    startSession({mode:'mock', title:'Custom test', queue:pool.slice(0, tc.n), limit:tc.minutes*60});
+  };
+  cc.appendChild(cb);
+  w.appendChild(cc);
+  return w;
+}
+
 function testCfg(){ return nav.testCfg || (nav.testCfg = {chapters:[], n:20, minutes:60}); }
 function mocksView(){
   const w = el('<div></div>');
@@ -2399,38 +2441,6 @@ function mocksView(){
     pl.appendChild(row);
   });
   if(papers.length) w.appendChild(pl);
-
-  // Create your own test: pick chapters across subjects
-  const tc = testCfg();
-  const cc = el('<div class="card" style="margin-top:18px"><div class="eyebrow">Create your own test</div><h3>Pick the chapters</h3></div>');
-  SUBJECTS.forEach(sub=>{
-    const chs = (SYLLABUS[sub]||[]);
-    if(!chs.length) return;
-    cc.appendChild(el('<div class="field">'+sub+'</div>'));
-    const row = el('<div class="chips"></div>');
-    chs.forEach(c=>{
-      const on = tc.chapters.indexOf(c)>=0;
-      const count = QUESTIONS.filter(q=>q.chapter===c).length;
-      const b = el('<button class="chip '+(on?'on':'')+'">'+esc(c)+(count?' <span class="meta">'+count+'</span>':'')+'</button>');
-      b.onclick = ()=>{ tc.chapters = on ? tc.chapters.filter(x=>x!==c) : tc.chapters.concat([c]); render(); };
-      row.appendChild(b);
-    });
-    cc.appendChild(row);
-  });
-  const tw = el('<div class="two" style="margin-top:6px"></div>');
-  tw.appendChild(pickerField('Questions', [10,20,30,40].map(n=>({v:n,l:n+' questions'})), tc.n, v=>{ tc.n = v; render(); }));
-  tw.appendChild(pickerField('Time', [30,60,90,120].map(n=>({v:n,l:n+' minutes'})), tc.minutes, v=>{ tc.minutes = v; render(); }));
-  cc.appendChild(tw);
-  const avail = tc.chapters.reduce((sum,c)=>sum+QUESTIONS.filter(q=>q.chapter===c).length,0);
-  cc.appendChild(el('<p class="note-line">'+(tc.chapters.length ? tc.chapters.length+' chapter'+(tc.chapters.length>1?'s':'')+' selected · '+avail+' questions available' : 'Select one or more chapters to begin.')+'</p>'));
-  const cb = el('<button class="btn block" style="margin-top:14px"'+(tc.chapters.length?'':' disabled')+'>Start my test</button>');
-  cb.onclick = ()=>{
-    const pool = shuffle(QUESTIONS.filter(q=>tc.chapters.indexOf(q.chapter)>=0));
-    if(!pool.length){ alert('No questions in the chosen chapters yet.'); return; }
-    startSession({mode:'mock', title:'My test', queue:pool.slice(0, tc.n), limit:tc.minutes*60});
-  };
-  cc.appendChild(cb);
-  w.appendChild(cc);
 
   // Full-paper style preset kept for JEE Advanced until its PYQs are added
   const ja = el('<div class="card preset" style="margin-top:14px"><div class="eyebrow">Full paper</div><div class="big">JEE Advanced style</div><div class="small">Approximate: 18 questions per subject · 180 minutes</div></div>');
@@ -3706,6 +3716,9 @@ function cloudSync(){
 
   const TL = el(splashHTML());
   document.body.appendChild(TL);
+  // Nothing from the page is visible under the splash while the app starts
+  const appEl = document.getElementById('app');
+  if(appEl) appEl.style.visibility = 'hidden';
   const bar = TL.querySelector('.spl-bar i');
   const pct = TL.querySelector('.spl-pct');
   const msg = TL.querySelector('.spl-msg');
@@ -3733,10 +3746,11 @@ function cloudSync(){
   const finish = ()=>{
     if(finished) return; finished = true;
     show(100, 'Ready');
-    setTimeout(()=>{ TL.classList.add('off'); setTimeout(()=>TL.remove(), 600); }, 250);
+    setTimeout(()=>{ TL.classList.add('off'); setTimeout(()=>{ TL.remove(); if(appEl) appEl.style.visibility = ''; }, 300); }, 200);
   };
   const withTimeout = (p, ms)=> Promise.race([p, new Promise(r=>setTimeout(r, ms))]);
-  const hardStop = setTimeout(finish, 3500); // never leave the user on the splash indefinitely
+  const hardStop = setTimeout(finish, 3500);
+  setTimeout(()=>{ if(appEl) appEl.style.visibility = ''; }, 6000); // never leave the user on the splash indefinitely
 
   (async ()=>{
     await loadBank();
@@ -3756,5 +3770,3 @@ function cloudSync(){
 </script>
 </body>
 </html>
-
-</body></html>
