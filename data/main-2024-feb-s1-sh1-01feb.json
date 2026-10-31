@@ -1587,8 +1587,8 @@
   "paper": null,
   "paper_section": null,
   "question_number": 31,
-  "subject": "Physics",
-  "chapter": "Dual Nature of Matter",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
   "topic": "Graph of wavelength vs momentum",
   "question_type": "single",
   "difficulty": "easy",
@@ -1635,7 +1635,20 @@
   ],
   "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. Classified as Physics by topic (de Broglie); paper section split not verified. Graph options are described from the figure and should be verified.",
   "verified": false,
-  "verified_against": "text layer and printed answer key; second-pass check pending"
+  "verified_against": "text layer and printed answer key; second-pass check pending",
+  "chapters": [
+   "Atomic Structure"
+  ],
+  "subtopics": [
+   {
+    "chapter": "Atomic Structure",
+    "subtopic": "Dual nature of matter"
+   },
+   {
+    "chapter": "Atomic Structure",
+    "subtopic": "de Broglie's relationship"
+   }
+  ]
  },
  {
   "id": "main-2024-feb-s1-sh1-01feb-p-32",
