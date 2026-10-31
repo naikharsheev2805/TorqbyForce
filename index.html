@@ -1067,6 +1067,39 @@ body.has-nav .bn{ flex:none; }
 .bn.on{ background:var(--accent-soft); border-radius:999px; padding:8px 14px; }
 @media (min-width:960px){ .bn span{ display:inline; } .bn.on{ background:none; border-radius:var(--r-md); padding:var(--sp-3) 2px; } }
 
+/* ---------- Legal pages: dark, like the rest of the app ---------- */
+.legal-paper{ color:var(--text) !important; background:linear-gradient(160deg,var(--surface),var(--surface-2)) !important; border:1px solid var(--border) !important;
+  border-radius:var(--r-xl) !important; box-shadow:0 24px 50px -34px var(--shadow); padding:26px 24px 28px !important; }
+.legal-paper::before{ content:""; position:absolute; left:22px; right:22px; top:0; height:2px; background:var(--accent); opacity:.8; border-radius:0 0 3px 3px; }
+.legal-paper .lp-top{ color:var(--accent) !important; }
+.legal-paper .lp-title{ color:var(--text) !important; font-family:Lora,Georgia,serif; font-weight:600; }
+.legal-paper .lp-date{ color:var(--muted) !important; font-family:Inter,sans-serif; font-style:normal; font-size:13px; }
+.legal-paper .lp-p{ color:var(--text) !important; font-family:Inter,sans-serif; font-size:15px; line-height:1.7; opacity:.92; }
+.legal-paper .lp-foot{ border-top:1px solid var(--border) !important; color:var(--muted) !important; }
+.legal-paper .lp-form input, .legal-paper .lp-form textarea{ background:var(--surface-2) !important; color:var(--text) !important; border:1px solid var(--border) !important; }
+.legal-paper .lp-form .btn{ background:var(--accent) !important; color:#1f1e1d !important; }
+.legal-paper .lp-form .eyebrow{ color:var(--accent) !important; }
+.legal-paper .note-line{ color:var(--muted) !important; }
+.legal-paper .err{ color:#e5484d !important; }
+/* formula cards: tap to open */
+.fcard{ cursor:pointer; transition:transform .2s ease, border-color .2s ease; }
+.fcard:hover{ border-color:var(--accent); }
+.fcard:active{ transform:scale(.98); }
+.fc-back{ position:fixed; inset:0; z-index:110; background:rgba(10,10,9,0); transition:background .35s ease; }
+.fc-back.on{ background:rgba(10,10,9,.55); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); }
+.fc-big{ position:fixed; z-index:111; border-radius:var(--r-xl); padding:26px 26px 24px; overflow:hidden; cursor:pointer;
+  border:1px solid transparent; background:linear-gradient(160deg,var(--surface),var(--surface-2)) padding-box, linear-gradient(135deg,var(--accent),var(--c-medium),var(--c-phys)) border-box;
+  box-shadow:0 40px 80px -30px var(--shadow); display:flex; flex-direction:column; justify-content:center; gap:14px;
+  transition:left .45s cubic-bezier(.2,.7,.2,1), top .45s cubic-bezier(.2,.7,.2,1), width .45s cubic-bezier(.2,.7,.2,1), height .45s cubic-bezier(.2,.7,.2,1); }
+.fc-big::before{ content:""; position:absolute; inset:-30% -10% auto auto; width:260px; height:260px; border-radius:50%; pointer-events:none;
+  background:radial-gradient(circle, color-mix(in srgb,var(--accent) 22%, transparent), transparent 70%); }
+.fc-big > *{ position:relative; }
+.fc-big-ch{ font:700 11px Inter,sans-serif; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+.fc-big-eq{ font-size:clamp(22px,6vw,30px); color:var(--text); overflow-x:auto; }
+.fc-big-use{ font:400 15px/1.6 Inter,sans-serif; color:var(--muted); }
+.fc-big.on{ opacity:1; }
+.fc-big:not(.on){ opacity:.4; }
+
 .intwrap{margin:12px 0 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .intin{font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);width:180px}
 .intin.ok{border-color:var(--ok,#2a9d5c)} .intin.bad{border-color:var(--bad,#d64545)}
@@ -1393,7 +1426,7 @@ let view = 'home';
 let session = null;
 let nav = {tab:'home', subject:SUBJECTS[0], pyqTab:'questions', paper:null, meTab:'analysis', cfg:null,
            mockCfg:{subjects:[...SUBJECTS], perSubject:5, minutes:60}};
-const TAB_OF = {privacy:'me', terms:'me', copyright:'me', disclaimer:'me', contact:'me', notebooks:'notebooks', leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', notes:'notehub', notehub:'notehub', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
+const TAB_OF = {privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', notebooks:'notebooks', leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', notes:'notehub', notehub:'notehub', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
 
 const LAST_VIEW_KEY = 'torq_last_view_v1';
 function saveLastView(){
@@ -2303,7 +2336,17 @@ function requestLeave(then){
   leaveArmed = Date.now();
   leaveNotice(LEAVE_MSG);
 }
-function mockLocked(){ return !!(session && session.mode==='mock' && !session.submitted && !session.review); }
+// Guard accounts: the 4CE admin email(s), lowercase. A guard has every feature unlocked and is hidden from leaderboards.
+const GUARD_EMAILS = ['torqbyforce@gmail.com'];
+function isGuard(){
+  const e = ((sbSession && sbSession.user && sbSession.user.email) || '').toLowerCase();
+  return !!e && GUARD_EMAILS.indexOf(e) >= 0;
+}
+// Every gate in the app asks this. A guard passes all of them.
+function hasFullAccess(){ return isGuard(); }
+// Leaderboards call this for each row: guard accounts never appear.
+function showOnLeaderboard(email){ return !!email && GUARD_EMAILS.indexOf(String(email).toLowerCase()) < 0; }
+function mockLocked(){ if(hasFullAccess()) return false; return !!(session && session.mode==='mock' && !session.submitted && !session.review); }
 function mockNotice(){
   const old = document.querySelector('.mock-notice'); if(old) old.remove();
   const n = el('<div class="mock-notice" role="status">Submit the test to leave it. Your marks are saved when you submit.</div>');
@@ -3090,7 +3133,38 @@ function storyCard(c){
   return card;
 }
 function fcardEl(f, chapter){
-  return el('<div class="fcard"><div class="fcard-eq">$'+f.eq+'$</div><div class="fcard-use">'+esc(f.use)+'</div><div class="fcard-ch">'+esc(chapter)+'</div></div>');
+  const d = el('<div class="fcard" role="button" tabindex="0" aria-label="Open formula"><div class="fcard-eq">$'+f.eq+'$</div><div class="fcard-use">'+esc(f.use)+'</div><div class="fcard-ch">'+esc(chapter)+'</div></div>');
+  d.onclick = (e)=>{ e.stopPropagation(); openFcard(d, f, chapter); };
+  return d;
+}
+let fcOpen = null;
+function openFcard(src, f, chapter){
+  if(fcOpen) return;
+  const r = src.getBoundingClientRect();
+  const back = el('<div class="fc-back"></div>');
+  const big = el('<div class="fc-big" role="dialog" aria-modal="true"><div class="fc-big-ch">'+esc(chapter)+'</div><div class="fc-big-eq">$'+f.eq+'$</div><div class="fc-big-use">'+esc(f.use)+'</div></div>');
+  big.style.left = r.left+'px'; big.style.top = r.top+'px'; big.style.width = r.width+'px'; big.style.height = r.height+'px';
+  document.body.appendChild(back); document.body.appendChild(big);
+  fcOpen = {big, back, src};
+  if(window.renderMathInElement) try{ renderMathInElement(big, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}], throwOnError:false}); }catch(e){}
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    back.classList.add('on');
+    big.classList.add('on');
+    const w = Math.min(window.innerWidth-32, 560), h = Math.min(window.innerHeight*0.6, 360);
+    big.style.left = ((window.innerWidth-w)/2)+'px'; big.style.top = ((window.innerHeight-h)/2)+'px';
+    big.style.width = w+'px'; big.style.height = h+'px';
+  }));
+  const close = ()=>{
+    if(!fcOpen) return;
+    const rr = src.getBoundingClientRect();
+    back.classList.remove('on'); big.classList.remove('on');
+    big.style.left = rr.left+'px'; big.style.top = rr.top+'px'; big.style.width = rr.width+'px'; big.style.height = rr.height+'px';
+    const o = fcOpen; fcOpen = null;
+    setTimeout(()=>{ o.big.remove(); o.back.remove(); }, 380);
+  };
+  back.onclick = close;
+  big.onclick = close;
+  document.addEventListener('keydown', function esc1(e){ if(e.key==='Escape'){ close(); document.removeEventListener('keydown', esc1); } });
 }
 function notehubView(){
   const w = el('<div></div>');
