@@ -740,6 +740,36 @@ svg.wm-lg{ --torq-stroke:1.9; }
 .explain-box{ margin-top:12px; background:var(--surface-2); border-radius:var(--r-md); padding:10px 12px; }
 .story{ border-left:3px solid var(--accent); }
 
+/* ---------- Back card, formula cards, Notes tab ---------- */
+.navback{ position:fixed; top:calc(12px + env(safe-area-inset-top,0px)); right:14px; z-index:70; display:flex; align-items:center; gap:6px;
+  padding:9px 14px; border-radius:14px; border:1px solid var(--border); background:var(--surface); color:var(--text);
+  font:600 14px Inter,sans-serif; cursor:pointer; box-shadow:0 12px 24px -14px var(--shadow); }
+.navback span{ font-size:16px; color:var(--accent); }
+.navback:hover{ border-color:var(--accent); }
+.fcards{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; margin:10px 0 14px; }
+.fcard{ position:relative; overflow:hidden; padding:16px 14px 14px; border:1px solid var(--border); border-radius:var(--r-lg);
+  background:linear-gradient(160deg,var(--surface),var(--surface-2)); }
+.fcard::before{ content:""; position:absolute; left:14px; right:14px; top:0; height:2px; background:var(--accent); opacity:.7; }
+.fcard-eq{ font-size:17px; color:var(--text); overflow-x:auto; }
+.fcard-use{ font-size:12.5px; color:var(--muted); margin-top:8px; line-height:1.45; }
+.fcard-ch{ font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); margin-top:10px; font-weight:700; }
+
+/* ---------- Big home cards, chemistry sections, icon-first bottom bar ---------- */
+.big-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:0 0 14px; }
+.big-card{ position:relative; overflow:hidden; padding:20px 18px; border-radius:var(--r-xl); border:1px solid var(--border);
+  background:linear-gradient(160deg,var(--surface),var(--surface-2)); min-height:140px; }
+.big-card::before{ content:""; position:absolute; left:18px; right:18px; top:0; height:2px; background:var(--accent); opacity:.8; }
+.big-num{ font:600 52px/1 Lora,Georgia,serif; color:var(--accent); margin-top:10px; font-variant-numeric:tabular-nums; }
+.big-title{ font:600 22px/1.2 Lora,Georgia,serif; margin-top:10px; }
+.big-sub{ font-size:13px; color:var(--muted); margin-top:6px; line-height:1.45; }
+.examday-big{ min-height:0; margin-bottom:16px; }
+.examday-big .btn{ width:100%; }
+.sec-head{ font:600 13px Inter,sans-serif; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); padding:16px 18px 6px; }
+.bn span{ display:none; }
+.bn.on span{ display:inline-block; }
+.bn.on{ background:var(--accent-soft); border-radius:999px; padding:8px 14px; }
+@media (min-width:960px){ .bn span{ display:inline; } .bn.on{ background:none; border-radius:var(--r-md); padding:var(--sp-3) 2px; } }
+
 .intwrap{margin:12px 0 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .intin{font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);width:180px}
 .intin.ok{border-color:var(--ok,#2a9d5c)} .intin.bad{border-color:var(--bad,#d64545)}
@@ -979,6 +1009,15 @@ const FORMULAS = {
 };
 
 // ---------- Syllabus (chapter names; questions are added per chapter later) ----------
+// Chemistry sections, by the syllabus units: 1 to 8 physical, 9 to 12 inorganic, 13 to 19 organic, 20 practical
+function chemSection(c){
+  const i = (SYLLABUS.Chemistry||[]).indexOf(c);
+  if(i<0) return 'Chemistry';
+  if(i<8) return 'Physical Chemistry';
+  if(i<12) return 'Inorganic Chemistry';
+  if(i<19) return 'Organic Chemistry';
+  return 'Practical Chemistry';
+}
 // Canonical chapters (JEE Main 2027 syllabus, Paper 1). Generated from checker/syllabus_map.json.
 const SYLLABUS = {"Physics": ["Units and Measurements", "Kinematics", "Laws of Motion", "Work, Energy and Power", "Rotational Motion", "Gravitation", "Properties of Solids and Liquids", "Thermodynamics", "Kinetic Theory of Gases", "Oscillations and Waves", "Electrostatics", "Current Electricity", "Magnetic Effects of Current and Magnetism", "Electromagnetic Induction and Alternating Currents", "Electromagnetic Waves", "Optics", "Dual Nature of Matter and Radiation", "Atoms and Nuclei", "Electronic Devices", "Experimental Skills"], "Chemistry": ["Some Basic Concepts in Chemistry", "Atomic Structure", "Chemical Bonding and Molecular Structure", "Chemical Thermodynamics", "Solutions", "Equilibrium", "Redox Reactions and Electrochemistry", "Chemical Kinetics", "Classification of Elements and Periodicity in Properties", "p-Block Elements", "d- and f-Block Elements", "Coordination Compounds", "Purification and Characterisation of Organic Compounds", "Some Basic Principles of Organic Chemistry", "Hydrocarbons", "Organic Compounds Containing Halogens", "Organic Compounds Containing Oxygen", "Organic Compounds Containing Nitrogen", "Biomolecules", "Principles Related to Practical Chemistry"], "Maths": ["Sets, Relations and Functions", "Complex Numbers and Quadratic Equations", "Matrices and Determinants", "Permutations and Combinations", "Binomial Theorem", "Sequence and Series", "Limit, Continuity and Differentiability", "Integral Calculus", "Differential Equations", "Co-ordinate Geometry", "Three Dimensional Geometry", "Vector Algebra", "Statistics and Probability", "Trigonometry"]};
 const CANON_ALIAS = {"Physics": {"Ray Optics": "Optics", "Waves": "Oscillations and Waves", "Heat and Thermodynamics": "Thermodynamics", "Electromagnetism": "Magnetic Effects of Current and Magnetism", "Magnetism": "Magnetic Effects of Current and Magnetism", "Electromagnetic Induction": "Electromagnetic Induction and Alternating Currents", "Alternating Currents": "Electromagnetic Induction and Alternating Currents", "Modern Physics": "Dual Nature of Matter and Radiation", "Atomic Physics": "Atoms and Nuclei", "Nuclear Physics": "Atoms and Nuclei", "Semiconductors": "Electronic Devices", "Fluids": "Properties of Solids and Liquids", "Elasticity": "Properties of Solids and Liquids", "Gravity": "Gravitation", "Circular Motion": "Laws of Motion", "Friction": "Laws of Motion", "Center of Mass": "Rotational Motion", "Centre of Mass": "Rotational Motion", "Work and Energy": "Work, Energy and Power", "Energy": "Work, Energy and Power", "Capacitors": "Electrostatics", "Electric Circuits": "Current Electricity", "Circuits": "Current Electricity"}, "Chemistry": {"Some Basic Concepts": "Some Basic Concepts in Chemistry", "Periodicity": "Classification of Elements and Periodicity in Properties", "Electrochemistry": "Redox Reactions and Electrochemistry", "Redox Reactions": "Redox Reactions and Electrochemistry", "d and f Block Elements": "d- and f-Block Elements", "d-block Elements": "d- and f-Block Elements", "f-block Elements": "d- and f-Block Elements", "Coordination Chemistry": "Coordination Compounds", "Co-ordination Compounds": "Coordination Compounds", "Stereochemistry": "Some Basic Principles of Organic Chemistry", "Organic Nomenclature": "Some Basic Principles of Organic Chemistry", "Organic Basics": "Some Basic Principles of Organic Chemistry", "Aromatic Compounds": "Hydrocarbons", "Alkanes": "Hydrocarbons", "Alkenes": "Hydrocarbons", "Alkynes": "Hydrocarbons", "Aldehydes and Ketones": "Organic Compounds Containing Oxygen", "Alcohols and Phenols": "Organic Compounds Containing Oxygen", "Carboxylic Acids": "Organic Compounds Containing Oxygen", "Amines": "Organic Compounds Containing Nitrogen", "Haloalkanes and Haloarenes": "Organic Compounds Containing Halogens", "Haloalkanes": "Organic Compounds Containing Halogens", "Nuclear Chemistry (Kinetics)": "Chemical Kinetics", "Nuclear Chemistry": "Atomic Structure", "Chemical Equilibrium": "Equilibrium", "Ionic Equilibrium": "Equilibrium", "Chemical Thermodynamics and Equilibrium": "Chemical Thermodynamics", "Thermochemistry": "Chemical Thermodynamics", "Solution": "Solutions", "Mole Concept": "Some Basic Concepts in Chemistry", "Stoichiometry": "Some Basic Concepts in Chemistry", "Chemical Bonding": "Chemical Bonding and Molecular Structure", "Hydrogen Bonding": "Chemical Bonding and Molecular Structure", "Surface Chemistry": "Principles Related to Practical Chemistry", "Biology in Chemistry": "Biomolecules"}, "Maths": {"Sets, Relations and Function": "Sets, Relations and Functions", "Sets and Relations": "Sets, Relations and Functions", "Complex Numbers": "Complex Numbers and Quadratic Equations", "Quadratic Equations": "Complex Numbers and Quadratic Equations", "Matrices": "Matrices and Determinants", "Determinants": "Matrices and Determinants", "Permutations and Combinations": "Permutations and Combinations", "Permutation and Combination": "Permutations and Combinations", "Binomial Theorem and its Simple Applications": "Binomial Theorem", "Sequence": "Sequence and Series", "Series": "Sequence and Series", "Limits and Continuity": "Limit, Continuity and Differentiability", "Differentiability": "Limit, Continuity and Differentiability", "Continuity and Differentiability": "Limit, Continuity and Differentiability", "Differentiation": "Limit, Continuity and Differentiability", "Application of Derivatives": "Limit, Continuity and Differentiability", "Logarithmic and Exponential Functions": "Limit, Continuity and Differentiability", "Integration": "Integral Calculus", "Integrals": "Integral Calculus", "Definite Integrals": "Integral Calculus", "Area under curves": "Integral Calculus", "Differential Equation": "Differential Equations", "Coordinate Geometry": "Co-ordinate Geometry", "Co-ordinate geometry": "Co-ordinate Geometry", "Straight Lines": "Co-ordinate Geometry", "Straight Line": "Co-ordinate Geometry", "Conic Sections": "Co-ordinate Geometry", "Circles": "Co-ordinate Geometry", "Parabola": "Co-ordinate Geometry", "Ellipse": "Co-ordinate Geometry", "Hyperbola": "Co-ordinate Geometry", "3D Geometry": "Three Dimensional Geometry", "3-D Geometry": "Three Dimensional Geometry", "Vectors": "Vector Algebra", "Vector": "Vector Algebra", "Probability": "Statistics and Probability", "Statistics": "Statistics and Probability", "Inverse Trigonometric Functions": "Trigonometry", "Trigonometric Functions": "Trigonometry", "Trigonometric Equations": "Trigonometry", "Sets": "Sets, Relations and Functions", "Relations and Functions": "Sets, Relations and Functions", "Complex Number": "Complex Numbers and Quadratic Equations"}};
@@ -1059,7 +1098,7 @@ let view = 'home';
 let session = null;
 let nav = {tab:'home', subject:SUBJECTS[0], pyqTab:'questions', paper:null, meTab:'analysis', cfg:null,
            mockCfg:{subjects:[...SUBJECTS], perSubject:5, minutes:60}};
-const TAB_OF = {leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', notes:'pyq', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
+const TAB_OF = {leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', notes:'pyq', notehub:'notehub', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
 
 function go(v, patch){
   if(TAB_OF[v]) nav.tab = TAB_OF[v];
@@ -1515,7 +1554,19 @@ async function restoreFromServer(uid){
     persist();
   }
 }
-function render(){ renderInner(); histSync(); }
+function addBackCard(){
+  let c = document.getElementById('navBack');
+  const show = store.profile && view!=='home';
+  if(!show){ if(c) c.remove(); return; }
+  if(!c){
+    c = document.createElement('button');
+    c.id = 'navBack'; c.className = 'navback'; c.type = 'button'; c.setAttribute('aria-label','Back');
+    c.innerHTML = '<span aria-hidden="true">&larr;</span> Back';
+    c.onclick = ()=>{ if((window.__depth||0)>0) history.back(); else go('home'); };
+    document.body.appendChild(c);
+  }
+}
+function render(){ renderInner(); histSync(); addBackCard(); }
 function navKey(){
   const o = {};
   Object.keys(nav).forEach(k=>{ if(k!=='cfg' && k!=='mockCfg') o[k] = nav[k]; });
@@ -1526,7 +1577,7 @@ function histSync(){
   const state = {torq:1, key, view, idx: (session && session.mode) ? session.idx : null, nav: JSON.parse(JSON.stringify(nav))};
   const prev = history.state;
   // a real change of screen or question adds a history step; a settings tweak only updates the current one
-  if(prev && prev.torq && prev.key!==key) history.pushState(state, '');
+  if(prev && prev.torq && prev.key!==key){ history.pushState(state, ''); window.__depth = (window.__depth||0)+1; }
   else history.replaceState(state, '');
 }
 function renderInner(){
@@ -1543,7 +1594,7 @@ function renderInner(){
   app.classList.toggle('is-onb', needSignIn || !store.profile);
   if(view!=='practice' && store.profile && !needSignIn) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
   const V = {leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
-             me:meView, practice:practiceView, results:resultsView, notes:notesView};
+             me:meView, practice:practiceView, results:resultsView, notes:notesView, notehub:notehubView};
   app.appendChild(needSignIn ? authView() :(!store.profile ? onboardView() : (V[view]||homeView)()));
   if(view==='pyq') app.appendChild(el('<div class="foot">'+esc(BANK_ERROR || ('PYQ bank: '+QUESTIONS.length+' questions'))+'</div>'));
   if(view!=='practice' && store.profile && !needSignIn) document.body.appendChild(bottomNav());
@@ -1563,7 +1614,7 @@ const TABS = [
   {id:'pyq', label:'PYQs', icon:'<path d="M5 4h10l4 4v12H5z"/><path d="M14 4v5h5M9 13h6M9 17h4"/>'},
   {id:'syllabus', label:'Syllabus', icon:'<path d="M4 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>'},
   {id:'mocks', label:'Mocks', icon:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>'},
-  {id:'leaderboard', label:'Leaderboard', disabled:true, icon:'<path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M5 5H3v2a3 3 0 0 0 3 3M19 5h2v2a3 3 0 0 1-3 3M10 14h4v4h-4zM8 20h8"/>'},
+  {id:'notehub', label:'Notes', icon:'<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M8 8h7M8 12h7"/>'},
   {id:'me', label:'Me', icon:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>'}
 ];
 function registerSW(){
@@ -1578,10 +1629,7 @@ function bottomNav(){
   });
   return bar;
 }
-function back(label, fn){
-  const b = el('<button class="linkish" style="margin-bottom:10px;padding:0">&larr; '+esc(label)+'</button>');
-  b.onclick = fn; return b;
-}
+function back(label, fn){ return el('<div></div>'); } // the Back card at the top right replaces the in-page links
 // Chapter icons, batch 1 (Physics). One small line drawing per chapter, in the chapter's colour.
 const CH_ICONS = {
  'Units and Measurements': '<path d="M3 17 L17 3 L21 7 L7 21 Z"/><path d="M7 13 l2 2 M10 10 l2 2 M13 7 l2 2"/>',
@@ -1594,48 +1642,7 @@ const CH_ICONS = {
  'Thermodynamics': '<path d="M10 14 V5 a2 2 0 0 1 4 0 V14 a4 4 0 1 1 -4 0 z"/><path d="M12 9 V17"/>'
 };
 // Revision notes and formula sheets, batch 1 (Kinematics). Written to build intuition first.
-const NOTES = {
- 'Kinematics': {
-  formulas: [
-   {eq:'v = u + at', use:'Velocity after time t, starting at u with constant acceleration a'},
-   {eq:'s = ut + ½at²', use:'Displacement in time t'},
-   {eq:'v² = u² + 2as', use:'Velocity after a displacement s, when time is not given'},
-   {eq:'sₙ = u + a(n − ½)', use:'Displacement in the nth second'},
-   {eq:'v̄ = (u + v) / 2', use:'Average velocity under constant acceleration'},
-   {eq:'v_AB = v_A − v_B', use:'Velocity of A as seen from B'},
-   {eq:'Slope of x–t graph = velocity', use:'Reading velocity from a position–time graph'},
-   {eq:'Slope of v–t graph = acceleration', use:'Reading acceleration from a velocity–time graph'},
-   {eq:'Area under v–t graph = displacement', use:'Reading displacement from a velocity–time graph'},
-   {eq:'Free fall: a = g downward', use:'Only gravity acts (take g = 10 m/s² in JEE problems unless told otherwise)'},
-   {eq:'T = 2u sinθ / g', use:'Time of flight of a projectile launched at θ on level ground'},
-   {eq:'H = u² sin²θ / 2g', use:'Maximum height of a projectile'},
-   {eq:'R = u² sin2θ / g', use:'Horizontal range on level ground'}
-  ],
-  concepts: [
-   {title:'Displacement is not distance', analogy:'Walk 5 floors up a staircase, then 3 floors down. You walked 8 floors (distance), but you ended up 2 floors above where you started (displacement).',
-    body:['Distance counts the whole path you walked. Displacement only cares about where you began and where you ended.','Two bodies can have the same distance and very different displacements, which is why the two must never be mixed up.'],
-    example:{q:'A particle goes 4 m east and then 3 m west. Find the distance and the displacement.', a:'Distance = 4 + 3 = 7 m. Displacement = 4 − 3 = 1 m east.'}},
-   {title:'Velocity is speed with a direction', analogy:'A weather forecast that says “wind at 15 km/h” is speed. “15 km/h from the north” is velocity. Same number, but the direction changes what it means for you.',
-    body:['Speed tells you how fast. Velocity tells you how fast and which way.','Velocity can change even when speed stays the same, for example when a car goes around a bend at constant speed.'],
-    example:{q:'A car goes around a circular track at constant speed. Is its velocity constant?', a:'No. Speed is constant, but the direction keeps changing, so velocity changes.'}},
-   {title:'Acceleration is the gas pedal, not the speedometer', analogy:'Acceleration is how hard you press the pedal. It tells you how quickly your velocity is changing, whether you are speeding up or braking.',
-    body:['If acceleration and velocity point the same way, the body speeds up. If they point opposite ways, it slows down.','A body moving west and accelerating east is slowing down, even though its acceleration is positive in the eastward direction.'],
-    example:{q:'A ball moves up at 10 m/s and is pulled down by gravity. Does it speed up or slow down?', a:'Gravity (down) is opposite to the velocity (up), so the ball slows down.'}},
-   {title:'Why the area under v–t is displacement', analogy:'Build a wall out of thin bricks. Each brick has width equal to a tiny time and height equal to the velocity then. The brick’s area is velocity times time, which is a tiny distance. The wall’s total area is the total distance.',
-    body:['When velocity changes, slice time into very thin pieces. In each piece the velocity is almost constant, so velocity × time gives a small displacement.','Adding all the slices gives the area under the graph. Area below the time axis counts as negative displacement.'],
-    example:{q:'A velocity–time graph is a triangle with base 6 s and height 8 m/s. Find the displacement.', a:'Area = ½ × 6 × 8 = 24 m.'}},
-   {title:'The four equations are four recipes', analogy:'The five quantities are u, v, a, s and t. Each equation leaves one of them out. Pick the equation that leaves out the quantity you do not know and do not need.',
-    body:['If the question asks for velocity without time, use v² = u² + 2as.','If it asks for displacement after time t, use s = ut + ½at².','Writing the list of known and unknown quantities first saves most of the mistakes.'],
-    example:{q:'A bike starts from rest and accelerates at 2 m/s² for 5 s. Find its speed.', a:'Use v = u + at = 0 + 2 × 5 = 10 m/s.'}},
-   {title:'Projectile motion: two independent motions', analogy:'Drop a ball inside a moving bus. To a passenger the ball falls straight down. To someone on the road the ball moves forward and down along a curve. Sideways motion and falling motion do not affect each other.',
-    body:['Horizontally there is no acceleration, so the horizontal velocity stays constant at u cos θ.','Vertically gravity acts, so the vertical motion follows the same equations as free fall, starting with u sin θ upward.','Time of flight is decided by the vertical motion alone. Range is decided by the horizontal velocity and the time of flight.'],
-    example:{q:'A ball is thrown at 20 m/s at 30° above the horizontal. Find the time of flight (g = 10).', a:'T = 2u sinθ / g = 2 × 20 × ½ / 10 = 2 s.'}},
-   {title:'Relative velocity: what the other body sees', analogy:'You walk at 2 m/s on a walkway that moves at 3 m/s in the same direction. Relative to the floor you move at 5 m/s, but relative to the walkway you only move at 2 m/s.',
-    body:['To find how A looks from B, subtract B’s velocity from A’s velocity: v_AB = v_A − v_B.','Set one direction as positive, and keep the signs consistent for every body.'],
-    example:{q:'Train A moves east at 30 m/s and train B moves west at 20 m/s. Find A’s velocity as seen from B.', a:'v_AB = 30 − (−20) = 50 m/s east.'}}
-  ]
- }
-};
+const NOTES = {"Kinematics": {"formulas": [{"eq": "v = u + at", "use": "Velocity after time t, starting at u with constant acceleration a"}, {"eq": "s = ut + \\tfrac{1}{2}at^{2}", "use": "Displacement in time t"}, {"eq": "v^{2} = u^{2} + 2as", "use": "Velocity after a displacement s, when time is not given"}, {"eq": "s_{n} = u + a\\left(n - \\tfrac{1}{2}\\right)", "use": "Displacement in the nth second"}, {"eq": "\\bar{v} = \\tfrac{u + v}{2}", "use": "Average velocity under constant acceleration"}, {"eq": "\\vec{v}_{AB} = \\vec{v}_{A} - \\vec{v}_{B}", "use": "Velocity of A as seen from B"}, {"eq": "v = \\dfrac{dx}{dt}", "use": "Velocity: the slope of the position–time graph"}, {"eq": "a = \\dfrac{dv}{dt}", "use": "Acceleration: the slope of the velocity–time graph"}, {"eq": "\\Delta x = \\text{area under } v\\text{–}t", "use": "Displacement: the area under the velocity–time graph"}, {"eq": "a = g \\text{ downward}", "use": "Free fall: only gravity acts (g = 10 m/s² in JEE problems unless told otherwise)"}, {"eq": "T = \\dfrac{2u\\sin\\theta}{g}", "use": "Time of flight of a projectile launched at θ on level ground"}, {"eq": "H = \\dfrac{u^{2}\\sin^{2}\\theta}{2g}", "use": "Maximum height of a projectile"}, {"eq": "R = \\dfrac{u^{2}\\sin 2\\theta}{g}", "use": "Horizontal range on level ground"}], "concepts": [{"title": "Displacement is not distance", "analogy": "Walk 5 floors up a staircase, then 3 floors down. You walked 8 floors (distance), but you finish 2 floors above where you started (displacement).", "body": ["Distance counts every metre of the path. Displacement only compares where you finish with where you started, so it can be smaller than the distance, or even zero.", "This is why a closed loop always gives zero displacement, however long the loop is. Many JEE traps come from mixing these two quantities.", "Displacement is a vector: it has a size and a direction. Distance is a scalar: it only has a size."], "example": {"q": "A particle goes 4 m east, then 3 m west. Find the distance and the displacement.", "a": "Distance = 4 + 3 = 7 m. Displacement = 4 − 3 = 1 m east."}}, {"title": "Velocity is speed with a direction", "analogy": "A speedometer tells you how fast you go. A weather forecast saying “15 km/h from the north” adds the direction, and that changes what it means for a sailor.", "body": ["Average velocity is displacement divided by time. Average speed is distance divided by time. They agree only when the motion is in one straight line without turning back.", "Velocity can change while speed stays fixed. A car going round a circular track at constant speed has a changing velocity, because its direction keeps changing."], "example": {"q": "A runner completes one lap of a 400 m circular track in 80 s. Find the average speed and the average velocity.", "a": "Average speed = 400 / 80 = 5 m/s. Average velocity = 0, because the displacement after a full lap is zero."}}, {"title": "Acceleration is how velocity changes", "analogy": "Acceleration is the gas pedal and the brake combined. It describes how quickly your velocity is changing, not how fast you are going.", "body": ["If acceleration points the same way as velocity, the body speeds up. If it points the opposite way, the body slows down, even when the acceleration is written as a positive number.", "A body moving west while accelerating east is slowing down. It will stop, then speed up eastward. Always check signs against a chosen positive direction."], "example": {"q": "A ball is thrown up at 10 m/s. Is it speeding up or slowing down during the rise?", "a": "Gravity points down, against the upward velocity, so the ball slows down at 10 m/s² until it stops."}}, {"title": "Reading the graphs: slope and area", "analogy": "A position–time graph is the journey log. Its steepness is how fast you travel. A velocity–time graph is the speedometer history, and the area under it is the total distance travelled, with sign.", "body": ["Slope of x–t gives velocity. A horizontal line means at rest. A steeper line means faster.", "Slope of v–t gives acceleration. Area under v–t gives displacement. Area below the time axis is negative displacement.", "For a v–t graph that is a straight line, the average velocity is simply (u + v)/2 and the area is a trapezium or triangle."], "example": {"q": "A v–t graph rises from 0 to 8 m/s in 4 s, then stays at 8 m/s for 6 s. Find the displacement.", "a": "Triangle: ½ × 4 × 8 = 16 m. Rectangle: 8 × 6 = 48 m. Total = 64 m."}}, {"title": "The four equations are four recipes", "analogy": "The five quantities are s, u, v, a and t. Each equation leaves one of them out. Pick the equation that leaves out the quantity you neither know nor need.", "body": ["If the question does not mention time and asks for velocity, use v² = u² + 2as. If it asks for displacement after a given time, use s = ut + ½at².", "Write down what is known and what is asked before choosing. Most errors come from using an equation that needs a quantity you do not have.", "These equations assume constant acceleration. They fail for a changing acceleration, and then you must use calculus."], "example": {"q": "A bike starts from rest and accelerates at 2 m/s² for 5 s. Find its speed and the distance covered.", "a": "v = u + at = 10 m/s. s = ut + ½at² = 0 + ½ × 2 × 25 = 25 m."}}, {"title": "Free fall: gravity as a constant pull", "analogy": "Think of gravity as an escalator that always pulls down at the same rate, whatever you are doing. Going up or down, your speed changes by the same amount every second.", "body": ["Near the Earth’s surface gravity gives every body the same downward acceleration, about 9.8 m/s², which JEE usually rounds to 10 m/s².", "The mass does not matter if air resistance is ignored. A feather and a stone fall together in vacuum.", "A body thrown up returns to the same height with the same speed, but in the opposite direction, because the motion is symmetric about the top."], "example": {"q": "A stone is dropped from a 20 m tall tower. Find its speed on landing (g = 10).", "a": "v² = 0 + 2 × 10 × 20 = 400, so v = 20 m/s downward."}}, {"title": "Projectile motion: two independent motions", "analogy": "Drop a ball inside a moving bus. To a passenger it falls straight down. To someone on the road it moves forward and down along a curve. The sideways motion and the falling motion do not affect each other.", "body": ["Horizontally there is no acceleration, so the horizontal velocity stays at u cos θ for the whole flight.", "Vertically gravity acts, so the vertical motion follows the free-fall equations, starting with u sin θ upward.", "The time of flight is decided by the vertical motion alone. The range is then the horizontal velocity times that time. The highest point is where the vertical velocity becomes zero."], "example": {"q": "A ball is thrown at 20 m/s at 30° above the horizontal. Find the time of flight (g = 10).", "a": "T = 2u sinθ / g = 2 × 20 × ½ / 10 = 2 s."}}, {"title": "Relative velocity: what the other body sees", "analogy": "You walk at 2 m/s on a walkway that moves at 3 m/s in the same direction. To the floor you move at 5 m/s, but to the walkway you only move at 2 m/s.", "body": ["To find how A looks from B, subtract B’s velocity from A’s velocity: the vector $\\vec{v}_{AB} = \\vec{v}_{A} - \\vec{v}_{B}$.", "Choose one direction as positive and keep the signs consistent for every body.", "Relative velocity explains why rain seems to fall slantwise to a moving cyclist, even though it falls straight down to someone standing still."], "example": {"q": "Train A moves east at 30 m/s and train B moves west at 20 m/s. Find A’s velocity as seen from B.", "a": "$\\vec{v}_{AB} = 30 - (-20) = 50$ m/s east."}}]}};
 function chIcon(name){
   const d = CH_ICONS[name]; if(!d) return '';
   return '<span class="ch-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d+'</svg></span>';
@@ -1925,14 +1932,28 @@ function daysLeft(iso){ return Math.ceil((new Date(iso+'T00:00:00') - new Date()
 // Any subject counts toward the goal; it counts questions answered today
 function dailyGoalCard(){
   const today = dayKey();
-  const done = store.attempts.filter(a=>a.d===today).length;
+  const done = new Set(store.attempts.filter(a=>a.d===today && !a.skipped && a.c!==null).map(a=>a.q)).size;
   const pct = Math.min(100, Math.round(done/DAILY_GOAL*100));
   const exams = EXAMS.map(x=>'<span class="exam-chip"><b>'+daysLeft(x.date)+'</b> days to '+esc(x.name)+'</span>').join('');
   return el('<div class="card dgoal"><div class="dg-top"><div><div class="eyebrow">Daily goal</div>'
     +'<div class="dg-num">'+done+'<span> / '+DAILY_GOAL+' questions</span></div></div></div>'
     +'<div class="goal-bar"><i style="width:'+pct+'%"></i></div>'
     +'<div class="note-line" style="margin-top:8px">Any subject, any chapter. It is your call.</div>'
-    +'<div class="exam-row">'+exams+'</div></div>');
+    +'</div>');
+}
+function examRowEl(){
+  const row = el('<div class="big-row"></div>');
+  EXAMS.forEach(x=>{
+    row.appendChild(el('<div class="big-card exam-big"><div class="eyebrow">'+esc(x.name)+'</div><div class="big-num">'+daysLeft(x.date)+'</div><div class="big-sub">days left</div></div>'));
+  });
+  return row;
+}
+function examDayCardEl(){
+  const card = el('<div class="big-card examday-big"><div class="eyebrow">Exam-day mode</div><div class="big-title">Nine fresh questions, two minutes each</div><div class="big-sub">Mixed subjects, unattempted first. Like the real paper, but shorter.</div></div>');
+  const go_ = el('<button class="btn block" style="margin-top:14px">Start exam-day mode</button>');
+  go_.onclick = startExamDay;
+  card.appendChild(go_);
+  return card;
 }
 function homeView(){
   const w = el('<div></div>');
@@ -1949,7 +1970,8 @@ function homeView(){
 
 
   w.appendChild(dailyGoalCard());
-  { const xb = el('<button class="btn secondary block" style="margin:0 0 16px">Exam-day mode: 9 fresh questions, 2 minutes each</button>'); xb.onclick = startExamDay; w.appendChild(xb); }
+  w.appendChild(examRowEl());
+  w.appendChild(examDayCardEl());
   w.appendChild(streakStrip());
   w.appendChild(qotdCard());
   const daily = dailyQueue();
@@ -2044,7 +2066,9 @@ function pyqView(){
   if(nav.pyqTab==='papers'){ w.appendChild(papersPart()); return w; }
   w.appendChild(subjectCards());
   const list = el('<div class="list"></div>');
+  let lastSec = null;
   chaptersOf(nav.subject).forEach(c=>{
+    if(nav.subject==='Chemistry'){ const sec = chemSection(c); if(sec!==lastSec){ list.appendChild(el('<div class="sec-head">'+esc(sec)+'</div>')); lastSec = sec; } }
     const n = QUESTIONS.filter(q=>q.subject===nav.subject && q.chapter===c).length;
     const st = chapterStats(c);
     const row = barRow(c, st.acc, n+' question'+(n>1?'s':''));
@@ -2170,6 +2194,28 @@ function storyCard(c){
   card.appendChild(dismiss);
   return card;
 }
+function fcardEl(f, chapter){
+  return el('<div class="fcard"><div class="fcard-eq">$'+f.eq+'$</div><div class="fcard-use">'+esc(f.use)+'</div><div class="fcard-ch">'+esc(chapter)+'</div></div>');
+}
+function notehubView(){
+  const w = el('<div></div>');
+  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Study</div><h1 class="hm-title">Notes and <em>formulas.</em></h1></div>'));
+  const chs = Object.keys(NOTES);
+  if(!chs.length){ w.appendChild(el('<div class="card empty">No notes yet.</div>')); return w; }
+  w.appendChild(el('<div class="field">Formula cards</div>'));
+  const fg = el('<div class="fcards"></div>');
+  chs.forEach(c=>NOTES[c].formulas.forEach(f=>fg.appendChild(fcardEl(f, c))));
+  w.appendChild(fg);
+  w.appendChild(el('<div class="field" style="margin-top:18px">Revision notes</div>'));
+  const list = el('<div class="list"></div>');
+  chs.forEach(c=>{
+    const row = el('<div class="row"><div><div class="name">'+esc(c)+'</div><div class="meta">'+NOTES[c].concepts.length+' concepts with worked examples</div></div><div class="end">Open</div></div>');
+    row.onclick = ()=>go('notes',{chapter:c});
+    list.appendChild(row);
+  });
+  w.appendChild(list);
+  return w;
+}
 function notesView(){
   const c = nav.chapter, data = NOTES[c];
   const w = el('<div></div>');
@@ -2177,9 +2223,10 @@ function notesView(){
   w.appendChild(el('<div class="eyebrow">Revision notes</div>'));
   w.appendChild(el('<h1 class="title">'+esc(c)+'</h1>'));
   if(!data){ w.appendChild(el('<div class="card empty">Notes for this chapter are coming in a later batch.</div>')); return w; }
-  const fs = el('<div class="card"><div class="eyebrow">Formula sheet</div></div>');
-  data.formulas.forEach(f=>fs.appendChild(el('<div class="fx-row"><div class="fx-eq">'+esc(f.eq)+'</div><div class="meta">'+esc(f.use)+'</div></div>')));
-  w.appendChild(fs);
+  w.appendChild(el('<div class="field">Formula cards</div>'));
+  const fg = el('<div class="fcards"></div>');
+  data.formulas.forEach(f=>fg.appendChild(fcardEl(f, c)));
+  w.appendChild(fg);
   data.concepts.forEach((k,i)=>{
     const card = el('<div class="card"><div class="eyebrow">'+(i+1)+'. '+esc(k.title)+'</div></div>');
     card.appendChild(el('<div class="nt-analogy">'+esc(k.analogy)+'</div>'));
@@ -3000,6 +3047,13 @@ function mockResults(w){
   });
 }
 function pyqResults(w){
+  // Anything left untouched when the set ends is marked as skipped. Those earn no points; a deliberate skip earns 1.
+  session.queue.forEach(q=>{
+    if(session.answers[q.id]) return;
+    session.answers[q.id] = {skip:true, auto:true, time:0, pts:0};
+    recordSkip(q, 0);
+    if(session.title==='Question of the day'){ store.qotdSkip = store.qotdSkip || {}; store.qotdSkip[dayKey()] = q.id; persist(); }
+  });
   const total = session.queue.length;
   const answered = session.queue.filter(q=>session.answers[q.id] && !session.answers[q.id].skip);
   const correct = answered.filter(q=>session.answers[q.id].correct).length;
@@ -3142,7 +3196,7 @@ function qotdFor(d){ return QUESTIONS.length ? QUESTIONS[seed('qotd-'+d) % QUEST
 // Days on which the question of the day was answered (right or wrong). A skip does not count.
 function qotdDays(){
   const set = new Set();
-  store.attempts.forEach(a=>{ const q = qotdFor(a.d); if(q && a.q===q.id) set.add(a.d); });
+  store.attempts.forEach(a=>{ const q = qotdFor(a.d); if(q && a.q===q.id && !a.skipped && a.c!==null) set.add(a.d); });
   return set;
 }
 // 'ok' | 'bad' | 'skip' | null for a given day
@@ -3150,6 +3204,7 @@ function qotdState(d){
   const q = qotdFor(d); if(!q) return null;
   let last = null;
   store.attempts.forEach(a=>{ if(a.q===q.id && a.d===d) last = a; });
+  if(last && last.skipped) return 'skip';
   if(last) return last.c ? 'ok' : 'bad';
   if(store.qotdSkip && store.qotdSkip[d]===q.id) return 'skip';
   return null;
@@ -3409,6 +3464,7 @@ function qtextHTML(t){
 }
 window.addEventListener('popstate', e=>{
   const st = e.state;
+  window.__depth = Math.max(0,(window.__depth||0)-1);
   if(!st || !st.torq) return;
   // a practice or results screen with no live session cannot be shown; step past it
   if((st.view==='practice' || st.view==='results') && (!session || (st.view==='practice' && session.submitted))){
