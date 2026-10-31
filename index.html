@@ -16,6 +16,9 @@
 .vis-toggle input:checked + .vis-sw{ background:var(--accent); }
 .vis-toggle input:checked + .vis-sw::after{ transform:translateX(18px); background:var(--accent-ink); }
 .vis-toggle input:focus-visible + .vis-sw{ outline:2px solid var(--accent); outline-offset:2px; }
+
+/* Wide screens: the app column is solid, so side formulas never show through cards */
+@media (min-width:960px){ #app{ background:var(--bg); } }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -702,6 +705,34 @@ svg.wm-lg{ --torq-stroke:1.9; }
 /* ---------- Quote card: full width on tablets and wide screens ---------- */
 @media (min-width:960px){ figure.qcard{ max-width:none; } }
 
+/* ---------- Marks ring, daily goal and exam countdown ---------- */
+.rc em{ font-style:normal; font-size:12px; color:var(--muted); margin-top:4px; }
+.dg-num{ font:600 28px/1.1 Lora,Georgia,serif; margin-top:4px; }
+.dg-num span{ font:500 15px Inter,sans-serif; color:var(--muted); }
+.goal-bar{ height:8px; border-radius:99px; background:var(--surface-2); margin-top:12px; overflow:hidden; }
+.goal-bar i{ display:block; height:100%; border-radius:99px; background:linear-gradient(90deg,var(--accent),var(--c-medium)); transition:width .6s ease; }
+.exam-row{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.exam-chip{ font-size:12.5px; padding:6px 11px; border-radius:999px; border:1px solid var(--border); background:var(--surface-2); color:var(--muted); }
+.exam-chip b{ color:var(--accent); font-weight:700; }
+
+/* ---------- Question of the day: tinted and greyed once answered ---------- */
+.qotd.st-ok, .qotd.st-bad, .qotd.st-skip{ filter:saturate(.35); opacity:.92; }
+.qotd.st-ok{ background:linear-gradient(var(--surface),var(--surface)) padding-box, linear-gradient(160deg, color-mix(in srgb,var(--c-easy) 45%, transparent), transparent 70%) ; }
+.qotd.st-bad{ background:linear-gradient(160deg, color-mix(in srgb,var(--c-hard) 28%, var(--surface)), var(--surface) 70%); }
+.qotd.st-skip{ background:linear-gradient(160deg, color-mix(in srgb,var(--c-medium) 22%, var(--surface)), var(--surface) 70%); border-style:dashed; }
+.qotd-rule{ font-size:13px; color:var(--muted); margin:10px 4px 0; line-height:1.5; }
+.qotd-rule b{ color:var(--text); font-weight:600; }
+
+/* ---------- Chapter icons, revision notes, my solutions ---------- */
+.ch-ico{ width:36px; height:36px; display:grid; place-items:center; border:1px solid var(--border); border-radius:12px; background:var(--surface-2); color:var(--accent); margin-right:12px; flex-shrink:0; }
+.ch-ico svg{ width:20px; height:20px; }
+.fx-row{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); flex-wrap:wrap; }
+.fx-row:last-child{ border-bottom:0; }
+.fx-eq{ font:600 18px/1.3 Lora,Georgia,serif; color:var(--text); }
+.nt-analogy{ font-style:italic; color:var(--muted); border-left:3px solid var(--accent); padding:8px 12px; margin:10px 0; line-height:1.55; }
+.nt-p{ line-height:1.6; margin:8px 0; }
+.nt-ex{ background:var(--surface-2); border-radius:var(--r-md); padding:10px 12px; margin-top:10px; line-height:1.55; font-size:14.5px; }
+
 .intwrap{margin:12px 0 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .intin{font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);width:180px}
 .intin.ok{border-color:var(--ok,#2a9d5c)} .intin.bad{border-color:var(--bad,#d64545)}
@@ -1016,7 +1047,7 @@ let view = 'home';
 let session = null;
 let nav = {tab:'home', subject:SUBJECTS[0], pyqTab:'questions', paper:null, meTab:'analysis', cfg:null,
            mockCfg:{subjects:[...SUBJECTS], perSubject:5, minutes:60}};
-const TAB_OF = {leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
+const TAB_OF = {leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', notes:'pyq', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
 
 function go(v, patch){
   if(TAB_OF[v]) nav.tab = TAB_OF[v];
@@ -1096,7 +1127,7 @@ const subjectStats = s => statsOf(attemptsWhere(q=>q.subject===s));
 const topicStats = (c,t) => statsOf(attemptsWhere(q=>q.chapter===c && q.topic===t));
 // Days in a row. While today is still open the streak is held (frozen) at yesterday's count.
 function streakInfo(){
-  const days = new Set(store.attempts.map(a=>a.d));
+  const days = qotdDays();
   const d = new Date();
   let frozen = false;
   if(!days.has(dayKey(d))){ d.setDate(d.getDate()-1); frozen = true; }
@@ -1500,7 +1531,7 @@ function renderInner(){
   app.classList.toggle('is-onb', needSignIn || !store.profile);
   if(view!=='practice' && store.profile && !needSignIn) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
   const V = {leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
-             me:meView, practice:practiceView, results:resultsView};
+             me:meView, practice:practiceView, results:resultsView, notes:notesView};
   app.appendChild(needSignIn ? authView() :(!store.profile ? onboardView() : (V[view]||homeView)()));
   if(view==='pyq') app.appendChild(el('<div class="foot">'+esc(BANK_ERROR || ('PYQ bank: '+QUESTIONS.length+' questions'))+'</div>'));
   if(view!=='practice' && store.profile && !needSignIn) document.body.appendChild(bottomNav());
@@ -1538,6 +1569,64 @@ function bottomNav(){
 function back(label, fn){
   const b = el('<button class="linkish" style="margin-bottom:10px;padding:0">&larr; '+esc(label)+'</button>');
   b.onclick = fn; return b;
+}
+// Chapter icons, batch 1 (Physics). One small line drawing per chapter, in the chapter's colour.
+const CH_ICONS = {
+ 'Units and Measurements': '<path d="M3 17 L17 3 L21 7 L7 21 Z"/><path d="M7 13 l2 2 M10 10 l2 2 M13 7 l2 2"/>',
+ 'Kinematics': '<path d="M3 12 H19"/><path d="M14 7 L19 12 L14 17"/>',
+ 'Laws of Motion': '<rect x="4" y="9" width="7" height="7" rx="1"/><path d="M11 12.5 H20"/><path d="M17 9.5 L20 12.5 L17 15.5"/>',
+ 'Work, Energy and Power': '<path d="M9 18 h6 M10 21 h4"/><path d="M12 3 a6 6 0 0 0 -3.5 10.9 V15 h7 v-1.1 A6 6 0 0 0 12 3 z"/>',
+ 'Rotational Motion': '<rect x="7" y="7" width="10" height="10" rx="1"/><path d="M4 12 A8 8 0 0 1 12 4"/><path d="M12 1.5 L12 4 L14.5 4"/>',
+ 'Gravitation': '<circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(-20 12 12)"/>',
+ 'Properties of Solids and Liquids': '<path d="M3 12 H6 L8 6 L11 18 L14 6 L17 18 L19 12 H21"/>',
+ 'Thermodynamics': '<path d="M10 14 V5 a2 2 0 0 1 4 0 V14 a4 4 0 1 1 -4 0 z"/><path d="M12 9 V17"/>'
+};
+// Revision notes and formula sheets, batch 1 (Kinematics). Written to build intuition first.
+const NOTES = {
+ 'Kinematics': {
+  formulas: [
+   {eq:'v = u + at', use:'Velocity after time t, starting at u with constant acceleration a'},
+   {eq:'s = ut + ½at²', use:'Displacement in time t'},
+   {eq:'v² = u² + 2as', use:'Velocity after a displacement s, when time is not given'},
+   {eq:'sₙ = u + a(n − ½)', use:'Displacement in the nth second'},
+   {eq:'v̄ = (u + v) / 2', use:'Average velocity under constant acceleration'},
+   {eq:'v_AB = v_A − v_B', use:'Velocity of A as seen from B'},
+   {eq:'Slope of x–t graph = velocity', use:'Reading velocity from a position–time graph'},
+   {eq:'Slope of v–t graph = acceleration', use:'Reading acceleration from a velocity–time graph'},
+   {eq:'Area under v–t graph = displacement', use:'Reading displacement from a velocity–time graph'},
+   {eq:'Free fall: a = g downward', use:'Only gravity acts (take g = 10 m/s² in JEE problems unless told otherwise)'},
+   {eq:'T = 2u sinθ / g', use:'Time of flight of a projectile launched at θ on level ground'},
+   {eq:'H = u² sin²θ / 2g', use:'Maximum height of a projectile'},
+   {eq:'R = u² sin2θ / g', use:'Horizontal range on level ground'}
+  ],
+  concepts: [
+   {title:'Displacement is not distance', analogy:'Walk 5 floors up a staircase, then 3 floors down. You walked 8 floors (distance), but you ended up 2 floors above where you started (displacement).',
+    body:['Distance counts the whole path you walked. Displacement only cares about where you began and where you ended.','Two bodies can have the same distance and very different displacements, which is why the two must never be mixed up.'],
+    example:{q:'A particle goes 4 m east and then 3 m west. Find the distance and the displacement.', a:'Distance = 4 + 3 = 7 m. Displacement = 4 − 3 = 1 m east.'}},
+   {title:'Velocity is speed with a direction', analogy:'A weather forecast that says “wind at 15 km/h” is speed. “15 km/h from the north” is velocity. Same number, but the direction changes what it means for you.',
+    body:['Speed tells you how fast. Velocity tells you how fast and which way.','Velocity can change even when speed stays the same, for example when a car goes around a bend at constant speed.'],
+    example:{q:'A car goes around a circular track at constant speed. Is its velocity constant?', a:'No. Speed is constant, but the direction keeps changing, so velocity changes.'}},
+   {title:'Acceleration is the gas pedal, not the speedometer', analogy:'Acceleration is how hard you press the pedal. It tells you how quickly your velocity is changing, whether you are speeding up or braking.',
+    body:['If acceleration and velocity point the same way, the body speeds up. If they point opposite ways, it slows down.','A body moving west and accelerating east is slowing down, even though its acceleration is positive in the eastward direction.'],
+    example:{q:'A ball moves up at 10 m/s and is pulled down by gravity. Does it speed up or slow down?', a:'Gravity (down) is opposite to the velocity (up), so the ball slows down.'}},
+   {title:'Why the area under v–t is displacement', analogy:'Build a wall out of thin bricks. Each brick has width equal to a tiny time and height equal to the velocity then. The brick’s area is velocity times time, which is a tiny distance. The wall’s total area is the total distance.',
+    body:['When velocity changes, slice time into very thin pieces. In each piece the velocity is almost constant, so velocity × time gives a small displacement.','Adding all the slices gives the area under the graph. Area below the time axis counts as negative displacement.'],
+    example:{q:'A velocity–time graph is a triangle with base 6 s and height 8 m/s. Find the displacement.', a:'Area = ½ × 6 × 8 = 24 m.'}},
+   {title:'The four equations are four recipes', analogy:'The five quantities are u, v, a, s and t. Each equation leaves one of them out. Pick the equation that leaves out the quantity you do not know and do not need.',
+    body:['If the question asks for velocity without time, use v² = u² + 2as.','If it asks for displacement after time t, use s = ut + ½at².','Writing the list of known and unknown quantities first saves most of the mistakes.'],
+    example:{q:'A bike starts from rest and accelerates at 2 m/s² for 5 s. Find its speed.', a:'Use v = u + at = 0 + 2 × 5 = 10 m/s.'}},
+   {title:'Projectile motion: two independent motions', analogy:'Drop a ball inside a moving bus. To a passenger the ball falls straight down. To someone on the road the ball moves forward and down along a curve. Sideways motion and falling motion do not affect each other.',
+    body:['Horizontally there is no acceleration, so the horizontal velocity stays constant at u cos θ.','Vertically gravity acts, so the vertical motion follows the same equations as free fall, starting with u sin θ upward.','Time of flight is decided by the vertical motion alone. Range is decided by the horizontal velocity and the time of flight.'],
+    example:{q:'A ball is thrown at 20 m/s at 30° above the horizontal. Find the time of flight (g = 10).', a:'T = 2u sinθ / g = 2 × 20 × ½ / 10 = 2 s.'}},
+   {title:'Relative velocity: what the other body sees', analogy:'You walk at 2 m/s on a walkway that moves at 3 m/s in the same direction. Relative to the floor you move at 5 m/s, but relative to the walkway you only move at 2 m/s.',
+    body:['To find how A looks from B, subtract B’s velocity from A’s velocity: v_AB = v_A − v_B.','Set one direction as positive, and keep the signs consistent for every body.'],
+    example:{q:'Train A moves east at 30 m/s and train B moves west at 20 m/s. Find A’s velocity as seen from B.', a:'v_AB = 30 − (−20) = 50 m/s east.'}}
+  ]
+ }
+};
+function chIcon(name){
+  const d = CH_ICONS[name]; if(!d) return '';
+  return '<span class="ch-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d+'</svg></span>';
 }
 function barRow(name, acc, meta){
   return el('<div class="row" style="cursor:default"><div><div class="name">'+esc(name)+'</div><div class="meta">'+esc(meta)+'</div></div>'
@@ -1816,6 +1905,22 @@ function quoteCard(){
     +'<figcaption class="qauth"><span>'+esc(Q.a)+'</span>'+(Q.s?'<em>'+esc(Q.s)+'</em>':'')+'</figcaption></figure>');
 }
 
+// Exams from the profile: days left to each one
+const EXAMS = [{name:'JEE Main 2027', date:'2027-01-20'}, {name:'JEE Advanced 2027', date:'2027-05-18'}];
+const DAILY_GOAL = 40;
+function daysLeft(iso){ return Math.ceil((new Date(iso+'T00:00:00') - new Date()) / 864e5); }
+// Any subject counts toward the goal; it counts questions answered today
+function dailyGoalCard(){
+  const today = dayKey();
+  const done = store.attempts.filter(a=>a.d===today).length;
+  const pct = Math.min(100, Math.round(done/DAILY_GOAL*100));
+  const exams = EXAMS.map(x=>'<span class="exam-chip"><b>'+daysLeft(x.date)+'</b> days to '+esc(x.name)+'</span>').join('');
+  return el('<div class="card dgoal"><div class="dg-top"><div><div class="eyebrow">Daily goal</div>'
+    +'<div class="dg-num">'+done+'<span> / '+DAILY_GOAL+' questions</span></div></div></div>'
+    +'<div class="goal-bar"><i style="width:'+pct+'%"></i></div>'
+    +'<div class="note-line" style="margin-top:8px">Any subject, any chapter. It is your call.</div>'
+    +'<div class="exam-row">'+exams+'</div></div>');
+}
 function homeView(){
   const w = el('<div></div>');
   window.__hour = new Date().getHours();
@@ -1830,6 +1935,7 @@ function homeView(){
   const all = statsOf(store.attempts);
 
 
+  w.appendChild(dailyGoalCard());
   w.appendChild(streakStrip());
   w.appendChild(qotdCard());
   const daily = dailyQueue();
@@ -1929,6 +2035,7 @@ function pyqView(){
     const st = chapterStats(c);
     const row = barRow(c, st.acc, n+' question'+(n>1?'s':''));
     row.style.cursor='pointer';
+    if(CH_ICONS[c]) row.insertBefore(el(chIcon(c)), row.firstChild);
     row.onclick = ()=>go('chapter',{chapter:c});
     list.appendChild(row);
   });
@@ -1977,6 +2084,25 @@ function paperView(){
   return w;
 }
 
+function notesView(){
+  const c = nav.chapter, data = NOTES[c];
+  const w = el('<div></div>');
+  w.appendChild(back(c, ()=>go('chapter')));
+  w.appendChild(el('<div class="eyebrow">Revision notes</div>'));
+  w.appendChild(el('<h1 class="title">'+esc(c)+'</h1>'));
+  if(!data){ w.appendChild(el('<div class="card empty">Notes for this chapter are coming in a later batch.</div>')); return w; }
+  const fs = el('<div class="card"><div class="eyebrow">Formula sheet</div></div>');
+  data.formulas.forEach(f=>fs.appendChild(el('<div class="fx-row"><div class="fx-eq">'+esc(f.eq)+'</div><div class="meta">'+esc(f.use)+'</div></div>')));
+  w.appendChild(fs);
+  data.concepts.forEach((k,i)=>{
+    const card = el('<div class="card"><div class="eyebrow">'+(i+1)+'. '+esc(k.title)+'</div></div>');
+    card.appendChild(el('<div class="nt-analogy">'+esc(k.analogy)+'</div>'));
+    k.body.forEach(p=>card.appendChild(el('<p class="nt-p">'+esc(p)+'</p>')));
+    card.appendChild(el('<div class="nt-ex"><b>Worked example.</b> '+esc(k.example.q)+'<br><b>Solution.</b> '+esc(k.example.a)+'</div>'));
+    w.appendChild(card);
+  });
+  return w;
+}
 function chapterView(){
   const s=nav.subject, c=nav.chapter;
   const w = el('<div></div>');
@@ -1988,6 +2114,7 @@ function chapterView(){
   const pb = el('<button class="btn block">Practice whole chapter</button>');
   pb.onclick = ()=>go('setup',{cfg:defaultCfg({subject:s, chapter:c})});
   w.appendChild(pb);
+  if(NOTES[c]){ const nb = el('<button class="btn secondary block" style="margin-top:10px">Revision notes and formula sheet</button>'); nb.onclick = ()=>go('notes',{chapter:c}); w.appendChild(nb); }
 
   w.appendChild(el('<div class="eyebrow" style="margin:24px 0 8px">Topics</div>'));
   const list = el('<div class="list"></div>');
@@ -2442,7 +2569,7 @@ function meView(){
     +'<div class="hm-eyebrow">Your space</div>'
     +'<h1 class="hm-title">'+(first ? 'Me, <em>'+esc(first)+'.</em>' : 'Me<em>.</em>')+'</h1></div>'));
   const tabs = el('<div class="ctabs" role="tablist"></div>');
-  [['analysis','Analysis'],['badges','Badges'],['saved','Saved'],['redo','Redo'],['profile','Profile'],['theme','Theme']].forEach(p=>{
+  [['analysis','Analysis'],['badges','Badges'],['saved','Saved'],['mysol','My solutions'],['redo','Redo'],['profile','Profile'],['theme','Theme']].forEach(p=>{
     const on = nav.meTab === p[0];
     const b = el('<button role="tab" aria-selected="'+on+'" class="ctab'+(on?' on':'')+'">'+p[1]+'</button>');
     b.onclick = ()=>go('me',{meTab:p[0]});
@@ -2454,6 +2581,7 @@ function meView(){
   else if(nav.meTab==='theme') panel.appendChild(themePart());
   else if(nav.meTab==='badges') panel.appendChild(badgesPart());
   else if(nav.meTab==='saved') panel.appendChild(savedPart());
+  else if(nav.meTab==='mysol') panel.appendChild(mySolPart());
   else if(nav.meTab==='redo') panel.appendChild(redoPart());
   else panel.appendChild(analysisPart());
   w.appendChild(panel);
@@ -2492,6 +2620,23 @@ function analysisPart(){
     if(cs.total) cl.appendChild(barRow(c, cs.acc, cs.total+' attempted · avg '+fmtTime(cs.avg)));
   });
   w.appendChild(cl);
+  return w;
+}
+// Your own solutions. Only you can see these; they are not official solutions.
+function mySolPart(){
+  const w = el('<div></div>');
+  w.appendChild(el('<p class="note-line" style="margin:0 0 14px">Your own, better ways of solving questions. Only you can see these.</p>'));
+  const ids = Object.keys(store.mySol || {});
+  if(!ids.length){ w.appendChild(el('<div class="card empty">Nothing here yet. After you answer a question, write your own solution under it.</div>')); return w; }
+  ids.forEach(id=>{
+    const q = QMAP[id]; if(!q) return;
+    const card = el('<div class="card"></div>');
+    card.appendChild(el('<div class="tags"><span class="tag">'+esc(q.chapter)+'</span><span class="tag shift">'+q.year+' · '+SHIFT_NAME[q.shift]+'</span></div>'));
+    card.appendChild(el('<div style="font-size:14.5px;line-height:1.55;margin-bottom:10px">'+esc(q.text.length>140?q.text.slice(0,140)+'…':q.text)+'</div>'));
+    card.appendChild(el('<div class="field">My solution</div>'));
+    card.appendChild(el('<div style="white-space:pre-wrap;line-height:1.5">'+esc(store.mySol[id])+'</div>'));
+    w.appendChild(card);
+  });
   return w;
 }
 function savedPart(){
@@ -2622,6 +2767,13 @@ function pyqPractice(w){
     noteTa.value = store.notes[q.id] || '';
     card.appendChild(el('<div class="field">Note</div>'));
     card.appendChild(noteTa);
+    card.appendChild(el('<div class="field">My solution</div>'));
+    const mysTa = el('<textarea placeholder="Your own, better way to solve this. Only you can see it."></textarea>');
+    mysTa.value = (store.mySol && store.mySol[q.id]) || '';
+    card.appendChild(mysTa);
+    const mysBtn = el('<button class="linkish">Save my solution</button>');
+    mysBtn.onclick = ()=>{ store.mySol = store.mySol || {}; const t = mysTa.value.trim(); if(t) store.mySol[q.id] = t; else delete store.mySol[q.id]; persist(); mysBtn.innerText = 'Saved'; };
+    card.appendChild(mysBtn);
     const saved = store.bookmarks.indexOf(q.id)>=0;
     const bmRow = el('<div class="row" style="justify-content:flex-start;margin-top:12px;padding:0;border:none"></div>');
     const bm = el('<button class="linkish">'+(saved?'★ Saved':'☆ Save for later')+'</button>');
@@ -2729,7 +2881,8 @@ function mockResults(w){
     else { wr++; score-=1; bySub[q.subject].score-=1; }
   });
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Your result'+nameSuffix()+'</div><h1 class="hm-title">'+esc(session.title)+'</h1></div>'));
-  w.appendChild(ringEl(Math.max(0,Math.round(score/(n*4)*100)), String(score), 'of '+(n*4)+' · '+c+' correct · '+wr+' wrong · '+sk+' skipped'));
+  w.appendChild(ringMarks(score, n*4));
+  w.appendChild(el('<div class="note-line" style="text-align:center">'+c+' correct · '+wr+' wrong · '+sk+' skipped</div>'));
   flair(w, Math.max(0,Math.round(score/(n*4)*100)), c+wr, 60);
   const sl = el('<div class="list"></div>');
   Object.keys(bySub).forEach(s=>{
@@ -2752,7 +2905,15 @@ function pyqResults(w){
   const answered = session.queue.filter(q=>session.answers[q.id] && !session.answers[q.id].skip);
   const correct = answered.filter(q=>session.answers[q.id].correct).length;
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Session results'+nameSuffix()+'</div><h1 class="hm-title">'+esc(session.title)+'</h1></div>'));
-  { const pc = answered.length?Math.round(correct/answered.length*100):0; w.appendChild(ringEl(pc, pc+'%', correct+' of '+total+' correct')); flair(w, pc, answered.length, 75); }
+  { const wrong = answered.filter(q=>!session.answers[q.id].correct).length;
+    const marks = correct*4 - wrong, max = total*4;
+    const mp = max>0 ? Math.round(marks/max*100) : 0;
+    const acc = answered.length ? Math.round(correct/answered.length*100) : 0;
+    w.appendChild(ringMarks(marks, max));
+    w.appendChild(el('<div class="note-line" style="text-align:center">Accuracy '+acc+'% · '+correct+' of '+answered.length+' answered correct</div>'));
+    flair(w, mp, answered.length, 75);
+    if(mp>=80) w.appendChild(shareBtn('I scored '+marks+' out of '+max+' marks ('+mp+'%) on TORQ. JEE practice that works.'));
+  }
   w.appendChild(el('<div class="stats">'
     +'<div class="stat"><div class="n">'+correct+'/'+total+'</div><div class="l">Correct</div></div>'
     +'<div class="stat"><div class="n">'+(answered.length?Math.round(correct/answered.length*100):0)+'%</div><div class="l">Accuracy</div></div>'
@@ -2780,6 +2941,22 @@ function pyqResults(w){
 
 // ---------- Redesign helpers ----------
 const SUBJ_VAR = {Physics:'var(--c-phys)', Chemistry:'var(--c-chem)', Maths:'var(--c-maths)'};
+// Marks ring: the score is the largest figure, the maximum and the percentage of marks sit below it
+function ringMarks(score, max){
+  const p = max>0 ? Math.max(0, Math.min(100, Math.round(score/max*100))) : 0;
+  return el('<div class="card resultcard"><div class="ring" role="img" aria-label="'+score+' out of '+max+' marks">'
+    +'<svg viewBox="0 0 120 120" aria-hidden="true"><circle class="rt" cx="60" cy="60" r="52"/>'
+    +'<circle class="rf" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" data-to="'+(100-p)+'"/></svg>'
+    +'<div class="rc"><b>'+score+'</b><span>out of '+max+'</span><em>'+p+'% of marks</em></div></div></div>');
+}
+function shareBtn(text){
+  const b = el('<button class="btn secondary block" style="margin-top:12px">Share my result</button>');
+  b.onclick = ()=>{
+    if(navigator.share) navigator.share({title:'TORQ', text}).catch(()=>{});
+    else if(navigator.clipboard) navigator.clipboard.writeText(text).catch(()=>{});
+  };
+  return b;
+}
 function ringEl(pct, big, small){
   const p = Math.max(0, Math.min(100, pct));
   return el('<div class="card resultcard"><div class="ring" role="img" aria-label="'+esc(String(big))+' '+esc(small)+'">'
@@ -2844,7 +3021,7 @@ function flair(w, pct, answered, goodAt){
 // ---------- Streak, question of the day, badges, score reveal, chapter map ----------
 let qotdOpen = false;
 function streakStrip(){
-  const days = new Set(store.attempts.map(a=>a.d));
+  const days = qotdDays();
   const info = streakInfo();
   const n = info.n;
   const todayDone = days.has(dayKey());
@@ -2861,10 +3038,28 @@ function streakStrip(){
     +'<div><div class="sk-l">Day streak</div><div class="note-line" style="margin:3px 0 0">'+esc(nudge)+'</div></div></div>'
     +'<div class="sk-days">'+tiles.join('')+'</div><div class="sk-pts">'+(store.points||0)+' points</div></div>');
 }
+// The question for a given day, the same for every user that day
+function qotdFor(d){ return QUESTIONS.length ? QUESTIONS[seed('qotd-'+d) % QUESTIONS.length] : null; }
+// Days on which the question of the day was answered (right or wrong). A skip does not count.
+function qotdDays(){
+  const set = new Set();
+  store.attempts.forEach(a=>{ const q = qotdFor(a.d); if(q && a.q===q.id) set.add(a.d); });
+  return set;
+}
+// 'ok' | 'bad' | 'skip' | null for a given day
+function qotdState(d){
+  const q = qotdFor(d); if(!q) return null;
+  let last = null;
+  store.attempts.forEach(a=>{ if(a.q===q.id && a.d===d) last = a; });
+  if(last) return last.c ? 'ok' : 'bad';
+  if(store.qotdSkip && store.qotdSkip[d]===q.id) return 'skip';
+  return null;
+}
 function qotdCard(){
   if(!QUESTIONS.length) return el('<div></div>');
-  const q = QUESTIONS[seed('qotd-'+dayKey()) % QUESTIONS.length];
-  const c = el('<div class="card qotd"><div class="eyebrow">Question of the day</div>'
+  const q = qotdFor(dayKey());
+  const st = qotdState(dayKey());
+  const c = el('<div class="card qotd'+(st?' st-'+st:'')+'"><div class="eyebrow">Question of the day</div>'
     +'<div class="tags"><span class="tag subj subj-'+q.subject.toLowerCase()+'">'+esc(q.subject)+'</span>'
     +'<span class="tag shift">'+esc(q.year+' · '+SHIFT_NAME[q.shift])+'</span>'
     +'<span class="tag diff diff-'+q.difficulty.toLowerCase()+'">'+esc(q.difficulty)+'</span></div>'
@@ -2875,9 +3070,13 @@ function qotdCard(){
   rv.onclick = ()=>{ qotdOpen = !qotdOpen; render(); };
   const tr = el('<button class="btn small">Try it</button>');
   tr.onclick = ()=>startSession({mode:'pyq', title:'Question of the day', queue:[q]});
-  actions.appendChild(rv); actions.appendChild(tr);
+  if(!st){ actions.appendChild(tr); }
+  actions.appendChild(rv);
   c.appendChild(actions);
-  return c;
+  const wrap = el('<div></div>');
+  wrap.appendChild(c);
+  wrap.appendChild(el('<div class="qotd-rule"><b>Keep your streak:</b> answer today\u2019s question, right or wrong. Skipping it or missing the day breaks the streak. The easiest way is to open it first thing.</div>'));
+  return wrap;
 }
 const BADGES = [
   {g:'\u03C0',  name:'First steps',     tier:'Common',    desc:'Answer 10 questions',                    lore:'\u03C0 never ends. Every journey starts with a first digit.',                ok:c=>c.total>=10},
@@ -3011,6 +3210,7 @@ function skipQ(){
   const q = session.queue[session.idx];
   const prev = session.answers[q.id];
   if(prev && !prev.skip) return;
+  if(session.title==='Question of the day'){ store.qotdSkip = store.qotdSkip || {}; store.qotdSkip[dayKey()] = q.id; persist(); }
   const sec = Math.round((Date.now()-qStartOf(q))/1000);
   session.answers[q.id] = {skip:true, time:sec, pts:1};
   addPoints(1 - ((prev && prev.pts) || 0));
