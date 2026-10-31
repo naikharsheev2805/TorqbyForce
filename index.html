@@ -715,6 +715,19 @@ svg.wm-lg{ --torq-stroke:1.9; }
 .exam-chip{ font-size:12.5px; padding:6px 11px; border-radius:999px; border:1px solid var(--border); background:var(--surface-2); color:var(--muted); }
 .exam-chip b{ color:var(--accent); font-weight:700; }
 
+/* ---------- Confidence calibration cards ---------- */
+.cal-card{ position:relative; overflow:hidden; border-radius:calc(var(--r-xl) + 4px); padding:20px 18px 18px; border:1.5px solid transparent; margin-bottom:12px;
+  background:linear-gradient(var(--surface),var(--surface)) padding-box, linear-gradient(135deg,var(--ec),var(--accent)) border-box; }
+.cal-card .eyebrow{ color:var(--ec); position:relative; }
+.cal-num{ font:600 56px/1 Lora,Georgia,serif; color:var(--text); margin-top:10px; letter-spacing:-.02em; font-variant-numeric:tabular-nums; position:relative; }
+.cal-num span{ font-size:26px; color:var(--muted); margin-left:2px; }
+.cal-empty{ font-size:20px; color:var(--muted); letter-spacing:0; }
+.cal-sub{ font-size:13px; color:var(--muted); margin-top:6px; position:relative; }
+.cal-bar{ position:relative; height:12px; border-radius:999px; background:color-mix(in srgb,var(--c-hard) 35%, var(--surface-2)); overflow:hidden; margin-top:16px; }
+.cal-bar .cal-right{ display:block; height:100%; border-radius:999px; background:linear-gradient(90deg,var(--c-easy),var(--ec)); transition:width var(--dur) var(--ease); }
+.cal-legend{ display:flex; gap:14px; font-size:12.5px; color:var(--muted); margin-top:10px; position:relative; }
+.cal-note{ font-size:13px; color:var(--muted); line-height:1.5; margin:4px 4px 0; }
+
 /* ---------- Exam countdown cards: login-card look ---------- */
 .exam-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:0 0 14px; }
 .exam-row-one{ grid-template-columns:1fr; }
@@ -2092,7 +2105,12 @@ function pyqView(){
     b.onclick = ()=>go('pyq',{pyqTab:p[0]});
     tabSeg.appendChild(b);
   });
-  w.appendChild(tabSeg);
+  const tabRow = el('<div class="row" style="padding:0;border:none;align-items:center;gap:10px"></div>');
+  tabRow.appendChild(tabSeg); tabRow.firstChild.style.flex='1';
+  const shareTop = el('<button class="btn secondary small" aria-label="Share TORQ">Share</button>');
+  shareTop.onclick = ()=>{ const t = 'Practising JEE previous year questions on TORQ, with solutions and mock tests.'; if(navigator.share) navigator.share({title:'TORQ', text:t}).catch(()=>{}); else if(navigator.clipboard) navigator.clipboard.writeText(t).catch(()=>{}); };
+  tabRow.appendChild(shareTop);
+  w.appendChild(tabRow);
   if(nav.pyqTab==='papers'){ w.appendChild(papersPart()); return w; }
   w.appendChild(subjectCards());
   const list = el('<div class="list"></div>');
@@ -2202,13 +2220,26 @@ function patternsPart(){
   w.appendChild(card);
   const sure = {n:0, ok:0}, guess = {n:0, ok:0};
   store.attempts.forEach(a=>{ if(a.conf==='sure'){ sure.n++; if(a.c) sure.ok++; } else if(a.conf==='guess'){ guess.n++; if(a.c) guess.ok++; } });
-  const pct = o => o.n ? Math.round(o.ok/o.n*100)+'%' : 'no data yet';
-  const cal = el('<div class="card"><div class="eyebrow">Confidence calibration</div></div>');
-  cal.appendChild(el('<div class="fx-row"><div class="fx-eq">When you were sure</div><div class="meta">'+pct(sure)+' right ('+sure.n+')</div></div>'));
-  cal.appendChild(el('<div class="fx-row"><div class="fx-eq">When you were guessing</div><div class="meta">'+pct(guess)+' right ('+guess.n+')</div></div>'));
-  cal.appendChild(el('<p class="note-line">The gap between these two numbers is how well you judge your own answers. Guessing is cheap only when you know you are guessing.</p>'));
-  w.appendChild(cal);
+  w.appendChild(el('<div class="eyebrow" style="margin:14px 0 10px">Confidence calibration</div>'));
+  w.appendChild(calCardEl('When you were sure', sure, 'var(--c-phys)'));
+  w.appendChild(calCardEl('When you were guessing', guess, 'var(--c-medium)'));
+  const gap = sure.n && guess.n ? Math.abs(Math.round(sure.ok/sure.n*100) - Math.round(guess.ok/guess.n*100)) : null;
+  w.appendChild(el('<div class="cal-note">'+(gap===null
+    ? 'Answer a few questions with both confidence levels to see your calibration.'
+    : 'The gap between these two is '+gap+' points. The smaller the gap, the better you judge your own answers. Guessing is cheap only when you know you are guessing.')+'</div>'));
   return w;
+}
+// One calibration card: the share right as the largest figure, with a bar of right against wrong
+function calCardEl(title, o, tone){
+  const has = o.n > 0;
+  const p = has ? Math.round(o.ok/o.n*100) : 0;
+  const wrong = o.n - o.ok;
+  return el('<div class="cal-card" style="--ec:'+tone+'"><i class="exam-orb" aria-hidden="true"></i>'
+    +'<div class="eyebrow">'+esc(title)+'</div>'
+    +'<div class="cal-num">'+(has ? p+'<span>%</span>' : '<span class="cal-empty">no data</span>')+'</div>'
+    +'<div class="cal-sub">'+(has ? o.ok+' right out of '+o.n+' answers' : 'Nothing recorded yet')+'</div>'
+    +'<div class="cal-bar" role="img" aria-label="'+o.ok+' right, '+wrong+' wrong"><i class="cal-right" style="width:'+p+'%"></i></div>'
+    +'<div class="cal-legend"><span><i class="lg ok"></i>Right '+o.ok+'</span><span><i class="lg bad"></i>Wrong '+wrong+'</span></div></div>');
 }
 function startExamDay(){
   const pool = QUESTIONS.filter(q=>!store.attempts.some(a=>a.q===q.id));
@@ -2346,41 +2377,65 @@ function setupView(){
 }
 
 // ----- Mocks -----
+function testCfg(){ return nav.testCfg || (nav.testCfg = {chapters:[], n:20, minutes:60}); }
 function mocksView(){
-  const m = nav.mockCfg;
   const w = el('<div></div>');
-  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Timed like the real paper</div><h1 class="hm-title">Mock <em>tests.</em></h1></div>'));
+  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Timed like the real paper</div><h1 class="hm-title">Test <em>zone.</em></h1></div>'));
 
-  const jm = el('<div class="card preset"><div class="eyebrow">Full paper</div><div class="big">JEE Main style</div><div class="small">25 questions per subject · 180 minutes · +4 for correct, −1 for wrong</div></div>');
-  jm.onclick = ()=>startMock({title:'JEE Main style mock', subjects:SUBJECTS, perSubject:25, minutes:180});
-  w.appendChild(jm);
-  const ja = el('<div class="card preset"><div class="eyebrow">Full paper</div><div class="big">JEE Advanced style</div><div class="small">Approximate: 18 questions per subject · 180 minutes</div></div>');
-  ja.onclick = ()=>startMock({title:'JEE Advanced style mock', subjects:SUBJECTS, perSubject:18, minutes:180});
-  w.appendChild(ja);
-
-  const cc = el('<div class="card"><div class="eyebrow">Custom</div><h3>Build your own mock</h3></div>');
-  cc.appendChild(el('<div class="field">Subjects</div>'));
-  const sc = el('<div class="chips"></div>');
-  SUBJECTS.forEach(s=>{
-    const on = m.subjects.indexOf(s)>=0;
-    const b = el('<button class="chip '+(on?'on':'')+'">'+s+'</button>');
-    b.onclick = ()=>{ nav.mockCfg = Object.assign({}, m, {subjects: on ? m.subjects.filter(x=>x!==s) : m.subjects.concat([s])}); render(); };
-    sc.appendChild(b);
+  // PYQ mock test: a real paper, timed, exactly as it was asked
+  w.appendChild(el('<div class="eyebrow" style="margin:6px 0 10px">PYQ mock test</div>'));
+  w.appendChild(el('<p class="note-line" style="margin:0 0 12px">Pick a previous year paper and sit it under exam conditions: 180 minutes, +4 for correct, −1 for wrong.</p>'));
+  const papers = (PAPERS || []).slice().sort((a,b)=>(b.date||'').localeCompare(a.date||'') || a.shift-b.shift);
+  if(!papers.length){ w.appendChild(el('<div class="card empty">PYQ papers are still loading.</div>')); }
+  const pl = el('<div class="list"></div>');
+  papers.forEach(p=>{
+    const n = QUESTIONS.filter(q=>q.paperId===p.id).length;
+    const row = el('<div class="row"><div><div class="name">'+esc(paperTitle(p))+'</div><div class="meta">'+n+' questions · 180 minutes</div></div><div class="end">Start</div></div>');
+    row.onclick = ()=>{
+      const qs = QUESTIONS.filter(q=>q.paperId===p.id).sort((a,b)=>SUBJECTS.indexOf(a.subject)-SUBJECTS.indexOf(b.subject));
+      if(!qs.length){ alert('No questions for this paper yet.'); return; }
+      startSession({mode:'mock', title:'PYQ mock: '+paperTitle(p), queue:qs, limit:180*60});
+    };
+    pl.appendChild(row);
   });
-  cc.appendChild(sc);
+  if(papers.length) w.appendChild(pl);
+
+  // Create your own test: pick chapters across subjects
+  const tc = testCfg();
+  const cc = el('<div class="card" style="margin-top:18px"><div class="eyebrow">Create your own test</div><h3>Pick the chapters</h3></div>');
+  SUBJECTS.forEach(sub=>{
+    const chs = (SYLLABUS[sub]||[]);
+    if(!chs.length) return;
+    cc.appendChild(el('<div class="field">'+sub+'</div>'));
+    const row = el('<div class="chips"></div>');
+    chs.forEach(c=>{
+      const on = tc.chapters.indexOf(c)>=0;
+      const count = QUESTIONS.filter(q=>q.chapter===c).length;
+      const b = el('<button class="chip '+(on?'on':'')+'">'+esc(c)+(count?' <span class="meta">'+count+'</span>':'')+'</button>');
+      b.onclick = ()=>{ tc.chapters = on ? tc.chapters.filter(x=>x!==c) : tc.chapters.concat([c]); render(); };
+      row.appendChild(b);
+    });
+    cc.appendChild(row);
+  });
   const tw = el('<div class="two" style="margin-top:6px"></div>');
-  const cs = pickerField('Questions per subject', [5,10,15,20,25].map(n=>({v:n,l:n+' per subject'})), m.perSubject, v=>{ nav.mockCfg = Object.assign({}, nav.mockCfg, {perSubject: v}); render(); });
-  const ms = pickerField('Time', [60,90,120,180].map(n=>({v:n,l:n+' minutes'})), m.minutes, v=>{ nav.mockCfg = Object.assign({}, nav.mockCfg, {minutes: v}); render(); });
-  tw.appendChild(cs); tw.appendChild(ms);
+  tw.appendChild(pickerField('Questions', [10,20,30,40].map(n=>({v:n,l:n+' questions'})), tc.n, v=>{ tc.n = v; render(); }));
+  tw.appendChild(pickerField('Time', [30,60,90,120].map(n=>({v:n,l:n+' minutes'})), tc.minutes, v=>{ tc.minutes = v; render(); }));
   cc.appendChild(tw);
-  cc.appendChild(el('<p class="note-line">Available: '+SUBJECTS.map(s=>s+' '+QUESTIONS.filter(q=>q.subject===s).length).join(' · ')+'</p>'));
-  const cb = el('<button class="btn block" style="margin-top:14px"'+(m.subjects.length?'':' disabled')+'>Start custom mock</button>');
+  const avail = tc.chapters.reduce((sum,c)=>sum+QUESTIONS.filter(q=>q.chapter===c).length,0);
+  cc.appendChild(el('<p class="note-line">'+(tc.chapters.length ? tc.chapters.length+' chapter'+(tc.chapters.length>1?'s':'')+' selected · '+avail+' questions available' : 'Select one or more chapters to begin.')+'</p>'));
+  const cb = el('<button class="btn block" style="margin-top:14px"'+(tc.chapters.length?'':' disabled')+'>Start my test</button>');
   cb.onclick = ()=>{
-    const mc = nav.mockCfg;
-    startMock({title:'Custom mock', subjects:SUBJECTS.filter(s=>mc.subjects.indexOf(s)>=0), perSubject:mc.perSubject, minutes:mc.minutes});
+    const pool = shuffle(QUESTIONS.filter(q=>tc.chapters.indexOf(q.chapter)>=0));
+    if(!pool.length){ alert('No questions in the chosen chapters yet.'); return; }
+    startSession({mode:'mock', title:'My test', queue:pool.slice(0, tc.n), limit:tc.minutes*60});
   };
   cc.appendChild(cb);
   w.appendChild(cc);
+
+  // Full-paper style preset kept for JEE Advanced until its PYQs are added
+  const ja = el('<div class="card preset" style="margin-top:14px"><div class="eyebrow">Full paper</div><div class="big">JEE Advanced style</div><div class="small">Approximate: 18 questions per subject · 180 minutes</div></div>');
+  ja.onclick = ()=>startMock({title:'JEE Advanced style mock', subjects:SUBJECTS, perSubject:18, minutes:180});
+  w.appendChild(ja);
   return w;
 }
 
