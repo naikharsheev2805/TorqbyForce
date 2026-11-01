@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+<!doctype html><html lang="en"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
 /* ---------- Leaderboard + visibility toggle ---------- */
 .lb-row{ display:flex; align-items:center; gap:var(--sp-3); }
 .lb-rank{ width:28px; text-align:center; font-weight:600; color:var(--muted); font-variant-numeric:tabular-nums; flex-shrink:0; }
@@ -30,12 +30,6 @@
 <link rel="apple-touch-startup-image" href="icons/splash-iphone-1290x2796.png" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
 <link rel="apple-touch-startup-image" href="icons/splash-iphone-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
 <link rel="apple-touch-startup-image" href="icons/splash-ipad-1640x2360.png" media="(device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
-</head><body>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>TORQ — JEE PYQ Practice</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -441,16 +435,11 @@ details summary::-webkit-details-marker{display:none;}
 @keyframes splPulse{0%,100%{transform:scale(1)} 50%{transform:scale(1.06)}}
 @media (prefers-reduced-motion: reduce){ .spl-inner,.spl-logo{animation:none} .spl-bar i{transition:none} }
 
-/* ---------- Tap feedback: no blue flash, a soft ripple instead ---------- */
+/* ---------- Tap feedback: no blue flash ---------- */
 *{ -webkit-tap-highlight-color:transparent; }
 button, [role="button"], a, .row, .chip{ position:relative; overflow:hidden; }
 button:focus:not(:focus-visible), [role="button"]:focus:not(:focus-visible){ outline:none; }
 .btn:active, .chip:active, .seg button:active, .bn:active, .subjcard:active{ transform:scale(.97); transition:transform .12s ease; }
-.ripple-host{ overflow:hidden !important; }
-.ripple{ position:absolute; border-radius:50%; pointer-events:none; opacity:0; transform:scale(.2);
-  background:radial-gradient(circle, currentColor 0%, currentColor 38%, transparent 68%);
-  animation:ripple .85s cubic-bezier(.16,1,.3,1) forwards; }
-@keyframes ripple{ 0%{ transform:scale(.2); opacity:.32; } 55%{ opacity:.18; } 100%{ transform:scale(1); opacity:0; } }
 
 /* ---------- Shared card language (same look as the quote and subject cards) ---------- */
 .card{ position:relative; overflow:hidden; border-radius:var(--r-xl); box-shadow:0 14px 30px -24px var(--shadow); }
@@ -925,7 +914,6 @@ body.has-nav .navpanel{ top:calc(66px + env(safe-area-inset-top,0px)); left:14px
 body.has-nav .bn{ flex:none; }
 
 /* ---------- Tour drawing (hand-drawn line art) ---------- */
-  stroke-dasharray:1; stroke-dashoffset:1; animation:penDraw 1.25s cubic-bezier(.45,0,.25,1) forwards; animation-delay:calc(var(--i)*.22s + .25s); }
 .intro-art{ position:relative; width:calc(200px*var(--k,1)); height:calc(200px*var(--k,1)); margin:0 auto calc(18px*var(--k,1)); animation:introFloat 9s ease-in-out infinite; }
 .intro-art svg{ width:100%; height:100%; overflow:visible; }
 .intro-art path{ fill:none; stroke:var(--accent); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;
@@ -1465,7 +1453,6 @@ img{ -webkit-user-drag:none; }
 .hm-orbs i{ filter:none !important; border-radius:0 !important; background:radial-gradient(circle, color-mix(in srgb, var(--accent) 45%, transparent) 0%, transparent 68%) !important; }
 .hm-orbs i:nth-child(2){ background:radial-gradient(circle, color-mix(in srgb, var(--c-chem) 35%, transparent) 0%, transparent 68%) !important; }
 
-.ripple{ animation-duration:.42s !important; }
 /* ---------- Flashcards tile in Notes: large, art-led, like the subject cards ---------- */
 .fc-tile{ min-height:260px; }
 .fc-art{ height:200px; aspect-ratio:auto !important; background:linear-gradient(160deg,var(--surface-2),var(--surface)); }
@@ -1585,9 +1572,6 @@ img{ -webkit-user-drag:none; }
 .rpt-modal{ position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); z-index:22; width:min(88vw,380px); background:var(--surface); border:1px solid var(--border); border-radius:22px; padding:22px; box-shadow:var(--shadow-sheet); }
 .rpt-modal-title{ font:500 18px/1.3 Lora,Georgia,serif; margin-bottom:8px; }
 .rpt-modal-actions{ display:grid; grid-template-columns:1fr 1.5fr; gap:10px; margin-top:18px; }
-.rb-tag{ display:inline-flex; align-items:center; gap:6px; margin:8px 0 4px; padding:7px 12px; border-radius:99px; font:700 10.5px/1.25 Inter,sans-serif; letter-spacing:.06em; text-transform:uppercase; color:#3a2600; background:linear-gradient(110deg,#f6d77a 0%,#c8962e 40%,#fbe9a8 55%,#b87d1f 80%); background-size:220% 100%; box-shadow:0 0 0 1px rgba(200,150,46,.55), 0 4px 16px rgba(200,150,46,.35); animation:rbShine 3.2s linear infinite; }
-@keyframes rbShine{ from{ background-position:0 0; } to{ background-position:220% 0; } }
-@media (prefers-reduced-motion: reduce){ .rb-tag{ animation:none; } }
 .wt.hi{ background:var(--ok); color:var(--surface); border-color:transparent; }
 .wt.hi::before{ background:currentColor; }
 .explain-box textarea{ min-height:0 !important; height:1.6em; max-height:1.6em; resize:none; overflow:hidden; padding:2px 8px; line-height:1.6; font-size:inherit; transition:height .2s ease; }
@@ -1764,7 +1748,6 @@ body{ overflow-x:clip; }
   .fx2-keys{font-size:13px}
   .sog-pts span{font-size:13px}
   .qc-txt span small{font-size:13px}
-  .rb-tag{font-size:13px}
   .fx2-lab{font-size:13px}
   .oos-tag{font-size:13px}
   .oos-pop-k{font-size:13px}
@@ -1878,7 +1861,7 @@ body.has-nav .build-stamp{ margin-bottom:calc(96px + env(safe-area-inset-bottom,
 <script>
 // ---------- Data paths (adjust here if the folder layout changes) ----------
 // Serve the repo root with a local server (e.g. `python3 -m http.server`); opening the file directly blocks fetch().
-const APP_BUILD = '2026-11-01-b';   // bumped with every release; the app compares it with the hosted file
+const APP_BUILD = '2026-11-01-c';   // bumped with every release; the app compares it with the hosted file
 const PATHS = {
   index: 'data/index.json',  // lists every paper; each paper's "file" field points at its question JSON
   solutions: 'data/solutions/'    // one file per paper: data/solutions/<paper-id>.json
@@ -1890,7 +1873,8 @@ let PAPERS = [];
 let BANK_ERROR = null;
 
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1).toLowerCase() : 'Medium';
-const monthKey = s => /apr/i.test(String(s || '')) ? 'April' : 'Jan';
+const MONTH_KEY = {jan:'Jan', feb:'Feb', mar:'Mar', apr:'April'};
+const monthKey = s => { const m = /(jan|feb|mar|apr)/i.exec(String(s || '')); return m ? MONTH_KEY[m[1].toLowerCase()] : 'Jan'; };
 const paperTitle = p => [p.year, p.session, p.shift_label].filter(Boolean).join(' · ');
 
 function solText(v){
@@ -1987,18 +1971,6 @@ function sameAnswer(a, b){
   if(x !== '' && y !== '' && !isNaN(nx) && !isNaN(ny)) return Math.abs(nx - ny) < 1e-9;
   return x.toLowerCase() === y.toLowerCase();
 }
-function intInput(q, a, val, onSubmit, locked){
-  const wrap = el('<div class="intwrap"><div class="field">Your answer (integer)</div></div>');
-  const inp = el('<input class="intin" inputmode="decimal" autocomplete="off" placeholder="Enter a number">');
-  inp.value = val || '';
-  const btn = el('<button class="btn small">Check</button>');
-  if(locked && a){ inp.disabled = true; inp.classList.add(a.correct ? 'ok' : 'bad'); btn.style.display = 'none'; }
-  const submit = ()=>{ const v = inp.value.trim(); if(v) onSubmit(v); };
-  btn.onclick = submit;
-  inp.onkeydown = e => { if(e.key === 'Enter') submit(); };
-  wrap.appendChild(inp); wrap.appendChild(btn);
-  return wrap;
-}
 function answerNumeric(v){
   const q = session.queue[session.idx];
   const prev = session.answers[q.id];
@@ -2011,19 +1983,10 @@ function answerNumeric(v){
 }
 function setNumeric(v){   // mock: store the response, mark correctness at submit
   const q = session.queue[session.idx];
-  session.answers[q.id] = {sel:v};
+  if(v===''||v==null) delete session.answers[q.id]; else session.answers[q.id] = {sel:v};
   render();
 }
 
-// Sample formula cards (placeholders; replace with verified sheets later)
-const FORMULAS = {
-  'Mechanics': [{t:'Incline, frictionless', f:'a = g sin θ'}, {t:'Reduced mass', f:'μ = m₁m₂ / (m₁ + m₂)'}],
-  'Organic Chemistry': [{t:'Markovnikov addition', f:'H adds to the carbon with more H atoms'}],
-  'Electrochemistry': [{t:'Gibbs energy and cell potential', f:'ΔG° = −nFE°cell'}],
-  'Coordinate Geometry': [{t:'Distance between parallel lines', f:'d = |c₁ − c₂| / √(a² + b²)'}],
-  'Calculus': [{t:'Critical points', f:"f'(x) = 0"}],
-  'Electrostatics': [{t:'Electric field unit', f:'E = F / q  (N/C)'}]
-};
 
 // ---------- Syllabus (chapter names; questions are added per chapter later) ----------
 // Chemistry sections, by the syllabus units: 1 to 8 physical, 9 to 12 inorganic, 13 to 19 organic, 20 practical
@@ -2054,8 +2017,8 @@ function canonChapter(subject, name){
 const SUBJECTS = ['Physics','Chemistry','Maths'];
 let QMAP = {};
 let ALL_YEARS = [];
-const SHIFT_ORDER = {Jan:1, April:2};
-const SHIFT_NAME = {Jan:'January', April:'April'};
+const SHIFT_ORDER = {Jan:1, Feb:2, Mar:3, April:4};
+const SHIFT_NAME = {Jan:'January', Feb:'February', Mar:'March', April:'April'};
 const chaptersOf = s => { const base = SYLLABUS[s]||[]; const extra = [...new Set(QUESTIONS.filter(q=>q.subject===s).map(q=>q.chapter))].filter(c=>base.indexOf(c)<0); return base.concat(extra); };
 const topicsOf = (s,c) => [...new Set(QUESTIONS.filter(q=>q.subject===s && q.chapter===c).map(q=>q.topic))];
 let ALL_CHAPTERS = [];
@@ -2077,6 +2040,32 @@ function normalizeStore(){
   });
   const pts = Number(store.points);
   store.points = isFinite(pts) ? Math.round(pts) : 0;
+}
+// Merges two lists without repeats. Objects are matched by id, or by content when they have none.
+function unionItems(a, b){
+  const seen = new Set(), out = [];
+  a.concat(b).forEach(x=>{
+    const k = (x && typeof x === 'object') ? (x.id != null ? 'id:' + x.id : 'json:' + JSON.stringify(x)) : 'v:' + String(x);
+    if(!seen.has(k)){ seen.add(k); out.push(x); }
+  });
+  return out;
+}
+// Adds a saved copy (on this device or from the server) into the live store. Nothing already there is thrown away.
+function absorbLocal(incoming){
+  if(!incoming || typeof incoming !== 'object') return;
+  Object.keys(incoming).forEach(k=>{
+    const inc = incoming[k], cur = store[k];
+    if(cur === undefined || cur === null){ store[k] = inc; return; }
+    if(k === 'attempts' && Array.isArray(cur) && Array.isArray(inc)){
+      const have = new Set(cur.filter(Boolean).map(a => a.q + '|' + a.at));
+      store.attempts = cur.concat(inc.filter(a => a && !have.has(a.q + '|' + a.at)));
+      return;
+    }
+    if(typeof cur === 'number' && typeof inc === 'number'){ store[k] = Math.max(cur, inc); return; }
+    if(Array.isArray(cur) && Array.isArray(inc)){ store[k] = unionItems(cur, inc); return; }
+    if(cur && typeof cur === 'object' && !Array.isArray(cur) && inc && typeof inc === 'object' && !Array.isArray(inc)){ store[k] = Object.assign({}, cur, inc); return; }
+    store[k] = inc;
+  });
 }
 function persist(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){} markCloudDirty(); }
 
@@ -2116,7 +2105,7 @@ async function restoreCloudState(uid){
       if(k === 'attempts') return;
       const sv = s[k], lv = store[k];
       if(lv === undefined || lv === null) store[k] = sv;
-      else if(Array.isArray(lv) && Array.isArray(sv)) store[k] = Array.from(new Set([...lv, ...sv]));
+      else if(Array.isArray(lv) && Array.isArray(sv)) store[k] = unionItems(lv, sv);
       else if(typeof lv === 'number' && typeof sv === 'number') store[k] = Math.max(lv, sv);
       else if(typeof lv === 'object' && !Array.isArray(lv) && sv && typeof sv === 'object') store[k] = Object.assign({}, sv, lv);
     });
@@ -2202,8 +2191,8 @@ function recordAttempt(q, ok, time){
   return att;
 }
 // A question left unanswered when the session ends counts as skipped (for the leaderboard only)
-function recordSkip(q, time){
-  store.attempts.push({q:q.id, c:null, skipped:true, t:time||0, d:dayKey(), at:Date.now(), mock:!!(session && session.mode==='mock')});
+function recordSkip(q, time, pts){
+  store.attempts.push({q:q.id, c:null, skipped:true, pts:pts||0, t:time||0, d:dayKey(), at:Date.now(), mock:!!(session && session.mode==='mock')});
   if(store.attempts.length>3000) store.attempts.shift();
   scheduleUpload(); persist();
 }
@@ -2211,7 +2200,7 @@ function finalizeSkips(){
   if(!session || session.skipsDone) return;
   session.skipsDone = true;
   if(session.mode==='mock') return; // mocks record skips in submitMock
-  session.queue.forEach(q=>{ if(!session.answers[q.id]) recordSkip(q, 0); });
+  session.queue.forEach(q=>{ const a = session.answers[q.id]; if(!a || a.skip) recordSkip(q, Math.round((a && a.time) || 0), (a && !a.auto) ? 1 : 0); });
 }
 function statsOf(list){
   list = list.filter(a=>!a.skipped && !a.nullified);
@@ -2223,7 +2212,6 @@ function statsOf(list){
 function attemptsWhere(fn){ return store.attempts.filter(a=>{ const q=QMAP[a.q]; return q && fn(q); }); }
 const chapterStats = c => statsOf(attemptsWhere(q=>q.chapter===c));
 const subjectStats = s => statsOf(attemptsWhere(q=>q.subject===s));
-const topicStats = (c,t) => statsOf(attemptsWhere(q=>q.chapter===c && q.topic===t));
 // Days in a row. While today is still open the streak is held (frozen) at yesterday's count.
 function streakInfo(){
   const days = qotdDays();
@@ -2242,7 +2230,6 @@ function weakChapter(){
   if(!c.length) return null;
   return c.sort((a,b)=>a.s.acc-b.s.acc)[0];
 }
-function tileClass(acc){ if(acc===null) return ''; return acc<50 ? 'low' : acc<75 ? 'mid' : 'high'; }
 
 
 // ---------- Themes (default is Claude dark) ----------
@@ -2295,7 +2282,6 @@ function torqSpinner(px){
     +'<g class="torq-arc"><path d="'+arc+'" fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round"/>'
     +'<polygon points="'+head+'" fill="var(--accent)"/></g></svg>';
 }
-function logoImg(){ const id = document.documentElement.getAttribute('data-theme') || 'claude-dark'; return '<img class="logo" alt="" src="' + (LOGOS[id] || LOGOS['claude-dark']) + '">'; }
 function currentTheme(){ return document.documentElement.getAttribute('data-theme') || 'claude-dark'; }
 function applyTheme(id){
   if(!THEMES.some(t=>t.id===id)) id='claude-dark';
@@ -2328,14 +2314,6 @@ function themeSplitPart(){
     THEMES.filter(t=>!!t.dark===dark).forEach(t=>grid.appendChild(themeCardEl(t)));
     w.appendChild(grid);
   });
-  return w;
-}
-function themePart(){
-  const w = el('<div></div>');
-  w.appendChild(el('<p class="note-line" style="margin:0 0 16px">Each card shows that theme as it looks. Tap one to use it. It is saved on this device only.</p>'));
-  const grid = el('<div class="themes"></div>');
-  THEMES.forEach(t=>grid.appendChild(themeCardEl(t)));
-  w.appendChild(grid);
   return w;
 }
 
@@ -2526,7 +2504,6 @@ function startSessionNow(o){
   lastOrigin = {view: view, nav: JSON.parse(JSON.stringify(nav))};   // where the student was before the set began
   session.origin = lastOrigin;
   go('practice');
-  go('practice');
   if(session.limit){ if(window.__t) clearInterval(window.__t); const tk = session.mode==='mock' ? tickMock : tickExam; window.__t=setInterval(tk,1000); tk(); }
   else { if(window.__t) clearInterval(window.__t); window.__t=setInterval(tickQ,1000); tickQ(); }
 }
@@ -2595,7 +2572,7 @@ function submitMock(){
 // Submitting a practice set: this is the only moment answers are marked, scored and recorded
 function submitPractice(silent){
   if(!session || session.submitted || session.review) return;
-  const untouched = session.queue.filter(q=>!session.answers[q.id] || (session.answers[q.id].skip && session.answers[q.id].auto===undefined && !session.answers[q.id].pending && false)).length;
+  const untouched = session.queue.filter(q=>!session.answers[q.id]).length;
   if(!silent && untouched && !confirm('Submit now? '+untouched+' question'+(untouched>1?'s are':' is')+' untouched and will count as skipped with no points.')) return;
   session.queue.forEach(q=>{
     const a = session.answers[q.id];
@@ -2686,22 +2663,6 @@ function historyPart(){
   w.appendChild(list);
   return w;
 }
-function setConf(qid, conf){
-  const a = session.answers[qid];
-  if(a && a.att){
-    const next = a.att.conf===conf ? null : conf;
-    a.att.conf = next;
-    a.att.dirty = true;
-    // Points depend on sure / guess, so recalculate this answer when the choice changes
-    if(a.pts !== undefined && a.correct !== undefined && !a.skip){
-      const newPts = scoreFor(!!a.correct, next || 'guess', a.time || 0);
-      addPoints(newPts - a.pts);
-      a.pts = newPts;
-    }
-    scheduleUpload();
-  }
-  persist(); render();
-}
 function saveNote(qid, text){
   const t = text.trim();
   if(t) store.notes[qid]=t; else delete store.notes[qid];
@@ -2733,7 +2694,6 @@ function sbClient(){
   }
   return sbInst;
 }
-// Existing device attempts go up once per account. Points use the same scoring as the app.
 // Save the profile row (and the photo) to Supabase. Returns {taken:true} if the username is already used.
 async function saveRemote(p, newPhoto){
   const db = sbClient(); if(!db || !sbSession) return {};
@@ -2758,7 +2718,7 @@ function attemptFields(a){
     skipped: !!a.skipped,
     time_ms: a.t != null ? Math.round(a.t * 1000) : null,
     confidence: (a.conf === 'sure' || a.conf === 'guess') ? a.conf : null,
-    points: a.nullified ? 0 : a.skipped ? 1 : scoreFor(!!a.c, a.conf, a.t || 0),
+    points: a.nullified ? 0 : a.skipped ? (a.pts || 0) : scoreFor(!!a.c, a.conf, a.t || 0),
     created_at: a.at ? new Date(a.at).toISOString() : (a.d ? new Date(a.d + 'T12:00:00').toISOString() : new Date().toISOString())
   };
 }
@@ -2838,8 +2798,6 @@ function authView(){
 
 // ----- Sign-up flow: one question at a time -----
 // Email path:  account -> username -> about -> exam -> finish
-// Google path: password -> username -> about -> exam -> finish (Google already gave us the email)
-const SU_LABELS = ['Account','Username','About you','Your exam','Finish'];
 const SU_KEY = 'torq_signup_step_v1';
 function suDraft(){ try{ return JSON.parse(localStorage.getItem('torq_profile_draft_v1')) || {}; }catch(e){ return {}; } }
 function suSaveDraft(d){ try{ localStorage.setItem('torq_profile_draft_v1', JSON.stringify(d)); }catch(e){} }
@@ -3108,7 +3066,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v1.1.0';
+const APP_VERSION = 'v1.1.1';
 const LAST_UPDATED = 'November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact'];
 function addBuildStamp(app){
@@ -3120,8 +3078,6 @@ function addBuildStamp(app){
   if(showVer) box.appendChild(el('<span class="bs-ver">'+esc(APP_VERSION)+'</span>'));
   app.appendChild(box);
 }
-// Leaderboards call this for each row: guard accounts never appear.
-function showOnLeaderboard(email){ return !!email && GUARD_EMAILS.indexOf(String(email).toLowerCase()) < 0; }
 function mockLocked(){ if(hasFullAccess()) return false; return !!(session && session.mode==='mock' && !session.submitted && !session.review); }
 
 // Coming-soon notice for tabs that are not built yet
@@ -3233,7 +3189,7 @@ const TABS = [
   {id:'pyq', label:'PYQs', icon:'<path d="M5 4h10l4 4v12H5z"/><path d="M14 4v5h5M9 13h6M9 17h4"/>'},
   {id:'syllabus', label:'Syllabus', icon:'<path d="M4 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>'},
   {id:'leaderboard', label:'Leaderboard', title:'Leaderboard, coming soon', disabled:true, icon:'<path d=\"M8 4h8v5a4 4 0 0 1-8 0z\"/><path d=\"M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4\"/><path d=\"M12 13v4M9 20h6M10 17h4\"/>'},
-  {id:'mocks', label:'Mocks', title:'Mocks, coming soon (after the neural network)', disabled:true, icon:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>'},
+  {id:'mocks', label:'Mocks', title:'Mocks, coming soon', disabled:true, icon:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>'},
   {id:'notebooks', label:'Notebooks', icon:'<path d="M7 3h10v18l-5-4-5 4z"/>'},
   {id:'notehub', label:'Notes', icon:'<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M8 8h7M8 12h7"/>'},
   {id:'me', label:'Me', icon:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>'}
@@ -3336,7 +3292,7 @@ function bottomNav(){
   }
   return bar;
 }
-function back(label, fn){ return el('<div></div>'); } // the Back card at the top right replaces the in-page links
+// the Back card at the top right replaces the in-page links
 // Chapter icons, batch 1 (Physics). One small line drawing per chapter, in the chapter's colour.
 const CH_ICONS = {
  'Units and Measurements': '<path d="M3 17 L17 3 L21 7 L7 21 Z"/><path d="M7 13 l2 2 M10 10 l2 2 M13 7 l2 2"/>',
@@ -3405,10 +3361,10 @@ function chapterWeight(s, c){
   const all = QUESTIONS.filter(q=>q.subject===s); if(!all.length) return null;
   const n = all.filter(q=>q.chapter===c).length; return n ? Math.round(n/all.length*100) : null;
 }
-// Premium badge for the glossary: gold, shimmering, sold as a rank and memory booster
+// Rank booster chip for the glossary: same style as the PYQ weight tag
 function rankTag(c){
   if(c!=='Organic Terms Glossary') return '';
-  return '<span class="rb-tag">✦ Rank Booster · Made exclusively to lock every term into memory and lift your rank</span>';
+  return '<span class="wt rb">Rank booster</span>';
 }
 function wtTag(s, c){
   const p = chapterWeight(s, c); if(p===null) return '';
@@ -3425,26 +3381,6 @@ const SYL_INFO = {
  main:'JEE Main: 3 hours, 75 questions, 300 marks. Physics, Chemistry and Maths, 25 questions each. Chapters below.',
  adv:'JEE Advanced: two papers of 3 hours each. It covers the same chapters as Main, tested in greater depth. Chapters below.'
 };
-function syllabusPart(){
-  const tab = nav.sylTab || 'main';
-  const w = el('<div class="card"><div class="eyebrow">Syllabus</div></div>');
-  const seg = el('<div class="seg"></div>');
-  [['main','JEE Main'],['adv','JEE Advanced']].forEach(p=>{
-    const b = el('<button class="'+(tab===p[0]?'on':'')+'">'+p[1]+'</button>');
-    b.onclick = ()=>go('home',{sylTab:p[0]});
-    seg.appendChild(b);
-  });
-  w.appendChild(seg);
-  w.appendChild(el('<p class="note-line" style="margin:0 0 12px">'+esc(SYL_INFO[tab])+'</p>'));
-  SUBJECTS.forEach(s=>{
-    const d = el('<details style="border-bottom:1px solid var(--border);padding:10px 0"><summary style="cursor:pointer;font-weight:600">'+s+' · '+SYLLABUS[s].length+' chapters</summary><ul style="margin:8px 0 4px;padding-left:20px;font-size:14px;line-height:1.75"></ul></details>');
-    const ul = d.querySelector('ul');
-    SYLLABUS[s].forEach(c=>ul.appendChild(el('<li>'+esc(c)+'</li>')));
-    w.appendChild(d);
-  });
-  w.appendChild(el('<p class="note-line" style="margin-top:12px">Check the official NTA and IIT brochures for the current syllabus.</p>'));
-  return w;
-}
 const JEE_MAIN_SYLLABUS = [
  {s:'Mathematics', sec:[{h:'', u:[
   {t:'Sets, Relations and Functions', x:'Sets and their representation; Union, intersection and complement of sets and their algebraic properties; Power set; Relations, type of relations, equivalence relations, functions; one-one, into and onto functions, the composition of functions.'},
@@ -3526,7 +3462,7 @@ function examAdv(){ return !!(store.profile && store.profile.exam==='adv'); }
 function sylPapersShown(){ return SYL_PAPERS.filter(p=>p.id!=='adv'||examAdv()); }
 
 const TC_SMALL = new Set(['of','and','the','in','for','on','with','to','a','an','or','at','by','from','as','into','per','via','its','is']);
-const TC_KEEP = {'Co-ordinate Geometry':1,'p-Block Elements':1,'d- and f-Block Elements':1,'Three Dimensional- perception':1};
+const TC_KEEP = {'Co-ordinate Geometry':1,'p-Block Elements':1,'d- and f-Block Elements':1,'Three Dimensional Geometry':1};
 function tc(s){
   if(TC_KEEP[s]) return s;
   return s.split(' ').map((w,i)=>{
@@ -3903,7 +3839,6 @@ function paperView(){
                       .sort((a,b)=>SUBJECTS.indexOf(a.subject)-SUBJECTS.indexOf(b.subject));
   const title = paperTitle(PAPERS.find(x=>x.id===p) || {});
   const w = el('<div></div>');
-  w.appendChild(back('Papers', ()=>go('pyq',{pyqTab:'papers'})));
   w.appendChild(el('<div class="eyebrow">Previous year paper</div>'));
   w.appendChild(el('<h1 class="title">'+esc(title)+'</h1>'));
   w.appendChild(el('<p class="sub">'+qs.length+' questions</p>'));
@@ -4182,6 +4117,25 @@ Object.assign(FL_EXPLAIN, {"IUPAC Nomenclature and Common Names": (FL_EXPLAIN["I
 
 NOTES["Organic Terms Glossary"] = {formulas: [], concepts: [{"title": "Vicinal", "analogy": "Next door neighbours on a chain.", "body": ["Vicinal means on adjacent carbon atoms. In vicinal dihalides such as 1,2-dibromoethane, the two halogens sit on neighbouring carbons. Vicinal diols (1,2-diols) work the same way, as in ethylene glycol."]}, {"title": "Geminal", "analogy": "Twins on the same carbon.", "body": ["Geminal means on the same carbon atom. In geminal dihalides such as ethylidene chloride (CH3CHCl2), both chlorines share one carbon. Think of gem as in gemini, the twins."]}, {"title": "Halide (alkyl halide)", "analogy": "A halogen swapped in for a hydrogen.", "body": ["An alkyl halide is an alkane in which one hydrogen has been replaced by F, Cl, Br or I. The carbon bonded to the halogen is the one that matters for classification."]}, {"title": "Primary, secondary, tertiary", "analogy": "How many carbons are attached to the key carbon.", "body": ["A primary carbon is attached to one other carbon, secondary to two, and tertiary to three. The same labels classify alcohols and alkyl halides, and they predict how fast reactions happen."]}, {"title": "Functional group", "analogy": "The reactive part that gives a family its behaviour.", "body": ["A functional group is an atom or group of atoms that decides how a compound reacts, such as -OH in alcohols, -CHO in aldehydes and -COOH in acids. Compounds with the same group behave alike."]}, {"title": "Homologous series", "analogy": "A family where each member differs by CH2.", "body": ["A homologous series is a family of compounds with the same functional group, each one differing from the last by one CH2 unit. Methane, ethane and propane form the alkane series."]}, {"title": "Isomers", "analogy": "Same formula, different arrangement.", "body": ["Isomers have the same molecular formula but different structures or spatial arrangements. Everything that follows (structural, geometric, optical) is a kind of isomerism."]}, {"title": "Chain, position and functional isomers", "analogy": "Structural isomers differing in the skeleton, group position or group type.", "body": ["Chain isomers differ in the carbon skeleton (butane and isobutane). Position isomers differ in where the group sits (1-propanol and 2-propanol). Functional isomers have different groups (ethanol and dimethyl ether)."]}, {"title": "Geometric isomers (cis and trans)", "analogy": "Same bonds, different sides.", "body": ["Cis isomers have the same groups on the same side of a double bond. Trans isomers have them on opposite sides. Double bonds cannot rotate, so the two forms do not interconvert."]}, {"title": "Chiral centre and optical isomerism", "analogy": "A carbon with four different groups.", "body": ["A chiral carbon has four different groups attached. Its mirror image cannot be superimposed on it, so the molecule is optically active and rotates plane-polarised light."]}, {"title": "Enantiomers and racemic mixture", "analogy": "Mirror-image pairs, and a 50:50 mix of them.", "body": ["Enantiomers are non-superimposable mirror images. A racemic mixture contains equal amounts of both, so its optical rotation is zero because the two cancel."]}, {"title": "Saturated and unsaturated", "analogy": "Saturated has only single bonds; unsaturated has a double or triple bond.", "body": ["Saturated compounds such as alkanes contain only single bonds. Unsaturated compounds such as alkenes and alkynes have one or more double or triple bonds."]}, {"title": "Aliphatic, alicyclic and aromatic", "analogy": "Open chains, closed non-aromatic rings, and benzene-type rings.", "body": ["Aliphatic compounds are open chains. Alicyclic compounds are rings that are not aromatic, such as cyclohexane. Aromatic compounds, such as benzene, are rings with delocalised pi electrons."]}, {"title": "Inductive effect", "analogy": "A pull or push along a chain of sigma bonds.", "body": ["Electronegative atoms pull electron density along sigma bonds, creating a partial charge. The effect weakens quickly with distance. Chloroethane's carbon is slightly positive because chlorine pulls electrons."]}, {"title": "Resonance", "analogy": "Several Lewis structures for one molecule.", "body": ["Resonance describes electrons spread over several positions. The real molecule is a blend of the contributing structures, which makes it more stable than any single one, as in benzene."]}, {"title": "Hyperconjugation", "analogy": "Stabilisation by neighbouring C-H bonds.", "body": ["Hyperconjugation is the donation of electrons from adjacent C-H sigma bonds into an empty or partly empty orbital. More alkyl groups mean more hyperconjugation, which stabilises carbocations."]}, {"title": "Electrophile", "analogy": "Electron-loving, seeks electrons.", "body": ["An electrophile is an electron-deficient species that accepts an electron pair, such as H+, Br+ or a carbocation. Electrophilic addition and substitution are driven by them."]}, {"title": "Nucleophile", "analogy": "Nucleus-loving, donates electrons.", "body": ["A nucleophile has a lone pair it donates to an electron-poor centre, such as OH-, CN- or NH3. Nucleophilic substitution and addition are driven by them."]}, {"title": "Homolytic and heterolytic fission", "analogy": "Bond breaking that gives radicals or ions.", "body": ["In homolytic fission each atom keeps one electron, giving free radicals. In heterolytic fission one atom keeps both electrons, giving a carbocation and a carbanion."]}, {"title": "Carbocation, carbanion, free radical", "analogy": "Carbon with a positive, negative or single electron.", "body": ["A carbocation has six electrons and a positive charge, a carbanion has a lone pair and a negative charge, and a free radical has an unpaired electron. Stability follows the number of alkyl groups."]}, {"title": "Ortho, meta and para", "analogy": "Positions on a benzene ring relative to a substituent.", "body": ["Ortho is adjacent (1,2), meta has one carbon between (1,3) and para is opposite (1,4). Activating groups direct to ortho and para, deactivating groups to meta."]}, {"title": "Markovnikov's rule", "analogy": "The H goes to the carbon that already has more H.", "body": ["When HX adds to an unsymmetrical alkene, hydrogen bonds to the carbon with more hydrogens, and the halogen goes to the carbon with fewer. This is because the more stable carbocation forms."]}, {"title": "Anti-Markovnikov and the peroxide effect", "analogy": "The reverse addition, caused by peroxides.", "body": ["In the presence of peroxides, HBr adds in the anti-Markovnikov way through a free radical mechanism. Peroxide effect is seen only with HBr."]}, {"title": "Tetravalency and hybridisation", "analogy": "Carbon makes four bonds; its orbitals mix.", "body": ["Carbon forms four bonds because it has four valence electrons. In sp3 it is tetrahedral (109.5 degrees), sp2 trigonal planar (120 degrees) and sp linear (180 degrees)."]}, {"title": "Newman and Sawhorse projections", "analogy": "Two ways to draw a molecule's 3D shape.", "body": ["A Sawhorse projection shows the molecule diagonally, as if on a sawhorse. A Newman projection looks down a C-C bond, with the front carbon as a point and the back carbon as a circle. Both show staggered and eclipsed conformations."]}, {"title": "Acid anhydride", "analogy": "Two acids joined by losing one water.", "body": ["An acid anhydride is formed when two carboxylic acid groups lose one water molecule between them. Succinic anhydride and phthalic anhydride are examples."]}, {"title": "Reagent and reaction type", "analogy": "What is added, and what kind of change occurs.", "body": ["A reagent is the substance added to bring about a reaction. Common types are substitution (one group replaced), addition (a group added across a multiple bond), elimination (a small molecule removed) and rearrangement (atoms rearranged within the molecule)."]}]};
 
+// ---- Trigonometry: each flashcard explanation now sits beside its own formula (they had drifted out of step) ----
+NOTES["Trigonometry"].formulas = [
+ {eq:"sin^2(x) + cos^2(x) = 1", use:"Connects sine and cosine for any angle"},
+ {eq:"sin(A + B) = sin A cos B + cos A sin B", use:"Sine of a sum"},
+ {eq:"sin(2x) = 2 sin(x) cos(x)", use:"Sine of a double angle"},
+ {eq:"tan(A + B) = (tan A + tan B) / (1 - tan A tan B)", use:"Tangent of a sum"},
+ {eq:"sin(3x) = 3 sin(x) - 4 sin^3(x)", use:"Sine of three times an angle"},
+ {eq:"a / sin A = b / sin B = c / sin C", use:"Sides of a triangle against their opposite angles"},
+ {eq:"sin(A - B) = sin A cos B - cos A sin B", use:"Sine of a difference"},
+ {eq:"cos(2x) = 1 - 2 sin^2(x)", use:"Cosine of a double angle, in terms of sine alone"},
+ {eq:"cos(2x) = 2 cos^2(x) - 1", use:"Cosine of a double angle, in terms of cosine alone"},
+ {eq:"sin^(-1)(x) + cos^(-1)(x) = pi / 2", use:"Inverse sine and inverse cosine add to a right angle"},
+ {eq:"cos(2x) = cos^2(x) - sin^2(x)", use:"Cosine of a double angle, in terms of both"},
+ {eq:"tan^(-1)(x) + tan^(-1)(y) = tan^(-1)((x + y) / (1 - xy)), for xy < 1", use:"Adds two inverse tangents into one"}
+];
+FL_EXPLAIN["Trigonometry"] = (FL_EXPLAIN["Trigonometry"] || []).slice(0, 10).concat([
+ ["Cosine of a double angle, in terms of both cosine and sine.", "Take the cosine sum formula with equal angles: the cosine squared term minus the sine squared term gives the double angle.", "Cos squared minus sin squared."],
+ ["Adds two inverse tangents into one angle.", "Apply the tangent sum formula to the two angles, with x and y as their tangents. The condition xy < 1 keeps the sum on the principal branch.", "Add the tangents on top, subtract the product below."]
+]);
 const __flashCache = {};
 function flashCards(c){ return __flashCache[c] || (__flashCache[c] = flashCardsBuild(c)); }
 window.__oosSeen = window.__oosSeen || {};
@@ -4456,7 +4410,7 @@ function notehubView(){
     w.appendChild(el('<div class="nb-head" style="color:'+(SUBJ_VAR[g.s]||'var(--accent)')+'">'+esc(g.s)+'<span>'+g.list.length+' chapter'+(g.list.length===1?'':'s')+'</span></div>'));
     const list = el('<div class="list"></div>');
     g.list.forEach(c=>{
-      const row = el('<div class="row"><div><div class="name">'+esc(c)+'</div>'+wtTag(g.s, c)+'<div class="meta">'+NOTES[c].concepts.length+' concepts with worked examples</div>'+rankTag(c)+'</div><div class="end">Open</div></div>');
+      const row = el('<div class="row"><div><div class="name">'+esc(c)+'</div>'+wtTag(g.s, c)+rankTag(c)+'<div class="meta">'+NOTES[c].concepts.length+' concepts with worked examples</div></div><div class="end">Open</div></div>');
       row.onclick = ()=>go('notes',{chapter:c});
       list.appendChild(row);
     });
@@ -4468,10 +4422,9 @@ function notesView(){
   const c = nav.chapter, data = NOTES[c];
   oosNotice(c);
   const w = el('<div></div>');
-  w.appendChild(back(c, ()=>go('chapter')));
   w.appendChild(el('<div class="eyebrow">Revision notes</div>'));
   w.appendChild(el('<h1 class="title">'+esc(c)+'</h1>'));
-  if(rankTag(c)) w.appendChild(el(rankTag(c)));
+  if(rankTag(c)) w.appendChild(el('<div class="tags">'+rankTag(c)+'</div>'));
   if(!data){ w.appendChild(el('<div class="card empty">Notes for this chapter are coming in a later batch.</div>')); return w; }
   { const fb = el('<button class="btn block" style="margin:0 0 16px">Practice this chapter</button>'); fb.onclick = ()=>flashStart(c, false); w.appendChild(fb); }
   w.appendChild(el('<div class="field">Formula cards</div>'));
@@ -4519,20 +4472,9 @@ function renderFlashDeck(host, formulas, i, flipped){
   host.appendChild(bar);
   if(typeof renderMath==='function') renderMath();
 }
-function flashSectionEl(c){
-  const data = NOTES[c];
-  if(!data || !data.formulas || !data.formulas.length) return null;
-  const wrap = el('<div style="margin-top:22px"></div>');
-  wrap.appendChild(el('<div class="eyebrow" style="margin:0 0 10px">Formula flashcards</div>'));
-  const host = el('<div class="fc-deck"></div>');
-  wrap.appendChild(host);
-  renderFlashDeck(host, data.formulas, 0, false);
-  return wrap;
-}
 function chapterView(){
   const s=nav.subject, c=nav.chapter;
   const w = el('<div></div>');
-  w.appendChild(back('PYQs', ()=>go('pyq')));
   w.appendChild(el('<div class="eyebrow">'+esc(s)+'</div>'));
   w.appendChild(el('<h1 class="title">'+esc(c)+'</h1>'));
   { const sc = storyCard(c); if(sc) w.appendChild(sc); }
@@ -4566,7 +4508,6 @@ function chapterView(){
 function setupView(){
   const cfg = nav.cfg || defaultCfg({});
   const w = el('<div></div>');
-  w.appendChild(back(cfg.chapter?cfg.chapter:'PYQs', ()=>go(cfg.chapter?'chapter':'pyq')));
   const chosen = cfg.topics && cfg.topics.length ? cfg.topics.join(', ') : null;
   const scope = chosen || cfg.topic || cfg.chapter || cfg.subject || 'All questions';
   w.appendChild(el('<div class="eyebrow">'+esc(chosen||cfg.topic?cfg.chapter+' · subtopics':'Set up practice')+'</div>'));
@@ -4587,7 +4528,7 @@ function setupView(){
     card.appendChild(tw);
   }
 
-  card.appendChild(pk('Shift', [['All','All'],['Jan','January'],['April','April']].map(p=>({v:p[0],l:p[1]})), cfg.shift, 'shift'));
+  card.appendChild(pk('Shift', [['All','All'],['Jan','January'],['Feb','February'],['Mar','March'],['April','April']].map(p=>({v:p[0],l:p[1]})), cfg.shift, 'shift'));
 
   card.appendChild(pk('Difficulty', ['All','Easy','Medium','Hard'].map(d=>({v:d,l:d})), cfg.diff, 'diff'));
   card.appendChild(pk('Question type', [['All','All'],['MCQs','MCQs only'],['Integer','Integer only']].map(p=>({v:p[0],l:p[1]})), cfg.qtype || 'All', 'qtype'));
@@ -5146,12 +5087,6 @@ function notebookCard(q, showNote){
   return card;
 }
 
-// ----- About and legal: privacy, contact, copyright and the independence notice -----
-function legalSection(title, paras, id){
-  const c = el('<div class="card"'+(id?' id="'+id+'"':'')+'><div class="eyebrow">'+esc(title)+'</div></div>');
-  paras.forEach(t=>c.appendChild(el('<p class="nt-p" style="margin:8px 0 0">'+esc(t)+'</p>')));
-  return c;
-}
 function contactForm(){
   const card = el('<div class="card"><div class="eyebrow">Contact us</div><p class="note-line" style="margin:6px 0 12px">Send us a question or a problem. We use your details only to reply to you.</p></div>');
   const f = el('<form class="profile-form" autocomplete="off"></form>');
@@ -5554,7 +5489,6 @@ function pyqResults(w){
   session.queue.forEach(q=>{
     if(session.answers[q.id]) return;
     session.answers[q.id] = {skip:true, auto:true, time:0, pts:0};
-    recordSkip(q, 0);
     if(session.title==='Question of the day'){ store.qotdSkip = store.qotdSkip || {}; store.qotdSkip[dayKey()] = q.id; persist(); }
   });
   const total = session.queue.length;
@@ -5643,21 +5577,6 @@ function openShareSheet(text){
   sheet.querySelector('button').focus();
 }
 function shareBtn(text){ return shareFab(text, 'Share my result'); }
-function shareBtn_OLD(text){
-  const b = el('<button class="btn secondary block" style="margin-top:12px">Share my result</button>');
-  b.onclick = ()=>{
-    if(navigator.share) navigator.share({title:'TORQ', text}).catch(()=>{});
-    else if(navigator.clipboard) navigator.clipboard.writeText(text).catch(()=>{});
-  };
-  return b;
-}
-function ringEl(pct, big, small){
-  const p = Math.max(0, Math.min(100, pct));
-  return el('<div class="card resultcard"><div class="ring" role="img" aria-label="'+esc(String(big))+' '+esc(small)+'">'
-    +'<svg viewBox="0 0 120 120" aria-hidden="true"><circle class="rt" cx="60" cy="60" r="52"/>'
-    +'<circle class="rf" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" data-to="'+(100-p)+'"/></svg>'
-    +'<div class="rc"><b>'+esc(String(big))+'</b><span>'+esc(small)+'</span></div></div></div>');
-}
 function openSheet(title, opts, value, onPick){
   const scrim = el('<div class="scrim"></div>');
   const sheet = el('<div class="sheet" role="dialog" aria-modal="true" aria-label="'+esc(title)+'"><div class="grab"></div><div class="sheet-title">'+esc(title)+'</div></div>');
@@ -5681,24 +5600,6 @@ function pickerField(label, opts, value, onPick){
   const b = el('<button class="picker" aria-haspopup="dialog"><span class="pl">'+esc(label)+'</span><span class="pv">'+esc(String(cur))+'</span></button>');
   b.onclick = ()=>openSheet(label, opts, value, onPick);
   return b;
-}
-function heatmap(){
-  const counts = {};
-  store.attempts.forEach(a=>{ counts[a.d] = (counts[a.d]||0)+1; });
-  const n = streak();
-  if(!n){
-    return el('<div class="card"><div class="eyebrow">Streak</div><p class="note-line" style="margin:0">Practice today to start a streak. Each square is one day you practiced.</p></div>');
-  }
-  const cells = []; const today = new Date();
-  for(let i=n-1;i>=0;i--){
-    const d = new Date(today); d.setDate(today.getDate()-i);
-    const k = dayKey(d), c = counts[k]||0;
-    const lvl = c===0?0:c<3?1:c<6?2:c<10?3:4;
-    cells.push('<i class="hc l'+lvl+'" title="'+k+': '+c+' attempt'+(c===1?'':'s')+'"></i>');
-  }
-  return el('<div class="card"><div class="eyebrow">Streak · '+n+' day'+(n===1?'':'s')+'</div>'
-    +'<div class="hmgrid" role="img" aria-label="Practice activity for the last '+n+' days of your streak">'+cells.join('')+'</div>'
-    +'<div class="hmlegend">Less <i class="hc l0"></i><i class="hc l1"></i><i class="hc l2"></i><i class="hc l3"></i><i class="hc l4"></i> More</div></div>');
 }
 
 // ---------- Results message, confetti, announcements ----------
@@ -5733,7 +5634,12 @@ function streakStrip(){
     +'<div class="sk-days">'+tiles.join('')+'</div><div class="sk-pts">'+Math.round(store.points||0)+' points</div></div>');
 }
 // The question for a given day, the same for every user that day
-function qotdFor(d){ return QUESTIONS.length ? QUESTIONS[seed('qotd-'+d) % QUESTIONS.length] : null; }
+function qotdFor(d){
+  if(!QUESTIONS.length) return null;
+  const pinned = store.qotdPick && store.qotdPick[d];
+  if(pinned && QMAP[pinned]) return QMAP[pinned];
+  return QUESTIONS[seed('qotd-'+d) % QUESTIONS.length];
+}
 // Days on which the question of the day was answered (right or wrong). A skip does not count.
 function qotdDays(){
   const set = new Set();
@@ -5753,6 +5659,7 @@ function qotdState(d){
 function qotdCard(){
   if(!QUESTIONS.length) return el('<div></div>');
   const q = qotdFor(dayKey());
+  if(q){ store.qotdPick = store.qotdPick || {}; if(!store.qotdPick[dayKey()]){ store.qotdPick[dayKey()] = q.id; persist(); } }
   const st = qotdState(dayKey());
   const c = el('<div class="card qotd'+(st?' st-'+st:'')+'"><div class="eyebrow">Question of the day</div>'
     +'<div class="tags"><span class="tag subj subj-'+q.subject.toLowerCase()+'">'+esc(q.subject)+'</span>'
@@ -6116,19 +6023,6 @@ function enhance(app){
 
 // ---------- Start: render immediately, then try optional cloud sync with a timeout ----------
 // ---------- Ripple on every tap (replaces the default blue highlight) ----------
-document.addEventListener('pointerdown', e=>{ return; /* replaced below */
-  const t = e.target.closest && e.target.closest('button, [role="button"], a, .row, .chip');
-  if(!t || t.disabled || t.style.cursor === 'default') return;
-  const r = t.getBoundingClientRect();
-  const size = Math.max(r.width, r.height) * 2.4;
-  const dot = document.createElement('span');
-  dot.className = 'ripple';
-  dot.style.width = dot.style.height = size + 'px';
-  dot.style.left = (e.clientX - r.left - size/2) + 'px';
-  dot.style.top = (e.clientY - r.top - size/2) + 'px';
-  t.appendChild(dot);
-  dot.addEventListener('animationend', ()=> dot.remove());
-}, {passive:true});
 
 function splashHTML(){
   const id = document.documentElement.getAttribute('data-theme') || 'claude-dark';
@@ -6151,13 +6045,14 @@ function cloudSync(){
       return Promise.race([user.id(), timeout(3000)]).then(uid=>{
         if(!uid) return;
         return Promise.race([db.doc('data/users/'+uid+'/progress').get(), timeout(3000)]).then(doc=>{
-          if(doc && doc.data){ store = Object.assign(store, doc.data); normalizeStore(); persist(); render(); }
+          if(doc && doc.data){ absorbLocal(doc.data); normalizeStore(); persist(); render(); }
         });
       });
     });
   }).catch(()=>{});
 }
 (function init(){
+  absorbLocal(loadLocal()); normalizeStore();   // saved progress first, so no sync can overwrite it
   let saved=null; try{ saved=localStorage.getItem('torque_theme'); }catch(e){}
   applyTheme(saved || 'claude-dark');
   restoreLastView();
@@ -6189,7 +6084,7 @@ function cloudSync(){
       run:()=> document.readyState==='complete' ? Promise.resolve()
               : new Promise(r=>window.addEventListener('load', r, {once:true})) },
     { label:'Opening your question bank',
-      run:()=>{ const l = loadLocal(); if(l) store = Object.assign(store, l); normalizeStore(); return Promise.resolve(); },
+      run:()=> Promise.resolve(),
       after:()=> render() },
     { label:'Syncing your progress',
       run:()=> cloudSync() }
@@ -6244,9 +6139,6 @@ function flashFlip(){
 
 // Diagram images: dark themes invert the ink so the lines are light on the app's own background
 function isDarkTheme(){ return /dark/.test(getComputedStyle(document.documentElement).colorScheme || ''); }
-function imgWrap(src, alt){
-  return '<div class="img-wrap'+(isDarkTheme()?' inv':'')+'"><img src="'+src+'" alt="'+esc(alt)+'"></div>';
-}
 
 // ---------- Viva: chapter-exclusive. Optional menu shortcut the student can switch on ----------
 const VIVA_CHAPTER = 'IUPAC Nomenclature and Common Names';
@@ -6282,8 +6174,8 @@ function texify(s){
   if(!s || String(s).indexOf('\\') >= 0) return s;
   let t = String(s);
   const FN = 'sin|cos|tan|cot|sec|cosec|ln|log|exp';
-  t = t.replace(new RegExp('(?<![\\\\A-Za-z])(' + FN + ')\\^\\(([^()]*)\\)', 'g'), (m,f,p)=>'\\'+f+'^{'+p+'}');
-  t = t.replace(new RegExp('(?<![\\\\A-Za-z])(' + FN + ')(?![A-Za-z])', 'g'), (m,f)=>'\\'+f);
+  t = t.replace(new RegExp('(^|[^\\\\A-Za-z])(' + FN + ')\\^\\(([^()]*)\\)', 'g'), (m,pre,f,p)=>pre+'\\'+f+'^{'+p+'}');
+  t = t.replace(new RegExp('(^|[^\\\\A-Za-z])(' + FN + ')(?![A-Za-z])', 'g'), (m,pre,f)=>pre+'\\'+f);
   t = t.replace(/\^\(([^()]*)\)/g, (m,p)=>'^{'+p+'}');
   t = t.replace(/\^(-?\d+(?:\.\d+)?|[A-Za-z])(?![A-Za-z0-9])/g, (m,p)=>'^{'+p+'}');
   t = t.replace(/_([A-Za-z0-9])(?![A-Za-z0-9])/g, (m,p)=>'_{'+p+'}');
