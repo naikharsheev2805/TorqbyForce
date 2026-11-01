@@ -1246,6 +1246,18 @@ img{ -webkit-user-drag:none; }
 @keyframes lbCrown{ 0%,100%{ transform:translate(-50%,0) rotate(-5deg); } 50%{ transform:translate(-50%,-4px) rotate(5deg); } }
 @keyframes lbShimmer{ to{ background-position:220% 0; } }
 @media (min-width:700px){ .lb-podium{ gap:var(--sp-4); } .lb-r2, .lb-r3{ min-height:200px; } }
+/* ---------- Legal sections: the app's own language (outlined serif numerals, drop caps, glass, a hairline) ---------- */
+.lp-sec{ border:1px solid var(--border) !important; background:linear-gradient(160deg,var(--surface),var(--surface-2)) !important; box-shadow:0 22px 44px -32px var(--shadow) !important; padding:26px 24px 26px 24px !important; }
+.lp-sec::before{ content:counter(lp,decimal-leading-zero) !important; left:auto !important; right:20px !important; top:12px !important; font:500 46px/1 Lora,Georgia,serif !important;
+  background:none !important; -webkit-background-clip:border-box !important; background-clip:border-box !important; color:transparent !important; -webkit-text-stroke:1px color-mix(in srgb,var(--text) 38%, transparent); letter-spacing:-.02em; }
+.lp-sec::after{ content:"" !important; position:absolute; left:24px; right:24px; top:0; height:2px; width:auto; border-radius:0 0 3px 3px; background:linear-gradient(90deg,var(--accent),transparent 70%) !important; opacity:.85; box-shadow:none !important; }
+.lp-sec .lp-p{ color:var(--text); }
+.lp-sec .lp-p::first-letter{ float:left; font:italic 600 52px/0.82 Lora,Georgia,serif; color:var(--accent); margin:6px 10px 0 0; }
+.legal-paper .lp-sec{ border:1px solid var(--border) !important; background:linear-gradient(160deg,var(--surface),var(--surface-2)) !important; box-shadow:0 22px 44px -32px var(--shadow) !important; padding:26px 24px !important; margin-bottom:16px !important; overflow:hidden; }
+.legal-paper .lp-sec::before{ content:counter(lp,decimal-leading-zero) !important; position:absolute; right:20px; top:14px; left:auto; font:500 46px/1 Lora,Georgia,serif !important; background:none !important; color:transparent !important; -webkit-text-stroke:1px color-mix(in srgb,var(--text) 38%, transparent); letter-spacing:-.02em; }
+.legal-paper .lp-sec::after{ content:"" !important; position:absolute; left:24px; right:24px; top:0; height:2px; width:auto; border-radius:0 0 3px 3px; background:linear-gradient(90deg,var(--accent),transparent 70%) !important; opacity:.85; box-shadow:none !important; }
+.legal-paper .lp-sec .lp-p{ color:var(--text); padding-right:44px; }
+.legal-paper .lp-sec .lp-p::first-letter{ float:left; font:italic 600 52px/0.82 Lora,Georgia,serif; color:var(--accent); margin:6px 10px 0 0; }
 </style>
 </head>
 <body>
