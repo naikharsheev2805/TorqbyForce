@@ -1956,6 +1956,55 @@ html.immersive.show-bottom .bottomnav{ transform:none; opacity:1; }
 .hm-hero{ overflow:visible !important; }
 .hm-orbs{ overflow:visible !important; top:-70px !important; bottom:-70px !important; left:-100vw !important; right:-100vw !important; }
 #app{ overflow-x:clip; overflow-clip-margin:0; }
+
+/* ---- Admin: detail sheets, priority chips, filters, breakdown bars ---- */
+.ad-detail{ max-height:86vh; overflow:auto; padding-bottom:calc(24px + env(safe-area-inset-bottom,0px)); }
+.ad-d-title{ font:600 clamp(22px,4.6vw,28px)/1.15 Lora,Georgia,serif; margin:6px 0 12px; }
+.ad-kv{ display:grid; grid-template-columns:auto 1fr; gap:8px 16px; padding:14px 16px; margin:4px 0 6px; border:1px solid var(--border); border-radius:var(--r-lg); background:var(--surface-2); font-size:14px; }
+.ad-kv span{ color:var(--muted); }
+.ad-kv b{ font-weight:600; text-align:right; }
+.ad-label{ font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-text); margin:16px 0 8px; font-weight:700; }
+.ad-msg{ margin:0 0 4px; line-height:1.6; white-space:pre-wrap; }
+.ad-reply{ width:100%; box-sizing:border-box; margin:8px 0 12px; padding:12px 14px; border-radius:var(--r-md); border:1px solid var(--border); background:var(--surface); color:var(--text); font:inherit; line-height:1.5; resize:vertical; }
+.ad-search{ width:100%; box-sizing:border-box; margin:6px 0 10px; padding:12px 16px; border-radius:var(--r-lg); border:1px solid var(--border); background:var(--surface); color:var(--text); font:inherit; }
+.ad-tools{ justify-content:flex-end; gap:8px; padding:8px 0 4px; border:none; }
+.ad-badges{ display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.ad-p-urgent{ background:rgba(229,72,77,.18) !important; color:#e5484d !important; }
+.ad-p-high{ background:color-mix(in srgb, var(--accent) 22%, transparent) !important; color:var(--accent-text) !important; }
+.ad-p-low{ opacity:.7; }
+.ad-row{ cursor:pointer; align-items:flex-start; }
+.ad-breakdown{ margin-bottom:14px; padding:18px 20px; }
+.ad-bar{ display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,2fr) auto; gap:12px; align-items:center; font-size:13.5px; margin-top:10px; }
+.ad-track{ height:8px; border-radius:99px; background:var(--surface-2); overflow:hidden; }
+.ad-track i{ display:block; height:100%; border-radius:99px; background:linear-gradient(90deg,var(--accent),var(--accent-text)); }
+
+/* ---- Eyes Only: a dark, cinematic vault ---- */
+.eyes{ --e-bg:#0d0c0a; --e-ink:#f4ead7; --e-mute:#a59c8a; --e-ember:#e7733b; margin:-6px -4px 0; padding:8px 6px 40px; min-height:72vh; color:var(--e-ink); background:radial-gradient(90% 60% at 80% -10%, rgba(231,115,59,.22), transparent 60%), radial-gradient(70% 50% at -10% 110%, rgba(231,115,59,.12), transparent 60%), var(--e-bg); border-radius:28px; }
+.eyes-hero{ padding:30px 22px 26px; text-align:left; }
+.eyes-kicker{ font:700 11.5px/1 Inter,sans-serif; letter-spacing:.32em; text-transform:uppercase; color:var(--e-ember); }
+.eyes-title{ font:600 clamp(36px,9vw,64px)/1.02 Lora,Georgia,serif; margin:14px 0 14px; letter-spacing:-.02em; color:var(--e-ink); }
+.eyes-title em{ font-style:italic; font-weight:500; color:var(--e-ember); }
+.eyes-lede{ margin:0; max-width:46ch; font-size:16px; line-height:1.6; color:var(--e-mute); }
+.eyes-empty{ margin:18px 18px 0; padding:34px 22px; border:1px dashed rgba(244,234,215,.18); border-radius:22px; text-align:center; color:var(--e-mute); }
+.eyes-fuse-line{ position:relative; height:2px; margin:0 auto 22px; width:70%; background:rgba(244,234,215,.12); border-radius:2px; overflow:hidden; }
+.eyes-fuse-line i{ position:absolute; left:0; top:0; height:100%; width:40%; background:linear-gradient(90deg,transparent,var(--e-ember)); animation:eyesSpark 3.2s linear infinite; }
+@keyframes eyesSpark{ from{ left:-40%; } to{ left:100%; } }
+.eye-card{ position:relative; margin:18px 14px 0; padding:26px 22px 22px; border-radius:26px; background:linear-gradient(170deg, rgba(244,234,215,.06), rgba(244,234,215,.02)); border:1px solid rgba(244,234,215,.12); box-shadow:0 30px 60px -30px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.05); overflow:hidden; }
+.eye-card::before{ content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; background:radial-gradient(60% 40% at 100% 0%, rgba(231,115,59,.16), transparent 70%); }
+.eye-meta{ position:relative; font:700 11px/1.3 Inter,sans-serif; letter-spacing:.2em; text-transform:uppercase; color:var(--e-ember); }
+.eye-seal{ position:relative; width:54px; height:54px; border-radius:50%; margin:0 0 14px; background:radial-gradient(circle at 35% 30%, #f0a06a, #a8421c 70%); box-shadow:0 0 0 6px rgba(231,115,59,.12), 0 10px 30px rgba(231,115,59,.35); animation:sealPulse 2.8s ease-in-out infinite; }
+@keyframes sealPulse{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.06); } }
+.eye-lede{ position:relative; font:italic 500 clamp(22px,5vw,28px)/1.25 Lora,Georgia,serif; margin:10px 0 8px; color:var(--e-ink); }
+.eye-warn{ position:relative; margin:0 0 18px; color:var(--e-mute); font-size:14.5px; }
+.eye-open{ position:relative; background:var(--e-ember) !important; color:#1b120b !important; border-color:transparent !important; font-weight:700; letter-spacing:.02em; }
+.eye-body{ position:relative; margin:16px 0 22px; font:500 clamp(19px,4.4vw,23px)/1.55 Lora,Georgia,serif; color:var(--e-ink); white-space:pre-wrap; }
+.eye-timer{ position:relative; display:grid; grid-template-columns:1fr auto; gap:6px 16px; align-items:center; padding-top:16px; border-top:1px solid rgba(244,234,215,.1); }
+.eye-fuse{ grid-column:1 / -1; height:6px; border-radius:99px; background:rgba(244,234,215,.1); overflow:hidden; }
+.eye-fuse i{ display:block; height:100%; width:100%; border-radius:99px; background:linear-gradient(90deg,#ffd29a,var(--e-ember) 55%,#b3401b); box-shadow:0 0 14px rgba(231,115,59,.6); transition:width 1s linear; }
+.eye-clock{ font:600 26px/1 "SF Mono",ui-monospace,Menlo,monospace; letter-spacing:.06em; color:var(--e-ink); font-variant-numeric:tabular-nums; }
+.eye-timer small{ justify-self:end; color:var(--e-mute); font-size:12.5px; }
+.eye-card.opened[data-burning], .eye-clock[data-burning]{ color:var(--e-ember); }
+@media (prefers-reduced-motion: reduce){ .eyes-fuse-line i, .eye-seal{ animation:none; } .eye-fuse i{ transition:none; } }
 </style>
 </head>
 <body>
@@ -3633,7 +3682,7 @@ function renderInner(){
   app.classList.toggle('is-onb', needSignIn || !store.profile);
   if(view!=='practice' && store.profile && !needSignIn) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
   const V = {privacy:()=>legalPaperView('privacy'), terms:()=>legalPaperView('terms'), copyright:()=>legalPaperView('copyright'), disclaimer:()=>legalPaperView('disclaimer'), contact:contactPageView, notebooks:notebooksView, leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
-             me:meView, analytics:analyticsView, practice:practiceView, results:resultsView, notes:notesView, notehub:notehubView, viva:vivaView, flash:flashView, myflash:myFlashView, myflashnew:myFlashNewView, admin:adminView};
+             me:meView, analytics:analyticsView, practice:practiceView, results:resultsView, notes:notesView, notehub:notehubView, viva:vivaView, flash:flashView, myflash:myFlashView, myflashnew:myFlashNewView, admin:adminView, eyes:eyesView};
   app.appendChild(needSignIn ? authView() :(!store.profile ? (sbSession ? authView() : onboardView()) : (V[view]||homeView)()));
   if(view==='pyq') app.appendChild(el('<div class="foot">'+esc(BANK_ERROR || ('PYQ bank: '+QUESTIONS.length+' questions'))+'</div>'));
   document.querySelectorAll('.bottomnav,#navTog,#navScrim').forEach(n=>n.remove());
@@ -3732,6 +3781,11 @@ function bottomNav(){
     if(t.disabled) b.onclick = ()=>soonNotice(t.id);
     else b.onclick = ()=>{ if(mockLocked()){ mockNotice(); return; } setNavOpen(false); go(t.id); };
     bar.appendChild(b);
+    if(t.id==='home'){
+      if(eyesState.items && eyesState.items.length) bar.appendChild(eyesNavBtn());
+      if(isGuard()) bar.appendChild(adminNavBtn());
+      if(eyesState.items===null && !eyesState.loading && sbSession) setTimeout(loadEyes, 0);
+    }
   });
   bar.appendChild(el('<div class="navdiv" aria-hidden="true"></div>'));
   bar.appendChild(el('<div class="navsec">Analysis</div>'));
@@ -3748,12 +3802,6 @@ function bottomNav(){
     b.onclick = ()=>openLegal(it[0]);
     bar.appendChild(b);
   });
-  if(isGuard()){
-    bar.appendChild(el('<div class="navdiv" aria-hidden="true"></div>'));
-    const ad = el('<button class="bn navadm'+(view==='admin'?' on':'')+'"'+(view==='admin'?' aria-current="page"':'')+'><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg><span>Admin</span></button>');
-    ad.onclick = ()=>{ setNavOpen(false); go('admin'); };
-    bar.appendChild(ad);
-  }
   const fs = el('<button class="bn navfs"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Full screen</span></button>');
   fs.onclick = ()=>{
     setNavOpen(false);
@@ -4120,7 +4168,8 @@ function fitQuote(card){
   const t = card.querySelector('.qtext'); if(!t) return;
   const limit = window.innerHeight - 16;
   const fits = ()=> card.getBoundingClientRect().bottom <= limit;
-  let lo = 14, hi = 84;
+  // Phones get a lower ceiling so the quote stays a readable size; wide screens can go larger
+  let lo = 14, hi = window.innerWidth < 760 ? 30 : 84;
   for(let i = 0; i < 14; i++){
     const mid = (lo + hi) / 2;
     t.style.fontSize = mid + 'px';
@@ -5605,17 +5654,30 @@ function analyticsView(){
   return w;
 }
 
-// ----- Admin dashboard (guard accounts only): question reports and contact messages -----
-// The database must allow the guard emails to read these two tables. See the setup notes.
-const adminState = {reports:null, msgs:null, err:null, loading:false};
-function reportTier(r){ return (r.report_no===1 || (r.report_no==null && r.priority===1)) ? 1 : 2; }
+// ----- Admin dashboard (guard accounts only): reports, messages, replies -----
+// Needs the SQL in admin_setup.sql. Reads question_reports, contact_messages; writes admin_replies.
+const adminState = {reports:null, msgs:null, err:null, loading:false, status:'open', q:''};
+const ADMIN_PRIORITY = [['urgent','Urgent'],['high','High'],['normal','Normal'],['low','Low']];
+const ADMIN_STATUS = [['open','Open'],['review','In review'],['resolved','Resolved'],['dismissed','Dismissed']];
+const ADMIN_RANK = {urgent:0, high:1, normal:2, low:3};
+const REPLY_TEMPLATES = [
+  'Thank you for telling us. We are checking this now.',
+  'Thank you. This is fixed in the next update.',
+  'Good catch. We have reviewed the answer key with the official source.'
+];
+function reasonLabel(k){ const f = REPORT_REASONS.find(r=>r[0]===k); return f ? f[1] : String(k||'').replace(/_/g,' '); }
 function reportReasons(r){ return Array.isArray(r.reasons) ? r.reasons : (r.category ? String(r.category).split(',').filter(Boolean) : []); }
-// Priority: tier 1 first, then more reasons selected, then more words in the note
+function reportTier(r){ return (r.report_no===1 || (r.report_no==null && r.priority===1)) ? 1 : 2; }
+function reportPrio(r){ return ADMIN_RANK[r.admin_priority] != null ? r.admin_priority : 'normal'; }
+function reportStatus(r){ return r.status || 'open'; }
+// Order: the admin's own priority first, then tier, then reasons, then words
 function reportSort(list){
-  return list.slice().sort((a,b)=> reportTier(a)-reportTier(b)
-    || reportReasons(b).length - reportReasons(a).length
-    || (b.word_count||0) - (a.word_count||0));
+  return list.slice().sort((a,b)=> (ADMIN_RANK[reportPrio(a)] - ADMIN_RANK[reportPrio(b)])
+    || (reportTier(a) - reportTier(b))
+    || (reportReasons(b).length - reportReasons(a).length)
+    || ((b.word_count||0) - (a.word_count||0)));
 }
+function fmtWhen(iso){ return iso ? new Date(iso).toLocaleString([], {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'}) : '—'; }
 function loadAdmin(){
   if(adminState.loading) return;
   adminState.loading = true; adminState.err = null;
@@ -5636,6 +5698,110 @@ function loadAdmin(){
     if(view==='admin') render();
   });
 }
+// A sheet for detail views, in the app's own style
+function adminSheet(eyebrow, title, build){
+  const scrim = el('<div class="scrim"></div>');
+  const sheet = el('<div class="sheet ad-detail" role="dialog" aria-modal="true"><div class="grab"></div>'
+    +'<div class="eyebrow">'+esc(eyebrow)+'</div><h2 class="ad-d-title">'+esc(title)+'</h2><div class="ad-d-body"></div></div>');
+  const body = sheet.querySelector('.ad-d-body');
+  const close = ()=>{ scrim.remove(); sheet.remove(); document.removeEventListener('keydown', onKey); };
+  const onKey = e=>{ if(e.key==='Escape') close(); };
+  scrim.onclick = close;
+  build(body, close);
+  document.addEventListener('keydown', onKey);
+  document.body.appendChild(scrim); document.body.appendChild(sheet);
+  return close;
+}
+function chipRow(items, current, onPick){
+  const row = el('<div class="chips ad-chips"></div>');
+  items.forEach(p=>{
+    const on = current === p[0];
+    const b = el('<button class="chip'+(on?' on':'')+'" type="button" aria-pressed="'+on+'">'+esc(p[1])+'</button>');
+    b.onclick = ()=>onPick(p[0]);
+    row.appendChild(b);
+  });
+  return row;
+}
+function openReportDetail(r){
+  adminSheet(reportTier(r)===1 ? 'First report' : 'Repeat report', (r.subject||'Question')+(r.chapter?' · '+r.chapter:''), (body, close)=>{
+    const sel = {priority: reportPrio(r), status: reportStatus(r)};
+    body.appendChild(el('<div class="ad-kv"><span>Year</span><b>'+esc(r.year||'—')+'</b>'
+      +'<span>Shift</span><b>'+esc(r.shift||'—')+'</b>'
+      +'<span>Reported</span><b>'+esc(fmtWhen(r.created_at))+'</b>'
+      +'<span>Note length</span><b>'+(r.word_count||0)+' words</b></div>'));
+    body.appendChild(el('<div class="ad-label">Reasons selected</div>'));
+    const tags = el('<div class="chips"></div>');
+    reportReasons(r).forEach(k=> tags.appendChild(el('<span class="tag">'+esc(reasonLabel(k))+'</span>')));
+    if(!reportReasons(r).length) tags.appendChild(el('<span class="tag">No reason given</span>'));
+    body.appendChild(tags);
+    if(r.note) body.appendChild(el('<div class="ad-label">Student note</div><p class="ad-msg">'+esc(r.note)+'</p>'));
+    body.appendChild(el('<div class="ad-label">Your priority</div>'));
+    let pr = null;
+    const drawPriority = ()=>{
+      const next = chipRow(ADMIN_PRIORITY, sel.priority, v=>{ sel.priority = v; drawPriority(); });
+      if(pr) pr.replaceWith(next); else body.appendChild(next);
+      pr = next;
+    };
+    drawPriority();
+    body.appendChild(el('<div class="ad-label">Status</div>'));
+    const st = chipRow(ADMIN_STATUS, sel.status, ()=>{});
+    body.appendChild(st);
+    body.appendChild(el('<div class="ad-label">Your note (only the team sees this)</div>'));
+    const memo = el('<textarea class="ad-reply" rows="3" placeholder="For example: checked against the official key, fixed in v2"></textarea>');
+    memo.value = r.admin_note || '';
+    body.appendChild(memo);
+    const save = el('<button class="btn block" type="button">Save changes</button>');
+    save.onclick = async ()=>{
+      save.disabled = true;
+      const patch = {admin_priority: sel.priority, status: sel.status, admin_note: memo.value.trim() || null};
+      const { error } = await sbClient().from('question_reports').update(patch).eq('id', r.id);
+      if(error){ save.disabled = false; appNotice('Not saved', error.message); return; }
+      Object.assign(r, patch);
+      close(); render();
+    };
+    body.appendChild(save);
+  });
+}
+function openMessageDetail(m){
+  adminSheet('Message', (m.name||'Anonymous')+(m.email?' · '+m.email:''), (body, close)=>{
+    body.appendChild(el('<div class="ad-kv"><span>Received</span><b>'+esc(fmtWhen(m.created_at))+'</b><span>Status</span><b>'+esc(m.status||'open')+'</b></div>'));
+    body.appendChild(el('<p class="ad-msg">'+esc(m.message||'')+'</p>'));
+    body.appendChild(el('<div class="ad-label">Reply</div>'));
+    const tpl = el('<div class="chips"></div>');
+    const ta = el('<textarea class="ad-reply" rows="5" placeholder="Write a kind, clear reply. It opens in their Eyes Only inbox."></textarea>');
+    REPLY_TEMPLATES.forEach((t,i)=>{
+      const b = el('<button class="chip" type="button">Template '+(i+1)+'</button>');
+      b.onclick = ()=>{ ta.value = t; ta.focus(); };
+      tpl.appendChild(b);
+    });
+    body.appendChild(tpl);
+    body.appendChild(ta);
+    const send = el('<button class="btn block" type="button">Send reply</button>');
+    send.onclick = async ()=>{
+      const text = ta.value.trim();
+      if(!text) return;
+      if(!m.user_id){ appNotice('Cannot reply', 'This message was sent without an account, so there is no inbox to reply to.'); return; }
+      send.disabled = true;
+      const db = sbClient();
+      const { error } = await db.from('admin_replies').insert({ user_id: m.user_id, message_id: String(m.id), body: text });
+      if(error){ send.disabled = false; appNotice('Not sent', error.message); return; }
+      await db.from('contact_messages').update({ status: 'replied' }).eq('id', m.id);
+      m.status = 'replied';
+      close();
+      appNotice('Reply sent', 'It is waiting in their Eyes Only inbox. The 24-hour clock starts when they open it.');
+      render();
+    };
+    body.appendChild(send);
+  });
+}
+function exportReportsCsv(list){
+  const head = ['tier','priority','status','subject','chapter','year','reasons','words','created_at','note','admin_note'];
+  const cell = v => '"' + String(v==null?'':v).replace(/"/g,'""') + '"';
+  const rows = list.map(r=>[reportTier(r), reportPrio(r), reportStatus(r), r.subject, r.chapter, r.year, reportReasons(r).map(reasonLabel).join(' | '), r.word_count, r.created_at, r.note, r.admin_note].map(cell).join(','));
+  const blob = new Blob([head.join(',')+'\n'+rows.join('\n')], {type:'text/csv'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'torq-reports.csv';
+  document.body.appendChild(a); a.click(); a.remove();
+}
 function adminView(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Admin</div><h1 class="hm-title">Dash<em>board.</em></h1></div>'));
@@ -5643,60 +5809,189 @@ function adminView(){
   if(adminState.reports===null && !adminState.loading && !adminState.err) loadAdmin();
 
   const reports = adminState.reports || [], msgs = adminState.msgs || [];
+  const open = reports.filter(r=>reportStatus(r)==='open').length;
   const first = reports.filter(r=>reportTier(r)===1).length;
+  const unanswered = msgs.filter(m=>(m.status||'open')==='open').length;
   w.appendChild(el('<div class="stats">'
-    +'<div class="stat"><div class="n">'+reports.length+'</div><div class="l">Reports</div></div>'
+    +'<div class="stat"><div class="n">'+open+'</div><div class="l">Open reports</div></div>'
     +'<div class="stat"><div class="n">'+first+'</div><div class="l">First reports</div></div>'
-    +'<div class="stat"><div class="n">'+msgs.length+'</div><div class="l">Messages</div></div></div>'));
+    +'<div class="stat"><div class="n">'+unanswered+'</div><div class="l">Unanswered</div></div></div>'));
 
-  const tabs = el('<div class="ctabs" role="tablist"></div>');
   const cur = nav.adminTab || 'reports';
+  const tabs = el('<div class="ctabs" role="tablist"></div>');
   [['reports','Reports'],['messages','Messages']].forEach(p=>{
     const on = cur === p[0];
-    const b = el('<button role="tab" aria-selected="'+on+'" class="ctab'+(on?' on':'')+'">'+p[1]+'</button>');
-    b.onclick = ()=>go('admin',{adminTab:p[0]});
-    tabs.appendChild(b);
+    const t = el('<button role="tab" aria-selected="'+on+'" class="ctab'+(on?' on':'')+'">'+p[1]+'</button>');
+    t.onclick = ()=>go('admin',{adminTab:p[0]});
+    tabs.appendChild(t);
   });
   w.appendChild(tabs);
 
-  const refresh = el('<div class="row" style="justify-content:flex-end;padding:10px 0 4px"><button class="btn secondary small" type="button">Refresh</button></div>');
-  refresh.querySelector('button').onclick = ()=>{ adminState.reports = null; adminState.msgs = null; loadAdmin(); render(); };
-  w.appendChild(refresh);
+  const tools = el('<div class="row ad-tools"></div>');
+  const refresh = el('<button class="btn secondary small" type="button">Refresh</button>');
+  refresh.onclick = ()=>{ adminState.reports = null; adminState.msgs = null; loadAdmin(); render(); };
+  tools.appendChild(refresh);
+  if(cur==='reports'){
+    const csv = el('<button class="btn secondary small" type="button">Export CSV</button>');
+    csv.onclick = ()=>exportReportsCsv(filteredReports());
+    tools.appendChild(csv);
+  }
+  w.appendChild(tools);
 
   if(adminState.err){
     w.appendChild(el('<div class="card"><div class="eyebrow">Could not load</div><p class="note-line">'+esc(adminState.err)+'</p>'
-      +'<p class="note-line">If this says permission denied, the database needs a read policy for the admin accounts. See the setup notes.</p></div>'));
+      +'<p class="note-line">If this says permission denied, run admin_setup.sql in Supabase, then press Refresh.</p></div>'));
     return w;
   }
-  if(adminState.loading || adminState.reports===null){
-    w.appendChild(el('<div class="card"><p class="note-line">Loading…</p></div>'));
-    return w;
-  }
+  if(adminState.loading || adminState.reports===null){ w.appendChild(el('<div class="card"><p class="note-line">Loading…</p></div>')); return w; }
 
   if(cur === 'reports'){
-    if(!reports.length){ w.appendChild(el('<div class="card"><p class="note-line">No question reports yet.</p></div>')); return w; }
-    const list = el('<div class="list"></div>');
-    reportSort(reports).forEach(r=>{
-      const reasons = reportReasons(r);
+    const search = el('<input class="ad-search" type="search" placeholder="Search questions, notes, chapters" value="'+esc(adminState.q)+'" aria-label="Search reports">');
+    search.oninput = ()=>{ adminState.q = search.value; const keep = search.selectionStart; render(); const again = document.querySelector('.ad-search'); if(again){ again.focus(); again.setSelectionRange(keep, keep); } };
+    w.appendChild(search);
+    w.appendChild(chipRow([['all','All']].concat(ADMIN_STATUS), adminState.status, v=>{ adminState.status = v; render(); }));
+
+    // Where the reports go, at a glance
+    const byReason = {};
+    reports.forEach(r=> reportReasons(r).forEach(k=> byReason[k] = (byReason[k]||0)+1));
+    const top = Object.keys(byReason).sort((a,b)=>byReason[b]-byReason[a]).slice(0,4);
+    if(top.length){
+      const max = byReason[top[0]];
+      const card = el('<div class="card ad-breakdown"><div class="eyebrow">Where the reports point</div></div>');
+      top.forEach(k=>{
+        card.appendChild(el('<div class="ad-bar"><span>'+esc(reasonLabel(k))+'</span><div class="ad-track"><i style="width:'+Math.round(byReason[k]/max*100)+'%"></i></div><b>'+byReason[k]+'</b></div>'));
+      });
+      w.appendChild(card);
+    }
+
+    const list = filteredReports();
+    if(!list.length){ w.appendChild(el('<div class="card"><p class="note-line">No reports match this view.</p></div>')); return w; }
+    const box = el('<div class="list"></div>');
+    list.forEach(r=>{
       const label = (r.subject||'Question')+(r.chapter?' · '+r.chapter:'')+(r.year?' · '+r.year:'');
-      const when = r.created_at ? new Date(r.created_at).toLocaleDateString() : '';
-      const note = r.note ? '<div class="meta" style="white-space:normal">'+esc(r.note)+'</div>' : '';
-      list.appendChild(el('<div class="row" style="cursor:default;align-items:flex-start"><div style="min-width:0;flex:1">'
+      const row = el('<div class="row ad-row"><div style="min-width:0;flex:1">'
         +'<div class="name">'+esc(label)+'</div>'
-        +'<div class="meta">'+esc(reasons.join(' · ')||'No reason given')+(r.word_count?' · '+r.word_count+' words':'')+(when?' · '+esc(when):'')+'</div>'
-        +note+'</div><div class="end"><span class="tag">Tier '+reportTier(r)+'</span></div></div>'));
+        +'<div class="meta">'+esc(reportReasons(r).map(reasonLabel).join(' · ')||'No reason given')+(r.word_count?' · '+r.word_count+' words':'')+'</div>'
+        +'<div class="ad-badges"><span class="tag ad-p ad-p-'+reportPrio(r)+'">'+esc(ADMIN_PRIORITY.find(p=>p[0]===reportPrio(r))[1])+'</span>'
+        +'<span class="tag">'+esc(ADMIN_STATUS.find(p=>p[0]===reportStatus(r))[1])+'</span>'
+        +'<span class="tag">'+(reportTier(r)===1?'First report':'Repeat')+'</span></div>'
+        +'</div><div class="end">Open</div></div>');
+      row.onclick = ()=>openReportDetail(r);
+      box.appendChild(row);
     });
-    w.appendChild(list);
+    w.appendChild(box);
   } else {
     if(!msgs.length){ w.appendChild(el('<div class="card"><p class="note-line">No messages yet.</p></div>')); return w; }
+    const box = el('<div class="list"></div>');
     msgs.forEach(m=>{
-      const when = m.created_at ? new Date(m.created_at).toLocaleDateString() : '';
-      w.appendChild(el('<div class="card" style="margin-bottom:12px"><div class="eyebrow">'+esc(m.name||'Anonymous')+(when?' · '+esc(when):'')+'</div>'
-        +'<p class="note-line" style="margin:0 0 8px">'+esc(m.email||'')+(m.phone?' · '+esc(m.phone):'')+'</p>'
-        +'<p style="margin:0;white-space:pre-wrap;line-height:1.6">'+esc(m.message||'')+'</p></div>'));
+      const row = el('<div class="row ad-row"><div style="min-width:0;flex:1"><div class="name">'+esc(m.name||'Anonymous')+'</div>'
+        +'<div class="meta">'+esc((m.message||'').slice(0,90))+((m.message||'').length>90?'…':'')+'</div>'
+        +'<div class="ad-badges"><span class="tag">'+esc(m.status==='replied'?'Replied':'Unanswered')+'</span><span class="tag">'+esc(fmtWhen(m.created_at))+'</span></div></div><div class="end">Open</div></div>');
+      row.onclick = ()=>openMessageDetail(m);
+      box.appendChild(row);
     });
+    w.appendChild(box);
   }
   return w;
+}
+function filteredReports(){
+  const q = (adminState.q||'').trim().toLowerCase();
+  return reportSort((adminState.reports||[]).filter(r=>{
+    if(adminState.status !== 'all' && reportStatus(r) !== adminState.status) return false;
+    if(!q) return true;
+    const hay = [r.subject, r.chapter, r.topic, r.note, r.admin_note, reportReasons(r).map(reasonLabel).join(' ')].join(' ').toLowerCase();
+    return hay.indexOf(q) >= 0;
+  }));
+}
+
+// ----- Eyes Only: replies from the TORQ team, self-destructing 24 hours after they are opened -----
+const eyesState = {items:null, loading:false, err:null};
+const EYES_WINDOW_MS = 24*60*60*1000;
+async function loadEyes(){
+  if(!sbSession || eyesState.loading) return;
+  eyesState.loading = true;
+  const { data, error } = await sbClient().from('admin_replies').select('*').eq('user_id', sbSession.user.id).order('created_at',{ascending:false});
+  eyesState.loading = false;
+  eyesState.items = data || [];
+  eyesState.err = error ? error.message : null;
+  if(view==='eyes') render(); else mountNav();
+}
+function eyesNavBtn(){
+  const b = el('<button class="bn navEyes'+(view==='eyes'?' on':'')+'"'+(view==='eyes'?' aria-current="page"':'')+'><svg viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Eyes Only</span></button>');
+  b.onclick = ()=>{ setNavOpen(false); go('eyes'); };
+  return b;
+}
+function adminNavBtn(){
+  const b = el('<button class="bn navadm'+(view==='admin'?' on':'')+'"'+(view==='admin'?' aria-current="page"':'')+'><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg><span>Admin</span></button>');
+  b.onclick = ()=>{ setNavOpen(false); go('admin'); };
+  return b;
+}
+function fmtLeft(ms){
+  const t = Math.max(0, Math.floor(ms/1000));
+  const h = Math.floor(t/3600), m = Math.floor(t%3600/60), sec = t%60;
+  return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0');
+}
+async function openEye(r){
+  const now = new Date();
+  const exp = new Date(now.getTime() + EYES_WINDOW_MS);
+  const { error } = await sbClient().from('admin_replies').update({ seen_at: now.toISOString(), expires_at: exp.toISOString() }).eq('id', r.id);
+  if(error){ appNotice('Could not open', error.message); return; }
+  r.seen_at = now.toISOString(); r.expires_at = exp.toISOString();
+  render();
+}
+async function burnEye(id){
+  await sbClient().from('admin_replies').delete().eq('id', id);
+  if(eyesState.items) eyesState.items = eyesState.items.filter(x=>x.id!==id);
+  render();
+}
+function eyesView(){
+  const w = el('<div class="eyes"></div>');
+  w.appendChild(el('<div class="eyes-hero"><div class="eyes-kicker">Eyes Only</div>'
+    +'<h1 class="eyes-title">Read it once.<br><em>It burns in 24 hours.</em></h1>'
+    +'<p class="eyes-lede">Replies from the TORQ team arrive here, sealed. The clock starts the moment you open one, and it does not stop.</p></div>'));
+  if(eyesState.items===null){ loadEyes(); w.appendChild(el('<div class="eyes-empty"><p>Opening the vault…</p></div>')); return w; }
+  if(eyesState.err){ w.appendChild(el('<div class="eyes-empty"><p>'+esc(eyesState.err)+'</p></div>')); return w; }
+  if(!eyesState.items.length){
+    w.appendChild(el('<div class="eyes-empty"><div class="eyes-fuse-line" aria-hidden="true"><i></i></div><p>Nothing sealed for you right now. When the TORQ team writes back, it lands here.</p></div>'));
+    return w;
+  }
+  eyesState.items.forEach(r=> w.appendChild(eyeCard(r)));
+  startEyesTicker();
+  return w;
+}
+function eyeCard(r){
+  if(!r.seen_at){
+    const c = el('<div class="eye-card sealed"><div class="eye-seal" aria-hidden="true"></div>'
+      +'<div class="eye-meta">Sealed · from the TORQ team</div>'
+      +'<p class="eye-lede">A reply is waiting for you.</p>'
+      +'<p class="eye-warn">Opening it starts a 24-hour countdown. Then it burns.</p></div>');
+    const open = el('<button class="btn block eye-open" type="button">Open the envelope</button>');
+    open.onclick = ()=>openEye(r);
+    c.appendChild(open);
+    return c;
+  }
+  const exp = r.expires_at || new Date(Date.parse(r.seen_at)+EYES_WINDOW_MS).toISOString();
+  return el('<div class="eye-card opened"><div class="eye-meta">From the TORQ team · opened '+esc(fmtWhen(r.seen_at))+'</div>'
+    +'<p class="eye-body">'+esc(r.body)+'</p>'
+    +'<div class="eye-timer"><div class="eye-fuse"><i data-fuse="'+esc(r.id)+'" data-exp="'+esc(exp)+'"></i></div>'
+    +'<div class="eye-clock" data-clock="'+esc(r.id)+'" data-exp="'+esc(exp)+'">'+fmtLeft(Date.parse(exp)-Date.now())+'</div>'
+    +'<small>until it burns</small></div></div>');
+}
+let eyesTimer = null;
+function startEyesTicker(){
+  if(eyesTimer) clearInterval(eyesTimer);
+  tickEyes();
+  eyesTimer = setInterval(tickEyes, 1000);
+}
+function tickEyes(){
+  if(view !== 'eyes'){ clearInterval(eyesTimer); eyesTimer = null; return; }
+  document.querySelectorAll('[data-clock]').forEach(n=>{
+    const ms = Date.parse(n.dataset.exp) - Date.now();
+    n.textContent = fmtLeft(ms);
+    const fuse = document.querySelector('[data-fuse="'+n.dataset.clock+'"]');
+    if(fuse) fuse.style.width = Math.max(0, Math.min(100, ms/EYES_WINDOW_MS*100)) + '%';
+    if(ms <= 0 && !n.dataset.burning){ n.dataset.burning = '1'; burnEye(n.dataset.clock); }
+  });
 }
 function meView(){
   const w = el('<div></div>');
