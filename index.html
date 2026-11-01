@@ -1139,6 +1139,37 @@ body.has-nav .bn{ flex:none; }
 .fl-hint{ font-size:12px; color:var(--muted); text-align:center; margin-top:10px; }
 .fl-ctl{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:18px; }
 .fl-ctl .btn{ min-width:120px; }
+/* ---------- Menu partitions and legal pages ---------- */
+.navpanel .navsup.on, .navpanel .navsup[aria-current="page"]{ color:var(--c-phys) !important; background:color-mix(in srgb,var(--c-phys) 16%, transparent) !important; }
+.navpanel .navsup.on span, .navpanel .navsup[aria-current="page"] span{ color:var(--c-phys) !important; font-weight:700; }
+.navpanel .navana.on, .navpanel .navana[aria-current="page"]{ color:var(--c-chem) !important; background:color-mix(in srgb,var(--c-chem) 16%, transparent) !important; }
+.navpanel .navana.on span, .navpanel .navana[aria-current="page"] span{ color:var(--c-chem) !important; font-weight:700; }
+.navpanel .navana svg{ color:inherit; }
+.legal-page{ position:relative; isolation:isolate; }
+.legal-page::before{ content:""; position:absolute; inset:-40px -30px auto; height:360px; z-index:-1; pointer-events:none;
+  background:radial-gradient(60% 60% at 80% 20%, color-mix(in srgb,var(--accent) 26%, transparent), transparent 70%), radial-gradient(50% 50% at 10% 60%, color-mix(in srgb,var(--c-chem) 18%, transparent), transparent 70%); }
+.legal-paper{ counter-reset:lp; background:transparent !important; border:0 !important; box-shadow:none !important; padding:0 !important; }
+.legal-paper::before{ display:none !important; }
+.lp-top{ display:flex !important; gap:10px; align-items:center; margin:4px 0 14px; }
+.lp-no, .lp-kind{ font:700 11px Inter,sans-serif; letter-spacing:.16em; text-transform:uppercase; padding:6px 11px; border-radius:999px; border:1px solid var(--border); background:var(--surface-2); color:var(--muted); }
+.lp-kind{ color:var(--accent); border-color:color-mix(in srgb,var(--accent) 45%, transparent); }
+.legal-paper .lp-title{ font:600 clamp(36px,10vw,52px)/1.02 Lora,Georgia,serif; letter-spacing:-.025em; margin:6px 0 10px;
+  background:linear-gradient(100deg,var(--text) 0%,var(--text) 45%,var(--accent) 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.legal-paper .lp-date{ display:inline-flex; align-items:center; gap:8px; font:500 13px Inter,sans-serif; color:var(--muted); margin-bottom:22px; }
+.legal-paper .lp-date::before{ content:""; width:8px; height:8px; border-radius:50%; background:var(--c-easy); box-shadow:0 0 0 4px color-mix(in srgb,var(--c-easy) 20%, transparent); }
+.lp-sec{ counter-increment:lp; position:relative; overflow:hidden; margin:0 0 14px !important; padding:22px 22px 22px 86px !important; border-radius:calc(var(--r-xl) + 4px) !important; border:1.5px solid transparent !important;
+  background:linear-gradient(160deg,var(--surface),var(--surface-2)) padding-box, linear-gradient(135deg,var(--sc,var(--accent)),transparent 70%) border-box !important;
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); }
+.lp-sec:nth-child(4n+1){ --sc:var(--accent); } .lp-sec:nth-child(4n+2){ --sc:var(--c-phys); } .lp-sec:nth-child(4n+3){ --sc:var(--c-chem); } .lp-sec:nth-child(4n){ --sc:var(--c-maths); }
+.lp-sec::before{ content:counter(lp,decimal-leading-zero); position:absolute; left:18px; top:14px; font:600 34px/1 Lora,Georgia,serif; letter-spacing:-.02em;
+  background:linear-gradient(160deg,var(--sc),transparent 90%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.lp-sec::after{ content:""; position:absolute; right:-40px; bottom:-50px; width:150px; height:150px; border-radius:50%; pointer-events:none;
+  background:radial-gradient(circle, color-mix(in srgb,var(--sc) 20%, transparent), transparent 70%); }
+.lp-sec .lp-p{ position:relative; z-index:1; margin:0; color:var(--text); font:400 15.5px/1.75 Inter,sans-serif; opacity:.92; }
+.legal-paper .lp-form{ padding:24px 22px !important; }
+.legal-paper .lp-form input, .legal-paper .lp-form textarea{ background:var(--surface-2) !important; color:var(--text) !important; border:1px solid var(--border) !important; border-radius:14px !important; }
+.legal-paper .lp-form .btn{ background:linear-gradient(120deg,var(--accent),var(--c-medium)) !important; color:#1f1e1d !important; border-radius:16px !important; box-shadow:0 14px 28px -14px var(--accent); }
+.lp-foot{ margin-top:26px; display:inline-flex; font:700 11px Inter,sans-serif; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); padding:8px 14px; border-radius:999px; border:1px solid var(--border); }
 .intwrap{margin:12px 0 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .intin{font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);width:180px}
 .intin.ok{border-color:var(--ok,#2a9d5c)} .intin.bad{border-color:var(--bad,#d64545)}
@@ -2434,7 +2465,7 @@ function renderInner(){
   app.classList.toggle('is-onb', needSignIn || !store.profile);
   if(view!=='practice' && store.profile && !needSignIn) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
   const V = {privacy:()=>legalPaperView('privacy'), terms:()=>legalPaperView('terms'), copyright:()=>legalPaperView('copyright'), disclaimer:()=>legalPaperView('disclaimer'), contact:contactPageView, notebooks:notebooksView, leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
-             me:meView, practice:practiceView, results:resultsView, notes:notesView, notehub:notehubView, flash:flashView};
+             me:meView, analytics:analyticsView, practice:practiceView, results:resultsView, notes:notesView, notehub:notehubView, flash:flashView};
   app.appendChild(needSignIn ? authView() :(!store.profile ? (sbSession ? authView() : onboardView()) : (V[view]||homeView)()));
   if(view==='pyq') app.appendChild(el('<div class="foot">'+esc(BANK_ERROR || ('PYQ bank: '+QUESTIONS.length+' questions'))+'</div>'));
   document.querySelectorAll('.bottomnav,#navTog,#navScrim').forEach(n=>n.remove());
@@ -2482,6 +2513,11 @@ function mountNav(){
   document.body.appendChild(bottomNav());
   setNavOpen(navOpen);
 }
+const ANALYSIS_ITEMS = [
+  ['progress','Progress','<path d="M4 19V5M4 19h16"/><path d="M8 15l3-4 3 2 5-6"/>'],
+  ['history','History','<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>'],
+  ['patterns','Patterns','<path d="M4 4h16v16H4z"/><path d="M8 12l3 3 5-6"/>']
+];
 const SUPPORT_ITEMS = [
   ['contact','Contact Us','<path d="M4 12a8 8 0 1 1 3 6.2L4 19l.9-3.1A8 8 0 0 1 4 12z"/>'],
   ['privacy','Privacy Policy','<path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/>'],
@@ -2513,6 +2549,14 @@ function bottomNav(){
   TABS.forEach(t=>{
     const b = el('<button class="bn '+(nav.tab===t.id?'on':'')+(t.disabled?' disabled':'')+'"'+(t.disabled?' disabled aria-disabled="true" title="'+esc(t.title||'Coming soon')+'"':'')+'><svg viewBox="0 0 24 24">'+t.icon+'</svg><span>'+t.label+'</span></button>');
     if(!t.disabled) b.onclick = ()=>{ if(mockLocked()){ mockNotice(); return; } setNavOpen(false); go(t.id); };
+    bar.appendChild(b);
+  });
+  bar.appendChild(el('<div class="navdiv" aria-hidden="true"></div>'));
+  bar.appendChild(el('<div class="navsec">Analysis</div>'));
+  ANALYSIS_ITEMS.forEach(it=>{
+    const on = view==='analytics' && nav.anTab===it[0];
+    const b = el('<button class="bn navana'+(on?' on':'')+'"'+(on?' aria-current="page"':'')+'><svg viewBox="0 0 24 24">'+it[2]+'</svg><span>'+esc(it[1])+'</span></button>');
+    b.onclick = ()=>{ setNavOpen(false); go('analytics',{anTab:it[0]}); };
     bar.appendChild(b);
   });
   bar.appendChild(el('<div class="navdiv" aria-hidden="true"></div>'));
@@ -3810,15 +3854,26 @@ function accountBlock(){
   return w;
 }
 
+// Analysis page: Progress, History and Patterns, reached from the menu's Analysis partition
+function analyticsView(){
+  const w = el('<div></div>');
+  const titles = {progress:'Your <em>progress.</em>', history:'Your <em>history.</em>', patterns:'Your <em>patterns.</em>'};
+  const key = nav.anTab || 'progress';
+  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Analysis</div><h1 class="hm-title">'+titles[key]+'</h1></div>'));
+  if(key==='history') w.appendChild(historyPart());
+  else if(key==='patterns') w.appendChild(patternsPart());
+  else w.appendChild(analysisPart());
+  return w;
+}
 function meView(){
   const w = el('<div></div>');
-  if(nav.meTab==='saved') nav.meTab='analysis';
+  if(nav.meTab==='saved' || nav.meTab==='analysis' || nav.meTab==='history' || nav.meTab==='patterns') nav.meTab='badges';
   const first = ((store.profile && store.profile.name) || '').split(' ')[0];
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div>'
     +'<div class="hm-eyebrow">Your space</div>'
     +'<h1 class="hm-title">'+(first ? 'Me, <em>'+esc(first)+'.</em>' : 'Me<em>.</em>')+'</h1></div>'));
   const tabs = el('<div class="ctabs" role="tablist"></div>');
-  [['analysis','Progress'],['badges','Badges'],['mysol','Notebook'],['profile','Profile']].forEach(p=>{
+  [['badges','Badges'],['mysol','Notebook'],['profile','Profile']].forEach(p=>{
     const on = nav.meTab === p[0];
     const b = el('<button role="tab" aria-selected="'+on+'" class="ctab'+(on?' on':'')+'">'+p[1]+'</button>');
     b.onclick = ()=>go('me',{meTab:p[0]});
@@ -3827,11 +3882,8 @@ function meView(){
   w.appendChild(tabs);
   const panel = el('<div class="cpanel"></div>');
   if(nav.meTab==='profile'){ panel.appendChild(profilePart()); panel.appendChild(themePart()); }
-  else if(nav.meTab==='badges') panel.appendChild(badgesPart());
   else if(nav.meTab==='mysol'){ panel.appendChild(mySolPart()); panel.appendChild(redoPart()); }
-  else if(nav.meTab==='history') { panel.appendChild(analysisPart()); panel.appendChild(historyPart()); }
-  else if(nav.meTab==='patterns') { panel.appendChild(analysisPart()); panel.appendChild(patternsPart()); }
-  else { panel.appendChild(analysisPart()); panel.appendChild(historyPart()); panel.appendChild(patternsPart()); }
+  else panel.appendChild(badgesPart());
   w.appendChild(panel);
   return w;
 }
@@ -3980,7 +4032,7 @@ function legalPaperView(key){
   sheet.appendChild(el('<div class="lp-top"><span class="lp-no">Document '+d.no+' of 04</span><span class="lp-kind">Legal</span></div>'));
   sheet.appendChild(el('<h1 class="lp-title" id="lp-title">'+esc(d.title)+'</h1>'));
   sheet.appendChild(el('<div class="lp-date">Last updated 31 October 2026</div>'));
-  d.paras.forEach(t=>sheet.appendChild(el('<p class="lp-p">'+esc(t)+'</p>')));
+  d.paras.forEach(t=>sheet.appendChild(el('<section class="card lp-sec"><p class="lp-p">'+esc(t)+'</p></section>')));
   sheet.appendChild(el('<div class="lp-foot">TORQ &middot; Legal</div>'));
   w.appendChild(sheet);
   return w;
