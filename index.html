@@ -1889,6 +1889,59 @@ body.has-nav .build-stamp{ margin-bottom:calc(96px + env(safe-area-inset-bottom,
 .mock-sog.need{ border-color:var(--accent-text); box-shadow:0 0 0 4px color-mix(in srgb, var(--accent-text) 14%, transparent); }
 .mock-sog .sog-head{ margin:0 0 12px; }
 
+
+/* ---- Wide screens: question left, options right, the page does not scroll ---- */
+.qcard.qsplit{ display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); gap:30px; align-items:start; }
+.qcard.qsplit .qside{ min-width:0; }
+.qcard.qsplit .qside-r{ padding-top:4px; }
+.qcard.qsplit .qside-l .qtext{ font-size:clamp(18px,1.6vw,24px); }
+.qcard.qsplit .qside-r .opt{ margin-bottom:10px; }
+
+/* ---- Full screen: the bars hide; they come back only from the exact top or bottom edge ---- */
+html.immersive .header, html.immersive .navtog{ transition:transform .35s ease, opacity .35s ease; transform:translateY(-130%); opacity:0; }
+html.immersive .bottomnav{ transition:transform .35s ease, opacity .35s ease; transform:translateY(130%); opacity:0; }
+html.immersive.show-top .header, html.immersive.show-top .navtog{ transform:none; opacity:1; }
+html.immersive.show-bottom .bottomnav{ transform:none; opacity:1; }
+@media (prefers-reduced-motion: reduce){ html.immersive .header, html.immersive .navtog, html.immersive .bottomnav{ transition:none; } }
+
+/* ---- Logout sheet sits above the menu, and enters visibly ---- */
+.lo-scrim{ z-index:80 !important; }
+.lo-sheet{ z-index:81 !important; animation:loIn .42s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes loIn{ from{ opacity:0; transform:translate(-50%,28px) scale(.97); } to{ opacity:1; transform:translate(-50%,0) scale(1); } }
+@media (max-width:759px){ .lo-sheet{ animation-name:loInM; } }
+@keyframes loInM{ from{ opacity:0; transform:translateY(40px); } to{ opacity:1; transform:none; } }
+@media (prefers-reduced-motion: reduce){ .lo-sheet{ animation:none; } }
+
+/* ---- Results: marks on the left, bigger; the verdict sits inside the card; a stylised title card ---- */
+.resultcard{ display:grid !important; grid-template-columns:minmax(180px,260px) minmax(0,1fr); gap:10px 30px; align-items:center; padding:30px 32px !important; border-radius:28px !important; background:radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 60%), var(--surface) !important; }
+.resultcard > .ring{ grid-row:1 / span 4; width:min(260px,52vw); margin:0; }
+.resultcard > .ring .rc b{ font:600 clamp(48px,7vw,72px)/1 Lora,Georgia,serif; letter-spacing:-.02em; }
+.resultcard > .ring .rc em{ font-size:14px; letter-spacing:.02em; }
+.resultcard > :not(.ring){ grid-column:2; margin:0; text-align:left; }
+.resultcard .res-line{ font-size:15px; color:var(--muted); margin:0; }
+.resultcard .scoremsg{ margin:10px 0 0; font-size:17px; line-height:1.55; color:var(--muted); }
+.resultcard .scoremsg b{ display:block; font:600 clamp(22px,3vw,28px)/1.15 Lora,Georgia,serif; color:var(--text); margin-bottom:6px; }
+@media (max-width:640px){ .resultcard{ grid-template-columns:1fr; justify-items:center; text-align:center; } .resultcard > .ring{ grid-row:auto; } .resultcard > :not(.ring){ grid-column:1; text-align:center; } }
+.result-hero{ border-radius:28px !important; padding:34px 30px !important; background:radial-gradient(90% 120% at 100% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 62%), linear-gradient(160deg, var(--surface), var(--surface-2)) !important; border:1px solid var(--border); }
+.result-hero .hm-eyebrow{ display:inline-block; padding:6px 12px; border-radius:99px; background:color-mix(in srgb, var(--accent) 16%, transparent); color:var(--accent-text) !important; letter-spacing:.16em; }
+.result-hero .hm-title{ font-size:clamp(38px,8vw,64px) !important; line-height:1.02 !important; background:linear-gradient(120deg, var(--text) 30%, var(--accent-text) 100%); -webkit-background-clip:text; background-clip:text; color:transparent !important; margin-top:10px; }
+
+/* ---- In-app dialogs: large, stylish, and the keywords read at a glance ---- */
+.ad-scrim{ z-index:90 !important; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
+.ad-sheet{ position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); z-index:91; width:min(92vw,520px); padding:38px 34px 30px; border-radius:30px; background:linear-gradient(165deg, var(--surface), var(--surface-2)); border:1px solid var(--border); box-shadow:0 40px 90px -30px var(--shadow); overflow:hidden; animation:adIn .42s cubic-bezier(.2,.7,.2,1) both; }
+.ad-glow{ position:absolute; right:-70px; top:-70px; width:220px; height:220px; border-radius:50%; background:var(--accent); opacity:.22; filter:blur(30px); pointer-events:none; }
+.ad-danger .ad-glow{ background:#e5484d; }
+.ad-eyebrow{ position:relative; font:700 11.5px/1.2 Inter,sans-serif; letter-spacing:.18em; text-transform:uppercase; color:var(--accent-text); margin-bottom:12px; }
+.ad-title{ position:relative; font:600 clamp(26px,6vw,32px)/1.12 Lora,Georgia,serif; margin:0 0 14px; color:var(--text); }
+.ad-body{ position:relative; font-size:17px; line-height:1.62; color:var(--muted); margin:0 0 26px; }
+.ad-actions{ position:relative; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.ad-actions .btn{ padding:16px 18px; font-size:16.5px; border-radius:18px; margin:0; }
+.ad-actions .ad-no:only-child{ grid-column:1 / -1; }
+.ad-yes-danger{ background:#e5484d !important; color:#fff !important; border-color:transparent !important; }
+@keyframes adIn{ from{ opacity:0; transform:translate(-50%,-44%) scale(.96); } to{ opacity:1; transform:translate(-50%,-50%) scale(1); } }
+@media (max-width:759px){ .ad-sheet{ top:auto; bottom:0; left:0; right:0; transform:none; width:auto; border-radius:30px 30px 0 0; animation-name:adInM; } }
+@keyframes adInM{ from{ opacity:0; transform:translateY(40px); } to{ opacity:1; transform:none; } }
+@media (prefers-reduced-motion: reduce){ .ad-sheet{ animation:none; } }
 </style>
 </head>
 <body>
@@ -2193,7 +2246,7 @@ body.qnav-open .gutter{ opacity:0; }
   try{ shown = sessionStorage.getItem('torq.splashSeen') === '1'; }catch(e){}
   if(shown) return;
   var s = document.createElement('div'); s.id = 'torqSplash'; s.setAttribute('aria-hidden','true');
-  s.innerHTML = '<img class="sp-phone" alt="" src="icons/splash-iphone-1170x2532.png"><img class="sp-wide" alt="" src="icons/splash-ipad-1640x2360.png">';
+  s.innerHTML = '<img class="sp-phone" alt="" src="icons/splash-iphone-1170x2532.png" style="opacity:0" onload="this.style.opacity=1" onerror="this.remove()"><img class="sp-wide" alt="" src="icons/splash-ipad-1640x2360.png" style="opacity:0" onload="this.style.opacity=1" onerror="this.remove()">';
   document.documentElement.appendChild(s);
   var t0 = Date.now();
   window.torqHideSplash = function(){
@@ -2314,11 +2367,12 @@ function buildIndexes(){
 function answerLabel(q){ return q.type === 'integer' ? q.answer : L(q.correct); }
 function optBody(q, i){
   const img = q.optionImages && q.optionImages[i];
-  if(img && !q.options[i]) return '<span class="optbox'+(isDarkTheme()?' inv':'')+'"><img class="qimg-opt" src="'+esc(img)+'" alt="Option '+L(i)+'" loading="lazy" onerror="this.parentNode.parentNode.classList.remove(\'hasimg\');this.parentNode.remove()"></span>';
+  if(img && !q.options[i]) return '<span class="optbox'+(isDarkTheme()?' inv':'')+'"><img class="qimg-opt" style="opacity:0" onload="this.style.opacity=1" src="'+esc(img)+'" alt="Option '+L(i)+'" loading="lazy" onerror="this.parentNode.parentNode.classList.remove(\'hasimg\');this.parentNode.remove()"></span>';
   return '<span>'+esc(q.options[i])+'</span>';
 }
 function qImage(src){
-  const im = el('<img class="qimg" alt="Question figure" loading="lazy" src="'+esc(src)+'">');
+  const im = el('<img class="qimg" alt="Question figure" loading="lazy" style="opacity:0" src="'+esc(src)+'">');
+  im.onload = ()=>{ im.style.opacity = 1; };
   const fig = el('<div class="qfig'+(isDarkTheme()?' inv':'')+'"></div>'); fig.appendChild(im);
   im.onerror = ()=>fig.remove();   // images are optional until extracted
   return fig;
@@ -2851,13 +2905,41 @@ function showRulesSplash(then, mode){
   };
 }
 let lastOrigin = null;   // the page the student was on before a practice set started
+
+// In-app dialogs. These replace the browser's confirm() and alert() boxes, so every pop-up matches the app.
+function appDialog(o){
+  return new Promise(resolve=>{
+    const scrim = el('<div class="scrim ad-scrim"></div>');
+    const box = el('<div class="ad-sheet'+(o.danger?' ad-danger':'')+'" role="alertdialog" aria-modal="true" aria-labelledby="ad-title">'
+      +'<div class="ad-glow" aria-hidden="true"></div>'
+      +'<div class="ad-eyebrow">'+esc(o.eyebrow||'TORQ')+'</div>'
+      +'<h2 class="ad-title" id="ad-title">'+esc(o.title)+'</h2>'
+      +'<p class="ad-body">'+(o.html ? o.body : esc(o.body))+'</p>'
+      +'<div class="ad-actions"></div></div>');
+    const acts = box.querySelector('.ad-actions');
+    const canCancel = o.cancel !== false;
+    const done = v=>{ scrim.remove(); box.remove(); document.removeEventListener('keydown', onKey); resolve(v); };
+    const onKey = e=>{ if(e.key==='Escape' && canCancel) done(false); if(e.key==='Enter') done(true); };
+    if(canCancel){
+      const no = el('<button class="btn secondary ad-no" type="button">'+esc(o.cancel||'Cancel')+'</button>');
+      no.onclick = ()=>done(false); acts.appendChild(no);
+    }
+    const yes = el('<button class="btn ad-yes'+(o.danger?' ad-yes-danger':'')+'" type="button">'+esc(o.ok||'OK')+'</button>');
+    yes.onclick = ()=>done(true); acts.appendChild(yes);
+    scrim.onclick = ()=>{ if(canCancel) done(false); };
+    document.addEventListener('keydown', onKey);
+    document.body.appendChild(scrim); document.body.appendChild(box);
+    yes.focus();
+  });
+}
+function appNotice(title, body){ return appDialog({eyebrow:'Heads up', title:title, body:body, ok:'Okay', cancel:false}); }
 function startSession(o){
   if(o.mode==='mock'){ showRulesSplash(()=>startSessionNow(o), 'mock'); return; }
   if(!((store.rulesSeen||{})[dayKey()])){ showRulesSplash(()=>startSessionNow(o)); return; }
   startSessionNow(o);
 }
 function startSessionNow(o){
-  if(!o.queue.length){ alert('No questions match this selection yet.'); return; }
+  if(!o.queue.length){ appNotice('Nothing to start', 'No questions match this selection yet.'); return; }
   session = {mode:o.mode, title:o.title, queue:o.queue, idx:0, answers:{}, hints:{}, marks:{}, times:{}, draft:{}, conf:{}, pad:{}, started:{}, points:0, navOpen:false,
              qStart:Date.now(), sessionStart:Date.now(), limit:o.limit||0, submitted:false};
   lastOrigin = {view: view, nav: JSON.parse(JSON.stringify(nav))};   // where the student was before the set began
@@ -2873,8 +2955,12 @@ function startMock(o){
     if(pool.length<o.perSubject) warn.push(s+' has '+pool.length);
     queue.push(...pool.slice(0,o.perSubject));
   });
-  if(!queue.length){ alert('No questions yet.'); return; }
-  if(warn.length && !confirm('Not enough questions yet ('+warn.join(', ')+'). Start with what is available?')) return;
+  if(!queue.length){ appNotice('Nothing to start', 'No questions yet.'); return; }
+  if(warn.length){
+    appDialog({eyebrow:'Heads up', title:'Not enough questions yet', body:'Some subjects have fewer questions than the test needs: '+warn.join(', ')+'. Start with what is available?', ok:'Start anyway', cancel:'Go back'})
+      .then(ok=>{ if(ok) startSession({mode:'mock', title:o.title, queue:queue, limit:o.minutes*60}); });
+    return;
+  }
   startSession({mode:'mock', title:o.title, queue:queue, limit:o.minutes*60});
 }
 function tickExam(){ tickQ(); tickMock(); }
@@ -2934,7 +3020,11 @@ function submitMock(){
 function submitPractice(silent){
   if(!session || session.submitted || session.review) return;
   const untouched = session.queue.filter(q=>!session.answers[q.id]).length;
-  if(!silent && untouched && !confirm('Submit now? '+untouched+' question'+(untouched>1?'s are':' is')+' untouched and will count as skipped with no points.')) return;
+  if(!silent && untouched){
+    appDialog({eyebrow:'Submit', title:'Submit now?', body:untouched+' question'+(untouched>1?'s are':' is')+' untouched. '+(untouched>1?'They':'It')+' will count as skipped with no points.', ok:'Submit', cancel:'Keep going'})
+      .then(ok=>{ if(ok) submitPractice(true); });
+    return;
+  }
   session.queue.forEach(q=>{
     const a = session.answers[q.id];
     if(!a || !a.pending) return;
@@ -2984,6 +3074,7 @@ function startReviewFromRecord(rec){
   go('practice');
 }
 function openReviewFromResults(i){
+  session.queue.forEach(q=>{ if(!session.answers[q.id]) session.answers[q.id] = {skip:true, auto:true, pts:0, time:0}; });
   session.review = true; session.reviewFrom = 'results'; session.idx = i; session.qStart = Date.now();
   go('practice');
 }
@@ -3419,7 +3510,7 @@ function requestLeave(then){
   leaveNotice(LEAVE_MSG);
 }
 // Guard accounts: the 4CE admin email(s), lowercase. A guard has every feature unlocked and is hidden from leaderboards.
-const GUARD_EMAILS = ['torqbyforce@gmail.com'];
+const GUARD_EMAILS = ['torqbyforce@gmail.com', 'shadowman11682@gmail.com'];
 function isGuard(){
   const e = ((sbSession && sbSession.user && sbSession.user.email) || '').toLowerCase();
   return !!e && GUARD_EMAILS.indexOf(e) >= 0;
@@ -3648,7 +3739,9 @@ function bottomNav(){
     const out = el('<button class="bn navout"><svg viewBox="0 0 24 24"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"/><path d="M10 8l-4 4 4 4M6 12h9"/></svg><span>Logout</span></button>');
     out.onclick = ()=>{
       if(mockLocked()){ mockNotice(); return; }
-      confirmLogout(()=>{ setNavOpen(false); logOutNow(); });
+      // close the menu first, let it finish closing, then show the sheet above it
+      setNavOpen(false);
+      setTimeout(()=>confirmLogout(()=>logOutNow()), 340);
     };
     bar.appendChild(out);
   }
@@ -4318,9 +4411,14 @@ function examDayPick(){
 }
 function startExamDay(){
   const {queue, short} = examDayPick();
-  if(!queue.length){ alert('No hard questions yet for exam-day mode.'); return; }
-  if(short.length && !confirm('Not enough hard questions yet ('+short.join(', ')+'). Start with what is available?')) return;
-  startSession({mode:'pyq', title:'Exam-day mode', queue, limit:queue.length*120});
+  if(!queue.length){ appNotice('No hard questions yet', 'There are no hard questions for exam-day mode yet.'); return; }
+  const go0 = ()=>startSession({mode:'pyq', title:'Exam-day mode', queue, limit:queue.length*120});
+  if(short.length){
+    appDialog({eyebrow:'Heads up', title:'Not enough hard questions yet', body:'Short on: '+short.join(', ')+'. Start with what is available?', ok:'Start anyway', cancel:'Go back'})
+      .then(ok=>{ if(ok) go0(); });
+    return;
+  }
+  go0();
 }
 function storyCard(c){
   if(!CH_STORY[c] || (store.storySeen||{})[c]) return null;
@@ -4703,8 +4801,8 @@ function myCardRow(c){
   const bs = row.querySelectorAll('button');
   bs[0].onclick = ()=>go('myflashnew', {editId:c.id});
   bs[1].onclick = ()=>{
-    if(!confirm('Delete this card?')) return;
-    store.myCards = (store.myCards||[]).filter(x=>x.id!==c.id); persist(); render();
+    appDialog({eyebrow:'Delete', title:'Delete this card?', body:'Your card will be removed. This cannot be undone.', ok:'Delete', cancel:'Keep it', danger:true})
+      .then(ok=>{ if(!ok) return; store.myCards = (store.myCards||[]).filter(x=>x.id!==c.id); persist(); render(); });
   };
   return row;
 }
@@ -4875,7 +4973,7 @@ function notesView(){
     eSave.onclick = ()=>{ const t = et.value.trim(); if(t) store.explain[key] = t; else delete store.explain[key]; persist(); eSave.innerText = 'Saved'; };
     eb.appendChild(et); eb.appendChild(eSave);
     card.appendChild(eb);
-    w.appendChild(card);
+    w.appendChild(splitQuestionCard(card));
   });
   return w;
 }
@@ -5006,7 +5104,7 @@ function customTestPart(){
   const cb = el('<button class="btn block" style="margin-top:14px"'+(tc.chapters.length?'':' disabled')+'>Start my test</button>');
   cb.onclick = ()=>{
     const pool = shuffle(QUESTIONS.filter(q=>tc.chapters.indexOf(q.chapter)>=0));
-    if(!pool.length){ alert('No questions in the chosen chapters yet.'); return; }
+    if(!pool.length){ appNotice('Nothing to start', 'No questions in the chosen chapters yet.'); return; }
     startSession({mode:'mock', title:'Custom test', queue:pool.slice(0, tc.n), limit:tc.minutes*60});
   };
   cc.appendChild(cb);
@@ -5031,7 +5129,7 @@ function mocksView(){
     const row = el('<div class="row"><div><div class="name">'+esc(paperTitle(p))+'</div><div class="meta">'+n+' questions · 180 minutes</div></div><div class="end">Start</div></div>');
     row.onclick = ()=>{
       const qs = QUESTIONS.filter(q=>q.paperId===p.id).sort((a,b)=>SUBJECTS.indexOf(a.subject)-SUBJECTS.indexOf(b.subject));
-      if(!qs.length){ alert('No questions for this paper yet.'); return; }
+      if(!qs.length){ appNotice('Nothing to start', 'No questions for this paper yet.'); return; }
       startSession({mode:'mock', title:'PYQ mock: '+paperTitle(p), queue:qs, limit:180*60});
     };
     pl.appendChild(row);
@@ -5064,12 +5162,12 @@ function loadAvatarCache(){
 }
 // Shrink a chosen photo to a 256px square JPEG before it is cached
 function readAvatar(file, done){
-  if(!file || !file.type || file.type.indexOf('image/') !== 0){ alert('Please choose a photo (JPG or PNG).'); return; }
+  if(!file || !file.type || file.type.indexOf('image/') !== 0){ appNotice('Photo not supported', 'Please choose a photo (JPG or PNG).'); return; }
   const fr = new FileReader();
-  fr.onerror = ()=>alert('That photo could not be read. Try another one.');
+  fr.onerror = ()=>appNotice('Photo not read', 'That photo could not be read. Try another one.');
   fr.onload = ()=>{
     const img = new Image();
-    img.onerror = ()=>alert('That photo could not be opened. Try a JPG or PNG.');
+    img.onerror = ()=>appNotice('Photo not opened', 'That photo could not be opened. Try a JPG or PNG.');
     img.onload = ()=>{
       const S = 256, m = Math.min(img.width, img.height);
       const c = document.createElement('canvas'); c.width = S; c.height = S;
@@ -5430,11 +5528,13 @@ function accountBlock(){
 
   const del = el('<button class="btn block" type="button" style="margin-top:10px;background:transparent;color:#e5484d;border:1px solid #e5484d;box-shadow:none">Delete account</button>');
   del.onclick = async ()=>{
-    if(!confirm('Delete your account? Your profile, photo and practice history will be erased. This cannot be undone.')) return;
-    if(!confirm('Are you sure? This is permanent.')) return;
+    const sure1 = await appDialog({eyebrow:'Delete account', title:'Delete your account?', body:'Your profile, photo and practice history will be erased. This cannot be undone.', ok:'Continue', cancel:'Keep my account', danger:true});
+    if(!sure1) return;
+    const sure2 = await appDialog({eyebrow:'Last check', title:'Are you sure?', body:'This is permanent.', ok:'Delete my account', cancel:'Keep my account', danger:true});
+    if(!sure2) return;
     const db = sbClient();
     const { error } = await db.rpc('delete_my_account');
-    if(error){ alert('Could not delete the account: ' + error.message); return; }
+    if(error){ appNotice('Could not delete', 'Could not delete the account: ' + error.message); return; }
     try{ await db.auth.signOut(); }catch(e){}
     clearLocalData();
     render();
@@ -5525,7 +5625,7 @@ function mySolPart(){
     card.appendChild(el('<div style="font-size:14.5px;line-height:1.55;margin-bottom:10px">'+esc(q.text.length>140?q.text.slice(0,140)+'…':q.text)+'</div>'));
     card.appendChild(el('<div class="field">My solution</div>'));
     card.appendChild(el('<div style="white-space:pre-wrap;line-height:1.5">'+esc(store.mySol[id])+'</div>'));
-    w.appendChild(card);
+    w.appendChild(splitQuestionCard(card));
   });
   return w;
 }
@@ -5717,7 +5817,20 @@ function topRow(title, rightHtml, exitFn){
 function practiceView(){
   const w = el('<div></div>');
   if(!session){ go('home'); return w; }
-  return session.mode==='mock' ? mockPractice(w) : pyqPractice(w);
+  return (session.mode==='mock' && !session.review) ? mockPractice(w) : pyqPractice(w);
+}
+// Wide screens: the question sits on the left, the options and the Sure / Guessing choice on the right.
+// The page then fits without scrolling. Phones and narrow tablets keep the single column.
+function splitQuestionCard(card){
+  if(!window.matchMedia('(min-width:1100px)').matches) return card;
+  const right = el('<div class="qside qside-r"></div>'), left = el('<div class="qside qside-l"></div>');
+  [...card.children].forEach(k=>{
+    const isRight = k.matches('.opt, .sog-head, .chips, .mock-sog, .numpad, .qopts');
+    (isRight ? right : left).appendChild(k);
+  });
+  card.appendChild(left); card.appendChild(right);
+  card.classList.add('qsplit');
+  return card;
 }
 function pyqPractice(w){
   const q = session.queue[session.idx];
@@ -5871,7 +5984,10 @@ function mockPractice(w){
   const top = el('<div class="topline"><div class="qgroup"><span class="qring" role="img" aria-label="Question '+(session.idx+1)+' of '+n+', timer ring"><svg viewBox="0 0 44 44" aria-hidden="true"><circle class="qa" cx="22" cy="22" r="19"/><circle class="qb" id="timerArc" cx="22" cy="22" r="19" pathLength="100" stroke-dasharray="100" style="stroke-dashoffset:'+el0.toFixed(1)+'"/></svg><b>'+(session.idx+1)+'</b></span>'
     +'<span class="tag subj subj-'+q.subject.toLowerCase()+'">'+esc(q.subject)+' · of '+n+'</span></div>'
     +'<div class="right"><span class="timer" id="timerSpan" role="timer"></span><button class="btn small">Submit</button></div></div>');
-  top.querySelector('.btn').onclick = ()=>{ if(confirm('Submit the mock now? You have answered '+answered+' of '+n+'.')) submitMock(); };
+  top.querySelector('.btn').onclick = ()=>{
+    appDialog({eyebrow:'Submit', title:'Submit the mock now?', body:'You have answered '+answered+' of '+n+' questions. Your marks are saved when you submit.', ok:'Submit', cancel:'Keep going'})
+      .then(ok=>{ if(ok) submitMock(); });
+  };
   w.appendChild(top);
   w.appendChild(el('<div class="progress"><i style="width:'+Math.round((session.idx+1)/n*100)+'%"></i></div>'));
 
@@ -5946,9 +6062,9 @@ function mockResults(w){
     if(a.correct){ c++; score+=4; bySub[q.subject].score+=4; }
     else { wr++; score-=1; bySub[q.subject].score-=1; }
   });
-  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Your result'+nameSuffix()+'</div><h1 class="hm-title">'+esc(session.title)+'</h1></div>'));
+  w.appendChild(el('<div class="hm-hero result-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Your result'+nameSuffix()+'</div><h1 class="hm-title">'+esc(session.title)+'</h1></div>'));
   w.appendChild(ringMarks(score, n*4));
-  w.appendChild(el('<div class="note-line" style="text-align:center">'+c+' correct · '+wr+' wrong · '+sk+' skipped</div>'));
+  w.querySelector('.resultcard').appendChild(el('<div class="note-line res-line">'+c+' correct · '+wr+' wrong · '+sk+' skipped</div>'));
   flair(w, Math.max(0,Math.round(score/(n*4)*100)), c+wr, 60);
   const sl = el('<div class="list"></div>');
   Object.keys(bySub).forEach(s=>{
@@ -5969,13 +6085,13 @@ function pyqResults(w){
   const total = session.queue.length;
   const answered = session.queue.filter(q=>session.answers[q.id] && !session.answers[q.id].skip);
   const correct = answered.filter(q=>session.answers[q.id].correct).length;
-  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Session results'+nameSuffix()+'</div><h1 class="hm-title">'+esc(session.title)+'</h1></div>'));
+  w.appendChild(el('<div class="hm-hero result-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Session results'+nameSuffix()+'</div><h1 class="hm-title">'+esc(session.title)+'</h1></div>'));
   { const wrong = answered.filter(q=>!session.answers[q.id].correct).length;
     const marks = correct*4 - wrong, max = total*4;
     const mp = max>0 ? Math.round(marks/max*100) : 0;
     const acc = answered.length ? Math.round(correct/answered.length*100) : 0;
     w.appendChild(ringMarks(marks, max));
-    w.appendChild(el('<div class="note-line" style="text-align:center">Accuracy '+acc+'% · '+correct+' of '+answered.length+' answered correct</div>'));
+    w.querySelector('.resultcard').appendChild(el('<div class="note-line res-line">Accuracy '+acc+'% · '+correct+' of '+answered.length+' answered correct</div>'));
     flair(w, mp, answered.length, 75);
     if(mp>=80) w.appendChild(shareBtn('I scored '+marks+' out of '+max+' marks ('+mp+'%) on TORQ. JEE practice that works.'));
   }
@@ -6085,7 +6201,7 @@ function flair(w, pct, answered, goodAt){
     : pct>=35 ? ['Foundations need work.','Redo the wrong ones, then retry this chapter tomorrow.']
     : ['Tough set, useful data.','Read the explanations first, then redo the wrong ones.'];
   const p = el('<p class="scoremsg"><b>'+m[0]+'</b>'+m[1]+'</p>'); p.setAttribute('role','status');
-  w.appendChild(p);
+  (w.querySelector('.resultcard') || w).appendChild(p);
   if(answered && pct>=goodAt && session && !session.burst){ session.burst = true; setTimeout(confetti, 450); }
 }
 // ---------- Streak, question of the day, badges, score reveal, chapter map ----------
@@ -6417,7 +6533,7 @@ function qtextHTML(t){
   return esc(t).replace(/\s*(Statement[\s-]*(?:I{1,2}|1|2)\s*:|Assertion\s*\(A\)\s*:|Reason\s*\(R\)\s*:|In the light of)/gi,
     (m, p1, off)=> off===0 ? p1 : '<span class="stmt-break"></span>'+p1)
     .replace(/([.:;?])\s+(?=[A-H]\.\s+[A-Za-z(\\])/g, (m,p1)=> p1+'<span class="stmt-break"></span>')
-    .replace(/\s*(\((?:[A-H]|I{1,3}|IV|V)\)\s)/g, (m,p1,off)=> off===0 ? p1 : '<span class="stmt-break"></span>'+p1);
+    .replace(/(^|[.:;?!])\s*(\((?:[A-H]|I{1,3}|IV|V)\)\s)/g, (m,pre,p1)=> pre==='' ? p1 : pre+'<span class="stmt-break"></span>'+p1);
 }
 window.addEventListener('popstate', e=>{
   if(mockLocked()){ history.pushState({torq:true, view:'practice'}, ''); mockNotice(); return; }
@@ -6943,6 +7059,45 @@ document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState 
 // Some browsers only allow the request after a user gesture, so retry on the first touch or key
 ['pointerdown','keydown'].forEach(ev=>document.addEventListener(ev, keepAwake, {passive:true}));
 keepAwake();
+
+// Full screen detection, and the reveal rule: bars show only when the page is pulled from the exact top or bottom edge
+(function immersiveInit(){
+  const root = document.documentElement;
+  const fsQuery = window.matchMedia('(display-mode: fullscreen)');
+  let timer = null;
+  const hideNow = ()=>{ root.classList.remove('show-top','show-bottom'); clearTimeout(timer); };
+  function sync(){
+    const on = fsQuery.matches || !!document.fullscreenElement;
+    root.classList.toggle('immersive', on);
+    if(!on) hideNow();
+  }
+  if(fsQuery.addEventListener) fsQuery.addEventListener('change', sync); else fsQuery.addListener(sync);
+  document.addEventListener('fullscreenchange', sync);
+  sync();
+  const atTop = ()=> window.scrollY <= 0;
+  const atBottom = ()=> Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight;
+  const show = which=>{
+    root.classList.remove(which==='top' ? 'show-bottom' : 'show-top');
+    root.classList.add(which==='top' ? 'show-top' : 'show-bottom');
+    clearTimeout(timer);
+    timer = setTimeout(hideNow, 2400);
+  };
+  let y0 = null;
+  window.addEventListener('touchstart', e=>{ y0 = e.touches[0].clientY; }, {passive:true});
+  window.addEventListener('touchmove', e=>{
+    if(y0 == null || !root.classList.contains('immersive')) return;
+    const dy = e.touches[0].clientY - y0;
+    if(atTop() && dy > 24) show('top');
+    else if(atBottom() && dy < -24) show('bottom');
+  }, {passive:true});
+  window.addEventListener('touchend', ()=>{ y0 = null; });
+  window.addEventListener('wheel', e=>{
+    if(!root.classList.contains('immersive')) return;
+    if(atTop() && e.deltaY < -8) show('top');
+    else if(atBottom() && e.deltaY > 8) show('bottom');
+  }, {passive:true});
+  window.addEventListener('scroll', ()=>{ if(!atTop() && !atBottom()) hideNow(); }, {passive:true});
+})();
 </script>
 </body>
 </html>
