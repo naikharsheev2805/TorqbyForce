@@ -1352,6 +1352,69 @@ img{ -webkit-user-drag:none; }
 .soon-notice.out{opacity:0; transform:translate(-50%,10px);}
 .soon-head{font-weight:600; letter-spacing:.2px; font-size:var(--fs-4);}
 .soon-body{margin-top:4px; font-size:var(--fs-2); opacity:.72; line-height:1.5;}
+/* ---------- Flashcards (approved preview design) ---------- */
+.fx2-top{display:flex; justify-content:space-between; align-items:center; margin:4px 0 14px;}
+.fx2-back{display:inline-flex; align-items:center; gap:6px; padding:9px 14px; border-radius:14px; border:1px solid var(--border); background:var(--surface); color:var(--text); font:600 14px Inter,sans-serif; cursor:pointer;}
+.fx2-back svg{width:16px; height:16px; fill:none; stroke:var(--accent); stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
+.fx2-count{font:600 12px Inter,sans-serif; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);}
+.fx2-progress{height:5px; border-radius:99px; background:var(--surface-2); overflow:hidden; margin-bottom:22px;}
+.fx2-progress i{display:block; height:100%; background:var(--accent); border-radius:99px; transition:width .45s ease;}
+.fx2-stage{position:relative; display:flex; justify-content:center; perspective:1200px; margin-bottom:22px; cursor:pointer;}
+.fx2-stack{position:relative; width:min(88vw,360px); aspect-ratio:1 / 1.42;}
+.fx2-stack::before{content:""; position:absolute; inset:0; border-radius:22px; background:var(--surface-2); border:1px solid var(--border); transform:translate(8px,10px) rotate(2.5deg); opacity:.5;}
+.fx2-card{position:absolute; inset:0; transform-style:preserve-3d; transition:transform .65s cubic-bezier(.2,.7,.2,1); z-index:1;}
+.fx2-card.flip{transform:rotateY(180deg);}
+.fx2-face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:22px; padding:22px 22px 18px; display:flex; flex-direction:column; border:1px solid var(--border); background:linear-gradient(170deg,var(--surface),var(--surface-2)); box-shadow:0 30px 56px -34px var(--shadow); overflow:hidden;}
+.fx2-face.back{transform:rotateY(180deg);}
+.fx2-meta{display:flex; justify-content:space-between; align-items:center; gap:10px; flex-shrink:0;}
+.fx2-kind{font:700 10.5px Inter,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--accent);}
+.fx2-chap{font:500 11px Inter,sans-serif; color:var(--muted); text-align:right; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:60%;}
+.fx2-mid{flex:1; min-height:0; display:flex; flex-direction:column; justify-content:center; gap:12px; padding:14px 0; overflow:hidden;}
+.fx2-scroll{justify-content:flex-start; overflow-y:auto; overscroll-behavior:contain;}
+.fx2-front{font:500 clamp(19px,5.4vw,23px)/1.35 Lora,Georgia,serif; color:var(--text); overflow-wrap:anywhere; word-break:break-word; text-align:left;}
+.fx2-front .katex-display{margin:0; overflow-x:auto; overflow-y:hidden;}
+.fx2-front .katex{font-size:1em;}
+.fx2-plain{font:500 clamp(17px,4.8vw,20px)/1.45 Lora,Georgia,serif;}
+.fx2-answer{font:400 15px/1.6 Inter,sans-serif; color:var(--text);}
+.fx2-sec{font:400 13.5px/1.6 Inter,sans-serif; color:var(--muted); padding-left:10px; border-left:1px solid var(--border); overflow-wrap:anywhere;}
+.fx2-sec b{display:block; font:700 10px Inter,sans-serif; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:2px;}
+.fx2-hint{font:500 11px Inter,sans-serif; color:var(--muted); text-align:center; letter-spacing:.04em; opacity:.8; flex-shrink:0;}
+.fx2-actions{display:grid; grid-template-columns:1fr 1fr; gap:10px; max-width:360px; margin:0 auto;}
+.fx2-btn{border:0; border-radius:14px; padding:14px; font:600 14.5px Inter,sans-serif; cursor:pointer; transition:filter .15s, transform .12s;}
+.fx2-btn:active{transform:scale(.97);}
+.fx2-btn.primary{background:var(--accent); color:var(--accent-ink,#1f1e1d);}
+.fx2-btn.quiet{background:transparent; color:var(--text); border:1px solid var(--border);}
+.fx2-out-r{animation:fx2OutR .5s cubic-bezier(.3,.6,.2,1) forwards;}
+.fx2-out-l{animation:fx2OutL .5s cubic-bezier(.3,.6,.2,1) forwards;}
+@keyframes fx2OutR{to{transform:translate(120%,-6%) rotate(14deg); opacity:0;}}
+@keyframes fx2OutL{to{transform:translate(-120%,-6%) rotate(-14deg); opacity:0;}}
+.fx2-enter{animation:fx2Settle .5s cubic-bezier(.2,.7,.2,1) both;}
+@keyframes fx2Settle{from{transform:translateY(16px) scale(.95); opacity:0;} to{transform:none; opacity:1;}}
+@media (prefers-reduced-motion:reduce){ .fx2-card{transition:none;} .fx2-out-r,.fx2-out-l,.fx2-enter{animation:none;} }
+
+/* ---------- Diagram images: ink on transparent, inverted in dark themes, background matches the app ---------- */
+.img-wrap{ background:var(--bg); border-radius:14px; padding:8px; display:flex; justify-content:center; align-items:center; isolation:isolate; }
+.img-wrap img{ max-width:100%; height:auto; display:block; }
+.img-wrap.inv img{ filter:invert(1); }
+
+/* ---------- Viva: chapter block, pin switch, flashcard callout ---------- */
+.viva-block{ margin:18px 0 22px; padding:22px 22px 20px; border-radius:22px; background:linear-gradient(170deg,var(--surface),var(--surface-2)); border:1px solid var(--border); }
+.viva-head{ display:flex; gap:14px; align-items:center; }
+.viva-glyph{ width:44px; height:44px; flex-shrink:0; padding:10px; border-radius:14px; border:1px solid var(--border); fill:none; stroke:var(--accent); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; background:var(--bg); }
+.viva-eyebrow{ font:700 10.5px Inter,sans-serif; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+.viva-title{ font:500 26px/1.15 Lora,Georgia,serif; color:var(--text); margin-top:3px; }
+.viva-title em{ font-style:italic; color:var(--accent); }
+.viva-lede{ font:400 14px/1.6 Inter,sans-serif; color:var(--muted); margin:14px 0 16px; }
+.viva-start{ width:100%; border:0; border-radius:14px; padding:14px; font:600 15px Inter,sans-serif; background:var(--accent); color:var(--accent-ink,#1f1e1d); cursor:pointer; }
+.viva-start:active{ transform:scale(.98); }
+.viva-pin{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:16px; flex-wrap:wrap; }
+.viva-switch{ position:relative; display:inline-flex; align-items:center; gap:12px; padding:7px 7px 7px 16px; border-radius:999px; border:1px solid var(--border); background:var(--bg); color:var(--text); font:600 13px Inter,sans-serif; cursor:pointer; }
+.viva-knob{ width:22px; height:22px; border-radius:50%; background:var(--muted); transition:transform .3s cubic-bezier(.2,.7,.2,1), background .3s; }
+.viva-switch.on .viva-knob{ transform:translateX(0); background:var(--accent); box-shadow:0 0 0 5px color-mix(in srgb, var(--accent) 22%, transparent); }
+.viva-switch:not(.on) .viva-knob{ background:var(--muted); }
+.viva-note-line{ font:400 12.5px Inter,sans-serif; color:var(--muted); flex-basis:100%; }
+.viva-callout{ width:100%; display:flex; justify-content:space-between; align-items:center; margin:0 0 14px; padding:12px 16px; border-radius:16px; border:1px solid var(--border); background:var(--surface); color:var(--text); font:600 14px Inter,sans-serif; cursor:pointer; }
+.viva-callout em{ font-style:normal; color:var(--accent); font-size:12px; letter-spacing:.12em; text-transform:uppercase; }
 </style>
 </head>
 <body>
@@ -1602,7 +1665,7 @@ let view = 'home';
 let session = null;
 let nav = {tab:'home', subject:SUBJECTS[0], pyqTab:'questions', paper:null, meTab:'analysis', cfg:null,
            mockCfg:{subjects:[...SUBJECTS], perSubject:5, minutes:60}};
-const TAB_OF = {viva:'notehub', flash:'notehub', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', notebooks:'notebooks', leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', notes:'notehub', notehub:'notehub', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
+const TAB_OF = {viva:'viva', flash:'notehub', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', notebooks:'notebooks', leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', notes:'notehub', notehub:'notehub', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
 
 const LAST_VIEW_KEY = 'torq_last_view_v1';
 function saveLastView(){
@@ -3990,7 +4053,7 @@ function vivaView(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Organic chemistry</div><h1 class="hm-title">Common <em>names viva.</em></h1></div>'));
   const back = el('<div class="row" style="cursor:pointer"><div><div class="name">Back to notes</div></div><div class="end">Back</div></div>');
-  back.onclick = ()=>go('notehub');
+  back.onclick = ()=>go('notes',{chapter:VIVA_CHAPTER});
   if(!vivaState.mode){
     const list = el('<div class="list"></div>');
     [['name','Name to structure','See a common name, then pick its structure from four drawings.'],
@@ -4038,7 +4101,7 @@ function vivaView(){
 function notehubView(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Study</div><h1 class="hm-title">Notes and <em>formulas.</em></h1></div>'));
-  { const list0 = el('<div class="list"></div>'); const vv = el('<div class="row"><div><div class="name">Common names viva</div><div class="meta">Name the compound from its drawing, or draw it from its name</div></div><div class="end">Open</div></div>'); vv.onclick = ()=>{ vivaState = {mode:null, qs:[], i:0, score:0, picked:null, done:false}; go('viva'); }; list0.appendChild(vv); const fc = el('<div class="row"><div><div class="name">Flashcards</div><div class="meta">Flip through every formula and concept, by chapter</div></div><div class="end">Open</div></div>'); fc.onclick = ()=>{ flashState = {chapter:null, i:0, flipped:false, pool:[], filter:'All', done:false, busy:false, enter:false}; go('flash'); }; list0.appendChild(fc); w.appendChild(list0); }
+  { const list0 = el('<div class="list"></div>'); const fc = el('<div class="row"><div><div class="name">Flashcards</div><div class="meta">Flip through every formula and concept, by chapter</div></div><div class="end">Open</div></div>'); fc.onclick = ()=>{ flashState = {chapter:null, i:0, flipped:false, pool:[], filter:'All', done:false, busy:false, enter:false}; go('flash'); }; list0.appendChild(fc); w.appendChild(list0); }
   const chs = Object.keys(NOTES);
   if(!chs.length){ w.appendChild(el('<div class="card empty">No notes yet.</div>')); return w; }
   const claimed = new Set();
@@ -4151,7 +4214,7 @@ function chapterView(){
   sb.onclick = ()=>go('setup',{cfg:defaultCfg({subject:s, chapter:c, topics:sel.slice()})});
   w.appendChild(sb);
 
-  const fcs = flashSectionEl(c); if(fcs) w.appendChild(fcs);
+  if(c===VIVA_CHAPTER) w.appendChild(vivaChapterBlock()); const fcs = flashSectionEl(c); if(fcs) w.appendChild(fcs);
   return w;
 }
 
@@ -5813,6 +5876,93 @@ document.addEventListener('dragstart',function(e){ e.preventDefault(); });
 document.addEventListener('keydown',function(e){ var k=(e.key||'').toLowerCase();
   if(e.key==='F12' || (e.ctrlKey&&e.shiftKey&&(k==='i'||k==='j'||k==='c')) || (e.ctrlKey&&(k==='u'||k==='s'||k==='p'))) e.preventDefault(); });
 
+
+// ---------- Flashcards: session screen rebuilt to match the approved preview design ----------
+function fx2Front(c){
+  if(c.kind!=='Formula') return c.front;
+  const body = String(c.front).replace(/^\$|\$$/g,'');
+  const plainText = /[a-z]{3,}\s+[a-z]{2,}/i.test(body) && !/\\/.test(body);
+  return plainText ? '<span class="fx2-plain">'+esc(body)+'</span>' : c.front;
+}
+function flashSession(w){
+  const st = flashState, n = st.pool.length, c = st.pool[st.i];
+  const enterCls = st.enter ? ' fx2-enter' : ''; st.enter = false; st.busy = false;
+  const top = el('<div class="fx2-top"><button type="button" class="fx2-back" id="fx2Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>Chapters</span></button><span class="fx2-count">'+(st.i+1)+' / '+n+'</span></div>');
+  top.querySelector('#fx2Back').onclick = ()=>{ flashState.chapter = null; render(); };
+  w.appendChild(top);
+  if(st.chapter===VIVA_CHAPTER){ const cv = el('<button type="button" class="viva-callout"><span>Common names viva</span><em>Begin</em></button>'); cv.onclick = vivaLaunch; w.appendChild(cv); }
+  w.appendChild(el('<div class="fx2-progress"><i style="width:'+(st.i/n*100)+'%"></i></div>'));
+  const first = c.back[0] ? c.back[0].text : '';
+  const rest = c.back.slice(1).map(x=>x.label
+      ? '<div class="fx2-sec"><b>'+esc(x.label)+'</b>'+esc(x.text)+'</div>'
+      : '<div class="fx2-sec">'+esc(x.text)+'</div>').join('');
+  const stage = el('<div class="fx2-stage'+enterCls+'" role="button" tabindex="0" aria-label="Flip card"><div class="fx2-stack"><div class="fx2-card'+(st.flipped?' flip':'')+'">'
+    +'<div class="fx2-face front"><div class="fx2-meta"><span class="fx2-kind">'+esc(c.kind)+'</span><span class="fx2-chap">'+esc(st.chapter)+'</span></div>'
+    +'<div class="fx2-mid"><div class="fx2-front">'+fx2Front(c)+'</div></div><div class="fx2-hint">Tap to reveal</div></div>'
+    +'<div class="fx2-face back"><div class="fx2-meta"><span class="fx2-kind">'+esc(c.kind)+'</span><span class="fx2-chap">'+esc(st.chapter)+'</span></div>'
+    +'<div class="fx2-mid fx2-scroll"><div class="fx2-answer">'+esc(first)+'</div>'+rest+'</div><div class="fx2-hint">Tap to flip back</div></div>'
+    +'</div></div></div>');
+  stage.onclick = flashFlip;
+  stage.onkeydown = e=>{ if(e.key==='Enter'){ e.preventDefault(); flashFlip(); } };
+  w.appendChild(stage);
+  const ctl = el('<div class="fx2-actions"><button type="button" class="fx2-btn quiet">Still learning</button><button type="button" class="fx2-btn primary">Got it</button></div>');
+  const bs = ctl.querySelectorAll('button');
+  bs[0].onclick = ()=>flashAnswer(false);
+  bs[1].onclick = ()=>flashAnswer(true);
+  w.appendChild(ctl);
+  return w;
+}
+function flashFlip(){
+  if(flashState.busy) return;
+  flashState.flipped = !flashState.flipped;
+  const cd = document.querySelector('.fx2-card'); if(cd) cd.classList.toggle('flip', flashState.flipped);
+}
+function flashAnswer(ok){
+  const st = flashState, c = st.pool[st.i];
+  if(!c || st.busy) return;
+  st.busy = true;
+  flashKnown(st.chapter)[c.key] = ok;
+  const stack = document.querySelector('.fx2-stack');
+  if(stack) stack.classList.add(ok ? 'fx2-out-r' : 'fx2-out-l');
+  setTimeout(()=>{
+    if(st.i >= st.pool.length-1){ st.done = true; }
+    else { st.i++; st.enter = true; }
+    st.flipped = false;
+    render();
+  }, 320);
+}
+
+
+// Diagram images: dark themes invert the ink so the lines are light on the app's own background
+function isDarkTheme(){ return /dark/.test(getComputedStyle(document.documentElement).colorScheme || ''); }
+function imgWrap(src, alt){
+  return '<div class="img-wrap'+(isDarkTheme()?' inv':'')+'"><img src="'+src+'" alt="'+esc(alt)+'"></div>';
+}
+
+// ---------- Viva: chapter-exclusive. Optional menu shortcut the student can switch on ----------
+const VIVA_CHAPTER = 'IUPAC Nomenclature and Common Names';
+const VIVA_TAB = {id:'viva', label:'Viva', title:'Common names viva', icon:'<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/><path d="M8.5 14h7"/>'};
+function vivaMenuOn(){ try{ return localStorage.getItem('torq.vivaMenu')==='1'; }catch(e){ return false; } }
+function vivaMenuSet(on){ try{ localStorage.setItem('torq.vivaMenu', on?'1':'0'); }catch(e){} syncVivaTab(); render(); }
+function syncVivaTab(){
+  const i = TABS.findIndex(t=>t.id==='viva');
+  if(vivaMenuOn() && i<0){ const n = TABS.findIndex(t=>t.id==='notehub'); TABS.splice(n+1, 0, VIVA_TAB); }
+  else if(!vivaMenuOn() && i>=0){ TABS.splice(i, 1); }
+}
+syncVivaTab();
+function vivaLaunch(){ vivaState = {mode:null, qs:[], i:0, score:0, picked:null, done:false}; go('viva'); }
+function vivaChapterBlock(){
+  const on = vivaMenuOn();
+  const wrap = el('<section class="viva-block"><div class="viva-head"><svg class="viva-glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/><path d="M8.5 14h7"/></svg><div><div class="viva-eyebrow">Chapter exclusive</div><div class="viva-title">Common names <em>viva.</em></div></div></div><p class="viva-lede">Ten rapid-fire rounds. Name the compound from its drawing, or draw it from its name.</p></section>');
+  const go1 = el('<button type="button" class="viva-start">Begin the viva</button>');
+  go1.onclick = vivaLaunch;
+  wrap.appendChild(go1);
+  const sw = el('<button type="button" class="viva-switch'+(on?' on':'')+'" role="switch" aria-checked="'+(on?'true':'false')+'"><span class="viva-switch-label">Pin to menu</span><span class="viva-knob"></span></button>');
+  sw.onclick = ()=>vivaMenuSet(!vivaMenuOn());
+  const note = el('<div class="viva-note-line">'+(on?'Shown in your menu for quick access.':'Off. Turn it on to keep the viva one tap away in the menu.')+'</div>');
+  wrap.appendChild(el('<div class="viva-pin"></div>')); wrap.lastChild.appendChild(sw); wrap.lastChild.appendChild(note);
+  return wrap;
+}
 </script>
 </body>
 </html>
