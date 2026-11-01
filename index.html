@@ -701,7 +701,7 @@ button:focus:not(:focus-visible), [role="button"]:focus:not(:focus-visible){ out
 @media (min-width:960px){ .qcard .qtext{ max-width:none; } }
 
 /* ---------- Question of the day and greeting: the thought leads on wide screens ---------- */
-.stmt-break{ display:block; height:.9em; }
+.stmt-break{ display:block; height:.6em; }
 @media (min-width:960px){
   .hm-title{ font-size:clamp(22px,2.2vw,30px); font-weight:500; }
   .hm-eyebrow{ font-size:10.5px; }
@@ -1526,6 +1526,28 @@ img{ -webkit-user-drag:none; }
 .qfig, .img-wrap{ background:none !important; isolation:auto !important; box-shadow:none !important; border-radius:0 !important; padding:0 !important; width:auto !important; display:flex; justify-content:center; }
 .qfig img, .img-wrap img{ width:auto !important; height:auto !important; max-width:100% !important; min-width:0 !important; flex:0 0 auto; border-radius:0 !important; }
 .qfig.inv img, .img-wrap.inv img{ filter:invert(1); mix-blend-mode:screen; }
+
+/* ---------- Option figures: same treatment as question figures (inverted in dark themes, blended into the card behind) ---------- */
+.optbox{ background:none !important; isolation:auto !important; }
+.optbox.inv .qimg-opt{ filter:invert(1); mix-blend-mode:screen; }
+
+.upd-pill{ position:fixed; left:50%; bottom:calc(env(safe-area-inset-bottom,0px) + 96px); transform:translateX(-50%); z-index:150; display:flex; align-items:center; gap:10px; padding:10px 16px; border-radius:999px; border:1px solid var(--border); background:color-mix(in srgb,var(--surface) 88%, transparent); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); color:var(--text); font:600 13px Inter,sans-serif; cursor:pointer; box-shadow:0 14px 30px -18px var(--shadow); }
+.upd-pill em{ font-style:normal; font-weight:500; color:var(--muted); }
+.upd-dot{ width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%, transparent); }
+
+/* ---------- Flashcards on wide screens: the whole session fits the window, no scrolling ---------- */
+@media (min-width:900px){
+  body.flash-session{ overflow:hidden; }
+  body.flash-session #app{ padding-top:18px; padding-bottom:18px; height:100dvh; box-sizing:border-box; overflow:hidden; }
+  body.flash-session .hm-hero{ display:none !important; }
+  body.flash-session .fl-wrap{ padding-top:0; }
+  body.flash-session .fx2-top{ margin:0 0 10px; }
+  body.flash-session .fx2-split{ height:calc(100dvh - 120px); align-items:center; }
+  body.flash-session .fx2-stack, body.flash-session .fx2-under{ width:min(40vw, calc((100dvh - 150px) / 1.42)); aspect-ratio:auto; height:calc(100dvh - 150px); }
+  body.flash-session .fx2-stage{ height:calc(100dvh - 150px); }
+  body.flash-session .fx2-deck{ height:calc(100dvh - 150px); }
+  body.flash-session .fx2-side{ justify-content:center; }
+}
 </style>
 </head>
 <body>
@@ -1536,6 +1558,7 @@ img{ -webkit-user-drag:none; }
 <script>
 // ---------- Data paths (adjust here if the folder layout changes) ----------
 // Serve the repo root with a local server (e.g. `python3 -m http.server`); opening the file directly blocks fetch().
+const APP_BUILD = '2026-11-01-b';   // bumped with every release; the app compares it with the hosted file
 const PATHS = {
   index: 'data/index.json',  // lists every paper; each paper's "file" field points at its question JSON
   solutions: 'data/solutions/'    // one file per paper: data/solutions/<paper-id>.json
@@ -1629,7 +1652,7 @@ function buildIndexes(){
 function answerLabel(q){ return q.type === 'integer' ? q.answer : L(q.correct); }
 function optBody(q, i){
   const img = q.optionImages && q.optionImages[i];
-  if(img && !q.options[i]) return '<span class="optbox"><img class="qimg-opt" src="'+esc(img)+'" alt="Option '+L(i)+'" loading="lazy" onerror="this.parentNode.parentNode.classList.remove(\'hasimg\');this.parentNode.remove()"></span>';
+  if(img && !q.options[i]) return '<span class="optbox'+(isDarkTheme()?' inv':'')+'"><img class="qimg-opt" src="'+esc(img)+'" alt="Option '+L(i)+'" loading="lazy" onerror="this.parentNode.parentNode.classList.remove(\'hasimg\');this.parentNode.remove()"></span>';
   return '<span>'+esc(q.options[i])+'</span>';
 }
 function qImage(src){
@@ -2738,7 +2761,8 @@ function addBackCard(){
 }
 let __renderBusy = false, __lastRecover = 0;
 function render(){
-  if(__renderBusy) return;   // no nested redraws
+  if(__renderBusy) return;
+  document.body.classList.remove('flash-session');   // no nested redraws
   __renderBusy = true;
   try{ renderInner(); }
   catch(err){
@@ -5128,7 +5152,7 @@ function pyqPractice(w){
   const doneCount = session.queue.filter(x=>{ const y=session.answers[x.id]; return y && !y.skip; }).length;
   w.appendChild(topRow(session.title, '<span class="tag">'+(session.idx+1)+' / '+n+'</span>',
     ()=>requestLeave(exitSession)));
-  w.appendChild(el('<div class="progress"><i style="width:'+Math.round(doneCount/n*100)+'%"></i></div>'));
+  w.appendChild(el('<div class="progress"><i style="width:'+Math.round((session.idx+1)/n*100)+'%"></i></div>'));
   const over = !answered && left<0, warn = !answered && left<=20 && left>=0;
   w.appendChild(el('<div class="qclock'+(over?' over':(warn?' warn':''))+'">'
     +'<svg viewBox="0 0 44 44" aria-hidden="true"><circle class="qc-bg" cx="22" cy="22" r="18"/>'
@@ -5247,7 +5271,7 @@ function mockPractice(w){
     +'<div class="right"><span class="timer" id="timerSpan" role="timer"></span><button class="btn small">Submit</button></div></div>');
   top.querySelector('.btn').onclick = ()=>{ if(confirm('Submit the mock now? You have answered '+answered+' of '+n+'.')) submitMock(); };
   w.appendChild(top);
-  w.appendChild(el('<div class="progress"><i style="width:'+Math.round(answered/n*100)+'%"></i></div>'));
+  w.appendChild(el('<div class="progress"><i style="width:'+Math.round((session.idx+1)/n*100)+'%"></i></div>'));
 
   const card = el('<div class="card qcard" style="--bar:'+(SUBJ_VAR[q.subject]||'')+'"></div>');
   const mk = el('<div class="row" style="justify-content:space-between;margin-bottom:10px;padding:0;border:none"><span class="tag">Question '+(session.idx+1)+'</span></div>');
@@ -5786,8 +5810,10 @@ function buildGutter(){
 
 // Layout for question text: statements and the closing line start on their own lines
 function qtextHTML(t){
+  // Statements I, II... Assertion/Reason, and lettered statements A., B., C... each start on their own line
   return esc(t).replace(/\s*(Statement[\s-]*(?:I{1,2}|1|2)\s*:|Assertion\s*\(A\)\s*:|Reason\s*\(R\)\s*:|In the light of)/gi,
-    (m, p1, off)=> off===0 ? p1 : '<span class="stmt-break"></span>'+p1);
+    (m, p1, off)=> off===0 ? p1 : '<span class="stmt-break"></span>'+p1)
+    .replace(/([.:;?])\s+(?=[A-H]\.\s+[A-Za-z(\\])/g, (m,p1)=> p1+'<span class="stmt-break"></span>');
 }
 window.addEventListener('popstate', e=>{
   if(mockLocked()){ history.pushState({torq:true, view:'practice'}, ''); mockNotice(); return; }
@@ -6243,6 +6269,7 @@ function fxFace(c, side){
     +'<div class="fx2-mid fx2-scroll"><div class="fx2-answer">'+fxKey(first)+'</div>'+rest+'</div><div class="fx2-hint">Tap to flip back</div></div>';
 }
 function flashSession(w){
+  document.body.classList.add('flash-session');
   const st = flashState, n = st.pool.length, c = st.pool[st.i];
   const enterCls = st.enter ? ' fx2-enter' : ''; st.enter = false; st.busy = false;
   const top = el('<div class="fx2-top"><button type="button" class="fx2-back" id="fx2Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>Chapters</span></button><span class="fx2-count">'+(st.i+1)+' / '+n+'</span></div>');
@@ -6300,6 +6327,58 @@ function softNotice(msg){
   document.body.appendChild(n);
   setTimeout(()=>{ n.classList.add('out'); setTimeout(()=>n.remove(), 400); }, 3800);
 }
+
+// ---------- Quiet updates: the app looks for a newer copy in the background ----------
+let pendingBuild = null;
+function appBusy(){ return view==='practice' || !!(session && !session.submitted && !session.review && session.queue); }
+function checkForUpdate(){
+  if(location.protocol.indexOf('http')!==0) return;   // only meaningful when the file is served
+  fetch(location.href.split('#')[0] + (location.search ? '&' : '?') + 'v=' + Date.now(), {cache:'no-store'})
+    .then(r=>r.ok ? r.text() : '')
+    .then(t=>{
+      const m = t.match(/const APP_BUILD = '([^']+)'/);
+      if(m && m[1] !== APP_BUILD){ pendingBuild = m[1]; applyUpdateIfSafe(); }
+    }).catch(()=>{});
+}
+function applyUpdateIfSafe(){
+  if(!pendingBuild) return;
+  if(appBusy()){ showUpdatePill(); return; }   // mock or question set: wait for the student
+  applyUpdateNow();
+}
+function applyUpdateNow(){
+  try{ flushCloud(); }catch(e){}
+  try{ sessionStorage.setItem('torq.updated', pendingBuild); }catch(e){}
+  location.reload();
+}
+function showUpdatePill(){
+  if(document.getElementById('updPill')) return;
+  const p = el('<button type="button" id="updPill" class="upd-pill"><span class="upd-dot"></span><span>Update ready</span><em>Tap to install</em></button>');
+  p.onclick = ()=>{ if(appBusy()){ softNotice('Finish or leave this set first. Your update installs right after.'); return; } applyUpdateNow(); };
+  document.body.appendChild(p);
+}
+function showInstalledNoticeIfHome(){
+  let flag = null; try{ flag = sessionStorage.getItem('torq.updated'); }catch(e){}
+  if(!flag || view!=='home') return;
+  try{ sessionStorage.removeItem('torq.updated'); }catch(e){}
+  softNotice('TORQ was updated automatically. Your progress is safe.');
+}
+setInterval(()=>{ if(pendingBuild && !appBusy()) applyUpdateNow(); }, 4000);
+setInterval(checkForUpdate, 5*60*1000);
+document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='visible') checkForUpdate(); });
+setTimeout(checkForUpdate, 8000);
+setInterval(showInstalledNoticeIfHome, 1500);
+
+// ---------- Full screen when TORQ runs as an installed app ----------
+(function(){
+  const standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  if(!standalone) return;
+  const go = ()=>{
+    if(document.fullscreenElement) return;
+    const r = document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen;
+    if(r){ try{ const p = r.call(document.documentElement); if(p && p.catch) p.catch(()=>{}); }catch(e){} }
+  };
+  document.addEventListener('pointerdown', go, {passive:true});
+})();
 </script>
 </body>
 </html>
