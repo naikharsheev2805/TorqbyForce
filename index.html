@@ -1152,6 +1152,32 @@ body.has-nav .bn{ flex:none; }
 .fl-hint{ font-size:12px; color:var(--muted); text-align:center; margin-top:10px; }
 .fl-ctl{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:18px; }
 .fl-ctl .btn{ min-width:120px; }
+.fl-top{ display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:14px; }
+.fl-chapters{ display:inline-flex; align-items:center; gap:6px; padding:9px 14px; border-radius:14px; border:1px solid var(--border); background:var(--surface); color:var(--text); font:600 14px Inter,sans-serif; cursor:pointer; box-shadow:0 12px 24px -14px var(--shadow); transition:transform .25s cubic-bezier(.2,.7,.2,1), border-color .25s ease; }
+.fl-chapters .nb-arrow{ display:block; width:16px; height:16px; flex-shrink:0; fill:none; stroke:var(--accent); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.fl-chapters:hover{ border-color:var(--accent); }
+.fl-filters{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; }
+.fl-filter{ font:600 13px Inter,sans-serif; padding:8px 14px; border-radius:999px; border:1px solid var(--border); background:var(--surface); color:var(--muted); cursor:pointer; }
+.fl-filter.on{ color:var(--accent); border-color:var(--accent); background:var(--accent-soft); }
+.fl-stage.out-r{ transform:translateX(120%) rotate(12deg); opacity:0; transition:transform .3s ease, opacity .3s ease; }
+.fl-stage.out-l{ transform:translateX(-120%) rotate(-12deg); opacity:0; transition:transform .3s ease, opacity .3s ease; }
+.fl-stage.enter{ animation:flEnter .35s ease both; }
+@keyframes flEnter{ from{ opacity:0; transform:translateY(10px) scale(.98); } to{ opacity:1; transform:none; } }
+.fl-done{ text-align:center; }
+.fl-score{ font:700 48px Inter,sans-serif; color:var(--accent); margin:8px 0; }
+.fl-stage{ height:400px; }
+.fl-face.back{ overflow:auto; justify-content:flex-start; padding-top:22px; padding-bottom:18px; -webkit-overflow-scrolling:touch; }
+.fl-back{ color:var(--text); }
+.fl-back p{ margin:0 0 10px; }
+.fl-sec{ margin-bottom:12px; }
+.fl-sec b{ display:block; font:700 11px Inter,sans-serif; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); margin-bottom:4px; }
+/* flashcards: no tap highlight, no selection, no callout */
+.fl-wrap, .fl-wrap *, .fl-stage, .fl-stage *, .fl-chapters, .fl-filter, .fl-ctl button, .fl-wrap .row{
+  -webkit-tap-highlight-color:transparent; -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; -webkit-user-drag:none; outline:none; }
+.fl-stage{ touch-action:manipulation; }
+.fl-wrap button:focus, .fl-wrap [role="button"]:focus{ outline:none; }
+
+
 /* ---------- Menu partitions and legal pages ---------- */
 .navpanel .navsup.on, .navpanel .navsup[aria-current="page"]{ color:var(--c-phys) !important; background:color-mix(in srgb,var(--c-phys) 16%, transparent) !important; }
 .navpanel .navsup.on span, .navpanel .navsup[aria-current="page"] span{ color:var(--c-phys) !important; font-weight:700; }
@@ -1283,6 +1309,49 @@ img{ -webkit-user-drag:none; }
 /* PYQ tabs and share button: breathing room below the row */
 .pyq-tabrow{ margin:4px 0 22px; padding:0 2px; }
 .share-fab:hover{ border-color:var(--accent); }
+/* Logout sheet */
+.lo-scrim{ backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
+.lo-sheet{ position:fixed; padding:10px 22px calc(22px + env(safe-area-inset-bottom,0px)); text-align:center; border-radius:var(--r-xl) var(--r-xl) 0 0; background:linear-gradient(170deg,var(--surface),var(--surface-2)); box-shadow:var(--shadow-sheet); }
+.lo-sheet::before{ content:""; position:absolute; left:28px; right:28px; top:0; height:2px; background:linear-gradient(90deg,transparent,var(--accent),transparent); }
+.lo-mark{ width:84px; height:84px; margin:14px auto 0; border-radius:50%; display:grid; place-items:center; background:radial-gradient(circle,var(--accent-soft),transparent 70%); }
+.lo-eye{ margin:14px 0 0; color:var(--accent); }
+.lo-title{ font:500 26px/1.2 Lora,Georgia,serif; margin:6px 0 8px; color:var(--text); }
+.lo-body{ margin:0 auto 22px; max-width:340px; color:var(--muted); font-size:15px; line-height:1.6; }
+.lo-actions{ display:grid; gap:10px; }
+.lo-sheet .btn.lo-out{ background:transparent; color:var(--bad); border-color:transparent; }
+.lo-sheet .btn.lo-out:hover{ background:var(--bad-bg); filter:none; }
+.lo-sheet .btn:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+@media (max-width:639px){ .lo-sheet{ animation:loUp .32s var(--ease) both; } }
+@keyframes loUp{ from{ transform:translateY(28px); opacity:0; } to{ transform:none; opacity:1; } }
+/* Notes: subject headings */
+.nb-head{ display:flex; justify-content:space-between; align-items:baseline; margin:22px 4px 8px; font:700 12px Inter,sans-serif; letter-spacing:.14em; text-transform:uppercase; }
+.nb-head span{ color:var(--muted); letter-spacing:.02em; text-transform:none; font-weight:500; font-size:13px; }
+.wt{ display:inline-flex; align-items:center; gap:6px; font:600 11px/1 Inter,sans-serif; letter-spacing:.01em; padding:5px 10px; border-radius:99px; color:var(--accent); background:var(--accent-soft); border:1px solid color-mix(in srgb,var(--accent) 28%, transparent); white-space:nowrap; margin:6px 6px 2px 0; vertical-align:middle; }
+.wt.hi::before{ content:""; width:5px; height:5px; border-radius:50%; background:var(--accent); }
+.tags .wt{ margin:0; }
+
+/* ---------- Common names viva ---------- */
+.viva-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px;}
+.viva-opt{display:flex; align-items:center; justify-content:center; min-height:96px; padding:12px; cursor:pointer;}
+.viva-opt span{font-size:var(--fs-4); letter-spacing:.2px;}
+.viva-opt:disabled{cursor:default;}
+.viva-opt.is-correct{background:color-mix(in srgb, var(--text) 10%, transparent);}
+.viva-opt.is-correct::after{content:"Correct"; position:absolute; font-size:var(--fs-1); letter-spacing:.8px; text-transform:uppercase; opacity:.7;}
+.viva-opt.is-wrong{opacity:.5;}
+.viva-opt{position:relative;}
+.viva-mol{width:100%; max-width:150px; height:auto; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round;}
+.viva-mol text{fill:currentColor; stroke:none; font:600 11px "Inter",system-ui,sans-serif;}
+.viva-note{margin-top:14px;}
+.viva-next{width:100%; margin-top:14px; justify-content:center;}
+
+/* ---------- Coming-soon notice (under the screen) ---------- */
+.soon-notice{position:fixed; left:50%; bottom:calc(env(safe-area-inset-bottom,0px) + 104px); transform:translate(-50%,14px); opacity:0; z-index:200;
+  width:min(88vw,360px); padding:14px 18px; border-radius:var(--r-lg); background:var(--surface,#1b1b1b); color:var(--text); text-align:center;
+  box-shadow:0 18px 40px rgba(0,0,0,.28); transition:opacity .35s ease, transform .35s ease; pointer-events:none;}
+.soon-notice.in{opacity:1; transform:translate(-50%,0);}
+.soon-notice.out{opacity:0; transform:translate(-50%,10px);}
+.soon-head{font-weight:600; letter-spacing:.2px; font-size:var(--fs-4);}
+.soon-body{margin-top:4px; font-size:var(--fs-2); opacity:.72; line-height:1.5;}
 </style>
 </head>
 <body>
@@ -1533,7 +1602,7 @@ let view = 'home';
 let session = null;
 let nav = {tab:'home', subject:SUBJECTS[0], pyqTab:'questions', paper:null, meTab:'analysis', cfg:null,
            mockCfg:{subjects:[...SUBJECTS], perSubject:5, minutes:60}};
-const TAB_OF = {flash:'notehub', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', notebooks:'notebooks', leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', notes:'notehub', notehub:'notehub', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
+const TAB_OF = {viva:'notehub', flash:'notehub', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', notebooks:'notebooks', leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', notes:'notehub', notehub:'notehub', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
 
 const LAST_VIEW_KEY = 'torq_last_view_v1';
 function saveLastView(){
@@ -2454,6 +2523,20 @@ function hasFullAccess(){ return isGuard(); }
 // Leaderboards call this for each row: guard accounts never appear.
 function showOnLeaderboard(email){ return !!email && GUARD_EMAILS.indexOf(String(email).toLowerCase()) < 0; }
 function mockLocked(){ if(hasFullAccess()) return false; return !!(session && session.mode==='mock' && !session.submitted && !session.review); }
+
+// Coming-soon notice for tabs that are not built yet
+const SOON_LINES = {
+  leaderboard: {head:'Leaderboard is warming up', body:'Your rank will be waiting here. Keep solving until it goes live.'},
+  mocks: {head:'Full mocks are in the oven', body:'Timed papers are being built. Sharpen your PYQ skills until they arrive.'}
+};
+function soonNotice(id){
+  const info = SOON_LINES[id] || {head:'Coming soon', body:'This one is still in the works.'};
+  const old = document.querySelector('.soon-notice'); if(old) old.remove();
+  const n = el('<div class="soon-notice" role="status"><div class="soon-head">'+esc(info.head)+'</div><div class="soon-body">'+esc(info.body)+'</div></div>');
+  document.body.appendChild(n);
+  requestAnimationFrame(()=>n.classList.add('in'));
+  setTimeout(()=>{ n.classList.remove('in'); n.classList.add('out'); setTimeout(()=>n.remove(), 400); }, 2600);
+}
 function mockNotice(){
   const old = document.querySelector('.mock-notice'); if(old) old.remove();
   const n = el('<div class="mock-notice" role="status">Submit the test to leave it. Your marks are saved when you submit.</div>');
@@ -2502,7 +2585,7 @@ function renderInner(){
   app.classList.toggle('is-onb', needSignIn || !store.profile);
   if(view!=='practice' && store.profile && !needSignIn) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
   const V = {privacy:()=>legalPaperView('privacy'), terms:()=>legalPaperView('terms'), copyright:()=>legalPaperView('copyright'), disclaimer:()=>legalPaperView('disclaimer'), contact:contactPageView, notebooks:notebooksView, leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
-             me:meView, analytics:analyticsView, practice:practiceView, results:resultsView, notes:notesView, notehub:notehubView, flash:flashView};
+             me:meView, analytics:analyticsView, practice:practiceView, results:resultsView, notes:notesView, notehub:notehubView, viva:vivaView, flash:flashView};
   app.appendChild(needSignIn ? authView() :(!store.profile ? (sbSession ? authView() : onboardView()) : (V[view]||homeView)()));
   if(view==='pyq') app.appendChild(el('<div class="foot">'+esc(BANK_ERROR || ('PYQ bank: '+QUESTIONS.length+' questions'))+'</div>'));
   document.querySelectorAll('.bottomnav,#navTog,#navScrim').forEach(n=>n.remove());
@@ -2522,7 +2605,7 @@ const TABS = [
   {id:'home', label:'Home', icon:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>'},
   {id:'pyq', label:'PYQs', icon:'<path d="M5 4h10l4 4v12H5z"/><path d="M14 4v5h5M9 13h6M9 17h4"/>'},
   {id:'syllabus', label:'Syllabus', icon:'<path d="M4 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>'},
-  {id:'leaderboard', label:'Leaderboard', title:'Leaderboard, coming soon', disabled:true, icon:'<path d="M4 20h16"/><path d="M7 20v-6h4v6M13 20V9h4v11"/><path d="M9 11l3-3 3 2"/>'},
+  {id:'leaderboard', label:'Leaderboard', title:'Leaderboard, coming soon', disabled:true, icon:'<path d=\"M8 4h8v5a4 4 0 0 1-8 0z\"/><path d=\"M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4\"/><path d=\"M12 13v4M9 20h6M10 17h4\"/>'},
   {id:'mocks', label:'Mocks', title:'Mocks, coming soon (after the neural network)', disabled:true, icon:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>'},
   {id:'notebooks', label:'Notebooks', icon:'<path d="M7 3h10v18l-5-4-5 4z"/>'},
   {id:'notehub', label:'Notes', icon:'<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M8 8h7M8 12h7"/>'},
@@ -2584,8 +2667,9 @@ function bottomNav(){
   if(store.profile) bar.appendChild(navProfileEl());
   bar.appendChild(el('<div class="navsec">Main</div>'));
   TABS.forEach(t=>{
-    const b = el('<button class="bn '+(nav.tab===t.id?'on':'')+(t.disabled?' disabled':'')+'"'+(t.disabled?' disabled aria-disabled="true" title="'+esc(t.title||'Coming soon')+'"':'')+'><svg viewBox="0 0 24 24">'+t.icon+'</svg><span>'+t.label+'</span></button>');
-    if(!t.disabled) b.onclick = ()=>{ if(mockLocked()){ mockNotice(); return; } setNavOpen(false); go(t.id); };
+    const b = el('<button class="bn '+(nav.tab===t.id?'on':'')+(t.disabled?' disabled':'')+'"'+(t.disabled?' aria-disabled="true" title="'+esc(t.title||'Coming soon')+'"':'')+'><svg viewBox="0 0 24 24">'+t.icon+'</svg><span>'+t.label+'</span></button>');
+    if(t.disabled) b.onclick = ()=>soonNotice(t.id);
+    else b.onclick = ()=>{ if(mockLocked()){ mockNotice(); return; } setNavOpen(false); go(t.id); };
     bar.appendChild(b);
   });
   bar.appendChild(el('<div class="navdiv" aria-hidden="true"></div>'));
@@ -2608,9 +2692,7 @@ function bottomNav(){
     const out = el('<button class="bn navout"><svg viewBox="0 0 24 24"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"/><path d="M10 8l-4 4 4 4M6 12h9"/></svg><span>Logout</span></button>');
     out.onclick = ()=>{
       if(mockLocked()){ mockNotice(); return; }
-      if(!confirm('Log out? Answers that have not synced yet will be removed from this device.')) return;
-      setNavOpen(false);
-      logOutNow();
+      confirmLogout(()=>{ setNavOpen(false); logOutNow(); });
     };
     bar.appendChild(out);
   }
@@ -2680,8 +2762,17 @@ function chIcon(name){
   const d = CH_ICONS[name]; if(!d) return '';
   return '<span class="ch-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d+'</svg></span>';
 }
-function barRow(name, acc, meta){
-  return el('<div class="row" style="cursor:default"><div><div class="name">'+esc(name)+'</div><div class="meta">'+esc(meta)+'</div></div>'
+// Percentage tags: how much of the question bank a chapter makes up, computed live
+function chapterWeight(s, c){
+  const all = QUESTIONS.filter(q=>q.subject===s); if(!all.length) return null;
+  const n = all.filter(q=>q.chapter===c).length; return n ? Math.round(n/all.length*100) : null;
+}
+function wtTag(s, c){
+  const p = chapterWeight(s, c); if(p===null) return '';
+  return '<span class="wt'+(p>=10?' hi':'')+'">'+(p>=10?'High yield · ':'')+p+'% of PYQs</span>';
+}
+function barRow(name, acc, meta, tag){
+  return el('<div class="row" style="cursor:default"><div><div class="name">'+esc(name)+'</div>'+(tag||'')+'<div class="meta">'+esc(meta)+'</div></div>'
     +'<div class="end">'+(acc===null?'Not started':'<div class="bar"'+(SUBJ_VAR[name]?' style="--bar:'+SUBJ_VAR[name]+'"':'')+'><i style="width:'+acc+'%"></i></div><div style="margin-top:6px">'+acc+'%</div>')+'</div></div>');
 }
 
@@ -2769,7 +2860,9 @@ const JEE_MAIN_SYLLABUS = [
   ]},
   {h:'Organic Chemistry', u:[
    {t:'Purification and Characterisation of Organic Compounds', x:'Purification - Crystallization, sublimation, distillation, differential extraction and chromatography - principles and their applications. Qualitative analysis - Detection of nitrogen, sulphur, phosphorus and halogens. Quantitative analysis (basic principles only) - Estimation of carbon, hydrogen, nitrogen, halogens, sulphur and phosphorus. Calculations of empirical formulae and molecular formulae, numerical problems in organic quantitative analysis.'},
-   {t:'Some Basic Principles of Organic Chemistry', x:'Tetravalency of carbon, shapes of simple molecules - hybridization (s and p): classification of organic compounds based on functional groups and those containing halogens, oxygen, nitrogen and sulphur, homologous series: Isomerism - structural and stereoisomerism. Nomenclature (Trivial and IUPAC). Covalent bond fission - Homolytic and heterolytic, free radicals, carbocations and carbanions, stability of carbocations and free radicals, electrophiles and nucleophiles. Electronic displacement in a covalent bond - Inductive effect, electromeric effect, resonance and hyperconjugation. Common types of organic reactions - Substitution, addition, elimination and rearrangement.'},
+   {t:'Some Basic Principles of Organic Chemistry', x:'Tetravalency of carbon, shapes of simple molecules - hybridization (s and p): classification of organic compounds based on functional groups and those containing halogens, oxygen, nitrogen and sulphur, homologous series: Isomerism - structural and stereoisomerism. Covalent bond fission - Homolytic and heterolytic, free radicals, carbocations and carbanions, stability of carbocations and free radicals, electrophiles and nucleophiles. Electronic displacement in a covalent bond - Inductive effect, electromeric effect, resonance and hyperconjugation. Common types of organic reactions - Substitution, addition, elimination and rearrangement.'},
+  {t:'IUPAC Nomenclature and Common Names', x:'IUPAC rules for naming organic compounds: parent chain, root words, suffixes and priority, numbering, substituent prefixes, and the common names of key compounds such as acetone, acetic acid, aniline and phenol.'},
+  {t:'Organic Terms Glossary', x:'Every term used in organic chemistry explained in plain words: vicinal and geminal, primary, secondary and tertiary, functional groups, isomers, chirality, inductive effect, resonance, electrophiles and nucleophiles, Markovnikov and anti-Markovnikov, and more.'},
    {t:'Hydrocarbons', x:'Classification, isomerism, IUPAC nomenclature, general methods of preparation, properties and reactions. Alkanes - Conformations: Sawhorse and Newman projections (of ethane), mechanism of halogenation of alkanes. Alkenes - Geometrical isomerism, mechanism of electrophilic addition, addition of hydrogen, halogens, water, hydrogen halides (Markownikoff\'s and peroxide effect), Ozonolysis and polymerization. Alkynes - Acidic character, addition of hydrogen, halogens, water and hydrogen halides, polymerization. Aromatic hydrocarbons - Nomenclature, benzene - structure and aromaticity, mechanism of electrophilic substitution, halogenation, nitration. Friedel-Craft\'s alkylation and acylation, directive influence of the functional group in mono-substituted benzene.'},
    {t:'Organic Compounds Containing Halogens', x:'General methods of preparation, properties and reactions, nature of C-X bond, mechanisms of substitution reactions. Uses, environmental effects of chloroform, iodoform, freons and DDT.'},
    {t:'Organic Compounds Containing Oxygen', x:'General methods of preparation, properties, reactions and uses. Alcohols: Identification of primary, secondary and tertiary alcohols, mechanism of dehydration. Phenols: Acidic nature, electrophilic substitution reactions, halogenation, nitration and sulphonation, Reimer-Tiemann reaction. Ethers: Structure. Aldehyde and Ketones: Nature of carbonyl group, nucleophilic addition to >C=O group, relative reactivities of aldehydes and ketones, important reactions such as - Nucleophilic addition reactions (addition of HCN, NH3 and its derivatives), Grignard reagent, oxidation, reduction (Wolff-Kishner and Clemmensen), the acidity of α-hydrogen. Aldol condensation, Cannizzaro reaction, Haloform reaction, chemical tests to distinguish between aldehydes and ketones. Carboxylic Acids: Acidic strength and factors affecting it.'},
@@ -3116,7 +3209,7 @@ function pyqView(){
     if(nav.subject==='Chemistry'){ const sec = chemSection(c); if(sec!==lastSec){ list.appendChild(el('<div class="sec-head">'+esc(sec)+'</div>')); lastSec = sec; } }
     const st = chapterStats(c);
     const nq = QUESTIONS.filter(q=>q.subject===nav.subject && q.chapter===c).length;
-    const row = barRow(c, st.acc, nq ? nq+' question'+(nq>1?'s':'') : '');
+    const row = barRow(c, st.acc, nq ? nq+' question'+(nq>1?'s':'') : '', wtTag(nav.subject, c));
     row.style.cursor='pointer';
     if(CH_ICONS[c]){ const main = row.firstChild; const grp = el('<div style="display:flex;align-items:center;min-width:0;flex:1"></div>'); grp.appendChild(el(chIcon(c))); grp.appendChild(main); row.insertBefore(grp, row.firstChild); }
     row.onclick = ()=>go('chapter',{chapter:c, topicSel:[]});
@@ -3287,51 +3380,683 @@ function openFcard(src, f, chapter){
   document.addEventListener('keydown', function esc1(e){ if(e.key==='Escape'){ close(); document.removeEventListener('keydown', esc1); } });
 }
 // Flashcards: every formula and every concept from the revision notes, one card each
-let flashState = {i:0, flipped:false};
-function flashDeck(){
-  const deck = [];
-  Object.keys(NOTES).forEach(c=>{
-    NOTES[c].formulas.forEach(f=>deck.push({ch:c, kind:'Formula', front:'$'+f.eq+'$', back:f.use}));
-    NOTES[c].concepts.forEach(k=>deck.push({ch:c, kind:'Concept', front:esc(k.title), back:k.analogy}));
+let flashState = {chapter:null, i:0, flipped:false, pool:[], filter:'All', done:false, busy:false, enter:false};
+const FL_KNOWN = {}; // chapter -> {cardKey: true|false}, kept for this session
+const FL_EXPLAIN = {
+ "Kinematics": [
+  ["Velocity after time t when the velocity starts at u and changes steadily at a. Use it when the displacement is not asked for.", "Acceleration is the change in velocity per second, so over t seconds the change is a multiplied by t. Add that change to the starting velocity.", "Start at u, then add a for every second. The equation is that sentence in symbols."],
+  ["Displacement after time t under constant acceleration. Use it when the final velocity is not asked for.", "Speed rises steadily, so the average speed is (u + v)/2. Displacement is average speed times time, ((u + v)/2) t. Substituting v = u + at gives ut + ½at².", "The ½ comes from averaging the start and end speeds. ut is the uniform part; the ½at² is the extra gained from acceleration."],
+  ["Links final velocity to displacement with no time in it. Use it when the question gives s but never t.", "From v = u + at, t = (v − u)/a. Substitute into s = ((u + v)/2) t. Then s = (v² − u²)/(2a), which rearranges to this form.", "Say it aloud: v squared equals u squared plus two a s. If the question gives no time, reach for this one first."],
+  ["Distance covered during the nth second alone, not from the start.", "It is the displacement at the end of second n minus the displacement at the end of second n − 1. Subtracting the two formulas leaves u + a(n − ½). The nth second is centred on time n − ½.", "Place the nth second at time n minus half a second. That is where the half comes from."],
+  ["Average velocity under constant acceleration, equal to the mean of the start and end velocities.", "Under constant acceleration the velocity changes in a straight line over time, and the average of a straight line is the average of its two ends.", "Valid only for constant acceleration. If the acceleration changes, this shortcut fails."],
+  ["Velocity of A as seen by B. Subtract B's velocity from A's.", "Every velocity is measured relative to the observer. A car going 60 km/h, seen from a car going 40 km/h in the same direction, appears to move at 20 km/h.", "Subtract the observer. Whatever the observer does is taken away."],
+  ["Velocity is the rate at which position changes, which is the slope of the position–time graph.", "The slope is change in position divided by change in time. Shrinking that time interval towards zero gives the derivative.", "A steeper line on the x–t graph means faster motion; a flat line means at rest."],
+  ["Acceleration is the slope of the velocity–time graph.", "Slope is change in velocity over change in time, which is exactly the definition of acceleration.", "A straight, steady slope on the v–t graph means constant acceleration."],
+  ["Displacement is the area between the velocity–time graph and the time axis.", "Each thin strip has area v times a tiny time, which is a tiny displacement. Adding the strips gives the total. Area below the axis counts as negative.", "Area under v–t is displacement; slope of v–t is acceleration. Don't swap them."],
+  ["Acceleration of a body falling freely, with only gravity acting.", "Without air resistance nothing else acts, so the acceleration is constant and the same for every mass. JEE uses g = 10 m/s² unless the question says otherwise.", "Mass and shape don't matter in a vacuum: a feather and a hammer fall together."],
+  ["Total time a projectile launched from ground level stays in the air.", "The vertical component of launch velocity is u sinθ. It takes u sinθ / g to reach the top, and the rise and fall are symmetric, so double it.", "Time up equals time down. Find the time to the top and double it."],
+  ["Greatest height reached by a projectile launched at angle θ.", "At the top the vertical velocity is zero. Use v² = u² − 2gh with only the vertical part, u sinθ, which gives u² sin²θ / (2g).", "At the top, use only the vertical velocity: square it and divide by 2g."],
+  ["Horizontal distance from launch to landing on level ground.", "Range = horizontal speed × time of flight = u cosθ × (2u sinθ / g). Using sin 2θ = 2 sinθ cosθ gives u² sin 2θ / g.", "sin 2θ is largest when 2θ = 90°, so the range is greatest at 45°. Complementary angles give equal ranges."]
+ ],
+ "Laws of Motion": [
+  ["Net force gives a body an acceleration in the same direction as the force.", "A force changes motion, and mass is the body's resistance to that change. Use the net force, the vector sum of all the forces on the body.", "Heavier means harder to accelerate: a bigger mass needs a bigger force for the same acceleration."],
+  ["Forces between two bodies are equal in size, opposite in direction, and act on different bodies.", "Each body pushes the other, so the forces always come in pairs. They act on different bodies, so they never cancel in a single free-body diagram.", "Equal and opposite, but on different bodies. Never cancel them against each other."],
+  ["Impulse, force times the time it acts, equals the change in momentum.", "Integrating F over time gives the total change in momentum. For a fixed change in momentum, a longer time means a smaller average force.", "Catching a cricket ball with hands moving back: longer contact time means less force."],
+  ["The static friction force adjusts itself, up to a maximum of μs times the normal force.", "Static friction matches whatever force tends to slide the object, up to its limit. Beyond that limit the object starts to slide.", "Static friction supplies only what is needed, up to μs N."],
+  ["Kinetic friction, once the surfaces slide, has a fixed size of μk times the normal force.", "Once sliding starts, friction does not depend on the speed or on the applied force. It always opposes the relative motion.", "Sliding friction is steady, so the net force is the applied force minus μk N."],
+  ["Acceleration of a smooth block sliding down an incline of angle θ.", "Gravity has a component mg sinθ along the slope and mg cosθ into it. The surface cancels the second, and with no friction the first gives a = g sinθ.", "sin for along the slope, cos for into the slope. Gravity's along-slope part is sin."],
+  ["Apparent weight, the normal force from the floor, in a lift accelerating upward at a.", "Newton's second law gives N − mg = ma, so N = m(g + a). The floor pushes harder, so you feel heavier.", "Feel heavier going up, lighter going down. The change in what you feel is the acceleration."],
+  ["Pseudo force in an accelerating frame: −ma0 in a frame accelerating with a0.", "Inside an accelerating frame, Newton's laws need an extra force to match what is observed. It points opposite to the frame's acceleration.", "The pseudo force points backwards, like being pressed into the seat when a car speeds up."],
+  ["Acceleration of two masses connected over a light frictionless pulley.", "The net driving force is (m1 − m2)g and the total mass moved is m1 + m2. Divide the force by the mass.", "Difference over sum, times g."],
+  ["Tension in the string of an Atwood machine.", "From the heavier mass, T = m1(g − a). Substituting a gives T = 2m1m2 g / (m1 + m2).", "Tension is twice the product of the two masses over their sum, times g."]
+ ],
+ "Work, Energy and Power": [
+  ["Work done by a constant force F acting over displacement s at angle θ to it.", "Only the component of the force along the displacement moves the body. That component is F cosθ, so W = F s cosθ.", "Work counts only the force that points along the motion. A force at right angles does zero work."],
+  ["Kinetic energy of a body of mass m moving at speed v.", "The work needed to bring a body from rest to speed v is F s = m a s. With v² = 2as, this becomes ½mv².", "Double the speed and the kinetic energy quadruples."],
+  ["Work-energy theorem: net work equals the change in kinetic energy.", "Net force times displacement is the net work, and Newton's second law converts that into a change in ½mv².", "Use the net work, so include every force that acts."],
+  ["Gravitational potential energy relative to a chosen reference level.", "Work done to lift a mass steadily through height h against gravity is mgh. Only the height difference matters.", "Pick the reference level that makes the problem simplest, then measure height from there."],
+  ["Energy stored in a spring stretched or compressed by x.", "The force grows linearly as kx. The work equals the area under the force–displacement graph, a triangle with base x and height kx, which gives ½kx².", "Spring energy is the area of the triangle under the force graph."],
+  ["Mechanical energy is conserved when only conservative forces do work.", "Work by a conservative force changes kinetic and potential energy by equal and opposite amounts, so their sum stays the same.", "What leaves kinetic energy goes into potential energy, and back again."],
+  ["A conservative force is the negative slope of its potential energy curve.", "A conservative force pushes a particle towards lower potential energy. The minus sign encodes that direction.", "The force points downhill on the potential energy graph."],
+  ["Power is the rate of doing work, which equals force times velocity in the direction of motion.", "P = W/t = Fs/t, and s/t = v, so P = Fv.", "At constant power, doubling the speed halves the force. This is why a car pulls less hard at high speed."],
+  ["Coefficient of restitution: the ratio of separation speed to approach speed.", "It measures how much of the relative speed survives the collision. e = 1 is elastic and e = 0 is perfectly inelastic.", "Speed apart after, over speed together before."]
+ ],
+ "Rotational Motion": [
+  ["Torque is the turning effect of a force, equal to r F sinθ.", "Only the perpendicular part of the force turns a body. The lever arm is r sinθ, the perpendicular distance from the axis to the line of the force.", "Push far from the hinge and at right angles to it to get the most turning."],
+  ["Rotational form of Newton's second law: torque equals moment of inertia times angular acceleration.", "It parallels F = ma. Torque causes angular acceleration, and the moment of inertia resists it.", "I plays the role of mass."],
+  ["Moment of inertia, the rotational analogue of mass, depends on how the mass is spread about the axis.", "Each particle contributes m times the square of its distance from the axis, so mass far away counts much more.", "Distance squared: mass far from the axis dominates."],
+  ["Parallel axis theorem: moment of inertia about any axis equals the centre-of-mass value plus M d².", "Moving the axis a distance d from the centre adds M d² for the whole body. The centre of mass therefore always gives the smallest I.", "The centre is always the easiest axis to spin about."],
+  ["Moments of inertia about the central axis of a disc and of a ring.", "A disc has its mass spread through the interior, giving ½MR². A ring has all its mass at distance R, giving MR².", "Ring: all the mass is on the rim, so it's the full MR². Disc: half of that."],
+  ["Moment of inertia of a solid sphere about its centre, and of a thin rod about one end.", "Sphere: (2/5)MR². Rod: ML²/12 about its centre, plus M(L/2)² from the parallel axis theorem, giving ML²/3.", "Rod end is the centre value plus the parallel axis term: 1/12 + 1/4 = 1/3."],
+  ["Angular momentum, L = Iω, is conserved when the external torque is zero.", "Rotation has its own momentum. Torque changes it, so with no external torque it stays constant. A smaller I then needs a larger ω.", "Pull the arms in: I shrinks, so the spin speeds up."],
+  ["Kinetic energy of a body spinning about a fixed axis.", "Each particle contributes ½mv² with v = rω. Summing these gives ½Iω².", "I replaces m, and ω replaces v."],
+  ["Rolling without slipping: the centre's speed equals R times the angular speed.", "The contact point is momentarily at rest, so the centre moves exactly one radius for every radian the body turns.", "The contact point is instantly still, so each radian of spin moves the centre by exactly R."],
+  ["Acceleration of a body rolling down a rough incline.", "Energy splits between translation and rotation, so the effective inertia becomes M + I/R². This gives a = g sinθ / (1 + I/(MR²)).", "A smaller I/MR² means faster rolling: a disc beats a ring, and a solid sphere beats both."]
+ ],
+ "Gravitation": [
+  ["Attractive force between two masses a distance r apart.", "Each mass pulls the other, and the pull weakens with distance squared because the same influence spreads over a sphere of area 4πr².", "Same shape as Coulomb's law, with masses instead of charges. Gravity is always attractive."],
+  ["Gravitational field at the surface of a planet of mass M and radius R.", "Surface gravity comes from F = GMm/R² divided by m, so the planet's own mass is what sets g.", "g depends only on the planet's mass and radius, never on the mass of the object falling."],
+  ["Value of g at height h above the surface.", "g falls as 1/r², and r = R + h is measured from the centre. So g_h / g = (R/(R + h))².", "Height is measured from the centre of the planet, so add h to R."],
+  ["Value of g at depth d below the surface of a uniform planet.", "Only the inner sphere of radius R − d attracts you. Inside a uniform planet g grows in proportion to r, so g = g(R − d)/R = g(1 − d/R).", "Deeper down, the shell above you pulls nothing, so g drops linearly and reaches zero at the centre."],
+  ["Gravitational potential energy, taken as zero at infinity.", "Bringing a mass in from infinity means gravity does positive work, so the energy of the bound mass is negative.", "Negative means bound. You must add energy to get the mass out to infinity."],
+  ["Speed for a circular orbit of radius r.", "Gravity supplies the centripetal force: GMm/r² = mv²/r, which gives v² = GM/r.", "v² = GM/r. The higher the orbit, the slower the satellite moves."],
+  ["Escape speed from the surface of a planet.", "Escape needs total energy of zero: ½mv² = GMm/R. This is √2 times the orbital speed at the surface.", "Escape speed is the orbit speed times √2, because the kinetic energy must match the depth of the gravitational well."],
+  ["Orbital period; T² is proportional to r³ (Kepler's third law).", "Combine T = 2πr/v with v² = GM/r to get T² = 4π²r³/(GM).", "T² goes with r³: double the orbit radius and the period grows by about 2.8."],
+  ["Total energy of a body in a circular orbit.", "Kinetic energy is GMm/(2r) and potential energy is −GMm/r. Adding them gives −GMm/(2r).", "Total energy is half the potential energy, since kinetic energy is minus half the potential energy."]
+ ],
+ "Current Electricity": [
+  ["Electric current: charge passing a point per unit time.", "Current is the rate at which charge flows past a point, so it is charge divided by time.", "Charge is how much flows; current is how fast it flows."],
+  ["Ohm's law for a conductor at constant temperature.", "The field pushes electrons, and collisions with the lattice limit their drift. That limit makes the current proportional to the voltage.", "Think of a water pipe at constant width: more pressure means more flow."],
+  ["Resistance of a wire of length L, area A and resistivity rho.", "A longer wire has more collisions to get through, and a wider one gives electrons more paths. So R rises with L and falls with A.", "Longer means more resistance; fatter means less. It works like a crowded corridor."],
+  ["Current from the drift velocity, n free electrons per m³ and cross-section A.", "The charge crossing a section in time t is the charge in the volume A v_d t, which is n e A v_d t.", "Electrons per unit volume times the volume the flow sweeps past in one second."],
+  ["Resistors in series share the same current.", "The same current passes through each resistor, so the voltages add, and resistances add with them.", "In series there is one path, so the resistances simply stack up."],
+  ["Resistors in parallel share the same voltage.", "Each branch sees the same voltage, so the currents add. Adding conductances (1/R) gives the total.", "In parallel the total is always smaller than the smallest branch."],
+  ["Electrical power dissipated in a resistor.", "Power is energy per second, which is VI. Using V = IR gives I²R, and using I = V/R gives V²/R.", "Use V²/R when the voltage across a load is fixed, and I²R when the current through it is fixed."],
+  ["Terminal voltage of a cell with internal resistance r.", "The EMF E is shared between the external load and the cell's own resistance. The drop Ir inside the cell grows with current, so the terminal voltage falls under load.", "Terminal voltage is EMF minus the drop across the internal resistance."],
+  ["Wheatstone bridge is balanced, so no current flows through the galvanometer.", "The bridge balances when both midpoints are at the same potential, which means the arm ratios on each side match.", "A balanced bridge has P/Q = R/S: the ratios on the two sides are equal."],
+  ["Time constant of an RC circuit; charge grows as 1 − e^(−t/RC).", "The current into a capacitor depends on how much charge it still lacks, which makes the growth exponential. The time constant τ = RC is the time to reach 63% of full charge.", "After one time constant the capacitor is at 63% of its final charge, and after about 5τ it is effectively full."]
+ ],
+ "Electrostatics": [
+  ["Coulomb's law: force between two point charges, attractive for opposite signs.", "The force follows an inverse-square law, like gravity. Like charges repel and opposite charges attract.", "The shape of gravity, but charges can repel as well as attract."],
+  ["Electric field of a point charge Q at distance r.", "The field is the force per unit positive test charge, so E = F/q0 gives kQ/r².", "The field points away from a positive charge and towards a negative one."],
+  ["Electric potential of a point charge, zero at infinity.", "Potential is work per unit charge brought in from infinity. It is a scalar, so potentials from several charges simply add.", "Potential is a scalar: add the potentials directly and skip the vectors."],
+  ["Work done moving a charge q through a potential difference.", "Work equals the charge times the potential difference it moves through.", "Moving 1 coulomb through 1 volt does 1 joule of work."],
+  ["Gauss's law: total flux through a closed surface.", "The flux depends only on the charge enclosed, because field lines leaving the surface count positive and entering count negative.", "Only charges inside the surface matter. Charges outside add as many field lines in as out."],
+  ["Capacitance of a parallel plate capacitor, and its definition.", "The plates store charge Q for voltage V. A larger plate area or smaller gap lets more charge build up for the same voltage.", "Bigger plates and closer plates both increase the capacitance."],
+  ["Energy stored in a charged capacitor.", "Charging takes place as the voltage climbs from zero to V, so the average voltage is V/2. That gives energy ½QV.", "The average voltage during charging is half the final voltage, which gives ½CV²."],
+  ["A dielectric of constant K multiplies the capacitance.", "The dielectric reduces the field between the plates, so the same charge gives a smaller voltage, and capacitance rises by K.", "A dielectric lowers the voltage for the same charge, so capacitance goes up by K."]
+ ],
+ "Magnetic Effects of Current and Magnetism": [
+  ["Field at distance r from a long straight wire carrying current I.", "Ampère's law says the field circles the wire, and its strength falls off with r.", "Right-hand grip rule: thumb along the current, fingers curl in the direction of the field."],
+  ["Field at the centre of a circular loop of radius R with N turns.", "Each turn adds to the field, and every point of the loop is the same distance from the centre.", "N turns multiply the field, and a bigger radius weakens it."],
+  ["Field inside a long solenoid with n turns per metre.", "Inside a long solenoid the field is uniform and points along the axis. Outside it is nearly zero.", "Inside a solenoid the field is uniform and strong; outside it nearly cancels, like a flat tube."],
+  ["Magnetic (Lorentz) force on a moving charge.", "The force is perpendicular to both velocity and field. Since it never acts along the motion, it does no work and the speed stays the same.", "Right-hand rule: thumb along the velocity, fingers along the field, palm pushes a positive charge."],
+  ["Force on a straight current-carrying wire in a magnetic field.", "A wire is a stream of moving charges, and each one feels a Lorentz force qvB sinθ. Adding them up gives BIL sinθ.", "Same right-hand rule as the Lorentz force, applied to the whole wire."],
+  ["Radius and period of a charge moving perpendicular to a uniform field.", "The magnetic force supplies the centripetal force: qvB = mv²/r, so r = mv/(qB). The period T = 2πm/(qB) does not depend on speed.", "The period is the same for any speed: faster particles simply make bigger circles."],
+  ["Force per unit length between two long parallel wires.", "Each wire's field acts on the current in the other wire. Parallel currents attract, and antiparallel currents repel.", "Parallel currents attract; antiparallel currents repel."],
+  ["Torque on a rectangular coil of area A in a magnetic field.", "The forces on opposite sides of the coil form a couple. Here θ is the angle between the coil's normal and the field.", "Torque is greatest when the coil is parallel to the field lines, and zero when it is perpendicular to them."]
+ ],
+ "Electromagnetic Induction and Alternating Currents": [
+  ["Faraday's law: EMF induced by a changing magnetic flux; the minus sign is Lenz's law.", "A changing flux through a loop induces an EMF. The minus sign means the induced current opposes the change that produced it.", "Lenz's law: the induced current always opposes the change in flux."],
+  ["Motional EMF of a rod of length L moving at speed v across a field B.", "Electrons in the moving rod feel a force qvB along its length, so they are pushed to one end. This gives EMF = BLv.", "A rod sliding through a field is a generator in one step: EMF = BLv."],
+  ["Self-induced EMF in an inductor of inductance L.", "A changing current changes the flux through the inductor itself, and that change opposes the current.", "An inductor resists changes in current, the way inertia resists changes in motion."],
+  ["Root mean square value of a sinusoidal alternating voltage.", "The average of sin² over a cycle is ½, so the root of the mean square is v0 divided by √2.", "For a sine wave the RMS value is the peak divided by √2."],
+  ["Inductive and capacitive reactance.", "An inductor's opposition grows with frequency, while a capacitor's falls. So inductors block high frequencies and capacitors block low ones.", "Inductors resist high frequencies; capacitors resist low frequencies."],
+  ["Impedance of a series RLC circuit.", "Resistance and net reactance are 90° out of phase, so they add as perpendicular phasors.", "Impedance is the Pythagorean sum of R and the net reactance."],
+  ["Resonant angular frequency, where the reactances cancel.", "At resonance X_L = X_C, so the reactances cancel, leaving impedance equal to R and current at its maximum.", "At resonance the inductor and capacitor cancel each other out, leaving only R."],
+  ["Average power; cos φ is the power factor.", "Only the in-phase part of the current delivers average power. The reactive part swaps energy back and forth and delivers none on average.", "Power factor cos φ: the reactive part moves energy back and forth without delivering any on average."],
+  ["Ideal transformer voltage ratio.", "The changing flux links both coils, so the EMF per turn is the same. The voltage ratio therefore equals the turns ratio. In an ideal transformer power is conserved, so the current falls as the voltage rises.", "More turns on the secondary means higher voltage and lower current."]
+ ],
+ "Experimental Skills": [
+  ["Least count of a vernier caliper: the smallest reading it can give.", "Ten vernier divisions span the same length as nine main-scale divisions, so each vernier division is a tenth of a main division shorter. The least count is 1 MSD − 1 VSD, which is one tenth of 1 MSD.", "Ten vernier divisions cover nine main divisions, so each one is a tenth short."],
+  ["Least count of a screw gauge.", "One full turn of the screw moves it forward by one pitch. One circular-scale division is a fraction of a turn, so it moves the screw by pitch divided by the number of divisions.", "One full turn advances the screw by one pitch, so divide the pitch by the number of divisions on the head."],
+  ["Corrected reading of a vernier caliper: MSR + (VSC × LC) − zero error.", "The main-scale reading plus the vernier coincidence times the least count gives the raw reading. The zero error is then subtracted to correct for an instrument that doesn't read zero when closed.", "Add the main scale and vernier readings, then subtract the zero error. If the zero error is negative, subtracting it adds the magnitude."],
+  ["Period of a simple pendulum for small amplitudes, used to find g.", "For small angles the restoring force mg sinθ is roughly mgθ, which gives simple harmonic motion with ω² = g/L. The period then depends only on length and g.", "The period depends on length and g, not on the bob's mass. Measure T and L to find g."],
+  ["Resistivity from a wire's resistance, length and cross-sectional area.", "This is R = ρL/A rearranged to make resistivity the subject.", "Rearrange R = ρL/A: resistivity is resistance times area over length."]
+ ],
+ "Some Basic Concepts in Chemistry": [
+  ["Converts between grams and moles.", "Molar mass is the mass of one mole in grams, so dividing a mass by it gives the number of moles.", "Mass over molar mass, the same way you would divide a total cost by the price of one item."],
+  ["Converts moles to atoms, molecules or ions.", "One mole contains Avogadro's number, 6.022 × 10²³, of particles, so the count is moles times that number.", "One mole is just a very large counting unit, 6.022 × 10²³ items, as a dozen is 12."],
+  ["Percentage composition of an element in a compound.", "The mass of the element in one formula unit divided by the molar mass gives its fraction of the compound. Multiplying by 100 gives the percentage.", "Element's share of the whole molecule's mass, then times 100."],
+  ["Concentration in mol per litre.", "Molarity counts how many moles of solute are dissolved in each litre of solution, so volume must be in litres.", "Convert mL to litres before dividing, which means dividing by 1000. This is the most common error."]
+ ],
+ "Atomic Structure": [
+  ["Energy of an electron in a hydrogen-like atom.", "In the Bohr model the electrostatic pull is balanced by quantised angular momentum. The energy scales with Z² and falls off as 1/n², and the negative sign means the electron is bound.", "The energy ladder: the ground state n = 1 is the deepest, and the levels climb towards zero as n grows."],
+  ["Radius of the nth Bohr orbit.", "Allowed orbits are quantised, so the radius grows as n². A larger nuclear charge Z pulls the electron closer, so the radius shrinks as 1/Z.", "The orbit radius goes up with n² and down with Z."],
+  ["de Broglie wavelength of a particle with momentum mv.", "Every moving particle has a matter wave. Its wavelength is h divided by its momentum, so heavier or faster particles have shorter wavelengths.", "Heavier or faster means shorter wavelength: λ = h/(mv)."],
+  ["Heisenberg uncertainty principle.", "Position and momentum cannot both be known exactly. Their uncertainties multiply to at least h/4π, so sharpening one blurs the other.", "Pin down where it is and you lose how fast it is moving."],
+  ["Allowed values of the quantum numbers.", "For a shell n, l runs from 0 to n − 1, m runs from −l to +l, giving 2l + 1 orbitals. Each orbital takes two electrons, one for each spin value.", "Count the boxes: each l gives 2l + 1 orbitals, and each orbital holds two electrons with opposite spins."]
+ ],
+ "Chemical Bonding and Molecular Structure": [
+  ["Formal charge on an atom in a Lewis structure.", "Each atom is credited with its lone-pair electrons and half of its shared electrons. The formal charge is what remains compared with its valence electrons.", "Each atom keeps all its lone-pair electrons and half of each bond it makes."],
+  ["Molecular orbital bond order.", "Bonding electron pairs hold atoms together, while antibonding electrons pull them apart. The bond order is the net number of bonding pairs.", "Bond order is the net bonding pairs. Zero means no stable bond."],
+  ["Dipole moment of a charge separation.", "A dipole is a pair of equal and opposite charges a distance d apart. The moment is q times d, and it is a vector pointing from positive to negative.", "A symmetric molecule can have polar bonds and still have zero dipole, because the bond dipoles cancel, as in CO2."],
+  ["Ideal bond angles by hybridisation.", "Hybrid orbitals point as far apart as possible. sp is linear at 180°, sp2 is trigonal planar at 120°, and sp3 is tetrahedral at 109.5°.", "Count the hybridised orbitals: two gives linear, three gives planar, four gives tetrahedral."]
+ ],
+ "Chemical Thermodynamics": [
+  ["First law of thermodynamics: ΔU = q + w.", "Energy is conserved. Heat added to the system and work done on it both raise its internal energy, with the signs taken as positive when they go into the system.", "Positive means the system gains energy, whether as heat or as work."],
+  ["Relation between enthalpy and internal energy change.", "Enthalpy includes the pV term. For a reaction in which gas moles change by Δn_g, Δ(pV) = Δn_g RT, so only gaseous moles count.", "Only gas moles matter. Solids and liquids barely change volume."],
+  ["Gibbs energy; a process is spontaneous when ΔG is negative.", "Enthalpy tends to fall in an exothermic process, while entropy tends to rise. Temperature sets how much weight the entropy term carries.", "Enthalpy pushes the reaction down, while entropy, weighted by T, pushes it up. Negative ΔG means it goes forward."],
+  ["Links Gibbs energy to the equilibrium constant.", "At equilibrium ΔG = 0 for the actual mixture. The standard Gibbs energy and K are then tied together by this relation.", "A large K means a negative standard ΔG, so products are favoured."],
+  ["Second law criterion: ΔS_universe.", "A spontaneous process must increase the total entropy of the system plus its surroundings. At equilibrium this total stays unchanged.", "The universe must gain entropy for a change to be spontaneous; the system alone may lose it."]
+ ],
+ "Optics": [
+  ["Snell's law of refraction.", "Light bends at a boundary because its speed changes. The product n sinθ is the same on both sides, which keeps the wavefronts continuous across the interface.", "n sinθ is the same on both sides of the boundary."],
+  ["Critical angle for total internal reflection, light going from a denser medium n1 into a rarer medium n2.", "At the critical angle the refracted ray grazes the surface, θ2 = 90°. Beyond it there is no refracted ray, so all the light reflects.", "At the critical angle the refracted ray grazes along the surface, so sin C = n2/n1."],
+  ["Mirror formula, with the real-is-positive sign convention.", "Rays from the object converge at the image, and the focal length marks where parallel rays converge. Relating object and image distances to f gives this formula.", "Object and image distances add to the reciprocal of f, so the image sits farther out as the object moves towards the focus."],
+  ["Lens formula with the Cartesian sign convention; u is negative for a real object.", "The formula follows from refraction at the two lens surfaces. With the Cartesian convention, distances are measured from the optical centre and u is taken as negative for real objects.", "With Cartesian signs, 1/v − 1/u = 1/f. Remember that u is negative for a real object."],
+  ["Lensmaker's formula for a thin lens in air.", "Each curved surface bends the light, and the total power of the lens is the sum of the two surface powers. The radii set the power, and the refractive index sets how strongly the glass bends light.", "A stronger curvature means a shorter focal length: a thicker, more curved lens bends light more."],
+  ["Fringe width in Young's double-slit experiment.", "Two slits act as coherent sources. Path differences change steadily across the screen, and the spacing of successive bright fringes is λD/d.", "The fringe width grows with wavelength and screen distance, and shrinks as the slit gap grows."],
+  ["Dark fringes (minima) of single-slit diffraction for slit width a.", "The slit splits into pieces that cancel in pairs when the path difference a sinθ is a whole number of wavelengths.", "Dark fringes sit where a sinθ = nλ. Central maximum is wider than the rest."],
+  ["Refractive index: ratio of the speed of light in vacuum to its speed in the medium.", "Light slows down in a medium, and the ratio of vacuum speed to medium speed is the refractive index. A larger n means light travels more slowly there.", "n = c/v: the bigger the number, the slower light moves through it."]
+ ],
+ "Dual Nature of Matter and Radiation": [
+  ["Energy of a photon, with h = 6.63 × 10⁻³⁴ J s.", "Light arrives in packets called photons, and each packet's energy is set by its frequency, E = hν. Since ν = c/λ, this equals hc/λ.", "Short wavelength means high energy: violet light carries more energy per photon than red."],
+  ["Maximum kinetic energy of photoelectrons (Einstein's photoelectric equation).", "One photon gives its whole energy to one electron. Part of it is needed to escape the metal, the work function φ, and the rest is kinetic energy.", "Photon energy minus the work function gives the maximum kinetic energy."],
+  ["Threshold frequency below which no electrons are emitted.", "Setting K_max = 0 in the photoelectric equation gives the minimum frequency that can free an electron.", "Below the threshold, no amount of extra light intensity will emit electrons. Only frequency matters."],
+  ["Stopping potential V0 measures the maximum kinetic energy of photoelectrons.", "The stopping potential is the reverse voltage needed to stop the fastest electrons, so eV0 equals their maximum kinetic energy.", "Stopping potential in volts times the electron charge gives the maximum kinetic energy in joules."],
+  ["de Broglie wavelength of a particle with momentum p.", "Matter also has wave properties. The wavelength is h divided by momentum, so faster and heavier particles have shorter wavelengths.", "The same formula as for light, now applied to matter. Heavier or faster means shorter wavelength."],
+  ["Handy form: photon energy in eV equals 1240 divided by wavelength in nm.", "hc is about 1240 eV nm, so dividing by the wavelength in nanometres gives the photon energy directly in electronvolts.", "Memorise 1240: photon energy in eV is 1240 divided by the wavelength in nm."]
+ ],
+ "Units and Measurements": [
+  ["Dimensions of force, energy and pressure, built from the base quantities M, L and T.", "Each quantity is built from mass, length and time in powers that follow its defining relation, such as F = ma giving MLT⁻² for force.", "Force is mass times acceleration, so MLT⁻². Energy is force times length, so ML²T⁻²."],
+  ["Maximum fractional error of a product z = xy.", "The worst case adds the fractional errors of the factors, since each one can push the result in the same direction.", "For products and quotients, the fractional errors add."],
+  ["Error when the quantity is raised to the power a.", "If z = x^a, the fractional error is multiplied by the power, because the same relative change in x is magnified a times in z.", "The power multiplies the fractional error."],
+  ["Least count of a screw gauge with N circular scale divisions.", "One full turn advances the screw by one pitch. Dividing the pitch by N gives the smallest distance the screw can measure.", "Pitch divided by the number of head divisions is the least count."],
+  ["Relative error expressed as a percentage.", "Dividing the absolute error by the measured value gives the fractional error, and multiplying by 100 turns it into a percentage.", "Absolute error over value, then times 100."]
+ ],
+ "Properties of Solids and Liquids": [
+  ["Young's modulus: stress divided by longitudinal strain.", "A wire stretches in proportion to the load when the stress is within the elastic limit. Young's modulus measures how stiff the material is.", "A large Y means a stiff material that barely stretches."],
+  ["Extension of a wire under a load F.", "Rearranging Y = (F/A)/(ΔL/L) gives ΔL = FL/(AY). The extension grows with load and length, and falls with area and stiffness.", "Longer and more loaded means more stretch; thicker and stiffer means less stretch."],
+  ["Bulk modulus: pressure change per unit fractional volume change.", "Pressure squeezes a material, and the bulk modulus measures how resistant it is to volume change. The minus sign reflects that pressure increases as volume falls.", "A large B means the material is hard to compress."],
+  ["Pressure at depth h in a liquid of density ρ.", "The column of liquid above a point has weight ρ g h per unit area, which adds to the pressure at the surface.", "Pressure at depth is the surface pressure plus the weight of the liquid column above."],
+  ["Surface tension: force per unit length of a surface.", "The molecules at a surface are pulled inward, and surface tension is the force per unit length that acts along the surface.", "Surface tension is the force along a line of unit length in the surface."],
+  ["Excess pressure inside a liquid drop of radius r.", "A drop has one surface, so the inward pull of surface tension raises its pressure. Smaller drops have more curvature and so higher excess pressure.", "Small drops are squeezed harder: excess pressure is 2T/r, so it rises as r falls."],
+  ["Height of capillary rise in a tube of radius r.", "Surface tension pulls the liquid up the wall until the weight of the raised column balances the pull, which gives h = 2T cosθ/(ρgr).", "Narrow tubes raise liquid higher. Rise is greater for small radius."],
+  ["Equation of continuity for steady flow.", "Liquid can't pile up or vanish, so the volume flow rate A v is the same at every section of the pipe.", "Narrow pipe means fast flow: the speed rises when the area falls."],
+  ["Bernoulli's principle along a streamline.", "Bernoulli's equation is energy conservation for a fluid: pressure energy, kinetic energy and potential energy per unit volume sum to a constant.", "Faster flow means lower pressure, provided the height stays the same."]
+ ],
+ "Thermodynamics": [
+  ["First law of thermodynamics: heat added minus work done by the gas.", "Energy is conserved. Heat added raises the internal energy, and work done by the gas uses some of it.", "Here W is work done by the gas. Heat in increases energy; work out decreases it."],
+  ["Work done by a gas at constant pressure.", "A constant pressure times the volume change gives the area under the PV graph, which is the work done.", "At constant pressure, work is pressure times volume change, the area under the PV line."],
+  ["Work done in an isothermal expansion of an ideal gas.", "Integrating P dV with P = nRT/V at constant temperature gives nRT ln(V2/V1).", "Isothermal work is the logarithm of the volume ratio."],
+  ["Adiabatic process: PV^γ is constant, with γ = Cp/Cv.", "In an adiabatic process no heat flows, so the change in internal energy alone gives the relation PV^γ = constant. γ is the ratio of specific heats.", "Adiabatic means no heat in or out. Gas gets hotter when compressed."],
+  ["Mayer's relation for one mole of an ideal gas.", "At constant pressure the gas also does work pushing its boundary outward, so it needs R more heat per mole than at constant volume.", "Cp exceeds Cv by exactly R per mole."],
+  ["Efficiency of a Carnot engine, with temperatures in kelvin.", "No engine can beat a reversible engine working between the same two temperatures. Its efficiency depends only on the cold and hot reservoir temperatures.", "Efficiency depends on temperatures in kelvin only. Hotter source and colder sink mean higher efficiency."],
+  ["Ideal gas law.", "Molecules are assumed to have negligible size and no forces between them, so pressure, volume and temperature follow PV = nRT.", "Pressure times volume is proportional to amount times temperature."]
+ ],
+ "Kinetic Theory of Gases": [
+  ["Ideal gas law, in moles or molecules.", "This is the same ideal gas law, with N molecules and Boltzmann's constant k_B = R/N_A used in place of n and R.", "k_B is R per molecule, so PV = NkT and PV = nRT say the same thing."],
+  ["Pressure from molecular collisions with the walls.", "Each molecule bounces off a wall and transfers momentum. Averaging over all molecules gives one third of the density times the mean square speed.", "One third of the density times the mean square speed."],
+  ["Average translational kinetic energy per molecule.", "The mean kinetic energy depends only on temperature, and each of the three translational directions carries an equal share, ½ k_B T.", "Three directions, each with half k_B T, gives 3/2 k_B T."],
+  ["Root mean square speed of molecules of molar mass M.", "Equating the average kinetic energy to ½mv² and writing m = M/N_A gives v_rms = √(3RT/M).", "Heavier molecules move more slowly at the same temperature."],
+  ["Equipartition: each degree of freedom gets half of k_B T per molecule.", "Energy is shared equally among the independent ways a molecule can store energy, each getting half k_B T.", "Every degree of freedom gets an equal share: ½ k_B T each."],
+  ["Ratio of specific heats in terms of the number of degrees of freedom f.", "Each degree of freedom adds half a unit of R to Cv, so Cv = fR/2 and γ = 1 + 2/f.", "Monatomic gas: f = 3, so γ = 5/3. Diatomic: f = 5, so γ = 7/5."]
+ ],
+ "Oscillations and Waves": [
+  ["Displacement in simple harmonic motion.", "A point moving in a circle at constant speed casts a shadow that moves in simple harmonic motion, and its displacement is a sine function of time.", "The shadow of a point on a rotating circle is the simplest picture of SHM."],
+  ["Angular frequency and period of a mass on a spring.", "Hooke's law gives a restoring force kx, so Newton's second law gives ω² = k/m. The period follows from ω.", "A stiffer spring speeds it up. A heavier mass slows it down."],
+  ["Period of a simple pendulum for small swings.", "For small angles the restoring force is proportional to displacement, which gives SHM with ω² = g/L.", "The period depends on length and g, not on the bob's mass."],
+  ["Total energy in SHM, shared between kinetic and potential.", "Energy swaps between kinetic and potential as the oscillator moves. The total stays constant and equals the potential energy at maximum displacement, ½kA².", "The total energy depends on the square of the amplitude, so doubling the amplitude quadruples it."],
+  ["Speed of a wave in terms of frequency and wavelength.", "In one period the wave advances one wavelength, so the wave speed is wavelength times frequency.", "Speed equals frequency times wavelength: v = fλ."],
+  ["Speed of a transverse wave on a string of tension T and mass per unit length μ.", "Tension supplies the restoring force, and the mass per unit length sets how much inertia the string has.", "More tension makes the wave faster; more mass per length makes it slower."],
+  ["Beat frequency from two close frequencies.", "Two nearly equal frequencies interfere, and the loudness rises and falls at the difference frequency.", "Beats are the difference of the two frequencies, one beat each time the sound swells and fades."],
+  ["Doppler effect for sound, with observer speed v0 and source speed vs.", "Moving towards a sound compresses its wavefronts and raises the pitch, and moving away lowers it. The upper signs apply when the observer moves towards a source, or the source moves towards the observer.", "Approaching raises the pitch; receding lowers it. In the formula, + for the observer approaching, − for the source approaching."]
+ ],
+ "Electromagnetic Waves": [
+  ["Speed of every electromagnetic wave in vacuum.", "Changing electric and magnetic fields sustain each other, and the speed of the resulting wave depends only on the vacuum permittivity and permeability.", "Every electromagnetic wave travels at the same speed in vacuum: about 3 × 10⁸ m/s."],
+  ["Peak electric and magnetic fields of a plane wave are linked by c.", "In an electromagnetic wave E and B are in phase and perpendicular, and their ratio is the wave speed.", "E is always c times B, so the electric field is the bigger of the two in numbers."],
+  ["Ampère–Maxwell law: a changing electric flux acts like a current.", "Maxwell added a displacement current, ε0 dΦE/dt, which completes the loop of magnetic field around a changing electric field.", "A changing electric field produces a magnetic field, just as a current does."],
+  ["Average intensity of a plane wave with peak field E0.", "Intensity is the average energy flux, and for a plane wave it depends on the square of the peak electric field.", "Double the field and the intensity quadruples."],
+  ["Momentum carried by radiation of energy U, absorbed completely.", "Electromagnetic waves carry momentum, equal to energy divided by c. An absorbed photon hands over all of its momentum.", "Light carries momentum: U/c, so energy and momentum are linked by c."],
+  ["Radiation pressure on a perfectly absorbing or reflecting surface.", "Absorbing a beam transfers its momentum rate I/c. A reflecting surface reverses the momentum, which doubles the transfer to 2I/c.", "Reflection doubles the radiation pressure, because the momentum is reversed as well as absorbed."]
+ ],
+ "Atoms and Nuclei": [
+  ["Radius of the nth Bohr orbit in hydrogen.", "Bohr's quantised orbits grow as the square of n, and a0 is the radius of the first orbit.", "Orbit radius grows as n², with a0 ≈ 0.53 Å for the innermost orbit."],
+  ["Energy of the nth level of hydrogen.", "The electron's energy is negative because it is bound. Levels approach zero as n grows, so higher levels lie closer to the top.", "Negative energy means bound. The ground state is −13.6 eV, the deepest level."],
+  ["Photon emitted when an electron drops from level i to level f.", "The energy lost by the electron in the jump appears as a single photon, with energy equal to the difference of the two levels.", "Drop from high to low, and the photon energy is the gap between the two rungs."],
+  ["Wavelengths of the spectral lines of hydrogen.", "Combining E = hc/λ with the energy levels gives the Rydberg formula. The lines are grouped by the lower level n_f.", "The lower level sets the series: n_f = 1 is Lyman, n_f = 2 is Balmer, and n_f = 3 is Paschen."],
+  ["Energy needed to remove the electron from the ground state of hydrogen.", "Ionisation takes the electron from the ground state to zero energy, which costs the full 13.6 eV binding energy.", "The ionisation energy is the magnitude of the ground-state energy: 13.6 eV."]
+ ],
+ "Electronic Devices": [
+  ["Current relation in a transistor: emitter current equals base plus collector current.", "Charge is conserved, so the current leaving the emitter splits between the base and collector, and the base current is always the smallest.", "The emitter sends everything: the base and collector share it between them."],
+  ["Current gain of a common base transistor.", "Most carriers from the emitter reach the collector, so the collector current is a large fraction of the emitter current.", "Alpha is always slightly less than 1, because a few carriers are lost in the base."],
+  ["Current gain of a common emitter transistor.", "A small base current controls a much larger collector current, so beta measures amplification.", "Beta is the amplification: a small base current controls a large collector current."],
+  ["Links alpha and beta.", "Substituting I_E = I_B + I_C into alpha = I_C/I_E and beta = I_C/I_B gives this relation.", "Alpha and beta are linked: beta is large when alpha is close to 1."],
+  ["Behaviour of a p–n junction diode.", "Forward bias narrows the depletion region, so current flows freely. Reverse bias widens it, leaving only a tiny leakage current.", "Forward bias: current flows. Reverse bias: almost none."]
+ ],
+ "Solutions": [
+  ["Molality: moles of solute per kilogram of solvent.", "Molality uses the mass of solvent rather than the volume of solution, so it does not change when the temperature changes the solution's volume.", "Molality uses kg of solvent, so it stays fixed when the liquid expands or contracts."],
+  ["Raoult's law for an ideal solution: the solvent's vapour pressure is its mole fraction times the pure vapour pressure.", "Adding solute lowers the number of solvent molecules at the surface, so the vapour pressure of the solvent drops in proportion to its mole fraction.", "The solvent's vapour pressure falls in proportion to how much of the solution it makes up."],
+  ["Depression of freezing point: ΔTf = i Kf m.", "Solute particles get in the way of freezing, so the solution must be cooled further. The drop is proportional to the number of particles, which is i times the molality.", "More particles, bigger drop. The van't Hoff factor i counts them."],
+  ["Elevation of boiling point: ΔTb = i Kb m.", "Solute particles lower the solvent's vapour pressure, so the solution must be heated further to reach atmospheric pressure. The rise is proportional to the number of particles.", "Boiling rises when freezing falls, by the same factor i."],
+  ["Osmotic pressure: π = i C R T.", "Solvent moves across a semipermeable membrane to dilute the solute, and the pressure needed to stop that flow is the number of particles times the concentration, RT.", "Osmotic pressure works like an ideal gas: the particles press as much as a gas of the same concentration."]
+ ],
+ "Equilibrium": [
+  ["Converts Kc to Kp for gas reactions: Kp = Kc (RT)^Δn_g.", "Kp uses partial pressures and Kc uses concentrations. Each gas pressure is its concentration times RT, so the difference in gas moles gives the power of RT.", "Only gases change the conversion: Δn_g is moles of gaseous products minus gaseous reactants."],
+  ["Conjugate acid–base pairs: Ka × Kb = Kw = 1.0 × 10⁻¹⁴ at 25 °C.", "The acid and its conjugate base together reproduce water's self-ionisation, so their constants multiply to Kw.", "Strong acid, weak conjugate base: the product of the two constants always equals 10⁻¹⁴ at 25 °C."],
+  ["Definition of pH: pH = −log10[H⁺].", "pH is a logarithmic scale for hydrogen-ion concentration. Each unit change is a tenfold change in concentration.", "Lower pH means more H⁺. Each whole step is a factor of ten."],
+  ["Henderson–Hasselbalch equation for buffers: pH = pKa + log([A⁻]/[HA]).", "A buffer resists pH change because it holds both the acid and its salt. The ratio of salt to acid sets the pH relative to pKa.", "When the salt and acid are equal, the pH equals pKa. Doubling the salt shifts the pH up by about 0.3."],
+  ["Solubility product of a sparingly soluble salt: Ksp = [M⁺]^a [X⁻]^b.", "At equilibrium the ion product of a saturated solution equals Ksp. If the ion product exceeds Ksp, a precipitate forms.", "Ion product above Ksp means precipitation; below Ksp means the solid dissolves."]
+ ],
+ "Redox Reactions and Electrochemistry": [
+  ["Nernst equation: E = E° − (0.0591/n) log Q at 25 °C.", "Cell potential depends on the reaction quotient Q. As reactants are used up and products build, Q rises and the potential falls.", "The Nernst correction shifts E away from E° as the reaction moves towards equilibrium."],
+  ["Links cell potential to Gibbs energy: ΔG = −nFE, with F = 96500 C/mol.", "Electrical work per mole of electrons is nFE, and this work comes from the free energy released. A positive E means a negative ΔG and a spontaneous reaction.", "Positive E means negative ΔG: the cell reaction runs by itself."],
+  ["Kohlrausch's law for molar conductivity: Λm = λ+ + λ−.", "At infinite dilution each ion moves independently, so the total conductivity is the sum of the individual ionic contributions.", "Add the contributions of the two ions: each ion carries its own share."],
+  ["Mass deposited in electrolysis (Faraday's law): m = ZIt.", "The mass deposited is proportional to the charge passed, which is current times time. Z is the electrochemical equivalent of the substance.", "Mass depends only on charge passed: current times time, times Z."]
+ ],
+ "Chemical Kinetics": [
+  ["Concentration against time for a zero-order reaction: [A] = [A]0 − kt.", "The rate does not depend on concentration, so the concentration falls in a straight line at constant rate.", "Zero order: straight line down, reaching zero at t = [A]0/k."],
+  ["Concentration against time for a first-order reaction: ln([A]0/[A]) = kt.", "The rate is proportional to concentration, so the amount remaining falls exponentially, and the logarithm of the ratio grows linearly with time.", "First order: a straight line when you plot ln[A] against time."],
+  ["Half-life of a first-order reaction: t½ = 0.693/k.", "Setting [A] = [A]0/2 in the first-order equation gives t½ = ln2/k, and ln2 is about 0.693.", "Half-life depends only on k, not on the starting concentration."],
+  ["Arrhenius equation: k = A exp(−Ea/RT).", "Only molecules with energy at least Ea react. The exponential factor is the fraction of collisions carrying that energy, and A counts how often collisions happen.", "A high activation energy slows the reaction; a high temperature speeds it up."],
+  ["Temperature dependence of k: log(k2/k1) = (Ea/2.303R)(1/T1 − 1/T2).", "Taking the logarithm of the Arrhenius equation at two temperatures and subtracting gives this relation between the two rate constants.", "Raise the temperature by 10 K and the rate roughly doubles for most reactions."]
+ ],
+ "Classification of Elements and Periodicity in Properties": [
+  ["Periodic trend in atomic size: radius decreases across a period and increases down a group.", "Across a period the nuclear charge rises with the same shielding, so the electrons are pulled closer. Down a group each new shell adds size.", "Across a row the nucleus pulls harder; down a column each new shell adds size."],
+  ["Periodic trend in ionisation enthalpy: increases across a period, decreases down a group.", "A smaller atom with a higher nuclear charge holds its electrons more tightly, so more energy is needed to remove one. Larger atoms lose electrons more easily.", "Smaller and more charged means harder to ionise."],
+  ["Periodic trend in electron gain enthalpy: becomes more negative across a period, with exceptions in groups 2, 15 and 18.", "Atoms that gain an electron more readily release more energy. The exceptions are groups 2, 15 and 18, where the added electron must enter a filled or half-filled subshell or pair with another electron.", "Trend is more negative across a period; exceptions come from stable configurations and electron repulsion."]
+ ],
+ "p-Block Elements": [
+  ["Counting outer electrons for p-block elements: groups 13 to 18 have valence electrons running from 3 to 8.", "The p-block fills its p subshell, so the group number minus 10 gives the valence electron count, from 3 for group 13 to 8 for group 18.", "Group number minus 10 gives valence electrons for p-block elements."],
+  ["Inert pair effect: heavier p-block elements prefer lower oxidation states, for example +2 for Pb.", "The ns² pair is held tightly in heavier atoms, so it is not used in bonding. This makes lower oxidation states more stable, as in Pb²⁺.", "The heaviest element of a group often keeps its two s electrons back, so it shows the lower oxidation state."]
+ ],
+ "d- and f-Block Elements": [
+  ["Definition of a transition element: a partly filled d subshell in at least one common oxidation state.", "Transition metals have d electrons that can be used in bonding, and they form ions with partly filled d subshells.", "Transition metals have partly filled d orbitals in common ions. Zinc is not one of them."],
+  ["Lanthanoid contraction: atomic radii shrink steadily across the 4f series.", "Each added 4f electron shields the nucleus poorly, so the nuclear pull on the outer electrons grows and the atoms shrink.", "Filling the f subshell does not add much shielding, so the atoms get smaller across the series."],
+  ["Highest oxidation states in the oxidising salts: Mn in KMnO4 is +7; Cr in K2Cr2O7 is +6.", "Mn in MnO4⁻ is +7 and Cr in Cr2O7²⁻ is +6. These are the highest states, and they make the salts strong oxidising agents.", "Permanganate has Mn +7 and dichromate has Cr +6, both strong oxidisers."],
+  ["Spin-only magnetic moment: sqrt(n(n + 2)) BM, where n is the number of unpaired electrons.", "Each unpaired electron adds spin angular momentum, and the magnetic moment grows with the square root of this count.", "Count the unpaired electrons, add two, multiply, and take the square root."]
+ ],
+ "Coordination Compounds": [
+  ["Coordination number: the number of donor atoms bonded to the central metal.", "Each donor atom forms one coordinate bond to the metal, so counting donors gives the number of bonds.", "Count the donor atoms that attach to the metal, not the total number of ligands."],
+  ["Finding the metal's oxidation state: oxidation state of metal + charges of ligands = overall charge of complex.", "The overall charge of the complex must equal the metal's charge plus the charges of its ligands.", "Metal charge equals the complex charge minus the ligand charges."],
+  ["Crystal field splitting: Δo, the energy gap between t2g and eg orbitals.", "In an octahedral field the d orbitals split into a lower t2g set and a higher eg set. Strong-field ligands make the gap larger.", "The gap is larger for strong-field ligands; the split decides whether electrons pair up."],
+  ["IUPAC naming rule: ligands in alphabetical order, the metal name last, its oxidation state in Roman numerals.", "The name is built in a fixed order so that the complex can be read without ambiguity.", "Ligands first in alphabetical order, then the metal with its Roman numeral. Anionic ligands end in -o."]
+ ],
+ "Sets, Relations and Functions": [
+  ["Counting elements in two overlapping sets: n(A ∪ B) = n(A) + n(B) − n(A ∩ B).", "Adding the sets counts the overlap twice, so one copy of the intersection is subtracted.", "Add the two sets, then subtract the overlap once."],
+  ["Number of subsets: n(power set of A) = 2^n(A).", "Each element is either in a subset or not, so with n elements there are two choices for each element, giving 2^n subsets.", "Each element is in or out, so 2^n."],
+  ["Test for equivalence: a relation is an equivalence relation if it is reflexive, symmetric and transitive.", "Equivalence relations group elements into classes. Each element relates to itself, relating in one direction implies the other, and chains of relations connect.", "Reflexive, symmetric, transitive: all three must hold."],
+  ["Injective (one-one) test: f is one-one if f(a) = f(b) implies a = b.", "Distinct inputs must always give distinct outputs. A horizontal line test on the graph shows whether it holds.", "One-one means no two inputs share an output: a horizontal line crosses the graph at most once."],
+  ["Surjective (onto) test: f is onto if every element of the codomain is an image.", "The range must cover the whole codomain, so nothing in the codomain is left without an input.", "Onto means the range equals the codomain."]
+ ],
+ "Complex Numbers and Quadratic Equations": [
+  ["Definition of the imaginary unit: i² = −1.", "The square root of −1 is defined as i, which lets quadratic equations with negative discriminant have solutions.", "i is the square root of minus one: i² = −1."],
+  ["Modulus of a complex number: |z| = √(a² + b²) for z = a + ib.", "The modulus is the distance of the point a + ib from the origin in the Argand plane, found by Pythagoras.", "Modulus is the length of the arrow from the origin to the point."],
+  ["Quadratic formula: x = (−b ± √(b² − 4ac)) / 2a.", "Completing the square on ax² + bx + c = 0 gives this expression for both roots.", "Negative b, plus or minus the root of b squared minus four a c, over two a."],
+  ["Relations between roots and coefficients: sum of roots = −b/a, product of roots = c/a.", "Expanding a(x − α)(x − β) and comparing coefficients gives these two relations between the roots and the coefficients.", "Sum equals minus b over a, and product equals c over a."],
+  ["Nature of roots from the discriminant D = b² − 4ac: D > 0 gives two real roots, D = 0 equal roots, D < 0 complex roots.", "The discriminant is the quantity under the square root in the quadratic formula. A positive value gives two real roots, zero gives one repeated root, and a negative value gives complex roots.", "Positive means two real roots, zero means one repeated root, negative means complex roots."]
+ ],
+ "Matrices and Determinants": [
+  ["Determinant of a 2 × 2 matrix: ad − bc.", "The determinant measures how a matrix scales area. It is the product of the main diagonal minus the product of the other diagonal.", "Main diagonal product minus the other diagonal product."],
+  ["Inverse of a square matrix: A⁻¹ = adj(A)/det(A).", "Multiplying A by adj(A) gives det(A) times the identity, so dividing by det(A) gives the inverse. It exists only when det(A) is not zero.", "No determinant, no inverse. For a 2 × 2, swap a and d, negate b and c, then divide by the determinant."],
+  ["Area of a triangle from its vertices: ½ |det of the coordinate matrix|.", "Each vertex becomes a row (x, y, 1). The determinant of this matrix is twice the signed area of the triangle.", "Write each vertex as (x, y, 1), take the determinant, halve it, and drop the sign."],
+  ["Adjoint identity: A(adj A) = (adj A)A = det(A) I.", "The off-diagonal terms cancel out in each product, and the diagonal terms each give det(A).", "Diagonal entries give the determinant; off-diagonal entries cancel to zero."],
+  ["Cramer's rule: x = det(Dx)/det(D).", "Replacing the column of the unknown with the constants builds a new determinant, and dividing by the original determinant gives the solution.", "Replace the unknown's column with the constants, then divide by the original determinant."]
+ ],
+ "Permutations and Combinations": [
+  ["Arrangements of r objects from n when order matters: P(n, r) = n!/(n − r)!.", "The first slot has n choices, the next n − 1, and so on for r slots. This product is n!/(n − r)!.", "Fill the slots from left to right: n, then n − 1, down to r terms."],
+  ["Selections of r objects from n when order does not matter: C(n, r) = n!/(r!(n − r)!).", "Each selection can be arranged in r! orders, so dividing the permutations by r! removes the ordering.", "Combinations are permutations divided by r!, since each group can be ordered r! ways."],
+  ["Symmetry of combinations: C(n, r) = C(n, n − r).", "Choosing the r people to include is the same as choosing the n − r people to leave out.", "Choosing who goes in is the same as choosing who stays out."],
+  ["Pascal's recurrence: C(n, r) = C(n − 1, r − 1) + C(n − 1, r).", "Either a particular object is in the selection, which leaves r − 1 choices from n − 1, or it is not, which leaves r choices from n − 1.", "Pascal's triangle: each entry is the sum of the two entries directly above it."]
+ ],
+ "Binomial Theorem": [
+  ["Binomial expansion for a positive integer n.", "Multiplying out (a + b) n times means choosing a or b from each factor. Counting the choices that give b exactly r times gives C(n, r).", "C(n, r) counts how many factors give b, so the power of b is the index r."],
+  ["General term T(r+1) = C(n, r) a^(n−r) b^r.", "The general term is the one in which exactly r factors give b. Its position is r + 1, which is why the index and the term number differ by one.", "Index r is the power of b. The term number is one more than the index."],
+  ["Middle term: if n is even, T(n/2 + 1); if n is odd, the two terms T((n + 1)/2) and T((n + 3)/2).", "An expansion has n + 1 terms, so an even n gives one middle term, and an odd n gives two.", "n + 1 terms: an odd count has one middle, an even count has two."],
+  ["Sum of coefficients = 2^n.", "Setting a = b = 1 turns the expansion into (1 + 1)^n = 2^n, which is the sum of all coefficients.", "Set every variable to 1 to add up the coefficients."]
+ ],
+ "Sequence and Series": [
+  ["Arithmetic progression: a_n = a + (n − 1)d and S_n = (n/2)(2a + (n − 1)d).", "Each term adds d to the one before, so the nth term is a plus (n − 1) steps of d. The sum pairs the first and last terms, which all have the same total.", "Sum is the number of terms times the average of the first and last terms."],
+  ["Geometric progression: a_n = a r^(n − 1) and S_n = a(r^n − 1)/(r − 1).", "Each term is r times the one before. Multiplying the sum by r and subtracting cancels all middle terms, leaving only the first and last.", "Multiply the sum by r and subtract: almost everything cancels."],
+  ["Sum to infinity of a geometric progression: S = a/(1 − r) for |r| < 1.", "When |r| < 1 the term r^n shrinks to zero, so the partial sum formula reduces to a/(1 − r).", "If the ratio is between −1 and 1, the terms shrink and the sum settles to a/(1 − r)."],
+  ["Means of two numbers: AM = (a + b)/2, GM = √(ab), and AM ≥ GM.", "The inequality follows from (√a − √b)² ≥ 0, which expands to a + b ≥ 2√(ab).", "The square of a real difference is never negative, which is why AM is always at least GM."]
+ ],
+ "Limit, Continuity and Differentiability": [
+  ["Standard limit: sin x/x tends to 1 as x tends to 0.", "For small angles in radians, sin x is almost equal to x, and a geometric squeeze between triangle and sector areas proves the limit.", "For small x in radians, sin x is almost x, so the ratio is nearly one."],
+  ["Definition of e: (1 + 1/x)^x tends to e as x tends to infinity.", "This is the limit of compound interest compounded more and more often, which gives the constant e.", "e is what you get from compounding continuously."],
+  ["Basic derivatives: d/dx(xⁿ) = nx^(n − 1), d/dx(sin x) = cos x, d/dx(eˣ) = eˣ, d/dx(ln x) = 1/x.", "Each comes from the limit definition of the derivative. The exponential function is special because its rate of growth equals its value.", "eˣ is its own derivative, and ln x has derivative 1/x."],
+  ["Product rule (uv)′ = u′v + uv′ and quotient rule (u/v)′ = (u′v − uv′)/v².", "Adding and subtracting the same term in the limit definition gives these rules. The quotient rule is the product rule applied to u times 1/v.", "Quotient rule: low times d-high, minus high times d-low, all over low squared."],
+  ["Chain rule: dy/dx = (dy/du)(du/dx).", "A change in x changes u, and that change changes y. Multiplying the two rates gives the overall rate.", "Treat du like a fraction that cancels across the two derivatives."]
+ ],
+ "Integral Calculus": [
+  ["Power rule: ∫xⁿ dx = x^(n + 1)/(n + 1) + C, for n ≠ −1.", "Integration reverses differentiation. Differentiating x^(n+1)/(n+1) gives xⁿ, so this works for every power except n = −1.", "Raise the power by one and divide by the new power. The exception is n = −1."],
+  ["Logarithm rule: ∫(1/x) dx = ln|x| + C.", "The derivative of ln|x| is 1/x for both positive and negative x. The absolute value makes the function defined on both sides of zero.", "ln of the absolute value, because logs of negatives are undefined."],
+  ["Integration by parts: ∫u dv = uv − ∫v du.", "This is the product rule read backwards. It trades a hard integral for a simpler one, and it works when one factor becomes simpler on differentiation.", "Use ILATE to pick u: Inverse, Logarithmic, Algebraic, Trigonometric, Exponential."],
+  ["Fundamental theorem of calculus: ∫ from a to b of f(x) dx = F(b) − F(a).", "The integral is the accumulated area, and the antiderivative F measures that accumulation. The area between a and b is the change in F.", "Evaluate at the top limit, then subtract the value at the bottom limit."],
+  ["Standard form: ∫1/(x² + a²) dx = (1/a) arctan(x/a) + C.", "The substitution x = a tanθ turns the integrand into a constant, which gives the arctangent after dividing by a.", "Arctan appears when the denominator is a squared plus x squared, and you divide by a."]
+ ],
+ "Differential Equations": [
+  ["Separation of variables: if dy/dx = f(x)g(y), integrate dy/g(y) = f(x) dx.", "Rearranging puts all the y terms with dy and all the x terms with dx, so each side can be integrated on its own.", "Collect all the y terms and dy on one side, and all the x terms and dx on the other."],
+  ["Linear first-order equation: dy/dx + p(x)y = q(x), with integrating factor e^(∫p dx).", "Multiplying by the integrating factor makes the left side the exact derivative of y times the factor, so it can be integrated directly.", "Multiply by e^(∫p dx), and the left side becomes a single derivative."],
+  ["Order is the highest derivative present; degree is the power of that highest derivative.", "Order counts how many times the function is differentiated. Degree is the exponent of the highest-order term, once the equation is free of fractions and radicals.", "Order counts how many derivatives; degree is the power on the top one."],
+  ["Homogeneous equation: substitute y = vx, so dy/dx = v + x dv/dx.", "If the right side depends only on y/x, the substitution turns the equation into one that is separable in v and x.", "If the equation depends only on y/x, let y = vx and separate."]
+ ],
+ "Co-ordinate Geometry": [
+  ["Distance formula between (x1, y1) and (x2, y2).", "The horizontal and vertical differences form the legs of a right triangle, and the distance is its hypotenuse.", "The horizontal and vertical steps form a right triangle, so use Pythagoras."],
+  ["Section formula: the point dividing a segment in the ratio m : n.", "Each coordinate is a weighted average of the two endpoints. The weight on each endpoint is the ratio on the opposite side, so the point sits closer to the endpoint with the smaller weight.", "Each endpoint is weighted by the ratio on the opposite side of the point."],
+  ["Slope m = (y2 − y1)/(x2 − x1); parallel lines have equal slopes, perpendicular lines have m1m2 = −1.", "Slope is rise over run. Parallel lines rise at the same rate. Perpendicular lines turn through 90°, which makes their slopes negative reciprocals.", "Parallel means equal slopes; perpendicular means the slopes multiply to −1."],
+  ["Distance from a point to a line ax + by + c = 0: |ax1 + by1 + c|/√(a² + b²).", "Substituting the point into the line gives a value proportional to its distance. Dividing by the length of the normal vector (a, b) converts it into true distance.", "Plug the point into the line, take the absolute value, and divide by the length of (a, b)."],
+  ["Standard equation of a circle: (x − h)² + (y − k)² = r².", "Every point on the circle is at distance r from the centre (h, k), and Pythagoras gives this equation.", "Centre (h, k) enters with opposite signs; r² sits on the right."]
+ ],
+ "Three Dimensional Geometry": [
+  ["Distance between two points in space.", "Adding a third coordinate extends Pythagoras to three dimensions, giving the square root of the sum of the three squared differences.", "The 2D distance formula with one more squared term for z."],
+  ["Direction cosines l, m, n satisfy l² + m² + n² = 1.", "Direction cosines are the cosines of the angles the line makes with the three axes. They are the components of a unit vector along the line, so their squares sum to 1.", "The three cosines are the components of a unit vector, so their squares add to 1."],
+  ["Direction cosines from direction ratios a, b, c: a/R, b/R, c/R, where R = √(a² + b² + c²).", "Dividing each ratio by its length R scales the direction vector to unit length, and the scaled components are the direction cosines.", "Divide each ratio by the length R to turn it into a unit vector."],
+  ["Angle between two lines: cosθ = |a1a2 + b1b2 + c1c2| / (product of the two lengths).", "The angle between two directions is found from the dot product of their direction vectors. The absolute value gives the acute angle between the lines.", "Dot product over the product of lengths; the absolute value always gives the acute angle."],
+  ["Shortest distance between skew lines: |(a2 − a1)·(b1 × b2)| / |b1 × b2|.", "The shortest distance is the component of the vector joining any two points on the lines along their common perpendicular, which is b1 × b2.", "Project the vector between the two lines onto the common perpendicular b1 × b2."]
+ ],
+ "Vector Algebra": [
+  ["Scalar (dot) product: a · b = |a||b| cosθ.", "The dot product multiplies the length of one vector by the component of the other along it.", "The dot product is largest when vectors are parallel and zero when they are perpendicular."],
+  ["Magnitude of the vector (cross) product: |a × b| = |a||b| sinθ.", "The cross product's size is the area of the parallelogram formed by the two vectors, which depends on the perpendicular component.", "The cross product is largest when vectors are perpendicular and zero when they are parallel."],
+  ["Area of a triangle using the cross product: ½|a × b|.", "The two sides of the triangle span a parallelogram, and the triangle is half of that parallelogram.", "Half the parallelogram formed by the two sides."],
+  ["Scalar projection of a on b: (a · b)/|b|.", "The projection is the length of the shadow that a casts on the direction of b, found by dividing the dot product by the length of b.", "Dot product over the length of b gives the shadow length of a on b."],
+  ["Scalar triple product a · (b × c), equal to the volume of the parallelepiped.", "The volume of the parallelepiped formed by three edges is the base area times the height, which the triple product gives. If the three vectors are coplanar, the volume is zero.", "If the three vectors lie in one plane, the box they form has no volume, so the triple product is zero."]
+ ]
+};
+// ---- Statistics and Probability: extra formulas and full flashcard explanations ----
+NOTES["Statistics and Probability"].formulas.push(
+ {eq:"Var(X) = E(X^2) - [E(X)]^2", use:"Shortcut variance of a random variable"},
+ {eq:"P(X = r) = nCr p^r q^(n-r), q = 1 - p", use:"Binomial distribution probability"},
+ {eq:"Mean = np, Variance = npq", use:"Mean and variance of a binomial distribution"},
+ {eq:"Mean deviation about mean = sum |x - mean| / n", use:"Average absolute distance from the mean"}
+);
+Object.assign(FL_EXPLAIN, {
+ "Statistics and Probability": [
+  ["Average of the data values. Use it to find the centre of ungrouped data.", "Add all the values, then divide by how many there are. This gives the balance point of the data.", "Sum first, then share equally: total divided by count."],
+  ["Average squared distance from the mean. Use it to measure spread.", "Each value's distance from the mean is squared so that negatives do not cancel positives. The average of those squares is the variance.", "Squares make every distance positive, then average them."],
+  ["Square root of the variance, in the same units as the data.", "Variance is in squared units, so taking the root brings the spread back to the original units.", "Variance squared-units, root back to normal units."],
+  ["The chance that A or B happens, counting the overlap once.", "If you add P(A) and P(B), the outcomes in both are counted twice, so subtract P(A and B) once.", "Add both, then remove the double count."],
+  ["Probability of A given that B has already happened.", "Once B is known, only the part of B matters. So you divide the overlap P(A and B) by the whole of B.", "Shrink the sample space to B first."],
+  ["Reverses a conditional probability, finding the chance of a cause given an effect.", "Weight each possible cause by its prior probability and by how likely the evidence is under that cause, then divide by the total of all such weights.", "Prior times likelihood, divided by the sum over all causes."],
+  ["Long-run average value of a random variable, weighting each value by its probability.", "Each outcome contributes its value times how often it occurs. Adding them gives the average you expect over many trials.", "Multiply each value by its chance, then add."],
+  ["Expected value of X squared. Subtract the square of the mean to get variance.", "Variance is the average of the squares minus the square of the average. This form is often quicker than measuring each distance.", "Average of squares minus square of average."],
+  ["Probability of exactly r successes in n independent trials, each with success probability p.", "Choose which r trials succeed (nCr ways), then multiply p for each success and q for each failure.", "Choose the positions, then multiply the probabilities."],
+  ["Mean and variance of a binomial distribution.", "Each of n trials contributes p to the mean and pq to the variance, and independent trials add up.", "n trials, each adds p to the mean and pq to the variance."],
+  ["Average distance from the mean, ignoring signs.", "Taking absolute values avoids cancellation without squaring, so it is an alternative to the standard deviation.", "Sign-free distances, averaged."]
+ ],
+ "Trigonometry": [
+  ["Connects sine and cosine for any angle. Use it to simplify or convert between them.", "On the unit circle, a point at angle x has coordinates (cos x, sin x), and its distance from the origin is 1.", "Picture the unit circle: the two squares always add to one."],
+  ["Expands sine of a sum. Use it to find values for angles like 75 degrees.", "Combine the sine and cosine of each part with the cross terms, which is how two rotations combine.", "Sine of a sum: sin cos plus cos sin."],
+  ["Doubles the angle in a sine product. Use it to halve or double angles.", "Adding the sine formula to itself with equal angles gives twice the product of sine and cosine.", "Sine of double is twice sine cosine."],
+  ["Expresses tan of a sum. Use it when combining two angles.", "From the sine and cosine sum formulas, divide top and bottom to get a formula in tangents only.", "Tangents add on top, and the cross term sits below."],
+  ["Expresses sine of three times an angle in terms of sine alone.", "Apply the sine addition formula to 2x plus x, then substitute the double-angle formulas and the identity.", "Three sines, one cube: 3 sin minus 4 sin cubed."],
+  ["Links the sides of any triangle to the angles opposite them.", "Each side divided by the sine of its opposite angle gives the same value, which equals the diameter of the circumcircle.", "Side over opposite sine is constant."],
+  ["Sine of a difference. Use it when the angles are subtracted.", "The same expansion as the sum, with the sign of the second angle changed.", "Same as the sum, but minus in the middle."],
+  ["Gives cos 2x in terms of sine alone. Use it to reduce powers.", "Substitute cos squared equals one minus sine squared into the double-angle formula.", "Cos double, sine squared version."],
+  ["Gives cos 2x in terms of cos alone. Use it to reduce powers.", "Substitute sin squared equals one minus cos squared into the double-angle formula.", "Cos double, cos squared version."],
+  ["Inverse sine and inverse cosine add to a right angle.", "A right angle split between the two angles: if sine of one is x, the cosine of the other is also x.", "Complementary angles add to ninety degrees."]
+ ]
+});
+// ---- New chapter: IUPAC Nomenclature and Common Names (Organic Chemistry) ----
+NOTES["IUPAC Nomenclature and Common Names"] = {
+ formulas: [
+  {eq:"Parent name = longest carbon chain containing the principal functional group", use:"Starting point for every IUPAC name"},
+  {eq:"Roots: meth, eth, prop, but, pent, hex, hept, oct, non, dec", use:"Chain length to root word"},
+  {eq:"Suffix priority: acid > ester > amide > nitrile > aldehyde > ketone > alcohol > amine", use:"Which group becomes the suffix"},
+  {eq:"Lowest locant rule: number the chain so the principal group gets the lowest number", use:"Numbering direction"},
+  {eq:"Alkane: -ane, alkene: -ene, alkyne: -yne", use:"Ending for saturated and unsaturated chains"},
+  {eq:"Acetone = propan-2-one; acetic acid = ethanoic acid", use:"Common name to IUPAC name"},
+  {eq:"Formic, acetic, propionic, butyric: 1, 2, 3, 4 carbon acids", use:"Common names of simple carboxylic acids"},
+  {eq:"Benzoic acid, phenol, aniline, toluene, anisole: retained common names", use:"Aromatic compounds with accepted common names"}
+ ],
+ concepts: [
+  {title:"Why we still learn common names", analogy:"Nicknames that everyone uses. IUPAC is the full legal name, but chemists, exams and labels still use the short form every day.", body:["Many compounds have a well-known common name that is shorter and used in industry, medicine and textbooks.","Common names carry no systematic logic, so they are learned by repetition and linked to the source of the compound, such as formic acid from ants (Latin formica)."]},
+  {title:"Build an IUPAC name in four steps", analogy:"Assembling flat-pack furniture: find the main part, count its pieces, attach the fittings, then number everything so the instructions match.", body:["Step 1: find the principal functional group and its suffix.","Step 2: find the longest chain that contains it, and name the root.","Step 3: name the substituents with their locants, in alphabetical order.","Step 4: number the chain so the principal group gets the lowest locant."]},
+  {title:"Functional group priority decides the suffix", analogy:"A rank order at work. When several groups compete, the highest-ranking one names the compound and the others become prefixes.", body:["Carboxylic acid outranks ester, amide, nitrile, aldehyde, ketone, alcohol and amine in that order.","Halogens and nitro groups are never suffixes; they are always prefixes."]},
+  {title:"Common names of key compounds", analogy:"Flashcard pairs. Each common name is matched with one IUPAC name, and both must be memorised.", body:["Acetone: propan-2-one. Acetaldehyde: ethanal. Acetic acid: ethanoic acid.","Formaldehyde: methanal. Chloroform: trichloromethane. Glycerol: propane-1,2,3-triol.","Aniline: benzenamine. Phenol: hydroxybenzene. Toluene: methylbenzene."]}
+ ]
+};
+Object.assign(FL_EXPLAIN, {
+ "IUPAC Nomenclature and Common Names": [
+  ["Name the chain by its principal group, using the suffix and the root word.", "Find the longest carbon chain containing the principal group, and the suffix shows which group it is.", "Longest chain plus principal group, then the suffix."],
+  ["Root word from the number of carbons in the parent chain.", "Each root is a Greek or Latin number prefix, so meth means one carbon, eth two, and so on.", "Meth, eth, prop, but: count one to four, then continue."],
+  ["Decides which functional group names the whole compound.", "Groups are ranked by oxidation state of the carbon, so acids come first and amines last.", "Acid beats ester, ester beats amide, and so on."],
+  ["Gives the direction for numbering the chain.", "Numbering from either end gives two possible locants, and the lower set is always chosen.", "Pick the end that gives the lowest number."],
+  ["Endings for single, double and triple bonds.", "A double bond is an ene and a triple bond is an yne, and the locant of the first unsaturated carbon is given.", "Ane is single, ene double, yne triple."],
+  ["Acetone is propan-2-one in IUPAC.", "Acetone has three carbons with the ketone on the middle carbon, so the ketone suffix sits at position 2.", "Acetone is the three carbon ketone."],
+  ["Common names of the simple carboxylic acids.", "Formic from Latin formica (ant), acetic from vinegar, propionic from the first fatty acid, butyric from butter.", "Ant, vinegar, first fatty, butter."],
+  ["Retained common names for aromatic compounds.", "These names predate the IUPAC rules and remain accepted, so benzoic acid and aniline are used in exams.", "Benzoic, phenol, aniline and toluene: learn them as names."]
+ ]
+});
+
+
+NOTES["IUPAC Nomenclature and Common Names"].formulas.push(
+ {eq:"Substituent prefixes: methyl, ethyl, propyl, isopropyl, tert-butyl; chloro, bromo, iodo, fluoro, nitro", use:"Names of groups attached to the chain"},
+ {eq:"Alphabetical order of prefixes ignores di, tri, tetra", use:"Ordering substituents in the name"},
+ {eq:"Cycloalkanes: cyclo + alkane root, e.g. cyclohexane", use:"Naming ring compounds"},
+ {eq:"Ethers: alkoxy prefix on the larger group, e.g. methoxyethane", use:"Naming R-O-R compounds"},
+ {eq:"Benzene derivatives: ortho = 1,2, meta = 1,3, para = 1,4", use:"Relative positions on a ring"},
+ {eq:"Dienes and polyenes: -diene, -triene, with locants for each double bond", use:"More than one double bond"}
+);
+Object.assign(FL_EXPLAIN, {"IUPAC Nomenclature and Common Names": (FL_EXPLAIN["IUPAC Nomenclature and Common Names"]||[]).concat([
+ ["Names of the groups hanging off the main chain.", "A group is named by its alkane root with yl, so methyl is one carbon and ethyl is two. Halogens and nitro use their own short names.", "Methyl, ethyl, propyl, and chloro, bromo, iodo, nitro are the small set to learn."],
+ ["Prefixes are arranged alphabetically, and the multiplying words are ignored.", "Dichloro is filed under c, not d, because the di only counts how many. Alphabetise by the group name itself.", "Multipliers do not count when sorting."],
+ ["Ring compounds get the cyclo prefix on the alkane root.", "A closed ring of six carbons with single bonds is cyclohexane, and the ring is numbered from one carbon.", "Cyclo means a loop; the rest of the name is the usual root."],
+ ["Ethers are named as an alkoxy group attached to an alkane.", "The smaller group becomes the alkoxy prefix (methoxy for CH3O) and the larger group the parent alkane.", "Smaller group becomes alkoxy, bigger group is the parent."],
+ ["Ortho, meta and para describe two substituents on a benzene ring.", "Ortho is adjacent (1,2), meta has one carbon between (1,3), and para is opposite (1,4). The numbering is fixed by the ring.", "Ortho next door, meta skip one, para opposite."],
+ ["Dienes have two double bonds and each needs its own locant.", "Count the carbons of the chain, add the diene ending, and give the position of each double bond, e.g. buta-1,3-diene.", "Di means two, so give two locants in one name."]
+])});
+
+NOTES["Organic Terms Glossary"] = {formulas: [], concepts: [{"title": "Vicinal", "analogy": "Next door neighbours on a chain.", "body": ["Vicinal means on adjacent carbon atoms. In vicinal dihalides such as 1,2-dibromoethane, the two halogens sit on neighbouring carbons. Vicinal diols (1,2-diols) work the same way, as in ethylene glycol."]}, {"title": "Geminal", "analogy": "Twins on the same carbon.", "body": ["Geminal means on the same carbon atom. In geminal dihalides such as ethylidene chloride (CH3CHCl2), both chlorines share one carbon. Think of gem as in gemini, the twins."]}, {"title": "Halide (alkyl halide)", "analogy": "A halogen swapped in for a hydrogen.", "body": ["An alkyl halide is an alkane in which one hydrogen has been replaced by F, Cl, Br or I. The carbon bonded to the halogen is the one that matters for classification."]}, {"title": "Primary, secondary, tertiary", "analogy": "How many carbons are attached to the key carbon.", "body": ["A primary carbon is attached to one other carbon, secondary to two, and tertiary to three. The same labels classify alcohols and alkyl halides, and they predict how fast reactions happen."]}, {"title": "Functional group", "analogy": "The reactive part that gives a family its behaviour.", "body": ["A functional group is an atom or group of atoms that decides how a compound reacts, such as -OH in alcohols, -CHO in aldehydes and -COOH in acids. Compounds with the same group behave alike."]}, {"title": "Homologous series", "analogy": "A family where each member differs by CH2.", "body": ["A homologous series is a family of compounds with the same functional group, each one differing from the last by one CH2 unit. Methane, ethane and propane form the alkane series."]}, {"title": "Isomers", "analogy": "Same formula, different arrangement.", "body": ["Isomers have the same molecular formula but different structures or spatial arrangements. Everything that follows (structural, geometric, optical) is a kind of isomerism."]}, {"title": "Chain, position and functional isomers", "analogy": "Structural isomers differing in the skeleton, group position or group type.", "body": ["Chain isomers differ in the carbon skeleton (butane and isobutane). Position isomers differ in where the group sits (1-propanol and 2-propanol). Functional isomers have different groups (ethanol and dimethyl ether)."]}, {"title": "Geometric isomers (cis and trans)", "analogy": "Same bonds, different sides.", "body": ["Cis isomers have the same groups on the same side of a double bond. Trans isomers have them on opposite sides. Double bonds cannot rotate, so the two forms do not interconvert."]}, {"title": "Chiral centre and optical isomerism", "analogy": "A carbon with four different groups.", "body": ["A chiral carbon has four different groups attached. Its mirror image cannot be superimposed on it, so the molecule is optically active and rotates plane-polarised light."]}, {"title": "Enantiomers and racemic mixture", "analogy": "Mirror-image pairs, and a 50:50 mix of them.", "body": ["Enantiomers are non-superimposable mirror images. A racemic mixture contains equal amounts of both, so its optical rotation is zero because the two cancel."]}, {"title": "Saturated and unsaturated", "analogy": "Saturated has only single bonds; unsaturated has a double or triple bond.", "body": ["Saturated compounds such as alkanes contain only single bonds. Unsaturated compounds such as alkenes and alkynes have one or more double or triple bonds."]}, {"title": "Aliphatic, alicyclic and aromatic", "analogy": "Open chains, closed non-aromatic rings, and benzene-type rings.", "body": ["Aliphatic compounds are open chains. Alicyclic compounds are rings that are not aromatic, such as cyclohexane. Aromatic compounds, such as benzene, are rings with delocalised pi electrons."]}, {"title": "Inductive effect", "analogy": "A pull or push along a chain of sigma bonds.", "body": ["Electronegative atoms pull electron density along sigma bonds, creating a partial charge. The effect weakens quickly with distance. Chloroethane's carbon is slightly positive because chlorine pulls electrons."]}, {"title": "Resonance", "analogy": "Several Lewis structures for one molecule.", "body": ["Resonance describes electrons spread over several positions. The real molecule is a blend of the contributing structures, which makes it more stable than any single one, as in benzene."]}, {"title": "Hyperconjugation", "analogy": "Stabilisation by neighbouring C-H bonds.", "body": ["Hyperconjugation is the donation of electrons from adjacent C-H sigma bonds into an empty or partly empty orbital. More alkyl groups mean more hyperconjugation, which stabilises carbocations."]}, {"title": "Electrophile", "analogy": "Electron-loving, seeks electrons.", "body": ["An electrophile is an electron-deficient species that accepts an electron pair, such as H+, Br+ or a carbocation. Electrophilic addition and substitution are driven by them."]}, {"title": "Nucleophile", "analogy": "Nucleus-loving, donates electrons.", "body": ["A nucleophile has a lone pair it donates to an electron-poor centre, such as OH-, CN- or NH3. Nucleophilic substitution and addition are driven by them."]}, {"title": "Homolytic and heterolytic fission", "analogy": "Bond breaking that gives radicals or ions.", "body": ["In homolytic fission each atom keeps one electron, giving free radicals. In heterolytic fission one atom keeps both electrons, giving a carbocation and a carbanion."]}, {"title": "Carbocation, carbanion, free radical", "analogy": "Carbon with a positive, negative or single electron.", "body": ["A carbocation has six electrons and a positive charge, a carbanion has a lone pair and a negative charge, and a free radical has an unpaired electron. Stability follows the number of alkyl groups."]}, {"title": "Ortho, meta and para", "analogy": "Positions on a benzene ring relative to a substituent.", "body": ["Ortho is adjacent (1,2), meta has one carbon between (1,3) and para is opposite (1,4). Activating groups direct to ortho and para, deactivating groups to meta."]}, {"title": "Markovnikov's rule", "analogy": "The H goes to the carbon that already has more H.", "body": ["When HX adds to an unsymmetrical alkene, hydrogen bonds to the carbon with more hydrogens, and the halogen goes to the carbon with fewer. This is because the more stable carbocation forms."]}, {"title": "Anti-Markovnikov and the peroxide effect", "analogy": "The reverse addition, caused by peroxides.", "body": ["In the presence of peroxides, HBr adds in the anti-Markovnikov way through a free radical mechanism. Peroxide effect is seen only with HBr."]}, {"title": "Tetravalency and hybridisation", "analogy": "Carbon makes four bonds; its orbitals mix.", "body": ["Carbon forms four bonds because it has four valence electrons. In sp3 it is tetrahedral (109.5 degrees), sp2 trigonal planar (120 degrees) and sp linear (180 degrees)."]}, {"title": "Newman and Sawhorse projections", "analogy": "Two ways to draw a molecule's 3D shape.", "body": ["A Sawhorse projection shows the molecule diagonally, as if on a sawhorse. A Newman projection looks down a C-C bond, with the front carbon as a point and the back carbon as a circle. Both show staggered and eclipsed conformations."]}, {"title": "Acid anhydride", "analogy": "Two acids joined by losing one water.", "body": ["An acid anhydride is formed when two carboxylic acid groups lose one water molecule between them. Succinic anhydride and phthalic anhydride are examples."]}, {"title": "Reagent and reaction type", "analogy": "What is added, and what kind of change occurs.", "body": ["A reagent is the substance added to bring about a reaction. Common types are substitution (one group replaced), addition (a group added across a multiple bond), elimination (a small molecule removed) and rearrangement (atoms rearranged within the molecule)."]}]};
+
+function flashCards(c){
+  const out = [];
+  if(!NOTES[c]) return out;
+  const LBL = ['What it means','Why it works','Memory trick'];
+  NOTES[c].formulas.forEach((f,n)=>{
+    const ex = (FL_EXPLAIN[c]||[])[n];
+    const back = ex ? ex.map((t,j)=>({label:LBL[j], text:t})) : [{label:'Use', text:f.use}];
+    out.push({key:'f'+n, ch:c, kind:'Formula', front:'$'+f.eq+'$', back});
   });
-  return deck;
+  NOTES[c].concepts.forEach((k,n)=>{
+    const back = [{label:'Idea', text:k.analogy}].concat((k.body||[]).map(p=>({label:'', text:p})));
+    out.push({key:'c'+n, ch:c, kind:'Concept', front:esc(k.title), back});
+  });
+  return out;
+}
+function flashKnown(c){ return FL_KNOWN[c] || (FL_KNOWN[c] = {}); }
+function flashPct(c){
+  const cards = flashCards(c); if(!cards.length) return 0;
+  const k = flashKnown(c); return Math.round(cards.filter(x=>k[x.key]===true).length / cards.length * 100);
+}
+function flashShuffle(a){ for(let j=a.length-1;j>0;j--){ const r=Math.floor(Math.random()*(j+1)); [a[j],a[r]]=[a[r],a[j]]; } return a; }
+function flashSubject(c){ return SUBJECTS.find(s=>chaptersOf(s).includes(c)) || 'Other'; }
+function flashStart(c, shuffle){
+  flashState = {chapter:c, i:0, flipped:false, pool: shuffle ? flashShuffle(flashCards(c)) : flashCards(c), filter:flashState.filter||'All', done:false, busy:false, enter:true};
+  go('flash');
 }
 function flashView(){
-  const deck = flashDeck();
   const w = el('<div class="fl-wrap"></div>');
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Study</div><h1 class="hm-title">Flash<em>cards.</em></h1></div>'));
-  if(!deck.length){ w.appendChild(el('<div class="card empty">No flashcards yet.</div>')); return w; }
-  flashState.i = Math.min(flashState.i, deck.length-1);
-  const c = deck[flashState.i], pct = Math.round((flashState.i+1)/deck.length*100);
-  w.appendChild(el('<div class="fl-count">'+(flashState.i+1)+' of '+deck.length+' · '+esc(c.ch)+'</div>'));
-  w.appendChild(el('<div class="fl-bar"><i style="width:'+pct+'%"></i></div>'));
-  const stage = el('<div class="fl-stage" role="button" tabindex="0" aria-label="Flip card"><div class="fl-card'+(flashState.flipped?' flip':'')+'">'
-    +'<div class="fl-face front"><div class="fl-ch">'+c.kind+'</div><div class="fl-front">'+c.front+'</div><div class="fl-hint">Tap to flip</div></div>'
-    +'<div class="fl-face back"><div class="fl-ch">Explanation</div><div class="fl-back">'+esc(c.back)+'</div></div></div></div>');
-  stage.onclick = ()=>{ flashState.flipped = !flashState.flipped; render(); };
-  w.appendChild(stage);
-  const ctl = el('<div class="fl-ctl"></div>');
-  const prev = el('<button class="btn secondary" type="button"'+(flashState.i===0?' disabled':'')+'>Previous</button>');
-  const next = el('<button class="btn" type="button"'+(flashState.i===deck.length-1?' disabled':'')+'>Next</button>');
-  prev.onclick = ()=>{ flashState.i--; flashState.flipped=false; render(); };
-  next.onclick = ()=>{ flashState.i++; flashState.flipped=false; render(); };
-  ctl.appendChild(prev); ctl.appendChild(next);
-  w.appendChild(ctl);
-  return w;
+  if(!flashState.chapter || !NOTES[flashState.chapter]) return flashList(w);
+  if(flashState.done) return flashDone(w);
+  return flashSession(w);
 }
-function notehubView(){
-  const w = el('<div></div>');
-  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Study</div><h1 class="hm-title">Notes and <em>formulas.</em></h1></div>'));
-  const chs = Object.keys(NOTES);
-  if(!chs.length){ w.appendChild(el('<div class="card empty">No notes yet.</div>')); return w; }
-  w.appendChild(el('<div class="field">Revision notes</div>'));
+function flashList(w){
+  const chs = Object.keys(NOTES).filter(c=>flashCards(c).length);
+  if(!chs.length){ w.appendChild(el('<div class="card empty">No flashcards yet.</div>')); return w; }
+  const bar = el('<div class="fl-filters"></div>');
+  ['All'].concat(SUBJECTS).forEach(f=>{
+    const b = el('<button type="button" class="fl-filter'+(flashState.filter===f?' on':'')+'">'+f+'</button>');
+    b.onclick = ()=>{ flashState.filter = f; render(); };
+    bar.appendChild(b);
+  });
+  w.appendChild(bar);
+  const shown = flashState.filter==='All' ? chs : chs.filter(c=>flashSubject(c)===flashState.filter);
   const list = el('<div class="list"></div>');
-  chs.forEach(c=>{
-    const row = el('<div class="row"><div><div class="name">'+esc(c)+'</div><div class="meta">'+NOTES[c].concepts.length+' concepts with worked examples</div></div><div class="end">Open</div></div>');
-    row.onclick = ()=>go('notes',{chapter:c});
+  shown.forEach(c=>{
+    const row = el('<div class="row"><div><div class="name">'+esc(c)+'</div>'+wtTag(flashSubject(c), c)
+      +'<div class="meta">'+flashCards(c).length+' cards · '+flashPct(c)+'% mastered</div></div><div class="end">Open</div></div>');
+    row.onclick = ()=>flashStart(c, false);
     list.appendChild(row);
   });
   w.appendChild(list);
+  return w;
+}
+function flashSession(w){
+  const st = flashState, n = st.pool.length, c = st.pool[st.i];
+  const enterCls = st.enter ? ' enter' : ''; st.enter = false; st.busy = false;
+  const head = el('<div class="fl-top"><button type="button" class="fl-chapters" id="flBack"><svg class="nb-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="nb-label">Chapters</span></button><button type="button" class="fl-filter" id="flShuf">Shuffle</button></div>');
+  head.querySelector('#flBack').onclick = ()=>{ flashState.chapter = null; render(); };
+  head.querySelector('#flShuf').onclick = ()=>{ flashState.pool = flashShuffle(flashCards(st.chapter)); flashState.i = 0; flashState.flipped = false; flashState.enter = true; render(); };
+  w.appendChild(head);
+  w.appendChild(el('<div class="fl-count">'+(st.i+1)+' of '+n+' · '+esc(st.chapter)+'</div>'));
+  w.appendChild(el('<div class="fl-bar"><i style="width:'+(st.i/n*100)+'%"></i></div>'));
+  const stage = el('<div class="fl-stage'+enterCls+'" role="button" tabindex="0" aria-label="Flip card"><div class="fl-card'+(st.flipped?' flip':'')+'">'
+    +'<div class="fl-face front"><div class="fl-ch">'+c.kind+'</div><div class="fl-front">'+c.front+'</div><div class="fl-hint">Tap to flip</div></div>'
+    +'<div class="fl-face back"><div class="fl-ch">Explanation</div><div class="fl-back">'+c.back.map(x=>x.label?'<div class="fl-sec"><b>'+esc(x.label)+'</b>'+esc(x.text)+'</div>':'<p>'+esc(x.text)+'</p>').join('')+'</div><div class="fl-hint">Tap to flip back</div></div></div></div>');
+  stage.onclick = flashFlip;
+  stage.oncontextmenu = e=>e.preventDefault();
+  stage.onselectstart = e=>e.preventDefault();
+  stage.ondragstart = e=>e.preventDefault();
+  w.appendChild(stage);
+  const ctl = el('<div class="fl-ctl"><button class="btn secondary" type="button">Still learning</button><button class="btn" type="button">Got it</button></div>');
+  const bs = ctl.querySelectorAll('button');
+  bs[0].onclick = ()=>flashAnswer(false);
+  bs[1].onclick = ()=>flashAnswer(true);
+  w.appendChild(ctl);
+  return w;
+}
+function flashDone(w){
+  const st = flashState, k = flashKnown(st.chapter), total = st.pool.length;
+  const got = st.pool.filter(x=>k[x.key]===true).length, pct = total ? Math.round(got/total*100) : 0;
+  w.appendChild(el('<div class="card fl-done"><div class="fl-ch">Session complete</div><div class="fl-score">'+pct+'%</div><div class="meta">'+got+' of '+total+' marked Got it</div></div>'));
+  const row = el('<div class="fl-ctl"><button class="btn secondary" type="button">Chapters</button><button class="btn" type="button">Go again</button></div>');
+  const bs = row.querySelectorAll('button');
+  bs[0].onclick = ()=>{ flashState.chapter = null; render(); };
+  bs[1].onclick = ()=>flashStart(st.chapter, false);
+  w.appendChild(row);
+  return w;
+}
+function flashFlip(){
+  if(flashState.busy) return;
+  flashState.flipped = !flashState.flipped;
+  const cd = document.querySelector('.fl-card'); if(cd) cd.classList.toggle('flip', flashState.flipped);
+}
+function flashAnswer(ok){
+  const st = flashState, c = st.pool[st.i];
+  if(!c || st.busy) return;
+  st.busy = true;
+  flashKnown(st.chapter)[c.key] = ok;
+  const stage = document.querySelector('.fl-stage');
+  if(stage) stage.classList.add(ok ? 'out-r' : 'out-l');
+  setTimeout(()=>{
+    if(st.i >= st.pool.length-1){ st.done = true; }
+    else { st.i++; st.enter = true; }
+    st.flipped = false;
+    render();
+  }, 300);
+}
+document.addEventListener('keydown', e=>{
+  if(view!=='flash' || !flashState.chapter || flashState.done || flashState.busy) return;
+  if(e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+  if(e.key===' '){ e.preventDefault(); flashFlip(); }
+  else if(e.key==='ArrowRight') flashAnswer(true);
+  else if(e.key==='ArrowLeft') flashAnswer(false);
+});
+// ---------- Common Names Viva: quiz on common names of organic compounds ----------
+const VIVA_DATA = {"Acetone": {"iupac": "Propan-2-one", "atoms": [[20, 55, ""], [50, 40, ""], [50, 15, "O"], [80, 55, ""]], "bonds": [[0, 1, 1], [1, 2, 2], [1, 3, 1]]}, "Acetic acid": {"iupac": "Ethanoic acid", "atoms": [[20, 55, ""], [50, 40, ""], [50, 15, "O"], [80, 55, "OH"]], "bonds": [[0, 1, 1], [1, 2, 2], [1, 3, 1]]}, "Chloroform": {"iupac": "Trichloromethane", "atoms": [[60, 50, "C"], [30, 70, "Cl"], [60, 20, "Cl"], [90, 70, "Cl"]], "bonds": [[0, 1, 1], [0, 2, 1], [0, 3, 1]]}, "Ethylene": {"iupac": "Ethene", "atoms": [[35, 50, ""], [85, 50, ""]], "bonds": [[0, 1, 2]]}, "Acetylene": {"iupac": "Ethyne", "atoms": [[35, 50, ""], [85, 50, ""]], "bonds": [[0, 1, 3]]}, "Urea": {"iupac": "Carbamide (diamide of carbonic acid)", "atoms": [[60, 45, "C"], [60, 15, "O"], [30, 65, "NH2"], [90, 65, "NH2"]], "bonds": [[0, 1, 2], [0, 2, 1], [0, 3, 1]]}, "Glycerol": {"iupac": "Propane-1,2,3-triol", "atoms": [[20, 55, ""], [50, 40, ""], [80, 55, ""], [20, 20, "OH"], [50, 15, "OH"], [80, 20, "OH"]], "bonds": [[0, 1, 1], [1, 2, 1], [0, 3, 1], [1, 4, 1], [2, 5, 1]]}, "Phenol": {"iupac": "Phenol", "atoms": [[60.0, 34.0, ""], [82.5, 47.0, ""], [82.5, 73.0, ""], [60.0, 86.0, ""], [37.5, 73.0, ""], [37.5, 47.0, ""], [60, 20, "OH"]], "bonds": [[0, 1, 1], [1, 2, 2], [2, 3, 1], [3, 4, 2], [4, 5, 1], [5, 0, 2], [0, 6, 1]]}, "Toluene": {"iupac": "Methylbenzene", "atoms": [[60.0, 34.0, ""], [82.5, 47.0, ""], [82.5, 73.0, ""], [60.0, 86.0, ""], [37.5, 73.0, ""], [37.5, 47.0, ""], [60, 20, "CH3"]], "bonds": [[0, 1, 1], [1, 2, 2], [2, 3, 1], [3, 4, 2], [4, 5, 1], [5, 0, 2], [0, 6, 1]]}, "Aniline": {"iupac": "Benzenamine", "atoms": [[60.0, 34.0, ""], [82.5, 47.0, ""], [82.5, 73.0, ""], [60.0, 86.0, ""], [37.5, 73.0, ""], [37.5, 47.0, ""], [60, 20, "NH2"]], "bonds": [[0, 1, 1], [1, 2, 2], [2, 3, 1], [3, 4, 2], [4, 5, 1], [5, 0, 2], [0, 6, 1]]}, "Anisole": {"iupac": "Methoxybenzene", "atoms": [[60.0, 34.0, ""], [82.5, 47.0, ""], [82.5, 73.0, ""], [60.0, 86.0, ""], [37.5, 73.0, ""], [37.5, 47.0, ""], [60, 20, "O"], [85, 10, "CH3"]], "bonds": [[0, 1, 1], [1, 2, 2], [2, 3, 1], [3, 4, 2], [4, 5, 1], [5, 0, 2], [0, 6, 1], [6, 7, 1]]}, "Benzoic acid": {"iupac": "Benzenecarboxylic acid", "atoms": [[60.0, 34.0, ""], [82.5, 47.0, ""], [82.5, 73.0, ""], [60.0, 86.0, ""], [37.5, 73.0, ""], [37.5, 47.0, ""], [60, 20, "C"], [42, 8, "O"], [78, 8, "OH"]], "bonds": [[0, 1, 1], [1, 2, 2], [2, 3, 1], [3, 4, 2], [4, 5, 1], [5, 0, 2], [0, 6, 1], [6, 7, 2], [6, 8, 1]]}};
+let vivaState = {mode:null, qs:[], i:0, score:0, picked:null, done:false};
+function vivaDraw(name){
+  const c = VIVA_DATA[name];
+  const sc = (x,y)=>x; // coordinates already in the 120 x 100 box
+  let g = '';
+  const shorten = (a,b,lab)=>{ // pull line ends back from labelled atoms
+    if(!lab) return [a,b];
+    const dx=b[0]-a[0], dy=b[1]-a[1], L=Math.hypot(dx,dy)||1, k=Math.max(0,(L-9)/L);
+    return [a, [a[0]+dx*k, a[1]+dy*k]];
+  };
+  c.bonds.forEach(([i,j,o])=>{
+    const A=c.atoms[i], B=c.atoms[j];
+    const p=[A[0],A[1]], q=[B[0],B[1]];
+    const [s,e]=shorten(p,q,B[2]||A[2]);
+    const [s2,e2]=shorten(q,p,A[2]||B[2]);
+    const from=A[2]?e2:s, to=B[2]?e:e2;
+    const x1=A[2]? (A[0]+(B[0]-A[0])*(9/Math.hypot(B[0]-A[0],B[1]-A[1]))) : A[0];
+    const y1=A[2]? (A[1]+(B[1]-A[1])*(9/Math.hypot(B[0]-A[0],B[1]-A[1]))) : A[1];
+    const x2=B[2]? (B[0]-(B[0]-A[0])*(9/Math.hypot(B[0]-A[0],B[1]-A[1]))) : B[0];
+    const y2=B[2]? (B[1]-(B[1]-A[1])*(9/Math.hypot(B[0]-A[0],B[1]-A[1]))) : B[1];
+    const L=Math.hypot(B[0]-A[0],B[1]-A[1])||1, nx=-(B[1]-A[1])/L, ny=(B[0]-A[0])/L;
+    const offs = o===1?[0]:o===2?[-2.6,2.6]:[-3.4,0,3.4];
+    offs.forEach(d=>{ g+=`<line x1="${(x1+nx*d).toFixed(1)}" y1="${(y1+ny*d).toFixed(1)}" x2="${(x2+nx*d).toFixed(1)}" y2="${(y2+ny*d).toFixed(1)}"/>`; });
+  });
+  c.atoms.forEach(([x,y,l])=>{ if(l) g+=`<text x="${x}" y="${y+3.5}" text-anchor="middle">${l}</text>`; });
+  return `<svg viewBox="0 0 120 100" class="viva-mol" aria-hidden="true">${g}</svg>`;
+}
+function vivaShuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function vivaBuild(mode){
+  const names = Object.keys(VIVA_DATA);
+  const qs = vivaShuffle(names).slice(0,10).map((n,k)=>{
+    const type = mode==='mixed' ? (k%2? 'structure':'name') : mode;
+    const distract = vivaShuffle(names.filter(x=>x!==n)).slice(0,3);
+    const opts = vivaShuffle([n].concat(distract));
+    return {type, answer:n, opts};
+  });
+  vivaState = {mode, qs, i:0, score:0, picked:null, done:false};
+}
+function vivaStart(mode){ vivaBuild(mode); render(); }
+function vivaPick(idx){
+  const q = vivaState.qs[vivaState.i]; if(vivaState.picked!==null) return;
+  vivaState.picked = idx; if(q.opts[idx]===q.answer) vivaState.score++;
+  render();
+}
+function vivaNext(){
+  vivaState.i++; vivaState.picked=null;
+  if(vivaState.i>=vivaState.qs.length) vivaState.done=true;
+  render();
+}
+function vivaView(){
+  const w = el('<div></div>');
+  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Organic chemistry</div><h1 class="hm-title">Common <em>names viva.</em></h1></div>'));
+  const back = el('<div class="row" style="cursor:pointer"><div><div class="name">Back to notes</div></div><div class="end">Back</div></div>');
+  back.onclick = ()=>go('notehub');
+  if(!vivaState.mode){
+    const list = el('<div class="list"></div>');
+    [['name','Name to structure','See a common name, then pick its structure from four drawings.'],
+     ['structure','Structure to name','See a structure, then pick its common name from four options.'],
+     ['mixed','Mixed round','Both kinds of question, shuffled together.']].forEach(([m,t,d])=>{
+      const r = el('<div class="row"><div><div class="name">'+esc(t)+'</div><div class="meta">'+esc(d)+'</div></div><div class="end">Start</div></div>');
+      r.onclick = ()=>vivaStart(m); list.appendChild(r);
+    });
+    w.appendChild(el('<p class="meta" style="margin:6px 4px 16px">Ten questions. Common names are learned by memory, so the viva drills them until they stick.</p>'));
+    w.appendChild(list); w.appendChild(back); return w;
+  }
+  if(vivaState.done){
+    w.appendChild(el('<div class="card"><div class="eyebrow">Round complete</div><h2 class="hm-title" style="font-size:28px">'+vivaState.score+' of '+vivaState.qs.length+' <em>correct.</em></h2></div>'));
+    const again = el('<div class="row" style="cursor:pointer"><div><div class="name">Play again</div></div><div class="end">Start</div></div>');
+    again.onclick = ()=>vivaStart(vivaState.mode); w.appendChild(again); w.appendChild(back); return w;
+  }
+  const q = vivaState.qs[vivaState.i];
+  w.appendChild(el('<div class="eyebrow" style="margin:6px 4px 10px">Question '+(vivaState.i+1)+' of '+vivaState.qs.length+' · '+vivaState.score+' correct</div>'));
+  const prompt = q.type==='name'
+    ? '<div class="hm-title" style="font-size:26px">Which structure is <em>'+esc(q.answer)+'</em>?</div>'
+    : '<div class="hm-title" style="font-size:26px">What is the common name of this compound?</div>'+vivaDraw(q.answer);
+  w.appendChild(el('<div class="card" style="text-align:center">'+prompt+'</div>'));
+  const grid = el('<div class="viva-grid"></div>');
+  q.opts.forEach((o,idx)=>{
+    const label = q.type==='name' ? vivaDraw(o) : '<span>'+esc(VIVA_DATA[o].iupac? o : o)+'</span>';
+    const b = el('<button class="opt viva-opt" type="button">'+label+'</button>');
+    if(vivaState.picked!==null){
+      if(o===q.answer) b.classList.add('is-correct');
+      else if(idx===vivaState.picked) b.classList.add('is-wrong');
+      b.disabled = true;
+    }
+    b.onclick = ()=>vivaPick(idx);
+    grid.appendChild(b);
+  });
+  w.appendChild(grid);
+  if(vivaState.picked!==null){
+    const ok = q.opts[vivaState.picked]===q.answer;
+    w.appendChild(el('<div class="card viva-note"><div class="eyebrow">'+(ok?'Correct':'Not quite')+'</div><div>'+esc(q.answer)+' is <em>'+esc(VIVA_DATA[q.answer].iupac)+'</em> in IUPAC.</div></div>'));
+    const nxt = el('<button class="opt viva-next" type="button"><span>'+(vivaState.i+1>=vivaState.qs.length?'See result':'Next question')+'</span></button>');
+    nxt.onclick = vivaNext; w.appendChild(nxt);
+  }
+  return w;
+}
+
+function notehubView(){
+  const w = el('<div></div>');
+  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Study</div><h1 class="hm-title">Notes and <em>formulas.</em></h1></div>'));
+  { const list0 = el('<div class="list"></div>'); const vv = el('<div class="row"><div><div class="name">Common names viva</div><div class="meta">Name the compound from its drawing, or draw it from its name</div></div><div class="end">Open</div></div>'); vv.onclick = ()=>{ vivaState = {mode:null, qs:[], i:0, score:0, picked:null, done:false}; go('viva'); }; list0.appendChild(vv); const fc = el('<div class="row"><div><div class="name">Flashcards</div><div class="meta">Flip through every formula and concept, by chapter</div></div><div class="end">Open</div></div>'); fc.onclick = ()=>{ flashState = {chapter:null, i:0, flipped:false, pool:[], filter:'All', done:false, busy:false, enter:false}; go('flash'); }; list0.appendChild(fc); w.appendChild(list0); }
+  const chs = Object.keys(NOTES);
+  if(!chs.length){ w.appendChild(el('<div class="card empty">No notes yet.</div>')); return w; }
+  const claimed = new Set();
+  const groups = SUBJECTS.map(s=>({s, list: chaptersOf(s).filter(c=>NOTES[c])}));
+  groups.forEach(g=>g.list.forEach(c=>claimed.add(c)));
+  const other = chs.filter(c=>!claimed.has(c));
+  if(other.length) groups.push({s:'Other', list: other});
+  groups.forEach(g=>{
+    if(!g.list.length) return;
+    w.appendChild(el('<div class="nb-head" style="color:'+(SUBJ_VAR[g.s]||'var(--accent)')+'">'+esc(g.s)+'<span>'+g.list.length+' chapter'+(g.list.length===1?'':'s')+'</span></div>'));
+    const list = el('<div class="list"></div>');
+    g.list.forEach(c=>{
+      const row = el('<div class="row"><div><div class="name">'+esc(c)+'</div>'+wtTag(g.s, c)+'<div class="meta">'+NOTES[c].concepts.length+' concepts with worked examples</div></div><div class="end">Open</div></div>');
+      row.onclick = ()=>go('notes',{chapter:c});
+      list.appendChild(row);
+    });
+    w.appendChild(list);
+  });
   return w;
 }
 function notesView(){
@@ -3341,7 +4066,7 @@ function notesView(){
   w.appendChild(el('<div class="eyebrow">Revision notes</div>'));
   w.appendChild(el('<h1 class="title">'+esc(c)+'</h1>'));
   if(!data){ w.appendChild(el('<div class="card empty">Notes for this chapter are coming in a later batch.</div>')); return w; }
-  { const fb = el('<button class="btn block" style="margin:0 0 16px">Open flashcards</button>'); fb.onclick = ()=>{ flashState = {i:0, flipped:false}; go('flash'); }; w.appendChild(fb); }
+  { const fb = el('<button class="btn block" style="margin:0 0 16px">Practice this chapter</button>'); fb.onclick = ()=>flashStart(c, false); w.appendChild(fb); }
   w.appendChild(el('<div class="field">Formula cards</div>'));
   const fg = el('<div class="fcards"></div>');
   data.formulas.forEach(f=>fg.appendChild(fcardEl(f, c)));
@@ -3833,6 +4558,26 @@ function clearLocalData(){
   store = {bookmarks:[], errorLog:[], notes:{}, attempts:[]};
   sbSession = null;
 }
+// Logout confirmation: an in-app sheet in the app's own style, not the browser dialog
+function confirmLogout(onYes){
+  const scrim = el('<div class="scrim lo-scrim"></div>');
+  const box = el('<div class="sheet lo-sheet" role="alertdialog" aria-modal="true" aria-labelledby="lo-title" aria-describedby="lo-body">'
+    +'<div class="grab"></div>'
+    +'<div class="lo-mark" aria-hidden="true">'+torqSpinner(46)+'</div>'
+    +'<div class="eyebrow lo-eye">Account</div>'
+    +'<h2 class="lo-title" id="lo-title">Before you go</h2>'
+    +'<p class="lo-body" id="lo-body">Anything you haven’t synced yet will be removed from this device. You can log back in at any time to pick up where you left off.</p>'
+    +'<div class="lo-actions"><button class="btn block lo-stay" type="button">Keep studying</button>'
+    +'<button class="btn secondary block lo-out" type="button">Log out</button></div></div>');
+  function close(){ scrim.remove(); box.remove(); document.removeEventListener('keydown', onKey); }
+  function onKey(e){ if(e.key==='Escape') close(); }
+  box.querySelector('.lo-stay').onclick = close;
+  box.querySelector('.lo-out').onclick = ()=>{ close(); onYes(); };
+  scrim.onclick = close;
+  document.addEventListener('keydown', onKey);
+  document.body.appendChild(scrim); document.body.appendChild(box);
+  box.querySelector('.lo-stay').focus();
+}
 async function logOutNow(){
   const db = sbClient();
   if(db){ try{ await db.auth.signOut(); }catch(e){} }
@@ -3871,8 +4616,7 @@ function accountBlock(){
 
   const logout = el('<button class="btn block" type="button" style="margin-top:14px">Log out</button>');
   logout.onclick = ()=>{
-    if(!confirm('Log out? Answers that have not synced yet will be removed from this device.')) return;
-    logOutNow();
+    confirmLogout(()=>logOutNow());
   };
   w.appendChild(logout);
 
@@ -3968,7 +4712,7 @@ function mySolPart(){
   ids.forEach(id=>{
     const q = QMAP[id]; if(!q) return;
     const card = el('<div class="card"></div>');
-    card.appendChild(el('<div class="tags"><span class="tag">'+esc(q.chapter)+'</span><span class="tag shift">'+q.year+' · '+SHIFT_NAME[q.shift]+'</span></div>'));
+    card.appendChild(el('<div class="tags"><span class="tag">'+esc(q.chapter)+'</span><span class="tag shift">'+q.year+' · '+SHIFT_NAME[q.shift]+'</span>'+wtTag(q.subject,q.chapter)+'</div>'));
     card.appendChild(el('<div style="font-size:14.5px;line-height:1.55;margin-bottom:10px">'+esc(q.text.length>140?q.text.slice(0,140)+'…':q.text)+'</div>'));
     card.appendChild(el('<div class="field">My solution</div>'));
     card.appendChild(el('<div style="white-space:pre-wrap;line-height:1.5">'+esc(store.mySol[id])+'</div>'));
@@ -3978,7 +4722,7 @@ function mySolPart(){
 }
 function notebookCard(q, showNote){
   const card = el('<div class="card"></div>');
-  card.appendChild(el('<div class="tags"><span class="tag">'+esc(q.chapter)+'</span><span class="tag shift">'+q.year+' · '+SHIFT_NAME[q.shift]+'</span></div>'));
+  card.appendChild(el('<div class="tags"><span class="tag">'+esc(q.chapter)+'</span><span class="tag shift">'+q.year+' · '+SHIFT_NAME[q.shift]+'</span>'+wtTag(q.subject,q.chapter)+'</div>'));
   card.appendChild(el('<div style="font-size:14.5px;line-height:1.55;margin-bottom:10px">'+esc(q.text.length>140?q.text.slice(0,140)+'…':q.text)+'</div>'));
   const ta = el('<textarea placeholder="Add a note"></textarea>');
   ta.value = store.notes[q.id] || '';
@@ -4081,7 +4825,7 @@ function legalPaperView(key){
   d.paras.forEach(t=>sheet.appendChild(el('<section class="card lp-sec"><p class="lp-p">'+legalText(t)+'</p></section>')));
   if(d.links){ sheet.appendChild(el('<section class="card lp-sec lp-links"><div class="eyebrow">Official websites</div>'
     +'<p class="lp-p" style="margin:0">Syllabus, dates and rules are published on these sites. Open them to check the latest.</p>'
-    +d.links.map(l=>'<a class="lp-link" href="'+l.url+'" target="_blank" rel="noopener noreferrer"><span><b>'+esc(l.label)+'</b><small>'+esc(l.note)+'</small></span><em>&#8599;</em></a>').join('')
+    +d.links.map(l=>'<a class="lp-link" href="'+l.url+'" target="_blank" rel="noopener noreferrer"><span><b>'+esc(l.label)+'</b><small>'+esc(l.note)+'</small></span><em class="lp-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20C4 12 9 8 13 11C17 14 14 18 11 15C8 12 12 6 19 5"/><path d="M15 5h4v4"/></svg></em></a>').join('')
     +'</section>')); }
   sheet.appendChild(el('<div class="lp-foot">TORQ &middot; Legal</div>'));
   w.appendChild(sheet);
@@ -4193,7 +4937,7 @@ function pyqPractice(w){
     +'<div class="qc-pts">'+(session.points||0)+' pts</div></div>'));
 
   const card = el('<div class="card qcard" style="--bar:'+(SUBJ_VAR[q.subject]||'')+'"></div>');
-  card.appendChild(el('<div class="tags"><span class="tag shift">'+q.year+' · '+SHIFT_NAME[q.shift]+'</span><span class="tag diff diff-'+q.difficulty.toLowerCase()+'">'+q.difficulty+'</span><span class="tag">'+esc(q.topic)+'</span></div>'));
+  card.appendChild(el('<div class="tags"><span class="tag shift">'+q.year+' · '+SHIFT_NAME[q.shift]+'</span><span class="tag diff diff-'+q.difficulty.toLowerCase()+'">'+q.difficulty+'</span><span class="tag">'+esc(q.topic)+'</span>'+wtTag(q.subject,q.chapter)+'</div>'));
   card.appendChild(el('<div class="qtext">'+qtextHTML(q.text)+'</div>'));
   if(q.image) card.appendChild(qImage(q.image));
 
@@ -4595,7 +5339,7 @@ function qotdCard(){
   const c = el('<div class="card qotd'+(st?' st-'+st:'')+'"><div class="eyebrow">Question of the day</div>'
     +'<div class="tags"><span class="tag subj subj-'+q.subject.toLowerCase()+'">'+esc(q.subject)+'</span>'
     +'<span class="tag shift">'+esc(q.year+' · '+SHIFT_NAME[q.shift])+'</span>'
-    +'<span class="tag diff diff-'+q.difficulty.toLowerCase()+'">'+esc(q.difficulty)+'</span></div>'
+    +'<span class="tag diff diff-'+q.difficulty.toLowerCase()+'">'+esc(q.difficulty)+'</span>'+wtTag(q.subject,q.chapter)+'</div>'
     +'<div class="qtext qclamp">'+qtextHTML(q.text)+'</div></div>');
   if(qotdOpen) c.appendChild(el('<div class="note">Answer: '+esc(answerLabel(q))+'. '+esc(q.explanation)+'</div>'));
   const actions = el('<div class="qotd-actions"></div>');
