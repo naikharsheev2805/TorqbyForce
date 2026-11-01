@@ -338,7 +338,7 @@ details summary::-webkit-details-marker{display:none;}
 .picker .pl{ color:var(--muted); font-size:13px; }
 .picker .pv{ font-weight:600; display:flex; align-items:center; gap:10px; }
 .picker .pv::after{ content:""; width:7px; height:7px; border-right:2px solid var(--muted); border-bottom:2px solid var(--muted); transform:rotate(45deg); margin-top:-3px; border-radius:1px; }
-.scrim{ position:fixed; inset:0; background:var(--scrim); z-index:20; animation:fade var(--dur-fast) linear; }
+.scrim{ position:fixed; inset:0; background:var(--scrim); z-index:20; animation:fade var(--dur-fast) linear; touch-action:none; overscroll-behavior:contain; }
 .sheet{ position:fixed; left:0; right:0; bottom:0; margin:0 auto; max-width:640px; z-index:21; background:var(--surface); border:1px solid var(--border);
   border-radius:var(--r-xl) 22px 0 0; padding:10px 14px calc(16px + env(safe-area-inset-bottom,0px)); box-shadow:var(--shadow-sheet); animation:sheetUp var(--dur) var(--ease); }
 .sheet .grab{ width:40px; height:4px; border-radius:99px; background:var(--border); margin:2px auto 12px; }
@@ -1898,11 +1898,6 @@ body.has-nav .build-stamp{ margin-bottom:calc(96px + env(safe-area-inset-bottom,
 .qcard.qsplit .qside-r .opt{ margin-bottom:10px; }
 
 /* ---- Full screen: the bars hide; they come back only from the exact top or bottom edge ---- */
-html.immersive .header, html.immersive .navtog{ transition:transform .35s ease, opacity .35s ease; transform:translateY(-130%); opacity:0; }
-html.immersive .bottomnav{ transition:transform .35s ease, opacity .35s ease; transform:translateY(130%); opacity:0; }
-html.immersive.show-top .header, html.immersive.show-top .navtog{ transform:none; opacity:1; }
-html.immersive.show-bottom .bottomnav{ transform:none; opacity:1; }
-@media (prefers-reduced-motion: reduce){ html.immersive .header, html.immersive .navtog, html.immersive .bottomnav{ transition:none; } }
 
 /* ---- Logout sheet sits above the menu, and enters visibly ---- */
 .lo-scrim{ z-index:80 !important; }
@@ -5744,8 +5739,13 @@ function openReportDetail(r){
     };
     drawPriority();
     body.appendChild(el('<div class="ad-label">Status</div>'));
-    const st = chipRow(ADMIN_STATUS, sel.status, ()=>{});
-    body.appendChild(st);
+    let stRow = null;
+    const drawStatus = ()=>{
+      const next = chipRow(ADMIN_STATUS, sel.status, v=>{ sel.status = v; drawStatus(); });
+      if(stRow) stRow.replaceWith(next); else body.appendChild(next);
+      stRow = next;
+    };
+    drawStatus();
     body.appendChild(el('<div class="ad-label">Your note (only the team sees this)</div>'));
     const memo = el('<textarea class="ad-reply" rows="3" placeholder="For example: checked against the official key, fixed in v2"></textarea>');
     memo.value = r.admin_note || '';
@@ -7499,64 +7499,28 @@ document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState 
 ['pointerdown','keydown'].forEach(ev=>document.addEventListener(ev, keepAwake, {passive:true}));
 keepAwake();
 
-// Full screen detection, and the reveal rule: bars show only when the page is pulled from the exact top or bottom edge
-(function immersiveInit(){
-  const root = document.documentElement;
-  const fsQuery = window.matchMedia('(display-mode: fullscreen)');
-  let timer = null;
-  const immersive = ()=> root.classList.contains('immersive');
-  const atTop = ()=> window.scrollY <= 0;
-  const atBottom = ()=> Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight;
-  // At the very top of the page the header and menu stay on screen; they only leave once the page scrolls away
-  const pinTop = ()=>{
-    if(immersive() && atTop()){
-      root.classList.add('show-top');
-      root.classList.remove('show-bottom');
-    }
-  };
-  const leaveTop = ()=>{
-    if(!atTop()) root.classList.remove('show-top');
-  };
-  const hideBottom = ()=>{ root.classList.remove('show-bottom'); };
+
+// ---------- Pop-ups never let the page behind them move ----------
+(function scrollLockInit(){
+  let saved = 0, locked = false;
+  const overlayOpen = ()=> !!document.querySelector('.scrim, .navscrim.on');
   function sync(){
-    const on = fsQuery.matches || !!document.fullscreenElement;
-    root.classList.toggle('immersive', on);
-    clearTimeout(timer);
-    if(!on){ root.classList.remove('show-top','show-bottom'); return; }
-    pinTop();
+    const want = overlayOpen();
+    if(want === locked) return;
+    locked = want;
+    const b = document.body;
+    if(want){
+      saved = window.scrollY;
+      b.style.position = 'fixed'; b.style.top = (-saved)+'px';
+      b.style.left = '0'; b.style.right = '0'; b.style.width = '100%';
+    } else {
+      b.style.position = ''; b.style.top = '';
+      b.style.left = ''; b.style.right = ''; b.style.width = '';
+      window.scrollTo(0, saved);
+    }
   }
-  if(fsQuery.addEventListener) fsQuery.addEventListener('change', sync); else fsQuery.addListener(sync);
-  document.addEventListener('fullscreenchange', sync);
+  new MutationObserver(sync).observe(document.body, {childList:true});
   sync();
-  let y0 = null;
-  window.addEventListener('touchstart', e=>{ y0 = e.touches[0].clientY; }, {passive:true});
-  window.addEventListener('touchmove', e=>{
-    if(y0 == null || !immersive()) return;
-    const dy = e.touches[0].clientY - y0;
-    if(atTop() && dy > 24) pinTop();
-    else if(atBottom() && dy < -24){
-      root.classList.add('show-bottom');
-      root.classList.remove('show-top');
-      clearTimeout(timer);
-      timer = setTimeout(hideBottom, 2400);
-    }
-  }, {passive:true});
-  window.addEventListener('touchend', ()=>{ y0 = null; });
-  window.addEventListener('wheel', e=>{
-    if(!immersive()) return;
-    if(atTop() && e.deltaY < -8) pinTop();
-    else if(atBottom() && e.deltaY > 8){
-      root.classList.add('show-bottom');
-      root.classList.remove('show-top');
-      clearTimeout(timer);
-      timer = setTimeout(hideBottom, 2400);
-    }
-  }, {passive:true});
-  window.addEventListener('scroll', ()=>{
-    if(!immersive()) return;
-    if(atTop()) pinTop();
-    else { leaveTop(); if(!atBottom()) hideBottom(); }
-  }, {passive:true});
 })();
 </script>
 </body>
