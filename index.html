@@ -846,10 +846,10 @@ svg.wm-lg{ --torq-stroke:1.9; }
   font-family:Lora,Georgia,serif; color:var(--text);
   background:linear-gradient(160deg, color-mix(in srgb,var(--c-medium) 18%, var(--surface)), var(--surface-2));
   border:1px solid color-mix(in srgb,var(--c-medium) 55%, transparent);
-  box-shadow:0 0 0 3px color-mix(in srgb,var(--c-medium) 10%, transparent), 0 10px 24px -14px var(--shadow); }
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--c-medium) 10%, transparent), 0 10px 24px -14px var(--shadow); overflow:hidden; }
 .sog-mark b{ font-weight:700; font-size:17px; letter-spacing:.02em; background:linear-gradient(120deg,var(--c-medium),var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent; }
 .sog-mark small{ font-weight:600; font-size:12px; color:var(--c-medium); margin:0 1px; }
-.sog-mark::after{ content:""; position:absolute; top:0; bottom:0; left:-50%; width:40%; z-index:-1; border-radius:12px;
+.sog-mark::after{ content:""; position:absolute; top:0; bottom:0; left:-50%; width:40%; z-index:0; border-radius:12px; pointer-events:none;
   background:linear-gradient(100deg, transparent, color-mix(in srgb,var(--c-medium) 30%, transparent), transparent); animation:sogSheen 5s ease-in-out infinite; }
 .sog-mark.sog-lg{ padding:10px 20px 10px 18px; border-radius:16px; }
 .sog-mark.sog-lg b{ font-size:30px; }
@@ -1487,6 +1487,17 @@ img{ -webkit-user-drag:none; }
   .fx2-front{ font-size:clamp(22px,2.1vw,30px); }
 }
 @media (min-width:1100px){ .fl-wrap{ max-width:1160px; } .fx2-stack, .fx2-under{ width:min(36vw,440px); } }
+
+/* ---------- SoG points, shown in the rules popup ---------- */
+.sog-pts{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:14px 0 10px; }
+.sog-pts > div{ display:flex; justify-content:space-between; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:var(--surface-2); }
+.sog-pts span{ font:500 12.5px Inter,sans-serif; color:var(--muted); }
+.sog-pts b{ font:600 16px Inter,sans-serif; color:var(--text); }
+.sog-note{ font-size:13px; opacity:.85; }
+/* ---------- Question figures: dark themes show light lines on the card's own colour ---------- */
+.qfig{ background:var(--surface); border-radius:12px; padding:6px; display:flex; justify-content:center; isolation:isolate; margin:10px auto; }
+.qfig img{ display:block; max-width:100%; height:auto; border-radius:0; margin:0 !important; }
+.qfig.inv img{ filter:invert(1); mix-blend-mode:screen; }
 </style>
 </head>
 <body>
@@ -1595,8 +1606,9 @@ function optBody(q, i){
 }
 function qImage(src){
   const im = el('<img class="qimg" alt="Question figure" loading="lazy" src="'+esc(src)+'">');
-  im.onerror = ()=>im.remove();   // images are optional until extracted
-  return im;
+  const fig = el('<div class="qfig'+(isDarkTheme()?' inv':'')+'"></div>'); fig.appendChild(im);
+  im.onerror = ()=>fig.remove();   // images are optional until extracted
+  return fig;
 }
 function sameAnswer(a, b){
   const x = String(a).replace(/\u2212/g,'-').trim(), y = String(b).replace(/\u2212/g,'-').trim();
@@ -2064,7 +2076,7 @@ function showRulesSplash(then, mode){
       +'<p class="rules-body">Each correct answer gives <b>+4</b>. Each wrong answer gives <b>−1</b>. An unanswered question gives <b>0</b>. Your marks are shown when you submit. A mock does not change your points or the leaderboard.</p>'
     : '<div class="rules-mark">'+sogMark('lg')+'</div><div class="eyebrow">Before you start</div>'
       +'<h2 class="rules-title">Every answer needs an honest call.</h2>'
-      +'<p class="rules-body">Before you answer, choose <b>Sure</b> or <b>Guessing</b>. An answer without a choice is <b>nullified</b>: no points, no accuracy. Skip anything you cannot attempt.</p>';
+      +'<p class="rules-body">Before you answer, choose <b>Sure</b> or <b>Guessing</b>. An answer without a choice is <b>nullified</b>: no points, no accuracy. Skip anything you cannot attempt.</p>'+'<div class="sog-pts"><div><span>Sure, correct</span><b>+6</b></div><div><span>Guess, correct</span><b>+3</b></div><div><span>Sure, wrong</span><b>−1</b></div><div><span>Guess, wrong</span><b>−3</b></div></div>'+'<p class="rules-body sog-note">Answer correctly within two minutes to earn up to +2 extra. Skipped or nullified questions score 0.</p>';
   const ov = el('<div class="rules-splash" role="dialog" aria-modal="true"><div class="rules-card">'
     +head
     +'<button class="btn block rules-ok" type="button">Okay, I understand</button></div></div>');
@@ -2075,6 +2087,7 @@ function showRulesSplash(then, mode){
     then();
   };
 }
+let lastOrigin = null;   // the page the student was on before a practice set started
 function startSession(o){
   if(o.mode==='mock'){ showRulesSplash(()=>startSessionNow(o), 'mock'); return; }
   if(!((store.rulesSeen||{})[dayKey()])){ showRulesSplash(()=>startSessionNow(o)); return; }
@@ -2084,6 +2097,9 @@ function startSessionNow(o){
   if(!o.queue.length){ alert('No questions match this selection yet.'); return; }
   session = {mode:o.mode, title:o.title, queue:o.queue, idx:0, answers:{}, hints:{}, marks:{}, times:{}, draft:{}, conf:{}, pad:{}, started:{}, points:0, navOpen:false,
              qStart:Date.now(), sessionStart:Date.now(), limit:o.limit||0, submitted:false};
+  lastOrigin = {view: view, nav: JSON.parse(JSON.stringify(nav))};   // where the student was before the set began
+  session.origin = lastOrigin;
+  go('practice');
   go('practice');
   if(session.limit){ if(window.__t) clearInterval(window.__t); window.__t=setInterval(tickMock,1000); tickMock(); }
   else { if(window.__t) clearInterval(window.__t); window.__t=setInterval(tickQ,1000); tickQ(); }
@@ -2109,7 +2125,7 @@ function tickMock(){
   if(arc){ arc.style.strokeDashoffset = Math.min(100,100-remain/session.limit*100).toFixed(1); arc.parentNode.parentNode.classList.toggle('warn', remain<=300); }
   if(remain===300) announce('5 minutes left'); else if(remain===60) announce('1 minute left');
 }
-function exitSession(){ if(window.__t) clearInterval(window.__t); finalizeSkips(); session=null; go('home'); }
+function exitSession(){ if(window.__t){ clearInterval(window.__t); window.__t=null; } try{ finalizeSkips(); }catch(e){} session=null; leaveArmed=0; const origin = lastOrigin; lastOrigin=null; if(origin){ Object.assign(nav, origin.nav); view = origin.view || 'home'; saveLastView(); render(); window.scrollTo(0,0); } else go('home'); }
 
 function answerPYQ(i){
   const q = session.queue[session.idx];
@@ -2632,8 +2648,9 @@ let leaveArmed = 0;
 function practiceLeavePending(){ return !!(session && session.mode!=='mock' && !session.review && !session.submitted && hasPending()); }
 function finalizeLeave(){
   if(!session) return;
-  submitPractice(true);
-  finalizeSkips();
+  if(window.__t){ clearInterval(window.__t); window.__t=null; }
+  try{ submitPractice(true); }catch(e){ console.error(e); }
+  try{ finalizeSkips(); }catch(e){}
   session = null;
   leaveArmed = 0;
 }
