@@ -1,13 +1,10 @@
 <!doctype html><html lang="en"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
 /* ---------- Leaderboard + visibility toggle ---------- */
 .lb-row{ display:flex; align-items:center; gap:var(--sp-3); }
-.lb-rank{ width:28px; text-align:center; font-weight:600; color:var(--muted); font-variant-numeric:tabular-nums; flex-shrink:0; }
 .lb-av{ width:36px; height:36px; border-radius:50%; overflow:hidden; background:var(--surface-2); display:grid; place-items:center; flex-shrink:0; font-weight:600; color:var(--muted); }
 .lb-av img{ width:100%; height:100%; object-fit:cover; display:block; }
 .lb-name{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:500; }
-.lb-name small{ color:var(--muted); font-weight:400; }
 .lb-pts{ font-variant-numeric:tabular-nums; font-weight:600; flex-shrink:0; }
-.lb-me{ background:var(--accent-soft); }
 .lb-prev{ background:var(--surface-2); border-radius:var(--r-md); padding:var(--sp-3); margin-top:var(--sp-2); cursor:default; }
 .vis-toggle{ display:flex; align-items:center; gap:var(--sp-3); margin-top:var(--sp-2); cursor:pointer; }
 .vis-toggle input{ position:absolute; opacity:0; width:1px; height:1px; }
@@ -28,6 +25,11 @@ html, body{ overscroll-behavior-y:none; }
 #app > .card, #app > .list, #app > .big-card, #app > .cal-card, #app > .exam-row, #app > .subjgrid, #app > .stats, #app > figure.qcard, #app > .hm-hero{ margin-bottom:14px; }
 /* Audit trail */
 .ad-audit p{ margin:6px 0; font-size:13.5px; color:var(--muted); }
+/* Practice: the Previous / Next row sits above the card decoration, and never selects text when tapped */
+.qcard .qnav-row, .qcard > .row{ position:relative; z-index:2; user-select:none; -webkit-user-select:none; -webkit-tap-highlight-color:transparent; }
+.qcard .qnav-row button, .qcard > .row button{ position:relative; z-index:2; }
+/* Custom test: the two pickers stack on phones and sit side by side on wider screens */
+@media (max-width:520px){ .two{ grid-template-columns:minmax(0,1fr); } }
 /* Batch 2 finish: spotlight, digest, sent replies */
 .ad-spot h3{ font:500 19px/1.3 Lora,Georgia,serif; margin:6px 0 4px; }
 .ad-digest .ad-trend{ display:flex; align-items:flex-end; gap:6px; margin-top:12px; }
@@ -338,7 +340,7 @@ details summary::-webkit-details-marker{display:none;}
 /* ---------- Redesign: subject identity ---------- */
 .bar i{ background:var(--bar,var(--accent)); }
 .qcard{ position:relative; overflow:hidden; padding:22px 20px 20px 26px; }
-.qcard::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--bar,var(--border)); }
+.qcard::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--bar,var(--border)); pointer-events:none; }
 
 /* ---------- Redesign: question card feel ---------- */
 .qtext{ font-family:Lora,Georgia,serif; font-size:17.5px; line-height:1.6; }
@@ -424,7 +426,7 @@ details summary::-webkit-details-marker{display:none;}
 .qcard{position:relative; margin:0 0 16px; padding:26px 24px 22px; border-radius:var(--r-xl); border:1px solid var(--border);
   background:radial-gradient(120% 140% at 0% 0%, var(--accent-soft) 0%, var(--surface) 62%); overflow:hidden;
   box-shadow:0 14px 34px -22px rgba(0,0,0,.45); min-width:0;}
-.qcard::after{content:""; position:absolute; right:-50px; bottom:-70px; width:190px; height:190px; border-radius:50%;
+.qcard::after{content:""; pointer-events:none; position:absolute; right:-50px; bottom:-70px; width:190px; height:190px; border-radius:50%;
   background:var(--accent); opacity:.07; pointer-events:none;}
 .qmark{position:absolute; top:-22px; right:14px; font:600 120px/1 Lora,Georgia,serif; color:var(--accent-text); opacity:.22; pointer-events:none; user-select:none;}
 .qcard .eyebrow{position:relative; color:var(--accent-text); text-transform:uppercase; letter-spacing:.14em; font-size:11px; margin-bottom:14px;}
@@ -1272,59 +1274,58 @@ html, body, #app, #app *{ -webkit-user-select:none; user-select:none; -webkit-to
 input, textarea, select, [contenteditable="true"]{ -webkit-user-select:text; user-select:text; -webkit-touch-callout:default; }
 img{ -webkit-user-drag:none; }
 
-/* ---------- Leaderboard: boards, periods, podium ---------- */
-.lb-boards{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-2); margin:0 0 var(--sp-3); }
-.lb-tile{ position:relative; display:flex; flex-direction:column; align-items:flex-start; gap:3px; min-width:0; text-align:left; font:inherit; color:var(--text); background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:12px 14px; cursor:pointer; transition:border-color .15s, background .15s, box-shadow .15s; }
-.lb-tile b{ font:600 var(--fs-2) Inter,sans-serif; }
-.lb-tile small{ font:400 12px/1.35 Inter,sans-serif; opacity:.7; }
-.lb-tile:hover{ border-color:var(--accent-text); }
-.lb-tile.on{ background:var(--accent-soft); border-color:var(--accent-text); box-shadow:inset 0 0 0 1px var(--accent); }
-.lb-bar{ margin:0 0 var(--sp-3); }
-.lb-bar .picker{ width:100%; }
-.lb-podium{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-3); margin:var(--sp-3) 0 var(--sp-4); }
-.lb-card{ position:relative; overflow:hidden; isolation:isolate; min-width:0; display:flex; flex-direction:column; align-items:center; text-align:center; gap:var(--sp-2);
-  background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--sp-4) var(--sp-3);
-  box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 22%,transparent), 0 6px 20px color-mix(in srgb,var(--accent) 12%,transparent);
-  animation:lbRise .6s var(--ease) both, lbGlow 3.4s ease-in-out infinite; }
-.lb-card::before{ content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
-  background:linear-gradient(105deg, transparent 38%, color-mix(in srgb,var(--text) 16%,transparent) 50%, transparent 62%);
-  transform:translateX(-120%); animation:lbGlint 3.8s ease-in-out infinite; }
-.lb-r2::before{ animation-delay:.9s; } .lb-r3::before{ animation-delay:1.8s; }
-.lb-r2, .lb-r3{ min-height:176px; animation-delay:.1s, .3s; }
-.lb-r2, .lb-r3{ animation-delay:0s, 0s; }
-.lb-r3{ animation-delay:.12s, 1s; }
-.lb-r2{ animation-delay:.06s, .8s; }
-.lb-card .lb-av{ width:54px; height:54px; border-radius:50%; overflow:hidden; background:var(--surface-2); display:grid; place-items:center; color:var(--muted); font-weight:600; font-size:var(--fs-4); }
-.lb-card .lb-av img{ width:100%; height:100%; object-fit:cover; display:block; }
-.lb-medal{ font:500 var(--fs-2) Lora,Georgia,serif; color:var(--muted); font-variant-numeric:tabular-nums; }
-.lb-who{ display:flex; flex-direction:column; min-width:0; max-width:100%; }
-.lb-who .lb-name{ font:500 var(--fs-4) Lora,Georgia,serif; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:100%; }
-.lb-who small{ color:var(--muted); font-size:var(--fs-1); }
-.lb-score{ font:500 var(--fs-5) Lora,Georgia,serif; font-variant-numeric:tabular-nums; color:var(--accent-text); }
-/* Rank 1: the showpiece */
-.lb-r1{ grid-column:1/-1; padding:40px var(--sp-4) var(--sp-5); border-color:var(--accent-text);
-  box-shadow:0 0 0 1px var(--accent), 0 10px 34px color-mix(in srgb,var(--accent) 34%,transparent);
-  animation:lbRise .7s var(--ease) both, lbGlowStrong 2.6s ease-in-out infinite; }
-.lb-r1 .lb-av{ width:84px; height:84px; box-shadow:0 0 0 3px var(--accent), 0 0 18px color-mix(in srgb,var(--accent) 50%,transparent); }
-.lb-r1 .lb-who .lb-name{ font-size:21px; }
-.lb-r1::before{ background:linear-gradient(100deg, transparent 30%, color-mix(in srgb,var(--accent) 45%,transparent) 50%, transparent 70%); animation-duration:2.8s; }
-.lb-r1::after{ content:""; position:absolute; inset:-1px; z-index:-1; pointer-events:none; border-radius:inherit;
-  background:radial-gradient(circle at 50% 0%, color-mix(in srgb,var(--accent) 26%,transparent), transparent 62%); animation:lbPulse 2.6s ease-in-out infinite; }
-.lb-r1 .lb-score{ font-size:26px; background:linear-gradient(90deg,var(--accent),var(--text) 48%,var(--accent)); background-size:220% 100%;
-  -webkit-background-clip:text; background-clip:text; color:transparent; animation:lbShimmer 3.2s linear infinite; }
-.lb-crown{ position:absolute; top:12px; left:50%; color:var(--accent-text); animation:lbCrown 2.6s ease-in-out infinite; transform-origin:center; }
-.lb-crown svg{ display:block; }
-.lb-card.lb-me{ outline:1px dashed var(--accent); outline-offset:3px; }
-@keyframes lbRise{ from{ opacity:0; transform:translateY(12px) scale(.98); } }
-@keyframes lbGlint{ 0%,50%{ transform:translateX(-120%); } 100%{ transform:translateX(120%); } }
-@keyframes lbGlow{ 0%,100%{ box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 22%,transparent), 0 6px 20px color-mix(in srgb,var(--accent) 12%,transparent); }
-  50%{ box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 40%,transparent), 0 10px 28px color-mix(in srgb,var(--accent) 24%,transparent); } }
-@keyframes lbGlowStrong{ 0%,100%{ box-shadow:0 0 0 1px var(--accent), 0 10px 30px color-mix(in srgb,var(--accent) 30%,transparent); }
-  50%{ box-shadow:0 0 0 2px var(--accent), 0 14px 46px color-mix(in srgb,var(--accent) 58%,transparent); } }
-@keyframes lbPulse{ 0%,100%{ opacity:.55; } 50%{ opacity:1; } }
-@keyframes lbCrown{ 0%,100%{ transform:translate(-50%,0) rotate(-5deg); } 50%{ transform:translate(-50%,-4px) rotate(5deg); } }
-@keyframes lbShimmer{ to{ background-position:220% 0; } }
-@media (min-width:700px){ .lb-podium{ gap:var(--sp-4); } .lb-r2, .lb-r3{ min-height:200px; } }
+/* ---------- Leaderboard ---------- */
+.lb-seg{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:4px; padding:4px; margin:0 0 var(--sp-3); background:var(--surface-2); border:1px solid var(--border); border-radius:var(--r-lg); }
+.lb-seg button{ min-width:0; padding:10px 2px; border:0; border-radius:calc(var(--r-lg) - 4px); background:transparent; color:var(--muted); font:600 var(--fs-2) Inter,sans-serif; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:background var(--dur-fast), color var(--dur-fast); -webkit-tap-highlight-color:transparent; }
+.lb-seg button.on{ background:var(--surface); color:var(--accent-text); box-shadow:0 0 0 1px var(--accent-text), 0 6px 14px -8px var(--shadow); }
+.lb-seg button:focus-visible{ outline:2px solid var(--accent); outline-offset:1px; }
+.lb-bar{ margin:0 0 var(--sp-2); }
+.lb-blurb{ margin:var(--sp-2) 2px var(--sp-3); font-size:var(--fs-2); color:var(--muted); }
+/* Your standing */
+.lb-you{ display:flex; align-items:center; justify-content:space-between; gap:var(--sp-3); padding:var(--sp-3) var(--sp-4); margin:0 0 var(--sp-3); background:var(--accent-soft); border:1px solid color-mix(in srgb,var(--accent) 45%,transparent); border-radius:var(--r-xl); }
+.lb-you-k{ font-size:11px; letter-spacing:.16em; text-transform:uppercase; font-weight:700; color:var(--accent-text); }
+.lb-you-rank{ font:500 28px/1.1 Lora,Georgia,serif; margin-top:2px; font-variant-numeric:tabular-nums; }
+.lb-you-score{ text-align:right; font:600 var(--fs-3) Inter,sans-serif; font-variant-numeric:tabular-nums; min-width:0; }
+.lb-you-score small{ display:block; margin-top:2px; font-weight:400; font-size:var(--fs-1); color:var(--muted); }
+.lb-you.off{ background:var(--surface); border-color:var(--border); }
+.lb-you.off p{ margin:0; font-size:var(--fs-2); color:var(--muted); }
+/* Podium */
+.lb-pod{ display:grid; grid-template-columns:1fr 1.14fr 1fr; gap:var(--sp-2); align-items:end; padding:var(--sp-5) var(--sp-3) 0; margin:0 0 var(--sp-3); background:var(--surface); border:1px solid var(--border); border-radius:var(--r-xl); box-shadow:0 14px 30px -24px var(--shadow); overflow:hidden; animation:lbIn .45s var(--ease) both; }
+.lb-pc{ position:relative; display:flex; flex-direction:column; align-items:center; min-width:0; text-align:center; }
+.lb-pc .lb-av{ width:52px; height:52px; font-size:var(--fs-4); box-shadow:0 0 0 2px var(--border); }
+.lb-pc.p1 .lb-av{ width:68px; height:68px; font-size:var(--fs-5); box-shadow:0 0 0 2px var(--accent); }
+.lb-pc.me .lb-av{ box-shadow:0 0 0 2px var(--accent), 0 0 0 5px var(--accent-soft); }
+.lb-crown{ color:var(--accent-text); margin-bottom:4px; line-height:0; }
+.lb-pn{ max-width:100%; margin-top:var(--sp-2); font:500 var(--fs-3) Lora,Georgia,serif; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.lb-pc.p1 .lb-pn{ font-size:var(--fs-4); }
+.lb-pc.me .lb-pn{ color:var(--accent-text); }
+.lb-ps{ max-width:100%; margin:2px 0 var(--sp-3); font:600 var(--fs-2) Inter,sans-serif; font-variant-numeric:tabular-nums; color:var(--accent-text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.lb-ped{ width:100%; display:grid; place-items:center; height:44px; border-radius:10px 10px 0 0; background:var(--surface-2); color:var(--muted); font:500 26px/1 Lora,Georgia,serif; font-variant-numeric:tabular-nums; }
+.lb-pc.p1 .lb-ped{ height:72px; background:var(--accent-soft); color:var(--accent-text); }
+.lb-pc.p2 .lb-ped{ height:56px; }
+/* Ranked list (4th place onwards) */
+.lb-item{ display:flex; align-items:center; gap:var(--sp-3); padding:12px 16px; border-bottom:1px solid var(--border); min-width:0; }
+.lb-item:last-child{ border-bottom:0; }
+.lb-item.me{ background:var(--accent-soft); }
+.lb-no{ width:30px; flex-shrink:0; text-align:center; font:500 var(--fs-3) Lora,Georgia,serif; color:var(--muted); font-variant-numeric:tabular-nums; }
+.lb-who{ flex:1; min-width:0; display:flex; flex-direction:column; }
+.lb-who b{ font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.lb-who small{ font-size:var(--fs-1); color:var(--muted); }
+.lb-who em{ font-style:normal; font-size:var(--fs-1); font-weight:600; color:var(--accent-text); }
+.lb-sc{ flex-shrink:0; font-weight:600; font-variant-numeric:tabular-nums; }
+.lb-gap{ text-align:center; padding:2px 0 4px; letter-spacing:.4em; color:var(--muted); border-bottom:1px solid var(--border); }
+.lb-av i{ font-style:normal; }
+/* Loading, empty and error */
+.lb-skel i{ display:block; border-radius:99px; background:linear-gradient(90deg,var(--surface-2) 25%,color-mix(in srgb,var(--text) 10%,var(--surface-2)) 50%,var(--surface-2) 75%); background-size:200% 100%; animation:lbSkel 1.4s linear infinite; }
+.lb-state{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:var(--sp-2); padding:32px var(--sp-4); background:var(--surface); border:1px solid var(--border); border-radius:var(--r-xl); }
+.lb-state svg{ color:var(--accent-text); opacity:.85; }
+.lb-state b{ font:500 var(--fs-4) Lora,Georgia,serif; }
+.lb-state p{ margin:0; max-width:32ch; font-size:var(--fs-2); color:var(--muted); }
+.lb-state .btn{ margin-top:var(--sp-2); }
+@keyframes lbIn{ from{ opacity:0; transform:translateY(10px); } }
+@keyframes lbSkel{ to{ background-position:-200% 0; } }
+@media (min-width:700px){ .lb-pod{ gap:var(--sp-4); padding-left:var(--sp-5); padding-right:var(--sp-5); } .lb-pc .lb-av{ width:60px; height:60px; } .lb-pc.p1 .lb-av{ width:78px; height:78px; } }
+@media (prefers-reduced-motion: reduce){ .lb-pod, .lb-skel i{ animation:none; } }
 /* ---------- Legal sections: the app's own language (outlined serif numerals, drop caps, glass, a hairline) ---------- */
 .lp-sec{ border:1px solid var(--border) !important; background:linear-gradient(160deg,var(--surface),var(--surface-2)) !important; box-shadow:0 22px 44px -32px var(--shadow) !important; padding:26px 24px 26px 24px !important; }
 .lp-sec::before{ content:counter(lp,decimal-leading-zero) !important; left:auto !important; right:20px !important; top:12px !important; font:500 46px/1 Lora,Georgia,serif !important;
@@ -1751,7 +1752,6 @@ body{ overflow-x:clip; }
   .fl-sec b{font-size:13px}
   .lp-no, .lp-kind{font-size:13px}
   .lp-foot{font-size:13px}
-  .lb-tile small{font-size:13px}
   .nb-head{font-size:13px}
   .wt{font-size:13px}
   .fx2-count{font-size:13px}
@@ -2458,6 +2458,7 @@ async function loadBank(){
     console.error(e);
   }
   buildIndexes();
+  restoreSessionSnapshot();
 }
 function buildIndexes(){
   QMAP = Object.fromEntries(QUESTIONS.map(q=>[q.id,q]));
@@ -3148,6 +3149,30 @@ function submitPractice(silent){
   saveSessionRecord();
   if(!silent) go('results');
 }
+// Practice sessions survive a refresh: the question, answers, marks and timers are saved and restored
+const SESSION_SNAP_KEY = 'torq.session.v1';
+function saveSessionSnapshot(){
+  try{
+    if(!session){ return; }                                   // nothing loaded yet: keep the saved copy
+    if(session.submitted || session.review){ localStorage.removeItem(SESSION_SNAP_KEY); return; }
+    const snap = Object.assign({}, session, {queue: undefined, queueIds: session.queue.map(q=>q.id)});
+    localStorage.setItem(SESSION_SNAP_KEY, JSON.stringify(snap));
+  }catch(e){}
+}
+function restoreSessionSnapshot(){
+  let snap = null;
+  try{ snap = JSON.parse(localStorage.getItem(SESSION_SNAP_KEY)); }catch(e){}
+  if(!snap || !snap.queueIds || !snap.queueIds.length || snap.submitted || snap.review) return;
+  const queue = snap.queueIds.map(id=>QUESTIONS.find(q=>q.id===id));
+  if(queue.some(q=>!q)) return;                              // the question bank changed: start clean
+  delete snap.queueIds;
+  session = Object.assign(snap, {queue: queue, qStart: Date.now(), navOpen: false});
+  view = 'practice';
+  if(window.__t) clearInterval(window.__t);
+  if(session.limit){ const tk = session.mode==='mock' ? tickMock : tickExam; window.__t = setInterval(tk,1000); tk(); }
+  else { window.__t = setInterval(tickQ,1000); tickQ(); }
+  render();
+}
 function hasPending(){ return !!(session && !session.submitted && session.queue && session.queue.some(q=>session.answers[q.id] && session.answers[q.id].pending)); }
 // Keeps a record of every submitted set, so it can be reviewed later from Me > History
 function saveSessionRecord(){
@@ -3272,7 +3297,7 @@ function attemptFields(a){
     skipped: !!a.skipped,
     time_ms: a.t != null ? Math.round(a.t * 1000) : null,
     confidence: (a.conf === 'sure' || a.conf === 'guess') ? a.conf : null,
-    points: a.nullified ? 0 : a.skipped ? (a.pts || 0) : scoreFor(!!a.c, a.conf, a.t || 0),
+    points: a.skipped ? (a.pts || 0) : scoreFor(!!a.c, a.conf, a.t || 0),
     created_at: a.at ? new Date(a.at).toISOString() : (a.d ? new Date(a.d + 'T12:00:00').toISOString() : new Date().toISOString())
   };
 }
@@ -3282,31 +3307,25 @@ async function uploadPending(){
   __upBusy = true;
   try{
     const uid = sbSession.user.id;
-    // Devices that uploaded before this version already sent everything up to now
-    const legacy = 'torq_uploaded_' + uid;
-    try{ if(localStorage.getItem(legacy)){ store.attempts.forEach(a=>{ if(a) a.up = true; }); persist(); } }catch(e){}
-    // Answers whose sure / guess choice changed after they were sent: update their row
-    const changed = store.attempts.filter(a => a && a.q && a.up && a.dirty);
-    for(const a of changed){
-      const f = attemptFields(a);
-      const { error } = await db.from('attempts').update(f).eq('user_id', uid).eq('question_id', String(a.q)).eq('created_at', f.created_at);
-      if(error){ console.error('Update failed, will retry', error); return; }
-      a.dirty = false;
-      lbState.cache = {};
+    // One-time repair. An earlier build marked every answer as sent after the first upload, so later answers never reached the server.
+    // Send them all once more; the server keeps one row per answer and ignores the ones it already has.
+    const fixKey = 'torq_resync_v1_' + uid;
+    let fixed = false; try{ fixed = localStorage.getItem(fixKey) === '1'; }catch(e){}
+    if(!fixed){
+      store.attempts.forEach(a => { if(a) a.up = false; });
+      persist();
+      try{ localStorage.setItem(fixKey, '1'); }catch(e){}
     }
-    if(changed.length) persist();
-    const todo = store.attempts.filter(a => a && a.q && !a.up && !a.mock);
+    const todo = store.attempts.filter(a => a && a.q && !a.up && !a.mock && !a.nullified);
     for(let i = 0; i < todo.length; i += 500){
       const chunk = todo.slice(i, i + 500);
       const rows = chunk.map(a => Object.assign({ user_id: uid, question_id: String(a.q) }, attemptFields(a)));
-      const { error } = await db.from('attempts').insert(rows);
+      const { error } = await db.from('attempts').upsert(rows, { onConflict: 'user_id,question_id,created_at', ignoreDuplicates: true });
       if(error){ console.error('Upload failed, will retry', error); return; }
-      chunk.forEach(a => { a.up = true; a.dirty = false; });
+      chunk.forEach(a => { a.up = true; });
       persist();
-      lbState.cache = {};
     }
-    if((changed.length || todo.length) && view === 'leaderboard') render();
-    try{ localStorage.setItem(legacy, '1'); }catch(e){}
+    if(todo.length){ lbState.cache = {}; if(view === 'leaderboard') render(); }
   } finally {
     __upBusy = false;
     if(__upAgain){ __upAgain = false; uploadPending(); }
@@ -3671,7 +3690,7 @@ function render(){
   if(__renderBusy) return;
   document.body.classList.remove('flash-session');   // no nested redraws
   __renderBusy = true;
-  try{ renderInner(); }
+  try{ renderInner(); saveSessionSnapshot(); }
   catch(err){
     console.error(err);
     const now = Date.now();
@@ -5446,89 +5465,144 @@ function onboardView(){
 
 // ----- Leaderboard -----
 const ANON_SVG = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="9" r="4" fill="currentColor"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6z" fill="currentColor"/></svg>';
+const LB_TROPHY = '<svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4"/><path d="M12 13v4M9 20h6M10 17h4"/></svg>';
+const LB_CROWN = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z" fill="currentColor"/></svg>';
 const LB_BOARDS = [
-  {k:'time',   l:'Most time',             sub:'Minutes answered',        note:'Total minutes spent answering in this period.'},
-  {k:'points', l:'Most points',           sub:'Points earned',           note:'Points from correct answers. Quicker and sure answers earn more.'},
-  {k:'speed',  l:'Quickest',              sub:'Fastest correct answers', note:'Average seconds per correct answer. Lower is faster. Needs 5 or more answers.'},
-  {k:'clean',  l:'Least skipped & right', sub:'Accuracy incl. skips',    note:'Correct answers as a share of every question in the period, skips included. Needs 5 or more answers.'}
+  {k:'points', l:'Points',   sub:'Most points earned',            need:false, note:'Points come from your answers. A correct, sure answer earns the most, a quick one adds a bonus, and a wrong answer costs a little.'},
+  {k:'time',   l:'Time',     sub:'Most time spent answering',     need:false, note:'Total time spent answering questions in this period.'},
+  {k:'speed',  l:'Speed',    sub:'Fastest correct answers',       need:true,  note:'Average seconds per correct answer. Lower is faster. Needs 5 or more correct answers in the period.'},
+  {k:'clean',  l:'Accuracy', sub:'Correct share of all answers',  need:true,  note:'Correct answers as a share of every question in the period, skips included. Needs 5 or more answers.'}
 ];
 const LB_PERIODS = [['day','Today'],['week','This week'],['month','This month'],['3m','Last 3 months'],['6m','Last 6 months'],['year','Last year'],['all','All time']];
+const LB_LIMIT = 50, LB_TTL = 60000, LB_STUCK = 15000;
 let lbState = {board:'points', period:'all', cache:{}};
-const LB_TTL = 60000;
-function avatarUrl(path){ return path ? SB_URL+'/storage/v1/object/public/avatars/'+path : null; }
+let lbSeq = 0;
 function lbKey(){ return lbState.board+'|'+lbState.period; }
 function setC(key, v){ v.at = Date.now(); lbState.cache[key] = v; }
 function lbFmt(board, s){
   if(s==null || isNaN(s)) return '–';
-  if(board==='points') return (Math.round(s*10)/10)+' pts';
-  if(board==='clean') return Math.round(s)+'%';
-  if(board==='speed') return (Math.round(s*10)/10)+' s avg';
+  if(board==='points') return Math.round(s).toLocaleString('en-IN')+' pts';
+  if(board==='clean') return (Math.round(s*10)/10)+'%';
+  if(board==='speed') return (Math.round(s*10)/10)+' s';
   const m = Math.round(s);
+  if(m<1) return '<1 min';
   return m>=60 ? Math.floor(m/60)+' h '+(m%60)+' min' : m+' min';
 }
-function lbFetch(){
+// Loads one board. A newer request for the same board replaces an older one, so a slow reply can never overwrite fresh data.
+function lbFetch(force){
   const key = lbKey(), c = lbState.cache[key];
-  if(c && (c.loading || Date.now()-c.at < LB_TTL)) return;
+  if(!force && c){
+    const age = Date.now() - c.at;
+    if(c.loading ? age < LB_STUCK : age < LB_TTL) return;
+  }
   const db = sbClient();
   if(!db || !sbSession){ setC(key, {err:'Sign in to see the leaderboard.'}); return; }
-  setC(key, {loading:true});
-  db.rpc('leaderboard', {p_board:lbState.board, p_period:lbState.period, p_limit:50}).then(({data,error})=>{
+  const tok = ++lbSeq, board = lbState.board, period = lbState.period;
+  setC(key, {loading:true, tok});
+  db.rpc('leaderboard', {p_board:board, p_period:period, p_limit:LB_LIMIT}).then(({data,error})=>{
+    const cur = lbState.cache[key];
+    if(!cur || cur.tok!==tok) return;
     if(error){ console.error(error); setC(key, {err:'Could not load the leaderboard. Check your connection and try again.'}); return; }
-    const rows = (data||[]).map(r=>({place:Number(r.place), name:r.username||'Anonymous User', first:r.first_name,
-      avatar:r.avatar_data || null, anon:!!r.is_anonymous, me:!!r.is_me, score:Number(r.score)}));
+    const rows = (data||[]).map(r=>({place:Number(r.place), name:r.username||'Anonymous User', first:r.first_name||'',
+      avatar:r.avatar_data||null, anon:!!r.is_anonymous, me:!!r.is_me, score:Number(r.score)}));
     // Remember our all-time points rank so future awards can taper for top ranks.
-    if(lbState.board==='points' && lbState.period==='all'){
-      const me = rows.find(r=>r.me);
-      store.lbRank = me ? me.place : null;
-      persist();
+    if(board==='points' && period==='all'){
+      const me = rows.find(r=>r.me), rank = me ? me.place : null;
+      if(store.lbRank !== rank){ store.lbRank = rank; persist(); }
     }
     setC(key, {rows});
-  }).catch(()=>setC(key, {err:'Could not load the leaderboard.'})).finally(()=>render());
+  }).catch(()=>{
+    const cur = lbState.cache[key];
+    if(cur && cur.tok===tok) setC(key, {err:'Could not load the leaderboard. Check your connection and try again.'});
+  }).finally(()=>{ if(view==='leaderboard') render(); });
 }
 function lbAvHTML(r){
   return r.avatar ? '<img alt="" src="'+esc(r.avatar)+'">' : (r.anon ? ANON_SVG : '<i>'+esc((r.name||'?').charAt(0).toUpperCase())+'</i>');
 }
-function lbCardHTML(r, cls){
-  const crown = cls==='lb-r1' ? '<span class="lb-crown" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z" fill="currentColor"/></svg></span>' : '';
-  return '<div class="lb-card '+cls+(r.me?' lb-me':'')+'" role="listitem" aria-label="Rank '+r.place+', '+esc(r.name)+', '+esc(lbFmt(lbState.board,r.score))+'">'+crown
-    +'<span class="lb-medal">'+r.place+'</span>'
-    +'<span class="lb-av">'+lbAvHTML(r)+'</span>'
-    +'<span class="lb-who"><b class="lb-name">'+esc(r.name)+(r.me?' <small>(You)</small>':'')+'</b>'+(r.first && !r.anon?'<small>'+esc(r.first)+'</small>':'')+'</span>'
-    +'<span class="lb-score">'+esc(lbFmt(lbState.board,r.score))+'</span></div>';
+function lbPodiumHTML(top){
+  const cols = [1,0,2].map(i=>{
+    const r = top[i], label = 'Rank '+r.place+', '+r.name+(r.me?' (you)':'')+', '+lbFmt(lbState.board, r.score);
+    return '<div class="lb-pc p'+(i+1)+(r.me?' me':'')+'" role="listitem" aria-label="'+esc(label)+'">'
+      +(i===0 ? '<span class="lb-crown" aria-hidden="true">'+LB_CROWN+'</span>' : '')
+      +'<span class="lb-av">'+lbAvHTML(r)+'</span>'
+      +'<b class="lb-pn">'+esc(r.name)+'</b>'
+      +'<span class="lb-ps">'+esc(lbFmt(lbState.board, r.score))+'</span>'
+      +'<span class="lb-ped" aria-hidden="true">'+r.place+'</span></div>';
+  });
+  return '<div class="lb-pod" role="list" aria-label="Top three">'+cols.join('')+'</div>';
 }
-function lbRowHTML(r){
-  return '<div class="row lb-row'+(r.me?' lb-me':'')+'" role="listitem" style="cursor:default"><span class="lb-rank">'+r.place+'</span><span class="lb-av">'+lbAvHTML(r)+'</span><span class="lb-name">'+esc(r.name)+(r.me?' <small>(You)</small>':'')+'</span><span class="lb-pts">'+esc(lbFmt(lbState.board,r.score))+'</span></div>';
+function lbItemHTML(r){
+  const sub = r.me ? '<em>You</em>' : (r.first && !r.anon ? '<small>'+esc(r.first)+'</small>' : '');
+  return '<div class="lb-item'+(r.me?' me':'')+'" role="listitem"><span class="lb-no">'+r.place+'</span>'
+    +'<span class="lb-av">'+lbAvHTML(r)+'</span>'
+    +'<span class="lb-who"><b>'+esc(r.name)+'</b>'+sub+'</span>'
+    +'<span class="lb-sc">'+esc(lbFmt(lbState.board, r.score))+'</span></div>';
+}
+function lbStandingHTML(rows, meta){
+  const me = rows.find(r=>r.me);
+  if(me){
+    const hidden = store.profile && store.profile.visible===false;
+    return '<div class="lb-you"><div><div class="lb-you-k">Your rank</div><div class="lb-you-rank">#'+me.place+'</div></div>'
+      +'<div class="lb-you-score">'+esc(lbFmt(lbState.board, me.score))+'<small>'+(hidden ? 'Others see you as Anonymous User' : esc(meta.sub))+'</small></div></div>';
+  }
+  const why = isGuard() ? 'Admin accounts are kept off the leaderboard.'
+    : meta.need ? 'You are not ranked here yet. This board needs 5 or more answers in the period.'
+    : 'You are not ranked here yet. Answer a few questions in this period to appear.';
+  return '<div class="lb-you off"><p>'+esc(why)+'</p></div>';
+}
+function lbSkeleton(){
+  let rows = '';
+  for(let i=0;i<6;i++) rows += '<div class="lb-item lb-skel"><i style="width:22px;height:14px"></i><i style="width:36px;height:36px"></i><i style="flex:1;height:14px"></i><i style="width:60px;height:14px"></i></div>';
+  return el('<div class="list" aria-busy="true" aria-label="Loading the leaderboard">'+rows+'</div>');
+}
+function lbMessage(icon, title, text, retry){
+  const n = el('<div class="lb-state" role="status">'+icon+'<b>'+esc(title)+'</b><p>'+esc(text)+'</p></div>');
+  if(retry){
+    const b = el('<button class="btn secondary small" type="button">Try again</button>');
+    b.onclick = ()=>{ lbFetch(true); render(); };
+    n.appendChild(b);
+  }
+  return n;
 }
 function leaderboardView(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Leaderboard</div><h1 class="hm-title">Who is <em>leading?</em></h1></div>'));
-  const boards = el('<div class="lb-boards" role="tablist" aria-label="Ranking type"></div>');
+  const meta = LB_BOARDS.find(b=>b.k===lbState.board);
+
+  const seg = el('<div class="lb-seg" role="group" aria-label="Ranking type"></div>');
   LB_BOARDS.forEach(b=>{
     const on = lbState.board===b.k;
-    const x = el('<button role="tab" aria-selected="'+on+'" class="lb-tile'+(on?' on':'')+'"><b>'+esc(b.l)+'</b><small>'+esc(b.sub)+'</small></button>');
-    x.onclick = ()=>{ lbState.board = b.k; render(); };
-    boards.appendChild(x);
+    const x = el('<button type="button" aria-pressed="'+on+'"'+(on?' class="on"':'')+'>'+esc(b.l)+'</button>');
+    x.onclick = ()=>{ if(!on){ lbState.board = b.k; render(); } };
+    seg.appendChild(x);
   });
-  w.appendChild(boards);
+  w.appendChild(seg);
   const bar = el('<div class="lb-bar"></div>');
   bar.appendChild(pickerField('Time range', LB_PERIODS.map(p=>({v:p[0], l:p[1]})), lbState.period, v=>{ lbState.period = v; render(); }));
   w.appendChild(bar);
+  w.appendChild(el('<p class="lb-blurb">'+esc(meta.sub)+'</p>'));
 
+  // Send any answers still waiting on this device first, so your own result is up to date
+  if(sbSession) uploadPending();
   lbFetch();
   const c = lbState.cache[lbKey()];
-  if(!c || c.loading){ w.appendChild(el('<div class="empty">Loading…</div>')); return w; }
-  if(c.err){ w.appendChild(el('<div class="card"><p class="sub" style="margin:0">'+esc(c.err)+'</p></div>')); return w; }
-  if(!c.rows.length){ w.appendChild(el('<div class="empty">Nobody here yet for this period. Answer a few questions to take the top spot.</div>')); return w; }
-
-  const pod = el('<div class="lb-podium" role="list"></div>');
-  c.rows.slice(0,3).forEach((r,i)=>pod.appendChild(el(lbCardHTML(r, 'lb-r'+(i+1)))));
-  w.appendChild(pod);
-  if(c.rows.length>3){
-    const list = el('<div class="list" role="list"></div>');
-    c.rows.slice(3).forEach(r=>list.appendChild(el(lbRowHTML(r))));
-    w.appendChild(list);
+  if(!c || c.loading){ w.appendChild(lbSkeleton()); return w; }
+  if(c.err){ w.appendChild(lbMessage(LB_TROPHY, 'Leaderboard unavailable', c.err, true)); return w; }
+  if(!c.rows.length){
+    w.appendChild(lbMessage(LB_TROPHY, 'Nobody here yet', meta.need ? 'Answer 5 or more questions in this period to take the top spot.' : 'Answer a few questions in this period to take the top spot.'));
+    w.appendChild(el('<p class="note-line">'+esc(meta.note)+'</p>'));
+    return w;
   }
-  const meta = LB_BOARDS.find(b=>b.k===lbState.board);
+
+  w.appendChild(el(lbStandingHTML(c.rows, meta)));
+  const hasPodium = c.rows.length>=3 && c.rows[2].place<=LB_LIMIT;
+  if(hasPodium) w.appendChild(el(lbPodiumHTML(c.rows.slice(0,3))));
+  const rest = hasPodium ? c.rows.slice(3) : c.rows;
+  if(rest.length){
+    // A row past the top 50 is your own, pinned under a gap
+    const html = rest.map(r=>(r.me && r.place>LB_LIMIT ? '<div class="lb-gap" aria-hidden="true">···</div>' : '')+lbItemHTML(r)).join('');
+    w.appendChild(el('<div class="list" role="list" aria-label="Rankings">'+html+'</div>'));
+  }
   w.appendChild(el('<p class="note-line">'+esc(meta.note)+'</p>'));
   return w;
 }
@@ -5545,8 +5619,9 @@ function profilePart(){
 // Log out and delete account live here, along with setting a password for accounts that have none
 function clearLocalData(){
   cloudReady = false; cloudDirty = false; clearTimeout(cloudTimer);
-  try{ localStorage.removeItem(STORE_KEY); localStorage.removeItem(USER_CACHE_KEY); localStorage.removeItem('torq_profile_draft_v1'); }catch(e){}
+  try{ localStorage.removeItem(STORE_KEY); localStorage.removeItem(USER_CACHE_KEY); localStorage.removeItem('torq_profile_draft_v1'); localStorage.removeItem('torq.session.v1'); }catch(e){}
   store = {bookmarks:[], errorLog:[], notes:{}, attempts:[]};
+  lbState.cache = {};
   sbSession = null;
 }
 // Logout confirmation: an in-app sheet in the app's own style, not the browser dialog
@@ -6685,8 +6760,13 @@ function mockPractice(w){
   const nv = el('<div class="row" style="justify-content:space-between;margin-top:18px;padding:0;border:none"></div>');
   const prev = el('<button class="btn secondary"'+(session.idx===0?' disabled':'')+'>Previous</button>');
   prev.onclick = ()=>gotoQ(session.idx-1);
-  const next = el('<button class="btn"'+(session.idx===n-1?' disabled':'')+'>Next</button>');
-  next.onclick = ()=>gotoQ(session.idx+1);
+  const lastQ = session.idx === n-1;
+  const next = el('<button class="btn">'+(lastQ ? 'Submit test' : 'Next')+'</button>');
+  next.onclick = ()=>{
+    if(!lastQ){ gotoQ(session.idx+1); return; }
+    appDialog({eyebrow:'Submit', title:'Submit the test now?', body:'You have answered '+answered+' of '+n+' questions. Your marks are saved when you submit.', ok:'Submit', cancel:'Keep going'})
+      .then(ok=>{ if(ok) submitMock(); });
+  };
   nv.appendChild(prev); nv.appendChild(next);
   card.appendChild(nv);
   w.appendChild(card);
