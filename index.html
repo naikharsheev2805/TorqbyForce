@@ -7504,38 +7504,59 @@ keepAwake();
   const root = document.documentElement;
   const fsQuery = window.matchMedia('(display-mode: fullscreen)');
   let timer = null;
-  const hideNow = ()=>{ root.classList.remove('show-top','show-bottom'); clearTimeout(timer); };
+  const immersive = ()=> root.classList.contains('immersive');
+  const atTop = ()=> window.scrollY <= 0;
+  const atBottom = ()=> Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight;
+  // At the very top of the page the header and menu stay on screen; they only leave once the page scrolls away
+  const pinTop = ()=>{
+    if(immersive() && atTop()){
+      root.classList.add('show-top');
+      root.classList.remove('show-bottom');
+    }
+  };
+  const leaveTop = ()=>{
+    if(!atTop()) root.classList.remove('show-top');
+  };
+  const hideBottom = ()=>{ root.classList.remove('show-bottom'); };
   function sync(){
     const on = fsQuery.matches || !!document.fullscreenElement;
     root.classList.toggle('immersive', on);
-    if(!on) hideNow();
+    clearTimeout(timer);
+    if(!on){ root.classList.remove('show-top','show-bottom'); return; }
+    pinTop();
   }
   if(fsQuery.addEventListener) fsQuery.addEventListener('change', sync); else fsQuery.addListener(sync);
   document.addEventListener('fullscreenchange', sync);
   sync();
-  const atTop = ()=> window.scrollY <= 0;
-  const atBottom = ()=> Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight;
-  const show = which=>{
-    root.classList.remove(which==='top' ? 'show-bottom' : 'show-top');
-    root.classList.add(which==='top' ? 'show-top' : 'show-bottom');
-    clearTimeout(timer);
-    timer = setTimeout(hideNow, 2400);
-  };
   let y0 = null;
   window.addEventListener('touchstart', e=>{ y0 = e.touches[0].clientY; }, {passive:true});
   window.addEventListener('touchmove', e=>{
-    if(y0 == null || !root.classList.contains('immersive')) return;
+    if(y0 == null || !immersive()) return;
     const dy = e.touches[0].clientY - y0;
-    if(atTop() && dy > 24) show('top');
-    else if(atBottom() && dy < -24) show('bottom');
+    if(atTop() && dy > 24) pinTop();
+    else if(atBottom() && dy < -24){
+      root.classList.add('show-bottom');
+      root.classList.remove('show-top');
+      clearTimeout(timer);
+      timer = setTimeout(hideBottom, 2400);
+    }
   }, {passive:true});
   window.addEventListener('touchend', ()=>{ y0 = null; });
   window.addEventListener('wheel', e=>{
-    if(!root.classList.contains('immersive')) return;
-    if(atTop() && e.deltaY < -8) show('top');
-    else if(atBottom() && e.deltaY > 8) show('bottom');
+    if(!immersive()) return;
+    if(atTop() && e.deltaY < -8) pinTop();
+    else if(atBottom() && e.deltaY > 8){
+      root.classList.add('show-bottom');
+      root.classList.remove('show-top');
+      clearTimeout(timer);
+      timer = setTimeout(hideBottom, 2400);
+    }
   }, {passive:true});
-  window.addEventListener('scroll', ()=>{ if(!atTop() && !atBottom()) hideNow(); }, {passive:true});
+  window.addEventListener('scroll', ()=>{
+    if(!immersive()) return;
+    if(atTop()) pinTop();
+    else { leaveTop(); if(!atBottom()) hideBottom(); }
+  }, {passive:true});
 })();
 </script>
 </body>
