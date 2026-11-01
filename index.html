@@ -1050,6 +1050,29 @@ body.has-nav .bn{ flex:none; }
 .share-badge.more{ background:var(--c-chem); }
 .share-opt:focus-visible .share-badge{ outline:2px solid var(--accent); outline-offset:3px; }
 .share-copied{ text-align:center; font-size:13px; color:var(--c-easy); margin-top:6px; }
+/* Share sheet in the app's own dialog language: soft gradient, glow, serif title, quote-style preview */
+.share-scrim{ z-index:80 !important; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
+.share-sheet{ z-index:81 !important; position:fixed; overflow:hidden; padding:28px 24px calc(22px + env(safe-area-inset-bottom,0px)); border-radius:30px 30px 0 0;
+  background:linear-gradient(165deg,var(--surface),var(--surface-2)); box-shadow:0 -30px 80px -34px var(--shadow); animation:adInM .45s var(--ease) both; }
+@media (min-width:760px){ .share-sheet{ border-radius:30px; animation-name:fade; } }
+.share-sheet > *{ position:relative; }
+.share-sheet .grab{ display:none; }
+.share-glow{ position:absolute !important; right:-70px; top:-70px; width:220px; height:220px; border-radius:50%; background:var(--accent); opacity:.2; filter:blur(30px); pointer-events:none; }
+.share-eyebrow{ font:700 11.5px/1.2 Inter,sans-serif; letter-spacing:.18em; text-transform:uppercase; color:var(--accent-text); margin-bottom:10px; }
+.share-title{ font:600 clamp(26px,6vw,30px)/1.12 Lora,Georgia,serif; margin:0 0 16px; color:var(--text); }
+.share-title em{ font-style:italic; font-weight:500; color:var(--accent-text); }
+.share-sheet .share-preview{ position:relative; margin:0 0 18px; padding:14px 16px 14px 20px; border-radius:var(--r-lg); background:color-mix(in srgb,var(--surface) 70%, transparent); max-height:130px; }
+.share-sheet .share-preview::before{ content:""; position:absolute; left:0; top:12px; bottom:12px; width:3px; border-radius:0 3px 3px 0; background:var(--accent); }
+.share-sheet .share-grid{ gap:6px; margin-bottom:12px; }
+.share-sheet .share-badge, .share-sheet .share-badge.wa, .share-sheet .share-badge.tg, .share-sheet .share-badge.x, .share-sheet .share-badge.more, .share-sheet .share-badge.copy{
+  width:54px; height:54px; background:var(--surface); color:var(--accent-text); border:1px solid var(--border); box-shadow:0 12px 24px -16px var(--shadow);
+  transition:transform .2s var(--ease), background .2s ease, color .2s ease, border-color .2s ease; }
+.share-sheet .share-opt:hover .share-badge{ transform:translateY(-2px); border-color:var(--accent-text); }
+.share-sheet .share-opt:active .share-badge{ transform:scale(.94); }
+.share-sheet .share-badge.done{ background:var(--accent); color:var(--accent-ink); border-color:transparent; }
+.share-sheet .share-lbl{ color:var(--muted); }
+.share-sheet .btn.ghost{ margin-top:4px; border-radius:18px; padding:14px 18px; }
+@media (prefers-reduced-motion: reduce){ .share-sheet{ animation:none; } .share-sheet .share-badge{ transition:none; } }
 
 /* ---------- Exam countdown cards: login-card look ---------- */
 .exam-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:0 0 14px; }
@@ -3290,6 +3313,7 @@ async function saveRemote(p, newPhoto){
   const uid = sbSession.user.id;
   const row = {id:uid, username:(p.username||'').trim(), first_name:p.name||null, surname:p.surname||null, standard:p.standard||null, exam:p.exam||null, age:parseInt(p.age,10)||null,
     hide_from_leaderboard: p.visible===false, birthdate:p.birthdate||null, updated_at:new Date().toISOString()};
+  if(isGuard()) row.admin_on_leaderboard = !!p.adminBoard;
   // A newly picked photo is saved in the profile row (a small 256px image)
   if(newPhoto && newPhoto.indexOf('data:image/') === 0) row.avatar_data = newPhoto;
   const {error} = await db.from('profiles').upsert(row, {onConflict:'id'});
@@ -3586,6 +3610,12 @@ async function restoreFromServer(uid){
         standard: data.standard||'', exam: data.exam||'main', visible: !data.hide_from_leaderboard};
       persist();
     }
+  }
+  if(isGuard()){
+    try{
+      const { data: ab, error: abErr } = await db.from('profiles').select('admin_on_leaderboard').eq('id', uid).maybeSingle();
+      if(!abErr && ab && store.profile && store.profile.adminBoard !== !!ab.admin_on_leaderboard){ store.profile.adminBoard = !!ab.admin_on_leaderboard; persist(); }
+    }catch(e){}
   }
   await restoreCloudState(uid);
   // Practice history: every attempt the server holds that this device does not have yet
@@ -4426,7 +4456,7 @@ function pyqView(){
   });
   const tabRow = el('<div class="row pyq-tabrow" style="padding:0;border:none;align-items:center;gap:12px"></div>');
   tabRow.appendChild(tabSeg); tabSeg.style.flex='1'; tabSeg.style.margin='0';
-  const shareTop = shareFab('Practicing JEE previous year questions on TORQ, with solutions and mock tests.', 'Share TORQ');
+  const shareTop = shareFab('I am practising JEE previous year questions on TORQ, with solutions and mock tests. Try it:', 'Share TORQ');
   tabRow.appendChild(shareTop);
   w.appendChild(tabRow);
   if(nav.pyqTab==='papers'){ w.appendChild(papersPart()); return w; }
@@ -5039,6 +5069,7 @@ function myFlashNewView(){
 function notehubView(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Study</div><h1 class="hm-title">Notes and <em>formulas.</em></h1></div>'));
+  w.appendChild(shareRow('Revision notes, formula cards and flashcards for JEE, all on TORQ.', 'Share TORQ notes', 'Share these notes'));
   { const grid = el('<div class="subjgrid" style="grid-template-columns:repeat(2,minmax(0,1fr))"></div>');
     const fc = el('<button type="button" class="subjcard fc-tile"><div class="subjart fc-art" aria-hidden="true"><i class="fc-orb"></i><span class="fc-c c1"></span><span class="fc-c c2"></span><span class="fc-c c3"></span></div><div class="subjlabel"><div class="name">Flash<em>cards.</em></div><div class="meta">Every formula and concept, one flip at a time</div></div></button>');
     fc.onclick = ()=>{ flashState = {chapter:null, i:0, flipped:false, pool:[], filter:'All', done:false, busy:false, enter:false}; go('flash'); };
@@ -5332,6 +5363,10 @@ function profileForm(p, btnLabel, onSave, withAvatar, withEmail){
     +'<div class="pf vis-block"><span class="eyebrow">Show me on the leaderboard</span>'
     +'<label class="vis-toggle"><input type="checkbox" name="visible"'+(vis?' checked':'')+'><span class="vis-sw" aria-hidden="true"></span><span class="vis-lbl">'+(vis?'Visible to others':'Anonymous to others')+'</span></label>'
     +'<div class="vis-preview" aria-live="polite"></div></div>'
+    // Admin accounts only: take part in the rankings at all (separate from hiding your name and photo above)
+    +(isGuard() ? '<div class="pf vis-block"><span class="eyebrow">Admin: appear on the leaderboard</span>'
+      +'<label class="vis-toggle"><input type="checkbox" name="adminboard"'+(p.adminBoard?' checked':'')+'><span class="vis-sw" aria-hidden="true"></span><span class="vis-lbl">'+(p.adminBoard?'Ranked with everyone':'Kept off the leaderboard')+'</span></label>'
+      +'<p class="note-line">Admin accounts are normally not ranked. Switch this on to be ranked like any student. Your name and photo still follow the setting above.</p></div>' : '')
     +'<p class="note-line err" hidden></p>'
     +'<button class="btn block" type="submit">'+btnLabel+'</button>';
   let exam = p.exam || 'main';
@@ -5364,6 +5399,8 @@ function profileForm(p, btnLabel, onSave, withAvatar, withEmail){
       +(on ? esc(uname) : 'Anonymous User')+'</span><span class="lb-pts">— pts</span></div>'
       +'<p class="note-line">'+(on ? 'Others see your username and photo.' : 'Others see a generic avatar and "Anonymous User". Your points still count.')+'</p>';
   };
+  const abx = f.querySelector('input[name="adminboard"]');
+  if(abx) abx.onchange = ()=>{ f.querySelector('input[name="adminboard"]').closest('.vis-toggle').querySelector('.vis-lbl').textContent = abx.checked ? 'Ranked with everyone' : 'Kept off the leaderboard'; };
   vcb.onchange = paintPreview;
   ['name','username'].forEach(n=>g(n).addEventListener('input', paintPreview));
   paintPreview();
@@ -5400,6 +5437,7 @@ function profileForm(p, btnLabel, onSave, withAvatar, withEmail){
       if(isNaN(d) || d>now) return fail('Birthdate cannot be in the future.');
     }
     const profile = {username, name, surname, age, birthdate: bd||null, standard:g('standard').value, exam, visible: vcb.checked};
+    if(abx) profile.adminBoard = abx.checked; else if(p.adminBoard != null) profile.adminBoard = p.adminBoard;
     const btn = f.querySelector('button[type="submit"]');
     if(needOtp && !sbSession){
       const db = sbClient();
@@ -5555,7 +5593,7 @@ function lbStandingHTML(rows, meta){
     return '<div class="lb-you"><div><div class="lb-you-k">Your rank</div><div class="lb-you-rank">#'+me.place+'</div></div>'
       +'<div class="lb-you-score">'+esc(lbFmt(lbState.board, me.score))+'<small>'+(hidden ? 'Others see you as Anonymous User' : esc(meta.sub))+'</small></div></div>';
   }
-  const why = isGuard() ? 'Admin accounts are kept off the leaderboard.'
+  const why = isGuard() ? 'Admin accounts are kept off the leaderboard unless you switch it on in Me, Profile.'
     : meta.need ? 'You are not ranked here yet. This board needs 5 or more answers in the period.'
     : 'You are not ranked here yet. Answer a few questions in this period to appear.';
   return '<div class="lb-you off"><p>'+esc(why)+'</p></div>';
@@ -5605,6 +5643,8 @@ function leaderboardView(){
   }
 
   w.appendChild(el(lbStandingHTML(c.rows, meta)));
+  { const mine = c.rows.find(r=>r.me);
+    if(mine) w.appendChild(shareRow('I am ranked #'+mine.place+' on the TORQ leaderboard ('+meta.l+'). Think you can beat me?', 'Share my rank', 'Share your rank')); }
   const hasPodium = c.rows.length>=3 && c.rows[2].place<=LB_LIMIT;
   if(hasPodium) w.appendChild(el(lbPodiumHTML(c.rows.slice(0,3))));
   const rest = hasPodium ? c.rows.slice(3) : c.rows;
@@ -5621,8 +5661,11 @@ function profilePart(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="eyebrow" style="margin:6px 0 10px">Your profile</div>'));
   const chosen = (store.profile && store.profile.exam) === 'adv' ? 1 : 0;
-  w.appendChild(el('<div class="exam-row exam-row-one"></div>')).appendChild(examCardEl(EXAMS[chosen], chosen));
-  w.appendChild(profileForm(store.profile||{exam:'main'}, 'Save changes', (p,av)=>{ store.profile = p; persist(); cacheUser({avatar: av||null}); go('me',{meTab:'profile'}); }, true));
+  // Advanced students prepare for both exams, so both countdowns show; Main-only students see the Main one
+  const examRow = w.appendChild(el('<div class="exam-row'+(chosen ? '' : ' exam-row-one')+'"></div>'));
+  if(chosen) examRow.appendChild(examCardEl(EXAMS[0], 0));
+  examRow.appendChild(examCardEl(EXAMS[chosen], chosen));
+  w.appendChild(profileForm(store.profile||{exam:'main'}, 'Save changes', (p,av)=>{ store.profile = p; persist(); lbState.cache = {}; cacheUser({avatar: av||null}); go('me',{meTab:'profile'}); }, true));
   w.appendChild(accountBlock());
   return w;
 }
@@ -6869,7 +6912,12 @@ function pyqResults(w){
     w.appendChild(ringMarks(marks, max));
     w.querySelector('.resultcard').appendChild(el('<div class="note-line res-line">Accuracy '+acc+'% · '+correct+' of '+answered.length+' answered correct</div>'));
     flair(w, mp, answered.length, 75);
-    if(mp>=80) w.appendChild(shareBtn('I scored '+marks+' out of '+max+' marks ('+mp+'%) on TORQ. JEE practice that works.'));
+    // Every finished session can be shared, not only strong scores
+    const what = session.title || 'a practice set';
+    const msg = mp>=80
+      ? 'I scored '+marks+' out of '+max+' marks ('+mp+'%) in '+what+' on TORQ. JEE practice that works.'
+      : 'I just finished '+what+' on TORQ: '+correct+' of '+answered.length+' answered correct. JEE practice with solutions and mock tests.';
+    w.appendChild(shareRow(msg, 'Share my result', 'Share this result'));
   }
   w.appendChild(el('<div class="stats">'
     +'<div class="stat"><div class="n">'+correct+'/'+total+'</div><div class="l">Correct</div></div>'
@@ -6914,10 +6962,18 @@ function shareFab(text, label){
   b.onclick = ()=>openShareSheet(text);
   return b;
 }
+// The web address people should open: this app's own page, without index.html
+function appLink(){
+  try{ if(location.protocol.indexOf('http') === 0) return location.origin + location.pathname.replace(/index\.html$/, ''); }catch(e){}
+  return '';
+}
 function openShareSheet(text){
-  const scrim = el('<div class="scrim"></div>');
-  const sheet = el('<div class="sheet share-sheet" role="dialog" aria-modal="true" aria-label="Share"><div class="grab"></div><div class="sheet-title">Share</div></div>');
-  sheet.appendChild(el('<div class="share-preview">'+esc(text)+'</div>'));
+  const link = appLink();
+  const full = link ? text + '\n' + link : text;
+  const scrim = el('<div class="scrim share-scrim"></div>');
+  const sheet = el('<div class="sheet share-sheet" role="dialog" aria-modal="true" aria-label="Share"><div class="share-glow" aria-hidden="true"></div><div class="grab"></div>'
+    +'<div class="share-eyebrow">TORQ</div><h2 class="share-title">Share it <em>around.</em></h2></div>');
+  sheet.appendChild(el('<div class="share-preview" style="white-space:pre-line;overflow-wrap:anywhere">'+esc(full)+'</div>'));
   const grid = el('<div class="share-grid"></div>');
   const close = ()=>{ scrim.remove(); sheet.remove(); document.removeEventListener('keydown', onKey); };
   const onKey = e=>{ if(e.key==='Escape') close(); };
@@ -6925,15 +6981,20 @@ function openShareSheet(text){
     const o = el('<button class="share-opt" type="button"><span class="share-badge '+cls+'" aria-hidden="true">'+glyph+'</span><span class="share-lbl">'+esc(label)+'</span></button>');
     o.onclick = fn; grid.appendChild(o); return o;
   };
-  const enc = encodeURIComponent(text);
+  const encFull = encodeURIComponent(full), encText = encodeURIComponent(text), encLink = encodeURIComponent(link);
   opt('copy', '&#10697;', 'Copy', ()=>{
-    const done = ()=>{ const l = sheet.querySelector('.share-copied'); if(l) l.remove(); sheet.appendChild(el('<div class="share-copied">Copied to clipboard</div>')); };
-    if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, done); else done();
+    const done = ()=>{
+      const b = sheet.querySelector('.share-badge.copy'), lbl = b && b.parentNode.querySelector('.share-lbl');
+      if(b){ b.classList.add('done'); b.innerHTML = '&#10003;'; }
+      if(lbl) lbl.textContent = 'Copied';
+      setTimeout(()=>{ if(b){ b.classList.remove('done'); b.innerHTML = '&#10697;'; } if(lbl) lbl.textContent = 'Copy'; }, 1800);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(full).then(done, done); else done();
   });
-  opt('wa', 'W', 'WhatsApp', ()=>window.open('https://wa.me/?text='+enc, '_blank', 'noopener'));
-  opt('tg', 'T', 'Telegram', ()=>window.open('https://t.me/share/url?text='+enc, '_blank', 'noopener'));
-  opt('x', 'X', 'X', ()=>window.open('https://twitter.com/intent/tweet?text='+enc, '_blank', 'noopener'));
-  if(navigator.share) opt('more', '&#8943;', 'More', ()=>{ navigator.share({title:'TORQ', text}).catch(()=>{}); close(); });
+  opt('wa', 'W', 'WhatsApp', ()=>window.open('https://wa.me/?text='+encFull, '_blank', 'noopener'));
+  opt('tg', 'T', 'Telegram', ()=>window.open(link ? 'https://t.me/share/url?url='+encLink+'&text='+encText : 'https://t.me/share/url?url='+encFull, '_blank', 'noopener'));
+  opt('x', 'X', 'X', ()=>window.open('https://twitter.com/intent/tweet?text='+encText+(link ? '&url='+encLink : ''), '_blank', 'noopener'));
+  if(navigator.share) opt('more', '&#8943;', 'More', ()=>{ navigator.share(link ? {title:'TORQ', text, url:link} : {title:'TORQ', text}).catch(()=>{}); close(); });
   sheet.appendChild(grid);
   const cancel = el('<button class="btn ghost block" style="margin-top:10px">Close</button>');
   cancel.onclick = close;
@@ -6944,6 +7005,12 @@ function openShareSheet(text){
   sheet.querySelector('button').focus();
 }
 function shareBtn(text){ return shareFab(text, 'Share my result'); }
+function shareRow(text, label, caption){
+  const row = el('<div class="share-row" style="display:flex;align-items:center;gap:12px;margin:0 0 14px"></div>');
+  row.appendChild(shareFab(text, label));
+  row.appendChild(el('<span class="note-line" style="margin:0">'+esc(caption)+'</span>'));
+  return row;
+}
 function openSheet(title, opts, value, onPick){
   const scrim = el('<div class="scrim"></div>');
   const sheet = el('<div class="sheet" role="dialog" aria-modal="true" aria-label="'+esc(title)+'"><div class="grab"></div><div class="sheet-title">'+esc(title)+'</div></div>');
