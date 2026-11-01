@@ -3828,7 +3828,7 @@
   "marks_unattempted": 0,
   "solution": null,
   "solution_source": null,
-  "image": "assets/q/main-2025-jan-s1-sh1-22jan-p-57.webp",
+  "image": null,
   "figure_refs": [
    "assets/q/main-2025-jan-s1-sh1-22jan-p-57.webp",
    "assets/q/main-2025-jan-s1-sh1-22jan-p-57-b.webp",
@@ -3842,7 +3842,14 @@
   "source_notes": "Figure supplied separately by image account; path is planned, file not yet delivered. Paper name not printed on the source pages; set to null. Answer from the printed answer key.",
   "verified": false,
   "verified_against": "page image reviewed; second-pass check pending",
-  "image_display_width_px": 57
+  "image_display_width_px": 57,
+  "figure_display": {
+   "mode": "inline_small",
+   "max_height_px": 120,
+   "note": "Compound drawings (A)-(E) are duplicates of the names in the stem. Show small, not as a full-width block."
+  },
+  "needs_review": true,
+  "review_note": "Figure-to-label mapping unconfirmed: 4 drawings for 5 compounds (A)-(E). Confirm which drawing is which before showing labels next to them."
  },
  {
   "id": "main-2025-jan-s1-sh1-22jan-p-58",
