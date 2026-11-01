@@ -3270,10 +3270,8 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-47.webp",
-    "figure_refs": [
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-47.webp"
-    ],
+    "image": null,
+    "figure_refs": [],
     "tags": [
       "gauss law",
       "flux"
@@ -3290,8 +3288,7 @@
         "chapter": "Electrostatics",
         "subtopic": "Gauss's law and its applications"
       }
-    ],
-    "image_display_width_px": 49
+    ]
   },
   {
     "id": "main-2025-jan-s1-sh1-24jan-p-48",
@@ -3578,10 +3575,8 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-52.webp",
-    "figure_refs": [
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-52.webp"
-    ],
+    "image": null,
+    "figure_refs": [],
     "tags": [
       "substitution",
       "solvent effects"
@@ -3594,8 +3589,7 @@
         "chapter": "Organic Compounds Containing Halogens",
         "subtopic": "Mechanisms of substitution reactions"
       }
-    ],
-    "image_display_width_px": 172
+    ]
   },
   {
     "id": "main-2025-jan-s1-sh1-24jan-p-53",
@@ -3625,27 +3619,23 @@
     "options": [
       {
         "key": "1",
-        "text": "",
-        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-1.webp",
-        "image_display_width_px": 32
+        "text": "Structure (1) — see PDF",
+        "image": null
       },
       {
         "key": "2",
-        "text": "",
-        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-2.webp",
-        "image_display_width_px": 37
+        "text": "Structure (2) — see PDF",
+        "image": null
       },
       {
         "key": "3",
-        "text": "",
-        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-3.webp",
-        "image_display_width_px": 49
+        "text": "Structure (3) — see PDF",
+        "image": null
       },
       {
         "key": "4",
-        "text": "",
-        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-4.webp",
-        "image_display_width_px": 50
+        "text": "Structure (4) — see PDF",
+        "image": null
       }
     ],
     "correct_answer": [
@@ -3656,14 +3646,8 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-53.webp",
-    "figure_refs": [
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-1.webp",
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-2.webp",
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-3.webp",
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-4.webp",
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-53.webp"
-    ],
+    "image": null,
+    "figure_refs": [],
     "tags": [
       "alkynes",
       "cyanohydrin"
@@ -3680,8 +3664,7 @@
         "chapter": "Organic Compounds Containing Oxygen",
         "subtopic": "Nucleophilic addition with HCN, NH3 and its derivatives"
       }
-    ],
-    "image_display_width_px": 65
+    ]
   },
   {
     "id": "main-2025-jan-s1-sh1-24jan-p-54",
@@ -3711,27 +3694,23 @@
     "options": [
       {
         "key": "1",
-        "text": "",
-        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-1.webp",
-        "image_display_width_px": 20
+        "text": "Structure (1) — see PDF",
+        "image": null
       },
       {
         "key": "2",
-        "text": "",
-        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-2.webp",
-        "image_display_width_px": 25
+        "text": "Structure (2) — see PDF",
+        "image": null
       },
       {
         "key": "3",
-        "text": "",
-        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-3.webp",
-        "image_display_width_px": 21
+        "text": "Structure (3) — see PDF",
+        "image": null
       },
       {
         "key": "4",
-        "text": "",
-        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-4.webp",
-        "image_display_width_px": 25
+        "text": "Structure (4) — see PDF",
+        "image": null
       }
     ],
     "correct_answer": [
@@ -3742,14 +3721,8 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-54.webp",
-    "figure_refs": [
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-1.webp",
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-2.webp",
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-3.webp",
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-4.webp",
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-54.webp"
-    ],
+    "image": null,
+    "figure_refs": [],
     "tags": [
       "ozonolysis",
       "aldol"
@@ -3766,8 +3739,7 @@
         "chapter": "Organic Compounds Containing Oxygen",
         "subtopic": "Aldol condensation"
       }
-    ],
-    "image_display_width_px": 29
+    ]
   },
   {
     "id": "main-2025-jan-s1-sh1-24jan-p-55",
@@ -4518,27 +4490,23 @@
     "options": [
       {
         "key": "1",
-        "text": "",
-        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-1.webp",
-        "image_display_width_px": 53
+        "text": "Structure (1) — see PDF",
+        "image": null
       },
       {
         "key": "2",
-        "text": "",
-        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-2.webp",
-        "image_display_width_px": 45
+        "text": "Structure (2) — see PDF",
+        "image": null
       },
       {
         "key": "3",
-        "text": "",
-        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-3.webp",
-        "image_display_width_px": 28
+        "text": "Structure (3) — see PDF",
+        "image": null
       },
       {
         "key": "4",
-        "text": "",
-        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-4.webp",
-        "image_display_width_px": 52
+        "text": "Structure (4) — see PDF",
+        "image": null
       }
     ],
     "correct_answer": [
@@ -4550,12 +4518,7 @@
     "solution": null,
     "solution_source": null,
     "image": null,
-    "figure_refs": [
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-1.webp",
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-2.webp",
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-3.webp",
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-4.webp"
-    ],
+    "figure_refs": [],
     "tags": [
       "carbocation stability"
     ],
@@ -4627,10 +4590,8 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-66.webp",
-    "figure_refs": [
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-66.webp"
-    ],
+    "image": null,
+    "figure_refs": [],
     "tags": [
       "electrophilic addition"
     ],
@@ -4646,8 +4607,7 @@
         "chapter": "Hydrocarbons",
         "subtopic": "Addition of hydrogen, halogens, water and hydrogen halides; Markownikoff's and peroxide effect"
       }
-    ],
-    "image_display_width_px": 99
+    ]
   },
   {
     "id": "main-2025-jan-s1-sh1-24jan-p-67",
@@ -4823,27 +4783,23 @@
     "options": [
       {
         "key": "1",
-        "text": "",
-        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-1.webp",
-        "image_display_width_px": 53
+        "text": "Graph (1) — see PDF",
+        "image": null
       },
       {
         "key": "2",
-        "text": "",
-        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-2.webp",
-        "image_display_width_px": 50
+        "text": "Graph (2) — see PDF",
+        "image": null
       },
       {
         "key": "3",
-        "text": "",
-        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-3.webp",
-        "image_display_width_px": 49
+        "text": "Graph (3) — see PDF",
+        "image": null
       },
       {
         "key": "4",
-        "text": "",
-        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-4.webp",
-        "image_display_width_px": 54
+        "text": "Graph (4) — see PDF",
+        "image": null
       }
     ],
     "correct_answer": [
@@ -4855,12 +4811,7 @@
     "solution": null,
     "solution_source": null,
     "image": null,
-    "figure_refs": [
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-1.webp",
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-2.webp",
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-3.webp",
-      "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-4.webp"
-    ],
+    "figure_refs": [],
     "tags": [
       "freezing point depression",
       "graphs"
