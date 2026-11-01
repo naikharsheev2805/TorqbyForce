@@ -20,13 +20,26 @@
 /* Wide screens: the app column is solid, so side formulas never show through cards */
 @media (min-width:960px){ #app{ background:var(--bg); } }
 /* Header sits in the same row as the menu button and matches its height */
-.header{ margin:-12px 0 26px; padding-left:60px; min-height:46px; align-items:center; gap:12px; }
+html, body{ overscroll-behavior-y:none; }
+.header{ margin:calc(env(safe-area-inset-top,0px) - 12px) 0 26px; padding-left:72px; height:46px; min-height:46px; align-items:center; gap:12px; overflow:visible; }
 .header .brand-lock{ justify-content:center; }
 /* Vertical rhythm: every card-type block keeps 14px of space below it, so cards never touch */
 #app > div > .card, #app > div > .list, #app > div > .big-card, #app > div > .cal-card, #app > div > .exam-row, #app > div > .subjgrid, #app > div > .stats, #app > div > figure.qcard, #app > div > .hm-hero,
 #app > .card, #app > .list, #app > .big-card, #app > .cal-card, #app > .exam-row, #app > .subjgrid, #app > .stats, #app > figure.qcard, #app > .hm-hero{ margin-bottom:14px; }
 /* Audit trail */
 .ad-audit p{ margin:6px 0; font-size:13.5px; color:var(--muted); }
+/* Batch 2 finish: spotlight, digest, sent replies */
+.ad-spot h3{ font:500 19px/1.3 Lora,Georgia,serif; margin:6px 0 4px; }
+.ad-digest .ad-trend{ display:flex; align-items:flex-end; gap:6px; margin-top:12px; }
+.ad-col{ flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:4px; }
+.ad-wrap{ width:100%; height:90px; display:flex; align-items:flex-end; }
+.ad-wrap i{ display:block; width:100%; min-height:3px; border-radius:7px 7px 3px 3px; background:linear-gradient(180deg,var(--accent),var(--accent-text)); transition:height .6s cubic-bezier(.2,.7,.2,1); }
+.ad-col b{ font-size:12px; font-variant-numeric:tabular-nums; }
+.ad-col span{ font-size:10px; color:var(--muted); white-space:nowrap; }
+.ad-sent{ padding:12px 14px; margin-bottom:8px; border:1px solid var(--border); border-radius:var(--r-md); background:var(--surface-2); }
+.ad-sent .ad-msg{ margin:0 0 6px; }
+.ad-sent-meta{ font-size:12px; color:var(--muted); margin-bottom:8px; }
+@media (prefers-reduced-motion: reduce){ .ad-wrap i{ transition:none; } }
 /* Admin badge: open urgent reports plus unanswered messages */
 .navadm{ position:relative; }
 .adm-badge{ position:absolute; top:4px; right:calc(50% - 22px); min-width:18px; height:18px; padding:0 5px; border-radius:99px; background:var(--accent); color:var(--accent-ink); font:700 11px/18px Inter,sans-serif; text-align:center; pointer-events:none; }
@@ -119,7 +132,7 @@
 *{box-sizing:border-box;}
 html{-webkit-text-size-adjust:100%;}
 body{margin:0; background:var(--bg); color:var(--text); font:15px/1.55 "Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
-  -webkit-font-smoothing:antialiased; overflow-x:hidden; padding-top:env(safe-area-inset-top,0px);}
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;}
 #app{max-width:640px; margin:0 auto; padding:24px 18px 128px; overflow-x:hidden;}
 #app > *{max-width:100%;}
 .header{display:flex; align-items:center; gap:10px; margin-bottom:26px;}
@@ -920,7 +933,7 @@ svg.wm-lg{ --torq-stroke:1.9; }
 body.has-nav{ padding-left:0 !important; }
 .navpanel .bn span{ display:inline !important; font-size:15px; }
 body.has-nav .navpanel .bn span{ display:inline !important; }
-body.has-nav .header{ padding-left:64px; }
+body.has-nav .header{ padding-left:72px; }
 body.has-nav .header .brand-lock{ margin-left:0; }
 body.has-nav .navpanel{ top:calc(66px + env(safe-area-inset-top,0px)); left:14px; right:auto; bottom:auto; width:min(268px,78vw); height:auto; padding:8px; border:1px solid var(--border); border-radius:18px; flex-direction:column; justify-content:flex-start; gap:4px; }
 .navpanel{ right:auto; bottom:auto; justify-content:flex-start; }
@@ -975,8 +988,8 @@ body.has-nav .bn{ flex:none; }
 .navpanel .navsec{ font:600 11px Inter,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); padding:10px 14px 6px; }
 .navpanel .navdiv{ height:1px; background:var(--border); margin:6px 10px; }
 .navpanel .navsup svg{ opacity:.85; }
-.navpanel .navout{ color:#e5484d; }
-.navpanel .navout svg{ stroke:#e5484d; }
+.navpanel .navout{ color:var(--bad); }
+.navpanel .navout svg{ stroke:var(--bad); }
 .navpanel .navout:hover{ background:rgba(229,72,77,.08); }
 .navpanel .navprof{ all:unset; box-sizing:border-box; display:flex; align-items:center; gap:12px; padding:12px 12px; margin:2px 0 4px; border-radius:14px; cursor:pointer;
   background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 16%,var(--surface-2)),var(--surface-2)); border:1px solid var(--border); }
@@ -1120,7 +1133,7 @@ body.has-nav .bn{ flex:none; }
 .legal-paper .lp-form .btn{ background:var(--accent) !important; color:#1f1e1d !important; }
 .legal-paper .lp-form .eyebrow{ color:var(--accent-text) !important; }
 .legal-paper .note-line{ color:var(--muted) !important; }
-.legal-paper .err{ color:#e5484d !important; }
+.legal-paper .err{ color:var(--bad) !important; }
 /* formula cards: tap to open */
 .fcard{ cursor:pointer; transition:transform .2s ease, border-color .2s ease; }
 .fcard:hover{ border-color:var(--accent-text); }
@@ -1938,14 +1951,14 @@ body.has-nav .build-stamp{ margin-bottom:calc(96px + env(safe-area-inset-bottom,
 .ad-scrim{ z-index:90 !important; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
 .ad-sheet{ position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); z-index:91; width:min(92vw,520px); padding:38px 34px 30px; border-radius:30px; background:linear-gradient(165deg, var(--surface), var(--surface-2)); border:1px solid var(--border); box-shadow:0 40px 90px -30px var(--shadow); overflow:hidden; animation:adIn .42s cubic-bezier(.2,.7,.2,1) both; }
 .ad-glow{ position:absolute; right:-70px; top:-70px; width:220px; height:220px; border-radius:50%; background:var(--accent); opacity:.22; filter:blur(30px); pointer-events:none; }
-.ad-danger .ad-glow{ background:#e5484d; }
+.ad-danger .ad-glow{ background:var(--bad); }
 .ad-eyebrow{ position:relative; font:700 11.5px/1.2 Inter,sans-serif; letter-spacing:.18em; text-transform:uppercase; color:var(--accent-text); margin-bottom:12px; }
 .ad-title{ position:relative; font:600 clamp(26px,6vw,32px)/1.12 Lora,Georgia,serif; margin:0 0 14px; color:var(--text); }
 .ad-body{ position:relative; font-size:17px; line-height:1.62; color:var(--muted); margin:0 0 26px; }
 .ad-actions{ position:relative; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 .ad-actions .btn{ padding:16px 18px; font-size:16.5px; border-radius:18px; margin:0; }
 .ad-actions .ad-no:only-child{ grid-column:1 / -1; }
-.ad-yes-danger{ background:#e5484d !important; color:#fff !important; border-color:transparent !important; }
+.ad-yes-danger{ background:var(--bad) !important; color:#fff !important; border-color:transparent !important; }
 @keyframes adIn{ from{ opacity:0; transform:translate(-50%,-44%) scale(.96); } to{ opacity:1; transform:translate(-50%,-50%) scale(1); } }
 @media (max-width:759px){ .ad-sheet{ top:auto; bottom:0; left:0; right:0; transform:none; width:auto; border-radius:30px 30px 0 0; animation-name:adInM; } }
 @keyframes adInM{ from{ opacity:0; transform:translateY(40px); } to{ opacity:1; transform:none; } }
@@ -1962,7 +1975,7 @@ body.has-nav .build-stamp{ margin-bottom:calc(96px + env(safe-area-inset-bottom,
 
 /* ---- Glow orbs reach the edges of the screen, not the edge of the card ---- */
 .hm-hero{ overflow:visible !important; }
-.hm-orbs{ overflow:visible !important; top:-70px !important; bottom:-70px !important; left:-100vw !important; right:-100vw !important; }
+.hm-orbs{ overflow:visible !important; top:-70px !important; bottom:-70px !important; left:calc(50% - 50vw) !important; right:calc(50% - 50vw) !important; }
 #app{ overflow-x:clip; overflow-clip-margin:0; }
 
 /* ---- Admin: detail sheets, priority chips, filters, breakdown bars ---- */
@@ -1977,7 +1990,7 @@ body.has-nav .build-stamp{ margin-bottom:calc(96px + env(safe-area-inset-bottom,
 .ad-search{ width:100%; box-sizing:border-box; margin:6px 0 10px; padding:12px 16px; border-radius:var(--r-lg); border:1px solid var(--border); background:var(--surface); color:var(--text); font:inherit; }
 .ad-tools{ justify-content:flex-end; gap:8px; padding:8px 0 4px; border:none; }
 .ad-badges{ display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
-.ad-p-urgent{ background:rgba(229,72,77,.18) !important; color:#e5484d !important; }
+.ad-p-urgent{ background:color-mix(in srgb, var(--bad) 18%, transparent) !important; color:var(--bad) !important; }
 .ad-p-high{ background:color-mix(in srgb, var(--accent) 22%, transparent) !important; color:var(--accent-text) !important; }
 .ad-p-low{ opacity:.7; }
 .ad-row{ cursor:pointer; align-items:flex-start; }
@@ -3623,7 +3636,6 @@ function mockLocked(){ if(hasFullAccess()) return false; return !!(session && se
 
 // Coming-soon notice for tabs that are not built yet
 const SOON_LINES = {
-  leaderboard: {head:'Leaderboard is warming up', body:'Your rank will be waiting here. Keep solving until it goes live.'},
   mocks: {head:'Full mocks are in the oven', body:'Timed papers are being built. Sharpen your PYQ skills until they arrive.'}
 };
 function soonNotice(id){
@@ -3732,7 +3744,7 @@ const TABS = [
   {id:'home', label:'Home', icon:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>'},
   {id:'pyq', label:'PYQs', icon:'<path d="M5 4h10l4 4v12H5z"/><path d="M14 4v5h5M9 13h6M9 17h4"/>'},
   {id:'syllabus', label:'Syllabus', icon:'<path d="M4 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>'},
-  {id:'leaderboard', label:'Leaderboard', title:'Leaderboard, coming soon', disabled:true, icon:'<path d=\"M8 4h8v5a4 4 0 0 1-8 0z\"/><path d=\"M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4\"/><path d=\"M12 13v4M9 20h6M10 17h4\"/>'},
+  {id:'leaderboard', label:'Leaderboard', icon:'<path d=\"M8 4h8v5a4 4 0 0 1-8 0z\"/><path d=\"M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4\"/><path d=\"M12 13v4M9 20h6M10 17h4\"/>'},
   {id:'mocks', label:'Mocks', title:'Mocks, coming soon', disabled:true, icon:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>'},
   {id:'notebooks', label:'Notebooks', icon:'<path d="M7 3h10v18l-5-4-5 4z"/>'},
   {id:'notehub', label:'Notes', icon:'<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M8 8h7M8 12h7"/>'},
@@ -4959,52 +4971,6 @@ function leaveFlash(){
   go(mine ? 'myflash' : 'flash');
 }
 function myFlashNewView(){
-  const editing = nav.editId ? (store.myCards||[]).find(x=>x.id===nav.editId) : null;
-  let kind = editing ? editing.kind : 'sentence';
-  const w = el('<div></div>');
-  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">'+(editing?'Edit card':'New card')+'</div><h1 class="hm-title">'+(editing?'Edit a <em>card.</em>':'Make a <em>card.</em>')+'</h1></div>'));
-  const form = el('<form class="mf-form card" autocomplete="off"></form>');
-  const seg = el('<div class="seg" role="group" aria-label="Card type"><button type="button" data-k="sentence">Sentence</button><button type="button" data-k="formula">Formula</button></div>');
-  form.appendChild(seg);
-  const front = el('<label class="mf-field"><span class="eyebrow">Front</span><textarea name="front" maxlength="300" rows="2"></textarea></label>');
-  const hint = el('<p class="note-line" style="margin:4px 0 10px"></p>');
-  const why = el('<label class="mf-field"><span class="eyebrow">Why it works</span><textarea name="why" maxlength="600" rows="3" placeholder="The short reason this is true"></textarea></label>');
-  const trick = el('<label class="mf-field"><span class="eyebrow">Memory trick</span><textarea name="trick" maxlength="300" rows="2" placeholder="Anything that makes it stick"></textarea></label>');
-  if(editing){
-    front.querySelector('textarea').value = editing.front || '';
-    why.querySelector('textarea').value = editing.why || '';
-    trick.querySelector('textarea').value = editing.trick || '';
-  }
-  const err = el('<p class="note-line err" hidden></p>');
-  const save = el('<button class="btn block" type="submit">'+(editing?'Save changes':'Save card')+'</button>');
-  const back = el('<button class="btn secondary" type="button" style="margin-top:8px">Cancel</button>');
-  form.appendChild(front); form.appendChild(hint); form.appendChild(why); form.appendChild(trick); form.appendChild(err); form.appendChild(save); form.appendChild(back);
-  const setKind = k=>{
-    kind = k;
-    seg.querySelectorAll('button[data-k]').forEach(b=>b.classList.toggle('on', b.dataset.k===k));
-    const ta = front.querySelector('textarea');
-    ta.placeholder = k==='formula' ? 'e.g. sin^(-1)(x) + cos^(-1)(x) = pi/2' : 'e.g. Angular momentum is conserved when no external torque acts';
-    hint.textContent = k==='formula' ? 'Type it plainly. It is shown in proper notation: ^ for powers, pi, sqrt(x), and so on.' : 'Write the statement as you would say it aloud.';
-  };
-  seg.querySelectorAll('button[data-k]').forEach(b=>b.onclick = ()=>setKind(b.dataset.k));
-  setKind(kind);
-  back.onclick = ()=>go('myflash', {editId:null});
-  form.onsubmit = e=>{
-    e.preventDefault();
-    const f = front.querySelector('textarea').value.trim(), y = why.querySelector('textarea').value.trim(), t = trick.querySelector('textarea').value.trim();
-    if(!f || !y){ err.textContent = 'Fill in the front and the why-it-works box.'; err.hidden = false; return; }
-    if(editing){
-      Object.assign(editing, {kind: kind, front: f, why: y, trick: t});
-    } else {
-      store.myCards = store.myCards || [];
-      store.myCards.push({id: Date.now().toString(36)+Math.random().toString(36).slice(2,6), kind: kind, front: f, why: y, trick: t, created: Date.now()});
-    }
-    persist(); go('myflash', {editId:null});
-  };
-  w.appendChild(form);
-  return w;
-}
-function myFlashNewView(){
   let kind = 'sentence';
   const w = el('<div></div>');
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">New card</div><h1 class="hm-title">Make a <em>card.</em></h1></div>'));
@@ -5293,7 +5259,7 @@ function cacheUser(patch){
 function loadAvatarCache(){
   try{ return (JSON.parse(localStorage.getItem(USER_CACHE_KEY)) || {}).avatar || null; }catch(e){ return null; }
 }
-// Shrink a chosen photo to a 256px square JPEG before it is cached
+// Shrink a chosen photo to a 160px square JPEG before it is cached (shown at 54px at most, so this stays sharp and small)
 function readAvatar(file, done){
   if(!file || !file.type || file.type.indexOf('image/') !== 0){ appNotice('Photo not supported', 'Please choose a photo (JPG or PNG).'); return; }
   const fr = new FileReader();
@@ -5302,10 +5268,10 @@ function readAvatar(file, done){
     const img = new Image();
     img.onerror = ()=>appNotice('Photo not opened', 'That photo could not be opened. Try a JPG or PNG.');
     img.onload = ()=>{
-      const S = 256, m = Math.min(img.width, img.height);
+      const S = 160, m = Math.min(img.width, img.height);
       const c = document.createElement('canvas'); c.width = S; c.height = S;
       c.getContext('2d').drawImage(img, (img.width-m)/2, (img.height-m)/2, m, m, 0, 0, S, S);
-      done(c.toDataURL('image/jpeg', 0.85));
+      done(c.toDataURL('image/jpeg', 0.82));
     };
     img.src = fr.result;
   };
@@ -5467,7 +5433,7 @@ function onboardView(){
     +'<div class="onb-eyebrow">JEE Main \u00B7 Previous-year papers</div>'
     +'<h1 class="onb-title"><span class="w onb-outline">Crack</span><span class="w">JEE</span><em class="w">with intent.</em></h1>'
     +'<p class="onb-sub">Real papers, shift by shift, and timed mocks that feel like exam day. Tell us a little about you to begin.</p>'
-    +'<div class="onb-tags"><span class="onb-tag-hot">SoG On Every Answer</span><span>Shift-wise PYQs</span><span>Timed mocks</span><span>Chapter drills</span></div>'
+    +'<div class="onb-tags"><span class="onb-tag-hot">SoG On Every Answer</span><span>Shift-wise PYQs</span><span>Timed mocks</span><span>Chapter drills</span><span>Live leaderboard</span></div>'
     +'</div>'));
   const card = el('<div class="onb-card"></div>');
   card.appendChild(el('<div class="onb-cardhead">Set up your profile</div>'));
@@ -5509,7 +5475,7 @@ function lbFetch(){
   db.rpc('leaderboard', {p_board:lbState.board, p_period:lbState.period, p_limit:50}).then(({data,error})=>{
     if(error){ console.error(error); setC(key, {err:'Could not load the leaderboard. Check your connection and try again.'}); return; }
     const rows = (data||[]).map(r=>({place:Number(r.place), name:r.username||'Anonymous User', first:r.first_name,
-      avatar:avatarUrl(r.avatar_path), anon:!!r.is_anonymous, me:!!r.is_me, score:Number(r.score)}));
+      avatar:r.avatar_data || null, anon:!!r.is_anonymous, me:!!r.is_me, score:Number(r.score)}));
     // Remember our all-time points rank so future awards can taper for top ranks.
     if(lbState.board==='points' && lbState.period==='all'){
       const me = rows.find(r=>r.me);
@@ -5527,11 +5493,11 @@ function lbCardHTML(r, cls){
   return '<div class="lb-card '+cls+(r.me?' lb-me':'')+'" role="listitem" aria-label="Rank '+r.place+', '+esc(r.name)+', '+esc(lbFmt(lbState.board,r.score))+'">'+crown
     +'<span class="lb-medal">'+r.place+'</span>'
     +'<span class="lb-av">'+lbAvHTML(r)+'</span>'
-    +'<span class="lb-who"><b class="lb-name">'+esc(r.name)+(r.me?' <small>(you)</small>':'')+'</b>'+(r.first && !r.anon?'<small>'+esc(r.first)+'</small>':'')+'</span>'
+    +'<span class="lb-who"><b class="lb-name">'+esc(r.name)+(r.me?' <small>(You)</small>':'')+'</b>'+(r.first && !r.anon?'<small>'+esc(r.first)+'</small>':'')+'</span>'
     +'<span class="lb-score">'+esc(lbFmt(lbState.board,r.score))+'</span></div>';
 }
 function lbRowHTML(r){
-  return '<div class="row lb-row'+(r.me?' lb-me':'')+'" role="listitem" style="cursor:default"><span class="lb-rank">'+r.place+'</span><span class="lb-av">'+lbAvHTML(r)+'</span><span class="lb-name">'+esc(r.name)+(r.me?' <small>(you)</small>':'')+'</span><span class="lb-pts">'+esc(lbFmt(lbState.board,r.score))+'</span></div>';
+  return '<div class="row lb-row'+(r.me?' lb-me':'')+'" role="listitem" style="cursor:default"><span class="lb-rank">'+r.place+'</span><span class="lb-av">'+lbAvHTML(r)+'</span><span class="lb-name">'+esc(r.name)+(r.me?' <small>(You)</small>':'')+'</span><span class="lb-pts">'+esc(lbFmt(lbState.board,r.score))+'</span></div>';
 }
 function leaderboardView(){
   const w = el('<div></div>');
@@ -5659,7 +5625,7 @@ function accountBlock(){
   };
   w.appendChild(logout);
 
-  const del = el('<button class="btn block" type="button" style="margin-top:10px;background:transparent;color:#e5484d;border:1px solid #e5484d;box-shadow:none">Delete account</button>');
+  const del = el('<button class="btn block" type="button" style="margin-top:10px;background:transparent;color:var(--bad);border:1px solid var(--bad);box-shadow:none">Delete account</button>');
   del.onclick = async ()=>{
     const sure1 = await appDialog({eyebrow:'Delete account', title:'Delete your account?', body:'Your profile, photo and practice history will be erased. This cannot be undone.', ok:'Continue', cancel:'Keep my account', danger:true});
     if(!sure1) return;
@@ -5843,6 +5809,94 @@ async function loadStudentThread(m, box){
   box.appendChild(el('<div class="ad-label">Their replies</div>'));
   data.forEach(t=> box.appendChild(el('<p class="ad-msg">'+esc(fmtWhen(t.created_at))+' · '+esc(t.body)+'</p>')));
 }
+function currentTemplates(){ return (adminState.templates && adminState.templates.length) ? adminState.templates : REPLY_TEMPLATES.slice(); }
+async function loadTemplates(){
+  const { data, error } = await sbClient().from('admin_settings').select('value').eq('key','reply_templates').maybeSingle();
+  adminState.templates = (!error && data && Array.isArray(data.value) && data.value.length) ? data.value : REPLY_TEMPLATES.slice();
+  if(view==='admin') render();
+}
+async function saveTemplates(arr){
+  const { error } = await sbClient().from('admin_settings').upsert({ key:'reply_templates', value:arr, updated_at:new Date().toISOString() });
+  if(error){ appNotice('Not saved', error.message); return false; }
+  adminState.templates = arr; return true;
+}
+function editTemplates(onDone){
+  const list = currentTemplates().slice();
+  while(list.length < 3) list.push('');
+  adminSheet('Reply templates', 'Edit the wording your team uses', (body, close)=>{
+    const fields = list.map((t,i)=>{
+      body.appendChild(el('<div class="ad-label">Template '+(i+1)+'</div>'));
+      const f = el('<textarea class="ad-reply" rows="3" aria-label="Template '+(i+1)+'"></textarea>');
+      f.value = t; body.appendChild(f); return f;
+    });
+    const save = el('<button class="btn block" type="button">Save templates</button>');
+    save.onclick = async ()=>{
+      const arr = fields.map(f=>f.value.trim()).filter(Boolean);
+      if(!arr.length){ appNotice('Nothing to save', 'Keep at least one template.'); return; }
+      save.disabled = true;
+      if(await saveTemplates(arr)){ close(); if(onDone) onDone(); }
+      else save.disabled = false;
+    };
+    body.appendChild(save);
+  });
+}
+async function loadSentReplies(m, box){
+  const db = sbClient();
+  const { data, error } = await db.from('admin_replies').select('*').eq('message_id', String(m.id)).order('created_at',{ascending:false});
+  if(error || !data || !data.length) return;
+  box.appendChild(el('<div class="ad-label">Sent replies</div>'));
+  data.forEach(rep=>{
+    const state = rep.seen_at ? 'Opened ' + fmtWhen(rep.seen_at) : 'Sealed, not opened yet';
+    const row = el('<div class="ad-sent"><p class="ad-msg">'+esc(rep.body)+'</p><div class="ad-sent-meta">'+esc(fmtWhen(rep.created_at))+' · '+esc(state)+'</div></div>');
+    const burn = el('<button class="btn secondary small" type="button">Burn now</button>');
+    burn.onclick = async ()=>{
+      const ok = await appDialog({eyebrow:'Admin', title:'Burn this reply now?', body:'The student loses it straight away, along with anything they wrote back. This cannot be undone.', ok:'Burn it', cancel:'Keep it', danger:true});
+      if(!ok) return;
+      burn.disabled = true;
+      await db.from('eye_thread').delete().eq('reply_id', String(rep.id));
+      const { data: gone, error: e2 } = await db.from('admin_replies').delete().eq('id', rep.id).select();
+      if(e2 || !gone || !gone.length){ burn.disabled = false; appNotice('Not burned', e2 ? e2.message : 'Run batch2b_setup.sql in Supabase, then try again.'); return; }
+      row.remove();
+      const left = await db.from('admin_replies').select('id', {count:'exact', head:true}).eq('message_id', String(m.id));
+      if(!left.error && left.count === 0){ await db.from('contact_messages').update({status:'open'}).eq('id', m.id); m.status = 'open'; render(); }
+    };
+    row.appendChild(burn);
+    box.appendChild(row);
+  });
+}
+function spotlightCard(reports){
+  const groups = {};
+  reports.forEach(r=>{ const key = [r.subject||'', r.chapter||'', r.year||''].join('|'); (groups[key] = groups[key] || []).push(r); });
+  const top = Object.values(groups).sort((a,b)=>b.length-a.length)[0];
+  if(!top) return null;
+  const latest = top.slice().sort((a,b)=>String(b.created_at).localeCompare(String(a.created_at)))[0];
+  const label = (latest.subject||'Question')+(latest.chapter?' · '+latest.chapter:'')+(latest.year?' · '+latest.year:'');
+  const card = el('<div class="card ad-spot"><div class="eyebrow">Most reported question</div><h3>'+esc(label)+'</h3><p class="note-line">'+top.length+(top.length===1?' report':' reports')+' so far.</p></div>');
+  const btn = el('<button class="btn secondary small" type="button">Open latest report</button>');
+  btn.onclick = ()=>openReportDetail(latest);
+  card.appendChild(btn);
+  return card;
+}
+function weekStartOf(d){ const x = new Date(d); x.setHours(0,0,0,0); x.setDate(x.getDate() - ((x.getDay()+6)%7)); return x; }
+function digestCard(reports){
+  const now = weekStartOf(new Date());
+  const weeks = [];
+  for(let i=7;i>=0;i--){ const st = new Date(now); st.setDate(st.getDate() - i*7); weeks.push({start:st, n:0}); }
+  reports.forEach(r=>{
+    if(!r.created_at) return;
+    const ws = weekStartOf(new Date(r.created_at)).getTime();
+    const hit = weeks.find(w=>w.start.getTime()===ws); if(hit) hit.n++;
+  });
+  const max = Math.max(1, ...weeks.map(w=>w.n));
+  const total = weeks.reduce((a,w)=>a+w.n,0);
+  const card = el('<div class="card ad-digest"><div class="eyebrow">Weekly digest</div><p class="note-line">'+total+' reports across the last eight weeks.</p><div class="ad-trend"></div></div>');
+  const trend = card.querySelector('.ad-trend');
+  weeks.forEach(w=>{
+    const label = w.start.getDate()+' '+w.start.toLocaleString([],{month:'short'});
+    trend.appendChild(el('<div class="ad-col"><div class="ad-wrap"><i style="height:'+Math.round(w.n/max*100)+'%"></i></div><b>'+w.n+'</b><span>'+esc(label)+'</span></div>'));
+  });
+  return card;
+}
 function openMessageDetail(m){
   adminSheet('Message', (m.name||'Anonymous')+(m.email?' · '+m.email:''), (body, close)=>{
     body.appendChild(el('<div class="ad-kv"><span>Received</span><b>'+esc(fmtWhen(m.created_at))+'</b><span>Status</span><b>'+esc(m.status||'open')+'</b></div>'));
@@ -5852,12 +5906,21 @@ function openMessageDetail(m){
     body.appendChild(el('<div class="ad-label">Reply</div>'));
     const tpl = el('<div class="chips"></div>');
     const ta = el('<textarea class="ad-reply" rows="5" placeholder="Write a kind, clear reply. It opens in their For Your Eyes Only inbox."></textarea>');
-    REPLY_TEMPLATES.forEach((t,i)=>{
-      const b = el('<button class="chip" type="button">Template '+(i+1)+'</button>');
-      b.onclick = ()=>{ ta.value = t; ta.focus(); };
-      tpl.appendChild(b);
-    });
+    const drawChips = ()=>{
+      tpl.innerHTML = '';
+      currentTemplates().forEach((t,i)=>{
+        const b = el('<button class="chip" type="button">Template '+(i+1)+'</button>');
+        b.onclick = ()=>{ ta.value = t; ta.focus(); };
+        tpl.appendChild(b);
+      });
+    };
+    drawChips();
     body.appendChild(tpl);
+    const tplTools = el('<div class="row ad-tools"></div>');
+    const editT = el('<button class="btn secondary small" type="button">Edit templates</button>');
+    editT.onclick = ()=>editTemplates(drawChips);
+    tplTools.appendChild(editT);
+    body.appendChild(tplTools);
     body.appendChild(ta);
     const send = el('<button class="btn block" type="button">Send reply</button>');
     send.onclick = async ()=>{
@@ -5875,6 +5938,8 @@ function openMessageDetail(m){
       render();
     };
     body.appendChild(send);
+    const sentBox = el('<div></div>'); body.appendChild(sentBox);
+    loadSentReplies(m, sentBox);
   });
 }
 function exportReportsCsv(list){
@@ -5890,6 +5955,7 @@ function adminView(){
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Admin</div><h1 class="hm-title">Dash<em>board.</em></h1></div>'));
   if(!isGuard()){ w.appendChild(el('<div class="card"><div class="eyebrow">Restricted</div><p class="note-line">This area is for the TORQ team.</p></div>')); return w; }
   if(adminState.reports===null && !adminState.loading && !adminState.err) loadAdmin();
+  if(adminState.templates===undefined){ adminState.templates = null; loadTemplates(); }
 
   const reports = adminState.reports || [], msgs = adminState.msgs || [];
   const open = reports.filter(r=>reportStatus(r)==='open').length;
@@ -5946,6 +6012,10 @@ function adminView(){
       });
       w.appendChild(card);
     }
+
+    const spot = spotlightCard(reports);
+    if(spot) w.appendChild(spot);
+    if(reports.length) w.appendChild(digestCard(reports));
 
     const list = filteredReports();
     if(!list.length){ w.appendChild(el('<div class="card"><p class="note-line">No reports match this view.</p></div>')); return w; }
