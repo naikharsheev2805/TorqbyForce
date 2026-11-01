@@ -1100,6 +1100,45 @@ body.has-nav .bn{ flex:none; }
 .fc-big.on{ opacity:1; }
 .fc-big:not(.on){ opacity:.4; }
 
+/* ---------- Menu fits any screen; sign-up fills the first screen; flashcards; calmer Me tabs ---------- */
+.navpanel{ max-height:calc(100dvh - 90px - env(safe-area-inset-bottom,0px)); overflow-y:auto; overscroll-behavior:contain; }
+.navsup.on{ color:var(--accent); background:var(--accent-soft); }
+.navsup.on span{ color:var(--accent); }
+@media (min-width:760px){ .navpanel{ max-height:calc(100dvh - 120px); } }
+@media (max-width:759px){
+  .onb-hero{ min-height:calc(100dvh - 56px); display:flex; flex-direction:column; justify-content:center; }
+  .onb-stage > .onb-card{ margin-top:12px; }
+}
+/* legal pages: a hero header and numbered section cards in the same style as the daily set */
+.legal-paper{ background:transparent !important; border:0 !important; box-shadow:none !important; padding:0 !important; }
+.legal-paper::before{ display:none !important; }
+.legal-paper .lp-top{ display:none !important; }
+.legal-paper .lp-title{ font:500 clamp(30px,8.5vw,40px)/1.1 Lora,Georgia,serif; letter-spacing:-.02em; margin:0 0 8px; color:var(--text) !important; }
+.legal-paper .lp-date{ color:var(--muted) !important; font-size:13px; margin-bottom:18px; }
+.legal-paper .card{ position:relative; overflow:hidden; border:1.5px solid transparent !important; border-radius:calc(var(--r-xl) + 4px) !important; margin-bottom:14px;
+  background:linear-gradient(var(--surface),var(--surface)) padding-box, linear-gradient(135deg,var(--accent),var(--c-phys),var(--c-chem)) border-box !important; }
+.legal-paper .card .eyebrow{ font:600 18px/1.25 Lora,Georgia,serif; letter-spacing:0; text-transform:none; color:var(--text) !important; }
+.legal-paper .card .nt-p{ color:var(--muted); font-size:15px; line-height:1.7; }
+.legal-paper .card::after{ content:""; position:absolute; right:-30px; top:-30px; width:120px; height:120px; border-radius:50%; pointer-events:none;
+  background:radial-gradient(circle, color-mix(in srgb,var(--accent) 18%, transparent), transparent 70%); }
+/* flashcards */
+.fl-wrap{ max-width:620px; margin:0 auto; padding:8px 4px 40px; }
+.fl-count{ font:600 12px Inter,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
+.fl-bar{ height:6px; border-radius:99px; background:var(--surface-2); overflow:hidden; margin-bottom:18px; }
+.fl-bar i{ display:block; height:100%; background:linear-gradient(90deg,var(--accent),var(--c-medium)); border-radius:99px; transition:width .4s ease; }
+.fl-stage{ perspective:1200px; height:340px; cursor:pointer; }
+.fl-card{ position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .6s cubic-bezier(.2,.7,.2,1); }
+.fl-card.flip{ transform:rotateY(180deg); }
+.fl-face{ position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:var(--r-xl); padding:26px 24px;
+  display:flex; flex-direction:column; justify-content:center; gap:14px; border:1.5px solid transparent;
+  background:linear-gradient(160deg,var(--surface),var(--surface-2)) padding-box, linear-gradient(135deg,var(--accent),var(--c-medium),var(--c-phys)) border-box; box-shadow:0 30px 60px -34px var(--shadow); }
+.fl-face.back{ transform:rotateY(180deg); }
+.fl-ch{ font:700 11px Inter,sans-serif; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+.fl-front{ font-size:clamp(20px,5.6vw,28px); color:var(--text); line-height:1.35; }
+.fl-back{ font:400 15.5px/1.6 Inter,sans-serif; color:var(--muted); }
+.fl-hint{ font-size:12px; color:var(--muted); text-align:center; margin-top:10px; }
+.fl-ctl{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:18px; }
+.fl-ctl .btn{ min-width:120px; }
 .intwrap{margin:12px 0 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .intin{font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);width:180px}
 .intin.ok{border-color:var(--ok,#2a9d5c)} .intin.bad{border-color:var(--bad,#d64545)}
@@ -1426,7 +1465,7 @@ let view = 'home';
 let session = null;
 let nav = {tab:'home', subject:SUBJECTS[0], pyqTab:'questions', paper:null, meTab:'analysis', cfg:null,
            mockCfg:{subjects:[...SUBJECTS], perSubject:5, minutes:60}};
-const TAB_OF = {privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', notebooks:'notebooks', leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', notes:'notehub', notehub:'notehub', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
+const TAB_OF = {flash:'notehub', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', notebooks:'notebooks', leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', notes:'notehub', notehub:'notehub', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
 
 const LAST_VIEW_KEY = 'torq_last_view_v1';
 function saveLastView(){
@@ -2395,7 +2434,7 @@ function renderInner(){
   app.classList.toggle('is-onb', needSignIn || !store.profile);
   if(view!=='practice' && store.profile && !needSignIn) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
   const V = {privacy:()=>legalPaperView('privacy'), terms:()=>legalPaperView('terms'), copyright:()=>legalPaperView('copyright'), disclaimer:()=>legalPaperView('disclaimer'), contact:contactPageView, notebooks:notebooksView, leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
-             me:meView, practice:practiceView, results:resultsView, notes:notesView, notehub:notehubView};
+             me:meView, practice:practiceView, results:resultsView, notes:notesView, notehub:notehubView, flash:flashView};
   app.appendChild(needSignIn ? authView() :(!store.profile ? (sbSession ? authView() : onboardView()) : (V[view]||homeView)()));
   if(view==='pyq') app.appendChild(el('<div class="foot">'+esc(BANK_ERROR || ('PYQ bank: '+QUESTIONS.length+' questions'))+'</div>'));
   document.querySelectorAll('.bottomnav,#navTog,#navScrim').forEach(n=>n.remove());
@@ -2479,7 +2518,7 @@ function bottomNav(){
   bar.appendChild(el('<div class="navdiv" aria-hidden="true"></div>'));
   bar.appendChild(el('<div class="navsec">Support</div>'));
   SUPPORT_ITEMS.forEach(it=>{
-    const b = el('<button class="bn navsup"><svg viewBox="0 0 24 24">'+it[2]+'</svg><span>'+esc(it[1])+'</span></button>');
+    const b = el('<button class="bn navsup'+(view===it[0]?' on':'')+'"'+(view===it[0]?' aria-current="page"':'')+'><svg viewBox="0 0 24 24">'+it[2]+'</svg><span>'+esc(it[1])+'</span></button>');
     b.onclick = ()=>openLegal(it[0]);
     bar.appendChild(b);
   });
@@ -3166,6 +3205,39 @@ function openFcard(src, f, chapter){
   big.onclick = close;
   document.addEventListener('keydown', function esc1(e){ if(e.key==='Escape'){ close(); document.removeEventListener('keydown', esc1); } });
 }
+// Flashcards: every formula and every concept from the revision notes, one card each
+let flashState = {i:0, flipped:false};
+function flashDeck(){
+  const deck = [];
+  Object.keys(NOTES).forEach(c=>{
+    NOTES[c].formulas.forEach(f=>deck.push({ch:c, kind:'Formula', front:'$'+f.eq+'$', back:f.use}));
+    NOTES[c].concepts.forEach(k=>deck.push({ch:c, kind:'Concept', front:esc(k.title), back:k.analogy}));
+  });
+  return deck;
+}
+function flashView(){
+  const deck = flashDeck();
+  const w = el('<div class="fl-wrap"></div>');
+  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Study</div><h1 class="hm-title">Flash<em>cards.</em></h1></div>'));
+  if(!deck.length){ w.appendChild(el('<div class="card empty">No flashcards yet.</div>')); return w; }
+  flashState.i = Math.min(flashState.i, deck.length-1);
+  const c = deck[flashState.i], pct = Math.round((flashState.i+1)/deck.length*100);
+  w.appendChild(el('<div class="fl-count">'+(flashState.i+1)+' of '+deck.length+' · '+esc(c.ch)+'</div>'));
+  w.appendChild(el('<div class="fl-bar"><i style="width:'+pct+'%"></i></div>'));
+  const stage = el('<div class="fl-stage" role="button" tabindex="0" aria-label="Flip card"><div class="fl-card'+(flashState.flipped?' flip':'')+'">'
+    +'<div class="fl-face front"><div class="fl-ch">'+c.kind+'</div><div class="fl-front">'+c.front+'</div><div class="fl-hint">Tap to flip</div></div>'
+    +'<div class="fl-face back"><div class="fl-ch">Explanation</div><div class="fl-back">'+esc(c.back)+'</div></div></div></div>');
+  stage.onclick = ()=>{ flashState.flipped = !flashState.flipped; render(); };
+  w.appendChild(stage);
+  const ctl = el('<div class="fl-ctl"></div>');
+  const prev = el('<button class="btn secondary" type="button"'+(flashState.i===0?' disabled':'')+'>Previous</button>');
+  const next = el('<button class="btn" type="button"'+(flashState.i===deck.length-1?' disabled':'')+'>Next</button>');
+  prev.onclick = ()=>{ flashState.i--; flashState.flipped=false; render(); };
+  next.onclick = ()=>{ flashState.i++; flashState.flipped=false; render(); };
+  ctl.appendChild(prev); ctl.appendChild(next);
+  w.appendChild(ctl);
+  return w;
+}
 function notehubView(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Study</div><h1 class="hm-title">Notes and <em>formulas.</em></h1></div>'));
@@ -3188,6 +3260,7 @@ function notesView(){
   w.appendChild(el('<div class="eyebrow">Revision notes</div>'));
   w.appendChild(el('<h1 class="title">'+esc(c)+'</h1>'));
   if(!data){ w.appendChild(el('<div class="card empty">Notes for this chapter are coming in a later batch.</div>')); return w; }
+  { const fb = el('<button class="btn block" style="margin:0 0 16px">Open flashcards</button>'); fb.onclick = ()=>{ flashState = {i:0, flipped:false}; go('flash'); }; w.appendChild(fb); }
   w.appendChild(el('<div class="field">Formula cards</div>'));
   const fg = el('<div class="fcards"></div>');
   data.formulas.forEach(f=>fg.appendChild(fcardEl(f, c)));
@@ -3745,7 +3818,7 @@ function meView(){
     +'<div class="hm-eyebrow">Your space</div>'
     +'<h1 class="hm-title">'+(first ? 'Me, <em>'+esc(first)+'.</em>' : 'Me<em>.</em>')+'</h1></div>'));
   const tabs = el('<div class="ctabs" role="tablist"></div>');
-  [['analysis','Analysis'],['history','History'],['badges','Badges'],['mysol','My solutions'],['patterns','Patterns'],['redo','Redo'],['profile','Profile'],['theme','Theme']].forEach(p=>{
+  [['analysis','Progress'],['badges','Badges'],['mysol','Notebook'],['profile','Profile']].forEach(p=>{
     const on = nav.meTab === p[0];
     const b = el('<button role="tab" aria-selected="'+on+'" class="ctab'+(on?' on':'')+'">'+p[1]+'</button>');
     b.onclick = ()=>go('me',{meTab:p[0]});
@@ -3753,14 +3826,12 @@ function meView(){
   });
   w.appendChild(tabs);
   const panel = el('<div class="cpanel"></div>');
-  if(nav.meTab==='profile') panel.appendChild(profilePart());
-  else if(nav.meTab==='theme') panel.appendChild(themePart());
+  if(nav.meTab==='profile'){ panel.appendChild(profilePart()); panel.appendChild(themePart()); }
   else if(nav.meTab==='badges') panel.appendChild(badgesPart());
-  else if(nav.meTab==='mysol') panel.appendChild(mySolPart());
-  else if(nav.meTab==='history') panel.appendChild(historyPart());
-  else if(nav.meTab==='patterns') panel.appendChild(patternsPart());
-  else if(nav.meTab==='redo') panel.appendChild(redoPart());
-  else panel.appendChild(analysisPart());
+  else if(nav.meTab==='mysol'){ panel.appendChild(mySolPart()); panel.appendChild(redoPart()); }
+  else if(nav.meTab==='history') { panel.appendChild(analysisPart()); panel.appendChild(historyPart()); }
+  else if(nav.meTab==='patterns') { panel.appendChild(analysisPart()); panel.appendChild(patternsPart()); }
+  else { panel.appendChild(analysisPart()); panel.appendChild(historyPart()); panel.appendChild(patternsPart()); }
   w.appendChild(panel);
   return w;
 }
