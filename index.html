@@ -1140,7 +1140,8 @@ body.has-nav .bn{ flex:none; }
 .fcard{ cursor:pointer; transition:transform .2s ease, border-color .2s ease; }
 .fcard:hover{ border-color:var(--accent-text); }
 .fcard:active{ transform:scale(.98); }
-.fc-back{ position:fixed; inset:0; z-index:110; background:rgba(10,10,9,0); transition:background .35s ease; }
+.fc-back{ position:fixed; inset:0; z-index:110; background:rgba(10,10,9,0); -webkit-backdrop-filter:blur(0px); backdrop-filter:blur(0px);
+  transition:background .5s ease, backdrop-filter .5s ease, -webkit-backdrop-filter .5s ease; touch-action:none; }
 .fc-back.on{ background:rgba(10,10,9,.55); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); }
 .fc-big{ position:fixed; z-index:111; border-radius:var(--r-xl); padding:26px 26px 24px; overflow:hidden; cursor:pointer;
   border:1px solid transparent; background:linear-gradient(160deg,var(--surface),var(--surface-2)) padding-box, linear-gradient(135deg,var(--accent),var(--c-medium),var(--c-phys)) border-box;
@@ -1639,12 +1640,21 @@ img{ -webkit-user-drag:none; }
 /* ---- Patch: formula cards never scroll; the card itself enlarges and returns to its slot ---- */
 .fcard-eq{ overflow:visible !important; }
 .fcard-eq .katex-display{ overflow:visible; margin:0; }
-.fcard.fc-travel{ position:fixed; z-index:111; margin:0; cursor:pointer; border:1px solid var(--border); background:linear-gradient(160deg,var(--surface),var(--surface-2)); box-shadow:0 40px 80px -30px var(--shadow); transition:left .42s cubic-bezier(.2,.7,.2,1), top .42s cubic-bezier(.2,.7,.2,1), width .42s cubic-bezier(.2,.7,.2,1), height .42s cubic-bezier(.2,.7,.2,1), padding .42s ease; }
+.fcard.fc-travel{ position:fixed; z-index:111; margin:0; cursor:pointer; opacity:1; transform:none; border:1px solid var(--border);
+  background:linear-gradient(160deg,var(--surface),var(--surface-2)); box-shadow:0 18px 40px -26px var(--shadow);
+  display:flex; flex-direction:column; justify-content:center; gap:0; box-sizing:border-box; will-change:left, top, width, height;
+  transition:left .5s cubic-bezier(.22,.8,.24,1), top .5s cubic-bezier(.22,.8,.24,1), width .5s cubic-bezier(.22,.8,.24,1), height .5s cubic-bezier(.22,.8,.24,1),
+             padding .5s cubic-bezier(.22,.8,.24,1), gap .5s cubic-bezier(.22,.8,.24,1), border-radius .5s cubic-bezier(.22,.8,.24,1), box-shadow .5s ease; }
+.fcard.fc-travel:active{ transform:none; }
 .fcard.fc-travel::before{ display:none; }
 .fcard.fc-travel:hover{ border-color:var(--border); }
-.fcard.fc-travel.fc-big{ padding:26px 26px 24px; border-radius:var(--r-xl); display:flex; flex-direction:column; justify-content:center; gap:14px; }
-.fcard.fc-travel .fcard-eq{ transition:font-size .42s ease; }
-.fcard.fc-travel.fc-big .fcard-eq{ font-size:clamp(22px,6vw,30px) !important; }
+.fcard.fc-travel.fc-open{ padding:26px 26px 24px; border-radius:var(--r-xl); gap:14px; box-shadow:0 40px 80px -30px var(--shadow); }
+.fcard.fc-travel .fcard-eq{ transition:font-size .5s cubic-bezier(.22,.8,.24,1); }
+.fcard.fc-travel.fc-open .fcard-eq{ font-size:clamp(22px,6vw,30px) !important; }
+.fcard.fc-travel .fcard-use, .fcard.fc-travel .fcard-ch{ transition:font-size .5s ease, margin-top .5s cubic-bezier(.22,.8,.24,1); }
+.fcard.fc-travel.fc-open .fcard-use, .fcard.fc-travel.fc-open .fcard-ch{ margin-top:0; }
+.fcard.fc-travel.fc-open .fcard-use{ font-size:15px; line-height:1.6; }
+@media (prefers-reduced-motion: reduce){ .fcard.fc-travel, .fcard.fc-travel .fcard-eq, .fc-back{ transition-duration:.01s !important; } }
 .fc-ph{ display:block; flex-shrink:0; }
 
 /* ---- Patch: no clipping of the glass glow; the menu draws its own border, reveals, then its items arrive ---- */
@@ -1979,7 +1989,8 @@ body.has-nav .build-stamp{ margin-bottom:calc(96px + env(safe-area-inset-bottom,
 #app{ overflow-x:clip; overflow-clip-margin:0; }
 
 /* ---- Admin: detail sheets, priority chips, filters, breakdown bars ---- */
-.ad-detail{ max-height:86vh; overflow:auto; padding-bottom:calc(24px + env(safe-area-inset-bottom,0px)); }
+.ad-detail-scrim{ z-index:80 !important; }
+.ad-detail{ z-index:81 !important; max-height:86vh; overflow:auto; overscroll-behavior:contain; padding-bottom:calc(24px + env(safe-area-inset-bottom,0px)); }
 .ad-d-title{ font:600 clamp(22px,4.6vw,28px)/1.15 Lora,Georgia,serif; margin:6px 0 12px; }
 .ad-kv{ display:grid; grid-template-columns:auto 1fr; gap:8px 16px; padding:14px 16px; margin:4px 0 6px; border:1px solid var(--border); border-radius:var(--r-lg); background:var(--surface-2); font-size:14px; }
 .ad-kv span{ color:var(--muted); }
@@ -4601,7 +4612,7 @@ function fcardEl(f, chapter){
 let fcOpen = null;
 // Shrinks a formula to fit its card width. Formulas never scroll: a small card makes the formula smaller instead.
 function fitEq(eqEl){
-  if(!eqEl || eqEl.closest('.fc-travel.fc-big')) return;
+  if(!eqEl || eqEl.closest('.fc-travel.fc-open')) return;
   const k = eqEl.querySelector('.katex') || eqEl;
   let fs = 17; eqEl.style.fontSize = fs+'px';
   while(k.getBoundingClientRect().width > eqEl.clientWidth - 2 && fs > 9){ fs--; eqEl.style.fontSize = fs+'px'; }
@@ -4620,11 +4631,10 @@ function openFcard(src, f, chapter){
   const origClick = src.onclick;
   src.classList.add('fc-travel');
   src.style.left = r.left+'px'; src.style.top = r.top+'px'; src.style.width = r.width+'px'; src.style.height = r.height+'px';
-  const eq = src.querySelector('.fcard-eq'); if(eq) eq.style.fontSize = '';
   fcOpen = {src, ph, back, origClick};
   requestAnimationFrame(()=>requestAnimationFrame(()=>{
     back.classList.add('on');
-    src.classList.add('fc-big');
+    src.classList.add('fc-open');
     const w = Math.min(window.innerWidth-32, 560), h = Math.min(window.innerHeight*0.6, 360);
     src.style.left = ((window.innerWidth-w)/2)+'px'; src.style.top = ((window.innerHeight-h)/2)+'px';
     src.style.width = w+'px'; src.style.height = h+'px';
@@ -4639,7 +4649,7 @@ function closeFcard(){
   document.removeEventListener('keydown', escFc);
   const rr = o.ph.getBoundingClientRect();     // the card flies back to its own slot
   o.back.classList.remove('on');
-  o.src.classList.remove('fc-big');
+  o.src.classList.remove('fc-open');
   o.src.style.left = rr.left+'px'; o.src.style.top = rr.top+'px';
   o.src.style.width = rr.width+'px'; o.src.style.height = rr.height+'px';
   setTimeout(()=>{
@@ -4649,7 +4659,7 @@ function closeFcard(){
     o.src.onclick = o.origClick;
     fitEq(o.src.querySelector('.fcard-eq'));
     o.back.remove();
-  }, 460);
+  }, 520);
 }
 // Flashcards: every formula and every concept from the revision notes, one card each
 let flashState = {chapter:null, i:0, flipped:false, pool:[], filter:'All', done:false, busy:false, enter:false};
@@ -5504,7 +5514,7 @@ function lbFetch(force){
     if(!cur || cur.tok!==tok) return;
     if(error){ console.error(error); setC(key, {err:'Could not load the leaderboard. Check your connection and try again.'}); return; }
     const rows = (data||[]).map(r=>({place:Number(r.place), name:r.username||'Anonymous User', first:r.first_name||'',
-      avatar:r.avatar_data||null, anon:!!r.is_anonymous, me:!!r.is_me, score:Number(r.score)}));
+      avatar:r.avatar_data||null, anon:!!r.is_anonymous, me:!!r.is_me, score:(r.score==null ? null : Number(r.score))}));
     // Remember our all-time points rank so future awards can taper for top ranks.
     if(board==='points' && period==='all'){
       const me = rows.find(r=>r.me), rank = me ? me.place : null;
@@ -5774,18 +5784,34 @@ function loadAdmin(){
     if(view==='admin') render();
   });
 }
-// A sheet for detail views, in the app's own style
+// A sheet for detail views, in the app's own style.
+// It owns one browser-history step while open, so the Back button closes the sheet instead of leaving it stranded.
+const adminSheetStack = [];   // open sheets, the top one last
+let adminSheetPopSkip = 0;    // history.back() calls we started ourselves, which popstate must ignore
 function adminSheet(eyebrow, title, build){
-  const scrim = el('<div class="scrim"></div>');
+  const scrim = el('<div class="scrim ad-detail-scrim"></div>');
   const sheet = el('<div class="sheet ad-detail" role="dialog" aria-modal="true"><div class="grab"></div>'
     +'<div class="eyebrow">'+esc(eyebrow)+'</div><h2 class="ad-d-title">'+esc(title)+'</h2><div class="ad-d-body"></div></div>');
   const body = sheet.querySelector('.ad-d-body');
-  const close = ()=>{ scrim.remove(); sheet.remove(); document.removeEventListener('keydown', onKey); };
-  const onKey = e=>{ if(e.key==='Escape') close(); };
+  let closed = false, pushed = false;
+  const entry = { popClose: ()=>finish(true) };
+  function finish(fromPop){
+    if(closed) return; closed = true;
+    scrim.remove(); sheet.remove(); document.removeEventListener('keydown', onKey);
+    const i = adminSheetStack.indexOf(entry); if(i > -1) adminSheetStack.splice(i, 1);
+    // closed by a button, the scrim or Escape: also remove the history step this sheet added
+    if(!fromPop && pushed){ adminSheetPopSkip++; try{ history.back(); }catch(e){ adminSheetPopSkip--; } }
+  }
+  const close = ()=>finish(false);
+  function onKey(e){ if(e.key==='Escape' && adminSheetStack[adminSheetStack.length-1]===entry) close(); }
   scrim.onclick = close;
+  if(typeof setNavOpen === 'function') setNavOpen(false);   // the menu never stays open behind a sheet
   build(body, close);
+  if(closed) return close;
   document.addEventListener('keydown', onKey);
   document.body.appendChild(scrim); document.body.appendChild(sheet);
+  adminSheetStack.push(entry);
+  try{ history.pushState(Object.assign({}, history.state || window.__lastTorqState || {torq:1}), ''); pushed = true; }catch(e){}
   return close;
 }
 function chipRow(items, current, onPick){
@@ -7286,6 +7312,14 @@ function qtextHTML(t){
     .replace(/(^|[.:;?!])\s*(\((?:[A-H]|I{1,3}|IV|V)\)\s)/g, (m,pre,p1)=> pre==='' ? p1 : pre+'<span class="stmt-break"></span>'+p1);
 }
 window.addEventListener('popstate', e=>{
+  // history steps the admin sheets removed themselves: nothing to navigate
+  if(adminSheetPopSkip > 0){ adminSheetPopSkip--; return; }
+  // Back while an admin sheet is open closes only the sheet; the page behind stays where it is
+  if(adminSheetStack.length){
+    if(document.querySelector('.ad-scrim')){ try{ history.pushState(Object.assign({}, e.state || window.__lastTorqState || {torq:1}), ''); }catch(_){} return; }
+    adminSheetStack[adminSheetStack.length-1].popClose();
+    return;
+  }
   if(mockLocked()){ history.pushState({torq:true, view:'practice'}, ''); mockNotice(); return; }
   if(practiceLeavePending()){
     if(!(leaveArmed && Date.now()-leaveArmed < 4000)){
