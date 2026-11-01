@@ -1768,7 +1768,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Rated from the stem: correct observations for circuit.",
-    "text": "Refer to the circuit diagram given in the figure. Which of the following observations are correct? A. Total resistance of circuit is $6\\,\\Omega$. B. Current in Ammeter is $1$ A. C. Potential across $AB$ is $4$ Volts. D. Potential across $\\ldots$ (see PDF).",
+    "text": "Refer to the circuit diagram given in the figure. Which of the following observations are correct? A. Total resistance of circuit is $6\\,\\Omega$. B. Current in Ammeter is $1$ A. C. Potential across $AB$ is $4$ Volts. D. Potential across $\\ldots$",
     "options": [
       {
         "key": "1",
@@ -2622,7 +2622,7 @@
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
     "verified_against": "text layer and printed answer key; second-pass check pending",
-    "image_display_width_px": 61
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-23jan-p-44",
@@ -2689,7 +2689,7 @@
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
     "verified_against": "text layer and printed answer key; second-pass check pending",
-    "image_display_width_px": 75
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-23jan-p-45",
@@ -2843,7 +2843,7 @@
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
     "verified_against": "text layer and printed answer key; second-pass check pending",
-    "image_display_width_px": 72
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-23jan-p-48",
@@ -3252,7 +3252,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Rated from the stem: match classification and examples.",
-    "text": "Match the LIST-I with LIST-II (classification of molecules based on octet rule). A. Molecules obeying octet rule, B. Molecules with incomplete octet, C. Molecules with incomplete octet with odd electron, D. Molecules with expanded octet. Examples: I. NO, NO2; II. BCl3, AlCl3; III. H2SO4, PCl5; IV. CCl4, CO2. Choose the correct answer from the options given below:",
+    "text": "Match the LIST-I with LIST-II (classification of molecules based on octet rule). Choose the correct answer from the options given below:",
     "options": [
       {
         "key": "1",
@@ -3294,7 +3294,7 @@
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
     "verified": false,
     "verified_against": "text layer and printed answer key; second-pass check pending",
-    "image_display_width_px": 129
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-23jan-p-56",
@@ -3427,7 +3427,7 @@
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
     "verified_against": "text layer and printed answer key; second-pass check pending",
-    "image_display_width_px": 71
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-23jan-p-58",
@@ -3780,25 +3780,25 @@
         "key": "1",
         "text": "",
         "image": "assets/q/main-2025-jan-s1-sh1-23jan-p-63-opt-1.webp",
-        "image_display_width_px": 38
+        "image_display_width_px": 45
       },
       {
         "key": "2",
         "text": "$\\mathrm{CH_3-CH_2-CH_2-OH}$",
         "image": "assets/q/main-2025-jan-s1-sh1-23jan-p-63-opt-2.webp",
-        "image_display_width_px": 38
+        "image_display_width_px": 45
       },
       {
         "key": "3",
         "text": "",
         "image": "assets/q/main-2025-jan-s1-sh1-23jan-p-63-opt-3.webp",
-        "image_display_width_px": 32
+        "image_display_width_px": 45
       },
       {
         "key": "4",
         "text": "",
         "image": "assets/q/main-2025-jan-s1-sh1-23jan-p-63-opt-4.webp",
-        "image_display_width_px": 32
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [
@@ -3853,25 +3853,25 @@
         "key": "1",
         "text": "",
         "image": "assets/q/main-2025-jan-s1-sh1-23jan-p-64-opt-1.webp",
-        "image_display_width_px": 129
+        "image_display_width_px": 45
       },
       {
         "key": "2",
         "text": "",
         "image": "assets/q/main-2025-jan-s1-sh1-23jan-p-64-opt-2.webp",
-        "image_display_width_px": 138
+        "image_display_width_px": 45
       },
       {
         "key": "3",
         "text": "",
         "image": "assets/q/main-2025-jan-s1-sh1-23jan-p-64-opt-3.webp",
-        "image_display_width_px": 30
+        "image_display_width_px": 45
       },
       {
         "key": "4",
         "text": "",
         "image": "assets/q/main-2025-jan-s1-sh1-23jan-p-64-opt-4.webp",
-        "image_display_width_px": 60
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [
@@ -4048,7 +4048,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Rated from the stem: match name reactions with products.",
-    "text": "Match LIST-I (Name reaction) with LIST-II (Product obtainable). A. Swarts reaction, B. Sandmeyer's reaction, C. Wurtz Fittig reaction, D. Finkelstein reaction. I. Ethyl benzene, II. Ethyl iodide, III. Cyanobenzene, IV. Ethyl fluoride. Choose the correct answer from the options given below:",
+    "text": "Match LIST-I (Name reaction) with LIST-II (Product obtainable). Choose the correct answer from the options given below:",
     "options": [
       {
         "key": "1",
@@ -4089,7 +4089,7 @@
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
     "verified": false,
     "verified_against": "text layer and printed answer key; second-pass check pending",
-    "image_display_width_px": 119
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-23jan-p-68",
@@ -4284,7 +4284,7 @@
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
     "verified_against": "text layer and printed answer key; second-pass check pending",
-    "image_display_width_px": 120
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-23jan-p-71",
@@ -4371,7 +4371,7 @@
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
     "verified": false,
     "verified_against": "text layer and printed answer key; second-pass check pending",
-    "image_display_width_px": 53
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-23jan-p-73",
@@ -4501,6 +4501,6 @@
     "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. Stem partly reconstructed; verify.",
     "verified": false,
     "verified_against": "text layer and printed answer key; second-pass check pending",
-    "image_display_width_px": 87
+    "image_display_width_px": 45
   }
 ]

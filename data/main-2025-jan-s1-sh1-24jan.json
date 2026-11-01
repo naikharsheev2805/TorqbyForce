@@ -3270,8 +3270,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-47.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-47.webp"
+    ],
     "tags": [
       "gauss law",
       "flux"
@@ -3288,7 +3290,8 @@
         "chapter": "Electrostatics",
         "subtopic": "Gauss's law and its applications"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-24jan-p-48",
@@ -3575,8 +3578,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-52.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-52.webp"
+    ],
     "tags": [
       "substitution",
       "solvent effects"
@@ -3589,7 +3594,8 @@
         "chapter": "Organic Compounds Containing Halogens",
         "subtopic": "Mechanisms of substitution reactions"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-24jan-p-53",
@@ -3619,23 +3625,27 @@
     "options": [
       {
         "key": "1",
-        "text": "Structure (1) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-1.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "2",
-        "text": "Structure (2) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-2.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "3",
-        "text": "Structure (3) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-3.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "4",
-        "text": "Structure (4) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-53-opt-4.webp",
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [
@@ -3646,8 +3656,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-53.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-53.webp"
+    ],
     "tags": [
       "alkynes",
       "cyanohydrin"
@@ -3664,7 +3676,8 @@
         "chapter": "Organic Compounds Containing Oxygen",
         "subtopic": "Nucleophilic addition with HCN, NH3 and its derivatives"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-24jan-p-54",
@@ -3694,23 +3707,27 @@
     "options": [
       {
         "key": "1",
-        "text": "Structure (1) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-1.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "2",
-        "text": "Structure (2) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-2.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "3",
-        "text": "Structure (3) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-3.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "4",
-        "text": "Structure (4) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-54-opt-4.webp",
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [
@@ -3721,8 +3738,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-54.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-54.webp"
+    ],
     "tags": [
       "ozonolysis",
       "aldol"
@@ -3739,7 +3758,8 @@
         "chapter": "Organic Compounds Containing Oxygen",
         "subtopic": "Aldol condensation"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-24jan-p-55",
@@ -4490,23 +4510,27 @@
     "options": [
       {
         "key": "1",
-        "text": "Structure (1) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-1.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "2",
-        "text": "Structure (2) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-2.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "3",
-        "text": "Structure (3) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-3.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "4",
-        "text": "Structure (4) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-65-opt-4.webp",
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [
@@ -4590,8 +4614,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-66.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-24jan-p-66.webp"
+    ],
     "tags": [
       "electrophilic addition"
     ],
@@ -4607,7 +4633,8 @@
         "chapter": "Hydrocarbons",
         "subtopic": "Addition of hydrogen, halogens, water and hydrogen halides; Markownikoff's and peroxide effect"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-24jan-p-67",
@@ -4783,23 +4810,27 @@
     "options": [
       {
         "key": "1",
-        "text": "Graph (1) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-1.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "2",
-        "text": "Graph (2) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-2.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "3",
-        "text": "Graph (3) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-3.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "4",
-        "text": "Graph (4) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh1-24jan-p-69-opt-4.webp",
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [

@@ -2371,7 +2371,7 @@
         "subtopic": "Series and parallel combinations of resistors"
       }
     ],
-    "image_display_width_px": 57
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-23jan-p-35",
@@ -2590,7 +2590,7 @@
         "subtopic": "First law of thermodynamics"
       }
     ],
-    "image_display_width_px": 52
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-23jan-p-38",
@@ -3453,7 +3453,7 @@
         "subtopic": "Kirchhoff's laws and their applications"
       }
     ],
-    "image_display_width_px": 61
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-23jan-p-51",
@@ -3497,7 +3497,7 @@
         "key": "3",
         "text": "",
         "image": "assets/q/main-2025-jan-s1-sh2-23jan-p-51-opt-3.webp",
-        "image_display_width_px": 61
+        "image_display_width_px": 45
       },
       {
         "key": "4",
@@ -3516,10 +3516,6 @@
     "solution_source": null,
     "image": "assets/q/main-2025-jan-s1-sh2-23jan-p-51.webp",
     "figure_refs": [
-      "assets/q/main-2025-jan-s1-sh2-23jan-p-51-opt-1.webp",
-      "assets/q/main-2025-jan-s1-sh2-23jan-p-51-opt-2.webp",
-      "assets/q/main-2025-jan-s1-sh2-23jan-p-51-opt-3.webp",
-      "assets/q/main-2025-jan-s1-sh2-23jan-p-51-opt-4.webp",
       "assets/q/main-2025-jan-s1-sh2-23jan-p-51.webp"
     ],
     "tags": [
@@ -3539,7 +3535,7 @@
         "subtopic": "Acidic nature of phenols"
       }
     ],
-    "image_display_width_px": 85
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-23jan-p-52",
@@ -3684,7 +3680,7 @@
         "subtopic": "Change in entropy of universe and Gibbs energy of system as criteria for spontaneity"
       }
     ],
-    "image_display_width_px": 112
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-23jan-p-54",
@@ -3733,7 +3729,7 @@
         "key": "4",
         "text": "",
         "image": "assets/q/main-2025-jan-s1-sh2-23jan-p-54-opt-4.webp",
-        "image_display_width_px": 38
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [
@@ -3922,7 +3918,7 @@
         "subtopic": "Inductive effect"
       }
     ],
-    "image_display_width_px": 86
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-23jan-p-57",
@@ -4570,7 +4566,7 @@
         "subtopic": "Nature of C-X bond"
       }
     ],
-    "image_display_width_px": 103
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-23jan-p-66",
@@ -4664,7 +4660,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Rated from the stem: match isomers of c10h14 with ozonolysis products.",
-    "text": "Match List-I (isomers of $\\mathrm C_{10}\\mathrm H_{14}$) with List-II (ozonolysis product). Choose the correct answer from the options given below:",
+    "text": "Match List-I (isomers of C10H14) with List-II (ozonolysis product). Choose the correct answer from the options given below:",
     "options": [
       {
         "key": "1",
@@ -4716,7 +4712,7 @@
         "subtopic": "Classification and isomerism of hydrocarbons"
       }
     ],
-    "image_display_width_px": 102
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-23jan-p-68",
@@ -4867,7 +4863,7 @@
         "subtopic": "Colour and magnetic properties of coordination compounds"
       }
     ],
-    "image_display_width_px": 79
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-23jan-p-70",
@@ -5050,7 +5046,7 @@
         "subtopic": "Classification of organic compounds by functional groups"
       }
     ],
-    "image_display_width_px": 73
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-23jan-p-73",
@@ -5219,6 +5215,6 @@
         "subtopic": "Shapes of simple molecules and hybridization (s and p)"
       }
     ],
-    "image_display_width_px": 157
+    "image_display_width_px": 45
   }
 ]

@@ -1781,8 +1781,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-26.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-28jan-p-26.webp"
+    ],
     "tags": [
       "magnetic field",
       "errors"
@@ -1799,7 +1801,8 @@
         "chapter": "Units and Measurements",
         "subtopic": "Errors in measurements"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-28jan-p-27",
@@ -1928,8 +1931,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-28.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-28jan-p-28.webp"
+    ],
     "tags": [
       "graphs",
       "kinematics"
@@ -1946,7 +1951,8 @@
         "chapter": "Kinematics",
         "subtopic": "Uniformly accelerated motion"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-28jan-p-29",
@@ -2044,7 +2050,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Rated from the stem: matching quantities with dimensions.",
-    "text": "Match List-I with List-II. (A) Angular Impulse, (B) Latent Heat, (C) Electrical resistivity, (D) Electromotive force. List-II: (I) $[M^0L^2T^{-2}]$, (II) $[ML^2T^{-3}A^{-1}]$, (III) $[ML^2T^{-1}]$, (IV) $[ML^3T^{-3}A^{-2}]$. Choose the correct answer from the options given below:",
+    "text": "Match List-I with List-II. Choose the correct answer from the options given below:",
     "options": [
       {
         "key": "1",
@@ -2075,8 +2081,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-30.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-28jan-p-30.webp"
+    ],
     "tags": [
       "dimensions"
     ],
@@ -2092,7 +2100,8 @@
         "chapter": "Units and Measurements",
         "subtopic": "Dimensional analysis and its applications"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-28jan-p-31",
@@ -2222,8 +2231,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-32.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-28jan-p-32.webp"
+    ],
     "tags": [
       "biot savart",
       "arc"
@@ -2236,7 +2247,8 @@
         "chapter": "Magnetic Effects of Current and Magnetism",
         "subtopic": "Biot-Savart law and its application to a current-carrying circular loop"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-28jan-p-33",
@@ -3144,17 +3156,20 @@
       {
         "key": "2",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-45-opt-2.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "3",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-45-opt-3.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "4",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-45-opt-4.webp",
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [
@@ -3165,8 +3180,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-45.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-28jan-p-45.webp"
+    ],
     "tags": [
       "diode",
       "rectifier"
@@ -3179,7 +3196,8 @@
         "chapter": "Electronic Devices",
         "subtopic": "Diode as a rectifier"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-28jan-p-46",
@@ -3267,8 +3285,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-47.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-28jan-p-47.webp"
+    ],
     "tags": [
       "kirchhoff",
       "circuits"
@@ -3285,7 +3305,8 @@
         "chapter": "Current Electricity",
         "subtopic": "Series and parallel combinations of resistors"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-28jan-p-48",
@@ -3373,8 +3394,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-49.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-28jan-p-49.webp"
+    ],
     "tags": [
       "motional emf",
       "rails"
@@ -3391,7 +3414,8 @@
         "chapter": "Electromagnetic Induction and Alternating Currents",
         "subtopic": "Faraday's law"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-28jan-p-50",
@@ -3574,8 +3598,11 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-52.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-28jan-p-52.webp",
+      "assets/q/main-2025-jan-s1-sh2-28jan-p-52-b.webp"
+    ],
     "tags": [
       "isomerism"
     ],
@@ -3591,7 +3618,8 @@
         "chapter": "Some Basic Principles of Organic Chemistry",
         "subtopic": "Classification of organic compounds by functional groups"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-28jan-p-53",
@@ -3621,22 +3649,26 @@
       {
         "key": "1",
         "text": "[A]: CH$_2$=CH$_2$, [B]: H$_3$C$-$C$-$CH$_3$ (ketone), [C]: HCHO",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-53-opt-1.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "2",
         "text": "[A]: CH$_3$-CH=CH$_2$, [B]: CH$_3$CHO, [C]: CH$_3$CH$_2$OH",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-53-opt-2.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "3",
         "text": "[A]: CH$_3$-CH=CH$_2$, [B]: CH$_3$CHO, [C]: HCHO",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-53-opt-3.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "4",
         "text": "[A]: CH$_3$CH$_2$CH$_3$, [B]: CH$_3$CHO, [C]: HCHO",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-53-opt-4.webp",
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [
@@ -3647,8 +3679,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-53.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-28jan-p-53.webp"
+    ],
     "tags": [
       "alkynes",
       "ozonolysis"
@@ -3665,7 +3699,8 @@
         "chapter": "Hydrocarbons",
         "subtopic": "Ozonolysis and polymerization of alkenes"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-28jan-p-54",
@@ -3721,8 +3756,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-54.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-28jan-p-54.webp"
+    ],
     "tags": [
       "side chain oxidation"
     ],
@@ -3738,7 +3775,8 @@
         "chapter": "Hydrocarbons",
         "subtopic": "Nomenclature of aromatic hydrocarbons"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-28jan-p-55",
@@ -3763,7 +3801,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Rated from the stem: match complexes with hybridisation of central metal ion.",
-    "text": "Match List-I (Complex) with List-II (Hybridisation of central metal ion). List-I: (A) $[\\mathrm{CoF}_6]^{3-}$, (B) $[\\mathrm{NiCl}_4]^{2-}$, (C) $[\\mathrm{Co(NH_3)_6}]^{3+}$, (D) $[\\mathrm{Ni(CN)_4}]^{2-}$. List-II: (I) $d^2sp^3$, (II) $sp^3$, (III) $sp^3d^2$, (IV) $dsp^2$. Choose the correct answer from the options given below:",
+    "text": "Match List-I (Complex) with List-II (Hybridisation of central metal ion). Choose the correct answer from the options given below:",
     "options": [
       {
         "key": "1",
@@ -3794,8 +3832,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-55.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-28jan-p-55.webp"
+    ],
     "tags": [
       "hybridisation",
       "coordination"
@@ -3808,7 +3848,8 @@
         "chapter": "Coordination Compounds",
         "subtopic": "Bonding: valence bond approach"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-28jan-p-56",
@@ -3912,22 +3953,26 @@
       {
         "key": "1",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-57-opt-1.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "2",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-57-opt-2.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "3",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-57-opt-3.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "4",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-57-opt-4.webp",
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [
@@ -4150,8 +4195,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-60.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-28jan-p-60.webp"
+    ],
     "tags": [
       "sublimation"
     ],
@@ -4163,7 +4210,8 @@
         "chapter": "Purification and Characterisation of Organic Compounds",
         "subtopic": "Sublimation"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-28jan-p-61",
@@ -4340,22 +4388,26 @@
       {
         "key": "1",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-63-opt-1.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "2",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-63-opt-2.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "3",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-63-opt-3.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "4",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-63-opt-4.webp",
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [
@@ -4366,8 +4418,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-63.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-28jan-p-63.webp"
+    ],
     "tags": [
       "addition",
       "cyanide"
@@ -4384,7 +4438,8 @@
         "chapter": "Hydrocarbons",
         "subtopic": "Addition of hydrogen, halogens, water and hydrogen halides; Markownikoff's and peroxide effect"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-28jan-p-64",
@@ -4552,7 +4607,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Rated from the stem: match saccharides with glycosidic linkages.",
-    "text": "Match List-I (Saccharides) with List-II (Glycosidic linkages found). List-I: (A) Sucrose, (B) Maltose, (C) Lactose, (D) Amylopectin. List-II: (I) $\\alpha$ 1-4, (II) $\\alpha$ 1-4 and $\\alpha$ 1-6, (III) $\\alpha$ 1-$\\beta$ 2, (IV) $\\beta$ 1-4. Choose the correct answer from the options given below:",
+    "text": "Match List-I (Saccharides) with List-II (Glycosidic linkages found). Choose the correct answer from the options given below:",
     "options": [
       {
         "key": "1",
@@ -4583,8 +4638,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-66.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-28jan-p-66.webp"
+    ],
     "tags": [
       "glycosidic linkage"
     ],
@@ -4600,7 +4657,8 @@
         "chapter": "Biomolecules",
         "subtopic": "Classification of carbohydrates"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-28jan-p-67",
@@ -4656,8 +4714,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-67.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-28jan-p-67.webp"
+    ],
     "tags": [
       "cyclic process",
       "internal energy"
@@ -4674,7 +4734,8 @@
         "chapter": "Chemical Thermodynamics",
         "subtopic": "Work, heat, internal energy and enthalpy"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-28jan-p-68",
@@ -4802,8 +4863,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-28jan-p-69.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-28jan-p-69.webp"
+    ],
     "tags": [
       "elimination",
       "dehydrohalogenation"
@@ -4820,7 +4883,8 @@
         "chapter": "Organic Compounds Containing Halogens",
         "subtopic": "Properties and reactions"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-28jan-p-70",

@@ -1919,8 +1919,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-28.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-28.webp"
+    ],
     "tags": [
       "capacitor energy",
       "graphs"
@@ -1937,7 +1939,8 @@
         "chapter": "Electrostatics",
         "subtopic": "Capacitors and capacitance"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-28jan-p-29",
@@ -2063,8 +2066,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-30.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-30.webp"
+    ],
     "tags": [
       "work energy",
       "electric field"
@@ -2081,7 +2086,8 @@
         "chapter": "Work, Energy and Power",
         "subtopic": "Conservation of mechanical energy"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-28jan-p-31",
@@ -2283,8 +2289,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-33.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-33.webp"
+    ],
     "tags": [
       "refraction",
       "total internal reflection"
@@ -2301,7 +2309,8 @@
         "chapter": "Optics",
         "subtopic": "Total internal reflection and its applications"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-28jan-p-34",
@@ -2728,8 +2737,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-39.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-39.webp"
+    ],
     "tags": [
       "energy conservation",
       "spring"
@@ -2750,7 +2761,8 @@
         "chapter": "Work, Energy and Power",
         "subtopic": "Motion in a vertical circle"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-28jan-p-40",
@@ -2806,8 +2818,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-40.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-40.webp"
+    ],
     "tags": [
       "circuits",
       "resistance"
@@ -2824,7 +2838,8 @@
         "chapter": "Current Electricity",
         "subtopic": "Wheatstone bridge"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-28jan-p-41",
@@ -2959,8 +2974,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-42.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-42.webp"
+    ],
     "tags": [
       "centre of mass",
       "variable density"
@@ -2973,7 +2990,8 @@
         "chapter": "Rotational Motion",
         "subtopic": "Centre of mass of a rigid body"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-28jan-p-43",
@@ -3003,22 +3021,26 @@
       {
         "key": "1",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-43-opt-1.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "2",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-43-opt-2.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "3",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-43-opt-3.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "4",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-43-opt-4.webp",
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [
@@ -3029,8 +3051,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-43.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-43.webp"
+    ],
     "tags": [
       "logic gates"
     ],
@@ -3042,7 +3066,8 @@
         "chapter": "Electronic Devices",
         "subtopic": "Logic gates (OR, AND, NOT, NAND, NOR)"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-28jan-p-44",
@@ -3072,22 +3097,26 @@
       {
         "key": "1",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-44-opt-1.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "2",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-44-opt-2.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "3",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-44-opt-3.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "4",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-44-opt-4.webp",
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [
@@ -3691,22 +3720,26 @@
       {
         "key": "1",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-54-opt-1.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "2",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-54-opt-2.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "3",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-54-opt-3.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "4",
         "text": "",
-        "image": null
+        "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-54-opt-4.webp",
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [
@@ -3717,8 +3750,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-54.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-54.webp"
+    ],
     "tags": [
       "rearrangement",
       "ozonolysis"
@@ -3735,7 +3770,8 @@
         "chapter": "Hydrocarbons",
         "subtopic": "Mechanism of electrophilic addition to alkenes"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-28jan-p-55",
@@ -3791,8 +3827,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-55.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-55.webp"
+    ],
     "tags": [
       "carbocation stability"
     ],
@@ -3808,7 +3846,8 @@
         "chapter": "Some Basic Principles of Organic Chemistry",
         "subtopic": "Free radicals, carbocations and carbanions"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-28jan-p-56",
@@ -4226,8 +4265,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-61.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-61.webp"
+    ],
     "tags": [
       "order of reaction",
       "half life"
@@ -4244,7 +4285,8 @@
         "chapter": "Chemical Kinetics",
         "subtopic": "Characteristics and half-lives of zero and first-order reactions"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-28jan-p-62",
@@ -4300,8 +4342,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-62.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-62.webp"
+    ],
     "tags": [
       "redox types"
     ],
@@ -4317,7 +4361,8 @@
         "chapter": "Redox Reactions and Electrochemistry",
         "subtopic": "Redox reactions and oxidation number"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-28jan-p-63",
@@ -4521,8 +4566,14 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-65.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-65.webp",
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-65-b.webp",
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-65-c.webp",
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-65-d.webp",
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-65-e.webp"
+    ],
     "tags": [
       "acidity of carboxylic acids",
       "phenols"
@@ -4539,7 +4590,8 @@
         "chapter": "Organic Compounds Containing Oxygen",
         "subtopic": "Acidic nature of phenols"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-28jan-p-66",
@@ -4669,8 +4721,11 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-67.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-67.webp",
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-67-b.webp"
+    ],
     "tags": [
       "hydrolysis",
       "neighbouring group"
@@ -4687,7 +4742,8 @@
         "chapter": "Organic Compounds Containing Nitrogen",
         "subtopic": "Basic character of amines"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-28jan-p-68",
@@ -5044,8 +5100,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-73.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-73.webp"
+    ],
     "tags": [
       "stoichiometry",
       "aromatic"
@@ -5062,7 +5120,8 @@
         "chapter": "Some Basic Concepts in Chemistry",
         "subtopic": "Chemical equations and stoichiometry"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh1-28jan-p-74",
@@ -5150,8 +5209,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh1-28jan-p-75.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh1-28jan-p-75.webp"
+    ],
     "tags": [
       "conductance",
       "kohlrausch"
@@ -5168,6 +5229,7 @@
         "chapter": "Redox Reactions and Electrochemistry",
         "subtopic": "Kohlrausch's law and its applications"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   }
 ]

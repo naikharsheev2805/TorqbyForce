@@ -1717,23 +1717,27 @@
     "options": [
       {
         "key": "1",
-        "text": "Figure (1) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-26-opt-1.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "2",
-        "text": "Figure (2) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-26-opt-2.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "3",
-        "text": "Figure (3) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-26-opt-3.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "4",
-        "text": "Figure (4) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-26-opt-4.webp",
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [
@@ -1887,8 +1891,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-28.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-24jan-p-28.webp"
+    ],
     "tags": [
       "logic gates"
     ],
@@ -1900,7 +1906,8 @@
         "chapter": "Electronic Devices",
         "subtopic": "Logic gates (OR, AND, NOT, NAND, NOR)"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-24jan-p-29",
@@ -2029,8 +2036,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-30.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-24jan-p-30.webp"
+    ],
     "tags": [
       "cyclic process",
       "heat"
@@ -2047,7 +2056,8 @@
         "chapter": "Thermodynamics",
         "subtopic": "Isothermal and adiabatic processes"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-24jan-p-31",
@@ -2076,23 +2086,27 @@
     "options": [
       {
         "key": "1",
-        "text": "Graph (1) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-31-opt-1.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "2",
-        "text": "Graph (2) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-31-opt-2.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "3",
-        "text": "Graph (3) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-31-opt-3.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "4",
-        "text": "Graph (4) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-31-opt-4.webp",
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [
@@ -2394,8 +2408,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-35.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-24jan-p-35.webp"
+    ],
     "tags": [
       "ampere law",
       "current loop"
@@ -2408,7 +2424,8 @@
         "chapter": "Magnetic Effects of Current and Magnetism",
         "subtopic": "Ampere's law and its applications to infinitely long straight wire and solenoid"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-24jan-p-36",
@@ -2437,23 +2454,27 @@
     "options": [
       {
         "key": "1",
-        "text": "Graph (1) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-36-opt-1.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "2",
-        "text": "Graph (2) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-36-opt-2.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "3",
-        "text": "Graph (3) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-36-opt-3.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "4",
-        "text": "Graph (4) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-36-opt-4.webp",
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [
@@ -2608,8 +2629,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-38.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-24jan-p-38.webp"
+    ],
     "tags": [
       "forces",
       "superposition"
@@ -2626,7 +2649,8 @@
         "chapter": "Electrostatics",
         "subtopic": "Superposition principle"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-24jan-p-39",
@@ -2967,8 +2991,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-43.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-24jan-p-43.webp"
+    ],
     "tags": [
       "polarization",
       "interference"
@@ -2985,7 +3011,8 @@
         "chapter": "Optics",
         "subtopic": "Interference: Young's double-slit experiment and fringe width"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-24jan-p-44",
@@ -3214,8 +3241,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-47.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-24jan-p-47.webp"
+    ],
     "tags": [
       "conical pendulum",
       "circular motion"
@@ -3236,7 +3265,8 @@
         "chapter": "Kinematics",
         "subtopic": "Uniform circular motion"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-24jan-p-48",
@@ -3489,7 +3519,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Rated from the stem: match transition metal ions with magnetic moment.",
-    "text": "Match List-I (Transition metal ion) with List-II (Spin only magnetic moment (B.M.)). List-I: (A) Ti$^{3+}$, (B) V$^{2+}$, (C) Ni$^{2+}$, (D) Sc$^{3+}$. List-II: (I) 3.87, (II) 0.00, (III) 1.73, (IV) 2.84. Choose the correct answer from the options given below:",
+    "text": "Match List-I (Transition metal ion) with List-II (Spin only magnetic moment (B.M.)). Choose the correct answer from the options given below:",
     "options": [
       {
         "key": "1",
@@ -3520,8 +3550,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-52.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-24jan-p-52.webp"
+    ],
     "tags": [
       "magnetic moment"
     ],
@@ -3537,7 +3569,8 @@
         "chapter": "d- and f-Block Elements",
         "subtopic": "Trends in first-row transition elements: oxidation states and atomic radii"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-24jan-p-53",
@@ -3925,23 +3958,27 @@
     "options": [
       {
         "key": "1",
-        "text": "Graph (1) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-58-opt-1.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "2",
-        "text": "Graph (2) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-58-opt-2.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "3",
-        "text": "Graph (3) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-58-opt-3.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "4",
-        "text": "Graph (4) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-58-opt-4.webp",
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [
@@ -4237,8 +4274,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-62.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-24jan-p-62.webp"
+    ],
     "tags": [
       "hybridization"
     ],
@@ -4250,7 +4289,8 @@
         "chapter": "Some Basic Principles of Organic Chemistry",
         "subtopic": "Shapes of simple molecules and hybridization (s and p)"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-24jan-p-63",
@@ -4306,8 +4346,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-63.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-24jan-p-63.webp"
+    ],
     "tags": [
       "first order kinetics"
     ],
@@ -4323,7 +4365,8 @@
         "chapter": "Chemical Kinetics",
         "subtopic": "Differential and integral forms of zero and first-order reactions"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-24jan-p-64",
@@ -4349,7 +4392,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Rated from the stem: match named reactions with products.",
-    "text": "Match List-I with List-II. List-I: (A) RCN with (i) SnCl2, HCl (ii) H3O+ giving RCHO; (B) benzoyl chloride with H2, Pd-BaSO4; (C) toluene with CrO2Cl2, CS2 then H3O+ giving benzaldehyde; (D) benzene with CO, HCl, anhydrous AlCl3/CuCl giving benzaldehyde. List-II: (I) Etard reaction, (II) Gatterman-Koch reaction, (III) Rosenmund reduction, (IV) Stephen reaction. Choose the correct answer from the options given below:",
+    "text": "Match List-I with List-II. Choose the correct answer from the options given below:",
     "options": [
       {
         "key": "1",
@@ -4380,8 +4423,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-64.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-24jan-p-64.webp"
+    ],
     "tags": [
       "named reactions"
     ],
@@ -4397,7 +4442,8 @@
         "chapter": "Hydrocarbons",
         "subtopic": "Halogenation and nitration of benzene"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-24jan-p-65",
@@ -4426,23 +4472,27 @@
     "options": [
       {
         "key": "1",
-        "text": "Structure (1) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-65-opt-1.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "2",
-        "text": "Structure (2) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-65-opt-2.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "3",
-        "text": "Structure (3) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-65-opt-3.webp",
+        "image_display_width_px": 45
       },
       {
         "key": "4",
-        "text": "Structure (4) — see PDF",
-        "image": null
+        "text": "",
+        "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-65-opt-4.webp",
+        "image_display_width_px": 45
       }
     ],
     "correct_answer": [
@@ -4453,8 +4503,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-65.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-24jan-p-65.webp"
+    ],
     "tags": [
       "cyanide",
       "substitution"
@@ -4471,7 +4523,8 @@
         "chapter": "Organic Compounds Containing Halogens",
         "subtopic": "Nature of C-X bond"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-24jan-p-66",
@@ -4527,8 +4580,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-66.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-24jan-p-66.webp"
+    ],
     "tags": [
       "aniline",
       "reagents"
@@ -4545,7 +4600,8 @@
         "chapter": "Organic Compounds Containing Nitrogen",
         "subtopic": "Diazonium salts and their importance in synthetic organic chemistry"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-24jan-p-67",
@@ -4670,8 +4726,10 @@
     "marks_unattempted": 0,
     "solution": null,
     "solution_source": null,
-    "image": null,
-    "figure_refs": [],
+    "image": "assets/q/main-2025-jan-s1-sh2-24jan-p-68.webp",
+    "figure_refs": [
+      "assets/q/main-2025-jan-s1-sh2-24jan-p-68.webp"
+    ],
     "tags": [
       "nucleic acids"
     ],
@@ -4683,7 +4741,8 @@
         "chapter": "Biomolecules",
         "subtopic": "Nucleic acids: chemical constitution and biological functions of DNA and RNA"
       }
-    ]
+    ],
+    "image_display_width_px": 45
   },
   {
     "id": "main-2025-jan-s1-sh2-24jan-p-69",
