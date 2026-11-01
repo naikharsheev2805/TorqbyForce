@@ -19,6 +19,26 @@
 
 /* Wide screens: the app column is solid, so side formulas never show through cards */
 @media (min-width:960px){ #app{ background:var(--bg); } }
+/* Header sits in the same row as the menu button and matches its height */
+.header{ margin:-12px 0 26px; padding-left:60px; min-height:46px; align-items:center; gap:12px; }
+.header .brand-lock{ justify-content:center; }
+/* Vertical rhythm: every card-type block keeps 14px of space below it, so cards never touch */
+#app > div > .card, #app > div > .list, #app > div > .big-card, #app > div > .cal-card, #app > div > .exam-row, #app > div > .subjgrid, #app > div > .stats, #app > div > figure.qcard, #app > div > .hm-hero,
+#app > .card, #app > .list, #app > .big-card, #app > .cal-card, #app > .exam-row, #app > .subjgrid, #app > .stats, #app > figure.qcard, #app > .hm-hero{ margin-bottom:14px; }
+/* Eyes Only: student reply thread */
+.eye-thread{ margin-top:16px; padding-top:14px; border-top:1px solid var(--border); }
+.eye-thread-title{ font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-text); font-weight:700; margin-bottom:8px; }
+.eye-thread-msg{ padding:10px 12px; border-radius:var(--r-md); background:var(--surface-2); margin-bottom:8px; }
+.eye-thread-msg p{ margin:4px 0 0; font-size:14.5px; overflow-wrap:anywhere; }
+.eye-thread-msg small, .eye-thread-empty{ color:var(--muted); font-size:12px; }
+.eye-thread-input{ margin-bottom:8px; }
+/* Audit trail */
+.ad-audit p{ margin:6px 0; font-size:13.5px; color:var(--muted); }
+/* Admin badge: open urgent reports plus unanswered messages */
+.navadm{ position:relative; }
+.adm-badge{ position:absolute; top:4px; right:calc(50% - 22px); min-width:18px; height:18px; padding:0 5px; border-radius:99px; background:var(--accent); color:var(--accent-ink); font:700 11px/18px Inter,sans-serif; text-align:center; pointer-events:none; }
+.navpanel .navadm .adm-badge{ position:static; margin-left:auto; min-width:22px; }
+@media (prefers-reduced-motion: reduce){ .adm-badge{ transition:none; } }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -1628,7 +1648,7 @@ body{ overflow-x:clip; }
 .np-draw{ position:absolute; left:0; top:0; width:100%; height:100%; overflow:visible; pointer-events:none; z-index:2; }
 .np-draw rect{ fill:none; stroke:var(--accent); stroke-width:1.6; stroke-dasharray:100; stroke-dashoffset:100; pathLength:100; opacity:0; }
 .navpanel.open .np-draw rect{ stroke-dashoffset:0; opacity:1; transition:stroke-dashoffset .9s cubic-bezier(.6,.1,.2,1), opacity .2s ease; }
-.navpanel.open .np-draw{ animation:npGlow 1.5s ease .7s 1 both; }
+.navpanel.open.glint .np-draw{ animation:npGlow 1.5s ease .7s 1 both; }
 @keyframes npGlow{ 0%{ filter:drop-shadow(0 0 0 transparent); } 40%{ filter:drop-shadow(0 0 8px var(--accent)); } 100%{ filter:drop-shadow(0 0 0 transparent); } }
 .navpanel.open .bn{ animation:npItem .5s cubic-bezier(.2,.7,.2,1) both; animation-delay:calc(var(--i,0) * 38ms + 180ms); }
 @keyframes npItem{ from{ opacity:0; transform:translateX(-12px); } to{ opacity:1; transform:none; } }
@@ -3636,6 +3656,8 @@ function render(){
     __renderBusy = false; return;
   }
   __renderBusy = false;
+  // Size the quote synchronously, before the browser paints, so it never jumps after load
+  document.querySelectorAll('figure.qcard').forEach(c=>fitQuote(c));
   histSync(); addBackCard(); if(store.profile && !store.introSeen && !window.__introShown){ window.__introShown = true; setTimeout(showIntro, 500); } }
 function navKey(){
   const o = {};
@@ -3715,7 +3737,13 @@ function setNavOpen(open){
   const p = document.querySelector('.navpanel'), t = document.getElementById('navTog'), sc = document.getElementById('navScrim');
   if(p){
     clearTimeout(p.__closeT);
-    if(navOpen){ p.classList.remove('closing'); p.classList.add('open'); }
+    if(navOpen){
+      // The glint plays only after the menu has been left alone for a while, not on every open
+      const idle = Date.now() - (window.__navLastOpen || 0);
+      p.classList.toggle('glint', idle > 7 * 60 * 1000);
+      window.__navLastOpen = Date.now();
+      p.classList.remove('closing'); p.classList.add('open');
+    }
     else if(p.classList.contains('open')){
       // Keep the panel on screen while it plays its closing animation, then unmount the state class
       p.classList.remove('open'); p.classList.add('closing');
@@ -5686,6 +5714,7 @@ function loadAdmin(){
     if(bad) adminState.err = bad.message || String(bad);
     adminState.reports = r1.data || [];
     adminState.msgs = r2.data || [];
+    refreshAdminBadge(true);
     if(view==='admin') render();
   }, e=>{
     adminState.loading = false;
@@ -5754,18 +5783,61 @@ function openReportDetail(r){
     save.onclick = async ()=>{
       save.disabled = true;
       const patch = {admin_priority: sel.priority, status: sel.status, admin_note: memo.value.trim() || null};
+      const before = {priority: reportPrio(r), status: reportStatus(r), note: r.admin_note || ''};
       const { error } = await sbClient().from('question_reports').update(patch).eq('id', r.id);
       if(error){ save.disabled = false; appNotice('Not saved', error.message); return; }
+      const actor = sbSession && sbSession.user ? sbSession.user.email : null;
+      const changes = [];
+      if(before.priority !== patch.admin_priority) changes.push(['priority', before.priority, patch.admin_priority]);
+      if(before.status !== patch.status) changes.push(['status', before.status, patch.status]);
+      if(before.note !== (patch.admin_note || '')) changes.push(['note', before.note, patch.admin_note || '']);
+      if(changes.length){
+        sbClient().from('report_audit').insert(changes.map(c=>({report_id:String(r.id), actor_email:actor, field:c[0], old_value:String(c[1]), new_value:String(c[2])})))
+          .then(({error:ae})=>{ if(ae) console.error('Audit not saved', ae); });
+      }
       Object.assign(r, patch);
       close(); render();
     };
     body.appendChild(save);
+    body.appendChild(el('<div class="ad-label">Recent changes</div>'));
+    const audit = el('<div class="ad-audit"><p>Loading…</p></div>');
+    body.appendChild(audit);
+    sbClient().from('report_audit').select('*').eq('report_id', String(r.id)).order('created_at',{ascending:false}).limit(8)
+      .then(({data,error})=>{
+        audit.innerHTML = '';
+        if(error){ audit.appendChild(el('<p>Could not load changes yet.</p>')); return; }
+        if(!data || !data.length){ audit.appendChild(el('<p>No changes yet.</p>')); return; }
+        data.forEach(t=>{
+          const who = esc(t.actor_email || 'Team');
+          const what = t.field === 'note'
+            ? 'updated the private note'
+            : 'changed '+esc(t.field)+' from '+esc(auditLabel(t.field, t.old_value))+' to '+esc(auditLabel(t.field, t.new_value));
+          audit.appendChild(el('<p>'+esc(fmtWhen(t.created_at))+' · '+who+' '+what+'</p>'));
+        });
+      });
   });
+}
+function auditLabel(field, v){
+  if(field==='priority'){ const p = ADMIN_PRIORITY.find(x=>x[0]===v); return p ? p[1] : v; }
+  if(field==='status'){ const p = ADMIN_STATUS.find(x=>x[0]===v); return p ? p[1] : v; }
+  return v;
+}
+async function loadStudentThread(m, box){
+  const db = sbClient();
+  const { data: reps } = await db.from('admin_replies').select('id').eq('message_id', String(m.id));
+  const ids = (reps || []).map(x=>String(x.id));
+  if(!ids.length) return;
+  const { data } = await db.from('eye_thread').select('*').in('reply_id', ids).order('created_at',{ascending:true});
+  if(!data || !data.length) return;
+  box.appendChild(el('<div class="ad-label">Their replies</div>'));
+  data.forEach(t=> box.appendChild(el('<p class="ad-msg">'+esc(fmtWhen(t.created_at))+' · '+esc(t.body)+'</p>')));
 }
 function openMessageDetail(m){
   adminSheet('Message', (m.name||'Anonymous')+(m.email?' · '+m.email:''), (body, close)=>{
     body.appendChild(el('<div class="ad-kv"><span>Received</span><b>'+esc(fmtWhen(m.created_at))+'</b><span>Status</span><b>'+esc(m.status||'open')+'</b></div>'));
     body.appendChild(el('<p class="ad-msg">'+esc(m.message||'')+'</p>'));
+    const threadBox = el('<div></div>'); body.appendChild(threadBox);
+    loadStudentThread(m, threadBox);
     body.appendChild(el('<div class="ad-label">Reply</div>'));
     const tpl = el('<div class="chips"></div>');
     const ta = el('<textarea class="ad-reply" rows="5" placeholder="Write a kind, clear reply. It opens in their Eyes Only inbox."></textarea>');
@@ -5921,9 +5993,35 @@ function eyesNavBtn(){
   b.onclick = ()=>{ setNavOpen(false); go('eyes'); };
   return b;
 }
+let adminBadgeN = 0, adminBadgeAt = 0;
+function paintAdminBadge(){
+  document.querySelectorAll('.navadm').forEach(b=>{
+    let t = b.querySelector('.adm-badge');
+    if(!adminBadgeN){ if(t) t.remove(); return; }
+    if(!t){ t = el('<span class="adm-badge"></span>'); b.appendChild(t); }
+    t.textContent = adminBadgeN > 9 ? '9+' : String(adminBadgeN);
+    t.setAttribute('aria-label', adminBadgeN + ' items need attention');
+  });
+}
+function refreshAdminBadge(force){
+  if(!isGuard()) return;
+  if(!force && Date.now() - adminBadgeAt < 120000) return;
+  adminBadgeAt = Date.now();
+  const db = sbClient();
+  Promise.all([
+    db.from('question_reports').select('id,status,admin_priority').eq('status','open').eq('admin_priority','urgent').limit(200),
+    db.from('contact_messages').select('id,status').neq('status','replied').limit(200)
+  ]).then(([a,b])=>{
+    if(a.error || b.error) return;
+    adminBadgeN = (a.data||[]).length + (b.data||[]).length;
+    paintAdminBadge();
+  }).catch(()=>{});
+}
 function adminNavBtn(){
   const b = el('<button class="bn navadm'+(view==='admin'?' on':'')+'"'+(view==='admin'?' aria-current="page"':'')+'><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg><span>Admin</span></button>');
   b.onclick = ()=>{ setNavOpen(false); go('admin'); };
+  refreshAdminBadge(false);
+  setTimeout(paintAdminBadge, 0);
   return b;
 }
 function fmtLeft(ms){
@@ -5971,11 +6069,40 @@ function eyeCard(r){
     return c;
   }
   const exp = r.expires_at || new Date(Date.parse(r.seen_at)+EYES_WINDOW_MS).toISOString();
-  return el('<div class="eye-card opened"><div class="eye-meta">From the TORQ team · opened '+esc(fmtWhen(r.seen_at))+'</div>'
+  const card = el('<div class="eye-card opened"><div class="eye-meta">From the TORQ team · opened '+esc(fmtWhen(r.seen_at))+'</div>'
     +'<p class="eye-body">'+esc(r.body)+'</p>'
     +'<div class="eye-timer"><div class="eye-fuse"><i data-fuse="'+esc(r.id)+'" data-exp="'+esc(exp)+'"></i></div>'
     +'<div class="eye-clock" data-clock="'+esc(r.id)+'" data-exp="'+esc(exp)+'">'+fmtLeft(Date.parse(exp)-Date.now())+'</div>'
     +'<small>until it burns</small></div></div>');
+  card.appendChild(threadPart(r));
+  return card;
+}
+function threadPart(r){
+  const box = el('<div class="eye-thread"><div class="eye-thread-title">Your reply</div><div class="eye-thread-list"></div></div>');
+  const list = box.querySelector('.eye-thread-list');
+  const ta = el('<textarea class="ad-reply eye-thread-input" rows="3" maxlength="1000" placeholder="Write back. The team sees it under this reply."></textarea>');
+  const send = el('<button class="btn secondary block" type="button">Send reply</button>');
+  box.appendChild(ta); box.appendChild(send);
+  const draw = items=>{
+    list.innerHTML = '';
+    if(!items.length){ list.appendChild(el('<p class="eye-thread-empty">Nothing sent yet.</p>')); return; }
+    items.forEach(t=> list.appendChild(el('<div class="eye-thread-msg"><small>'+esc(fmtWhen(t.created_at))+'</small><p>'+esc(t.body)+'</p></div>')));
+  };
+  draw([]);
+  sbClient().from('eye_thread').select('*').eq('reply_id', String(r.id)).order('created_at',{ascending:true})
+    .then(({data,error})=>{ if(!error) draw(data||[]); });
+  send.onclick = async ()=>{
+    const body = ta.value.trim();
+    if(!body){ appNotice('Nothing to send', 'Write a line first.'); return; }
+    send.disabled = true;
+    const { error } = await sbClient().from('eye_thread').insert({reply_id:String(r.id), user_id:sbSession.user.id, body:body});
+    send.disabled = false;
+    if(error){ appNotice('Not sent', error.message); return; }
+    ta.value = '';
+    const { data } = await sbClient().from('eye_thread').select('*').eq('reply_id', String(r.id)).order('created_at',{ascending:true});
+    draw(data || []);
+  };
+  return box;
 }
 let eyesTimer = null;
 function startEyesTicker(){
