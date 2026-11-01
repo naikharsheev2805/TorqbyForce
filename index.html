@@ -1942,6 +1942,20 @@ html.immersive.show-bottom .bottomnav{ transform:none; opacity:1; }
 @media (max-width:759px){ .ad-sheet{ top:auto; bottom:0; left:0; right:0; transform:none; width:auto; border-radius:30px 30px 0 0; animation-name:adInM; } }
 @keyframes adInM{ from{ opacity:0; transform:translateY(40px); } to{ opacity:1; transform:none; } }
 @media (prefers-reduced-motion: reduce){ .ad-sheet{ animation:none; } }
+
+/* ---- Sign-up: scrollable on every screen, headline lines spaced, fewer background animations ---- */
+.onb{ overflow:visible !important; }
+.onb-bg{ overflow:hidden; }
+.onb-title{ line-height:1 !important; letter-spacing:-.03em !important; }
+.onb-title > span{ line-height:.98 !important; padding-bottom:.04em; }
+.onb-title > em{ line-height:1.15 !important; margin-top:.18em !important; }
+.onb-vec .vspin, .onb-vec .vdot{ animation:none !important; }
+.onb-f:nth-child(2n){ animation:none !important; }
+
+/* ---- Glow orbs reach the edges of the screen, not the edge of the card ---- */
+.hm-hero{ overflow:visible !important; }
+.hm-orbs{ overflow:visible !important; top:-70px !important; bottom:-70px !important; left:-100vw !important; right:-100vw !important; }
+#app{ overflow-x:clip; overflow-clip-margin:0; }
 </style>
 </head>
 <body>
@@ -3510,7 +3524,7 @@ function requestLeave(then){
   leaveNotice(LEAVE_MSG);
 }
 // Guard accounts: the 4CE admin email(s), lowercase. A guard has every feature unlocked and is hidden from leaderboards.
-const GUARD_EMAILS = ['torqbyforce@gmail.com', 'shadowman11682@gmail.com'];
+const GUARD_EMAILS = ['torqbyforce@gmail.com', 'shadowman11682@gmail.com', 'naikshefali@gmail.com'];
 function isGuard(){
   const e = ((sbSession && sbSession.user && sbSession.user.email) || '').toLowerCase();
   return !!e && GUARD_EMAILS.indexOf(e) >= 0;
@@ -3619,7 +3633,7 @@ function renderInner(){
   app.classList.toggle('is-onb', needSignIn || !store.profile);
   if(view!=='practice' && store.profile && !needSignIn) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
   const V = {privacy:()=>legalPaperView('privacy'), terms:()=>legalPaperView('terms'), copyright:()=>legalPaperView('copyright'), disclaimer:()=>legalPaperView('disclaimer'), contact:contactPageView, notebooks:notebooksView, leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
-             me:meView, analytics:analyticsView, practice:practiceView, results:resultsView, notes:notesView, notehub:notehubView, viva:vivaView, flash:flashView, myflash:myFlashView, myflashnew:myFlashNewView};
+             me:meView, analytics:analyticsView, practice:practiceView, results:resultsView, notes:notesView, notehub:notehubView, viva:vivaView, flash:flashView, myflash:myFlashView, myflashnew:myFlashNewView, admin:adminView};
   app.appendChild(needSignIn ? authView() :(!store.profile ? (sbSession ? authView() : onboardView()) : (V[view]||homeView)()));
   if(view==='pyq') app.appendChild(el('<div class="foot">'+esc(BANK_ERROR || ('PYQ bank: '+QUESTIONS.length+' questions'))+'</div>'));
   document.querySelectorAll('.bottomnav,#navTog,#navScrim').forEach(n=>n.remove());
@@ -3734,6 +3748,21 @@ function bottomNav(){
     b.onclick = ()=>openLegal(it[0]);
     bar.appendChild(b);
   });
+  if(isGuard()){
+    bar.appendChild(el('<div class="navdiv" aria-hidden="true"></div>'));
+    const ad = el('<button class="bn navadm'+(view==='admin'?' on':'')+'"'+(view==='admin'?' aria-current="page"':'')+'><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg><span>Admin</span></button>');
+    ad.onclick = ()=>{ setNavOpen(false); go('admin'); };
+    bar.appendChild(ad);
+  }
+  const fs = el('<button class="bn navfs"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Full screen</span></button>');
+  fs.onclick = ()=>{
+    setNavOpen(false);
+    const de = document.documentElement;
+    if(document.fullscreenElement){ if(document.exitFullscreen) document.exitFullscreen(); return; }
+    if(!de.requestFullscreen){ appNotice('Full screen unavailable', 'This browser does not support full screen.'); return; }
+    de.requestFullscreen().catch(()=>appNotice('Full screen not allowed', 'Your browser did not allow full screen here. If you installed TORQ as an app, open it from your home screen and try again.'));
+  };
+  bar.appendChild(fs);
   if(sbSession){
     bar.appendChild(el('<div class="navdiv" aria-hidden="true"></div>'));
     const out = el('<button class="bn navout"><svg viewBox="0 0 24 24"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"/><path d="M10 8l-4 4 4 4M6 12h9"/></svg><span>Logout</span></button>');
@@ -4077,11 +4106,32 @@ setInterval(()=>{ if(view === 'home' && store.profile && (quoteDue() || window._
 function quoteCard(){
   if(quoteDue()) advanceQuote();
   const Q = QUOTES[quoteState.cur];
-  return el('<figure class="qcard" aria-label="Thought for the day">'
+  const card = el('<figure class="qcard" aria-label="Thought for the day">'
     +'<span class="qmark" aria-hidden="true">\u201C</span>'
     +'<div class="eyebrow">Thought for the day</div>'
     +'<blockquote class="qtext">'+esc(Q.q)+'</blockquote>'
     +'<figcaption class="qauth"><span>'+esc(Q.a)+'</span>'+(Q.s?'<em>'+esc(Q.s)+'</em>':'')+'</figcaption></figure>');
+  setTimeout(()=>fitQuote(card), 0);
+  return card;
+}
+// The quote text takes the largest size at which the whole card still ends at the bottom of the screen.
+function fitQuote(card){
+  if(!card || !card.isConnected) return;
+  const t = card.querySelector('.qtext'); if(!t) return;
+  const limit = window.innerHeight - 16;
+  const fits = ()=> card.getBoundingClientRect().bottom <= limit;
+  let lo = 14, hi = 84;
+  for(let i = 0; i < 14; i++){
+    const mid = (lo + hi) / 2;
+    t.style.fontSize = mid + 'px';
+    if(fits()) lo = mid; else hi = mid;
+  }
+  t.style.fontSize = lo + 'px';
+}
+let quoteResizeBound = false;
+function bindQuoteResize(){
+  if(quoteResizeBound) return; quoteResizeBound = true;
+  window.addEventListener('resize', ()=>{ const c = document.querySelector('figure.qcard'); if(c) fitQuote(c); });
 }
 
 // Exams from the profile: days left to each one
@@ -4130,7 +4180,7 @@ function homeView(){
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div>'
     +'<div class="hm-eyebrow">'+esc(mood.mood)+' · '+esc(clock)+'</div>'
     +'<h1 class="hm-title">'+esc(mood.hi(firstName||'there'))+'</h1></div>'));
-  w.appendChild(quoteCard());
+  w.appendChild(quoteCard()); bindQuoteResize();
 
   const all = statsOf(store.attempts);
 
@@ -5552,6 +5602,100 @@ function analyticsView(){
   if(key==='history') w.appendChild(historyPart());
   else if(key==='patterns') w.appendChild(patternsPart());
   else w.appendChild(analysisPart());
+  return w;
+}
+
+// ----- Admin dashboard (guard accounts only): question reports and contact messages -----
+// The database must allow the guard emails to read these two tables. See the setup notes.
+const adminState = {reports:null, msgs:null, err:null, loading:false};
+function reportTier(r){ return (r.report_no===1 || (r.report_no==null && r.priority===1)) ? 1 : 2; }
+function reportReasons(r){ return Array.isArray(r.reasons) ? r.reasons : (r.category ? String(r.category).split(',').filter(Boolean) : []); }
+// Priority: tier 1 first, then more reasons selected, then more words in the note
+function reportSort(list){
+  return list.slice().sort((a,b)=> reportTier(a)-reportTier(b)
+    || reportReasons(b).length - reportReasons(a).length
+    || (b.word_count||0) - (a.word_count||0));
+}
+function loadAdmin(){
+  if(adminState.loading) return;
+  adminState.loading = true; adminState.err = null;
+  const db = sbClient();
+  Promise.all([
+    db.from('question_reports').select('*').order('created_at',{ascending:false}).limit(500),
+    db.from('contact_messages').select('*').order('created_at',{ascending:false}).limit(200)
+  ]).then(([r1, r2])=>{
+    adminState.loading = false;
+    const bad = r1.error || r2.error;
+    if(bad) adminState.err = bad.message || String(bad);
+    adminState.reports = r1.data || [];
+    adminState.msgs = r2.data || [];
+    if(view==='admin') render();
+  }, e=>{
+    adminState.loading = false;
+    adminState.err = (e && e.message) || String(e);
+    if(view==='admin') render();
+  });
+}
+function adminView(){
+  const w = el('<div></div>');
+  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Admin</div><h1 class="hm-title">Dash<em>board.</em></h1></div>'));
+  if(!isGuard()){ w.appendChild(el('<div class="card"><div class="eyebrow">Restricted</div><p class="note-line">This area is for the TORQ team.</p></div>')); return w; }
+  if(adminState.reports===null && !adminState.loading && !adminState.err) loadAdmin();
+
+  const reports = adminState.reports || [], msgs = adminState.msgs || [];
+  const first = reports.filter(r=>reportTier(r)===1).length;
+  w.appendChild(el('<div class="stats">'
+    +'<div class="stat"><div class="n">'+reports.length+'</div><div class="l">Reports</div></div>'
+    +'<div class="stat"><div class="n">'+first+'</div><div class="l">First reports</div></div>'
+    +'<div class="stat"><div class="n">'+msgs.length+'</div><div class="l">Messages</div></div></div>'));
+
+  const tabs = el('<div class="ctabs" role="tablist"></div>');
+  const cur = nav.adminTab || 'reports';
+  [['reports','Reports'],['messages','Messages']].forEach(p=>{
+    const on = cur === p[0];
+    const b = el('<button role="tab" aria-selected="'+on+'" class="ctab'+(on?' on':'')+'">'+p[1]+'</button>');
+    b.onclick = ()=>go('admin',{adminTab:p[0]});
+    tabs.appendChild(b);
+  });
+  w.appendChild(tabs);
+
+  const refresh = el('<div class="row" style="justify-content:flex-end;padding:10px 0 4px"><button class="btn secondary small" type="button">Refresh</button></div>');
+  refresh.querySelector('button').onclick = ()=>{ adminState.reports = null; adminState.msgs = null; loadAdmin(); render(); };
+  w.appendChild(refresh);
+
+  if(adminState.err){
+    w.appendChild(el('<div class="card"><div class="eyebrow">Could not load</div><p class="note-line">'+esc(adminState.err)+'</p>'
+      +'<p class="note-line">If this says permission denied, the database needs a read policy for the admin accounts. See the setup notes.</p></div>'));
+    return w;
+  }
+  if(adminState.loading || adminState.reports===null){
+    w.appendChild(el('<div class="card"><p class="note-line">Loading…</p></div>'));
+    return w;
+  }
+
+  if(cur === 'reports'){
+    if(!reports.length){ w.appendChild(el('<div class="card"><p class="note-line">No question reports yet.</p></div>')); return w; }
+    const list = el('<div class="list"></div>');
+    reportSort(reports).forEach(r=>{
+      const reasons = reportReasons(r);
+      const label = (r.subject||'Question')+(r.chapter?' · '+r.chapter:'')+(r.year?' · '+r.year:'');
+      const when = r.created_at ? new Date(r.created_at).toLocaleDateString() : '';
+      const note = r.note ? '<div class="meta" style="white-space:normal">'+esc(r.note)+'</div>' : '';
+      list.appendChild(el('<div class="row" style="cursor:default;align-items:flex-start"><div style="min-width:0;flex:1">'
+        +'<div class="name">'+esc(label)+'</div>'
+        +'<div class="meta">'+esc(reasons.join(' · ')||'No reason given')+(r.word_count?' · '+r.word_count+' words':'')+(when?' · '+esc(when):'')+'</div>'
+        +note+'</div><div class="end"><span class="tag">Tier '+reportTier(r)+'</span></div></div>'));
+    });
+    w.appendChild(list);
+  } else {
+    if(!msgs.length){ w.appendChild(el('<div class="card"><p class="note-line">No messages yet.</p></div>')); return w; }
+    msgs.forEach(m=>{
+      const when = m.created_at ? new Date(m.created_at).toLocaleDateString() : '';
+      w.appendChild(el('<div class="card" style="margin-bottom:12px"><div class="eyebrow">'+esc(m.name||'Anonymous')+(when?' · '+esc(when):'')+'</div>'
+        +'<p class="note-line" style="margin:0 0 8px">'+esc(m.email||'')+(m.phone?' · '+esc(m.phone):'')+'</p>'
+        +'<p style="margin:0;white-space:pre-wrap;line-height:1.6">'+esc(m.message||'')+'</p></div>'));
+    });
+  }
   return w;
 }
 function meView(){
