@@ -2045,7 +2045,7 @@ body.has-nav .build-stamp{ margin-bottom:calc(96px + env(safe-area-inset-bottom,
   background:linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--accent) 22%, transparent) 60%, transparent 100%);
   opacity:0; transform:translate3d(0,-100%,0); will-change:transform, opacity;
 }
-.navpanel.open::after{ animation:navSweep .8s cubic-bezier(.45,0,.2,1) .1s both; }
+.navpanel.open.glint::after{ animation:navSweep .8s cubic-bezier(.45,0,.2,1) .1s both; }
 @keyframes navSweep{
   0%  { opacity:1; transform:translate3d(0,-100%,0); }
   85% { opacity:1; }
