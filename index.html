@@ -74,6 +74,16 @@
   --accent:#b5c8f1; --accent-ink:#151a2a; --accent-soft:#2f3a57; --ok:#9fd6b5; --bad:#e9a1a1; --ok-bg:#243529; --bad-bg:#3a2a2e;
   --low:#43302c; --mid:#403b27; --high:#27403a; color-scheme:dark; }
 
+/* ---------- Subject colours: one dedicated hue per subject, distinct in every theme ---------- */
+:root, [data-theme="claude-dark"]{ --subj-phys:#7fa9ff; --subj-chem:#6fd39a; --subj-maths:#e88fc6; }
+[data-theme="slate-teal"]{ --subj-phys:#7fb0ff; --subj-chem:#8fd49a; --subj-maths:#e89ad0; }
+[data-theme="plum"]{ --subj-phys:#7fb0ff; --subj-chem:#7fd6a8; --subj-maths:#f2a0c4; }
+[data-theme="moss"]{ --subj-phys:#7fb4ff; --subj-chem:#8fd49a; --subj-maths:#e88fc6; }
+[data-theme="dusk"]{ --subj-phys:#86b6ff; --subj-chem:#7fd6a8; --subj-maths:#f0a6c8; }
+[data-theme="mint"], [data-theme="peach"]{ --subj-phys:#1f5fbf; --subj-chem:#1c7d55; --subj-maths:#b03a7e; }
+[data-theme="lavender"]{ --subj-phys:#1f5fbf; --subj-chem:#1c7d55; --subj-maths:#b8447f; }
+[data-theme="sky"]{ --subj-phys:#2f6fa3; --subj-chem:#1c7d55; --subj-maths:#b03a7e; }
+
 /* ---------- Design tokens (shared by every screen) ---------- */
 :root{ --r-xs:8px; --r-sm:10px; --r-md:12px; --r-lg:16px; --r-xl:22px;
   --fs-1:12.5px; --fs-2:13.5px; --fs-3:14.5px; --fs-4:16px; --fs-5:18px;
@@ -727,6 +737,9 @@ svg.wm-lg{ --torq-stroke:1.9; }
 #tauLoader .torq-arc{ animation:torqSpin 1.3s linear infinite; }
 .torq-spinner .torq-arc{ transform-origin:22px 22px; animation:torqSpin 1s linear infinite; }
 @media (prefers-reduced-motion: reduce){ #tauLoader .torq-arc, .torq-spinner .torq-arc{ animation:none; } }
+/* The loading arc is a plain rotating stroke: remove the old draw-on dash animation so no part of it drops out */
+#tauLoader path, .torq-spinner path{ stroke-dasharray:none !important; stroke-dashoffset:0 !important; animation:none !important; }
+#tauLoader path{ stroke-width:var(--torq-stroke,3.2); }
 /* ---------- Quote card: full width on tablets and wide screens ---------- */
 @media (min-width:960px){ figure.qcard{ max-width:none; } }
 
@@ -979,7 +992,7 @@ body.has-nav .bn{ flex:none; }
 .navback:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
 /* ---------- Share: circular icon button and share sheet ---------- */
 .share-fab{ width:42px; height:42px; flex-shrink:0; border-radius:50%; display:grid; place-items:center; cursor:pointer;
-  border:1.5px solid transparent; color:var(--accent); background:linear-gradient(var(--surface),var(--surface)) padding-box, linear-gradient(135deg,var(--accent),var(--c-chem)) border-box;
+  border:1px solid var(--border); color:var(--accent); background:var(--surface);
   box-shadow:0 10px 22px -14px var(--shadow); transition:transform var(--dur-fast) var(--ease); }
 .share-fab svg{ width:19px; height:19px; }
 .share-fab:hover{ transform:translateY(-1px); }
@@ -1258,6 +1271,18 @@ img{ -webkit-user-drag:none; }
 .legal-paper .lp-sec::after{ content:"" !important; position:absolute; left:24px; right:24px; top:0; height:2px; width:auto; border-radius:0 0 3px 3px; background:linear-gradient(90deg,var(--accent),transparent 70%) !important; opacity:.85; box-shadow:none !important; }
 .legal-paper .lp-sec .lp-p{ color:var(--text); padding-right:44px; }
 .legal-paper .lp-sec .lp-p::first-letter{ float:left; font:italic 600 52px/0.82 Lora,Georgia,serif; color:var(--accent); margin:6px 10px 0 0; }
+/* Legal: first word in the app's italic serif accent at reading size; highlights match the Home title */
+.lp-sec .lp-p::first-letter, .legal-paper .lp-sec .lp-p::first-letter{ float:none; font:inherit; color:inherit; margin:0; }
+.lp-lead{ font-family:Lora,Georgia,serif; font-style:italic; font-weight:600; color:var(--accent); }
+.lp-hl{ font-family:Lora,Georgia,serif; font-style:italic; font-weight:500; color:var(--accent); }
+.lp-links .lp-link{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:10px; padding:14px 16px; border:1px solid var(--border); border-radius:var(--r-lg); background:var(--surface-2); color:var(--text); text-decoration:none; transition:border-color var(--dur-fast); }
+.lp-links .lp-link:hover, .lp-links .lp-link:focus-visible{ border-color:var(--accent); outline:none; }
+.lp-links .lp-link b{ display:block; font:600 15px/1.3 Lora,Georgia,serif; }
+.lp-links .lp-link small{ display:block; margin-top:3px; font-size:13px; color:var(--muted); }
+.lp-links .lp-link em{ font-style:normal; color:var(--accent); font-size:20px; flex-shrink:0; }
+/* PYQ tabs and share button: breathing room below the row */
+.pyq-tabrow{ margin:4px 0 22px; padding:0 2px; }
+.share-fab:hover{ border-color:var(--accent); }
 </style>
 </head>
 <body>
@@ -3077,8 +3102,8 @@ function pyqView(){
     b.onclick = ()=>go('pyq',{pyqTab:p[0]});
     tabSeg.appendChild(b);
   });
-  const tabRow = el('<div class="row" style="padding:0;border:none;align-items:center;gap:10px"></div>');
-  tabRow.appendChild(tabSeg); tabRow.firstChild.style.flex='1'; tabRow.firstChild.style.margin='0';
+  const tabRow = el('<div class="row pyq-tabrow" style="padding:0;border:none;align-items:center;gap:12px"></div>');
+  tabRow.appendChild(tabSeg); tabSeg.style.flex='1'; tabSeg.style.margin='0';
   const shareTop = shareFab('Practicing JEE previous year questions on TORQ, with solutions and mock tests.', 'Share TORQ');
   tabRow.appendChild(shareTop);
   w.appendChild(tabRow);
@@ -4007,9 +4032,9 @@ const LEGAL_DOCS = {
   privacy: {no:'01', title:'Privacy policy', paras:[
     'What we collect. Your account details: email, username, name, surname, age, optional birthdate, standard, the exam you prepare for, and whether you appear on the leaderboard. Your study data: answers, marks, notes, bookmarks, your own solutions and submitted sets. If you use the contact form, the name, email, optional phone number and comment you send us.',
     'Why we collect it. To run your account, keep your progress and sync it across your devices, show the leaderboard the way you chose, and reply to your messages.',
-    'Where it is kept. Your data is stored with our service provider, Supabase, and on your device for offline use. We do not sell your data and we do not show advertisements.',
+    'Where it is kept. Your data is stored with our service provider, Supabase, and on your device for offline use. *We do not sell your data* and *we do not show advertisements.*',
     'Leaderboard. Other users see only your username and photo, and only if you choose to be visible. Otherwise you appear as Anonymous User.',
-    'Your choices. You can change your profile and leaderboard visibility at any time, and ask us to delete your account and data through the contact form.',
+    'Your choices. You can change your profile and leaderboard visibility at any time, and ask us to *delete your account and data* through the contact form.',
     'Children. If you are under 18, please ask a parent or guardian to help you with sign-up and contact details.'
   ]},
   terms: {no:'02', title:'Terms of service', paras:[
@@ -4019,24 +4044,33 @@ const LEGAL_DOCS = {
     '3. What you give us. Your account details, study activity, notes and contact messages, as described in the privacy policy. You keep ownership of your own notes, solutions and profile content, and you give TORQ permission to store and show them to you across your devices.',
     '4. Leaderboard. If you choose to be visible, your username and photo may be shown to other users. Do not use an offensive name, photo or username. We may remove any content or account that breaks these terms.',
     '5. Acceptable use. Do not copy, resell or scrape TORQ, its notes, formula cards or explanations, or try to access the app\'s data, servers or other users\' accounts. Do not interfere with the app, bypass its limits or submit false reports.',
-    '6. Study content. TORQ provides practice material, notes and explanations to help you study. It does not guarantee any result in any exam. Check official sources for dates, syllabus and rules.',
-    '7. Independence. TORQ is not affiliated with the National Testing Agency, NCERT, the IITs or any exam body. See the Disclaimer for details.',
+    '6. Study content. TORQ provides practice material, notes and explanations to help you study. *It does not guarantee any result in any exam.* Check official sources for dates, syllabus and rules.',
+    '7. Independence. TORQ is *not affiliated with* the National Testing Agency, NCERT, the IITs or any exam body. See the Disclaimer for details.',
     '8. Ending your account. You can log out or delete your account at any time from your profile. We may suspend an account that breaks these terms.',
     '9. No warranty. TORQ is provided as is, without warranties of any kind, to the extent the law allows. We are not liable for indirect loss arising from your use of the app.',
     '10. Changes. We may update these terms. We will show the date of the latest update here. Continued use after an update means you accept the new terms.',
     '11. Contact. Questions about these terms can be sent through the Contact Us form on this page.'
   ]},
   copyright: {no:'03', title:'Copyright', paras:[
-    'The app, its design, its notes, formula cards, explanations and worked examples are copyright TORQ, 2026. Please do not copy or redistribute them without permission.',
+    'The app, its design, its notes, formula cards, explanations and worked examples are copyright TORQ, 2026. *Please do not copy or redistribute them without permission.*',
     'Question papers are the public previous-year papers used for practice. All trademarks and names belong to their owners.'
   ]},
-  disclaimer: {no:'04', title:'Independence notice', paras:[
-    'TORQ is an independent study app. It is not affiliated with, endorsed by, or approved by the National Testing Agency (NTA), NCERT, the Indian Institutes of Technology (IITs), or any other examination or government body.',
-    'For official dates, syllabus, and rules, always check the official websites of the examination authority.'
+  disclaimer: {no:'04', title:'Independence notice', links:[
+    {label:'JEE Main, National Testing Agency', note:'Syllabus, important dates and rules for JEE Main', url:'https://jeemain.nta.ac.in'},
+    {label:'JEE Advanced, IIT', note:'Syllabus PDF, schedule and brochure for JEE Advanced', url:'https://jeeadv.ac.in'},
+    {label:'National Testing Agency', note:'Official notices and exam calendar', url:'https://nta.ac.in'}
+  ], paras:[
+    'TORQ is an independent study app. It is *not affiliated with, endorsed by, or approved by* the National Testing Agency (NTA), NCERT, the Indian Institutes of Technology (IITs), or any other examination or government body.',
+    'For official dates, syllabus, and rules, *always check the official websites of the examination authority.*'
   ]},
 };
 
 // ----- Legal: each document is its own page, laid out like a sheet of paper -----
+// Legal text: the first word takes the app's italic serif accent; *phrases* between asterisks are highlighted
+function legalText(t){
+  const s = esc(t).replace(/\*([^*]+)\*/g, '<em class="lp-hl">$1</em>');
+  return s.replace(/^(\S+)/, '<span class="lp-lead">$1</span>');
+}
 function legalPaperView(key){
   const d = LEGAL_DOCS[key];
   const w = el('<div class="legal-page"></div>');
@@ -4044,7 +4078,11 @@ function legalPaperView(key){
   sheet.appendChild(el('<div class="lp-top"><span class="lp-no">Document '+d.no+' of 04</span><span class="lp-kind">Legal</span></div>'));
   sheet.appendChild(el('<h1 class="lp-title" id="lp-title">'+esc(d.title)+'</h1>'));
   sheet.appendChild(el('<div class="lp-date">Last updated 31 October 2026</div>'));
-  d.paras.forEach(t=>sheet.appendChild(el('<section class="card lp-sec"><p class="lp-p">'+esc(t)+'</p></section>')));
+  d.paras.forEach(t=>sheet.appendChild(el('<section class="card lp-sec"><p class="lp-p">'+legalText(t)+'</p></section>')));
+  if(d.links){ sheet.appendChild(el('<section class="card lp-sec lp-links"><div class="eyebrow">Official websites</div>'
+    +'<p class="lp-p" style="margin:0">Syllabus, dates and rules are published on these sites. Open them to check the latest.</p>'
+    +d.links.map(l=>'<a class="lp-link" href="'+l.url+'" target="_blank" rel="noopener noreferrer"><span><b>'+esc(l.label)+'</b><small>'+esc(l.note)+'</small></span><em>&#8599;</em></a>').join('')
+    +'</section>')); }
   sheet.appendChild(el('<div class="lp-foot">TORQ &middot; Legal</div>'));
   w.appendChild(sheet);
   return w;
@@ -4396,7 +4434,7 @@ function pyqResults(w){
 
 
 // ---------- Redesign helpers ----------
-const SUBJ_VAR = {Physics:'var(--c-phys)', Chemistry:'var(--c-chem)', Maths:'var(--c-maths)'};
+const SUBJ_VAR = {Physics:'var(--subj-phys)', Chemistry:'var(--subj-chem)', Maths:'var(--subj-maths)'};
 // Marks ring: the score is the largest figure, the maximum and the percentage of marks sit below it
 function ringMarks(score, max){
   const p = max>0 ? Math.max(0, Math.min(100, Math.round(score/max*100))) : 0;
