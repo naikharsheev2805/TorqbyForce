@@ -428,6 +428,7 @@ details summary::-webkit-details-marker{display:none;}
 button, [role="button"], a, .row, .chip{ position:relative; overflow:hidden; }
 button:focus:not(:focus-visible), [role="button"]:focus:not(:focus-visible){ outline:none; }
 .btn:active, .chip:active, .seg button:active, .bn:active, .subjcard:active{ transform:scale(.97); transition:transform .12s ease; }
+.ripple-host{ overflow:hidden !important; }
 .ripple{ position:absolute; border-radius:50%; pointer-events:none; opacity:0; transform:scale(.2);
   background:radial-gradient(circle, currentColor 0%, currentColor 38%, transparent 68%);
   animation:ripple .85s cubic-bezier(.16,1,.3,1) forwards; }
@@ -1415,6 +1416,29 @@ img{ -webkit-user-drag:none; }
 .viva-note-line{ font:400 12.5px Inter,sans-serif; color:var(--muted); flex-basis:100%; }
 .viva-callout{ width:100%; display:flex; justify-content:space-between; align-items:center; margin:0 0 14px; padding:12px 16px; border-radius:16px; border:1px solid var(--border); background:var(--surface); color:var(--text); font:600 14px Inter,sans-serif; cursor:pointer; }
 .viva-callout em{ font-style:normal; color:var(--accent); font-size:12px; letter-spacing:.12em; text-transform:uppercase; }
+/* ---------- Flashcards v3: aesthetic faces, keyword emphasis, fitted formulas ---------- */
+.fx2-face::before{content:""; position:absolute; left:-70px; top:-70px; width:200px; height:200px; border-radius:50%; background:var(--accent); opacity:.07; pointer-events:none;}
+.fx2-face::after{content:""; position:absolute; right:-60px; bottom:-60px; width:180px; height:180px; border-radius:50%; background:var(--accent); opacity:.08; pointer-events:none;}
+.fx2-face > *{position:relative; z-index:1;}
+.fx2-key{font-style:italic; font-family:Lora,Georgia,serif; color:var(--accent); font-weight:500;}
+.fx2-mid{min-width:0;}
+.fx2-front{min-width:0; width:100%; display:flex; justify-content:center; align-items:center; text-align:center; overflow:hidden;}
+.fx2-math{font:500 30px/1.3 Lora,Georgia,serif; color:var(--text); max-width:100%;}
+.fx2-math .katex{font-size:1em;}
+.fx2-math.fx2-stacked{display:block; white-space:normal; text-align:left; font-size:24px; line-height:1.9; width:100%; padding-left:4px;}
+.fx2-ln{display:block; white-space:nowrap;}
+.fx2-plain{font:500 clamp(18px,5vw,22px)/1.45 Lora,Georgia,serif; color:var(--text); overflow-wrap:anywhere; word-break:break-word;}
+.fx2-front .katex-display{margin:0;}
+.fx2-meta{position:relative; z-index:1;}
+
+/* ---------- Contact page: neutral card, flat button ---------- */
+.legal-paper .card{ border:1px solid var(--border) !important; background:var(--surface) !important; box-shadow:none !important; }
+.legal-paper .card::after{ display:none !important; }
+.legal-paper .lp-form .btn{ background:var(--accent) !important; color:var(--accent-ink,#1f1e1d) !important; box-shadow:none !important; border:0 !important; }
+.legal-paper .lp-form .btn:hover{ filter:brightness(1.04); }
+/* ---------- Hero orbs: soft radial glow, no visible edge ---------- */
+.hm-orbs i{ filter:none !important; border-radius:0 !important; background:radial-gradient(circle, color-mix(in srgb, var(--accent) 45%, transparent) 0%, transparent 68%) !important; }
+.hm-orbs i:nth-child(2){ background:radial-gradient(circle, color-mix(in srgb, var(--c-chem) 35%, transparent) 0%, transparent 68%) !important; }
 </style>
 </head>
 <body>
@@ -4280,8 +4304,12 @@ function customTestPart(){
     cc.appendChild(row);
   });
   const tw = el('<div class="two" style="margin-top:6px"></div>');
-  tw.appendChild(pickerField('Questions', [10,20,30,40].map(n=>({v:n,l:n+' questions'})), tc.n, v=>{ tc.n = v; render(); }));
-  tw.appendChild(pickerField('Time', [30,60,90,120].map(n=>({v:n,l:n+' minutes'})), tc.minutes, v=>{ tc.minutes = v; render(); }));
+  const QOPTS = [10,20,25,30,40,50,60,70,75];
+  tw.appendChild(pickerField('Questions', QOPTS.map(n=>({v:n,l:n+' questions'})), tc.n, v=>{ tc.n = v; tc.minutes = idealMinutes(v); render(); }));
+  const TOPTS = QOPTS.map(n=>idealMinutes(n)).filter((m,i,a)=>a.indexOf(m)===i);
+  tw.appendChild(pickerField('Time', TOPTS.map(m=>({v:m,l:m+' minutes  (ideal for '+questionsForMinutes(m)+' questions)'})), tc.minutes, v=>{ tc.minutes = v; render(); }));
+  const pace = tc.minutes*60/tc.n;
+  tw.appendChild(el('<p class="note-line" style="flex-basis:100%;margin:4px 0 0">Pace: one question every '+fmtPace(pace)+'. Ideal rate is 25 questions per hour.</p>'));
   cc.appendChild(tw);
   cc.appendChild(el('<p class="note-line">'+(tc.chapters.length ? tc.chapters.length+' chapter'+(tc.chapters.length>1?'s':'')+' selected' : 'Select one or more chapters to begin.')+'</p>'));
   const cb = el('<button class="btn block" style="margin-top:14px"'+(tc.chapters.length?'':' disabled')+'>Start my test</button>');
@@ -4295,7 +4323,7 @@ function customTestPart(){
   return w;
 }
 
-function testCfg(){ return nav.testCfg || (nav.testCfg = {chapters:[], n:20, minutes:60}); }
+function testCfg(){ return nav.testCfg || (nav.testCfg = {chapters:[], n:25, minutes:60}); }
 function mocksView(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Timed like the real paper</div><h1 class="hm-title">Test <em>zone.</em></h1></div>'));
@@ -5758,8 +5786,7 @@ function enhance(app){
 
 // ---------- Start: render immediately, then try optional cloud sync with a timeout ----------
 // ---------- Ripple on every tap (replaces the default blue highlight) ----------
-document.addEventListener('pointerdown', e=>{
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+document.addEventListener('pointerdown', e=>{ return; /* replaced below */
   const t = e.target.closest && e.target.closest('button, [role="button"], a, .row, .chip');
   if(!t || t.disabled || t.style.cursor === 'default') return;
   const r = t.getBoundingClientRect();
@@ -5963,6 +5990,131 @@ function vivaChapterBlock(){
   wrap.appendChild(el('<div class="viva-pin"></div>')); wrap.lastChild.appendChild(sw); wrap.lastChild.appendChild(note);
   return wrap;
 }
+
+// ---------- Flashcards v3: adaptive text, keyword highlights, split formulas ----------
+const FX_KEYWORDS = ['vicinal','geminal','Markovnikov','anti-Markovnikov','electrophile','nucleophile','carbocation','carbanion','free radical','resonance','hyperconjugation','inductive effect','chiral','enantiomers','racemic','isomers','homologous series','functional group','torque','moment of inertia','angular momentum','coefficient of restitution','Hess','Carnot','half-life','photon','molarity','Kohlrausch','Bohr','conservation'];
+const FX_KW_RE = new RegExp('\\b('+FX_KEYWORDS.slice().sort((a,b)=>b.length-a.length).map(k=>k.replace(/[-\/\\^$*+?.()|[\]{}]/g,'\\$&')).join('|')+')\\b','gi');
+// Escaped text in, HTML out: **word** and any listed keyword become orange italic serif
+function fxKey(s){
+  let t = esc(s).replace(/\[\[(.+?)\]\]/g, '<em class="fx2-key">$1</em>');
+  return t.replace(FX_KW_RE, '<em class="fx2-key">$1</em>');
+}
+function fxSplitTop(eq){
+  const parts=[]; let depth=0, cur='';
+  for(const ch of eq){
+    if(ch==='{') depth++; if(ch==='}') depth--;
+    if(ch==='+' && depth===0){ parts.push(cur.trim()); cur=''; } else cur+=ch;
+  }
+  if(cur.trim()) parts.push(cur.trim());
+  return parts;
+}
+function fx2Front(c){
+  if(c.kind!=='Formula') return fxKey(c.front.replace(/<[^>]+>/g,''));
+  const body = String(c.front).replace(/^\$|\$$/g,'');
+  const plainText = /[a-z]{3,}\s+[a-z]{2,}/i.test(body) && !/\\/.test(body);
+  if(plainText) return '<span class="fx2-plain" data-eq="'+esc(body)+'">'+fxKey(body)+'</span>';
+  return '<span class="fx2-math" data-eq="'+esc(body)+'">'+c.front+'</span>';
+}
+function fitFront(){
+  const box = document.querySelector('.fx2-face.front .fx2-front'); if(!box) return;
+  const area = box.parentElement; const maxW = area.clientWidth, maxH = area.clientHeight;
+  const m = box.querySelector('.fx2-math');
+  if(!m){ // text cards: shrink until the text fits the card
+    let size = 26; box.style.fontSize = size+'px';
+    while(box.scrollHeight > maxH && size > 14){ size--; box.style.fontSize = size+'px'; }
+    return;
+  }
+  const tgt = m; tgt.style.whiteSpace='nowrap'; tgt.style.display='inline-block';
+  const fits = ()=> tgt.scrollWidth <= maxW;
+  let size = 30; tgt.style.fontSize = size+'px';
+  while(size < 44){ size++; tgt.style.fontSize=size+'px'; if(!fits()){ size--; tgt.style.fontSize=size+'px'; break; } }
+  while(!fits() && size > 13){ size--; tgt.style.fontSize = size+'px'; }
+  if(!fits() && !tgt.dataset.split){ // too long even at the smallest size: stack the terms like a sum
+    const parts = fxSplitTop(tgt.dataset.eq || '');
+    if(parts.length > 1){
+      tgt.dataset.split = '1';
+      tgt.innerHTML = parts.map((p,i)=>'<span class="fx2-ln">'+(i?'+&nbsp;':'')+'$'+p+'$</span>').join('');
+      tgt.classList.add('fx2-stacked');
+      if(window.renderMathInElement) renderMathInElement(tgt, {delimiters:[{left:'$',right:'$',display:false}]});
+      fitFront();
+    }
+  }
+}
+function flashSession(w){
+  const st = flashState, n = st.pool.length, c = st.pool[st.i];
+  const enterCls = st.enter ? ' fx2-enter' : ''; st.enter = false; st.busy = false;
+  const top = el('<div class="fx2-top"><button type="button" class="fx2-back" id="fx2Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>Chapters</span></button><span class="fx2-count">'+(st.i+1)+' / '+n+'</span></div>');
+  top.querySelector('#fx2Back').onclick = ()=>{ flashState.chapter = null; render(); };
+  w.appendChild(top);
+  if(st.chapter===VIVA_CHAPTER){ const cv = el('<button type="button" class="viva-callout"><span>Common names viva</span><em>Begin</em></button>'); cv.onclick = vivaLaunch; w.appendChild(cv); }
+  w.appendChild(el('<div class="fx2-progress"><i style="width:'+(st.i/n*100)+'%"></i></div>'));
+  const first = c.back[0] ? c.back[0].text : '';
+  const rest = c.back.slice(1).map(x=>x.label
+      ? '<div class="fx2-sec"><b>'+esc(x.label)+'</b>'+fxKey(x.text)+'</div>'
+      : '<div class="fx2-sec">'+fxKey(x.text)+'</div>').join('');
+  const stage = el('<div class="fx2-stage'+enterCls+'" role="button" tabindex="0" aria-label="Flip card"><div class="fx2-stack"><div class="fx2-card'+(st.flipped?' flip':'')+'">'
+    +'<div class="fx2-face front"><div class="fx2-meta"><span class="fx2-kind">'+esc(c.kind)+'</span><span class="fx2-chap">'+esc(st.chapter)+'</span></div>'
+    +'<div class="fx2-mid"><div class="fx2-front">'+fx2Front(c)+'</div></div><div class="fx2-hint">Tap to reveal</div></div>'
+    +'<div class="fx2-face back"><div class="fx2-meta"><span class="fx2-kind">'+esc(c.kind)+'</span><span class="fx2-chap">'+esc(st.chapter)+'</span></div>'
+    +'<div class="fx2-mid fx2-scroll"><div class="fx2-answer">'+fxKey(first)+'</div>'+rest+'</div><div class="fx2-hint">Tap to flip back</div></div>'
+    +'</div></div></div>');
+  stage.onclick = flashFlip;
+  stage.onkeydown = e=>{ if(e.key==='Enter'){ e.preventDefault(); flashFlip(); } };
+  w.appendChild(stage);
+  const ctl = el('<div class="fx2-actions"><button type="button" class="fx2-btn quiet">Still learning</button><button type="button" class="fx2-btn primary">Got it</button></div>');
+  const bs = ctl.querySelectorAll('button');
+  bs[0].onclick = ()=>flashAnswer(false);
+  bs[1].onclick = ()=>flashAnswer(true);
+  w.appendChild(ctl);
+  setTimeout(fitFront, 0);
+  return w;
+}
+// Mastery sits next to the PYQ weight tag, not under the title
+function flashList(w){
+  const chs = Object.keys(NOTES).filter(c=>flashCards(c).length);
+  if(!chs.length){ w.appendChild(el('<div class="card empty">No flashcards yet.</div>')); return w; }
+  const bar = el('<div class="fl-filters"></div>');
+  ['All'].concat(SUBJECTS).forEach(f=>{
+    const b = el('<button type="button" class="fl-filter'+(flashState.filter===f?' on':'')+'">'+f+'</button>');
+    b.onclick = ()=>{ flashState.filter = f; render(); };
+    bar.appendChild(b);
+  });
+  w.appendChild(bar);
+  const shown = flashState.filter==='All' ? chs : chs.filter(c=>flashSubject(c)===flashState.filter);
+  const list = el('<div class="list"></div>');
+  shown.forEach(c=>{
+    const row = el('<div class="row"><div><div class="name">'+esc(c)+'</div><div class="tagrow">'+wtTag(flashSubject(c), c)
+      +'<span class="mastery">'+flashPct(c)+'% mastered</span></div><div class="meta">'+flashCards(c).length+' cards</div></div><div class="end">Open</div></div>');
+    row.onclick = ()=>flashStart(c, false);
+    list.appendChild(row);
+  });
+  w.appendChild(list);
+  return w;
+}
+// Ripples stay inside the thing that was tapped
+document.addEventListener('pointerdown', e=>{
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const t = e.target.closest && e.target.closest('.fx2-face, .fx2-btn, .fx2-back, button, .row, .chip, .viva-opt');
+  if(!t || t.disabled || t.style.cursor === 'default') return;
+  const r = t.getBoundingClientRect();
+  const size = Math.max(r.width, r.height) * 1.6;
+  const dot = document.createElement('span');
+  dot.className = 'ripple';
+  dot.style.width = dot.style.height = size + 'px';
+  dot.style.left = (e.clientX - r.left - size/2) + 'px';
+  dot.style.top = (e.clientY - r.top - size/2) + 'px';
+  if(getComputedStyle(t).position==='static') t.style.position = 'relative';
+  t.classList.add('ripple-host');
+  t.appendChild(dot);
+  dot.addEventListener('animationend', ()=> dot.remove());
+}, {passive:true, capture:true});
+
+
+// Practice pace: 25 questions per hour, so 75 questions = 180 minutes
+const PACE_PER_HOUR = 25;
+function idealMinutes(n){ return Math.round(n*60/PACE_PER_HOUR); }
+function questionsForMinutes(m){ return Math.round(m*PACE_PER_HOUR/60); }
+function fmtPace(sec){ const m=Math.floor(sec/60), s=Math.round(sec%60); return m+' min '+(s<10?'0':'')+s+' s'; }
 </script>
 </body>
 </html>
