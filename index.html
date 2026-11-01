@@ -1859,6 +1859,36 @@ body.has-nav .build-stamp{ margin-bottom:calc(96px + env(safe-area-inset-bottom,
 @keyframes vfade{ to{ opacity:1; } }
 @media (prefers-reduced-motion: reduce){ .onb-vec .vdraw{ animation:none; stroke-dashoffset:0; } .onb-vec .vhead{ animation:none; opacity:1; } .onb-vec .vspin, .onb-vec .vdot{ animation:none; } }
 @media (min-width:760px){ .onb-title > span{ font-size:clamp(110px, 12vw, 168px); } .onb-title > em{ font-size:clamp(34px, 3.4vw, 52px); } .onb-vec{ right:-10%; top:-12%; width:min(92%, 480px); } }
+
+/* ---- Pop-ups: larger, more polished, and the keywords pop in orange italics ---- */
+.pop-kw{ color:var(--accent-text); font-style:italic; font-weight:600; }
+.rules-card{ width:min(94vw,580px) !important; padding:42px 38px 36px !important; border-radius:30px !important; }
+.rules-title{ font-size:clamp(30px,7.6vw,44px) !important; line-height:1.08 !important; margin:10px 0 16px !important; }
+.rules-body{ font-size:clamp(16px,3.9vw,18.5px) !important; line-height:1.66 !important; margin:0 0 18px !important; }
+.rules-body b{ font-weight:700; }
+.rules-ok{ padding:17px 22px !important; font-size:17px !important; border-radius:18px !important; margin-top:8px !important; }
+.sog-pts{ gap:10px !important; }
+.sog-pts > div{ padding:15px 17px !important; border-radius:16px !important; }
+.sog-pts span{ font-size:15px !important; }
+.sog-pts b{ font-size:21px !important; }
+.rpt-modal{ width:min(92vw,540px) !important; padding:36px 32px !important; border-radius:30px !important; }
+.rpt-modal-title{ font-size:clamp(23px,5.4vw,28px) !important; margin-bottom:12px !important; }
+.rpt-modal .note-line{ font-size:17px !important; line-height:1.6 !important; }
+.rpt-modal-actions{ gap:12px !important; margin-top:24px !important; }
+.rpt-modal-actions .btn{ padding:16px 18px !important; font-size:16.5px !important; border-radius:16px !important; }
+.oos-pop{ width:min(92vw,560px) !important; padding:38px 34px !important; border-radius:30px !important; }
+.oos-pop-k{ font-size:12.5px !important; margin-bottom:14px !important; }
+.oos-pop-p{ font-size:18px !important; line-height:1.62 !important; margin-bottom:14px !important; }
+.oos-pop-list{ font-size:16.5px !important; line-height:1.75 !important; padding-left:22px !important; }
+.oos-pop .btn{ padding:16px 20px !important; font-size:17px !important; border-radius:18px !important; margin-top:22px !important; }
+.mock-notice{ max-width:min(92vw,520px) !important; padding:18px 24px !important; font-size:16.5px !important; line-height:1.5 !important; border-radius:20px !important; }
+.soon-notice{ max-width:min(92vw,480px) !important; padding:20px 24px !important; border-radius:20px !important; }
+.soon-head{ font-size:19px !important; }
+.soon-body{ font-size:16px !important; line-height:1.55 !important; }
+.mock-sog{ margin:6px 0 18px; padding:18px; border-radius:20px; border:1px solid var(--border); background:var(--surface-2); transition:border-color .25s ease, box-shadow .25s ease; }
+.mock-sog.need{ border-color:var(--accent-text); box-shadow:0 0 0 4px color-mix(in srgb, var(--accent-text) 14%, transparent); }
+.mock-sog .sog-head{ margin:0 0 12px; }
+
 </style>
 </head>
 <body>
@@ -2026,6 +2056,163 @@ body.qnav-open .gutter{ opacity:0; }
 @keyframes extRise{ from{ opacity:0; transform:translateY(18px); } to{ opacity:1; transform:none; } }
 @media (prefers-reduced-motion: reduce){ .ext-confirm, .ext-sheet{ animation:none !important; } }
 </style>
+<style>
+/* ---- Image viewer (question figures, option figures, profile photo) ---- */
+.iv{ position:fixed; inset:0; z-index:300; background:rgba(8,7,6,.94); display:flex; align-items:center; justify-content:center; overflow:hidden; touch-action:none; animation:ivFade .2s ease both; }
+.iv-stage{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+.iv-img{ max-width:96vw; max-height:90vh; width:auto; height:auto; object-fit:contain; background:#fff; border-radius:10px; padding:10px; transform-origin:center center; transition:transform .25s cubic-bezier(.16,1,.3,1); cursor:zoom-in; user-select:none; -webkit-user-drag:none; }
+.iv.zoomed .iv-img{ cursor:grab; transition:none; }
+.iv-close{ position:fixed; top:calc(14px + env(safe-area-inset-top,0px)); right:14px; width:44px; height:44px; border-radius:50%; border:1px solid rgba(255,255,255,.25); background:rgba(20,18,16,.7); color:#fff; font:400 26px/1 Inter,sans-serif; cursor:pointer; z-index:2; }
+.iv-hint{ position:fixed; bottom:calc(18px + env(safe-area-inset-bottom,0px)); left:0; right:0; text-align:center; color:rgba(255,255,255,.7); font:500 13px Inter,sans-serif; pointer-events:none; }
+@keyframes ivFade{ from{ opacity:0; } to{ opacity:1; } }
+/* Figures advertise that they open */
+.qfig img, .optbox img{ cursor:zoom-in; }
+/* ---- Avatar choice sheet ---- */
+.av-sheet-wrap{ position:fixed; inset:0; z-index:250; background:rgba(10,10,9,.42); display:flex; align-items:flex-end; justify-content:center; padding:16px; animation:ivFade .2s ease both; }
+.av-sheet{ width:min(420px,100%); background:var(--surface); color:var(--text); border:1px solid var(--border); border-radius:22px; padding:20px 16px calc(16px + env(safe-area-inset-bottom,0px)); box-shadow:var(--shadow-sheet); animation:extRise .32s cubic-bezier(.16,1,.3,1) both; }
+.av-sheet-title{ font:600 18px Lora,Georgia,serif; padding:0 6px 12px; }
+.av-sheet button{ display:block; width:100%; min-height:50px; margin-top:8px; border-radius:14px; border:1px solid var(--border); background:var(--surface-2); color:var(--text); font:600 15px Inter,sans-serif; cursor:pointer; }
+.av-sheet button.av-primary{ background:var(--accent); color:var(--accent-ink); border-color:transparent; }
+.av-sheet button.av-cancel{ background:transparent; color:var(--muted); }
+@media (prefers-reduced-motion: reduce){ .iv, .av-sheet-wrap, .av-sheet, .iv-img{ animation:none !important; transition:none !important; } }
+</style>
+<script>
+(function(){
+  /* ---------- Image viewer ---------- */
+  function openViewer(src, alt){
+    if(!src) return;
+    var old = document.getElementById('ivOverlay'); if(old) old.remove();
+    var v = document.createElement('div'); v.id = 'ivOverlay'; v.className = 'iv';
+    v.innerHTML = '<div class="iv-stage"><img class="iv-img" alt="" draggable="false"></div>'
+      + '<button type="button" class="iv-close" aria-label="Close">&times;</button>'
+      + '<div class="iv-hint">Tap to zoom · drag to move · tap outside to close</div>';
+    var img = v.querySelector('.iv-img'); img.src = src; img.alt = alt || 'Image';
+    var scale = 1, tx = 0, ty = 0, startX = 0, startY = 0, moved = false, lastTap = 0, pinch = null;
+    function apply(){
+      img.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+      v.classList.toggle('zoomed', scale > 1);
+      img.style.cursor = scale > 1 ? 'grab' : 'zoom-in';
+    }
+    function close(){ v.remove(); document.removeEventListener('keydown', onKey, true); }
+    function onKey(e){ if(e.key === 'Escape') close(); }
+    function zoomAt(target){ scale = scale > 1 ? 1 : 2.5; tx = 0; ty = 0; apply(); }
+    v.querySelector('.iv-close').onclick = close;
+    v.addEventListener('click', function(e){ if(e.target === v || e.target.classList.contains('iv-stage')) close(); });
+    img.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(moved){ moved = false; return; }
+      zoomAt(e);
+    });
+    // drag to pan when zoomed (mouse and touch)
+    function down(x,y){ startX = x - tx; startY = y - ty; moved = false; }
+    function move(x,y){ if(scale <= 1) return; var nx = x - startX, ny = y - startY; if(Math.abs(nx-tx)+Math.abs(ny-ty) > 3) moved = true; tx = nx; ty = ny; apply(); }
+    img.addEventListener('mousedown', function(e){ down(e.clientX,e.clientY); });
+    window.addEventListener('mousemove', function(e){ if(v.isConnected && e.buttons) move(e.clientX,e.clientY); });
+    img.addEventListener('touchstart', function(e){
+      if(e.touches.length === 2){
+        var a = e.touches[0], b = e.touches[1];
+        pinch = { d: Math.hypot(a.clientX-b.clientX, a.clientY-b.clientY), s: scale };
+      } else {
+        down(e.touches[0].clientX, e.touches[0].clientY);
+        var now = Date.now(); if(now - lastTap < 300){ zoomAt(e); lastTap = 0; } else lastTap = now;
+      }
+    }, {passive:true});
+    img.addEventListener('touchmove', function(e){
+      if(pinch && e.touches.length === 2){
+        var a = e.touches[0], b = e.touches[1];
+        var d = Math.hypot(a.clientX-b.clientX, a.clientY-b.clientY);
+        scale = Math.min(5, Math.max(1, pinch.s * d / pinch.d)); apply(); moved = true; e.preventDefault();
+      } else if(e.touches.length === 1){
+        move(e.touches[0].clientX, e.touches[0].clientY);
+        if(scale > 1) e.preventDefault();
+      }
+    }, {passive:false});
+    img.addEventListener('touchend', function(){ pinch = null; if(scale < 1.05){ scale = 1; tx = 0; ty = 0; apply(); } });
+    document.addEventListener('keydown', onKey, true);
+    document.body.appendChild(v);
+    apply();
+  }
+  window.openImageViewer = openViewer;
+
+  /* ---------- Figures open in the viewer (question figures and option figures) ---------- */
+  document.addEventListener('click', function(e){
+    var img = e.target && e.target.closest && e.target.closest('.qfig img, .optbox img');
+    if(!img || !img.src) return;
+    e.preventDefault(); e.stopPropagation();
+    openViewer(img.src, img.alt);
+  }, true);
+
+  /* ---------- Profile photo: tap the photo to choose Upload or View ---------- */
+  function avatarSheet(pick){
+    var old = document.getElementById('avSheet'); if(old) old.remove();
+    var hasPhoto = !!(pick.querySelector('.av-circle img'));
+    var wrap = document.createElement('div'); wrap.id = 'avSheet'; wrap.className = 'av-sheet-wrap';
+    wrap.innerHTML = '<div class="av-sheet" role="dialog" aria-modal="true">'
+      + '<div class="av-sheet-title">Profile photo</div>'
+      + '<button type="button" class="av-primary av-upload">Upload new profile picture</button>'
+      + (hasPhoto ? '<button type="button" class="av-view">View profile picture</button>' : '')
+      + '<button type="button" class="av-cancel">Cancel</button></div>';
+    function close(){ wrap.remove(); document.removeEventListener('keydown', onKey, true); }
+    function onKey(e){ if(e.key === 'Escape') close(); }
+    wrap.addEventListener('click', function(e){ if(e.target === wrap) close(); });
+    wrap.querySelector('.av-cancel').onclick = close;
+    wrap.querySelector('.av-upload').onclick = function(){
+      close();
+      var input = pick.querySelector('input[type="file"]');
+      if(input) input.click();
+    };
+    var view = wrap.querySelector('.av-view');
+    if(view) view.onclick = function(){
+      close();
+      var img = pick.querySelector('.av-circle img');
+      if(img) openViewer(img.src, 'Profile picture');
+    };
+    document.addEventListener('keydown', onKey, true);
+    document.body.appendChild(wrap);
+  }
+  document.addEventListener('click', function(e){
+    var pick = e.target && e.target.closest && e.target.closest('label.av-pick');
+    if(!pick) return;
+    e.preventDefault(); e.stopPropagation();   // stop the browser opening the file picker straight away
+    avatarSheet(pick);
+  }, true);
+})();
+</script>
+<style>
+/* ---- App launch splash: the original artwork, with the 4CE line, shown while the app loads, then it fades out ---- */
+#torqSplash{ position:fixed; inset:0; z-index:999; background:#262624; display:flex; align-items:center; justify-content:center; transition:opacity .45s ease; }
+#torqSplash.out{ opacity:0; pointer-events:none; }
+#torqSplash img{ width:100%; height:100%; object-fit:cover; display:block; }
+#torqSplash .sp-wide{ display:none; }
+@media (min-width:700px){ #torqSplash .sp-phone{ display:none; } #torqSplash .sp-wide{ display:block; } }
+@media (prefers-reduced-motion: reduce){ #torqSplash{ transition:none; } }
+</style>
+<script>
+(function(){
+  var shown = false;
+  try{ shown = sessionStorage.getItem('torq.splashSeen') === '1'; }catch(e){}
+  if(shown) return;
+  var s = document.createElement('div'); s.id = 'torqSplash'; s.setAttribute('aria-hidden','true');
+  s.innerHTML = '<img class="sp-phone" alt="" src="icons/splash-iphone-1170x2532.png"><img class="sp-wide" alt="" src="icons/splash-ipad-1640x2360.png">';
+  document.documentElement.appendChild(s);
+  var t0 = Date.now();
+  window.torqHideSplash = function(){
+    var wait = Math.max(0, 1100 - (Date.now() - t0));   // keep it on screen long enough to read
+    setTimeout(function(){
+      s.classList.add('out');
+      setTimeout(function(){ s.remove(); }, 480);
+      try{ sessionStorage.setItem('torq.splashSeen','1'); }catch(e){}
+    }, wait);
+  };
+  // Hide once the first screen has drawn
+  var poll = setInterval(function(){
+    var a = document.getElementById('app');
+    if(a && a.children.length){ clearInterval(poll); window.torqHideSplash(); }
+  }, 120);
+  // Safety net: never leave the splash up longer than 4 seconds
+  setTimeout(function(){ if(document.getElementById('torqSplash')) window.torqHideSplash(); }, 4000);
+})();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -2154,6 +2341,7 @@ function answerNumeric(v){
 }
 function setNumeric(v){   // mock: store the response, mark correctness at submit
   const q = session.queue[session.idx];
+  if(v!=='' && v!=null && !session.conf[q.id]){ mockNotice('Choose Sure or Guessing first. It is compulsory, and it does not change your marks.'); return; }
   if(v===''||v==null) delete session.answers[q.id]; else session.answers[q.id] = {sel:v};
   render();
 }
@@ -2647,10 +2835,11 @@ function showRulesSplash(then, mode){
   const jee = mode==='mock';
   const head = jee
     ? '<div class="eyebrow">Before you start</div><h2 class="rules-title">Standard JEE marking applies.</h2>'
-      +'<p class="rules-body">Each correct answer gives <b>+4</b>. Each wrong answer gives <b>−1</b>. An unanswered question gives <b>0</b>. Your marks are shown when you submit. A mock does not change your points or the leaderboard.</p>'
+      +'<p class="rules-body">Each correct answer gives <span class="pop-kw">+4</span>. Each wrong answer gives <span class="pop-kw">−1</span>. An unanswered question gives <span class="pop-kw">0</span>.</p>'
+      +'<p class="rules-body"><span class="pop-kw">Marking Sure or Guessing is compulsory</span> before every answer. It <span class="pop-kw">does not add or subtract any marks or points</span>, and it <span class="pop-kw">does not change your place on the leaderboard</span>. It is collected only as data for your own analysis.</p>'
     : '<div class="rules-mark">'+sogMark('lg')+'</div><div class="eyebrow">Before you start</div>'
       +'<h2 class="rules-title">Every answer needs an honest call.</h2>'
-      +'<p class="rules-body">Before you answer, choose <b>Sure</b> or <b>Guessing</b>. An answer without a choice is <b>nullified</b>: no points, no accuracy. Skip anything you cannot attempt.</p>'+'<div class="sog-pts"><div><span>Sure, correct</span><b>+6</b></div><div><span>Guess, correct</span><b>+3</b></div><div><span>Sure, wrong</span><b>−1</b></div><div><span>Guess, wrong</span><b>−3</b></div></div>'+'<p class="rules-body sog-note">Answer correctly within two minutes to earn up to +2 extra. Skipped or nullified questions score 0.</p>';
+      +'<p class="rules-body">Before you answer, choose <span class="pop-kw">Sure</span> or <span class="pop-kw">Guessing</span>. An answer without a choice is <span class="pop-kw">nullified</span>: no points, no accuracy. Skip anything you cannot attempt.</p>'+'<div class="sog-pts"><div><span>Sure, correct</span><b>+6</b></div><div><span>Guess, correct</span><b>+3</b></div><div><span>Sure, wrong</span><b>−1</b></div><div><span>Guess, wrong</span><b>−3</b></div></div>'+'<p class="rules-body sog-note">Answer correctly within two minutes to earn up to +2 extra. Skipped or nullified questions score 0.</p>';
   const ov = el('<div class="rules-splash" role="dialog" aria-modal="true"><div class="rules-card">'
     +head
     +'<button class="btn block rules-ok" type="button">Okay, I understand</button></div></div>');
@@ -2713,6 +2902,7 @@ function answerPYQ(i){
 function selectMock(i){
   const q = session.queue[session.idx];
   const a = session.answers[q.id];
+  if(!session.conf[q.id] && !(a && a.sel===i)){ mockNotice('Choose Sure or Guessing first. It is compulsory, and it does not change your marks.'); return; }
   if(a && a.sel===i) delete session.answers[q.id];
   else session.answers[q.id] = {sel:i};
   render();
@@ -2734,6 +2924,7 @@ function submitMock(){
     if(!a){ recordSkip(q, Math.round(session.times[q.id]||0)); return; }
     a.correct = q.type==='integer' ? sameAnswer(a.sel, q.answer) : a.sel===q.correct;
     a.att = recordAttempt(q, a.correct, Math.round(session.times[q.id]||0));
+    a.att.conf = session.conf[q.id] || null; // data only: never used for marks
   });
   saveSessionRecord();
   go('results');
@@ -3263,12 +3454,13 @@ function soonNotice(id){
   requestAnimationFrame(()=>n.classList.add('in'));
   setTimeout(()=>{ n.classList.remove('in'); n.classList.add('out'); setTimeout(()=>n.remove(), 400); }, 2600);
 }
-function mockNotice(){
+function mockNotice(msg){
   const old = document.querySelector('.mock-notice'); if(old) old.remove();
-  const n = el('<div class="mock-notice" role="status">Submit the test to leave it. Your marks are saved when you submit.</div>');
+  const n = el('<div class="mock-notice" role="status"></div>');
+  n.textContent = msg || 'Submit the test to leave it. Your marks are saved when you submit.';
   document.body.appendChild(n);
-  setTimeout(()=>n.classList.add('out'), 2200);
-  setTimeout(()=>n.remove(), 2700);
+  setTimeout(()=>n.classList.add('out'), 3400);
+  setTimeout(()=>n.remove(), 3900);
 }
 function addBackCard(){
   let c = document.getElementById('navBack');
@@ -5182,9 +5374,23 @@ function confirmLogout(onYes){
 }
 async function logOutNow(){
   const db = sbClient();
-  if(db){ try{ await db.auth.signOut(); }catch(e){} }
+  // 1. Drop the signed-in state at once, so the screen changes even if the network is slow or offline
   clearLocalData();
+  try{
+    Object.keys(localStorage).forEach(function(k){ if(/^sb-.*-auth-token/.test(k)) localStorage.removeItem(k); });
+  }catch(e){}
+  authState = 'ready';
   render();
+  // 2. Tell the server, but never wait on it for longer than a few seconds
+  if(db){
+    try{
+      await Promise.race([
+        db.auth.signOut({ scope: 'local' }),
+        new Promise(function(r){ setTimeout(r, 4000); })
+      ]);
+    }catch(e){}
+  }
+  if(typeof render === 'function') render();
 }
 function accountBlock(){
   const w = el('<div class="account-block"></div>');
@@ -5637,6 +5843,24 @@ function pyqPractice(w){
   w.appendChild(qNavDrawer());
   return w;
 }
+
+// Sure or Guessing for mocks and custom tests. It is compulsory and recorded for analysis only: it never changes marks, points or the leaderboard.
+function sogPicker(q){
+  const cur = session.conf[q.id] || '';
+  const box = el('<div class="mock-sog'+(cur?'':' need')+'"></div>');
+  box.appendChild(el('<div class="sog-head">'+sogMark()+'<div><div class="sog-title">Sure or guessing?</div><div class="sog-req">Compulsory. It does not change your marks.</div></div></div>'));
+  const row = el('<div class="chips"></div>');
+  [['sure','Sure'],['guess','Guessing']].forEach(p=>{
+    const on = cur===p[0];
+    const icon = p[0]==='sure' ? '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
+                               : '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6M12 17h.01"/></svg>';
+    const b = el('<button class="sog-choice sog-'+p[0]+(on?' on':'')+'" aria-pressed="'+on+'"><span class="sog-ico">'+icon+'</span><span>'+p[1]+'</span></button>');
+    b.onclick = ()=>{ session.conf[q.id] = on ? null : p[0]; render(); };
+    row.appendChild(b);
+  });
+  box.appendChild(row);
+  return box;
+}
 function mockPractice(w){
   const q = session.queue[session.idx];
   const a = session.answers[q.id];
@@ -5659,6 +5883,7 @@ function mockPractice(w){
   card.appendChild(mk);
   card.appendChild(el('<div class="qtext">'+qtextHTML(q.text)+'</div>'));
   if(q.image) card.appendChild(qImage(q.image));
+  card.appendChild(sogPicker(q));
   if(q.type==='integer'){
     card.appendChild(numpad(q, a ? String(a.sel) : '', v=>setNumeric(v), null, false, ''));
   } else q.options.forEach((o,i)=>{
