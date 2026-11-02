@@ -416,6 +416,18 @@ body.msg-fit .msg-hero{ display:none; }
 .vr-lock:not(.paused) .vr-pause .ic-play{ display:none; }
 .vr-lock.paused .vr-pause .ic-pause{ display:none; }
 @media (prefers-reduced-motion: reduce){ .vr-dot{ animation:none; } }
+
+/* ---- Voice bubble (rebuilt): triangle morphs to two bars; played bars turn orange ---- */
+.bubble.audio .vb-play{ position:relative; overflow:hidden; }
+.bubble.audio .vb-play svg{ position:absolute; left:50%; top:50%; width:16px; height:16px; margin:-8px 0 0 -8px; display:block; fill:currentColor; stroke:none; transition:transform .2s cubic-bezier(.2,.7,.2,1), opacity .15s ease; }
+.bubble.audio .vb-play .ic-play{ opacity:1; transform:scale(1); }
+.bubble.audio .vb-play .ic-pause{ opacity:0; transform:scale(.3); }
+.bubble.audio.playing .vb-play .ic-play{ opacity:0; transform:scale(.3); }
+.bubble.audio.playing .vb-play .ic-pause{ opacity:1; transform:scale(1); }
+.bubble.audio.playing .vb-play, .bubble.audio.playing .vb-bar{ animation:none; }
+.bubble.audio .vb-bar{ background:#b9b9c2; transition:background .1s linear; }
+.bubble.audio .vb-bar.played{ background:#f08a3c; }
+.bubble.audio[data-state="loading"] .vb-play{ opacity:.55; }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -6915,7 +6927,7 @@ async function refreshChat(markRead){
     .or('and(sender.eq.'+me+',recipient.eq.'+other+'),and(sender.eq.'+other+',recipient.eq.'+me+')')
     .order('created_at', {ascending:true}).limit(300);
   const before = fr.msgs.length;
-  fr.msgs = data || [];
+  fr.msgs = (data || []).filter(function(m){ return !chatHiddenIds().has(m.id); });
   if(markRead) scrollChatToEnd = true;
   if(fr.msgs.length !== before || markRead) render();
   if(fr.open) db.from('chat_messages').update({read_at: new Date().toISOString()}).eq('sender', other).eq('recipient', me).is('read_at', null).then(()=>{}, ()=>{});
@@ -8087,16 +8099,24 @@ function chatComposeBar(f){
 }
 
 // Playback
+const VB_BARS = 40;
+function chatHiddenKey(){ return 'torq.chat.hidden.' + sbSession.user.id; }
+function chatHiddenIds(){ try{ return new Set(JSON.parse(localStorage.getItem(chatHiddenKey()) || '[]')); }catch(e){ return new Set(); } }
+function hideMsgForMe(id){ const s = chatHiddenIds(); s.add(id); try{ localStorage.setItem(chatHiddenKey(), JSON.stringify(Array.from(s))); }catch(e){} }
 function voiceApplyBubble(bub){
   const p = voicePlayer, id = bub.dataset.vid, total = Number(bub.dataset.ms) || 0;
   const cur = p.id === id && !!p.audio;
   const playing = cur && !p.audio.paused && !p.audio.ended;
-  const frac = cur && total ? Math.min(1, p.audio.currentTime * 1000 / total) : 0;
+  const pos = cur ? p.audio.currentTime * 1000 : 0;
+  const dur = (cur && isFinite(p.audio.duration) && p.audio.duration > 0) ? p.audio.duration * 1000 : total;
+  const frac = dur ? Math.min(1, pos / dur) : 0;
+  const lit = Math.round(frac * VB_BARS);
   bub.classList.toggle('playing', playing);
-  bub.dataset.state = playing ? '' : ((p.id === id && p.status) ? p.status : (p.failed === id ? 'error' : ''));
-  bub.querySelectorAll('.vb-bar').forEach(function(b, i){ b.classList.toggle('on', cur && (i + 0.5) / 40 <= frac); });
-  bub.querySelector('.vb-dur').textContent = fmtDuration(cur ? p.audio.currentTime * 1000 : total);
+  bub.dataset.state = (p.id === id && p.status === 'loading') ? 'loading' : (p.failed === id ? 'error' : '');
+  bub.querySelectorAll('.vb-bar').forEach(function(b, i){ b.classList.toggle('played', i < lit); });
+  bub.querySelector('.vb-dur').textContent = fmtDuration(cur ? pos : total);
   bub.querySelector('.vb-sp').textContent = p.speed + 'x';
+  bub.querySelector('.vb-play').setAttribute('aria-label', playing ? 'Pause voice message' : 'Play voice message');
 }
 function voiceUpdateBubbles(){
   document.querySelectorAll('.bubble.audio[data-vid]').forEach(function(b){ voiceApplyBubble(b); });
@@ -8104,13 +8124,13 @@ function voiceUpdateBubbles(){
 function voiceBubble(f, m, mine, stamp, tick){
   const peaks = Array.isArray(m.audio_peaks) ? m.audio_peaks : [];
   let bars = '';
-  for(let i = 0; i < 40; i++){
+  for(let i = 0; i < VB_BARS; i++){
     const v = Math.max(0, Math.min(1, Number(peaks[i]) || 0));
-    bars += '<span class="vb-bar" style="height:' + Math.max(4, Math.min(24, Math.round(v * 24))) + 'px"></span>';
+    bars += '<span class="vb-bar" style="height:' + Math.max(4, Math.round(v * 24)) + 'px"></span>';
   }
   const bub = el('<div class="bubble audio ' + (mine ? 'mine' : 'theirs') + '" data-vid="' + esc(m.id) + '" data-ms="' + (Number(m.audio_ms) || 0) + '">'
-    + '<div class="vb-row"><button type="button" class="vb-play" aria-label="Play voice message">' + VOICE_PLAY_SVG + VOICE_PAUSE_SVG + '</button>'
-    + '<div class="vb-wave" aria-label="Seek">' + bars + '</div></div>'
+    + '<div class="vb-row"><button type="button" class="vb-play">' + VOICE_PLAY_SVG + VOICE_PAUSE_SVG + '</button>'
+    + '<div class="vb-wave">' + bars + '</div></div>'
     + '<div class="vb-meta"><span class="vb-dur"></span><button type="button" class="vb-sp" aria-label="Playback speed">1x</button><small>' + stamp + tick + '</small></div>'
     + '<span class="vb-err">Could not play this message</span>'
     + '</div>');
@@ -8127,6 +8147,7 @@ function voiceBubble(f, m, mine, stamp, tick){
     bub.style.cursor = 'pointer'; bub.title = 'Tap to report';
     bub.onclick = function(e){ if(e.target.closest && e.target.closest('button, .vb-wave')) return; reportMessage(m, f); };
   }
+  if(!voiceCachedUrl(m.audio_path)){ signedAudioUrl(m.audio_path).catch(function(){}); }
   voiceApplyBubble(bub);
   attachMsgPress(bub, m, f, mine);
   return bub;
@@ -8149,35 +8170,64 @@ function voiceCycleSpeed(){
   if(p.audio) p.audio.playbackRate = p.speed;
   voiceUpdateBubbles();
 }
+let voiceRaf = 0;
+function voiceProgressLoop(){
+  voiceRaf = 0;
+  voiceUpdateBubbles();
+  const a = voicePlayer.audio;
+  if(a && !a.paused && !a.ended) voiceRaf = requestAnimationFrame(voiceProgressLoop);
+}
+function voiceWatch(a, id){
+  const sync = function(){ if(voicePlayer.audio === a) voiceUpdateBubbles(); };
+  a.addEventListener('play', function(){
+    voicePlayer.failed = null; sync();
+    if(!voiceRaf) voiceRaf = requestAnimationFrame(voiceProgressLoop);
+  });
+  a.addEventListener('pause', sync);
+  a.addEventListener('loadedmetadata', sync);
+  a.addEventListener('seeked', sync);
+  a.addEventListener('ended', function(){
+    if(voicePlayer.audio === a){ voicePlayer.audio = null; voicePlayer.id = null; }
+    voiceUpdateBubbles();
+  });
+  a.addEventListener('error', function(){ if(voicePlayer.audio === a && a.error) voiceFail(id); });
+}
+// Starts playback synchronously, so it stays inside the user's tap (required on iOS)
+function voiceBegin(m, url, seekFrac){
+  const p = voicePlayer;
+  const a = new Audio();
+  a.preload = 'auto';
+  a.playbackRate = p.speed;
+  p.audio = a; p.id = m.id; p.status = ''; p.failed = null;
+  voiceWatch(a, m.id);
+  if(seekFrac != null){
+    a.addEventListener('loadedmetadata', function(){ a.currentTime = seekFrac * (m.audio_ms || 0) / 1000; }, {once: true});
+  }
+  a.src = url;
+  const pr = a.play();
+  if(pr && pr.catch){
+    pr.catch(function(err){ if(err && err.name === 'AbortError') return; if(voicePlayer.audio === a) voiceFail(m.id); });
+  }
+  voiceUpdateBubbles();
+}
 async function voiceToggle(m, seekFrac){
   const p = voicePlayer;
   if(p.id === m.id && p.audio){
     if(seekFrac != null) p.audio.currentTime = seekFrac * (m.audio_ms || 0) / 1000;
-    if(p.audio.paused){ p.failed = null; p.audio.play().catch(function(err){ if(err && err.name === 'AbortError') return; if(p.id === m.id) voiceFail(m.id); }); }
+    if(p.audio.paused){ p.audio.play().catch(function(err){ if(err && err.name === 'AbortError') return; if(p.id === m.id) voiceFail(m.id); }); }
     else { p.audio.pause(); }
     voiceUpdateBubbles(); return;
   }
   voicePause();
-  p.failed = null; p.id = m.id; p.status = 'loading'; voiceUpdateBubbles();
-  let url = voiceCachedUrl(m.audio_path);
-  if(!url){
-    try{ url = await signedAudioUrl(m.audio_path); }
-    catch(e){ if(p.id === m.id) voiceFail(m.id); return; }
-  }
+  p.id = m.id; p.status = 'loading'; p.failed = null; voiceUpdateBubbles();
+  const cached = voiceCachedUrl(m.audio_path);
+  if(cached){ p.status = ''; voiceBegin(m, cached, seekFrac); return; }
+  let url;
+  try{ url = await signedAudioUrl(m.audio_path); }
+  catch(e){ if(p.id === m.id) voiceFail(m.id); return; }
   if(p.id !== m.id) return;
-  const a = new Audio(url);
-  a.preload = 'auto';
-  a.playbackRate = p.speed;
-  p.audio = a; p.status = '';
-  a.addEventListener('playing', function(){ p.failed = null; voiceUpdateBubbles(); });
-  a.addEventListener('pause', voiceUpdateBubbles);
-  a.addEventListener('timeupdate', voiceUpdateBubbles);
-  a.addEventListener('ended', function(){ if(p.audio === a){ p.audio = null; p.id = null; } voiceUpdateBubbles(); });
-  a.addEventListener('error', function(){ if(p.audio === a && a.error) voiceFail(m.id); });
-  if(seekFrac != null) a.addEventListener('loadedmetadata', function(){ a.currentTime = seekFrac * (m.audio_ms || 0) / 1000; }, {once: true});
-  try{ await a.play(); }
-  catch(e){ if(e && e.name === 'AbortError') return; if(p.audio === a) voiceFail(m.id); return; }
-  voiceUpdateBubbles();
+  p.status = '';
+  voiceBegin(m, url, seekFrac);
 }
 
 // Leaving the app stops recording and playback
@@ -8193,7 +8243,11 @@ window.addEventListener('pagehide', function(){ voiceAbort(null); voicePause(); 
 function cleanCardText(t){ return String(t || '').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F-\u009F\u200B-\u200F\u2028\u2029\uFEFF]/g, '').replace(/\s+/g, ' ').trim(); }
 
 // ---- Message menu: press and hold a message for Copy (and Report for friends' messages) ----
-function msgPlainText(m){ return m.kind === 'audio' ? '' : cleanCardText(m.body).replace(/\$/g, ''); }
+function msgPlainText(m){
+  if(m.kind === 'audio') return '';
+  if(m.kind === 'question_card' || m.kind === 'answer_card') return cleanCardText(m.body);
+  return String(m.body || '');
+}
 function copyText(t){
   const legacy = function(){
     const ta = document.createElement('textarea'); ta.value = t; ta.setAttribute('readonly', '');
@@ -8208,6 +8262,20 @@ function toast(msg){
   setTimeout(function(){ t.remove(); }, 1800);
 }
 function closeMsgMenu(){ document.querySelectorAll('.mm-scrim').forEach(function(n){ n.remove(); }); }
+function removeMsgLocal(id){
+  if(voicePlayer.id === id) voicePause();
+  fr.msgs = fr.msgs.filter(function(x){ return x.id !== id; });
+  render();
+}
+async function deleteForEveryone(m){
+  const sure = await appDialog({eyebrow:'Delete', title:'Delete for everyone?', body:'The message is removed from both chats. This cannot be undone.', ok:'Delete', cancel:'Keep it', danger:true});
+  if(!sure) return;
+  const db = sbClient(), me = sbSession.user.id;
+  const res = await db.from('chat_messages').delete().eq('id', m.id).eq('sender', me).select('id');
+  if(res.error || !res.data || !res.data.length){ fr.note = 'Could not delete for everyone. Check your connection.'; render(); return; }
+  if(m.kind === 'audio' && m.audio_path){ db.storage.from('voice-notes').remove([m.audio_path]).then(function(){}, function(){}); }
+  removeMsgLocal(m.id);
+}
 function openMsgMenu(m, f, mine){
   closeMsgMenu();
   const scrim = el('<div class="mm-scrim"></div>');
@@ -8215,19 +8283,21 @@ function openMsgMenu(m, f, mine){
   const text = msgPlainText(m);
   const snip = document.createElement('div'); snip.className = 'mm-snip'; snip.textContent = (text || 'Voice message').slice(0, 90);
   sheet.appendChild(snip);
+  function item(label, cls, fn){
+    const b = el('<button type="button" class="mm-item' + (cls ? ' ' + cls : '') + '" role="menuitem">' + label + '</button>');
+    b.onclick = function(){ closeMsgMenu(); fn(); };
+    sheet.appendChild(b);
+  }
   if(text){
-    const copy = el('<button type="button" class="mm-item" role="menuitem">Copy</button>');
-    copy.onclick = async function(){ closeMsgMenu(); const ok = await copyText(text); toast(ok ? 'Copied' : 'Could not copy'); };
-    sheet.appendChild(copy);
+    item('Copy', '', async function(){ const ok = await copyText(text); toast(ok ? 'Copied' : 'Could not copy'); });
   }
-  if(!mine){
-    const rep = el('<button type="button" class="mm-item danger" role="menuitem">Report</button>');
-    rep.onclick = function(){ closeMsgMenu(); reportMessage(m, f); };
-    sheet.appendChild(rep);
+  item('Delete for me', 'danger', function(){ hideMsgForMe(m.id); removeMsgLocal(m.id); });
+  if(mine){
+    item('Delete for everyone', 'danger', function(){ deleteForEveryone(m); });
+  } else {
+    item('Report', 'danger', function(){ reportMessage(m, f); });
   }
-  const cancel = el('<button type="button" class="mm-item" role="menuitem">Cancel</button>');
-  cancel.onclick = closeMsgMenu;
-  sheet.appendChild(cancel);
+  item('Cancel', '', function(){});
   scrim.appendChild(sheet);
   scrim.addEventListener('click', function(e){ if(e.target === scrim) closeMsgMenu(); });
   document.body.appendChild(scrim);
