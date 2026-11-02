@@ -2112,7 +2112,7 @@ img{ -webkit-user-drag:none; }
 /* ---------- Menu: a little more room around icons and labels ---------- */
 .navpanel .bn{ padding:13px 16px 13px 24px !important; gap:14px !important; }
 /* ---------- Coming-soon tabs: same grey-out for Leaderboard and Mocks ---------- */
-.navpanel .bn.disabled, .bn.disabled{ opacity:.3 !important; filter:grayscale(1) !important; }
+.navpanel .bn.disabled, .bn.disabled{ filter:grayscale(1) !important; }
 
 /* ---------- Figures: no panel behind them. Dark themes screen the inverted figure onto whatever is behind it,
    so the white paper turns invisible and the lines show, with no visible boundary over glass or orbs ---------- */
@@ -2369,7 +2369,7 @@ body{ overflow-x:clip; }
 .build-stamp .bs-ver{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.02em; }
 body.has-nav .build-stamp{ margin-bottom:calc(96px + env(safe-area-inset-bottom,0px)); }
 /* ---- Patch: Leaderboard and Mocks use one fixed grey when disabled, in every theme and place ---- */
-.bn.disabled, .navpanel .bn.disabled{ opacity:1 !important; filter:none !important; color:#a5a39a !important; cursor:not-allowed !important; }
+.bn.disabled, .navpanel .bn.disabled{ filter:none !important; color:#a5a39a !important; cursor:not-allowed !important; }
 .bn.disabled svg, .navpanel .bn.disabled svg{ stroke:#a5a39a !important; fill:none !important; opacity:1 !important; }
 .bn.disabled span, .navpanel .bn.disabled span{ color:#a5a39a !important; }
 /* ---- Patch (round 9): simpler menu open/close, a soft High yield tag, shorter subject art, wider legal pages, two-column contact ---- */
@@ -2652,6 +2652,19 @@ body.has-nav .build-stamp{ margin-bottom:calc(96px + env(safe-area-inset-bottom,
 /* ==== Recorder: bigger stop/play glyphs ==== */
 .vr-stop svg{ width:22px; height:22px; }
 .vr-play-btn svg{ width:22px; height:22px; }
+</style>
+<style id="adaptive-fixes">
+/* Adaptive fixes: chat screens use the real visible height, which updates on resize and full screen */
+body.msg-fit #app, body.chat-full #app{ height:var(--app-h,100dvh) !important; max-height:var(--app-h,100dvh) !important; zoom:1 !important; box-sizing:border-box !important; }
+body.chat-full #app{ padding-bottom:calc(8px + env(safe-area-inset-bottom,0px)) !important; }
+body.msg-fit .wa-compose, body.chat-full .wa-compose{ flex:none !important; position:relative; z-index:2; }
+/* Wide screens: the side rail replaces the bottom bar, so no reserved space below the chat */
+@media (min-width:960px){
+  body.msg-fit #app{ padding-bottom:16px !important; }
+  body.msg-fit #app, body.chat-full #app{ max-width:760px !important; margin-left:auto !important; margin-right:auto !important; }
+}
+/* Very short or very narrow screens: keep the message bar usable */
+@media (max-height:560px){ body.msg-fit .wa-msgs{ min-height:120px; } }
 </style>
 </head>
 <body>
@@ -4378,17 +4391,36 @@ function histSync(){
   else history.replaceState(state, '');
 }
 // Tablet landscape: scale the app with the screen height so pages fill the screen instead of leaving empty space.
+// Chat screens are never zoomed, because zoom multiplies their height and pushes the message bar off screen.
+function measureViewport(){
+  const vv = window.visualViewport;
+  const h = Math.round((vv && vv.height) || window.innerHeight);
+  document.documentElement.style.setProperty('--app-h', h + 'px');
+  return h;
+}
 function fitToScreen(){
   const app = document.getElementById('app');
   if(!app) return;
+  measureViewport();
   const w = window.innerWidth, h = window.innerHeight;
-  const landscapeTablet = w >= 900 && w / h >= 1.2;
+  const inChat = document.body.classList.contains('msg-fit') || document.body.classList.contains('chat-full');
+  const landscapeTablet = !inChat && w >= 900 && w / h >= 1.2;
   const f = landscapeTablet ? Math.min(1.35, Math.max(1, h / 700)) : 1;
   const next = f === 1 ? '' : String(f.toFixed(3));
   if(app.style.zoom !== next) app.style.zoom = next;
 }
-window.addEventListener('resize', fitToScreen);
-window.addEventListener('orientationchange', fitToScreen);
+// Re-run the adaptive layout whenever the size of the screen changes, including entering or leaving full screen
+function relayoutAll(){
+  fitToScreen();
+  // Let open screens recalculate their own sizes (the keyboard and message bar are sized from the viewport)
+  window.dispatchEvent(new Event('torq:relayout'));
+}
+window.addEventListener('resize', relayoutAll);
+window.addEventListener('orientationchange', relayoutAll);
+document.addEventListener('fullscreenchange', ()=>setTimeout(relayoutAll, 60));
+document.addEventListener('webkitfullscreenchange', ()=>setTimeout(relayoutAll, 60));
+if(window.visualViewport) window.visualViewport.addEventListener('resize', relayoutAll);
+measureViewport();
 function renderInner(){
   const fi = [...document.querySelectorAll('.opt')].indexOf(document.activeElement);
   // The keyboard in an open chat is its own history step, so Back closes the keyboard before it leaves the chat.
@@ -7513,9 +7545,8 @@ function askFriendSheet(q){
       if(e1){ go.disabled = false; appNotice('Not sent', e1.message); return; }
       // Keep the card text whole where possible: cut at a word boundary, never inside a $...$ math expression
       const fullQ = String(q.text || 'A question');
-      let cut = fullQ.slice(0, 880).replace(/\s+\S*$/, '');
-      if((cut.match(/\$/g) || []).length % 2) cut = cut.slice(0, cut.lastIndexOf('$')).trim();
-      const preview = fullQ.length <= 900 ? fullQ : cut + ' …';
+      // Send the whole question. The app-side cut was removed so the card is never shortened here.
+      const preview = fullQ;
       const { error: e2 } = await db.from('chat_messages').insert({ sender: me, recipient: pick, kind: 'question_card', share_id: share.id, body: preview });
       if(e2){ go.disabled = false; appNotice('Not sent', e2.message); return; }
       close(); appNotice('Sent', 'Your question is on its way to your friend.');
@@ -7971,12 +8002,39 @@ function waSetDraft(v){
   fr.draft = v;
   const f = document.querySelector('.wa-field'); if(f) waShowDraft(f);
 }
+// Capital letters at the start of a sentence or a name. A full stop ends a sentence unless the word before it is an abbreviation.
+// Titles and initials are followed by a name (a proper noun) or a new sentence, so the next letter is capitalised.
+// Abbreviations such as e.g., etc., vs. normally continue the same sentence, so the next letter stays lowercase.
+// Abbreviations written in capitals (NO., USA.) are treated as abbreviations too, so the next letter stays lowercase.
+const WA_TITLES = new Set(['mr','mrs','ms','dr','prof','sr','jr','st']);
+const WA_CONTINUE_ABBR = new Set(['eg','ie','etc','vs','approx','fig','eq','cf','dept','govt','inc','ltd','co','vol','sec','min','max','avg','al','ca','nos']);
+function waWantsCapital(draft){
+  const d = String(draft || '');
+  if(!d.trim()) return true;                               // first letter of a message
+  if(!/\s$/.test(d)) return false;                          // only at the start of a new word
+  const body = d.trimEnd();
+  const end = body.slice(-1);
+  if(end === '!' || end === '?') return true;
+  if(end !== '.') return false;
+  const word = (body.slice(0, -1).match(/(\S+)$/) || [, ''])[1].replace(/[^A-Za-z]/g, '');
+  if(!word) return true;
+  if(word.length === 1) return true;                        // initials: A. starts a sentence, or a name follows
+  const lower = word.toLowerCase();
+  if(WA_TITLES.has(lower)) return true;                     // Dr. Smith, Mr. Khan: a proper noun follows
+  if(WA_CONTINUE_ABBR.has(lower)) return false;             // e.g., etc., vs.: the sentence carries on
+  if(word.length >= 2 && word === word.toUpperCase()) return false;   // NO., USA., UK.
+  return true;
+}
 function waType(ch){
   noteTyping();
   if(Date.now() - (fr.glideAt || 0) < 350) return;
   if(fr.draft.length >= 1000) return;
+  const isLetter = /^[A-Za-z]$/.test(ch);
+  const wasCap = waWantsCapital(fr.draft);
+  if(isLetter && fr.kbMode !== 'sym' && fr.kbMode !== 'sym2' && fr.kbShift === 0 && wasCap) ch = ch.toUpperCase();
   waSetDraft(fr.draft + ch);
   if(fr.kbShift === 1){ fr.kbShift = 0; waRedrawKb(); }   // one-shot shift is used up after one letter
+  else if(isLetter && wasCap !== waWantsCapital(fr.draft) && document.querySelector('.wa-kb')) waRedrawKb();
 }
 function waBack(){ waSetDraft(fr.draft.slice(0, -1)); }
 function waShift(){
@@ -8040,8 +8098,82 @@ function waCommitWord(w){
   waSetDraft(fr.draft + sep + word + ' ');
   waRedrawKb();
 }
+// Glide trail: a tapered streak that follows the finger. Speed sets its length (2 to 3 cm) and width:
+// a fast swipe gives a longer, thinner streak; a slow one gives a shorter, thicker streak.
+const WA_PX_PER_CM = 96 / 2.54;
+function waStreak(kb){
+  const cv = document.createElement('canvas');
+  cv.className = 'wa-streak';
+  cv.setAttribute('aria-hidden', 'true');
+  cv.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:6;';
+  kb.style.position = 'relative';
+  kb.appendChild(cv);
+  const ctx = cv.getContext('2d');
+  let pts = [], raf = 0, releasedAt = 0, down = false, color = '#e8b460';
+  const fit = ()=>{
+    const r = kb.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+    cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d);
+    ctx.setTransform(d, 0, 0, d, 0, 0);
+  };
+  const sample = (x, y)=>{
+    const r = kb.getBoundingClientRect();
+    pts.push({x: x - r.left, y: y - r.top, t: performance.now()});
+    if(pts.length > 120) pts.shift();
+  };
+  const speed = ()=>{
+    const n = pts.length; if(n < 2) return 0;
+    const a = pts[Math.max(0, n - 6)], b = pts[n - 1];
+    return Math.hypot(b.x - a.x, b.y - a.y) / Math.max(1, b.t - a.t);   // px per ms
+  };
+  const frame = ()=>{
+    raf = 0;
+    const now = performance.now();
+    const r = kb.getBoundingClientRect();
+    ctx.clearRect(0, 0, r.width, r.height);
+    if(pts.length){
+      const v = speed();
+      const fast = Math.min(1, Math.max(0, (v - 0.25) / 1.15));    // 0 = slow, 1 = fast
+      let len = (2 + fast) * WA_PX_PER_CM;                          // 2 cm slow, 3 cm fast
+      const headW = 14 - 11 * fast;                                 // thick when slow, thin when fast
+      if(releasedAt) len *= Math.max(0, 1 - (now - releasedAt) / 320);
+      const line = [pts[pts.length - 1]];
+      let acc = 0;
+      for(let i = pts.length - 2; i >= 0 && acc < len; i--){
+        const b = line[line.length - 1], a = pts[i];
+        acc += Math.hypot(b.x - a.x, b.y - a.y);
+        line.push(a);
+      }
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = color;
+      const steps = line.length - 1;
+      for(let i = 0; i < steps; i++){
+        const f = i / steps;                                        // 0 at the head, 1 at the tail
+        ctx.globalAlpha = 0.9 * (1 - f * 0.85);
+        ctx.lineWidth = Math.max(0.6, headW * (1 - f));
+        ctx.beginPath();
+        ctx.moveTo(line[i].x, line[i].y);
+        ctx.lineTo(line[i + 1].x, line[i + 1].y);
+        ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    }
+    if(down || (releasedAt && now - releasedAt < 320)) raf = requestAnimationFrame(frame);
+    else { pts = []; releasedAt = 0; }
+  };
+  const ensure = ()=>{ if(!raf) raf = requestAnimationFrame(frame); };
+  return {
+    start(x, y){
+      down = true; releasedAt = 0; pts = [];
+      color = getComputedStyle(document.documentElement).getPropertyValue('--accent-text').trim() || color;
+      fit(); sample(x, y); ensure();
+    },
+    move(x, y){ if(!down) return; sample(x, y); ensure(); },
+    end(){ down = false; releasedAt = performance.now(); ensure(); }
+  };
+}
 function waBindGlide(kb){
   kb.style.touchAction = 'none';
+  const streak = waStreak(kb);
   let down = false, moved = false, path = [], hits = [], lastEl = null;
   const keyAt = (x, y)=>{ const t = document.elementFromPoint(x, y); return t && t.closest ? t.closest('.wa-kb .nk') : null; };
   const clearHits = ()=>{ hits.forEach(h=>h.classList.remove('hit')); hits = []; };
@@ -8055,22 +8187,22 @@ function waBindGlide(kb){
     const b = keyAt(e.clientX, e.clientY);
     if(!b || !b.dataset.ch) return;
     down = true; moved = false; path = [b.dataset.ch]; lastEl = b;
-    clearHits(); b.classList.add('hit'); hits.push(b);
+    clearHits(); streak.start(e.clientX, e.clientY);
     waLoadWords();
   });
   kb.addEventListener('pointermove', e=>{
     if(!down) return;
+    streak.move(e.clientX, e.clientY);
     const b = keyAt(e.clientX, e.clientY);
     if(!b || b === lastEl) return;
     lastEl = b;
     if(!b.dataset.ch || path[path.length - 1] === b.dataset.ch) return;
     path.push(b.dataset.ch); moved = true;
-    b.classList.add('hit'); hits.push(b);
     preview();
   });
   kb.addEventListener('pointerup', ()=>{
     if(!down) return;
-    down = false;
+    down = false; streak.end();
     const glided = moved && path.length >= 2;
     const word = glided ? waBestWord(path) : '';
     path = []; lastEl = null;
@@ -8078,7 +8210,7 @@ function waBindGlide(kb){
     else if(glided){ showField(); }
     setTimeout(clearHits, 250);
   });
-  kb.addEventListener('pointercancel', ()=>{ down = false; path = []; clearHits(); showField(); });
+  kb.addEventListener('pointercancel', ()=>{ down = false; streak.end(); path = []; clearHits(); showField(); });
 }
 // Physical keyboard (laptops and PCs): type straight into an open chat, unless another text field has focus
 function waPhysicalKeys(e){
@@ -8108,7 +8240,7 @@ function waKeyboard(){
       if(k === 'SHIFT') return row.appendChild(waShiftKey(shift));
       if(k === 'BACK') return row.appendChild(waKey('\u232b', 'fn wide', waBack));
       if(k === 'MORE') return row.appendChild(waKey(mode === 'sym' ? '#+=' : '123', 'fn wide', ()=>{ fr.kbMode = mode === 'sym' ? 'sym2' : 'sym'; waRedrawKb(); }));
-      const ch = (mode === 'alpha' && shift) ? k.toUpperCase() : k;
+      const ch = (mode === 'alpha' && (shift || (shift === 0 && waWantsCapital(fr.draft)))) ? k.toUpperCase() : k;
       const lk = waKey(ch, '', ()=>waType(ch));
       if(mode === 'alpha') lk.dataset.ch = k;
       row.appendChild(lk);
@@ -8159,7 +8291,7 @@ function chatScreen(f){
     const tick = mine ? '<i class="wa-tick'+(m.read_at ? ' seen' : '')+'">'+(m.read_at ? WA_TICK_SEEN : WA_TICK_SENT)+'</i>' : '';
     if(m.kind === 'question_card' || m.kind === 'answer_card'){
       const isQ = m.kind === 'question_card';
-      const card = el('<div role="button" tabindex="0" class="qcard-chat '+(mine?'mine':'theirs')+'"><b>'+(isQ ? (mine ? 'You asked a question' : 'A friend asked you a question') : (mine ? 'You sent back notes' : 'Notes came back'))+'</b><span>'+esc(cleanCardText(m.body))+'</span><small>'+stamp+tick+'</small></div>');
+      const card = el('<div role="button" tabindex="0" class="qcard-chat '+(mine?'mine':'theirs')+'"><b>'+(isQ ? (mine ? 'You asked a question' : 'A friend asked you a question') : (mine ? 'You sent back notes' : 'Notes came back'))+'</b><span>'+esc(cardText(m.body))+'</span><small>'+stamp+tick+'</small></div>');
       card.onclick = ()=>openDoubt(m.share_id);
       attachMsgPress(card, m, f, mine);
       list.appendChild(card);
@@ -8779,6 +8911,14 @@ document.addEventListener('visibilitychange', function(){
 window.addEventListener('pagehide', function(){ voiceAbort(null); voicePause(); });
 
 // Chat card text: one clean line of prose (no stray line breaks or invisible characters)
+// Doubt cards keep line breaks (the card span uses pre-wrap), but still strip invisible characters
+function cardText(t){
+  return String(t || '')
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F-\u009F\u200B-\u200F\u2028\u2029\uFEFF]/g, '')
+    .replace(/[ \t]+/g, ' ')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
 function cleanCardText(t){ return String(t || '').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F-\u009F\u200B-\u200F\u2028\u2029\uFEFF]/g, '').replace(/\s+/g, ' ').trim(); }
 
 // ---- Message menu: press and hold a message for Copy (and Report for friends' messages) ----
