@@ -228,7 +228,7 @@ body.kb-open .wa-compose .wa-field{ flex:1 1 100%; }
 .wa-msgs .qcard-chat.mine{ align-self:flex-end !important; }
 .wa-msgs .qcard-chat.theirs{ align-self:flex-start !important; }
 .wa-msgs .qcard-chat b{ display:block !important; width:100% !important; font:700 11px/1.3 Inter,sans-serif !important; letter-spacing:.1em !important; text-transform:uppercase !important; color:var(--accent-text) !important; white-space:normal !important; }
-.wa-msgs .qcard-chat span{ display:block !important; width:100% !important; font:14px/1.45 Inter,sans-serif !important; color:var(--text) !important; white-space:normal !important; overflow-wrap:anywhere !important; word-break:normal !important; height:auto !important; overflow:visible !important; }
+.wa-msgs .qcard-chat > span{ display:block !important; width:100% !important; font:14px/1.45 Inter,sans-serif !important; color:var(--text) !important; white-space:normal !important; overflow-wrap:break-word !important; word-break:normal !important; height:auto !important; overflow:visible !important; }
 .wa-msgs .qcard-chat small{ display:block !important; width:100% !important; font-size:11px !important; color:var(--muted) !important; margin-top:2px !important; text-align:right !important; }
 .wa-msgs .qcard-chat .katex, .wa-msgs .qcard-chat .katex-display{ display:inline !important; max-width:100% !important; overflow-x:auto !important; white-space:normal !important; }
 /* Doubt screen: room between the buttons */
@@ -4121,7 +4121,7 @@ function render(){
   __renderBusy = false;
   // Size the quote synchronously, before the browser paints, so it never jumps after load
   document.querySelectorAll('figure.qcard').forEach(c=>fitQuote(c));
-  histSync(); addBackCard(); logOpenOnce(); if(store.profile && !store.introSeen && !window.__introShown){ window.__introShown = true; setTimeout(showIntro, 500); } }
+  if(!window.__kbBackPending) histSync(); addBackCard(); logOpenOnce(); if(store.profile && !store.introSeen && !window.__introShown){ window.__introShown = true; setTimeout(showIntro, 500); } }
 function navKey(){
   const o = {};
   Object.keys(nav).forEach(k=>{ if(k!=='cfg' && k!=='mockCfg') o[k] = nav[k]; });
@@ -4131,6 +4131,7 @@ function histSync(){
   const key = navKey();
   const state = {torq:1, key, view, idx: (session && session.mode) ? session.idx : null, nav: JSON.parse(JSON.stringify(nav))};
   const prev = history.state;
+  if(window.__kbHist) state.kb = true;
   window.__lastTorqState = state;
   // a real change of screen or question adds a history step; a settings tweak only updates the current one
   if(prev && prev.torq && prev.key!==key){ history.pushState(state, ''); window.__depth = (window.__depth||0)+1; }
@@ -4150,6 +4151,16 @@ window.addEventListener('resize', fitToScreen);
 window.addEventListener('orientationchange', fitToScreen);
 function renderInner(){
   const fi = [...document.querySelectorAll('.opt')].indexOf(document.activeElement);
+  // The keyboard in an open chat is its own history step, so Back closes the keyboard before it leaves the chat.
+  const kbOn = view==='messages' && !!fr.open && !!fr.kb;
+  if(!window.__kbBackPending){
+    if(kbOn && !window.__kbHist){
+      try{ history.pushState(Object.assign({}, history.state || window.__lastTorqState || {torq:1}, {kb:true}), ''); window.__kbHist = true; }catch(e){}
+    } else if(!kbOn && window.__kbHist){
+      window.__kbHist = false; window.__kbBackPending = true; window.__kbSkip = (window.__kbSkip||0) + 1;
+      try{ history.back(); }catch(e){ window.__kbSkip--; window.__kbBackPending = false; }
+    }
+  }
   document.body.classList.toggle('has-nav', view!=='practice' && !!store.profile);
   document.body.classList.toggle('msg-fit', view==='messages' && !!sbSession);
   document.body.classList.toggle('kb-open', view==='messages' && !!fr.open && !!fr.kb);
@@ -7715,7 +7726,7 @@ function chatScreen(f){
     const tick = mine ? '<i class="wa-tick'+(m.read_at ? ' seen' : '')+'">'+(m.read_at ? WA_TICK_SEEN : WA_TICK_SENT)+'</i>' : '';
     if(m.kind === 'question_card' || m.kind === 'answer_card'){
       const isQ = m.kind === 'question_card';
-      const card = el('<button type="button" class="qcard-chat '+(mine?'mine':'theirs')+'"><b>'+(isQ ? (mine ? 'You asked a question' : 'A friend asked you a question') : (mine ? 'You sent back notes' : 'Notes came back'))+'</b><span>'+esc(m.body||'')+'</span><small>'+stamp+tick+'</small></button>');
+      const card = el('<button type="button" class="qcard-chat '+(mine?'mine':'theirs')+'"><b>'+(isQ ? (mine ? 'You asked a question' : 'A friend asked you a question') : (mine ? 'You sent back notes' : 'Notes came back'))+'</b><span>'+esc(cleanCardText(m.body))+'</span><small>'+stamp+tick+'</small></button>');
       card.onclick = ()=>openDoubt(m.share_id);
       list.appendChild(card);
     } else if(m.kind === 'audio'){
@@ -8035,7 +8046,7 @@ function voiceApplyBubble(bub){
   const playing = cur && !p.audio.paused && !p.audio.ended;
   const frac = cur && total ? Math.min(1, p.audio.currentTime * 1000 / total) : 0;
   bub.classList.toggle('playing', playing);
-  bub.dataset.state = (p.id === id && p.status) ? p.status : (p.failed === id ? 'error' : '');
+  bub.dataset.state = playing ? '' : ((p.id === id && p.status) ? p.status : (p.failed === id ? 'error' : ''));
   bub.querySelectorAll('.vb-bar').forEach(function(b, i){ b.classList.toggle('on', cur && (i + 0.5) / 40 <= frac); });
   bub.querySelector('.vb-dur').textContent = fmtDuration(cur ? p.audio.currentTime * 1000 : total);
   bub.querySelector('.vb-sp').textContent = p.speed + 'x';
@@ -8094,7 +8105,7 @@ async function voiceToggle(m, seekFrac){
   const p = voicePlayer;
   if(p.id === m.id && p.audio){
     if(seekFrac != null) p.audio.currentTime = seekFrac * (m.audio_ms || 0) / 1000;
-    if(p.audio.paused){ p.audio.play().catch(function(){ if(p.id === m.id) voiceFail(m.id); }); }
+    if(p.audio.paused){ p.failed = null; p.audio.play().catch(function(err){ if(err && err.name === 'AbortError') return; if(p.id === m.id) voiceFail(m.id); }); }
     else { p.audio.pause(); }
     voiceUpdateBubbles(); return;
   }
@@ -8110,12 +8121,13 @@ async function voiceToggle(m, seekFrac){
   a.preload = 'auto';
   a.playbackRate = p.speed;
   p.audio = a; p.status = '';
+  a.addEventListener('playing', function(){ p.failed = null; voiceUpdateBubbles(); });
   a.addEventListener('timeupdate', voiceUpdateBubbles);
   a.addEventListener('ended', function(){ if(p.audio === a){ p.audio = null; p.id = null; } voiceUpdateBubbles(); });
-  a.addEventListener('error', function(){ if(p.audio === a) voiceFail(m.id); });
+  a.addEventListener('error', function(){ if(p.audio === a && a.error) voiceFail(m.id); });
   if(seekFrac != null) a.addEventListener('loadedmetadata', function(){ a.currentTime = seekFrac * (m.audio_ms || 0) / 1000; }, {once: true});
   try{ await a.play(); }
-  catch(e){ if(p.audio === a) voiceFail(m.id); return; }
+  catch(e){ if(e && e.name === 'AbortError') return; if(p.audio === a) voiceFail(m.id); return; }
   voiceUpdateBubbles();
 }
 
@@ -8127,6 +8139,9 @@ document.addEventListener('visibilitychange', function(){
   voicePause();
 });
 window.addEventListener('pagehide', function(){ voiceAbort(null); voicePause(); });
+
+// Chat card text: one clean line of prose (no stray line breaks or invisible characters)
+function cleanCardText(t){ return String(t || '').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F-\u009F\u200B-\u200F\u2028\u2029\uFEFF]/g, '').replace(/\s+/g, ' ').trim(); }
 
 // Admin: how many students are online right now, and what they are doing
 let liveNow = {at:0, total:0, byState:{}, loading:false};
@@ -9600,6 +9615,10 @@ function qtextHTML(t){
     .replace(/(^|[.:;?!])\s*(\((?:[A-H]|I{1,3}|IV|V)\)\s)/g, (m,pre,p1)=> pre==='' ? p1 : pre+'<span class="stmt-break"></span>'+p1);
 }
 window.addEventListener('popstate', e=>{
+  // the keyboard step we removed ourselves: resume history tracking for the current screen
+  if(window.__kbSkip > 0){ window.__kbSkip--; window.__kbBackPending = false; histSync(); return; }
+  // Back while the keyboard is open in a chat closes only the keyboard and stays in the chat
+  if(window.__kbHist){ window.__kbHist = false; if(fr.kb){ fr.kb = false; render(); } return; }
   // history steps the admin sheets removed themselves: nothing to navigate
   if(adminSheetPopSkip > 0){ adminSheetPopSkip--; return; }
   // Back while an admin sheet is open closes only the sheet; the page behind stays where it is
