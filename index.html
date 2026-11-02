@@ -8590,15 +8590,15 @@ function chatHiddenKey(){ return 'torq.chat.hidden.' + sbSession.user.id; }
 function chatHiddenIds(){ try{ return new Set(JSON.parse(localStorage.getItem(chatHiddenKey()) || '[]')); }catch(e){ return new Set(); } }
 function hideMsgForMe(id){ const s = chatHiddenIds(); s.add(id); try{ localStorage.setItem(chatHiddenKey(), JSON.stringify(Array.from(s))); }catch(e){} }
 function voiceApplyBubble(bub){
-  const p = voicePlayer, id = bub.dataset.vid, total = Number(bub.dataset.ms) || 0;
-  const cur = p.id === id && !!p.audio;
+  const p = voicePlayer, id = String(bub.dataset.vid), total = Number(bub.dataset.ms) || 0;
+  const cur = String(p.id) === id && !!p.audio;
   const playing = cur && !p.audio.paused && !p.audio.ended;
   const pos = cur ? p.audio.currentTime * 1000 : 0;
   const dur = (cur && isFinite(p.audio.duration) && p.audio.duration > 0) ? p.audio.duration * 1000 : total;
   const frac = dur ? Math.min(1, pos / dur) : 0;
   const lit = Math.round(frac * VB_BARS);
   bub.classList.toggle('playing', playing);
-  bub.dataset.state = (p.id === id && p.status === 'loading') ? 'loading' : (p.failed === id ? 'error' : '');
+  bub.dataset.state = (String(p.id) === id && p.status === 'loading') ? 'loading' : (String(p.failed) === id ? 'error' : '');
   bub.querySelectorAll('.vb-bar').forEach(function(b, i){ b.classList.toggle('played', i < lit); });
   bub.querySelector('.vb-dur').textContent = fmtDuration(cur ? pos : total);
   bub.querySelector('.vb-sp').textContent = p.speed + 'x';
