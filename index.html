@@ -47,6 +47,27 @@ html, body{ overscroll-behavior-y:none; }
 .adm-badge{ position:absolute; top:4px; right:calc(50% - 22px); min-width:18px; height:18px; padding:0 5px; border-radius:99px; background:var(--accent); color:var(--accent-ink); font:700 11px/18px Inter,sans-serif; text-align:center; pointer-events:none; }
 .navpanel .navadm .adm-badge{ position:static; margin-left:auto; min-width:22px; }
 @media (prefers-reduced-motion: reduce){ .adm-badge{ transition:none; } }
+
+/* Final layout fixes: whole words only, photo picker works on phones, login boxes match answer boxes */
+.onb-title{ overflow-wrap:normal !important; word-break:normal !important; hyphens:none; }
+.onb-title .w{ white-space:nowrap; display:inline-block; }
+.file-sr{ position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; overflow:hidden; }
+.av-pick{ position:relative; }
+.login-in{ width:100%; min-height:56px; padding:12px 16px; border-radius:var(--r-lg); border:1.5px dashed var(--accent); background:var(--surface-2); color:var(--text); font:600 18px Inter,sans-serif; box-sizing:border-box; }
+.login-in:focus{ border-style:solid; outline:none; box-shadow:0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent); }
+.pw-wrap .login-in{ padding-right:64px; }
+.strat-list{ margin:0; padding:0; list-style:none; display:grid; gap:12px; }
+.strat-list li{ padding:14px 16px; border-radius:var(--r-lg); background:var(--surface-2); border:1px solid var(--border); line-height:1.55; }
+.strat-stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:14px 0; }
+.strat-stats div{ padding:12px; border-radius:var(--r-lg); background:var(--surface-2); border:1px solid var(--border); text-align:center; }
+.strat-stats b{ display:block; font:600 24px Lora,Georgia,serif; color:var(--text); }
+.strat-stats span{ font-size:12px; color:var(--muted); }
+
+/* Usage bars for the admin dashboard, in the app's own tokens */
+.usage-bars{ display:flex; align-items:flex-end; gap:6px; height:130px; padding:8px 0 0; }
+.ub{ flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; }
+.ub i{ display:block; width:100%; max-width:26px; min-height:3px; border-radius:8px 8px 3px 3px; background:linear-gradient(180deg,var(--accent),var(--accent-text)); }
+.ub span{ margin-top:6px; font:600 10px Inter,sans-serif; color:var(--muted); }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -510,6 +531,7 @@ button:focus:not(:focus-visible), [role="button"]:focus:not(:focus-visible){ out
 .onb-title{ margin:0 0 14px; font-family:Lora,Georgia,serif; font-weight:600; line-height:.92; letter-spacing:-.035em; overflow-wrap:anywhere; }
 .onb-title > span, .onb-title > em{ display:block; font-size:clamp(56px,20vw,112px); }
 .onb-title .w{ opacity:0; transform:translateY(22px); animation:wordIn 1.8s var(--ease) .5s forwards; }
+.onb-title.no-intro .w{ opacity:1; transform:none; animation:none; }
 .onb-title .w:nth-child(2){ animation-delay:1.3s; } .onb-title .w:nth-child(3){ animation-delay:2.1s; }
 .onb-title .onb-outline{ color:transparent; -webkit-text-stroke:1.4px var(--text); }
 .onb-title em{ font-style:italic; font-weight:500; font-size:clamp(28px,8.5vw,44px); color:var(--accent-text); letter-spacing:-.02em; margin-top:6px; }
@@ -1050,6 +1072,10 @@ body.has-nav .bn{ flex:none; }
 .share-badge.more{ background:var(--c-chem); }
 .share-opt:focus-visible .share-badge{ outline:2px solid var(--accent); outline-offset:3px; }
 .share-copied{ text-align:center; font-size:13px; color:var(--c-easy); margin-top:6px; }
+.pw-wrap{ position:relative; }
+.pw-wrap input{ padding-right:64px; width:100%; }
+.pw-eye{ position:absolute; right:8px; top:50%; transform:translateY(-50%); border:none; background:transparent; color:var(--accent-text); font:600 13px Inter,sans-serif; cursor:pointer; padding:6px 8px; border-radius:8px; }
+.pw-eye:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 /* Share sheet in the app's own dialog language: soft gradient, glow, serif title, quote-style preview */
 .share-scrim{ z-index:80 !important; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
 .share-sheet{ z-index:81 !important; position:fixed; overflow:hidden; padding:28px 24px calc(22px + env(safe-area-inset-bottom,0px)); border-radius:30px 30px 0 0;
@@ -2682,11 +2708,19 @@ function saveLastView(){
 function restoreLastView(){
   try{ const o = JSON.parse(localStorage.getItem(LAST_VIEW_KEY)); if(!o || !o.view || !TAB_OF[o.view]) return; const dis = TABS.find(t=>t.id===TAB_OF[o.view]); if(dis && dis.disabled) return; view = o.view; if(o.nav) Object.assign(nav, o.nav); if(TAB_OF[o.view]) nav.tab = TAB_OF[o.view]; }catch(e){}
 }
+// Keeps the highlighted menu item on screen, so the section you are in is always visible in the bar
+function keepTabInView(){
+  const a = document.querySelector('.bn.on'); const row = a && a.parentElement;
+  if(!row || row.scrollWidth <= row.clientWidth) return;
+  row.scrollTo({ left: Math.max(0, a.offsetLeft - (row.clientWidth - a.offsetWidth) / 2), behavior: 'smooth' });
+}
 function go(v, patch){
+  logEvent('page', v);
   if(TAB_OF[v]) nav.tab = TAB_OF[v];
   Object.assign(nav, patch||{});
   if(cloudDirty) flushCloud();
   view = v; saveLastView(); render(); window.scrollTo(0,0);
+  keepTabInView();
 }
 function setCfg(patch){ nav.cfg = Object.assign({}, nav.cfg, patch); render(); }
 
@@ -2733,6 +2767,8 @@ function defaultCfg(o){
 function recordAttempt(q, ok, time){
   const att = {q:q.id, c:ok, conf:null, t:time, d:dayKey(), at:Date.now(), mock:!!(session && session.mode==='mock')};
   store.attempts.push(att);
+  logEvent('answer', view);
+  checkDailyReward();
   if(store.attempts.length>3000) store.attempts.shift();
   scheduleUpload();
   if(ok) store.errorLog = store.errorLog.filter(id=>id!==q.id);
@@ -3313,6 +3349,7 @@ async function saveRemote(p, newPhoto){
   const uid = sbSession.user.id;
   const row = {id:uid, username:(p.username||'').trim(), first_name:p.name||null, surname:p.surname||null, standard:p.standard||null, exam:p.exam||null, age:parseInt(p.age,10)||null,
     hide_from_leaderboard: p.visible===false, birthdate:p.birthdate||null, updated_at:new Date().toISOString()};
+  row.coaching_online = p.coachingOnline || null; row.coaching_offline = p.coachingOffline || null;
   if(isGuard()) row.admin_on_leaderboard = !!p.adminBoard;
   // A newly picked photo is saved in the profile row (a small 256px image)
   if(newPhoto && newPhoto.indexOf('data:image/') === 0) row.avatar_data = newPhoto;
@@ -3414,8 +3451,8 @@ function suIsGoogleNoPassword(){
   return !!(u && u.app_metadata && u.app_metadata.provider === 'google' && !(u.user_metadata && u.user_metadata.password_set));
 }
 function suSteps(){
-  if(!sbSession) return ['account','username','about','exam','finish'];
-  return suIsGoogleNoPassword() ? ['password','username','about','exam','finish'] : ['username','about','exam','finish'];
+  if(!sbSession) return ['account','username','about','exam','coaching','finish'];
+  return suIsGoogleNoPassword() ? ['password','username','about','exam','coaching','finish'] : ['username','about','exam','coaching','finish'];
 }
 function suCurrent(){
   const steps = suSteps();
@@ -3423,7 +3460,7 @@ function suCurrent(){
   return steps.indexOf(cur) >= 0 ? cur : steps[0];
 }
 function suGo(step){ try{ localStorage.setItem(SU_KEY, step); }catch(e){} render(); }
-function suLabelIndex(step){ return step === 'password' ? 0 : ['account','username','about','exam','finish'].indexOf(step); }
+function suLabelIndex(step){ return step === 'password' ? 0 : ['account','username','about','exam','coaching','finish'].indexOf(step); }
 function suLeaderPreview(on, uname, name, av){
   const pic = (on && av) ? '<img alt="" src="'+av+'">' : (on ? '<i>'+esc((name||'?').trim().charAt(0).toUpperCase()||'?')+'</i>' : ANON_SVG);
   return '<div class="lb-row lb-prev"><span class="lb-av">'+pic+'</span><span class="lb-name">'+(on ? esc(uname||'your_username') : 'Anonymous User')+'</span><span class="lb-pts">— pts</span></div>'
@@ -3475,14 +3512,22 @@ function signupCard(card, onSave){
     btns.forEach(b=>b.onclick = e=>{ e.preventDefault(); exam = b.dataset.v; sync(); save(); });
     sync();
     f.appendChild(seg);
+  } else if(step === 'coaching'){
+    f.appendChild(el('<p class="note-line" style="margin:0 0 12px">Where do you study? Choose from the list. If yours is not there, pick Other and type it.</p>'));
+    f.appendChild(coachingBlock({online: d.coaching_online, offline: d.coaching_offline}));
   } else if(step === 'finish'){
     const vis = d.visible !== false;
-    const pick = el('<div class="pf"><span class="eyebrow">Profile picture <small style="opacity:.6">(optional)</small></span><label class="av-pick"><input type="file" accept="image/*" hidden><span class="av-circle"></span><span class="av-text"><b>Add a photo</b></span></label></div>');
+    const pick = el('<div class="pf"><span class="eyebrow">Profile picture <small style="opacity:.6">(optional)</small></span><label class="av-pick"><input type="file" accept="image/*" class="file-sr"><span class="av-circle"></span><span class="av-text"><b>Add a photo</b></span></label></div>');
     const circle = pick.querySelector('.av-circle');
     const paintAv = ()=>{ circle.innerHTML = avatar.data ? '<img alt="" src="'+avatar.data+'">' : '<i>+</i>'; };
     paintAv();
-    pick.querySelector('input').onchange = e=>{ const file = e.target.files && e.target.files[0]; if(file) readAvatar(file, dd=>{ avatar = {data: dd, fresh: true}; paintAv(); paintPrev(); }); };
+    pick.querySelector('input').onchange = e=>{ const file = e.target.files && e.target.files[0]; e.target.value = ''; if(file) readAvatar(file, dd=>{ avatar = {data: dd, fresh: true}; paintAv(); paintPrev(); }); };
     f.appendChild(pick);
+    const goalNow = dailyGoal();
+    const goalBlock = el('<div class="pf vis-block"><span class="eyebrow">General settings: daily goal</span>'
+      +'<select name="dailygoal">'+[10,20,30,40,50].map(n=>'<option value="'+n+'"'+(n===goalNow?' selected':'')+'>'+n+' questions a day</option>').join('')+'</select>'
+      +'<p class="note-line">Finishing your daily goal earns '+DAILY_REWARD+' pts. Unfinished days earn nothing.</p></div>');
+    f.appendChild(goalBlock);
     const vblock = el('<div class="pf vis-block"><span class="eyebrow">Show me on the leaderboard</span>'
       +'<label class="vis-toggle"><input type="checkbox" name="visible"'+(vis?' checked':'')+'><span class="vis-sw" aria-hidden="true"></span><span class="vis-lbl">'+(vis?'Visible to others':'Anonymous to others')+'</span></label>'
       +'<div class="vis-preview" aria-live="polite"></div></div>');
@@ -3549,12 +3594,23 @@ function signupCard(card, onSave){
       if(bd){ const dt = new Date(bd+'T00:00:00'); if(isNaN(dt) || dt > new Date()) return fail('Birthdate cannot be in the future.'); }
       return suGo('exam');
     }
-    if(step === 'exam') return suGo('finish');
+    if(step === 'exam') return suGo('coaching');
+    if(step === 'coaching'){
+      // Both drop-downs are compulsory: pick an institute, or None where it does not apply
+      if(!coachValue(f, 'coaching_online') || !coachValue(f, 'coaching_offline')) return fail('Please choose your online and offline coaching. Pick None if you do not use one.');
+      for(const n of ['coaching_online','coaching_offline']){
+        const sel = f.querySelector('select[name="'+n+'"]'), o = f.querySelector('input[name="'+n+'_other"]');
+        if(sel && sel.value === 'Other' && !(o && o.value.trim())) return fail('Please type the name of your institute under Other.');
+      }
+      return suGo('finish');
+    }
     // finish: create the account
     const d2 = suDraft();
     const profile = { username: d2.username.trim(), name: d2.name.trim(), surname: d2.surname.trim(), age: parseInt(d2.age,10),
       birthdate: d2.birthdate || null, standard: d2.standard || STD_OPTS[0], exam: d2.exam || 'main', visible: !!d2.visible || d2.visible===undefined };
     profile.visible = f.querySelector('[name="visible"]').checked;
+    profile.coachingOnline = draftCoach(d2, 'coaching_online'); profile.coachingOffline = draftCoach(d2, 'coaching_offline'); profile.coachingAnswered = true;
+    { const dg = f.querySelector('select[name="dailygoal"]'); profile.dailyGoal = dg ? (Number(dg.value) || 40) : 40; }
     next.disabled = true; authBusy = true;
     const res = await saveRemote(profile, avatar.fresh ? avatar.data : null);
     authBusy = false; next.disabled = false;
@@ -3568,10 +3624,18 @@ function signupCard(card, onSave){
 }
 function loginForm(){
   const f = el('<form class="profile-form" autocomplete="on"></form>');
-  f.innerHTML = '<div class="pf"><span class="eyebrow">Email</span><input name="id" type="email" autocomplete="email" placeholder="you@example.com" value="'+esc(lastEmail)+'"></div>'
-    +'<div class="pf"><span class="eyebrow">Password</span><input name="pw" type="password" autocomplete="current-password"></div>'
+  f.innerHTML = '<div class="pf"><span class="eyebrow">Email</span><input class="login-in" name="id" type="email" autocomplete="email" placeholder="you@example.com" value="'+esc(lastEmail)+'"></div>'
+    +'<div class="pf"><span class="eyebrow">Password</span><div class="pw-wrap"><input class="login-in" name="pw" type="password" autocomplete="current-password"><button type="button" class="pw-eye" aria-label="Show password" aria-pressed="false">Show</button></div></div>'
     +'<p class="note-line err" hidden></p>'
     +'<button class="btn block" type="submit">Log in</button>';
+  const pwIn = f.querySelector('[name="pw"]'), eye = f.querySelector('.pw-eye');
+  eye.onclick = ()=>{
+    const show = pwIn.type === 'password';
+    pwIn.type = show ? 'text' : 'password';
+    eye.textContent = show ? 'Hide' : 'Show';
+    eye.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+    eye.setAttribute('aria-pressed', show ? 'true' : 'false');
+  };
   f.onsubmit = async e=>{
     e.preventDefault();
     const err = f.querySelector('.err');
@@ -3602,7 +3666,14 @@ function loginForm(){
 async function restoreFromServer(uid){
   const db = sbClient(); if(!db || !uid) return;
   {
-    const { data } = await db.from('profiles').select('username, first_name, surname, standard, exam, age, birthdate, hide_from_leaderboard, avatar_data').eq('id', uid).maybeSingle();
+    const { data } = await db.from('profiles').select('username, first_name, surname, standard, exam, age, birthdate, hide_from_leaderboard, avatar_data, coaching_online, coaching_offline').eq('id', uid).maybeSingle();
+    // Supabase is the source of truth for the coaching answers: this device copies them, it does not decide them
+    if(data && store.profile){
+      store.profile.coachingOnline = data.coaching_online || null;
+      store.profile.coachingOffline = data.coaching_offline || null;
+      store.profile.coachingAnswered = !!(data.coaching_online && data.coaching_offline);
+      persist();
+    }
     if(data && data.avatar_data) cacheUser({avatar: data.avatar_data});
     if(data && !store.profile){
       const age = data.age || (data.birthdate ? Math.floor((Date.now() - new Date(data.birthdate+'T00:00:00').getTime())/(365.25*864e5)) : '');
@@ -3741,7 +3812,7 @@ function render(){
   __renderBusy = false;
   // Size the quote synchronously, before the browser paints, so it never jumps after load
   document.querySelectorAll('figure.qcard').forEach(c=>fitQuote(c));
-  histSync(); addBackCard(); if(store.profile && !store.introSeen && !window.__introShown){ window.__introShown = true; setTimeout(showIntro, 500); } }
+  histSync(); addBackCard(); logOpenOnce(); if(store.profile && !store.introSeen && !window.__introShown){ window.__introShown = true; setTimeout(showIntro, 500); } }
 function navKey(){
   const o = {};
   Object.keys(nav).forEach(k=>{ if(k!=='cfg' && k!=='mockCfg') o[k] = nav[k]; });
@@ -3783,7 +3854,8 @@ function renderInner(){
   if(view!=='practice' && store.profile && !needSignIn) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
   const V = {privacy:()=>legalPaperView('privacy'), terms:()=>legalPaperView('terms'), copyright:()=>legalPaperView('copyright'), disclaimer:()=>legalPaperView('disclaimer'), contact:contactPageView, notebooks:notebooksView, leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
              me:meView, analytics:analyticsView, practice:practiceView, results:resultsView, notes:notesView, notehub:notehubView, viva:vivaView, flash:flashView, myflash:myFlashView, myflashnew:myFlashNewView, admin:adminView, eyes:eyesView};
-  app.appendChild(needSignIn ? authView() :(!store.profile ? (sbSession ? authView() : onboardView()) : (V[view]||homeView)()));
+  const needCoaching = !needSignIn && !!store.profile && !store.profile.coachingAnswered && !store.profile.coachingOnline && !store.profile.coachingOffline;
+  app.appendChild(needSignIn ? authView() :(!store.profile ? (sbSession ? authView() : onboardView()) : (needCoaching ? coachingCatchupView() : (V[view]||homeView)())));
   if(view==='pyq') app.appendChild(el('<div class="foot">'+esc(BANK_ERROR || ('PYQ bank: '+QUESTIONS.length+' questions'))+'</div>'));
   document.querySelectorAll('.bottomnav,#navTog,#navScrim').forEach(n=>n.remove());
   if(view!=='practice' && store.profile && !needSignIn) mountNav();
@@ -4179,7 +4251,9 @@ const TIME_MOODS = [
   {mood:'Last call for the day', hi:n=>'11 p.m., '+n+'. One more question, then rest.'}
 ];
 // One entry per hour, so the greeting always matches the clock
-function timeMood(){ return TIME_MOODS[new Date().getHours()]; }
+// The greeting switches ten minutes before the hour, so at 2:50 the 3 o'clock greeting shows
+function moodHour(){ return new Date(Date.now() + 10*60000).getHours(); }
+function timeMood(){ return TIME_MOODS[moodHour()]; }
 
 const QUOTES = [
   {q:"You are in danger of living a life so comfortable and soft that you will die without ever realizing your true potential.", a:"David Goggins", s:"Can't Hurt Me"},
@@ -4255,7 +4329,7 @@ function advanceQuote(now = Date.now()){
   try{ localStorage.setItem(QUOTE_KEY, JSON.stringify(quoteState)); }catch(e){}
 }
 // Refresh the quote on screen while the app stays open on the home view.
-setInterval(()=>{ if(view === 'home' && store.profile && (quoteDue() || window.__hour !== new Date().getHours())) render(); }, 60000);
+setInterval(()=>{ if(view === 'home' && store.profile && (quoteDue() || window.__hour !== moodHour())) render(); }, 60000);
 
 function quoteCard(){
   if(quoteDue()) advanceQuote();
@@ -4291,18 +4365,34 @@ function bindQuoteResize(){
 
 // Exams from the profile: days left to each one
 const EXAMS = [{name:'JEE Main 2027', date:'2027-01-20'}, {name:'JEE Advanced 2027', date:'2027-05-18'}];
-const DAILY_GOAL = 40;
+const DAILY_REWARD = 40;   // points, granted only once the daily goal is completed
+function dailyGoal(){ const g = Number(store.profile && store.profile.dailyGoal); return [10,20,30,40,50].includes(g) ? g : 40; }
+function dailyRewardCredited(day){ return !!(store.dailyRewards && store.dailyRewards[day]); }
+// Adds the reward to the points total once, on the first answer that completes today's goal
+function checkDailyReward(){
+  const today = dayKey();
+  if(dailyRewardCredited(today)) return;
+  const done = new Set(store.attempts.filter(a=>a.d===today && !a.skipped && (a.c===true||a.c===false)).map(a=>a.q)).size;
+  if(done < dailyGoal()) return;
+  store.dailyRewards = store.dailyRewards || {};
+  store.dailyRewards[today] = DAILY_REWARD;
+  store.points = Math.round((store.points||0) + DAILY_REWARD);
+  persist(); cacheUser({points: store.points});
+}
 function daysLeft(iso){ return Math.ceil((new Date(iso+'T00:00:00') - new Date()) / 864e5); }
 // Any subject counts toward the goal; it counts questions answered today
 function dailyGoalCard(){
   const today = dayKey();
   const done = new Set(store.attempts.filter(a=>a.d===today && !a.skipped && (a.c===true||a.c===false)).map(a=>a.q)).size;
-  const pct = Math.min(100, Math.round(done/DAILY_GOAL*100));
+  const goal = dailyGoal();
+  const pct = Math.min(100, Math.round(done/goal*100));
+  // Reward is recorded once, on the day the goal is first reached; nothing is granted for an unfinished day
+  const rewardNote = dailyRewardCredited(today) ? '+'+DAILY_REWARD+' pts earned today' : 'Finish your goal to earn '+DAILY_REWARD+' pts';
   const exams = EXAMS.map(x=>'<span class="exam-chip"><b>'+daysLeft(x.date)+'</b> days to '+esc(x.name)+'</span>').join('');
-  return el('<div class="card dgoal'+(done>=DAILY_GOAL?' st-ok':'')+'"><div class="dg-top"><div><div class="eyebrow">Daily goal</div>'
-    +'<div class="dg-num">'+done+'<span> / '+DAILY_GOAL+' questions</span></div></div></div>'
+  return el('<div class="card dgoal'+(done>=goal?' st-ok':'')+'"><div class="dg-top"><div><div class="eyebrow">Daily goal</div>'
+    +'<div class="dg-num">'+done+'<span> / '+goal+' questions</span></div></div></div>'
     +'<div class="goal-bar"><i style="width:'+pct+'%"></i></div>'
-    +'<div class="note-line" style="margin-top:8px">Any subject, any chapter. It is your call.</div>'
+    +'<div class="note-line" style="margin-top:8px">'+rewardNote+'. Any subject, any chapter.</div>'
     +'</div>');
 }
 // Exam countdown cards, styled like the login card: gradient border, a glowing orb and a serif numeral
@@ -4328,7 +4418,7 @@ function examDayCardEl(){
 }
 function homeView(){
   const w = el('<div></div>');
-  window.__hour = new Date().getHours();
+  window.__hour = moodHour();
   const mood = timeMood();
   const firstName = (store.profile && store.profile.name ? store.profile.name : '').split(' ')[0];
   const clock = new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
@@ -5338,6 +5428,43 @@ function readAvatar(file, done){
   fr.readAsDataURL(file);
 }
 
+
+// Coaching institutes: a fixed drop-down. "Other" lets a student type their own name, which is saved only to their profile.
+const COACH_OFFLINE = ['ALLEN','Aakash','FIITJEE','Resonance','Narayana','Motion','Bansal Classes','Vibrant Academy','Sri Chaitanya','Career Point','Rankers Academy','Reliable Academy','Pace IIT & Medical','Brilliant Tutorials','Vidyamandir Classes','None / self-study'];
+const COACH_ONLINE = ['Physics Wallah','Unacademy','Vedantu','Allen Digital','Aakash Digital','Resonance online','Narayana online','Infinity Learn','Sri Chaitanya online','Toppr','Embibe','Testbook','Doubtnut','Lakshya','Rankers Academy online','Adda247','Extramarks','Gradeup','Oliveboard','None'];
+function coachField(name, label, list, current){
+  const known = list.indexOf(current) >= 0;
+  const val = known ? current : (current ? 'Other' : '');
+  const other = known || !current ? '' : current;
+  const wrap = el('<div class="pf"><span class="eyebrow">'+label+'</span></div>');
+  const sel = el('<select name="'+name+'"></select>');
+  sel.innerHTML = '<option value="">Choose one</option>' + list.map(n=>'<option value="'+esc(n)+'">'+esc(n)+'</option>').join('') + '<option value="Other">Other (type it)</option>';
+  sel.value = val;
+  const inp = el('<input class="login-in coach-other" name="'+name+'_other" placeholder="Type your institute" value="'+esc(other)+'" maxlength="80">');
+  inp.hidden = val !== 'Other';
+  sel.onchange = ()=>{ inp.hidden = sel.value !== 'Other'; if(!inp.hidden) inp.focus(); };
+  wrap.appendChild(sel); wrap.appendChild(inp);
+  return wrap;
+}
+function coachingBlock(cur){
+  cur = cur || {};
+  const box = el('<div class="coach-block"></div>');
+  box.appendChild(coachField('coaching_online', 'Online coaching', COACH_ONLINE, cur.online || ''));
+  box.appendChild(coachField('coaching_offline', 'Offline coaching or tuition', COACH_OFFLINE, cur.offline || ''));
+  return box;
+}
+function draftCoach(d, name){
+  const v = d[name];
+  if(!v) return null;
+  if(v === 'Other') return (d[name + '_other'] || '').trim() || 'Other';
+  return v;
+}
+function coachValue(f, name){
+  const s = f.querySelector('select[name="'+name+'"]');
+  if(!s || !s.value) return null;
+  if(s.value === 'Other'){ const o = f.querySelector('input[name="'+name+'_other"]'); return (o && o.value.trim()) || 'Other'; }
+  return s.value;
+}
 function profileForm(p, btnLabel, onSave, withAvatar, withEmail){
   const f = el('<form class="profile-form" autocomplete="off"></form>');
   const g = n=>f.querySelector('[name="'+n+'"]');
@@ -5360,15 +5487,9 @@ function profileForm(p, btnLabel, onSave, withAvatar, withEmail){
     +'<label class="pf"><span class="eyebrow">Age</span><input name="age" type="number" min="10" max="60" inputmode="numeric" value="'+esc(p.age||'')+'"></label>'
     +'<label class="pf"><span class="eyebrow">Standard</span><select name="standard">'+STD_OPTS.map(s=>'<option'+(p.standard===s?' selected':'')+'>'+s+'</option>').join('')+'</select></label>'
     +'<div class="pf"><span class="eyebrow">Exam you are preparing for</span><div class="seg exam-seg"><button type="button" data-v="main">JEE Main</button><button type="button" data-v="adv">JEE Main + Advanced</button></div></div>'
-    +'<div class="pf vis-block"><span class="eyebrow">Show me on the leaderboard</span>'
-    +'<label class="vis-toggle"><input type="checkbox" name="visible"'+(vis?' checked':'')+'><span class="vis-sw" aria-hidden="true"></span><span class="vis-lbl">'+(vis?'Visible to others':'Anonymous to others')+'</span></label>'
-    +'<div class="vis-preview" aria-live="polite"></div></div>'
-    // Admin accounts only: take part in the rankings at all (separate from hiding your name and photo above)
-    +(isGuard() ? '<div class="pf vis-block"><span class="eyebrow">Admin: appear on the leaderboard</span>'
-      +'<label class="vis-toggle"><input type="checkbox" name="adminboard"'+(p.adminBoard?' checked':'')+'><span class="vis-sw" aria-hidden="true"></span><span class="vis-lbl">'+(p.adminBoard?'Ranked with everyone':'Kept off the leaderboard')+'</span></label>'
-      +'<p class="note-line">Admin accounts are normally not ranked. Switch this on to be ranked like any student. Your name and photo still follow the setting above.</p></div>' : '')
     +'<p class="note-line err" hidden></p>'
     +'<button class="btn block" type="submit">'+btnLabel+'</button>';
+  f.insertBefore(coachingBlock({online: p.coachingOnline, offline: p.coachingOffline}), f.querySelector('.note-line.err'));
   let exam = p.exam || 'main';
   const btns = [...f.querySelectorAll('.exam-seg button')];
   const sync = ()=>btns.forEach(b=>b.classList.toggle('on', b.dataset.v===exam));
@@ -5380,38 +5501,20 @@ function profileForm(p, btnLabel, onSave, withAvatar, withEmail){
     if(!withEmail) return;
     const em = f.querySelector('[name="email"]');
     const d = {email: em ? em.value.trim() : '', username: g('username').value, name: g('name').value, surname: g('surname').value,
-      birthdate: g('birthdate').value, age: g('age').value, standard: g('standard').value, exam, visible: g('visible').checked};
+      birthdate: g('birthdate').value, age: g('age').value, standard: g('standard').value, exam, visible: p.visible !== false};
     try{ localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); }catch(e){}
   };
   f.addEventListener('input', saveDraft);
   f.addEventListener('change', saveDraft);
   btns.forEach(b=>b.addEventListener('click', saveDraft));
 
-  // Live preview: how this user looks to others on the leaderboard
-  const prev = f.querySelector('.vis-preview'), vcb = g('visible');
-  const paintPreview = ()=>{
-    const on = vcb.checked;
-    f.querySelector('.vis-lbl').textContent = on ? 'Visible to others' : 'Anonymous to others';
-    const uname = (g('username').value.trim() || 'your_username');
-    const av = loadAvatarCache();
-    const pic = (on && av) ? '<img alt="" src="'+av+'">' : (on ? '<i>'+esc((g('name').value||'?').trim().charAt(0).toUpperCase()||'?')+'</i>' : ANON_SVG);
-    prev.innerHTML = '<div class="lb-row lb-prev"><span class="lb-av">'+pic+'</span><span class="lb-name">'
-      +(on ? esc(uname) : 'Anonymous User')+'</span><span class="lb-pts">— pts</span></div>'
-      +'<p class="note-line">'+(on ? 'Others see your username and photo.' : 'Others see a generic avatar and "Anonymous User". Your points still count.')+'</p>';
-  };
-  const abx = f.querySelector('input[name="adminboard"]');
-  if(abx) abx.onchange = ()=>{ f.querySelector('input[name="adminboard"]').closest('.vis-toggle').querySelector('.vis-lbl').textContent = abx.checked ? 'Ranked with everyone' : 'Kept off the leaderboard'; };
-  vcb.onchange = paintPreview;
-  ['name','username'].forEach(n=>g(n).addEventListener('input', paintPreview));
-  paintPreview();
-
   const avatarState = {data: null, fresh: false};
   if(withAvatar){
     avatarState.data = loadAvatarCache();
-    const av = el('<label class="av-pick"><input type="file" accept="image/*" hidden><span class="av-circle"></span>'
+    const av = el('<label class="av-pick"><input type="file" accept="image/*" class="file-sr"><span class="av-circle"></span>'
       +'<span class="av-text"><b>Add a photo</b></span></label>');
     const circle = av.querySelector('.av-circle');
-    const paint = ()=>{ circle.innerHTML = avatarState.data ? '<img alt="" src="'+avatarState.data+'">' : '<i>+</i>'; paintPreview(); };
+    const paint = ()=>{ circle.innerHTML = avatarState.data ? '<img alt="" src="'+avatarState.data+'">' : '<i>+</i>'; };
     paint();
     av.querySelector('input').onchange = e=>{
       const file = e.target.files && e.target.files[0];
@@ -5436,8 +5539,10 @@ function profileForm(p, btnLabel, onSave, withAvatar, withEmail){
       const d = new Date(bd+'T00:00:00'), now = new Date();
       if(isNaN(d) || d>now) return fail('Birthdate cannot be in the future.');
     }
-    const profile = {username, name, surname, age, birthdate: bd||null, standard:g('standard').value, exam, visible: vcb.checked};
-    if(abx) profile.adminBoard = abx.checked; else if(p.adminBoard != null) profile.adminBoard = p.adminBoard;
+    const profile = {username, name, surname, age, birthdate: bd||null, standard:g('standard').value, exam, visible: p.visible !== false};
+    profile.coachingOnline = coachValue(f, 'coaching_online'); profile.coachingOffline = coachValue(f, 'coaching_offline'); profile.coachingAnswered = true;
+    if(p.dailyGoal != null) profile.dailyGoal = p.dailyGoal;
+    if(p.adminBoard != null) profile.adminBoard = p.adminBoard;
     const btn = f.querySelector('button[type="submit"]');
     if(needOtp && !sbSession){
       const db = sbClient();
@@ -5478,6 +5583,8 @@ const ONB_VEC = '<svg class="onb-vec" viewBox="0 0 400 400" aria-hidden="true" f
   +'<circle class="vdot" cx="200" cy="200" r="7" style="fill:var(--accent)"/>'
   +'</svg>';
 function onboardView(){
+  const introAlreadyPlayed = !!window.__onbIntroPlayed;
+  setTimeout(()=>{ window.__onbIntroPlayed = true; }, 4000);
   const w = el('<div class="onb"></div>');
   const stage = el('<div class="onb-stage"></div>');
   const bg = el('<div class="onb-bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i><i class="o3"></i></div>');
@@ -5498,7 +5605,7 @@ function onboardView(){
   stage.appendChild(el('<div class="onb-hero">'+ONB_VEC
     +'<div class="onb-top"><div class="brand-lock">'+torqWordmark('wm-md')+'<span class="brand-sub">JEE companion</span></div><span class="onb-step">Step 1 of 1</span></div>'
     +'<div class="onb-eyebrow">JEE Main \u00B7 Previous-year papers</div>'
-    +'<h1 class="onb-title"><span class="w onb-outline">Crack</span><span class="w">JEE</span><em class="w">with intent.</em></h1>'
+    +'<h1 class="onb-title'+(introAlreadyPlayed ? ' no-intro' : '')+'"><span class="w onb-outline">Crack</span><span class="w">JEE</span><em class="w">with intent.</em></h1>'
     +'<p class="onb-sub">Real papers, shift by shift, and timed mocks that feel like exam day. Tell us a little about you to begin.</p>'
     +'<div class="onb-tags"><span class="onb-tag-hot">SoG On Every Answer</span><span>Shift-wise PYQs</span><span>Timed mocks</span><span>Chapter drills</span><span>Live leaderboard</span></div>'
     +'</div>'));
@@ -5612,6 +5719,29 @@ function lbMessage(icon, title, text, retry){
   }
   return n;
 }
+
+// Admin: open a student from the leaderboard and send them a message in For Your Eyes Only
+function openAdminStudent(r){
+  adminSheet('Student · #'+r.place, r.name, (body, close)=>{
+    body.appendChild(el('<p class="note-line" style="margin:0 0 12px">Score: '+esc(lbFmt(lbState.board, r.score))+(r.first && !r.anon ? ' · '+esc(r.first) : '')+'</p>'));
+    const ta = el('<textarea class="ad-reply" rows="5" placeholder="Write a kind, clear message. It opens in their For Your Eyes Only inbox."></textarea>');
+    body.appendChild(ta);
+    const send = el('<button class="btn block" type="button">Send message</button>');
+    send.onclick = async ()=>{
+      const text = ta.value.trim();
+      if(!text) return;
+      send.disabled = true;
+      const db = sbClient();
+      const { data: uid, error: e1 } = await db.rpc('admin_user_id', { p_username: r.name });
+      if(e1 || !uid){ send.disabled = false; appNotice('Not sent', 'Could not find this student account.'); return; }
+      const { error } = await db.from('admin_replies').insert({ user_id: uid, message_id: 'direct', body: text });
+      if(error){ send.disabled = false; appNotice('Not sent', error.message); return; }
+      close();
+      appNotice('Message sent', 'It is waiting in their For Your Eyes Only inbox.');
+    };
+    body.appendChild(send);
+  });
+}
 function leaderboardView(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Leaderboard</div><h1 class="hm-title">Who is <em>leading?</em></h1></div>'));
@@ -5651,7 +5781,10 @@ function leaderboardView(){
   if(rest.length){
     // A row past the top 50 is your own, pinned under a gap
     const html = rest.map(r=>(r.me && r.place>LB_LIMIT ? '<div class="lb-gap" aria-hidden="true">···</div>' : '')+lbItemHTML(r)).join('');
-    w.appendChild(el('<div class="list" role="list" aria-label="Rankings">'+html+'</div>'));
+    const listEl = el('<div class="list" role="list" aria-label="Rankings">'+html+'</div>');
+    w.appendChild(listEl);
+    // Admins tap any student to open their profile and send a message
+    if(isGuard()) listEl.querySelectorAll('.lb-item').forEach((it,i)=>{ const r = rest[i]; if(!r || r.me) return; it.style.cursor = 'pointer'; it.onclick = ()=>openAdminStudent(r); });
   }
   w.appendChild(el('<p class="note-line">'+esc(meta.note)+'</p>'));
   return w;
@@ -6094,10 +6227,194 @@ function exportReportsCsv(list){
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'torq-reports.csv';
   document.body.appendChild(a); a.click(); a.remove();
 }
+
+// ---- Usage events: sign-ins, page opens and answers. Only names of events and pages, never typed text. ----
+function eventDevice(){ return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent||'') ? 'phone' : 'desktop'; }
+function logEvent(event, page){
+  try{
+    const db = sbClient();
+    if(!db || !sbSession) return;
+    db.from('app_events').insert({ user_id: sbSession.user.id, event: event, page: page || null, device: eventDevice() }).then(()=>{}, ()=>{});
+  }catch(e){}
+}
+// Once per opened app, after sign-in
+function logOpenOnce(){
+  if(window.__openLogged || !sbSession) return;
+  window.__openLogged = true;
+  logEvent('app_open', view);
+}
+let adminAnalytics = {days: 7, rows: null, loading: false, err: null};
+async function loadAnalytics(){
+  if(adminAnalytics.loading) return;
+  adminAnalytics.loading = true; adminAnalytics.err = null;
+  const since = new Date(Date.now() - adminAnalytics.days * 864e5).toISOString();
+  const { data, error } = await sbClient().from('app_events').select('user_id, event, page, device, created_at').gte('created_at', since).order('created_at', {ascending:false}).limit(5000);
+  adminAnalytics.loading = false;
+  adminAnalytics.rows = data || [];
+  adminAnalytics.err = error ? error.message : null;
+  render();
+}
+function analyticsPanel(){
+  const box = el('<div class="card" style="padding:22px"></div>');
+  const a = adminAnalytics;
+  const tabs = [7,30].map(d=>'<button type="button" class="ctab'+(a.days===d?' on':'')+'" data-d="'+d+'">Last '+d+' days</button>').join('');
+  box.innerHTML = '<div class="eyebrow">Usage and traffic</div><div class="ctabs" style="margin:10px 0 16px">'+tabs+'</div>';
+  box.querySelectorAll('[data-d]').forEach(b=>b.onclick = ()=>{ adminAnalytics.days = Number(b.dataset.d); adminAnalytics.rows = null; loadAnalytics(); });
+  if(a.rows === null){ box.appendChild(el('<p class="note-line">Loading usage...</p>')); if(!a.loading) loadAnalytics(); return box; }
+  if(a.err){ box.appendChild(el('<p class="note-line err">Could not load usage: '+esc(a.err)+'</p>')); return box; }
+  const rows = a.rows;
+  const users = new Set(rows.filter(r=>r.user_id).map(r=>r.user_id)).size;
+  const opens = rows.filter(r=>r.event==='app_open').length;
+  const answers = rows.filter(r=>r.event==='answer').length;
+  const phone = rows.filter(r=>r.device==='phone').length;
+  const phonePct = rows.length ? Math.round(phone/rows.length*100) : 0;
+  box.appendChild(el('<div class="stats">'
+    +'<div class="stat"><div class="n">'+users+'</div><div class="l">Active students</div></div>'
+    +'<div class="stat"><div class="n">'+opens+'</div><div class="l">App opens</div></div>'
+    +'<div class="stat"><div class="n">'+answers+'</div><div class="l">Answers</div></div>'
+    +'<div class="stat"><div class="n">'+phonePct+'%</div><div class="l">On phones</div></div></div>'));
+  // Daily opens, as bars
+  const days = {};
+  for(let i=a.days-1;i>=0;i--){ days[new Date(Date.now()-i*864e5).toISOString().slice(0,10)] = 0; }
+  rows.filter(r=>r.event==='app_open').forEach(r=>{ const k = r.created_at.slice(0,10); if(k in days) days[k]++; });
+  const max = Math.max(1, ...Object.values(days));
+  box.appendChild(el('<div class="eyebrow" style="margin:18px 0 8px">Opens per day</div>'));
+  box.appendChild(el('<div class="usage-bars">'+Object.keys(days).map(k=>'<div class="ub" title="'+k+': '+days[k]+'"><i style="height:'+Math.round(days[k]/max*100)+'%"></i><span>'+k.slice(8)+'</span></div>').join('')+'</div>'));
+  // Pages
+  const pages = {};
+  rows.filter(r=>r.event==='page').forEach(r=>{ const k = r.page || 'other'; pages[k] = (pages[k]||0)+1; });
+  const top = Object.entries(pages).sort((x,y)=>y[1]-x[1]).slice(0,8);
+  box.appendChild(el('<div class="eyebrow" style="margin:18px 0 8px">Most visited pages</div>'));
+  box.appendChild(el('<ul class="strat-list">'+(top.length ? top.map(([k,v])=>'<li>'+esc(k)+' · '+v+' visits</li>').join('') : '<li>No page visits yet in this period.</li>')+'</ul>'));
+  box.appendChild(el('<p class="note-line" style="margin-top:12px">Counts come from up to 5,000 recent events. Typed text is never recorded.</p>'));
+  return box;
+}
+
+// ---- Cohort tools: group students by their answers and activity, tag them, and message the group ----
+let cohortState = {profiles:null, lastSeen:{}, tags:{}, loading:false, err:null, sent:null,
+  f:{standard:'', exam:'', on:'', off:'', activity:'any', tag:''}};
+async function loadCohorts(){
+  if(cohortState.loading) return;
+  cohortState.loading = true; cohortState.err = null;
+  const db = sbClient();
+  const since = new Date(Date.now() - 30*864e5).toISOString();
+  const [pr, ev, tg] = await Promise.all([
+    db.from('profiles').select('id, username, first_name, standard, exam, coaching_online, coaching_offline').limit(5000),
+    db.from('app_events').select('user_id, created_at').gte('created_at', since).limit(5000),
+    db.from('cohort_tags').select('user_id, tag').limit(5000)
+  ]);
+  cohortState.loading = false;
+  if(pr.error){ cohortState.err = pr.error.message; cohortState.profiles = []; render(); return; }
+  cohortState.profiles = pr.data || [];
+  cohortState.lastSeen = {};
+  (ev.data || []).forEach(e=>{ if(!cohortState.lastSeen[e.user_id] || e.created_at > cohortState.lastSeen[e.user_id]) cohortState.lastSeen[e.user_id] = e.created_at; });
+  cohortState.tags = {};
+  (tg.data || []).forEach(t=>{ (cohortState.tags[t.user_id] = cohortState.tags[t.user_id] || []).push(t.tag); });
+  render();
+}
+function cohortMatches(){
+  const f = cohortState.f, now = Date.now();
+  const known = (list)=>list;
+  return (cohortState.profiles || []).filter(p=>{
+    if(f.standard && p.standard !== f.standard) return false;
+    if(f.exam && p.exam !== f.exam) return false;
+    const coachOk = (val, list, sel)=>{
+      if(!sel) return true;
+      if(sel === '__other') return !!val && list.indexOf(val) < 0;
+      return val === sel;
+    };
+    if(!coachOk(p.coaching_online, COACH_ONLINE, f.on)) return false;
+    if(!coachOk(p.coaching_offline, COACH_OFFLINE, f.off)) return false;
+    const seen = cohortState.lastSeen[p.id] ? Date.parse(cohortState.lastSeen[p.id]) : 0;
+    if(f.activity === 'active7' && !(seen && now - seen < 7*864e5)) return false;
+    if(f.activity === 'lapsed14' && (seen && now - seen < 14*864e5)) return false;
+    if(f.tag && !((cohortState.tags[p.id] || []).indexOf(f.tag) >= 0)) return false;
+    return true;
+  });
+}
+function allCohortTags(){
+  const set = new Set();
+  Object.values(cohortState.tags).forEach(list=>list.forEach(t=>set.add(t)));
+  return [...set].sort();
+}
+function cohortPanel(){
+  const box = el('<div class="card" style="padding:22px"></div>');
+  if(cohortState.profiles === null){ box.innerHTML = '<div class="eyebrow">Cohorts</div><p class="note-line">Loading students...</p>'; if(!cohortState.loading) loadCohorts(); return box; }
+  const f = cohortState.f;
+  const opts = (list, sel, anyLabel, withOther)=>'<option value="">'+anyLabel+'</option>'+list.map(x=>'<option value="'+esc(x)+'"'+(x===sel?' selected':'')+'>'+esc(x)+'</option>').join('')+(withOther?'<option value="__other"'+(sel==='__other'?' selected':'')+'>Other (typed by student)</option>':'');
+  box.innerHTML = '<div class="eyebrow">Cohorts</div><h2 class="onb-cardhead" style="margin:4px 0 14px">Build a <em>group.</em></h2>'
+    +(cohortState.err ? '<p class="note-line err">Could not load students: '+esc(cohortState.err)+'</p>' : '')
+    +'<div class="pf"><span class="eyebrow">Class</span><select data-k="standard">'+opts(STD_OPTS, f.standard, 'Any class', false)+'</select></div>'
+    +'<div class="pf"><span class="eyebrow">Exam</span><select data-k="exam"><option value="">Any exam</option><option value="main"'+(f.exam==='main'?' selected':'')+'>JEE Main</option><option value="adv"'+(f.exam==='adv'?' selected':'')+'>JEE Main + Advanced</option></select></div>'
+    +'<div class="pf"><span class="eyebrow">Online coaching</span><select data-k="on">'+opts(COACH_ONLINE, f.on, 'Any', true)+'</select></div>'
+    +'<div class="pf"><span class="eyebrow">Offline coaching</span><select data-k="off">'+opts(COACH_OFFLINE, f.off, 'Any', true)+'</select></div>'
+    +'<div class="pf"><span class="eyebrow">Activity</span><select data-k="activity">'
+      +'<option value="any"'+(f.activity==='any'?' selected':'')+'>Any activity</option>'
+      +'<option value="active7"'+(f.activity==='active7'?' selected':'')+'>Active in the last 7 days</option>'
+      +'<option value="lapsed14"'+(f.activity==='lapsed14'?' selected':'')+'>Quiet for 14 days or more</option></select></div>'
+    +'<div class="pf"><span class="eyebrow">Tag</span><select data-k="tag"><option value="">Any tag</option>'+allCohortTags().map(t=>'<option value="'+esc(t)+'"'+(t===f.tag?' selected':'')+'>'+esc(t)+'</option>').join('')+'</select></div>';
+  box.querySelectorAll('select[data-k]').forEach(sel=>sel.onchange = ()=>{ cohortState.f[sel.dataset.k] = sel.value; render(); });
+
+  const matches = cohortMatches();
+  const names = matches.slice(0,12).map(p=>'<li>'+esc(p.username || 'student')+(p.first_name ? ' · '+esc(p.first_name) : '')+'</li>').join('');
+  box.appendChild(el('<div class="strat-stats"><div><b>'+matches.length+'</b><span>students in this group</span></div></div>'));
+  box.appendChild(el('<ul class="strat-list">'+(names || '<li>No students match these choices.</li>')+'</ul>'+(matches.length>12?'<p class="note-line">and '+(matches.length-12)+' more</p>':'')));
+
+  // Tag the group
+  const tagRow = el('<div class="pf" style="margin-top:16px"><span class="eyebrow">Tag this group</span></div>');
+  const tagIn = el('<input class="login-in" maxlength="40" placeholder="e.g. Kota-bound, Needs a nudge">');
+  const tagBtn = el('<button class="btn block" type="button" style="margin-top:8px">Add tag to '+matches.length+' students</button>');
+  tagBtn.disabled = !matches.length;
+  tagBtn.onclick = async ()=>{
+    const tag = tagIn.value.trim();
+    if(!tag || !matches.length) return;
+    tagBtn.disabled = true;
+    const rows = matches.map(p=>({user_id: p.id, tag}));
+    const db = sbClient(); let failed = null;
+    for(let i=0;i<rows.length && !failed;i+=500){
+      const { error } = await db.from('cohort_tags').upsert(rows.slice(i,i+500), {onConflict:'user_id,tag'});
+      if(error) failed = error.message;
+    }
+    if(failed){ tagBtn.disabled = false; appNotice('Not tagged', failed); return; }
+    cohortState.tags = cohortState.tags || {};
+    matches.forEach(p=>{ const l = cohortState.tags[p.id] = cohortState.tags[p.id] || []; if(l.indexOf(tag)<0) l.push(tag); });
+    appNotice('Tagged', 'Added "'+tag+'" to '+matches.length+' students.');
+    render();
+  };
+  tagRow.appendChild(tagIn); tagRow.appendChild(tagBtn);
+  box.appendChild(tagRow);
+
+  // Message the group: one private message each, in For Your Eyes Only
+  const msgRow = el('<div class="pf" style="margin-top:16px"><span class="eyebrow">Message this group</span></div>');
+  const ta = el('<textarea class="ad-reply" rows="4" placeholder="Write one clear message. Each student gets it privately in For Your Eyes Only."></textarea>');
+  const sendBtn = el('<button class="btn block" type="button" style="margin-top:8px">Send to '+matches.length+' students</button>');
+  sendBtn.disabled = !matches.length;
+  sendBtn.onclick = async ()=>{
+    const text = ta.value.trim();
+    if(!text || !matches.length) return;
+    if(!window.confirm('Send this message to '+matches.length+' students? This cannot be undone.')) return;
+    sendBtn.disabled = true;
+    const rows = matches.map(p=>({user_id: p.id, message_id: 'direct', body: text}));
+    const db = sbClient(); let failed = null;
+    for(let i=0;i<rows.length && !failed;i+=500){
+      const { error } = await db.from('admin_replies').insert(rows.slice(i,i+500));
+      if(error) failed = error.message;
+    }
+    if(failed){ sendBtn.disabled = false; appNotice('Not sent', failed); return; }
+    ta.value = '';
+    appNotice('Sent', 'Delivered to '+matches.length+' For Your Eyes Only inboxes.');
+    render();
+  };
+  msgRow.appendChild(ta); msgRow.appendChild(sendBtn);
+  box.appendChild(msgRow);
+  return box;
+}
 function adminView(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Admin</div><h1 class="hm-title">Dash<em>board.</em></h1></div>'));
   if(!isGuard()){ w.appendChild(el('<div class="card"><div class="eyebrow">Restricted</div><p class="note-line">This area is for the TORQ team.</p></div>')); return w; }
+  w.appendChild(analyticsPanel());
+  w.appendChild(cohortPanel());
   if(adminState.reports===null && !adminState.loading && !adminState.err) loadAdmin();
   if(adminState.templates===undefined){ adminState.templates = null; loadTemplates(); }
 
@@ -6368,6 +6685,119 @@ function tickEyes(){
     if(ms <= 0 && !n.dataset.burning){ n.dataset.burning = '1'; burnEye(n.dataset.clock); }
   });
 }
+
+// General settings: how the app treats you, in one place
+function settingsPanel(){
+  const p = store.profile || {};
+  const card = el('<div class="card" style="padding:22px"></div>');
+  const goal = dailyGoal();
+  card.innerHTML = '<div class="eyebrow">General settings</div>'
+    +'<h2 class="onb-cardhead" style="margin:4px 0 16px">Your <em>preferences.</em></h2>'
+    +'<form class="profile-form" autocomplete="off">'
+    +'<div class="pf"><span class="eyebrow">Daily goal</span><select name="goal">'+[10,20,30,40,50].map(n=>'<option value="'+n+'"'+(n===goal?' selected':'')+'>'+n+' questions a day</option>').join('')+'</select>'
+    +'<p class="note-line">Finishing your goal earns '+DAILY_REWARD+' pts. Unfinished days earn nothing.</p></div>'
+    +'<div class="pf vis-block"><span class="eyebrow">Show me on the leaderboard</span><label class="vis-toggle"><input type="checkbox" name="visible"'+(p.visible!==false?' checked':'')+'><span class="vis-sw" aria-hidden="true"></span><span class="vis-lbl">'+(p.visible!==false?'Visible to others':'Anonymous to others')+'</span></label></div>'
+    +(isGuard() ? '<div class="pf vis-block"><span class="eyebrow">Admin: appear on the leaderboard</span><label class="vis-toggle"><input type="checkbox" name="adminboard"'+(p.adminBoard?' checked':'')+'><span class="vis-sw" aria-hidden="true"></span><span class="vis-lbl">'+(p.adminBoard?'Ranked with everyone':'Kept off the leaderboard')+'</span></label></div>' : '')
+    +'<p class="note-line err" hidden></p><p class="note-line ok" hidden></p>'
+    +'<button class="btn block" type="submit">Save settings</button></form>';
+  const f = card.querySelector('form');
+  f.onsubmit = async e=>{
+    e.preventDefault();
+    const err = f.querySelector('.err'), ok = f.querySelector('.ok');
+    const next = Object.assign({}, store.profile || {});
+    next.dailyGoal = Number(f.querySelector('[name="goal"]').value) || 40;
+    next.visible = f.querySelector('[name="visible"]').checked;
+    const ab = f.querySelector('[name="adminboard"]'); if(ab) next.adminBoard = ab.checked;
+    store.profile = next; persist(); lbState.cache = {};
+    ok.textContent = 'Saved.'; ok.hidden = false; err.hidden = true;
+    if(sbSession){
+      const res = await saveRemote(next, loadAvatarCache());
+      if(res && res.error){ err.textContent = 'Saved on this device. Could not reach the server, so try again later.'; err.hidden = false; ok.hidden = true; }
+    }
+  };
+  return card;
+}
+
+// Strategy tips: fixed rules applied to your own answers. Not AI-written.
+function strategyPanel(){
+  const all = store.attempts || [];
+  const answered = all.filter(a=>a.c===true||a.c===false);
+  const acc = answered.length ? Math.round(answered.filter(a=>a.c===true).length/answered.length*100) : 0;
+  const skipRate = all.length ? Math.round(all.filter(a=>a.skipped).length/all.length*100) : 0;
+  const pct = arr => arr.length ? Math.round(arr.filter(a=>a.c===true).length/arr.length*100) : null;
+  const mockAcc = pct(answered.filter(a=>a.mock)), practiceAcc = pct(answered.filter(a=>!a.mock));
+  const days = new Set(all.map(a=>a.d)).size;
+  const tips = [];
+  if(answered.length < 30) tips.push('Answer at least 30 questions first. Advice from fewer answers is mostly noise.');
+  else if(acc < 50) tips.push('Accuracy is under half. Slow down, read the solution after every wrong answer, and retry that question the next day.');
+  else if(acc < 70) tips.push('You have a solid base. Spend your practice on the questions you got wrong, not on new ones.');
+  else tips.push('Accuracy is strong. Move up to timed mocks to build speed under exam pressure.');
+  if(skipRate >= 20) tips.push('You skip about '+skipRate+'% of questions. Make one real attempt before skipping; a reasoned guess teaches more than a blank.');
+  if(mockAcc !== null && practiceAcc !== null && mockAcc < practiceAcc - 10) tips.push('Your mock accuracy is well below your practice accuracy. Do more timed sets so exam conditions stop costing you marks.');
+  if(days < 4 && answered.length >= 30) tips.push('You have practised on only '+days+' day(s). Short daily sessions beat one long weekly one, so keep your daily goal.');
+  if(tips.length === 1 && answered.length >= 30 && acc >= 70) tips.push('Keep going, and review your weakest chapters every week.');
+  const w = el('<div class="card" style="padding:22px"></div>');
+  w.innerHTML = '<div class="eyebrow">Strategy</div><h2 class="onb-cardhead" style="margin:4px 0 0">Your <em>next steps.</em></h2>'
+    +'<div class="strat-stats"><div><b>'+acc+'%</b><span>accuracy</span></div><div><b>'+answered.length+'</b><span>answered</span></div><div><b>'+skipRate+'%</b><span>skipped</span></div></div>'
+    +'<ul class="strat-list">'+tips.map(t=>'<li>'+esc(t)+'</li>').join('')+'</ul>'
+    +'<p class="note-line" style="margin-top:14px">These tips use fixed rules on your own answers. They are not written by AI.</p>';
+  // AI advice: sends only summary numbers, never names or personal details
+  const aiBtn = el('<button class="btn block" type="button" style="margin-top:14px">Get AI advice</button>');
+  const aiOut = el('<div class="ai-advice" aria-live="polite" style="margin-top:12px;white-space:pre-line;line-height:1.6"></div>');
+  aiBtn.onclick = async ()=>{
+    if(answered.length < 10){ aiOut.textContent = 'Answer at least 10 questions to get AI advice.'; return; }
+    const db = sbClient();
+    if(!db){ aiOut.textContent = 'AI advice needs an internet connection. The tips above still apply.'; return; }
+    aiBtn.disabled = true; aiOut.textContent = 'Thinking...';
+    try{
+      const { data, error } = await db.functions.invoke('ai-strategy', { body: { accuracyPercent: acc, questionsAnswered: answered.length, skippedPercent: skipRate, mockAccuracyPercent: mockAcc, practiceAccuracyPercent: practiceAcc, activeDays: days } });
+      if(error || !data || !data.advice) throw new Error('unavailable');
+      aiOut.textContent = data.advice;
+    }catch(e){
+      aiOut.textContent = 'AI advice is unavailable right now. The tips above still apply.';
+    }
+    aiBtn.disabled = false;
+  };
+  w.appendChild(aiBtn); w.appendChild(aiOut);
+  return w;
+}
+
+// One-time question for students who signed up before coaching was asked
+function coachingCatchupView(){
+  const w = el('<div></div>');
+  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">One quick question</div><h1 class="hm-title">Where do you <em>study?</em></h1></div>'));
+  const card = el('<div class="card" style="padding:22px"></div>');
+  card.appendChild(el('<p class="note-line" style="margin:0 0 12px">We now ask every student which coaching they attend. Please answer both, choosing None where it does not apply.</p>'));
+  const block = coachingBlock({online: store.profile.coachingOnline, offline: store.profile.coachingOffline});
+  card.appendChild(block);
+  const err = el('<p class="note-line err" hidden></p>');
+  const btn = el('<button class="btn block" type="button" style="margin-top:12px">Save and continue</button>');
+  btn.onclick = async ()=>{
+    const on = coachValue(block, 'coaching_online'), off = coachValue(block, 'coaching_offline');
+    let msg = '';
+    if(!on || !off) msg = 'Please choose your online and offline coaching. Pick None if you do not use one.';
+    for(const n of ['coaching_online','coaching_offline']){
+      const sel = block.querySelector('select[name="'+n+'"]'), o = block.querySelector('input[name="'+n+'_other"]');
+      if(!msg && sel && sel.value === 'Other' && !(o && o.value.trim())) msg = 'Please type the name of your institute under Other.';
+    }
+    if(msg){ err.textContent = msg; err.hidden = false; return; }
+    btn.disabled = true;
+    const next = Object.assign({}, store.profile, {coachingOnline: on, coachingOffline: off, coachingAnswered: true});
+    let res = {};
+    try{ res = await saveRemote(next, loadAvatarCache()); }catch(e){ res = {error: e}; }
+    if(res && res.error){
+      btn.disabled = false;
+      err.textContent = 'Could not save your answers to the server. Check your connection and try again.';
+      err.hidden = false;
+      return;
+    }
+    store.profile = next; persist();
+    render();
+  };
+  card.appendChild(err); card.appendChild(btn);
+  w.appendChild(card);
+  return w;
+}
 function meView(){
   const w = el('<div></div>');
   if(['saved','analysis','history','patterns','mysol'].includes(nav.meTab)) nav.meTab='badges';
@@ -6376,13 +6806,15 @@ function meView(){
     +'<div class="hm-eyebrow">Your space</div>'
     +'<h1 class="hm-title">'+(first ? 'Me, <em>'+esc(first)+'.</em>' : 'Me<em>.</em>')+'</h1></div>'));
   const tabs = el('<div class="ctabs" role="tablist"></div>');
-  [['badges','Badges'],['profile','Profile'],['themes','Themes']].forEach(p=>{
+  [['badges','Badges'],['profile','Profile'],['strategy','Strategy'],['settings','Settings'],['themes','Themes']].forEach(p=>{
     const on = nav.meTab === p[0];
     const b = el('<button role="tab" aria-selected="'+on+'" class="ctab'+(on?' on':'')+'">'+p[1]+'</button>');
     b.onclick = ()=>go('me',{meTab:p[0]});
     tabs.appendChild(b);
   });
   w.appendChild(tabs);
+  if(nav.meTab === 'settings'){ w.appendChild(settingsPanel()); return w; }
+  if(nav.meTab === 'strategy'){ w.appendChild(strategyPanel()); return w; }
   const panel = el('<div class="cpanel"></div>');
   if(nav.meTab==='profile'){ panel.appendChild(profilePart()); }
   else if(nav.meTab==='themes'){ panel.appendChild(themeSplitPart()); }
@@ -6496,6 +6928,8 @@ const LEGAL_DOCS = {
     'Where it is kept. Your data is stored with our service provider, Supabase, and on your device for offline use. *We do not sell your data* and *we do not show advertisements.*',
     'Leaderboard. Other users see only your username and photo, and only if you choose to be visible. Otherwise you appear as Anonymous User.',
     'Your choices. You can change your profile and leaderboard visibility at any time, and ask us to *delete your account and data* through the contact form.',
+    'Usage records. To understand how TORQ is used and to improve it, we record basic usage: sign-ins, the pages you open, your device type, and the number of questions you answer. We do not record what you type in notes, messages or answers. Admins see these as totals and per-account activity. You can ask us to delete these records through the contact form.',
+    'Messages from us. Admins may send you a message. It arrives in your For Your Eyes Only inbox, and it stays there for the period shown in that inbox.',
     'Children. If you are under 18, please ask a parent or guardian to help you with sign-up and contact details.'
   ]},
   terms: {no:'02', title:'Terms of service', paras:[
@@ -6511,13 +6945,14 @@ const LEGAL_DOCS = {
     '9. No warranty. TORQ is provided as is, without warranties of any kind, to the extent the law allows. We are not liable for indirect loss arising from your use of the app.',
     '10. Changes. We may update these terms. We will show the date of the latest update here. Continued use after an update means you accept the new terms.',
     '11. Contact. Questions about these terms can be sent through the Contact Us form on this page.',
-    '12. Screen awake. While TORQ is open and in view, it asks your device to keep the screen on so timed practice is not interrupted. This uses the browser\'s Screen Wake Lock. It stops when you leave the app, and you can turn the screen off yourself at any time.'
+    '12. Screen awake. While TORQ is open and in view, it asks your device to keep the screen on so timed practice is not interrupted. This uses the browser\'s Screen Wake Lock. It stops when you leave the app, and you can turn the screen off yourself at any time.',
+    '13. Usage records and messages. TORQ records basic usage as described in the privacy policy, and admins may message you through For Your Eyes Only. Messages are for study and account matters only.'
   ]},
   copyright: {no:'03', title:'Copyright', paras:[
     'The app, its design, its notes, formula cards, explanations and worked examples are copyright TORQ, 2026. *Please do not copy or redistribute them without permission.*',
     'Question papers are the public previous-year papers used for practice. All trademarks and names belong to their owners.'
   ]},
-  disclaimer: {no:'04', title:'Independence notice', links:[
+  disclaimer: {no:'04', title:'Independence notice', paras:['Usage figures. Totals such as active users, questions answered and coaching choices are used to improve TORQ. They are not a measure of any student or of any exam result, and they are not shared with exam bodies or coaching institutes.'], links:[
     {label:'JEE Main, National Testing Agency', note:'Syllabus, important dates and rules for JEE Main', url:'https://jeemain.nta.ac.in'},
     {label:'JEE Advanced, IIT', note:'Syllabus PDF, schedule and brochure for JEE Advanced', url:'https://jeeadv.ac.in'},
     {label:'National Testing Agency', note:'Official notices and exam calendar', url:'https://nta.ac.in'}
