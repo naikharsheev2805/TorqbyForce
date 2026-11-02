@@ -507,7 +507,7 @@ body.chat-full .wa-compose{ flex:none; padding-bottom:max(8px, env(safe-area-ins
 
 /* ===== Messenger: formulas float over the whole screen ===== */
 .gutter-msg{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; display:none; }
-.gutter-msg .gf{ opacity:.16; }
+.gutter-msg .gf{ opacity:.1; }
 body.msg-fit .gutter-msg{ display:block; }
 body.msg-fit .gutter{ display:none !important; }
 body.msg-fit #app{ background:transparent !important; position:relative; z-index:1; }
@@ -531,6 +531,16 @@ body.msg-fit #app{ background:transparent !important; position:relative; z-index
 .bubble.act-bub .act-mic svg{ width:30px; height:20px; }
 .bubble.act-bub .wa-dots{ height:8px; margin-left:0; }
 @media (prefers-reduced-motion: reduce){ .wa-dots i, .act-mic .aw{ animation:none; } .act-mic .aw{ opacity:1; } }
+
+/* ===== Voice playback: bars bounce while playing, for sender and receiver ===== */
+.bubble.audio.playing .vb-bar{ animation:vbBar .8s ease-in-out infinite; transform-origin:center; }
+.bubble.audio.playing .vb-bar:nth-child(4n+1){ animation-delay:0s; }
+.bubble.audio.playing .vb-bar:nth-child(4n+2){ animation-delay:.2s; }
+.bubble.audio.playing .vb-bar:nth-child(4n+3){ animation-delay:.4s; }
+.bubble.audio.playing .vb-bar:nth-child(4n){ animation-delay:.6s; }
+.bubble.audio.playing .vb-play{ animation:none; }
+.bubble.audio .vb-bar.played{ background:#f08a3c; }
+@media (prefers-reduced-motion: reduce){ .bubble.audio.playing .vb-bar{ animation:none; } }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -10054,12 +10064,12 @@ function setQnavOpen(wrap, on){
 function buildMsgGutter(){
   if(document.querySelector('.gutter-msg')) return;
   const g = el('<div class="gutter-msg" aria-hidden="true"></div>');
-  const cols = 6, rows = 16;
+  const cols = 3, rows = 7;
   for(let r=0; r<rows; r++){
     for(let c=0; c<cols; c++){
       const t = el('<span class="gf">'+esc(BG_FORMULAS[(r*cols + c) % BG_FORMULAS.length])+'</span>');
-      t.style.left = (c*17 + (r%3)*3 - 2) + '%';
-      t.style.top = (r*6.6 + (c%2)*2) + '%';
+      t.style.left = (6 + c*40 + (r%2)*4) + '%';
+      t.style.top = (4 + r*14 + (c%2)*5) + '%';
       t.style.animationDelay = (-(r*1.1 + c*0.7)) + 's';
       t.style.setProperty('--r', ((r%2?1:-1)*(2 + (c%3)*2)) + 'deg');
       g.appendChild(t);
