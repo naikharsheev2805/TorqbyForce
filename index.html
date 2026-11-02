@@ -2663,6 +2663,10 @@ body.msg-fit .wa-compose, body.chat-full .wa-compose{ flex:none !important; posi
   body.msg-fit #app{ padding-bottom:16px !important; }
   body.msg-fit #app, body.chat-full #app{ max-width:760px !important; margin-left:auto !important; margin-right:auto !important; }
 }
+/* Doubt cards in chat: keep inline maths on the text baseline, so subscripts such as d_2 sit where they belong */
+body .wa-msgs .qcard-chat .katex{ display:inline-block !important; white-space:nowrap !important; overflow:visible !important; vertical-align:baseline !important; line-height:normal !important; max-width:none !important; }
+body .wa-msgs .qcard-chat .katex-display{ display:inline-block !important; overflow:visible !important; margin:0 !important; }
+body .wa-msgs .qcard-chat .katex .vlist-t, body .wa-msgs .qcard-chat .katex .vlist{ vertical-align:baseline !important; }
 /* Very short or very narrow screens: keep the message bar usable */
 @media (max-height:560px){ body.msg-fit .wa-msgs{ min-height:120px; } }
 </style>
@@ -3556,7 +3560,9 @@ function flushReports(){
 }
 // Errors: anything that breaks in a student's browser is recorded once per session, so the creator can see it
 const __seenErr = {};
+const ERROR_LOG_ON = false;   // dormant: set to true to record app errors again
 function reportError(msg, stack){
+  if(!ERROR_LOG_ON) return;
   const text = String(msg || '').slice(0, 500);
   if(!text || __seenErr[text.slice(0,120)]) return;
   __seenErr[text.slice(0,120)] = 1;
@@ -7159,7 +7165,7 @@ async function loadFriends(){
       const pr = await db.from('profiles').select('id, avatar_data, hide_from_leaderboard').in('id', need);
       (pr.data || []).forEach(function(p){
         const f = fr.list.find(function(x){ return x.id === p.id; });
-        if(f && p.avatar_data && !p.hide_from_leaderboard) f.avatar = p.avatar_data;
+        if(f && p.avatar_data) f.avatar = p.avatar_data;   // leaderboard visibility does not hide a photo from friends
       });
     }
   }catch(e){}
@@ -7575,6 +7581,7 @@ function doubtView(){
   const w = el('<div></div>');
   if(!sbSession){ w.appendChild(el('<div class="card"><p class="note-line">Log in to open doubts.</p></div>')); return w; }
   const back = el('<button class="btn ghost" type="button">Messages</button>');
+  back.style.marginBottom = '18px';   // keep the card clear of the button
   back.onclick = ()=>go('messages');
   w.appendChild(back);
   if(doubt.loading){ w.appendChild(el('<p class="note-line" style="margin-top:14px">Opening the doubt...</p>')); return w; }
@@ -7587,7 +7594,12 @@ function doubtView(){
   if(s0.asker_note) sheet.appendChild(el('<p class="doubt-ask">&ldquo;'+esc(s0.asker_note)+'&rdquo;</p>'));
   const q = doubt.q;
   if(q){
-    sheet.appendChild(el('<div class="doubt-q">'+qtextHTML(q.text)+'</div>'));
+    // Same question card as the practice screen (subject bar, tags, question text), without the timer
+    const qc = el('<div class="card qcard" style="--bar:'+(SUBJ_VAR[q.subject]||'')+';margin:0 0 12px"></div>');
+    qc.appendChild(el('<div class="tags"><span class="tag shift">'+q.year+' · '+SHIFT_NAME[q.shift]+'</span><span class="tag diff diff-'+String(q.difficulty||'').toLowerCase()+'">'+esc(q.difficulty||'')+'</span><span class="tag">'+esc(q.topic||'')+'</span>'+wtTag(q.subject,q.chapter)+'</div>'));
+    qc.appendChild(el('<div class="qtext">'+qtextHTML(q.text)+'</div>'));
+    if(q.image) qc.appendChild(qImage(q.image));
+    sheet.appendChild(qc);
     if(Array.isArray(q.options) && q.options.length){
       const list = el('<div class="doubt-opts"></div>');
       q.options.forEach((o,i)=>{
