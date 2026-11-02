@@ -148,34 +148,44 @@ html, body{ overscroll-behavior-y:none; }
 .on-strip .on-av,.on-strip .on-more{ width:26px; height:26px; margin-left:-8px; border-color:#0d0b09; font-size:11px; }
 .on-strip .on-label b{ font-size:12px; color:#f3ead8; }
 .on-strip .on-label small{ font-size:10px; color:#a79b82; }
-/* Keyboard: polished keys, shift, symbols */
-.wa-kb{ flex:none; margin-top:8px; padding:10px 6px 8px; border-radius:20px; background:linear-gradient(180deg,var(--surface-2),var(--surface)); border:1px solid var(--border); box-shadow:0 -14px 36px -22px var(--shadow), inset 0 1px 0 rgba(255,255,255,.05); }
-.wa-krow{ display:flex; gap:5px; margin-top:6px; }
+/* Keyboard: same keys as the number keypad */
+.wa-kb{ margin-top:10px; flex:none; }
+.wa-krow{ display:flex; gap:8px; margin-top:8px; }
 .wa-krow:first-child{ margin-top:0; }
-.wa-krow.inset{ padding:0 12px; }
-.wa-k{ flex:1 1 0; min-width:0; min-height:42px; padding:0 2px; display:flex; align-items:center; justify-content:center; border-radius:12px; border:1px solid var(--border); background:linear-gradient(180deg,var(--surface),var(--bg)); color:var(--text); font:500 16px/1 Inter,sans-serif; box-shadow:0 2px 0 var(--border); cursor:pointer; transition:transform .08s ease, box-shadow .08s ease, background .15s ease; -webkit-tap-highlight-color:transparent; }
-.wa-k:active{ transform:translateY(1px); box-shadow:0 1px 0 var(--border); }
-.wa-k:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
-.wa-k.wide{ flex:1.5 1 0; }
-.wa-k.narrow{ flex:.8 1 0; }
-.wa-k.sp{ flex:4 1 0; font-size:13px; color:var(--muted); }
-.wa-k.fn{ background:var(--surface); color:var(--muted); font-size:14px; font-weight:600; }
-.wa-k.on{ background:var(--accent-soft); color:var(--accent-text); border-color:var(--accent-text); }
-.wa-k.send{ flex:1.6 1 0; background:var(--accent); color:#1f1e1d; border-color:transparent; font-weight:700; box-shadow:0 2px 0 rgba(0,0,0,.25); }
-@media (prefers-reduced-motion: reduce){ .wa-k{ transition:none; } }
+.wa-kb .nk{ flex:1 1 0; min-width:0; min-height:54px; padding:0; display:flex; align-items:center; justify-content:center; }
+.wa-kb .nk.wide{ flex:1.5 1 0; }
+.wa-kb .nk.narrow{ flex:.8 1 0; }
+.wa-kb .nk.sp{ flex:4 1 0; font-size:15px; color:var(--muted); }
+.wa-kb .nk.on{ color:var(--accent-text); border-color:var(--accent-text); }
+.wa-kb .nk.send{ flex:1.6 1 0; background:var(--accent); color:#1f1e1d; border-color:transparent; font-size:16px; }
+/* Back and plus: large round buttons with thick icons */
+.wa-back, .plus-btn{ width:46px; height:46px; border-radius:50%; padding:0; display:inline-flex; align-items:center; justify-content:center; flex:none; cursor:pointer; }
+.wa-back svg, .plus-btn svg{ width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:2.8; stroke-linecap:round; stroke-linejoin:round; }
+.wa-back{ background:var(--surface); color:var(--text); border:1.5px solid var(--border); box-shadow:0 2px 0 var(--border); }
+.plus-btn{ background:var(--accent); color:#1f1e1d; border:0; box-shadow:0 3px 0 rgba(0,0,0,.25); }
 /* Keyboard open: message bar sits right above it, keyboard fills the bottom, menu hidden */
 body.kb-open .bottomnav{ display:none !important; }
 body.msg-fit.kb-open #app{ padding-bottom:env(safe-area-inset-bottom,0px); }
 .wa-compose{ padding:8px 0 8px; background:var(--bg); }
 .wa-field{ min-height:40px; border-radius:16px; padding:9px 14px; }
 .wa-send{ height:40px; padding:0 18px; border-radius:14px; }
-.wa-kb{ margin-top:0; border-radius:20px 20px 0 0; border-left:0; border-right:0; border-bottom:0; padding:10px 8px calc(10px + env(safe-area-inset-bottom,0px)); }
+.wa-kb{ padding-bottom:calc(8px + env(safe-area-inset-bottom,0px)); }
 /* Open chat: only the chat and its back button, full screen */
 body.chat-full .header,
 body.chat-full #navTog,
 body.chat-full .bottomnav{ display:none !important; }
 body.msg-fit.chat-full #app{ padding-bottom:env(safe-area-inset-bottom,0px); padding-top:calc(env(safe-area-inset-top,0px) + 6px); }
 body.chat-full .wa-head{ padding-top:6px; }
+/* Light themes: accents are pastel or vivid, never dark; subject cards get a clear pastel background with vivid doodles */
+[data-theme="mint"]{ --accent-text:#3a9a72; --subj-phys:#3f7fe0; --subj-chem:#2fa872; --subj-maths:#d0509a; --c-phys:#3f7fe0; --c-chem:#2fa872; --c-maths:#d0509a; }
+[data-theme="lavender"]{ --accent-text:#7c5fd0; --subj-phys:#4a7fe0; --subj-chem:#2fa872; --subj-maths:#c8559a; --c-phys:#4a7fe0; --c-chem:#2fa872; --c-maths:#c8559a; }
+[data-theme="peach"]{ --accent-text:#d9733f; --subj-phys:#3f7fe0; --subj-chem:#2fa872; --subj-maths:#d0509a; --c-phys:#3f7fe0; --c-chem:#2fa872; --c-maths:#d0509a; }
+[data-theme="sky"]{ --accent-text:#3b8ac4; --subj-phys:#3b8ac4; --subj-chem:#2fa872; --subj-maths:#d0509a; --c-phys:#3b8ac4; --c-chem:#2fa872; --c-maths:#d0509a; }
+[data-theme="cotton-candy"]{ --accent-text:#d64f93; --subj-phys:#3f7fe0; --subj-chem:#2fa872; --subj-maths:#d0509a; --c-phys:#3f7fe0; --c-chem:#2fa872; --c-maths:#d0509a; }
+[data-theme="butter"]{ --accent-text:#c48a0a; --subj-phys:#3f7fe0; --subj-chem:#2fa872; --subj-maths:#d0509a; --c-phys:#3f7fe0; --c-chem:#2fa872; --c-maths:#d0509a; }
+[data-theme="ocean"]{ --accent-text:#2fa083; --subj-phys:#3f7fe0; --subj-chem:#2fa872; --subj-maths:#d0509a; --c-phys:#3f7fe0; --c-chem:#2fa872; --c-maths:#d0509a; }
+:root[data-theme="mint"] .subjart, :root[data-theme="mint"] .fc-art, :root[data-theme="lavender"] .subjart, :root[data-theme="lavender"] .fc-art, :root[data-theme="peach"] .subjart, :root[data-theme="peach"] .fc-art, :root[data-theme="sky"] .subjart, :root[data-theme="sky"] .fc-art, :root[data-theme="cotton-candy"] .subjart, :root[data-theme="cotton-candy"] .fc-art, :root[data-theme="butter"] .subjart, :root[data-theme="butter"] .fc-art, :root[data-theme="ocean"] .subjart, :root[data-theme="ocean"] .fc-art{ background:linear-gradient(170deg, color-mix(in srgb, var(--accent) 55%, var(--surface)), color-mix(in srgb, var(--accent) 28%, var(--surface))) !important; }
+:root[data-theme="mint"] .subjart svg, :root[data-theme="lavender"] .subjart svg, :root[data-theme="peach"] .subjart svg, :root[data-theme="sky"] .subjart svg, :root[data-theme="cotton-candy"] .subjart svg, :root[data-theme="butter"] .subjart svg, :root[data-theme="ocean"] .subjart svg{ --accent: var(--accent-text); }
 /* Doubt screen: room between the buttons */
 .doubt-sheet .btn{ margin-top:14px !important; }
 .doubt-sheet .btn + .btn{ margin-top:10px !important; }
@@ -7098,11 +7108,24 @@ async function checkDoubtInbox(){
     .eq('recipient', sbSession.user.id).in('kind', ['question_card','answer_card']).is('read_at', null);
   if(count > 0) appNotice('New from your friends', count === 1 ? 'You have 1 new doubt or reply. Open Messages to see it.' : 'You have '+count+' new doubts or replies. Open Messages to see them.');
 }
+// "Online now", or how long ago the friend was last seen (minutes, hours, days)
+function lastSeenText(uid){
+  const p = fr.presence[uid];
+  if(!p) return 'Not seen yet';
+  if(stateOf(p) !== 'offline') return 'Online now';
+  const mins = Math.floor((Date.now() - Date.parse(p.last_seen)) / 60000);
+  if(mins < 1) return 'Last seen just now';
+  if(mins < 60) return 'Last seen ' + mins + (mins === 1 ? ' minute' : ' minutes') + ' ago';
+  const hrs = Math.floor(mins / 60);
+  if(hrs < 24) return 'Last seen ' + hrs + (hrs === 1 ? ' hour' : ' hours') + ' ago';
+  const days = Math.floor(hrs / 24);
+  if(days < 7) return 'Last seen ' + days + (days === 1 ? ' day' : ' days') + ' ago';
+  return 'Last seen ' + new Date(p.last_seen).toLocaleDateString([], {day:'numeric', month:'short'});
+}
 function friendsPanel(){
   const w = el('<div></div>');
   if(!sbSession){ w.appendChild(el('<div class="card"><p class="note-line">Log in to see your friends.</p></div>')); return w; }
   if(fr.list === null && !fr.loading) loadFriends();
-  if(fr.open) return chatScreen(fr.open);
 
   w.appendChild(duoPanel());
   const add = el('<div class="card" style="padding:22px"></div>');
@@ -7135,11 +7158,10 @@ function friendsPanel(){
     const r = el('<div class="lb-item" style="cursor:pointer"></div>');
     r.appendChild(presenceDot(f.id));
     r.appendChild(el('<span class="lb-who"><b>'+esc(f.username||'Student')+'</b>'+(f.first?'<small>'+esc(f.first)+'</small>':'')+'</span>'));
-    r.appendChild(el('<span class="note-line" style="margin:0">'+esc(DOT_STATES[stateOf(fr.presence[f.id])].label)+'</span>'));
+    r.appendChild(el('<span class="note-line" style="margin:0">'+esc(lastSeenText(f.id))+'</span>'));
     const duoBtn = el('<button class="btn ghost" type="button" style="margin-left:auto">Flame</button>');
     duoBtn.onclick = e=>{ e.stopPropagation(); startDuoSheet(f); };
     r.appendChild(duoBtn);
-    r.onclick = ()=>openChat(f);
     fc.appendChild(r);
   });
   w.appendChild(fc);
@@ -7253,7 +7275,7 @@ const chatStarted = new Set();
 function chatToolsBlock(){
   const w = el('<div class="msg-screen"></div>');
   const bar = el('<div class="msg-tools"><div class="eyebrow" style="margin:0">Chats</div></div>');
-  const plus = el('<button class="btn plus-btn" type="button" aria-label="'+(fr.picking ? 'Close' : 'Start a new chat')+'">'+(fr.picking ? '\u00d7' : '+')+'</button>');
+  const plus = el('<button class="plus-btn" type="button" aria-label="'+(fr.picking ? 'Close' : 'Start a new chat')+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+(fr.picking ? '<path d="M6 6l12 12M18 6L6 18"/>' : '<path d="M12 5v14M5 12h14"/>')+'</svg></button>');
   plus.onclick = ()=>{ fr.picking = !fr.picking; if(fr.picking && fr.list === null) loadFriends(); render(); };
   bar.appendChild(plus);
   w.appendChild(bar);
@@ -7374,7 +7396,7 @@ function waShowDraft(f){
   f.innerHTML = fr.draft ? '<span>'+esc(fr.draft)+'</span>' : '<i>Message</i>';
 }
 function waKey(label, cls, fn){
-  const b = el('<button type="button" class="wa-k '+(cls||'')+'" aria-label="'+esc(label)+'">'+esc(label)+'</button>');
+  const b = el('<button type="button" class="nk '+(cls||'')+'" aria-label="'+esc(label)+'">'+esc(label)+'</button>');
   b.onclick = fn;
   return b;
 }
@@ -7408,7 +7430,7 @@ function chatScreen(f){
   if(fr.waChat !== f.id){ fr.waChat = f.id; fr.waAtBottom = true; fr.kb = false; scrollChatToEnd = true; }
   const w = el('<div class="wa-chat"></div>');
   const head = el('<div class="wa-head"></div>');
-  const back = el('<button class="wa-back" type="button" aria-label="Back to chats">&larr;</button>');
+  const back = el('<button class="wa-back" type="button" aria-label="Back to chats"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>');
   back.onclick = closeChat;
   head.appendChild(back);
   head.appendChild(avatarEl(f, true));
