@@ -231,6 +231,7 @@ body.kb-open .wa-compose .wa-field{ flex:1 1 100%; }
 .wa-msgs .qcard-chat > span{ display:block !important; width:100% !important; font:14px/1.45 Inter,sans-serif !important; color:var(--text) !important; white-space:normal !important; overflow-wrap:break-word !important; word-break:normal !important; height:auto !important; overflow:visible !important; }
 .wa-msgs .qcard-chat small{ display:block !important; width:100% !important; font-size:11px !important; color:var(--muted) !important; margin-top:2px !important; text-align:right !important; }
 .wa-msgs .qcard-chat .katex, .wa-msgs .qcard-chat .katex-display{ display:inline !important; max-width:100% !important; overflow-x:auto !important; white-space:normal !important; }
+.wa-msgs .qcard-chat .katex{ line-height:normal !important; } .wa-msgs .qcard-chat .katex .base{ line-height:normal !important; }
 /* Doubt screen: room between the buttons */
 .doubt-sheet .btn{ margin-top:14px !important; }
 .doubt-sheet .btn + .btn{ margin-top:10px !important; }
@@ -503,7 +504,7 @@ body.chat-full .wa-compose{ flex:none; padding-bottom:max(8px, env(safe-area-ins
 @media (prefers-reduced-motion: reduce){ .wa-dots i{ animation:none; } }
 
 /* ===== Recording controls respond instantly on touch ===== */
-.vr-round, .vr-send, .wa-send, .vr-mic, .vb-play, .wa-more, .mm-item, .mm-react, .wa-pin-x{ touch-action:manipulation; }
+.vr-round, .vr-send, .wa-send, .vb-play, .wa-more, .mm-item, .mm-react, .wa-pin-x{ touch-action:manipulation; }
 
 /* ===== Messenger: formulas float over the whole screen ===== */
 .gutter-msg{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; display:none; }
@@ -541,6 +542,59 @@ body.msg-fit #app{ background:transparent !important; position:relative; z-index
 .bubble.audio.playing .vb-play{ animation:none; }
 .bubble.audio .vb-bar.played{ background:#f08a3c; }
 @media (prefers-reduced-motion: reduce){ .bubble.audio.playing .vb-bar{ animation:none; } }
+
+/* ---- Recorder polish: lock chip above the mic, floating oval bar, plus rotates into a cross, list slides in ---- */
+.vr-mic, .vr-mic-wrap .vr-mic{ touch-action:none !important; }
+.vr-mic{ transition:transform .18s cubic-bezier(.2,.8,.2,1), box-shadow .2s, background-color .2s; }
+.vr-mic:active{ transform:scale(.92); }
+.vr-mic-wrap{ position:relative; display:inline-flex; flex:none; }
+.vr-lockchip{ position:absolute; left:50%; bottom:calc(100% + 12px); width:40px; height:64px; margin-left:-20px; border-radius:999px; background:var(--surface); border:1px solid var(--border); box-shadow:0 8px 22px rgba(0,0,0,.28); color:var(--text); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; opacity:0; pointer-events:none; transform:translateY(12px) scale(.85); transition:opacity .2s ease, transform .22s cubic-bezier(.2,.8,.2,1), background-color .25s, color .25s; }
+.vr-mic-wrap.show .vr-lockchip{ opacity:1; transform:translateY(var(--lift,0px)) scale(1); }
+.vr-lockchip svg{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+.vr-lockchip .vr-arrow{ animation:vrBob .9s ease-in-out infinite; }
+.vr-lockchip.on{ background:var(--accent); color:var(--accent-ink); border-color:transparent; }
+.vr-lockchip.on .vr-arrow{ display:none; }
+.vr-lockchip.on .vr-lock-ic{ animation:vrLockSnap .4s cubic-bezier(.34,1.56,.64,1); }
+@keyframes vrBob{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-5px); } }
+@keyframes vrLockSnap{ 0%{ transform:scale(.5); } 100%{ transform:scale(1); } }
+@keyframes vrFloatIn{ from{ opacity:0; transform:translateY(14px) scale(.96); } to{ opacity:1; transform:none; } }
+.wa-chat .wa-compose > .vr-pill{ height:48px; border-radius:999px; box-shadow:0 8px 22px rgba(0,0,0,.18); animation:vrFloatIn .35s cubic-bezier(.2,.8,.2,1) both; }
+.wa-compose.vr-float{ padding:4px 0; }
+.wa-chat .wa-compose > .vr-float-pill{ flex:1 1 auto; width:auto; }
+.vr-float-pill{ display:flex; align-items:center; gap:6px; box-sizing:border-box; height:60px; padding:7px; border-radius:999px; background:var(--surface); border:1px solid var(--border); box-shadow:0 12px 30px rgba(0,0,0,.28); animation:vrFloatIn .38s cubic-bezier(.2,.8,.2,1) both; }
+.vr-cancel{ width:44px; height:44px; flex:none; border:0; border-radius:50%; background:transparent; color:#e0584f; display:grid; place-items:center; cursor:pointer; transition:background-color .2s, transform .15s cubic-bezier(.2,.8,.2,1); }
+.vr-cancel svg{ width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round; }
+.vr-cancel:hover{ background:rgba(224,88,79,.12); }
+.vr-wave-wrap{ flex:1; min-width:0; display:flex; align-items:center; gap:8px; padding-left:2px; }
+.vr-wave-wrap .vr-dot{ animation:vrPulse 1.1s ease-in-out infinite; }
+.vr-float.review .vr-wave-wrap .vr-dot{ animation:none; background:var(--muted); }
+.vr-float .vr-time{ flex:none; min-width:34px; font:600 13px/1 Inter,sans-serif; font-variant-numeric:tabular-nums; color:var(--text); }
+.vr-wave{ flex:1; min-width:0; height:34px; display:flex; align-items:center; justify-content:space-between; overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+.vr-wave .vr-bar{ flex:1 1 0; max-width:4px; min-height:3px; border-radius:3px; background:var(--border); transition:height .12s linear, background-color .2s; }
+.vr-float.live .vr-wave .vr-bar{ background:var(--accent-text); }
+.vr-float.review .vr-wave .vr-bar.played{ background:var(--accent-text); }
+.vr-stop, .vr-play-btn, .vr-send-btn{ width:44px; height:44px; flex:none; border:0; border-radius:50%; display:grid; place-items:center; cursor:pointer; transition:transform .15s cubic-bezier(.2,.8,.2,1), background-color .2s, box-shadow .2s; }
+.vr-stop, .vr-play-btn{ background:var(--bg); color:var(--text); border:1px solid var(--border); }
+.vr-send-btn{ background:var(--accent); color:var(--accent-ink); box-shadow:0 3px 0 rgba(0,0,0,.2); }
+.vr-cancel:active, .vr-stop:active, .vr-play-btn:active, .vr-send-btn:active{ transform:scale(.88); }
+.vr-stop svg{ width:16px; height:16px; fill:currentColor; stroke:none; }
+.vr-play-btn svg{ width:16px; height:16px; fill:currentColor; stroke:none; }
+.vr-play-btn .ic-pause{ display:none; }
+.vr-float.playing .vr-play-btn .ic-play{ display:none; }
+.vr-float.playing .vr-play-btn .ic-pause{ display:block; }
+.vr-send-btn svg{ width:19px; height:19px; fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; }
+.plus-btn{ transition:background-color .3s ease, color .3s ease, box-shadow .3s ease, border-color .3s ease, transform .2s cubic-bezier(.2,.8,.2,1); }
+.plus-btn svg{ transition:transform .45s cubic-bezier(.34,1.45,.64,1); }
+.plus-btn:active{ transform:scale(.9); }
+.plus-btn.open{ background:var(--surface); color:var(--text); border:1.5px solid var(--border); box-shadow:0 2px 0 var(--border); }
+.plus-btn.open svg{ transform:rotate(135deg); }
+.wa-scroll{ transition:opacity .17s ease, transform .17s ease; }
+.wa-scroll.swap-out{ opacity:0; transform:translateY(6px); }
+@keyframes tsSwapIn{ from{ opacity:0; transform:translateY(12px); } to{ opacity:1; transform:none; } }
+@keyframes tsRowIn{ from{ opacity:0; transform:translateX(-12px); } to{ opacity:1; transform:none; } }
+.wa-scroll.swap-in > *{ animation:tsSwapIn .36s cubic-bezier(.2,.8,.2,1) both; }
+.wa-scroll.swap-in .wa-row{ animation:tsRowIn .38s cubic-bezier(.2,.8,.2,1) both; animation-delay:calc(var(--i,0) * 45ms + 70ms); }
+@media (prefers-reduced-motion: reduce){ .vr-lockchip .vr-arrow, .vr-wave-wrap .vr-dot, .wa-scroll.swap-in > *, .wa-scroll.swap-in .wa-row, .vr-float-pill, .wa-chat .wa-compose > .vr-pill{ animation:none !important; } .plus-btn svg, .vr-mic, .wa-scroll{ transition:none !important; } }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -2577,6 +2631,37 @@ body.has-nav .build-stamp{ margin-bottom:calc(96px + env(safe-area-inset-bottom,
 @media (prefers-reduced-motion: reduce){
   .eyes-mail, .eye-seal, .eye-card, .eye-card.sealed.breaking .eye-seal, .eye-card.sealed.breaking{ animation:none !important; transition:none !important; }
 }
+/* ==== Patch: audio bounce, doubt card full text, lock chip, smoother plus/cross, polish ==== */
+@keyframes vbBar{ 0%,100%{ transform:scaleY(1); } 50%{ transform:scaleY(.45); } }
+.bubble.audio.playing .vb-bar{ animation:vbBar .8s ease-in-out infinite; transform-origin:center; }
+.bubble.audio.playing .vb-bar:nth-child(4n+1){ animation-delay:0s; }
+.bubble.audio.playing .vb-bar:nth-child(4n+2){ animation-delay:.2s; }
+.bubble.audio.playing .vb-bar:nth-child(4n+3){ animation-delay:.4s; }
+.bubble.audio.playing .vb-bar:nth-child(4n){ animation-delay:.6s; }
+@media (prefers-reduced-motion: reduce){ .bubble.audio.playing .vb-bar{ animation:none; } }
+
+.wa-msgs .qcard-chat,
+.wa-msgs .qcard-chat > span{ max-height:none !important; overflow:visible !important; height:auto !important; }
+.wa-msgs .qcard-chat > span{ white-space:pre-wrap !important; overflow-wrap:anywhere !important; }
+
+.vr-lockchip{ transition:opacity .2s ease, transform .22s cubic-bezier(.2,.8,.2,1), background-color .25s, color .25s; }
+.vr-lockchip .vr-arrow{ animation:vrBob .9s ease-in-out infinite; }
+.vr-lockchip.on{ background:var(--accent); color:var(--accent-ink); }
+.vr-lockchip.on .vr-arrow{ display:none; }
+@keyframes vrBob{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-5px); } }
+
+.plus-btn{ transition:background-color .3s ease, color .3s ease, box-shadow .3s ease, transform .2s cubic-bezier(.2,.8,.2,1); }
+.plus-btn svg{ transition:transform .45s cubic-bezier(.34,1.45,.64,1); }
+.plus-btn.open svg{ transform:rotate(135deg); }
+.wa-scroll{ transition:opacity .2s ease, transform .2s ease; }
+.wa-scroll.swap-out{ opacity:0; transform:translateY(8px); }
+@keyframes tsRowIn{ from{ opacity:0; transform:translateX(-12px); } to{ opacity:1; transform:none; } }
+.wa-scroll.swap-in .wa-row{ animation:tsRowIn .38s cubic-bezier(.2,.8,.2,1) both; animation-delay:calc(var(--i,0) * 45ms + 70ms); }
+.bubble{ animation:bubbleIn .28s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes bubbleIn{ from{ opacity:0; transform:translateY(6px) scale(.97); } to{ opacity:1; transform:none; } }
+.vr-mic:active, .vb-play:active, .wa-send:active, .vr-send-btn:active{ transform:scale(.9); }
+@media (prefers-reduced-motion: reduce){ .wa-scroll, .plus-btn, .plus-btn svg, .bubble, .wa-scroll.swap-in .wa-row{ animation:none !important; transition:none !important; } }
+
 </style>
 </head>
 <body>
@@ -4911,7 +4996,7 @@ function homeView(){
   window.__hour = moodHour();
   const mood = timeMood();
   const firstName = (store.profile && store.profile.name ? store.profile.name : '').split(' ')[0];
-  const clock = new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
+  const clock = new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit', hour12:true});
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div>'
     +'<div class="hm-eyebrow">'+esc(mood.mood)+' · '+esc(clock)+'</div>'
     +'<h1 class="hm-title">'+esc(mood.hi(firstName||'there'))+'</h1></div>'));
@@ -6467,7 +6552,7 @@ function reportSort(list){
     || (reportReasons(b).length - reportReasons(a).length)
     || ((b.word_count||0) - (a.word_count||0)));
 }
-function fmtWhen(iso){ return iso ? new Date(iso).toLocaleString([], {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'}) : '—'; }
+function fmtWhen(iso){ return iso ? new Date(iso).toLocaleString([], {day:'numeric', month:'short', hour:'numeric', minute:'2-digit', hour12:true}) : '—'; }
 function loadAdmin(){
   if(adminState.loading) return;
   adminState.loading = true; adminState.err = null;
@@ -7128,14 +7213,14 @@ function chatExtras(m, me, seenId){
   }
   if(m.id === seenId && m.read_at){
     const d = new Date(m.read_at);
-    wrap.appendChild(el('<div class="wa-seen">Seen at ' + d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) + '</div>'));
+    wrap.appendChild(el('<div class="wa-seen">Seen at ' + d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit', hour12:true}) + '</div>'));
   }
   return wrap;
 }
 async function shareStreak(f){
   const n = streak(); if(!n) return;
   const { error } = await sbClient().from('chat_messages').insert({sender: sbSession.user.id, recipient: f.id, body: '\u{1F525} ' + n + '-day streak. Keep it going.', kind: 'streak'});
-  if(error){ fr.note = 'Could not share your streak. Check your connection.'; render(); return; }
+  if(error){ fr.note = 'Could not share your streak: ' + (error.message || 'unknown error'); render(); return; }
   scrollChatToEnd = true;
   await refreshChat(false);
 }
@@ -7658,7 +7743,7 @@ function chatPreviewText(m, me){
 }
 function fmtChatTime(iso){
   const d = new Date(iso), now = new Date();
-  if(d.toDateString() === now.toDateString()) return d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+  if(d.toDateString() === now.toDateString()) return d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit', hour12:true});
   const y = new Date(now); y.setDate(now.getDate() - 1);
   if(d.toDateString() === y.toDateString()) return 'Yesterday';
   return d.toLocaleDateString([], {day:'numeric', month:'short'});
@@ -7738,17 +7823,30 @@ const chatStarted = new Set();
 function chatToolsBlock(){
   const w = el('<div class="msg-screen"></div>');
   const bar = el('<div class="msg-tools"><div class="eyebrow" style="margin:0">Chats</div></div>');
-  const plus = el('<button class="plus-btn" type="button" aria-label="'+(fr.picking ? 'Close' : 'Start a new chat')+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+(fr.picking ? '<path d="M6 6l12 12M18 6L6 18"/>' : '<path d="M12 5v14M5 12h14"/>')+'</svg></button>');
-  plus.onclick = ()=>{ fr.picking = !fr.picking; if(fr.picking && fr.list === null) loadFriends(); render(); };
-  bar.appendChild(plus);
-  w.appendChild(bar);
+  const plus = el('<button class="plus-btn' + (fr.picking ? ' open' : '') + '" type="button" aria-label="' + (fr.picking ? 'Close' : 'Start a new chat') + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>');
   const scroll = el('<div class="wa-scroll"></div>');
   scroll.appendChild(fr.picking ? chatPickerCard() : chatListCard());
   if(!fr.picking) scroll.appendChild(savedNotesCard());
+  plus.onclick = ()=>{
+    fr.picking = !fr.picking;
+    if(fr.picking && fr.list === null) loadFriends();
+    plus.classList.toggle('open', fr.picking);
+    plus.setAttribute('aria-label', fr.picking ? 'Close' : 'Start a new chat');
+    scroll.classList.add('swap-out');
+    clearTimeout(scroll._swapT);
+    scroll._swapT = setTimeout(function(){
+      scroll.innerHTML = '';
+      scroll.appendChild(fr.picking ? chatPickerCard() : chatListCard());
+      if(!fr.picking) scroll.appendChild(savedNotesCard());
+      scroll.classList.remove('swap-out');
+      scroll.classList.add('swap-in');
+    }, 170);
+  };
+  bar.appendChild(plus);
+  w.appendChild(bar);
   w.appendChild(scroll);
   return w;
 }
-// Only accepted friends can be picked, so chats can only start between friends
 function chatPickerCard(){
   const card = el('<div class="card" style="padding:18px 16px"></div>');
   const friends = (fr.list || []).filter(f=>f.status==='accepted');
@@ -7757,8 +7855,9 @@ function chatPickerCard(){
     card.appendChild(el('<p class="note-line">You have no friends yet. Add one in Friends first.</p>'));
     return card;
   }
-  friends.forEach(f=>{
+  friends.forEach((f,i)=>{
     const row = el('<div class="wa-row" role="button" tabindex="0"></div>');
+    row.style.setProperty('--i', i);
     row.appendChild(avatarEl(f));
     row.appendChild(el('<div class="wa-main"><div class="wa-top"><b>'+esc(f.username||'Student')+'</b></div><div class="wa-bot"><span>'+esc(DOT_STATES[stateOf(fr.presence[f.id])].label)+'</span></div></div>'));
     const start = ()=>{ chatStarted.add(f.id); fr.picking = false; openChat(f); };
@@ -8024,7 +8123,7 @@ function chatScreen(f){
     const d = new Date(m.created_at);
     if(d.toDateString() !== lastDay){ lastDay = d.toDateString(); list.appendChild(el('<div class="wa-day"><span>'+esc(dayLabel(d))+'</span></div>')); }
     const mine = m.sender === me;
-    const stamp = d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    const stamp = d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit', hour12:true});
     const tick = mine ? '<i class="wa-tick'+(m.read_at ? ' seen' : '')+'">'+(m.read_at ? WA_TICK_SEEN : WA_TICK_SENT)+'</i>' : '';
     if(m.kind === 'question_card' || m.kind === 'answer_card'){
       const isQ = m.kind === 'question_card';
@@ -8121,6 +8220,7 @@ function voiceArm(e){
   if(e.button !== undefined && e.button !== 0) return;
   if(r.state !== 'idle' || fr.kb || !fr.open) return;
   r.mic = e.currentTarget; r.startX = e.clientX; r.startY = e.clientY; r.releasedEarly = false;
+  try{ e.currentTarget.setPointerCapture(e.pointerId); }catch(err){}
   r.holdTimer = setTimeout(function(){ r.holdTimer = null; voiceStart(); }, VOICE_HOLD_MS);
   window.addEventListener('pointermove', voiceMove);
   window.addEventListener('pointerup', voiceUp);
@@ -8135,7 +8235,7 @@ async function voiceStart(){
   }
   if(!voiceConsentGiven()){ r.state = 'idle'; r.mic = null; render(); voiceConsent(); return; }
   r.state = 'starting'; r.chat = fr.open.id; r.cancelArmed = false; r.aborted = false; r.releasedEarly = false;
-  render();
+  voiceSwapLeft();
   let stream = null;
   try{
     stream = await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true, noiseSuppression:true, autoGainControl:true}});
@@ -8177,7 +8277,7 @@ async function voiceStart(){
   r.state = 'holding';
   r.tick = setInterval(voiceTick, 100);
   vibrate(10);
-  render();
+  voiceSwapLeft();
 }
 function voiceSample(){
   const r = voiceRec;
@@ -8198,11 +8298,13 @@ function voiceTick(){
 }
 function voiceMove(e){
   const r = voiceRec;
-  if(r.state !== 'holding') return;
+  if(r.state !== 'holding' && r.state !== 'starting') return;
   const dx = e.clientX - r.startX, dy = e.clientY - r.startY;
+  r.dy = Math.max(0, -dy);
   const armed = dx < -VOICE_CANCEL_PX;
-  if(armed !== r.cancelArmed){ r.cancelArmed = armed; vibrate(10); updateVoiceUI(); }
-  if(!armed && dy < -VOICE_LOCK_PX) voiceLock();
+  if(armed !== r.cancelArmed){ r.cancelArmed = armed; vibrate(10); }
+  if(r.state === 'holding' && !armed && dy < -VOICE_LOCK_PX){ voiceLock(); return; }
+  updateVoiceUI();
 }
 function voiceUp(){
   const r = voiceRec;
@@ -8217,8 +8319,9 @@ function voiceUp(){
 function voiceLock(){
   const r = voiceRec;
   if(r.state !== 'holding') return;
-  r.state = 'locked'; r.cancelArmed = false; r.paused = false;
-  vibrate(10); render();
+  r.state = 'locked'; r.cancelArmed = false; r.paused = false; r.dy = 0;
+  removeVoiceListeners();
+  vibrate(12); render();
 }
 function voicePauseToggle(){
   const r = voiceRec;
@@ -8258,10 +8361,11 @@ function voiceAbort(note){
   const r = voiceRec;
   if(r.holdTimer){ clearTimeout(r.holdTimer); r.holdTimer = null; }
   removeVoiceListeners();
+  voicePreviewStop();
   if(r.state === 'idle'){ if(note) fr.note = note; return; }
   r.aborted = true;
   if(r.recorder && r.recorder.state !== 'inactive'){ try{ r.recorder.onstop = null; r.recorder.stop(); }catch(e){} }
-  r.state = 'idle'; r.mic = null;
+  r.state = 'idle'; r.mic = null; r.reviewBlob = null;
   voiceReleaseMedia();
   if(note) fr.note = note;
 }
@@ -8289,29 +8393,40 @@ async function voiceSend(blob, mime, ms, peaks, recipient){
 // Recorder UI
 function voiceBarsHTML(n){ let h = ''; for(let i = 0; i < n; i++) h += '<span class="vr-bar"></span>'; return h; }
 function voicePill(){
-  return el('<div class="vr-pill"><span class="vr-dot"></span><span class="vr-time">0:00</span><span class="vr-msg">Slide left to cancel, up to lock</span><span class="vr-live">' + voiceBarsHTML(16) + '</span></div>');
+  return el('<div class="vr-pill"><span class="vr-dot"></span><span class="vr-time">0:00</span><span class="vr-msg">‹ Slide to cancel</span><span class="vr-live">' + voiceBarsHTML(16) + '</span></div>');
 }
+const VOICE_X_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+const VOICE_STOP_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="6.5" width="11" height="11" rx="2.5"/></svg>';
+const VOICE_SEND_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
+const VOICE_LOCKCHIP_SVG = '<svg class="vr-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 13l6-6 6 6"/></svg><svg class="vr-lock-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3"/></svg>';
+const VOICE_FLOAT_BARS = 26;
 function voiceMicBtn(live){
   const r = voiceRec;
-  if(r.mic && r.state !== 'idle'){ r.mic.classList.toggle('live', !!live); return r.mic; }
+  if(r.mic && r.state !== 'idle'){
+    r.mic.classList.toggle('live', !!live);
+    const w0 = r.mic.closest('.vr-mic-wrap'); if(w0) return w0;
+  }
   const b = el('<button type="button" class="vr-mic' + (live ? ' live' : '') + '" aria-label="Hold to record a voice message">' + VOICE_MIC_SVG + '</button>');
   b.addEventListener('pointerdown', voiceArm);
   b.addEventListener('contextmenu', function(e){ e.preventDefault(); });
-  return b;
+  const wrap = el('<span class="vr-mic-wrap"><span class="vr-lockchip" aria-hidden="true">' + VOICE_LOCKCHIP_SVG + '</span></span>');
+  wrap.insertBefore(b, wrap.firstChild);
+  return wrap;
 }
-function voiceLockBar(){
-  const bar = el('<div class="wa-compose vr-lock">'
-    + '<button type="button" class="vr-round vr-trash" aria-label="Delete recording">' + VOICE_TRASH_SVG + '</button>'
-    + '<span class="vr-time">0:00</span>'
-    + '<button type="button" class="vr-round vr-pause" aria-label="Pause recording">' + VOICE_PAUSE_SVG + VOICE_PLAY_SVG + '</button>'
-    + '<button type="button" class="btn wa-send vr-send">Send</button>'
-    + '</div>');
-  bar.querySelector('.vr-trash').onclick = function(){ voiceAbort(null); render(); };
-  const pz = bar.querySelector('.vr-pause');
-  pz.addEventListener('pointerdown', function(e){ if(e.button > 0) return; e.preventDefault(); voicePauseToggle(); });
-  pz.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); voicePauseToggle(); } });
-  bar.querySelector('.vr-send').onclick = function(){ voiceFinish(true); };
-  return bar;
+// Swap only the left side of the compose bar, so the mic button (and the finger on it) stays in the page
+function voiceSwapLeft(){
+  const r = voiceRec;
+  const wrap = r.mic ? r.mic.closest('.vr-mic-wrap') : null;
+  const bar = wrap ? wrap.parentNode : null;
+  if(!bar || !bar.classList || !bar.classList.contains('wa-compose')){ render(); return; }
+  r.mic.classList.add('live');
+  wrap.classList.add('show');
+  const left = wrap.previousElementSibling;
+  if(!left || !left.classList.contains('vr-pill')){
+    const pill = voicePill();
+    if(left) bar.replaceChild(pill, left); else bar.insertBefore(pill, wrap);
+  }
+  updateVoiceUI();
 }
 function voiceFillBars(bars){
   const live = voiceRec.live, n = bars.length;
@@ -8321,25 +8436,121 @@ function voiceFillBars(bars){
     b.style.height = Math.max(3, Math.round(v * 22)) + 'px';
   });
 }
+// Locked (recording hands-free) and review (stopped, not sent yet) share one floating oval bar
+function voiceFloatBar(){
+  const r = voiceRec, review = r.state === 'review';
+  const bar = el('<div class="wa-compose vr-float ' + (review ? 'review' : 'live') + '"></div>');
+  const pill = el('<div class="vr-float-pill"></div>');
+  const cancel = el('<button type="button" class="vr-cancel" aria-label="Delete recording">' + VOICE_X_SVG + '</button>');
+  cancel.onclick = function(){ voiceAbort(null); render(); };
+  let bars = '';
+  if(review){
+    const peaks = r.reviewPeaks || [];
+    for(let i = 0; i < VOICE_FLOAT_BARS; i++){
+      const idx = peaks.length ? Math.floor(i * peaks.length / VOICE_FLOAT_BARS) : 0;
+      const v = peaks.length ? Math.max(0, Math.min(1, Number(peaks[idx]) || 0)) : 0.2;
+      bars += '<span class="vr-bar" style="height:' + Math.max(3, Math.round(v * 26)) + 'px"></span>';
+    }
+  } else {
+    bars = voiceBarsHTML(VOICE_FLOAT_BARS);
+  }
+  const wave = el('<div class="vr-wave-wrap"><span class="vr-dot"></span><span class="vr-time">' + fmtDuration(review ? r.reviewMs : voiceElapsed()) + '</span><div class="vr-wave">' + bars + '</div></div>');
+  let mid;
+  if(review){
+    mid = el('<button type="button" class="vr-play-btn" aria-label="Play recording">' + VOICE_PLAY_SVG + VOICE_PAUSE_SVG + '</button>');
+    mid.onclick = function(){ voicePreviewToggle(); };
+  } else {
+    mid = el('<button type="button" class="vr-stop" aria-label="Stop recording">' + VOICE_STOP_SVG + '</button>');
+    mid.onclick = function(){ voiceStop(); };
+  }
+  const send = el('<button type="button" class="vr-send-btn" aria-label="Send voice message">' + VOICE_SEND_SVG + '</button>');
+  send.onclick = function(){ if(review) voiceSendReview(); else voiceFinish(true); };
+  pill.appendChild(cancel); pill.appendChild(wave); pill.appendChild(mid); pill.appendChild(send);
+  bar.appendChild(pill);
+  return bar;
+}
+// Stop: keep the recording for a preview instead of sending it straight away
+function voiceStop(){
+  const r = voiceRec;
+  if(r.state !== 'locked' && r.state !== 'holding') return;
+  const rec = r.recorder, chunks = r.chunks, mime = r.mime;
+  r.reviewMs = voiceElapsed(); r.reviewMime = mime; r.reviewChat = r.chat; r.reviewPeaks = voiceDownsample(r.peaks, 40);
+  r.state = 'review'; r.reviewBlob = null; r.mic = null;
+  clearInterval(r.tick); r.tick = null;
+  removeVoiceListeners();
+  const stopped = new Promise(function(res){
+    if(!rec || rec.state === 'inactive'){ res(); return; }
+    rec.onstop = function(){ res(); };
+    try{ rec.stop(); }catch(e){ res(); }
+  });
+  stopped.then(function(){
+    if(voiceRec.state !== 'review') return;
+    r.reviewBlob = new Blob(chunks, {type: mime});
+    voiceReleaseMedia();
+    render();
+  });
+}
+function voiceSendReview(){
+  const r = voiceRec;
+  if(r.state !== 'review' || !r.reviewBlob) return;
+  const blob = r.reviewBlob, mime = r.reviewMime, ms = r.reviewMs, peaks = r.reviewPeaks, chat = r.reviewChat;
+  voicePreviewStop();
+  r.state = 'idle'; r.reviewBlob = null; r.mic = null;
+  if(ms < VOICE_MIN_MS){ fr.note = 'Voice message too short. Hold to record.'; render(); return; }
+  render();
+  voiceSend(blob, mime, ms, peaks, chat);
+}
+function voicePreviewToggle(){
+  const r = voiceRec;
+  if(r.state !== 'review' || !r.reviewBlob) return;
+  if(!r.preview){
+    r.previewUrl = URL.createObjectURL(r.reviewBlob);
+    const a = new Audio(r.previewUrl);
+    ['timeupdate','play','pause','ended','loadedmetadata'].forEach(function(ev){ a.addEventListener(ev, updateVoiceUI); });
+    r.preview = a;
+  }
+  if(r.preview.paused) r.preview.play().catch(function(){}); else r.preview.pause();
+  updateVoiceUI();
+}
+function voicePreviewStop(){
+  const r = voiceRec;
+  if(r.preview){ try{ r.preview.pause(); }catch(e){} r.preview = null; }
+  if(r.previewUrl){ try{ URL.revokeObjectURL(r.previewUrl); }catch(e){} r.previewUrl = null; }
+}
 function updateVoiceUI(){
   const r = voiceRec, t = fmtDuration(voiceElapsed());
   const pill = document.querySelector('.vr-pill');
   if(pill){
     pill.classList.toggle('cancel', r.cancelArmed);
     pill.querySelector('.vr-time').textContent = t;
-    pill.querySelector('.vr-msg').textContent = r.cancelArmed ? 'Release to cancel' : 'Slide left to cancel, up to lock';
+    pill.querySelector('.vr-msg').textContent = r.cancelArmed ? 'Release to cancel' : '\u2039 Slide to cancel';
     voiceFillBars(pill.querySelectorAll('.vr-bar'));
   }
-  const lock = document.querySelector('.vr-lock');
-  if(lock){
-    lock.querySelector('.vr-time').textContent = t;
-    lock.classList.toggle('paused', r.paused);
-    lock.querySelector('.vr-pause').setAttribute('aria-label', r.paused ? 'Resume recording' : 'Pause recording');
+  const wrap = document.querySelector('.vr-mic-wrap');
+  const chip = wrap ? wrap.querySelector('.vr-lockchip') : null;
+  if(chip){
+    const p = Math.min(1, Math.max(0, (r.dy || 0) / VOICE_LOCK_PX));
+    chip.style.setProperty('--lift', (-p * 16).toFixed(1) + 'px');
+    chip.classList.toggle('on', p >= 1);
+  }
+  const fb = document.querySelector('.vr-float');
+  if(fb && r.state === 'locked'){
+    fb.querySelector('.vr-time').textContent = t;
+    voiceFillBars(fb.querySelectorAll('.vr-bar'));
+  } else if(fb && r.state === 'review'){
+    const cur = (r.preview && r.preview.currentTime > 0) ? r.preview.currentTime * 1000 : (r.reviewMs || 0);
+    const playing = !!(r.preview && !r.preview.paused && !r.preview.ended);
+    fb.classList.toggle('playing', playing);
+    fb.querySelector('.vr-time').textContent = fmtDuration(cur);
+    const bars = fb.querySelectorAll('.vr-bar'), frac = r.reviewMs ? Math.min(1, cur / r.reviewMs) : 0;
+    bars.forEach(function(b, i){ b.classList.toggle('played', (i + 0.5) / bars.length <= frac); });
+    const pb = fb.querySelector('.vr-play-btn');
+    if(pb) pb.setAttribute('aria-label', playing ? 'Pause preview' : 'Play recording');
   }
 }
 function chatComposeBar(f){
   const r = voiceRec, mine = r.chat === f.id && r.state !== 'idle';
-  if(mine && r.state === 'locked') return voiceLockBar();
+  if(mine && (r.state === 'locked' || r.state === 'review')) return voiceFloatBar();
   const bar = el('<div class="wa-compose"></div>');
   if(mine && (r.state === 'holding' || r.state === 'starting')){
     bar.appendChild(voicePill());
@@ -8495,8 +8706,9 @@ async function voiceToggle(m, seekFrac){
 // Leaving the app stops recording and playback
 document.addEventListener('visibilitychange', function(){
   if(document.visibilityState !== 'hidden') return;
-  const busy = voiceRec.state !== 'idle' || !!voiceRec.holdTimer;
-  voiceAbort(busy ? 'Recording stopped when the app went to the background. Not sent.' : null);
+  const busy = voiceRec.state === 'holding' || voiceRec.state === 'starting' || voiceRec.state === 'locked' || !!voiceRec.holdTimer;
+  if(voiceRec.state === 'review') voicePreviewStop();
+  else voiceAbort(busy ? 'Recording stopped when the app went to the background. Not sent.' : null);
   voicePause();
 });
 window.addEventListener('pagehide', function(){ voiceAbort(null); voicePause(); });
