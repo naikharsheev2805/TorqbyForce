@@ -213,7 +213,7 @@ body.chat-full .wa-head{ padding-top:6px; }
 .wa-kb .nk.send{ font-size:clamp(14px,3.6vw,18px) !important; }
 /* Doubt cards: fit the text, never stretch or cut it off */
 .qcard-chat{ width:auto; max-width:82%; box-sizing:border-box; display:flex; flex-direction:column; gap:4px; padding:10px 12px; text-align:left; line-height:1.4; white-space:normal; overflow-wrap:anywhere; }
-.qcard-chat b, .qcard-chat span, .qcard-chat small{ display:block; white-space:normal; overflow-wrap:anywhere; }
+.qcard-chat > b, .qcard-chat > span, .qcard-chat > small{ display:block; white-space:normal; overflow-wrap:anywhere; }
 .qcard-chat.mine{ align-self:flex-end; }
 .qcard-chat.theirs{ align-self:flex-start; }
 /* Open chat: no Back pill, no footer; one Send button (the keyboard's when it is open) */
@@ -353,6 +353,10 @@ body.msg-fit .msg-hero{ display:none; }
 .wa-chat .wa-compose > *{ flex:none; }
 .wa-chat .wa-compose > .wa-field{ flex:1 1 auto; min-width:0; }
 .wa-chat .wa-compose > .vr-pill{ flex:1 1 auto; }
+
+/* ---- Copyable chat text ---- */
+.bubble, .bubble *, .qcard-chat, .qcard-chat *{ -webkit-user-select:text !important; user-select:text !important; -webkit-touch-callout:default !important; }
+.vb-play, .vb-sp, .vb-wave{ -webkit-user-select:none !important; user-select:none !important; }
 
 /* ---- Voice messages ---- */
 @keyframes vrPulse{ 0%,100%{opacity:1} 50%{opacity:.35} }
@@ -7746,7 +7750,7 @@ function chatScreen(f){
     const tick = mine ? '<i class="wa-tick'+(m.read_at ? ' seen' : '')+'">'+(m.read_at ? WA_TICK_SEEN : WA_TICK_SENT)+'</i>' : '';
     if(m.kind === 'question_card' || m.kind === 'answer_card'){
       const isQ = m.kind === 'question_card';
-      const card = el('<button type="button" class="qcard-chat '+(mine?'mine':'theirs')+'"><b>'+(isQ ? (mine ? 'You asked a question' : 'A friend asked you a question') : (mine ? 'You sent back notes' : 'Notes came back'))+'</b><span>'+esc(cleanCardText(m.body))+'</span><small>'+stamp+tick+'</small></button>');
+      const card = el('<div role="button" tabindex="0" class="qcard-chat '+(mine?'mine':'theirs')+'"><b>'+(isQ ? (mine ? 'You asked a question' : 'A friend asked you a question') : (mine ? 'You sent back notes' : 'Notes came back'))+'</b><span>'+esc(cleanCardText(m.body))+'</span><small>'+stamp+tick+'</small></div>');
       card.onclick = ()=>openDoubt(m.share_id);
       list.appendChild(card);
     } else if(m.kind === 'audio'){
@@ -9850,8 +9854,8 @@ function cloudSync(){
   })();
 })();
 
-document.addEventListener('contextmenu',function(e){ if(!e.target.closest('input,textarea')) e.preventDefault(); });
-document.addEventListener('selectstart',function(e){ if(!e.target.closest('input,textarea')) e.preventDefault(); });
+document.addEventListener('contextmenu',function(e){ if(!e.target.closest('input,textarea,.bubble,.qcard-chat')) e.preventDefault(); });
+document.addEventListener('selectstart',function(e){ if(!e.target.closest('input,textarea,.bubble,.qcard-chat')) e.preventDefault(); });
 document.addEventListener('dragstart',function(e){ e.preventDefault(); });
 document.addEventListener('keydown',function(e){ var k=(e.key||'').toLowerCase();
   if(e.key==='F12' || (e.ctrlKey&&e.shiftKey&&(k==='i'||k==='j'||k==='c')) || (e.ctrlKey&&(k==='u'||k==='s'||k==='p'))) e.preventDefault(); });
