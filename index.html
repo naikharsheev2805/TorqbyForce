@@ -364,6 +364,17 @@ body.msg-fit .msg-hero{ display:none; }
 .mm-item.danger{ color:var(--accent-text); }
 .mm-toast{ position:fixed; left:50%; bottom:calc(24px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); z-index:95; background:var(--surface); color:var(--text); border:1px solid var(--border); padding:10px 16px; border-radius:999px; font:500 14px/1.2 Inter,sans-serif; box-shadow:0 8px 24px rgba(0,0,0,.3); }
 
+/* ---- Audio playing animation ---- */
+@keyframes vbBar{ 0%,100%{ transform:scaleY(1); } 50%{ transform:scaleY(.45); } }
+@keyframes vbRing{ 0%{ box-shadow:0 0 0 0 rgba(224,120,90,.55); } 100%{ box-shadow:0 0 0 12px rgba(224,120,90,0); } }
+.bubble.audio.playing .vb-bar{ animation:vbBar .8s ease-in-out infinite; transform-origin:center; }
+.bubble.audio.playing .vb-bar:nth-child(4n+1){ animation-delay:0s; }
+.bubble.audio.playing .vb-bar:nth-child(4n+2){ animation-delay:.2s; }
+.bubble.audio.playing .vb-bar:nth-child(4n+3){ animation-delay:.4s; }
+.bubble.audio.playing .vb-bar:nth-child(4n){ animation-delay:.6s; }
+.bubble.audio.playing .vb-play{ animation:vbRing 1.4s ease-out infinite; }
+@media (prefers-reduced-motion: reduce){ .bubble.audio.playing .vb-bar, .bubble.audio.playing .vb-play{ animation:none; } }
+
 /* ---- Voice messages ---- */
 @keyframes vrPulse{ 0%,100%{opacity:1} 50%{opacity:.35} }
 .bubble.audio{ width:min(252px, 74vw); padding:8px 10px 6px; }
@@ -4089,15 +4100,15 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v1.1.3';
-const LAST_UPDATED = 'November 2026';
+const APP_VERSION = 'v1.1.4';
+const LAST_UPDATED = '2 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
   const showVer = VERSION_VIEWS.indexOf(view) >= 0;
   const admin = isGuard();
   if(!showVer && !admin) return;
   const box = el('<div class="build-stamp"></div>');
-  if(admin) box.appendChild(el('<span class="bs-upd">Last updated '+esc(LAST_UPDATED)+'</span>'));
+  box.appendChild(el('<span class="bs-upd">Last updated '+esc(LAST_UPDATED)+'</span>'));
   if(showVer) box.appendChild(el('<span class="bs-ver">'+esc(APP_VERSION)+'</span>'));
   app.appendChild(box);
 }
@@ -8159,6 +8170,7 @@ async function voiceToggle(m, seekFrac){
   a.playbackRate = p.speed;
   p.audio = a; p.status = '';
   a.addEventListener('playing', function(){ p.failed = null; voiceUpdateBubbles(); });
+  a.addEventListener('pause', voiceUpdateBubbles);
   a.addEventListener('timeupdate', voiceUpdateBubbles);
   a.addEventListener('ended', function(){ if(p.audio === a){ p.audio = null; p.id = null; } voiceUpdateBubbles(); });
   a.addEventListener('error', function(){ if(p.audio === a && a.error) voiceFail(m.id); });
