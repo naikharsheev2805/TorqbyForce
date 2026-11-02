@@ -2662,6 +2662,9 @@ body.has-nav .build-stamp{ margin-bottom:calc(96px + env(safe-area-inset-bottom,
 .vr-mic:active, .vb-play:active, .wa-send:active, .vr-send-btn:active{ transform:scale(.9); }
 @media (prefers-reduced-motion: reduce){ .wa-scroll, .plus-btn, .plus-btn svg, .bubble, .wa-scroll.swap-in .wa-row{ animation:none !important; transition:none !important; } }
 
+/* ==== Recorder: bigger stop/play glyphs ==== */
+.vr-stop svg{ width:22px; height:22px; }
+.vr-play-btn svg{ width:22px; height:22px; }
 </style>
 </head>
 <body>
@@ -7119,6 +7122,16 @@ async function loadFriends(){
   if(error){ fr.err = error.message; fr.list = []; }
   else fr.list = (data || []).map(r=>({id:r.friend_id, username:r.friend_username, first:r.friend_first_name, status:r.friend_status, incoming:r.incoming, avatar:r.friend_avatar||null}));
   await loadPresenceFor(fr.list.filter(f=>f.status==='accepted').map(f=>f.id));
+  try{
+    const need = fr.list.filter(f=>f.status==='accepted' && !f.avatar).map(f=>f.id);
+    if(need.length){
+      const pr = await db.from('profiles').select('id, avatar_data, hide_from_leaderboard').in('id', need);
+      (pr.data || []).forEach(function(p){
+        const f = fr.list.find(function(x){ return x.id === p.id; });
+        if(f && p.avatar_data && !p.hide_from_leaderboard) f.avatar = p.avatar_data;
+      });
+    }
+  }catch(e){}
   fr.loading = false;
   render();
 }
@@ -8397,7 +8410,7 @@ function voicePill(){
 }
 const VOICE_X_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
 const VOICE_STOP_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="6.5" width="11" height="11" rx="2.5"/></svg>';
-const VOICE_SEND_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
+const VOICE_SEND_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"/></svg>';
 const VOICE_LOCKCHIP_SVG = '<svg class="vr-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 13l6-6 6 6"/></svg><svg class="vr-lock-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3"/></svg>';
 const VOICE_FLOAT_BARS = 26;
 function voiceMicBtn(live){
@@ -10910,6 +10923,59 @@ document.addEventListener('keydown', e=>{
   const t = e.target.closest && e.target.closest('.onb-tags [data-usp]');
   if(t) openUsp(Number(t.dataset.usp));
 });
+</script>
+<script>
+/* DEBUG PANEL: shows the state of the sent voice bubble after you press play. Tap the box to close. */
+(function(){
+  function box(){
+    var b = document.getElementById('vbDebugBox');
+    if(!b){
+      b = document.createElement('div');
+      b.id = 'vbDebugBox';
+      b.style.cssText = 'position:fixed;left:8px;right:8px;bottom:8px;max-height:55vh;overflow:auto;z-index:99999;background:#111;color:#9f9;font:12px/1.4 monospace;padding:10px;border-radius:10px;white-space:pre-wrap;word-break:break-all;opacity:.95';
+      b.onclick = function(){ b.remove(); };
+      document.body.appendChild(b);
+    }
+    return b;
+  }
+  function report(btn){
+    var out = [];
+    try{
+      var bub = btn.closest('.bubble');
+      out.push('STEP 1 bubble found: ' + !!bub);
+      out.push('bubble classes: ' + (bub ? bub.className : 'n/a'));
+      out.push('bubble data-vid: ' + (bub ? bub.dataset.vid : 'n/a'));
+      var vp = (typeof voicePlayer !== 'undefined') ? voicePlayer : null;
+      out.push('STEP 2 voicePlayer exists: ' + !!vp);
+      if(vp){
+        out.push('player id: ' + vp.id + '  status: ' + vp.status + '  failed: ' + vp.failed);
+        out.push('audio exists: ' + !!vp.audio + '  paused: ' + (vp.audio ? vp.audio.paused : 'n/a') + '  ended: ' + (vp.audio ? vp.audio.ended : 'n/a'));
+        out.push('id matches bubble: ' + (bub ? vp.id === bub.dataset.vid : 'n/a'));
+      }
+      out.push('STEP 3 bubbles on screen: ' + document.querySelectorAll('.bubble.audio').length);
+      out.push('bubbles with playing class: ' + document.querySelectorAll('.bubble.audio.playing').length);
+      var bar = bub ? bub.querySelector('.vb-bar') : null;
+      if(bar){
+        var cs = getComputedStyle(bar);
+        out.push('STEP 4 first bar animation-name: ' + cs.animationName + '  duration: ' + cs.animationDuration + '  transform: ' + cs.transform);
+      } else out.push('STEP 4 no .vb-bar in bubble');
+      var pl = bub ? bub.querySelector('.vb-play') : null;
+      if(pl){
+        var ps = getComputedStyle(pl);
+        out.push('play button animation-name: ' + ps.animationName);
+      }
+      var rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      out.push('STEP 5 reduced motion on phone: ' + rm);
+      out.push('STEP 6 bubble redrawn since press: ' + (bub ? (bub.isConnected ? 'no (same element)' : 'yes, element gone') : 'n/a'));
+    }catch(err){ out.push('DEBUG ERROR: ' + (err && err.message)); }
+    box().textContent = 'VOICE BUBBLE DEBUG\n' + out.join('\n') + '\n\n(tap to close)';
+  }
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest && e.target.closest('.bubble.audio .vb-play');
+    if(!btn) return;
+    setTimeout(function(){ report(btn); }, 700);
+  }, true);
+})();
 </script>
 </body>
 </html>
