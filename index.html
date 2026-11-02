@@ -366,13 +366,7 @@ body.msg-fit .msg-hero{ display:none; }
 .mm-toast{ position:fixed; left:50%; bottom:calc(24px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); z-index:95; background:var(--surface); color:var(--text); border:1px solid var(--border); padding:10px 16px; border-radius:999px; font:500 14px/1.2 Inter,sans-serif; box-shadow:0 8px 24px rgba(0,0,0,.3); }
 
 /* ---- Audio playing animation ---- */
-@keyframes vbBar{ 0%,100%{ transform:scaleY(1); } 50%{ transform:scaleY(.45); } }
 @keyframes vbRing{ 0%{ box-shadow:0 0 0 0 rgba(224,120,90,.55); } 100%{ box-shadow:0 0 0 12px rgba(224,120,90,0); } }
-.bubble.audio.playing .vb-bar{ animation:vbBar .8s ease-in-out infinite; transform-origin:center; }
-.bubble.audio.playing .vb-bar:nth-child(4n+1){ animation-delay:0s; }
-.bubble.audio.playing .vb-bar:nth-child(4n+2){ animation-delay:.2s; }
-.bubble.audio.playing .vb-bar:nth-child(4n+3){ animation-delay:.4s; }
-.bubble.audio.playing .vb-bar:nth-child(4n){ animation-delay:.6s; }
 .bubble.audio.playing .vb-play{ animation:vbRing 1.4s ease-out infinite; }
 @media (prefers-reduced-motion: reduce){ .bubble.audio.playing .vb-bar, .bubble.audio.playing .vb-play{ animation:none; } }
 
@@ -534,11 +528,6 @@ body.msg-fit #app{ background:transparent !important; position:relative; z-index
 @media (prefers-reduced-motion: reduce){ .wa-dots i, .act-mic .aw{ animation:none; } .act-mic .aw{ opacity:1; } }
 
 /* ===== Voice playback: bars bounce while playing, for sender and receiver ===== */
-.bubble.audio.playing .vb-bar{ animation:vbBar .8s ease-in-out infinite; transform-origin:center; }
-.bubble.audio.playing .vb-bar:nth-child(4n+1){ animation-delay:0s; }
-.bubble.audio.playing .vb-bar:nth-child(4n+2){ animation-delay:.2s; }
-.bubble.audio.playing .vb-bar:nth-child(4n+3){ animation-delay:.4s; }
-.bubble.audio.playing .vb-bar:nth-child(4n){ animation-delay:.6s; }
 .bubble.audio.playing .vb-play{ animation:none; }
 .bubble.audio .vb-bar.played{ background:#f08a3c; }
 @media (prefers-reduced-motion: reduce){ .bubble.audio.playing .vb-bar{ animation:none; } }
@@ -595,6 +584,10 @@ body.msg-fit #app{ background:transparent !important; position:relative; z-index
 .wa-scroll.swap-in > *{ animation:tsSwapIn .36s cubic-bezier(.2,.8,.2,1) both; }
 .wa-scroll.swap-in .wa-row{ animation:tsRowIn .38s cubic-bezier(.2,.8,.2,1) both; animation-delay:calc(var(--i,0) * 45ms + 70ms); }
 @media (prefers-reduced-motion: reduce){ .vr-lockchip .vr-arrow, .vr-wave-wrap .vr-dot, .wa-scroll.swap-in > *, .wa-scroll.swap-in .wa-row, .vr-float-pill, .wa-chat .wa-compose > .vr-pill{ animation:none !important; } .plus-btn svg, .vr-mic, .wa-scroll{ transition:none !important; } }
+/* Chat cards: never squish when the chat scrolls; display maths gets its own line with space around it */
+.wa-msgs > *{ flex-shrink:0 !important; }
+.wa-msgs .qcard-chat .katex-display{ display:block !important; margin:6px 0 !important; overflow-x:auto !important; overflow-y:hidden !important; text-align:left !important; }
+.wa-msgs .qcard-chat .katex{ font-size:1.05em !important; }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -2632,12 +2625,6 @@ body.has-nav .build-stamp{ margin-bottom:calc(96px + env(safe-area-inset-bottom,
   .eyes-mail, .eye-seal, .eye-card, .eye-card.sealed.breaking .eye-seal, .eye-card.sealed.breaking{ animation:none !important; transition:none !important; }
 }
 /* ==== Patch: audio bounce, doubt card full text, lock chip, smoother plus/cross, polish ==== */
-@keyframes vbBar{ 0%,100%{ transform:scaleY(1); } 50%{ transform:scaleY(.45); } }
-.bubble.audio.playing .vb-bar{ animation:vbBar .8s ease-in-out infinite; transform-origin:center; }
-.bubble.audio.playing .vb-bar:nth-child(4n+1){ animation-delay:0s; }
-.bubble.audio.playing .vb-bar:nth-child(4n+2){ animation-delay:.2s; }
-.bubble.audio.playing .vb-bar:nth-child(4n+3){ animation-delay:.4s; }
-.bubble.audio.playing .vb-bar:nth-child(4n){ animation-delay:.6s; }
 @media (prefers-reduced-motion: reduce){ .bubble.audio.playing .vb-bar{ animation:none; } }
 
 .wa-msgs .qcard-chat,
@@ -6392,14 +6379,26 @@ function leaderboardView(){
   { const mine = c.rows.find(r=>r.me);
     if(mine) w.appendChild(shareRow('I am ranked #'+mine.place+' on the TORQ leaderboard ('+meta.l+'). Think you can beat me?', 'Share my rank', 'Share your rank')); }
   const hasPodium = c.rows.length>=3 && c.rows[2].place<=LB_LIMIT;
-  if(hasPodium) w.appendChild(el(lbPodiumHTML(c.rows.slice(0,3))));
+  const podRows = c.rows.slice(0,3);
+  if(hasPodium){
+    w.appendChild(el(lbPodiumHTML(podRows)));
+    // Podium columns are drawn in the order 2, 1, 3 (see lbPodiumHTML)
+    const podOrder = [1,0,2];
+    w.querySelectorAll('.lb-pod .lb-pc').forEach(function(node, k){
+      const r = podRows[podOrder[k]];
+      if(!r || r.me) return;
+      attachLbHold(node, r);
+      node.style.cursor = 'pointer';
+      node.onclick = isGuard() ? function(){ openAdminStudent(r); } : function(){ openPublicProfile(r); };
+    });
+  }
   const rest = hasPodium ? c.rows.slice(3) : c.rows;
   if(rest.length){
     // A row past the top 50 is your own, pinned under a gap
     const html = rest.map(r=>(r.me && r.place>LB_LIMIT ? '<div class="lb-gap" aria-hidden="true">···</div>' : '')+lbItemHTML(r)).join('');
     const listEl = el('<div class="list" role="list" aria-label="Rankings">'+html+'</div>');
     w.appendChild(listEl);
-    listEl.querySelectorAll('.lb-item').forEach((it,i)=>{ const r = rest[i]; if(r && !r.me) attachLbHold(it, r); });
+    listEl.querySelectorAll('.lb-item').forEach((it,i)=>{ const r = rest[i]; if(r && !r.me){ attachLbHold(it, r); if(!isGuard()){ it.style.cursor = 'pointer'; it.onclick = ()=>openPublicProfile(r); } } });
     // Admins tap any student to open their profile and send a message
     if(isGuard()) listEl.querySelectorAll('.lb-item').forEach((it,i)=>{ const r = rest[i]; if(!r || r.me) return; it.style.cursor = 'pointer'; it.onclick = ()=>openAdminStudent(r); });
   }
@@ -7132,6 +7131,25 @@ async function loadFriends(){
       });
     }
   }catch(e){}
+  fr.avNote = null;
+  const accepted = fr.list.filter(f=>f.status==='accepted');
+  const missing = accepted.filter(f=>!friendAvatar(f));
+  if(missing.length){
+    let lbRows = 0, lbErr = null;
+    try{
+      const lb = await db.rpc('leaderboard', {p_board:'points', p_period:'all', p_limit:LB_LIMIT});
+      if(lb.error) lbErr = lb.error.message;
+      const rows = lb.data || [];
+      lbRows = rows.length;
+      rows.forEach(function(r){
+        if(!r.avatar_data) return;
+        const f = missing.find(function(x){ return x.username === r.username; });
+        if(f && !f.avatar) f.avatar = r.avatar_data;
+      });
+    }catch(e){ lbErr = String((e && e.message) || e); }
+    const still = accepted.filter(f=>!friendAvatar(f)).length;
+    fr.avNote = still ? ('Photos not loaded for ' + still + ' of ' + accepted.length + ' friends. Leaderboard rows: ' + lbRows + (lbErr ? ', error: ' + lbErr : '') + '.') : null;
+  }
   fr.loading = false;
   render();
 }
@@ -7813,6 +7831,7 @@ function chatListCard(){
     const tb = b.p && b.p.last ? Date.parse(b.p.last.created_at) : 0;
     return tb - ta;
   });
+  if(fr.avNote) card.appendChild(el('<p class="note-line" style="padding:6px 16px">'+esc(fr.avNote)+'</p>'));
   if(!rows.length) card.appendChild(el('<p class="note-line" style="padding:12px 16px">No chats yet. Tap + to start one with a friend.</p>'));
   rows.forEach(({f, p})=>{
     const last = p && p.last, unread = p ? p.unread : 0;
@@ -8441,13 +8460,50 @@ function voiceSwapLeft(){
   }
   updateVoiceUI();
 }
+// Mirrored amplitude graph: bars stay where they are. The centre shows the loudest moment now,
+// and each bar further out shows the level a little earlier (live) or a little before/after (playback).
+// The left half is the right half mirrored, so the shape is symmetrical.
+let voiceReviewRaf = 0;
+function voiceMirror(levels, n){
+  const out = new Array(n), c = (n - 1) / 2, span = Math.max(1, c), R = levels.length;
+  for(let i = 0; i < n; i++){
+    const d = Math.abs(i - c) / span;
+    const k = Math.min(R - 1, Math.max(0, Math.round(d * (R - 1))));
+    out[i] = levels[k] || 0;
+  }
+  return out;
+}
+function voicePaintMirror(bars, levels, maxPx){
+  const m = voiceMirror(levels, bars.length);
+  bars.forEach(function(b, i){ b.style.height = Math.max(3, Math.round(m[i] * maxPx)) + 'px'; });
+}
+function voiceLiveLevels(R){
+  const live = voiceRec.live, out = [];
+  for(let k = 0; k < R; k++) out.push(live[live.length - 1 - k] || 0);
+  return out;
+}
+function voiceReviewLevels(ms, R){
+  const raw = voiceRec.reviewRaw || [], out = [];
+  const at = function(t){ if(!raw.length) return 0; const i = Math.min(raw.length - 1, Math.max(0, Math.round(t / 100))); return raw[i] || 0; };
+  for(let k = 0; k < R; k++) out.push((at(ms - k * 100) + at(ms + k * 100)) / 2);
+  return out;
+}
+function voiceReviewPaint(fb){
+  const r = voiceRec, bars = fb.querySelectorAll('.vr-bar');
+  if(!bars.length) return;
+  const ms = r.preview ? r.preview.currentTime * 1000 : 0;
+  voicePaintMirror(bars, voiceReviewLevels(ms, Math.ceil(bars.length / 2)), 26);
+}
+function voiceReviewLoop(){
+  voiceReviewRaf = 0;
+  const r = voiceRec;
+  if(r.state !== 'review') return;
+  updateVoiceUI();
+  if(r.preview && !r.preview.paused && !r.preview.ended) voiceReviewRaf = requestAnimationFrame(voiceReviewLoop);
+}
+function voiceReviewStart(){ if(!voiceReviewRaf) voiceReviewRaf = requestAnimationFrame(voiceReviewLoop); }
 function voiceFillBars(bars){
-  const live = voiceRec.live, n = bars.length;
-  bars.forEach(function(b, i){
-    const idx = live.length - n + i;
-    const v = idx >= 0 ? live[idx] : 0;
-    b.style.height = Math.max(3, Math.round(v * 22)) + 'px';
-  });
+  voicePaintMirror(bars, voiceLiveLevels(Math.ceil(bars.length / 2)), 22);
 }
 // Locked (recording hands-free) and review (stopped, not sent yet) share one floating oval bar
 function voiceFloatBar(){
@@ -8457,17 +8513,9 @@ function voiceFloatBar(){
   const cancel = el('<button type="button" class="vr-cancel" aria-label="Delete recording">' + VOICE_X_SVG + '</button>');
   cancel.onclick = function(){ voiceAbort(null); render(); };
   let bars = '';
-  if(review){
-    const peaks = r.reviewPeaks || [];
-    for(let i = 0; i < VOICE_FLOAT_BARS; i++){
-      const idx = peaks.length ? Math.floor(i * peaks.length / VOICE_FLOAT_BARS) : 0;
-      const v = peaks.length ? Math.max(0, Math.min(1, Number(peaks[idx]) || 0)) : 0.2;
-      bars += '<span class="vr-bar" style="height:' + Math.max(3, Math.round(v * 26)) + 'px"></span>';
-    }
-  } else {
-    bars = voiceBarsHTML(VOICE_FLOAT_BARS);
-  }
+  bars = voiceBarsHTML(VOICE_FLOAT_BARS);
   const wave = el('<div class="vr-wave-wrap"><span class="vr-dot"></span><span class="vr-time">' + fmtDuration(review ? r.reviewMs : voiceElapsed()) + '</span><div class="vr-wave">' + bars + '</div></div>');
+  if(review) voicePaintMirror(wave.querySelectorAll('.vr-bar'), voiceReviewLevels(0, Math.ceil(VOICE_FLOAT_BARS / 2)), 26);
   let mid;
   if(review){
     mid = el('<button type="button" class="vr-play-btn" aria-label="Play recording">' + VOICE_PLAY_SVG + VOICE_PAUSE_SVG + '</button>');
@@ -8487,7 +8535,7 @@ function voiceStop(){
   const r = voiceRec;
   if(r.state !== 'locked' && r.state !== 'holding') return;
   const rec = r.recorder, chunks = r.chunks, mime = r.mime;
-  r.reviewMs = voiceElapsed(); r.reviewMime = mime; r.reviewChat = r.chat; r.reviewPeaks = voiceDownsample(r.peaks, 40);
+  r.reviewMs = voiceElapsed(); r.reviewMime = mime; r.reviewChat = r.chat; r.reviewPeaks = voiceDownsample(r.peaks, 40); r.reviewRaw = r.peaks.slice();
   r.state = 'review'; r.reviewBlob = null; r.mic = null;
   clearInterval(r.tick); r.tick = null;
   removeVoiceListeners();
@@ -8520,13 +8568,15 @@ function voicePreviewToggle(){
     r.previewUrl = URL.createObjectURL(r.reviewBlob);
     const a = new Audio(r.previewUrl);
     ['timeupdate','play','pause','ended','loadedmetadata'].forEach(function(ev){ a.addEventListener(ev, updateVoiceUI); });
+    a.addEventListener('play', voiceReviewStart);
     r.preview = a;
   }
-  if(r.preview.paused) r.preview.play().catch(function(){}); else r.preview.pause();
+  if(r.preview.paused){ r.preview.play().catch(function(){}); voiceReviewStart(); } else r.preview.pause();
   updateVoiceUI();
 }
 function voicePreviewStop(){
   const r = voiceRec;
+  cancelAnimationFrame(voiceReviewRaf); voiceReviewRaf = 0;
   if(r.preview){ try{ r.preview.pause(); }catch(e){} r.preview = null; }
   if(r.previewUrl){ try{ URL.revokeObjectURL(r.previewUrl); }catch(e){} r.previewUrl = null; }
 }
@@ -8551,6 +8601,7 @@ function updateVoiceUI(){
     fb.querySelector('.vr-time').textContent = t;
     voiceFillBars(fb.querySelectorAll('.vr-bar'));
   } else if(fb && r.state === 'review'){
+    voiceReviewPaint(fb);
     const cur = (r.preview && r.preview.currentTime > 0) ? r.preview.currentTime * 1000 : (r.reviewMs || 0);
     const playing = !!(r.preview && !r.preview.paused && !r.preview.ended);
     fb.classList.toggle('playing', playing);
@@ -8653,7 +8704,7 @@ function voicePause(){
 function voiceCycleSpeed(){
   const p = voicePlayer;
   p.speed = p.speed === 1 ? 1.5 : (p.speed === 1.5 ? 2 : 1);
-  if(p.audio) p.audio.playbackRate = p.speed;
+  if(p.audio){ p.audio.defaultPlaybackRate = p.speed; p.audio.playbackRate = p.speed; }
   voiceUpdateBubbles();
 }
 let voiceRaf = 0;
@@ -8666,11 +8717,11 @@ function voiceProgressLoop(){
 function voiceWatch(a, id){
   const sync = function(){ if(voicePlayer.audio === a) voiceUpdateBubbles(); };
   a.addEventListener('play', function(){
-    voicePlayer.failed = null; sync();
+    voicePlayer.failed = null; a.playbackRate = voicePlayer.speed; sync();
     if(!voiceRaf) voiceRaf = requestAnimationFrame(voiceProgressLoop);
   });
   a.addEventListener('pause', sync);
-  a.addEventListener('loadedmetadata', sync);
+  a.addEventListener('loadedmetadata', function(){ a.playbackRate = voicePlayer.speed; sync(); });
   a.addEventListener('seeked', sync);
   a.addEventListener('ended', function(){
     if(voicePlayer.audio === a){ voicePlayer.audio = null; voicePlayer.id = null; }
@@ -8683,7 +8734,8 @@ function voiceBegin(m, url, seekFrac){
   const p = voicePlayer;
   const a = new Audio();
   a.preload = 'auto';
-  a.playbackRate = p.speed;
+  // Setting src reloads the element and resets the rate to its default, so set the default as well
+  a.defaultPlaybackRate = p.speed; a.playbackRate = p.speed;
   p.audio = a; p.id = m.id; p.status = ''; p.failed = null;
   voiceWatch(a, m.id);
   if(seekFrac != null){
@@ -10923,59 +10975,6 @@ document.addEventListener('keydown', e=>{
   const t = e.target.closest && e.target.closest('.onb-tags [data-usp]');
   if(t) openUsp(Number(t.dataset.usp));
 });
-</script>
-<script>
-/* DEBUG PANEL: shows the state of the sent voice bubble after you press play. Tap the box to close. */
-(function(){
-  function box(){
-    var b = document.getElementById('vbDebugBox');
-    if(!b){
-      b = document.createElement('div');
-      b.id = 'vbDebugBox';
-      b.style.cssText = 'position:fixed;left:8px;right:8px;bottom:8px;max-height:55vh;overflow:auto;z-index:99999;background:#111;color:#9f9;font:12px/1.4 monospace;padding:10px;border-radius:10px;white-space:pre-wrap;word-break:break-all;opacity:.95';
-      b.onclick = function(){ b.remove(); };
-      document.body.appendChild(b);
-    }
-    return b;
-  }
-  function report(btn){
-    var out = [];
-    try{
-      var bub = btn.closest('.bubble');
-      out.push('STEP 1 bubble found: ' + !!bub);
-      out.push('bubble classes: ' + (bub ? bub.className : 'n/a'));
-      out.push('bubble data-vid: ' + (bub ? bub.dataset.vid : 'n/a'));
-      var vp = (typeof voicePlayer !== 'undefined') ? voicePlayer : null;
-      out.push('STEP 2 voicePlayer exists: ' + !!vp);
-      if(vp){
-        out.push('player id: ' + vp.id + '  status: ' + vp.status + '  failed: ' + vp.failed);
-        out.push('audio exists: ' + !!vp.audio + '  paused: ' + (vp.audio ? vp.audio.paused : 'n/a') + '  ended: ' + (vp.audio ? vp.audio.ended : 'n/a'));
-        out.push('id matches bubble: ' + (bub ? vp.id === bub.dataset.vid : 'n/a'));
-      }
-      out.push('STEP 3 bubbles on screen: ' + document.querySelectorAll('.bubble.audio').length);
-      out.push('bubbles with playing class: ' + document.querySelectorAll('.bubble.audio.playing').length);
-      var bar = bub ? bub.querySelector('.vb-bar') : null;
-      if(bar){
-        var cs = getComputedStyle(bar);
-        out.push('STEP 4 first bar animation-name: ' + cs.animationName + '  duration: ' + cs.animationDuration + '  transform: ' + cs.transform);
-      } else out.push('STEP 4 no .vb-bar in bubble');
-      var pl = bub ? bub.querySelector('.vb-play') : null;
-      if(pl){
-        var ps = getComputedStyle(pl);
-        out.push('play button animation-name: ' + ps.animationName);
-      }
-      var rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      out.push('STEP 5 reduced motion on phone: ' + rm);
-      out.push('STEP 6 bubble redrawn since press: ' + (bub ? (bub.isConnected ? 'no (same element)' : 'yes, element gone') : 'n/a'));
-    }catch(err){ out.push('DEBUG ERROR: ' + (err && err.message)); }
-    box().textContent = 'VOICE BUBBLE DEBUG\n' + out.join('\n') + '\n\n(tap to close)';
-  }
-  document.addEventListener('click', function(e){
-    var btn = e.target.closest && e.target.closest('.bubble.audio .vb-play');
-    if(!btn) return;
-    setTimeout(function(){ report(btn); }, 700);
-  }, true);
-})();
 </script>
 </body>
 </html>
