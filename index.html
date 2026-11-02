@@ -2667,6 +2667,16 @@ body.msg-fit .wa-compose, body.chat-full .wa-compose{ flex:none !important; posi
 body .wa-msgs .qcard-chat .katex{ display:inline-block !important; white-space:nowrap !important; overflow:visible !important; vertical-align:baseline !important; line-height:normal !important; max-width:none !important; }
 body .wa-msgs .qcard-chat .katex-display{ display:inline-block !important; overflow:visible !important; margin:0 !important; }
 body .wa-msgs .qcard-chat .katex .vlist-t, body .wa-msgs .qcard-chat .katex .vlist{ vertical-align:baseline !important; }
+/* Recording preview: same look as the sent voice message (frozen waveform, orange progress), no pulsing dot */
+.vr-float .vr-wave .vr-bar{ background:#b9b9c2 !important; transition:none !important; }
+.vr-float .vr-wave .vr-bar.played{ background:#f08a3c !important; }
+.vr-float .vr-wave-wrap .vr-dot{ display:none !important; }
+/* Chat: bubbles animate only when a chat first opens, not on every refresh (the cause of the flicker) */
+.wa-msgs:not(.fresh) .bubble, .wa-msgs:not(.fresh) .qcard-chat{ animation:none !important; }
+/* Selecting messages */
+.sel-bar{ display:flex; align-items:center; gap:10px; padding:8px 12px; }
+.sel-bar .sel-count{ flex:1; font:600 14px Inter,sans-serif; color:var(--text); text-align:center; }
+.bubble.picked, .qcard-chat.picked{ outline:2px solid var(--accent-text); outline-offset:2px; }
 /* Very short or very narrow screens: keep the message bar usable */
 @media (max-height:560px){ body.msg-fit .wa-msgs{ min-height:120px; } }
 </style>
@@ -4319,8 +4329,8 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v1.1.4';
-const LAST_UPDATED = '2 November 2026';
+const APP_VERSION = 'v1.1.5';
+const LAST_UPDATED = '3 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
   const showVer = VERSION_VIEWS.indexOf(view) >= 0;
@@ -7210,12 +7220,12 @@ async function answerRequest(id, accept){
   await loadFriends();
 }
 async function openChat(f){
-  fr.open = f; fr.msgs = []; fr.draft = '';
+  fr.open = f; fr.msgs = []; fr.draft = ''; fr.sel = null;
   await refreshChat(true);
   clearInterval(fr.poll);
   fr.poll = setInterval(()=>{ if(fr.open) refreshChat(false); }, 1000);
 }
-function closeChat(){ voiceAbort(); voicePause(); fr.open = null; clearInterval(fr.poll); fr.poll = null; render(); }
+function closeChat(){ voiceAbort(); voicePause(); fr.open = null; fr.sel = null; clearInterval(fr.poll); fr.poll = null; render(); }
 let activitySentAt = 0, activitySentKind = null, listActivityBusy = false;
 function noteActivity(kind){
   if(!fr.open || !sbSession) return;
@@ -7603,9 +7613,10 @@ function doubtView(){
     if(Array.isArray(q.options) && q.options.length){
       const list = el('<div class="doubt-opts"></div>');
       q.options.forEach((o,i)=>{
-        const b = el('<button type="button" class="doubt-opt'+(doubt.sel===i?' on':'')+'"'+(iAsked||s0.status==='returned'?' disabled':'')+'><b>'+L(i)+'</b><span>'+esc(o)+'</span></button>');
-        b.onclick = ()=>{ doubt.sel = i; render(); };
-        list.appendChild(b);
+        // Same option row as the practice questions
+        const row = el('<div class="opt'+(doubt.sel===i?' sel':'')+(q.optionImages && q.optionImages[i] ? ' hasimg' : '')+'"><span class="k">'+L(i)+'</span>'+optBody(q,i)+'</div>');
+        if(!(iAsked||s0.status==='returned')) row.onclick = ()=>{ doubt.sel = i; render(); };
+        list.appendChild(row);
       });
       sheet.appendChild(list);
     }
@@ -8271,7 +8282,8 @@ function waKeyboard(){
 }
 function chatScreen(f){
   const me = sbSession.user.id;
-  if(fr.waChat !== f.id){ fr.waChat = f.id; fr.waAtBottom = true; fr.kb = false; scrollChatToEnd = true; }
+  const openedNow = fr.waChat !== f.id;
+  if(openedNow){ fr.waChat = f.id; fr.waAtBottom = true; fr.kb = false; scrollChatToEnd = true; }
   const w = el('<div class="wa-chat"></div>');
   const head = el('<div class="wa-head"></div>');
   const back = el('<button class="wa-back" type="button" aria-label="Back to chats"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>');
@@ -8285,6 +8297,7 @@ function chatScreen(f){
   w.appendChild(head);
 
   const list = el('<div class="wa-msgs" role="log" aria-live="polite"></div>');
+  if(openedNow) list.classList.add('fresh');
   if(!fr.msgs.length) list.appendChild(el('<p class="note-line wa-empty">Say hello. Only you and '+esc(f.username||'your friend')+' can read these messages.</p>'));
   let lastDay = '';
   const seenId = ((fr.msgs.filter(function(x){ return x.sender === me && x.read_at; })).pop() || {}).id;
@@ -8646,6 +8659,21 @@ function voiceReviewLoop(){
   if(r.preview && !r.preview.paused && !r.preview.ended) voiceReviewRaf = requestAnimationFrame(voiceReviewLoop);
 }
 function voiceReviewStart(){ if(!voiceReviewRaf) voiceReviewRaf = requestAnimationFrame(voiceReviewLoop); }
+// Recording preview: each bar is frozen when its time window starts, then turns orange as the recording passes it
+function voiceFreezeBars(bars, elapsed){
+  const r = voiceRec, n = bars.length;
+  if(!r.barH || elapsed < (r.barLast || 0)){ r.barH = []; r.barDone = 0; }   // a new recording starts from zero
+  r.barLast = elapsed;
+  const step = VOICE_MAX_MS / n;
+  const reached = Math.min(n, Math.floor(elapsed / step) + 1);
+  const lvl = voiceLiveLevels(1)[0] || 0;
+  while(r.barDone < reached){ r.barH[r.barDone] = lvl; r.barDone++; }
+  bars.forEach(function(b, i){
+    const done = i < r.barDone;
+    b.style.height = Math.max(3, Math.round((done ? (r.barH[i] || 0) : 0) * 22)) + 'px';
+    b.classList.toggle('played', done);
+  });
+}
 function voiceFillBars(bars){
   voicePaintMirror(bars, voiceLiveLevels(Math.ceil(bars.length / 2)), 22);
 }
@@ -8743,7 +8771,7 @@ function updateVoiceUI(){
   const fb = document.querySelector('.vr-float');
   if(fb && r.state === 'locked'){
     fb.querySelector('.vr-time').textContent = t;
-    voiceFillBars(fb.querySelectorAll('.vr-bar'));
+    voiceFreezeBars(fb.querySelectorAll('.vr-bar'), voiceElapsed());
   } else if(fb && r.state === 'review'){
     voiceReviewPaint(fb);
     const cur = (r.preview && r.preview.currentTime > 0) ? r.preview.currentTime * 1000 : (r.reviewMs || 0);
@@ -8756,7 +8784,50 @@ function updateVoiceUI(){
     if(pb) pb.setAttribute('aria-label', playing ? 'Pause preview' : 'Play recording');
   }
 }
+function toggleSel(m){
+  if(!fr.sel) fr.sel = new Set();
+  if(fr.sel.has(m.id)) fr.sel.delete(m.id); else fr.sel.add(m.id);
+  if(!fr.sel.size) fr.sel = null;
+  render();
+}
+function startSelect(m){ fr.sel = new Set([m.id]); render(); }
+function clearSel(){ fr.sel = null; render(); }
+function selectBar(){
+  const bar = el('<div class="wa-compose sel-bar"></div>');
+  const cancel = el('<button type="button" class="btn ghost">Cancel</button>');
+  cancel.onclick = clearSel;
+  bar.appendChild(cancel);
+  bar.appendChild(el('<span class="sel-count">' + fr.sel.size + ' selected</span>'));
+  const del = el('<button type="button" class="btn" style="color:var(--bad)">Delete</button>');
+  del.onclick = deleteSelected;
+  bar.appendChild(del);
+  return bar;
+}
+async function deleteSelected(){
+  const ids = Array.from(fr.sel || []);
+  if(!ids.length) return;
+  const me = sbSession.user.id;
+  const mine = fr.msgs.filter(function(x){ return ids.indexOf(x.id) >= 0 && x.sender === me; });
+  const theirs = ids.filter(function(id){ return !mine.some(function(m){ return m.id === id; }); });
+  const n = ids.length;
+  const sure = await appDialog({eyebrow:'Delete', title:'Delete ' + n + (n > 1 ? ' messages' : ' message') + '?',
+    body:'Your own messages are removed from both chats. Your friend\'s messages are removed only from your chat. This cannot be undone.',
+    ok:'Delete', cancel:'Keep', danger:true});
+  if(!sure) return;
+  theirs.forEach(function(id){ hideMsgForMe(id); });
+  if(mine.length){
+    const db = sbClient();
+    const res = await db.from('chat_messages').delete().in('id', mine.map(function(m){ return m.id; })).eq('sender', me).select('id');
+    if(res.error || !res.data){ fr.note = 'Could not delete for everyone. Check your connection.'; render(); return; }
+    const paths = mine.filter(function(m){ return m.kind === 'audio' && m.audio_path; }).map(function(m){ return m.audio_path; });
+    if(paths.length) db.storage.from('voice-notes').remove(paths).then(function(){}, function(){});
+  }
+  fr.msgs = fr.msgs.filter(function(x){ return ids.indexOf(x.id) < 0; });
+  fr.sel = null;
+  render();
+}
 function chatComposeBar(f){
+  if(fr.sel && fr.sel.size) return selectBar();
   const r = voiceRec, mine = r.chat === f.id && r.state !== 'idle';
   if(mine && (r.state === 'locked' || r.state === 'review')) return voiceFloatBar();
   const bar = el('<div class="wa-compose"></div>');
@@ -9008,6 +9079,7 @@ function openMsgMenu(m, f, mine){
   if(text){
     item('Copy', '', async function(){ const ok = await copyText(text); toast(ok ? 'Copied' : 'Could not copy'); });
   }
+  item('Select messages', '', function(){ startSelect(m); });
   item(pinsFor(f).indexOf(m.id) >= 0 ? 'Unpin' : 'Pin to revisit', '', function(){ togglePin(f, m.id); });
   item('Delete for me', 'danger', function(){ hideMsgForMe(m.id); removeMsgLocal(m.id); });
   if(mine){
@@ -9031,8 +9103,13 @@ function attachMsgPress(node, m, f, mine){
   node.addEventListener('pointermove', function(e){ if(timer && Math.hypot(e.clientX - sx, e.clientY - sy) > 10) cancelPress(); });
   ['pointerup', 'pointercancel', 'pointerleave'].forEach(function(t){ node.addEventListener(t, cancelPress); });
   node.addEventListener('contextmenu', function(e){ e.preventDefault(); cancelPress(); openMsgMenu(m, f, mine); });
-  // after a long press, swallow the click that follows so the tap action does not also run
-  node.addEventListener('click', function(e){ if(fired){ fired = false; e.preventDefault(); e.stopImmediatePropagation(); } }, true);
+  // after a long press, swallow the click that follows so the tap action does not also run.
+  // While messages are being selected, a tap toggles this message instead.
+  node.addEventListener('click', function(e){
+    if(fr.sel){ e.preventDefault(); e.stopImmediatePropagation(); toggleSel(m); return; }
+    if(fired){ fired = false; e.preventDefault(); e.stopImmediatePropagation(); }
+  }, true);
+  if(fr.sel && fr.sel.has(m.id)) node.classList.add('picked');
 }
 
 // Admin: how many students are online right now, and what they are doing
