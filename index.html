@@ -83,8 +83,9 @@ html, body{ overscroll-behavior-y:none; }
 .pdot-row.now{ background:var(--accent-soft); }
 .pdot-row .pdot{ box-shadow:none; }
 .chat-list{ display:flex; flex-direction:column; gap:8px; max-height:52vh; overflow-y:auto; padding:14px 4px; }
-.bubble{ max-width:78%; padding:9px 13px; border-radius:var(--r-lg); font-size:15px; line-height:1.45; color:var(--text); word-wrap:break-word; }
-.bubble small{ display:block; margin-top:4px; font-size:11px; color:var(--muted); }
+.bubble{ max-width:78%; padding:6px 10px; border-radius:var(--r-lg); font-size:14px; line-height:1.35; color:var(--text); overflow-wrap:break-word; word-break:normal; }
+.bubble > span{ display:block; white-space:pre-wrap; overflow-wrap:break-word; word-break:normal; }
+.bubble small{ display:block; margin-top:2px; font-size:10px; color:var(--muted); text-align:right; }
 .bubble.mine{ align-self:flex-end; background:var(--accent-soft); border:1px solid var(--border); border-bottom-right-radius:6px; }
 .bubble.theirs{ align-self:flex-start; background:var(--surface); border:1px solid var(--border); border-bottom-left-radius:6px; }
 .chat-bar{ display:flex; gap:8px; margin-top:10px; }
@@ -104,18 +105,22 @@ html, body{ overscroll-behavior-y:none; }
 .wa-av[data-photo]{ cursor:zoom-in; }
 .wa-av img{ width:100%; height:100%; object-fit:cover; display:block; }
 .wa-avwrap .pdot{ position:absolute; right:0; bottom:0; }
-.wa-chat{ display:flex; flex-direction:column; height:calc(100dvh - 210px); min-height:340px; }
+.wa-chat{ display:flex; flex-direction:column; flex:1; min-height:0; }
 .wa-head{ display:flex; align-items:center; gap:12px; padding:10px 6px; border-bottom:1px solid var(--border); }
 .wa-back{ background:none; border:0; font-size:22px; color:var(--text); cursor:pointer; padding:4px 8px; }
 .wa-hname{ flex:1; min-width:0; display:flex; flex-direction:column; }
 .wa-hname b{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:16px; color:var(--text); }
 .wa-hname small{ font-size:12px; color:var(--muted); }
-.wa-msgs{ flex:1; min-height:0; overflow-y:auto; display:flex; flex-direction:column; gap:6px; padding:12px 4px; }
+.wa-msgs{ flex:1; min-height:0; overflow-y:auto; display:flex; flex-direction:column; gap:8px; padding:8px 4px; }
 .wa-day{ align-self:center; margin:8px 0 4px; }
 .wa-day span{ font-size:11px; color:var(--muted); background:var(--surface-2); border:1px solid var(--border); padding:3px 10px; border-radius:999px; }
-.wa-tick{ font-style:normal; margin-left:6px; color:var(--muted); letter-spacing:-1px; }
+.wa-tick{ display:inline-flex; align-items:center; margin-left:5px; color:var(--muted); }
+.wa-tk{ width:13px; height:9px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
 .wa-tick.seen{ color:var(--accent-text); }
-.wa-compose{ display:flex; gap:8px; align-items:center; padding-top:10px; border-top:1px solid var(--border); }
+.wa-compose{ display:flex; gap:8px; align-items:center; padding-top:6px; border-top:1px solid var(--border); flex:none; }
+.wa-field{ flex:1; min-width:0; min-height:36px; padding:6px 12px; border-radius:14px; background:var(--surface); border:1px solid var(--border); color:var(--text); font:14px/1.3 Inter,sans-serif; text-align:left; cursor:pointer; white-space:pre-wrap; overflow-wrap:break-word; }
+.wa-field i{ font-style:normal; color:var(--muted); }
+.wa-send{ width:auto; padding:8px 16px; flex:none; }
 .wa-empty{ text-align:center; margin:24px 0; }
 .av-viewer{ position:fixed; inset:0; z-index:95; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; padding:24px; animation:fade var(--dur-fast) linear; }
 .av-viewer img{ width:min(86vw,440px); aspect-ratio:1; object-fit:cover; border-radius:24px; box-shadow:0 40px 90px -30px var(--shadow); border:1px solid var(--border); }
@@ -136,6 +141,30 @@ html, body{ overscroll-behavior-y:none; }
 .on-label b{ font:600 13px Inter,sans-serif; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .on-label small{ font-size:11px; color:var(--muted); }
 @media (prefers-reduced-motion: reduce){ .on-strip{ animation:none; } }
+/* Online strip: a small dark pill at the top centre, like a dynamic island */
+@keyframes onIn{ from{ opacity:0; transform:translateX(-50%) scale(.6); } to{ opacity:1; transform:translateX(-50%) scale(1); } }
+.on-strip{ left:50%; right:auto; top:calc(8px + env(safe-area-inset-top,0px)); width:auto; max-width:calc(100vw - 32px); height:40px; padding:0 14px 0 6px; gap:10px; border-radius:999px; background:#0d0b09; border:1px solid rgba(255,255,255,.08); box-shadow:0 12px 30px -12px rgba(0,0,0,.7); transform:translateX(-50%); animation:onIn .4s var(--ease) both; }
+.on-strip.out{ opacity:0; transform:translateX(-50%) scale(.9); }
+.on-strip .on-av,.on-strip .on-more{ width:26px; height:26px; margin-left:-8px; border-color:#0d0b09; font-size:11px; }
+.on-strip .on-label b{ font-size:12px; color:#f3ead8; }
+.on-strip .on-label small{ font-size:10px; color:#a79b82; }
+/* Doubt screen: room between the buttons */
+.doubt-sheet .btn{ margin-top:14px !important; }
+.doubt-sheet .btn + .btn{ margin-top:10px !important; }
+/* Messenger fits the screen: no page scroll, the lists scroll inside */
+body.msg-fit{ overflow:hidden; }
+body.msg-fit #app{ height:100vh; height:100dvh; display:flex; flex-direction:column; overflow:hidden; box-sizing:border-box; padding-bottom:calc(84px + env(safe-area-inset-bottom,0px)); }
+body.msg-fit #app > .header{ flex:none; margin-bottom:10px; }
+body.msg-fit .msg-hero{ display:none; }
+.msg-screen{ flex:1; min-height:0; display:flex; flex-direction:column; }
+.wa-scroll{ flex:1; min-height:0; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+/* In-app keyboard, styled like the number keypad */
+.wa-kb{ flex:none; margin-top:6px; }
+.wa-krow{ display:flex; gap:4px; margin-top:4px; }
+.wa-krow .nk{ flex:1; min-width:0; min-height:40px; font-size:15px; padding:0; }
+.wa-krow .nk.fn{ font-size:14px; }
+.wa-space{ flex:4 !important; }
+.wa-send-key{ flex:2 !important; background:var(--accent); color:#1f1e1d; border-color:transparent; font-size:14px; }
 
 /* Admin panels: calmer and smaller on a phone */
 .adm-soft{ margin-top:6px; }
@@ -4000,6 +4029,7 @@ window.addEventListener('orientationchange', fitToScreen);
 function renderInner(){
   const fi = [...document.querySelectorAll('.opt')].indexOf(document.activeElement);
   document.body.classList.toggle('has-nav', view!=='practice' && !!store.profile);
+  document.body.classList.toggle('msg-fit', view==='messages' && !!sbSession);
   if(view!=='results') document.querySelectorAll('.confetti').forEach(c=>c.remove());
   if(view!=='practice' && window.__t){ clearInterval(window.__t); window.__t=null; }
   document.querySelectorAll('.bottomnav').forEach(n=>n.remove());
@@ -6899,13 +6929,12 @@ function savedNotesCard(){
   return card;
 }
 function messagesView(){
-  const w = el('<div></div>');
+  const w = el('<div class="msg-screen"></div>');
   if(!sbSession){ w.appendChild(el('<div class="card"><p class="note-line">Log in to see your messages.</p></div>')); return w; }
-  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Chats</div><h1 class="hm-title">Mess<em>ages.</em></h1></div>'));
+  if(!fr.open) w.appendChild(el('<div class="hm-hero msg-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Chats</div><h1 class="hm-title">Mess<em>ages.</em></h1></div>'));
   if(fr.list === null && !fr.loading) loadFriends();
   if(fr.open){ w.appendChild(chatScreen(fr.open)); return w; }
   w.appendChild(chatToolsBlock());
-  w.appendChild(savedNotesCard());
   return w;
 }
 
@@ -6936,7 +6965,7 @@ function askFriendSheet(q){
       const db = sbClient(), me = sbSession.user.id;
       const { data: share, error: e1 } = await db.from('question_shares').insert({ from_user: me, to_user: pick, question_id: String(q.id), asker_note: note.value.trim() || null }).select('id').single();
       if(e1){ go.disabled = false; appNotice('Not sent', e1.message); return; }
-      const preview = (q.text || 'A question').slice(0, 120);
+      const preview = (q.text || 'A question').slice(0, 900);
       const { error: e2 } = await db.from('chat_messages').insert({ sender: me, recipient: pick, kind: 'question_card', share_id: share.id, body: preview });
       if(e2){ go.disabled = false; appNotice('Not sent', e2.message); return; }
       close(); appNotice('Sent', 'Your question is on its way to your friend.');
@@ -6964,7 +6993,7 @@ async function openDoubt(shareId){
 function doubtView(){
   const w = el('<div></div>');
   if(!sbSession){ w.appendChild(el('<div class="card"><p class="note-line">Log in to open doubts.</p></div>')); return w; }
-  const back = el('<button class="btn ghost" type="button">&larr; Messages</button>');
+  const back = el('<button class="btn ghost" type="button">Messages</button>');
   back.onclick = ()=>go('messages');
   w.appendChild(back);
   if(doubt.loading){ w.appendChild(el('<p class="note-line" style="margin-top:14px">Opening the doubt...</p>')); return w; }
@@ -7126,15 +7155,27 @@ function dayLabel(d){
   return d.toLocaleDateString([], {day:'numeric', month:'long', year:'numeric'});
 }
 // Photo (or initial) with the online dot on it. Tapping a real photo opens the viewer.
+// Photo for a friend: from the friends list, or the leaderboard data already loaded on this phone.
+// Leaderboard rows already hide students who turned off the leaderboard, so the same privacy rule applies.
+function friendAvatar(f){
+  if(f.avatar) return f.avatar;
+  const cache = lbState && lbState.cache ? lbState.cache : {};
+  for(const k in cache){
+    const rows = (cache[k] && cache[k].rows) || [];
+    const hit = rows.find(r=>r.name === f.username && r.avatar);
+    if(hit) return hit.avatar;
+  }
+  return null;
+}
 function avatarEl(f, small){
   const wrap = el('<span class="wa-avwrap'+(small?' sm':'')+'"></span>');
   const av = el('<span class="wa-av"></span>');
-  if(f.avatar){
-    const img = document.createElement('img'); img.alt = ''; img.src = f.avatar;
+  if(friendAvatar(f)){
+    const img = document.createElement('img'); img.alt = ''; img.src = friendAvatar(f);
     av.appendChild(img); av.setAttribute('data-photo', '1');
     av.setAttribute('role', 'button'); av.setAttribute('tabindex', '0');
     av.setAttribute('aria-label', 'Enlarge photo of '+(f.username||'student'));
-    const open = e=>{ e.stopPropagation(); avatarViewer(f.avatar, f.username); };
+    const open = e=>{ e.stopPropagation(); avatarViewer(friendAvatar(f), f.username); };
     av.onclick = open;
     av.onkeydown = e=>{ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(e); } };
   } else {
@@ -7180,13 +7221,16 @@ function chatListCard(){
 // Friends you started a chat with this session stay in the list even before a message is sent
 const chatStarted = new Set();
 function chatToolsBlock(){
-  const w = el('<div></div>');
+  const w = el('<div class="msg-screen"></div>');
   const bar = el('<div class="msg-tools"><div class="eyebrow" style="margin:0">Chats</div></div>');
   const plus = el('<button class="btn plus-btn" type="button" aria-label="'+(fr.picking ? 'Close' : 'Start a new chat')+'">'+(fr.picking ? '\u00d7' : '+')+'</button>');
   plus.onclick = ()=>{ fr.picking = !fr.picking; if(fr.picking && fr.list === null) loadFriends(); render(); };
   bar.appendChild(plus);
   w.appendChild(bar);
-  w.appendChild(fr.picking ? chatPickerCard() : chatListCard());
+  const scroll = el('<div class="wa-scroll"></div>');
+  scroll.appendChild(fr.picking ? chatPickerCard() : chatListCard());
+  if(!fr.picking) scroll.appendChild(savedNotesCard());
+  w.appendChild(scroll);
   return w;
 }
 // Only accepted friends can be picked, so chats can only start between friends
@@ -7212,7 +7256,7 @@ function chatPickerCard(){
 // Online-friends strip: shown once per app open, just right of the menu button, for about 6.5 seconds
 function stripAvatar(f){
   const a = el('<span class="on-av"></span>');
-  if(f.avatar){ const img = document.createElement('img'); img.alt = ''; img.src = f.avatar; a.appendChild(img); }
+  if(friendAvatar(f)){ const img = document.createElement('img'); img.alt = ''; img.src = friendAvatar(f); a.appendChild(img); }
   else a.appendChild(document.createTextNode((f.username || '?').charAt(0).toUpperCase()));
   return a;
 }
@@ -7251,8 +7295,46 @@ function avatarViewer(url, name){
   document.addEventListener('keydown', onKey);
   x.focus();
 }
+// Message keyboard: same look as the number keypad
+const WA_ROWS = [
+  ['1','2','3','4','5','6','7','8','9','0'],
+  ['q','w','e','r','t','y','u','i','o','p'],
+  ['a','s','d','f','g','h','j','k','l'],
+  ['z','x','c','v','b','n','m']
+];
+const WA_TICK_SENT = '<svg class="wa-tk" viewBox="0 0 16 12" aria-hidden="true"><path d="M1.5 6.2l3 3 6-6.4"/></svg>';
+const WA_TICK_SEEN = '<svg class="wa-tk" viewBox="0 0 18 12" aria-hidden="true"><path d="M1 6.2l3 3 6-6.4"/><path d="M6.5 6.2l3 3 6-6.4"/></svg>';
+function waType(k){
+  if(k === '\u232b') fr.draft = fr.draft.slice(0, -1);
+  else if(fr.draft.length < 1000) fr.draft += k;
+  const f = document.querySelector('.wa-field'); if(f) waShowDraft(f);
+}
+function waShowDraft(f){
+  f.innerHTML = fr.draft ? '<span>'+esc(fr.draft)+'</span>' : '<i>Message</i>';
+}
+function waKey(label, cls, fn){
+  const b = el('<button type="button" class="nk '+(cls||'')+'">'+label+'</button>');
+  b.onclick = fn;
+  return b;
+}
+function waKeyboard(){
+  const kb = el('<div class="wa-kb" role="group" aria-label="Message keyboard"></div>');
+  WA_ROWS.forEach((r, i)=>{
+    const row = el('<div class="wa-krow"></div>');
+    r.forEach(k=>row.appendChild(waKey(k, '', ()=>waType(k))));
+    if(i === 3) row.appendChild(waKey('\u232b', 'fn', ()=>waType('\u232b')));
+    kb.appendChild(row);
+  });
+  const last = el('<div class="wa-krow"></div>');
+  [',', '.', '?', '!'].forEach(k=>last.appendChild(waKey(k, '', ()=>waType(k))));
+  last.appendChild(waKey('space', 'fn wa-space', ()=>waType(' ')));
+  last.appendChild(waKey('Send', 'wa-send-key', ()=>{ fr.kb = false; sendChat(); }));
+  kb.appendChild(last);
+  return kb;
+}
 function chatScreen(f){
   const me = sbSession.user.id;
+  if(fr.waChat !== f.id){ fr.waChat = f.id; fr.waAtBottom = true; fr.kb = false; scrollChatToEnd = true; }
   const w = el('<div class="wa-chat"></div>');
   const head = el('<div class="wa-head"></div>');
   const back = el('<button class="wa-back" type="button" aria-label="Back to chats">&larr;</button>');
@@ -7270,7 +7352,7 @@ function chatScreen(f){
     if(d.toDateString() !== lastDay){ lastDay = d.toDateString(); list.appendChild(el('<div class="wa-day"><span>'+esc(dayLabel(d))+'</span></div>')); }
     const mine = m.sender === me;
     const stamp = d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-    const tick = mine ? (m.read_at ? '<i class="wa-tick seen">\u2713\u2713</i>' : '<i class="wa-tick">\u2713</i>') : '';
+    const tick = mine ? '<i class="wa-tick'+(m.read_at ? ' seen' : '')+'">'+(m.read_at ? WA_TICK_SEEN : WA_TICK_SENT)+'</i>' : '';
     if(m.kind === 'question_card' || m.kind === 'answer_card'){
       const isQ = m.kind === 'question_card';
       const card = el('<button type="button" class="qcard-chat '+(mine?'mine':'theirs')+'"><b>'+(isQ ? (mine ? 'You asked a question' : 'A friend asked you a question') : (mine ? 'You sent back notes' : 'Notes came back'))+'</b><span>'+esc(m.body||'')+'</span><small>'+stamp+tick+'</small></button>');
@@ -7280,22 +7362,25 @@ function chatScreen(f){
       list.appendChild(el('<div class="bubble '+(mine?'mine':'theirs')+'"><span>'+esc(m.body)+'</span><small>'+stamp+tick+'</small></div>'));
     }
   });
+  list.onscroll = ()=>{ fr.waAtBottom = list.scrollHeight - list.scrollTop - list.clientHeight < 40; fr.waTop = list.scrollTop; };
   w.appendChild(list);
   if(fr.note) w.appendChild(el('<p class="note-line err">'+esc(fr.note)+'</p>'));
 
-  const bar = el('<div class="wa-compose"><input class="login-in" placeholder="Message" maxlength="1000" style="flex:1"><button class="btn" type="button">Send</button></div>');
-  const input = bar.querySelector('input');
-  input.value = fr.draft;
-  input.oninput = ()=>{ fr.draft = input.value; };
-  // Enter sends on desktop only; on phones Enter stays a newline-free keypress for the keyboard's own Send.
-  input.onkeydown = e=>{ if(e.key === 'Enter' && window.matchMedia('(pointer:fine)').matches){ e.preventDefault(); sendChat(); } };
-  bar.querySelector('button').onclick = sendChat;
+  const field = el('<button type="button" class="wa-field" aria-label="Type a message"></button>');
+  waShowDraft(field);
+  field.onclick = ()=>{ fr.kb = !fr.kb; render(); };
+  const send = el('<button class="btn wa-send" type="button">Send</button>');
+  send.onclick = ()=>{ fr.kb = false; sendChat(); };
+  const bar = el('<div class="wa-compose"></div>');
+  bar.appendChild(field); bar.appendChild(send);
   w.appendChild(bar);
+  if(fr.kb) w.appendChild(waKeyboard());
 
-  // Scroll to the newest message on open, on send, and when new messages arrive
+  // Scroll: go to the newest message when new ones arrive (unless the reader scrolled up); otherwise keep the place
   const grew = fr.msgs.length !== waScrollN;
   waScrollN = fr.msgs.length;
-  if(scrollChatToEnd || grew){ scrollChatToEnd = false; setTimeout(()=>{ list.scrollTop = list.scrollHeight; }, 0); }
+  if(scrollChatToEnd || grew || fr.waAtBottom !== false){ scrollChatToEnd = false; setTimeout(()=>{ list.scrollTop = list.scrollHeight; }, 0); }
+  else { setTimeout(()=>{ list.scrollTop = fr.waTop || 0; }, 0); }
   return w;
 }
 

@@ -30,6 +30,8 @@ self.addEventListener('push', event => {
     body: data.body || '',
     tag: data.tag || 'torq',
     renotify: true,
+    icon: './icons/icon-192.png',
+    badge: './icons/icon-192.png',
     data: { url: data.url || './' }
   };
   event.waitUntil(self.registration.showNotification(title, options));
