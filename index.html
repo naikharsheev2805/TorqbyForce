@@ -428,6 +428,109 @@ body.msg-fit .msg-hero{ display:none; }
 .bubble.audio .vb-bar{ background:#b9b9c2; transition:background .1s linear; }
 .bubble.audio .vb-bar.played{ background:#f08a3c; }
 .bubble.audio[data-state="loading"] .vb-play{ opacity:.55; }
+
+/* ===== Friends list: avatar layout, dot on the circle edge, flame badge ===== */
+.fr-row{ display:flex; align-items:center; gap:12px; padding:10px 0; }
+.fr-av{ position:relative; width:44px; height:44px; flex:none; }
+.fr-av .lb-av{ width:44px; height:44px; }
+.fr-av .pdot{ position:absolute; left:31.5px; top:31.5px; width:12px; height:12px; margin:0; box-shadow:none; }
+.fr-who{ flex:1; min-width:0; display:flex; flex-direction:column; }
+.fr-who b{ font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.fr-who small{ color:var(--muted); font-size:12px; }
+.fr-actions{ display:flex; gap:6px; align-items:center; flex:none; }
+.fr-flame{ display:inline-flex; align-items:center; gap:6px; border:0; border-radius:999px; padding:8px 14px 8px 10px; font:700 12.5px/1 Inter,sans-serif; letter-spacing:.02em; color:#fff; background:linear-gradient(135deg,#ffb35c 0%,#f0643a 50%,#c2283a 100%); box-shadow:0 8px 18px -8px rgba(240,100,58,.85), inset 0 1px 0 rgba(255,255,255,.3); cursor:pointer; transition:transform .15s ease; }
+.fr-flame svg{ width:14px; height:14px; fill:currentColor; }
+.fr-flame:active{ transform:scale(.95); }
+.fr-rm{ border:1px solid var(--border); background:transparent; color:var(--muted); border-radius:999px; padding:7px 12px; font:500 12px/1 Inter,sans-serif; cursor:pointer; }
+
+/* ===== Chat header: three-dot menu ===== */
+.wa-more{ margin-left:auto; width:36px; height:36px; border-radius:50%; border:1px solid var(--border); background:transparent; color:var(--text); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; flex:none; }
+.wa-more svg{ width:18px; height:18px; fill:currentColor; }
+
+/* ===== Tablet: keep the typing bar on screen during a chat ===== */
+body.chat-full{ overflow:hidden; }
+body.chat-full #app{ height:100vh; height:100dvh; box-sizing:border-box; display:flex; flex-direction:column; min-height:0; }
+body.chat-full .msg-screen{ flex:1 1 auto; min-height:0; display:flex; flex-direction:column; }
+body.chat-full .wa-chat{ flex:1 1 auto; min-height:0; height:100%; display:flex; flex-direction:column; }
+body.chat-full .wa-msgs{ flex:1 1 auto; min-height:0; }
+body.chat-full .wa-compose{ flex:none; padding-bottom:max(8px, env(safe-area-inset-bottom,0px)); }
+
+/* ===== Leaderboard rows: no text selection on long press ===== */
+.lb-item{ -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
+
+/* ===== Profile page (opened by long-press on a leaderboard name) ===== */
+.pp-scrim{ position:fixed; inset:0; z-index:100; background:rgba(0,0,0,.5); }
+.pp-card{ position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); z-index:101; width:min(340px, calc(100vw - 32px)); padding:28px 22px 22px; border-radius:var(--r-lg); background:linear-gradient(160deg,var(--surface),var(--surface-2)); border:1px solid var(--border); text-align:center; box-shadow:0 24px 50px -24px var(--shadow); }
+.pp-av{ width:136px; height:136px; border-radius:50%; margin:0 auto 14px; overflow:hidden; background:var(--surface-2); border:3px solid var(--accent-soft); display:grid; place-items:center; font:600 52px Lora,Georgia,serif; color:var(--muted); }
+.pp-av img{ width:100%; height:100%; object-fit:cover; display:block; }
+.pp-av i{ font-style:normal; }
+.pp-name{ font:600 24px/1.2 Lora,Georgia,serif; margin:0; color:var(--text); }
+.pp-first{ margin-top:4px; font-size:14px; color:var(--muted); }
+.pp-stats{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:18px 0; }
+.pp-stats div{ padding:12px; border-radius:var(--r-md); background:var(--surface-2); border:1px solid var(--border); }
+.pp-stats b{ display:block; font:600 22px Lora,Georgia,serif; color:var(--text); }
+.pp-stats span{ font-size:12px; color:var(--muted); }
+
+/* ===== Settings: rule between sections ===== */
+.set-rule{ border:0; border-top:1px solid var(--border); margin:22px 0 18px; }
+
+/* ===== Chat: typing, read receipts, reactions, pinned message, streak card ===== */
+.wa-typing-label{ color:var(--accent-text) !important; }
+.wa-extra{ display:flex; flex-direction:column; gap:3px; margin-top:-2px; max-width:78%; }
+.wa-extra.mine{ align-self:flex-end; align-items:flex-end; }
+.wa-extra.theirs{ align-self:flex-start; align-items:flex-start; }
+.wa-react-row{ display:flex; gap:4px; flex-wrap:wrap; }
+.wa-react{ font-size:12px; line-height:1; padding:4px 8px; border-radius:999px; background:var(--surface-2); border:1px solid var(--border); color:var(--text); }
+.wa-seen{ font-size:10px; color:var(--muted); letter-spacing:.02em; }
+.mm-react-row{ display:flex; justify-content:space-around; padding:6px 4px 10px; border-bottom:1px solid var(--border); margin-bottom:6px; }
+.mm-react{ font-size:24px; line-height:1; background:none; border:0; padding:6px; border-radius:50%; cursor:pointer; }
+.mm-react:active{ background:rgba(255,255,255,.08); }
+.wa-pin{ display:flex; align-items:center; gap:10px; padding:8px 12px; margin:6px 0; border-radius:var(--r-md); background:var(--accent-soft); border:1px solid var(--border); font-size:13px; color:var(--text); }
+.wa-pin-k{ font:700 10px Inter,sans-serif; letter-spacing:.12em; text-transform:uppercase; color:var(--accent-text); flex:none; }
+.wa-pin-t{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.wa-pin-x{ flex:none; border:0; background:none; color:var(--muted); font-size:18px; line-height:1; cursor:pointer; padding:2px 4px; }
+.bubble.streak-card{ background:linear-gradient(135deg,#ffb35c33,#f0643a33); border:1px solid #f0643a66; }
+.bubble.streak-card > span{ font-weight:600; }
+
+/* ===== Admin: cohorts tab ===== */
+
+/* ===== Typing: three bouncing dots ===== */
+.wa-dots{ display:inline-flex; gap:3px; align-items:center; height:12px; vertical-align:middle; }
+.wa-dots i{ display:block; width:6px; height:6px; border-radius:50%; background:var(--accent-text); animation:waBounce 1.1s infinite ease-in-out; }
+.wa-dots i:nth-child(2){ animation-delay:.15s; }
+.wa-dots i:nth-child(3){ animation-delay:.3s; }
+@keyframes waBounce{ 0%,60%,100%{ transform:translateY(0); opacity:.4; } 30%{ transform:translateY(-5px); opacity:1; } }
+@media (prefers-reduced-motion: reduce){ .wa-dots i{ animation:none; } }
+
+/* ===== Recording controls respond instantly on touch ===== */
+.vr-round, .vr-send, .wa-send, .vr-mic, .vb-play, .wa-more, .mm-item, .mm-react, .wa-pin-x{ touch-action:manipulation; }
+
+/* ===== Messenger: formulas float over the whole screen ===== */
+.gutter-msg{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; display:none; }
+.gutter-msg .gf{ opacity:.16; }
+body.msg-fit .gutter-msg{ display:block; }
+body.msg-fit .gutter{ display:none !important; }
+body.msg-fit #app{ background:transparent !important; position:relative; z-index:1; }
+
+/* ===== Activity: typing dots and the recording microphone with waves ===== */
+.wa-dots{ display:inline-flex; gap:3px; align-items:center; height:10px; margin-left:4px; vertical-align:middle; }
+.wa-dots i{ display:block; width:5px; height:5px; border-radius:50%; background:currentColor; animation:waBounce 1.1s infinite ease-in-out; }
+.wa-dots i:nth-child(2){ animation-delay:.15s; }
+.wa-dots i:nth-child(3){ animation-delay:.3s; }
+@keyframes waBounce{ 0%,60%,100%{ transform:translateY(0); opacity:.4; } 30%{ transform:translateY(-4px); opacity:1; } }
+.act-line{ display:inline-flex; align-items:center; gap:6px; color:var(--accent-text); }
+.act-line em{ font-style:normal; }
+.act-mic{ display:inline-block; line-height:0; }
+.act-mic svg{ width:22px; height:15px; display:block; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.act-mic svg rect{ fill:currentColor; stroke:none; }
+.act-mic .aw{ opacity:0; stroke-width:1.6; transform-box:fill-box; transform-origin:left center; animation:micWave 1.5s infinite ease-out; }
+.act-mic .aw2{ animation-delay:.5s; }
+.act-mic .aw3{ animation-delay:1s; }
+@keyframes micWave{ 0%{ opacity:0; transform:translateX(-1px) scale(.6); } 15%{ opacity:1; } 100%{ opacity:0; transform:translateX(2px) scale(1.3); } }
+.bubble.act-bub{ padding:8px 12px; min-width:0; }
+.bubble.act-bub .act-mic svg{ width:30px; height:20px; }
+.bubble.act-bub .wa-dots{ height:8px; margin-left:0; }
+@media (prefers-reduced-motion: reduce){ .wa-dots i, .act-mic .aw{ animation:none; } .act-mic .aw{ opacity:1; } }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -6070,6 +6173,34 @@ function lbItemHTML(r){
     +'<span class="lb-who"><b>'+esc(r.name)+'</b>'+sub+'</span>'
     +'<span class="lb-sc">'+esc(lbFmt(lbState.board, r.score))+'</span></div>';
 }
+function attachLbHold(node, r){
+  let timer = null, sx = 0, sy = 0, fired = false;
+  const cancel = function(){ clearTimeout(timer); timer = null; };
+  node.addEventListener('pointerdown', function(e){
+    if(e.button > 0) return;
+    fired = false; sx = e.clientX; sy = e.clientY; cancel();
+    timer = setTimeout(function(){ timer = null; fired = true; vibrate(12); openPublicProfile(r); }, 450);
+  });
+  node.addEventListener('pointermove', function(e){ if(timer && Math.hypot(e.clientX - sx, e.clientY - sy) > 10) cancel(); });
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach(function(t){ node.addEventListener(t, cancel); });
+  node.addEventListener('contextmenu', function(e){ e.preventDefault(); cancel(); openPublicProfile(r); });
+  node.addEventListener('click', function(e){ if(fired){ fired = false; e.preventDefault(); e.stopImmediatePropagation(); } }, true);
+}
+function openPublicProfile(r){
+  const scrim = el('<div class="pp-scrim"></div>');
+  const card = el('<div class="pp-card" role="dialog" aria-modal="true" aria-label="Profile"></div>');
+  const first = r.anon ? '' : (r.first || '');
+  card.innerHTML = '<div class="pp-av">' + lbAvHTML(r) + '</div>'
+    + '<h3 class="pp-name">' + esc(r.name || 'Student') + '</h3>'
+    + (first ? '<div class="pp-first">' + esc(first) + '</div>' : '')
+    + '<div class="pp-stats"><div><b>#' + r.place + '</b><span>Rank</span></div>'
+    + '<div><b>' + esc(lbFmt(lbState.board, r.score)) + '</b><span>' + esc(LB_BOARDS.find(b=>b.k===lbState.board).l) + '</span></div></div>'
+    + '<button class="btn block" type="button">Close</button>';
+  const close = function(){ scrim.remove(); card.remove(); };
+  scrim.onclick = close;
+  card.querySelector('button').onclick = close;
+  document.body.appendChild(scrim); document.body.appendChild(card);
+}
 function lbStandingHTML(rows, meta){
   const me = rows.find(r=>r.me);
   if(me){
@@ -6170,6 +6301,7 @@ function leaderboardView(){
     const html = rest.map(r=>(r.me && r.place>LB_LIMIT ? '<div class="lb-gap" aria-hidden="true">···</div>' : '')+lbItemHTML(r)).join('');
     const listEl = el('<div class="list" role="list" aria-label="Rankings">'+html+'</div>');
     w.appendChild(listEl);
+    listEl.querySelectorAll('.lb-item').forEach((it,i)=>{ const r = rest[i]; if(r && !r.me) attachLbHold(it, r); });
     // Admins tap any student to open their profile and send a message
     if(isGuard()) listEl.querySelectorAll('.lb-item').forEach((it,i)=>{ const r = rest[i]; if(!r || r.me) return; it.style.cursor = 'pointer'; it.onclick = ()=>openAdminStudent(r); });
   }
@@ -6917,9 +7049,86 @@ async function openChat(f){
   fr.open = f; fr.msgs = []; fr.draft = '';
   await refreshChat(true);
   clearInterval(fr.poll);
-  fr.poll = setInterval(()=>{ if(fr.open) refreshChat(false); }, 4000);
+  fr.poll = setInterval(()=>{ if(fr.open) refreshChat(false); }, 1000);
 }
 function closeChat(){ voiceAbort(); voicePause(); fr.open = null; clearInterval(fr.poll); fr.poll = null; render(); }
+let activitySentAt = 0, activitySentKind = null, listActivityBusy = false;
+function noteActivity(kind){
+  if(!fr.open || !sbSession) return;
+  const now = Date.now();
+  if(kind === activitySentKind && now - activitySentAt < 1500) return;
+  activitySentKind = kind; activitySentAt = now;
+  sbClient().from('chat_typing').upsert({user_id: sbSession.user.id, peer_id: fr.open.id, updated_at: new Date(now).toISOString(), activity: kind}, {onConflict: 'user_id,peer_id'}).then(function(){}, function(){});
+}
+function noteTyping(){ noteActivity('typing'); }
+function activityTick(){
+  if(!sbSession) return;
+  if(fr.open && voiceRec.chat === fr.open.id && ['starting','holding','locked'].indexOf(voiceRec.state) >= 0) noteActivity('recording');
+  if(view === 'messages' && !fr.open && fr.list) loadListActivity();
+}
+setInterval(activityTick, 1000);
+function loadListActivity(){
+  if(listActivityBusy) return; listActivityBusy = true;
+  const me = sbSession.user.id, cutoff = new Date(Date.now() - 3000).toISOString();
+  sbClient().from('chat_typing').select('user_id, activity').eq('peer_id', me).gte('updated_at', cutoff).then(function(r){
+    listActivityBusy = false;
+    const map = {}; (r.data || []).forEach(function(x){ map[x.user_id] = x.activity || 'typing'; });
+    if(JSON.stringify(map) !== JSON.stringify(fr.activityBy || {})){ fr.activityBy = map; if(voiceRec.state === 'idle') render(); }
+  }, function(){ listActivityBusy = false; });
+}
+function micWavesHTML(){
+  return '<span class="act-mic" aria-hidden="true"><svg viewBox="0 0 36 24"><rect x="5" y="2" width="6" height="11" rx="3"/><path d="M1.5 10a6.5 6.5 0 0 0 13 0"/><path d="M8 16.5V21"/><path class="aw aw1" d="M18 7a5 5 0 0 1 0 8"/><path class="aw aw2" d="M22 4a9 9 0 0 1 0 14"/><path class="aw aw3" d="M26 1a13 13 0 0 1 0 20"/></svg></span>';
+}
+function activityBubble(kind){
+  const b = el('<div class="bubble theirs act-bub"></div>');
+  b.innerHTML = kind === 'recording' ? micWavesHTML() : '<span class="wa-dots"><i></i><i></i><i></i></span>';
+  return b;
+}
+function chatActivityHTML(uid, fallback){
+  const k = (fr.activityBy || {})[uid];
+  if(k === 'recording') return '<span class="act-line"><em>recording audio</em>' + micWavesHTML() + '</span>';
+  if(k) return '<span class="act-line"><em>typing</em><span class="wa-dots"><i></i><i></i><i></i></span></span>';
+  return '<span>' + esc(fallback) + '</span>';
+}
+function chatPinKey(f){ return 'torq.chat.pins.' + sbSession.user.id + '.' + f.id; }
+function pinsFor(f){ try{ return JSON.parse(localStorage.getItem(chatPinKey(f)) || '[]'); }catch(e){ return []; } }
+function togglePin(f, id){
+  let list = pinsFor(f);
+  list = list.indexOf(id) >= 0 ? list.filter(function(x){ return x !== id; }) : list.concat([id]);
+  try{ localStorage.setItem(chatPinKey(f), JSON.stringify(list)); }catch(e){}
+  render();
+}
+async function setReaction(m, emoji){
+  const db = sbClient(), me = sbSession.user.id;
+  const mineNow = ((fr.reacts || {})[m.id] || []).find(function(x){ return x.user_id === me; });
+  if(mineNow && mineNow.emoji === emoji){ await db.from('chat_reactions').delete().eq('message_id', m.id).eq('user_id', me); }
+  else { await db.from('chat_reactions').upsert({message_id: m.id, user_id: me, emoji: emoji}, {onConflict: 'message_id,user_id'}); }
+  refreshChat(false);
+}
+function chatExtras(m, me, seenId){
+  const list = (fr.reacts || {})[m.id] || [];
+  if(!list.length && m.id !== seenId) return null;
+  const wrap = el('<div class="wa-extra ' + (m.sender === me ? 'mine' : 'theirs') + '"></div>');
+  if(list.length){
+    const counts = {};
+    list.forEach(function(x){ counts[x.emoji] = (counts[x.emoji] || 0) + 1; });
+    const row = el('<div class="wa-react-row"></div>');
+    Object.keys(counts).forEach(function(e){ row.appendChild(el('<span class="wa-react">' + esc(e) + (counts[e] > 1 ? ' ' + counts[e] : '') + '</span>')); });
+    wrap.appendChild(row);
+  }
+  if(m.id === seenId && m.read_at){
+    const d = new Date(m.read_at);
+    wrap.appendChild(el('<div class="wa-seen">Seen at ' + d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) + '</div>'));
+  }
+  return wrap;
+}
+async function shareStreak(f){
+  const n = streak(); if(!n) return;
+  const { error } = await sbClient().from('chat_messages').insert({sender: sbSession.user.id, recipient: f.id, body: '\u{1F525} ' + n + '-day streak. Keep it going.', kind: 'streak'});
+  if(error){ fr.note = 'Could not share your streak. Check your connection.'; render(); return; }
+  scrollChatToEnd = true;
+  await refreshChat(false);
+}
 async function refreshChat(markRead){
   if(!fr.open || !sbSession) return;
   const db = sbClient(), me = sbSession.user.id, other = fr.open.id;
@@ -6928,8 +7137,22 @@ async function refreshChat(markRead){
     .order('created_at', {ascending:true}).limit(300);
   const before = fr.msgs.length;
   fr.msgs = (data || []).filter(function(m){ return !chatHiddenIds().has(m.id); });
+  db.from('chat_typing').select('user_id, updated_at, activity').eq('user_id', other).eq('peer_id', me).limit(1).then(function(r){
+    const row = r.data && r.data[0];
+    const t = (row && Date.now() - Date.parse(row.updated_at) < 3000) ? (row.activity || 'typing') : null;
+    if(fr.peerActivity !== t){ fr.peerActivity = t; if(voiceRec.state === 'idle') render(); }
+  }, function(){});
+  const ids = fr.msgs.map(function(x){ return x.id; });
+  if(ids.length){
+    db.from('chat_reactions').select('message_id, user_id, emoji').in('message_id', ids).then(function(r){
+      const grouped = {};
+      (r.data || []).forEach(function(x){ (grouped[x.message_id] = grouped[x.message_id] || []).push(x); });
+      const key = JSON.stringify(grouped);
+      if(key !== fr.reactKey){ fr.reactKey = key; fr.reacts = grouped; if(voiceRec.state === 'idle') render(); }
+    }, function(){});
+  }
   if(markRead) scrollChatToEnd = true;
-  if(fr.msgs.length !== before || markRead) render();
+  if((fr.msgs.length !== before || markRead) && voiceRec.state === 'idle') render();
   if(fr.open) db.from('chat_messages').update({read_at: new Date().toISOString()}).eq('sender', other).eq('recipient', me).is('read_at', null).then(()=>{}, ()=>{});
 }
 let scrollChatToEnd = false;
@@ -7377,13 +7600,16 @@ function friendsPanel(){
   if(!accepted.length) fc.appendChild(el('<p class="note-line">No friends yet. Send a request above to start chatting.</p>'));
   accepted.forEach(f=>{
     const r = el('<div class="fr-row"></div>');
-    r.appendChild(presenceDot(f.id));
+    const av = el('<span class="fr-av"></span>');
+    av.appendChild(el('<span class="lb-av">'+lbAvHTML({avatar: friendAvatar(f), name: f.username || '?'})+'</span>'));
+    av.appendChild(presenceDot(f.id));
+    r.appendChild(av);
     r.appendChild(el('<div class="fr-who"><b>'+esc(f.username||'Student')+'</b>'+(f.first?'<small>'+esc(f.first)+'</small>':'')+'<span class="fr-status">'+esc(lastSeenText(f.id))+'</span></div>'));
     const acts = el('<div class="fr-actions"></div>');
-    const duoBtn = el('<button class="btn ghost" type="button">Flame</button>');
+    const duoBtn = el('<button class="fr-flame" type="button" aria-label="Start a flame with '+esc(f.username||'friend')+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.9 3.3 4.6 5.4 4.6 10.2A4.6 4.6 0 0 1 12 17a4.6 4.6 0 0 1-4.6-4.8c0-2.1 1-3.5 2-4.5.3 1.6 1 2.6 2.1 3.2C11.4 7.4 11.6 4.6 12 2z"/></svg><span>Flame</span></button>');
     duoBtn.onclick = e=>{ e.stopPropagation(); startDuoSheet(f); };
     acts.appendChild(duoBtn);
-    const rmBtn = el('<button class="btn ghost" type="button" aria-label="Remove friend">Remove</button>');
+    const rmBtn = el('<button class="fr-rm" type="button" aria-label="Remove friend">Remove</button>');
     rmBtn.onclick = e=>{ e.stopPropagation(); unfriend(f); };
     acts.appendChild(rmBtn);
     r.appendChild(acts);
@@ -7487,7 +7713,7 @@ function chatListCard(){
     const name = esc(f.username || 'Student');
     const main = last
       ? '<div class="wa-main"><div class="wa-top"><b>'+name+'</b><small>'+esc(fmtChatTime(last.created_at))+'</small></div>'
-        +'<div class="wa-bot"><span>'+esc(chatPreviewText(last, me))+'</span>'+(unread ? '<em class="wa-badge">'+unread+'</em>' : '')+'</div></div>'
+        +'<div class="wa-bot">'+chatActivityHTML(f.id, chatPreviewText(last, me))+(unread ? '<em class="wa-badge">'+unread+'</em>' : '')+'</div></div>'
       : '<div class="wa-main"><div class="wa-top"><b>'+name+'</b></div><div class="wa-bot"><span>'+esc(DOT_STATES[stateOf(fr.presence[f.id])].label)+'</span></div></div>';
     row.appendChild(el(main));
     const open = ()=>openChat(f);
@@ -7605,6 +7831,7 @@ function waSetDraft(v){
   const f = document.querySelector('.wa-field'); if(f) waShowDraft(f);
 }
 function waType(ch){
+  noteTyping();
   if(Date.now() - (fr.glideAt || 0) < 350) return;
   if(fr.draft.length >= 1000) return;
   waSetDraft(fr.draft + ch);
@@ -7766,15 +7993,23 @@ function chatScreen(f){
   back.onclick = closeChat;
   head.appendChild(back);
   head.appendChild(avatarEl(f, true));
-  head.appendChild(el('<div class="wa-hname"><b>'+esc(f.username||'Student')+'</b><small>'+esc(DOT_STATES[stateOf(fr.presence[f.id])].label)+'</small></div>'));
-  const blk = el('<button class="wa-block" type="button">Block</button>');
-  blk.onclick = ()=>blockUser(f);
-  head.appendChild(blk);
+  head.appendChild(el('<div class="wa-hname"><b>'+esc(f.username||'Student')+'</b><small class="wa-typing-label">'+(fr.peerActivity ? (fr.peerActivity==='recording' ? '<span class="act-line">recording audio'+micWavesHTML()+'</span>' : '<span class="act-line">typing<span class="wa-dots"><i></i><i></i><i></i></span></span>') : esc(DOT_STATES[stateOf(fr.presence[f.id])].label))+'</small></div>'));
+  const more = el('<button class="wa-more" type="button" aria-label="Chat options"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg></button>');
+  more.onclick = ()=>openChatMenu(f);
+  head.appendChild(more);
   w.appendChild(head);
 
   const list = el('<div class="wa-msgs" role="log" aria-live="polite"></div>');
   if(!fr.msgs.length) list.appendChild(el('<p class="note-line wa-empty">Say hello. Only you and '+esc(f.username||'your friend')+' can read these messages.</p>'));
   let lastDay = '';
+  const seenId = ((fr.msgs.filter(function(x){ return x.sender === me && x.read_at; })).pop() || {}).id;
+  const pinned = pinsFor(f).filter(function(id){ return fr.msgs.some(function(x){ return x.id === id; }); });
+  if(pinned.length){
+    const last = fr.msgs.find(function(x){ return x.id === pinned[pinned.length - 1]; });
+    const pb = el('<div class="wa-pin"><span class="wa-pin-k">Pinned</span><span class="wa-pin-t">' + esc(msgPlainText(last) || 'Voice message').slice(0, 120) + '</span><button type="button" class="wa-pin-x" aria-label="Unpin">×</button></div>');
+    pb.querySelector('.wa-pin-x').onclick = function(){ togglePin(f, last.id); };
+    w.appendChild(pb);
+  }
   fr.msgs.forEach(m=>{
     const d = new Date(m.created_at);
     if(d.toDateString() !== lastDay){ lastDay = d.toDateString(); list.appendChild(el('<div class="wa-day"><span>'+esc(dayLabel(d))+'</span></div>')); }
@@ -7789,13 +8024,20 @@ function chatScreen(f){
       list.appendChild(card);
     } else if(m.kind === 'audio'){
       list.appendChild(voiceBubble(f, m, mine, stamp, tick));
+    } else if(m.kind === 'streak'){
+      const sb = el('<div class="bubble streak-card '+(mine?'mine':'theirs')+'"><span>'+esc(m.body)+'</span><small>'+stamp+tick+'</small></div>');
+      attachMsgPress(sb, m, f, mine);
+      list.appendChild(sb);
     } else {
       const bub = el('<div class="bubble '+(mine?'mine':'theirs')+'"><span>'+esc(m.body)+'</span><small>'+stamp+tick+'</small></div>');
       if(!mine){ bub.style.cursor = 'pointer'; bub.title = 'Tap to report'; bub.onclick = ()=>reportMessage(m, f); }
       attachMsgPress(bub, m, f, mine);
       list.appendChild(bub);
     }
+    const ex = chatExtras(m, me, seenId);
+    if(ex) list.appendChild(ex);
   });
+  if(fr.peerActivity) list.appendChild(activityBubble(fr.peerActivity));
   list.onscroll = ()=>{ fr.waAtBottom = list.scrollHeight - list.scrollTop - list.clientHeight < 40; fr.waTop = list.scrollTop; };
   w.appendChild(list);
   if(fr.note) w.appendChild(el('<p class="note-line err">'+esc(fr.note)+'</p>'));
@@ -7817,6 +8059,13 @@ const VOICE_MIC_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y
 const VOICE_TRASH_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"/><path d="M9.5 7V4.5h5V7"/><path d="M6.5 7l1 12.5h9l1-12.5"/></svg>';
 const VOICE_PLAY_SVG = '<svg class="ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>';
 const VOICE_PAUSE_SVG = '<svg class="ic-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+function voiceConsentGiven(){ try{ return localStorage.getItem('torq.voice.consent') === '1'; }catch(e){ return false; } }
+async function voiceConsent(){
+  if(voiceConsentGiven()) return true;
+  const yes = await appDialog({eyebrow:'Before you record', title:'Record your voice?', body:'TORQ records your voice only when you hold the mic to send a voice message, or when you start an audio call, and only with your agreement. The audio is used to deliver that message or call and for nothing else. You can delete voice messages you sent at any time.', ok:'I agree', cancel:'Not now'});
+  if(yes){ try{ localStorage.setItem('torq.voice.consent', '1'); }catch(e){} }
+  return !!yes;
+}
 let voiceRec = {state:'idle', chat:null, mic:null, stream:null, recorder:null, ctx:null, analyser:null, buf:null, chunks:[], peaks:[], live:[], mime:'', elapsed:0, runSince:0, paused:false, startX:0, startY:0, cancelArmed:false, holdTimer:null, tick:null, releasedEarly:false, aborted:false};
 let voicePlayer = {id:null, audio:null, speed:1, status:'', failed:null};
 const voiceUrlCache = new Map();
@@ -7874,6 +8123,7 @@ async function voiceStart(){
   if(mime === null || !(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)){
     fr.note = 'Voice messages are not supported in this browser.'; render(); return;
   }
+  if(!voiceConsentGiven()){ r.state = 'idle'; r.mic = null; render(); voiceConsent(); return; }
   r.state = 'starting'; r.chat = fr.open.id; r.cancelArmed = false; r.aborted = false; r.releasedEarly = false;
   render();
   let stream = null;
@@ -8047,7 +8297,9 @@ function voiceLockBar(){
     + '<button type="button" class="btn wa-send vr-send">Send</button>'
     + '</div>');
   bar.querySelector('.vr-trash').onclick = function(){ voiceAbort(null); render(); };
-  bar.querySelector('.vr-pause').onclick = function(){ voicePauseToggle(); };
+  const pz = bar.querySelector('.vr-pause');
+  pz.addEventListener('pointerdown', function(e){ if(e.button > 0) return; e.preventDefault(); voicePauseToggle(); });
+  pz.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); voicePauseToggle(); } });
   bar.querySelector('.vr-send').onclick = function(){ voiceFinish(true); };
   return bar;
 }
@@ -8262,6 +8514,25 @@ function toast(msg){
   setTimeout(function(){ t.remove(); }, 1800);
 }
 function closeMsgMenu(){ document.querySelectorAll('.mm-scrim').forEach(function(n){ n.remove(); }); }
+function openChatMenu(f){
+  closeMsgMenu();
+  const scrim = el('<div class="mm-scrim"></div>');
+  const sheet = el('<div class="mm-sheet" role="menu"></div>');
+  const snip = document.createElement('div'); snip.className = 'mm-snip'; snip.textContent = f.username || 'Chat options';
+  sheet.appendChild(snip);
+  function item(label, cls, fn){
+    const b = el('<button type="button" class="mm-item' + (cls ? ' ' + cls : '') + '" role="menuitem">' + label + '</button>');
+    b.onclick = function(){ closeMsgMenu(); fn(); };
+    sheet.appendChild(b);
+  }
+  if(streak() > 0) item('Share my streak (' + streak() + ' days)', '', function(){ shareStreak(f); });
+  item('Remove friend', 'danger', function(){ unfriend(f); });
+  item('Block ' + (f.username || 'this student'), 'danger', function(){ blockUser(f); });
+  item('Cancel', '', function(){});
+  scrim.appendChild(sheet);
+  scrim.addEventListener('click', function(e){ if(e.target === scrim) closeMsgMenu(); });
+  document.body.appendChild(scrim);
+}
 function removeMsgLocal(id){
   if(voicePlayer.id === id) voicePause();
   fr.msgs = fr.msgs.filter(function(x){ return x.id !== id; });
@@ -8288,9 +8559,17 @@ function openMsgMenu(m, f, mine){
     b.onclick = function(){ closeMsgMenu(); fn(); };
     sheet.appendChild(b);
   }
+  const rr = el('<div class="mm-react-row"></div>');
+  ['👍','❤️','😂','😮','🙏'].forEach(function(e){
+    const b = el('<button type="button" class="mm-react" aria-label="React ' + e + '">' + e + '</button>');
+    b.onclick = function(){ closeMsgMenu(); setReaction(m, e); };
+    rr.appendChild(b);
+  });
+  sheet.appendChild(rr);
   if(text){
     item('Copy', '', async function(){ const ok = await copyText(text); toast(ok ? 'Copied' : 'Could not copy'); });
   }
+  item(pinsFor(f).indexOf(m.id) >= 0 ? 'Unpin' : 'Pin to revisit', '', function(){ togglePin(f, m.id); });
   item('Delete for me', 'danger', function(){ hideMsgForMe(m.id); removeMsgLocal(m.id); });
   if(mine){
     item('Delete for everyone', 'danger', function(){ deleteForEveryone(m); });
@@ -8344,11 +8623,10 @@ function liveNowPanel(){
 }
 function adminView(){
   const w = adminViewCore();
-  if(isGuard()){
+  if(isGuard() && (nav.adminTab || 'reports') !== 'cohorts'){
     const soft = el('<div class="adm-soft"></div>');
     soft.appendChild(liveNowPanel());
     soft.appendChild(analyticsPanel());
-    soft.appendChild(cohortPanel());
     w.appendChild(soft);
   }
   return w;
@@ -8371,13 +8649,14 @@ function adminViewCore(){
 
   const cur = nav.adminTab || 'reports';
   const tabs = el('<div class="ctabs" role="tablist"></div>');
-  [['reports','Reports'],['messages','Messages']].forEach(p=>{
+  [['reports','Reports'],['messages','Messages'],['cohorts','Cohorts']].forEach(p=>{
     const on = cur === p[0];
     const t = el('<button role="tab" aria-selected="'+on+'" class="ctab'+(on?' on':'')+'">'+p[1]+'</button>');
     t.onclick = ()=>go('admin',{adminTab:p[0]});
     tabs.appendChild(t);
   });
   w.appendChild(tabs);
+  if(isGuard() && cur === 'cohorts'){ w.appendChild(cohortPanel()); return w; }
 
   const tools = el('<div class="row ad-tools"></div>');
   const refresh = el('<button class="btn secondary small" type="button">Refresh</button>');
@@ -8688,6 +8967,11 @@ function settingsPanel(){
       if(res && res.error){ err.textContent = 'Saved on this device. Could not reach the server, so try again later.'; err.hidden = false; ok.hidden = true; }
     }
   };
+  card.appendChild(el('<hr class="set-rule">'));
+  const th = el('<div></div>');
+  th.appendChild(el('<div class="eyebrow" style="margin:0 0 10px">Themes</div>'));
+  th.appendChild(themeSplitPart());
+  card.appendChild(th);
   return card;
 }
 
@@ -8778,8 +9062,9 @@ function meView(){
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div>'
     +'<div class="hm-eyebrow">Your space</div>'
     +'<h1 class="hm-title">'+(first ? 'Me, <em>'+esc(first)+'.</em>' : 'Me<em>.</em>')+'</h1></div>'));
+  if(nav.meTab === 'themes') nav.meTab = 'settings';
   const tabs = el('<div class="ctabs" role="tablist"></div>');
-  [['badges','Badges'],['profile','Profile'],['strategy','Strategy'],['settings','Settings'],['themes','Themes']].forEach(p=>{
+  [['badges','Badges'],['profile','Profile'],['strategy','Strategy'],['settings','Settings']].forEach(p=>{
     const on = nav.meTab === p[0];
     const b = el('<button role="tab" aria-selected="'+on+'" class="ctab'+(on?' on':'')+'">'+p[1]+'</button>');
     b.onclick = ()=>go('me',{meTab:p[0]});
@@ -8896,6 +9181,7 @@ function contactForm(){
 }
 const LEGAL_DOCS = {
   privacy: {no:'01', title:'Privacy policy', paras:[
+    'Voice recordings. Audio is recorded only when you press and hold the microphone to send a voice message, or when you start an audio call, and only after you agree in the app. The recording is used to deliver that message or call and for no other purpose. It is never used for advertising, for training models, or for anything else, and you can delete a voice message you sent at any time.',
     'What we collect. Your account details: email, username, name, surname, age, optional birthdate, standard, the exam you prepare for, and whether you appear on the leaderboard. Your study data: answers, marks, notes, bookmarks, your own solutions and submitted sets. If you use the contact form, the name, email, optional phone number and comment you send us.',
     'Why we collect it. To run your account, keep your progress and sync it across your devices, show the leaderboard the way you chose, and reply to your messages.',
     'Where it is kept. Your data is stored with our service provider, Supabase, and on your device for offline use. *We do not sell your data* and *we do not show advertisements.*',
@@ -8906,6 +9192,7 @@ const LEGAL_DOCS = {
     'Children. If you are under 18, please ask a parent or guardian to help you with sign-up and contact details.'
   ]},
   terms: {no:'02', title:'Terms of service', paras:[
+    'Voice features. By using voice messages or audio calls you agree that TORQ may record your voice only for those features, with your consent given in the app. You must not use voice features to record other people without their consent.',
     'Draft for review. These terms apply when you use TORQ.',
     '1. Using TORQ. TORQ is a study app for JEE preparation. You must be able to form a binding agreement, or have a parent or guardian agree for you if you are under 18. You agree to use the app only for lawful, personal study.',
     '2. Your account. You are responsible for keeping your login details private and for activity on your account. Tell us at once if you think someone else has used it. Provide accurate details, including your age and exam.',
@@ -9764,7 +10051,24 @@ function setQnavOpen(wrap, on){
   document.body.classList.toggle('qnav-open', on);
 }
 // Wide screens: drifting formulas fill the side margins
+function buildMsgGutter(){
+  if(document.querySelector('.gutter-msg')) return;
+  const g = el('<div class="gutter-msg" aria-hidden="true"></div>');
+  const cols = 6, rows = 16;
+  for(let r=0; r<rows; r++){
+    for(let c=0; c<cols; c++){
+      const t = el('<span class="gf">'+esc(BG_FORMULAS[(r*cols + c) % BG_FORMULAS.length])+'</span>');
+      t.style.left = (c*17 + (r%3)*3 - 2) + '%';
+      t.style.top = (r*6.6 + (c%2)*2) + '%';
+      t.style.animationDelay = (-(r*1.1 + c*0.7)) + 's';
+      t.style.setProperty('--r', ((r%2?1:-1)*(2 + (c%3)*2)) + 'deg');
+      g.appendChild(t);
+    }
+  }
+  document.body.insertBefore(g, document.body.firstChild);
+}
 function buildGutter(){
+  buildMsgGutter();
   if(document.querySelector('.gutter')) return;
   const g = el('<div class="gutter" aria-hidden="true"></div>');
   for(let r=0; r<16; r++){
