@@ -186,6 +186,21 @@ body.chat-full .wa-head{ padding-top:6px; }
 [data-theme="ocean"]{ --accent-text:#2fa083; --subj-phys:#3f7fe0; --subj-chem:#2fa872; --subj-maths:#d0509a; --c-phys:#3f7fe0; --c-chem:#2fa872; --c-maths:#d0509a; }
 :root[data-theme="mint"] .subjart, :root[data-theme="mint"] .fc-art, :root[data-theme="lavender"] .subjart, :root[data-theme="lavender"] .fc-art, :root[data-theme="peach"] .subjart, :root[data-theme="peach"] .fc-art, :root[data-theme="sky"] .subjart, :root[data-theme="sky"] .fc-art, :root[data-theme="cotton-candy"] .subjart, :root[data-theme="cotton-candy"] .fc-art, :root[data-theme="butter"] .subjart, :root[data-theme="butter"] .fc-art, :root[data-theme="ocean"] .subjart, :root[data-theme="ocean"] .fc-art{ background:linear-gradient(170deg, color-mix(in srgb, var(--accent) 55%, var(--surface)), color-mix(in srgb, var(--accent) 28%, var(--surface))) !important; }
 :root[data-theme="mint"] .subjart svg, :root[data-theme="lavender"] .subjart svg, :root[data-theme="peach"] .subjart svg, :root[data-theme="sky"] .subjart svg, :root[data-theme="cotton-candy"] .subjart svg, :root[data-theme="butter"] .subjart svg, :root[data-theme="ocean"] .subjart svg{ --accent: var(--accent-text); }
+/* Keyboard: larger keys that scale with the screen */
+.wa-kb{ --k-h: clamp(52px, 8.4vh, 72px); }
+.wa-krow{ gap:clamp(6px,1.1vh,10px) !important; margin-top:clamp(6px,1.1vh,10px) !important; }
+.wa-kb .nk{ position:relative; min-height:var(--k-h) !important; font-size:clamp(19px,2.7vh,25px); border-radius:14px; }
+.wa-kb .nk.fn{ font-size:clamp(16px,2.2vh,21px); }
+.wa-kb .nk.sp{ font-size:clamp(14px,2vh,17px); }
+.wa-kb .nk.send{ font-size:clamp(16px,2.3vh,21px); }
+/* Shift: a filled arrow, glowing when on, with an underline for caps lock */
+.wa-kb .nk.shift{ background:linear-gradient(180deg,var(--surface),var(--surface-2)); color:var(--muted); }
+.wa-kb .nk.shift svg{ width:clamp(22px,3vh,28px); height:clamp(22px,3vh,28px); fill:currentColor; }
+.wa-kb .nk.shift.on{ background:linear-gradient(160deg,var(--accent),color-mix(in srgb,var(--accent) 60%,#ffffff)); color:#1f1e1d; border-color:transparent; box-shadow:0 0 0 3px var(--accent-soft), 0 10px 22px -10px var(--accent); transform:translateY(-1px); }
+.wa-kb .nk.shift.caps::after{ content:""; position:absolute; left:30%; right:30%; bottom:7px; height:3px; border-radius:3px; background:#1f1e1d; }
+.wa-kb .nk:active{ transform:scale(.95); }
+.wa-block{ margin-left:auto; background:none; border:1px solid var(--border); color:var(--muted); border-radius:999px; padding:6px 12px; font:600 13px Inter,sans-serif; cursor:pointer; }
+.push-prompt{ margin-bottom:10px; padding:16px 18px; flex:none; }
 /* Doubt screen: room between the buttons */
 .doubt-sheet .btn{ margin-top:14px !important; }
 .doubt-sheet .btn + .btn{ margin-top:10px !important; }
@@ -197,10 +212,7 @@ body.msg-fit .msg-hero{ display:none; }
 .msg-screen{ flex:1; min-height:0; display:flex; flex-direction:column; }
 .wa-scroll{ flex:1; min-height:0; overflow-y:auto; -webkit-overflow-scrolling:touch; }
 /* In-app keyboard, styled like the number keypad */
-.wa-kb{ flex:none; margin-top:6px; }
 .wa-krow{ display:flex; gap:4px; margin-top:4px; }
-.wa-krow .nk{ flex:1; min-width:0; min-height:40px; font-size:15px; padding:0; }
-.wa-krow .nk.fn{ font-size:14px; }
 .wa-space{ flex:4 !important; }
 .wa-send-key{ flex:2 !important; background:var(--accent); color:#1f1e1d; border-color:transparent; font-size:14px; }
 
@@ -6968,12 +6980,22 @@ function savedNotesCard(){
   });
   return card;
 }
+// Gentle one-time prompt in Messages: shown only while permission is undecided and the student has not dismissed it
+function pushPromptCard(){
+  if(!pushSupported() || Notification.permission !== 'default' || store.pushPromptDismissed) return null;
+  const card = el('<div class="card push-prompt"><div class="eyebrow">Stay in the loop</div><p class="note-line" style="margin:6px 0 12px">Get a quiet alert when a friend replies or sends you a doubt.</p><div style="display:flex;gap:8px"><button class="btn" type="button" style="flex:1">Turn on</button><button class="btn ghost" type="button">Not now</button></div></div>');
+  const btns = card.querySelectorAll('button');
+  btns[0].onclick = async ()=>{ await enablePush(btns[0]); setTimeout(render, 1200); };
+  btns[1].onclick = ()=>{ store.pushPromptDismissed = true; persist(); render(); };
+  return card;
+}
 function messagesView(){
   const w = el('<div class="msg-screen"></div>');
   if(!sbSession){ w.appendChild(el('<div class="card"><p class="note-line">Log in to see your messages.</p></div>')); return w; }
   if(!fr.open) w.appendChild(el('<div class="hm-hero msg-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Chats</div><h1 class="hm-title">Mess<em>ages.</em></h1></div>'));
   if(fr.list === null && !fr.loading) loadFriends();
   if(fr.open){ w.appendChild(chatScreen(fr.open)); return w; }
+  const pp = pushPromptCard(); if(pp) w.appendChild(pp);
   w.appendChild(chatToolsBlock());
   return w;
 }
@@ -7122,6 +7144,66 @@ function lastSeenText(uid){
   if(days < 7) return 'Last seen ' + days + (days === 1 ? ' day' : ' days') + ' ago';
   return 'Last seen ' + new Date(p.last_seen).toLocaleDateString([], {day:'numeric', month:'short'});
 }
+// Remove a friend: they are taken off your list, and chatting stops until you add each other again
+function unfriend(f){
+  appDialog({eyebrow:'Friends', title:'Remove '+(f.username||'this friend')+'?', body:'You will stop chatting with them until you add each other again.', ok:'Remove', cancel:'Keep', danger:true})
+    .then(async ok=>{
+      if(!ok) return;
+      const db = sbClient(), me = sbSession.user.id;
+      const { error } = await db.from('friendships').delete().or('and(requester.eq.'+me+',addressee.eq.'+f.id+'),and(requester.eq.'+f.id+',addressee.eq.'+me+')');
+      if(error) return appNotice('Not removed', error.message);
+      chatStarted.delete(f.id);
+      if(fr.open && fr.open.id === f.id) fr.open = null;
+      await loadFriends();
+    });
+}
+// ---- Block and report ----
+function blockUser(f){
+  appDialog({eyebrow:'Block', title:'Block '+(f.username||'this student')+'?', body:"They cannot message you or send you requests, and you will be removed from each other's friends.", ok:'Block', cancel:'Keep', danger:true})
+    .then(async ok=>{
+      if(!ok) return;
+      const { error } = await sbClient().rpc('block_user', { p_user: f.id });
+      if(error) return appNotice('Not blocked', error.message);
+      chatStarted.delete(f.id);
+      if(fr.open && fr.open.id === f.id) fr.open = null;
+      blockedState.list = null;
+      await loadFriends();
+    });
+}
+function reportMessage(m, f){
+  appDialog({eyebrow:'Report', title:'Report this message?', body:'The TORQ team will review it. Use this for harassment, spam, or anything unsafe.', ok:'Report', cancel:'Cancel', danger:true})
+    .then(async ok=>{
+      if(!ok) return;
+      const { error } = await sbClient().rpc('report_message', { p_message: String(m.id), p_reported: f.id, p_reason: 'Reported from chat' });
+      appNotice(error ? 'Not sent' : 'Reported', error ? error.message : 'Thank you. The TORQ team will review it.');
+    });
+}
+let blockedState = {list:null, loading:false};
+async function loadBlocked(){
+  if(blockedState.loading || !sbSession) return;
+  blockedState.loading = true;
+  const { data } = await sbClient().rpc('my_blocked');
+  blockedState.list = data || []; blockedState.loading = false;
+  render();
+}
+function blockedCard(){
+  const card = el('<div class="card" style="padding:18px 22px;margin-top:14px"><div class="eyebrow">Blocked students</div></div>');
+  if(blockedState.list === null && !blockedState.loading) loadBlocked();
+  if(blockedState.list === null){ card.appendChild(el('<p class="note-line">Loading...</p>')); return card; }
+  if(!blockedState.list.length){ card.appendChild(el('<p class="note-line">Students you block appear here.</p>')); return card; }
+  blockedState.list.forEach(b=>{
+    const r = el('<div class="lb-item"><span class="lb-who"><b>'+esc(b.blocked_username||'Student')+'</b></span></div>');
+    const un = el('<button class="btn ghost" type="button">Unblock</button>');
+    un.onclick = async ()=>{
+      const { error } = await sbClient().rpc('unblock_user', { p_user: b.blocked_id });
+      if(error) return appNotice('Not unblocked', error.message);
+      blockedState.list = null; render();
+    };
+    r.appendChild(un);
+    card.appendChild(r);
+  });
+  return card;
+}
 function friendsPanel(){
   const w = el('<div></div>');
   if(!sbSession){ w.appendChild(el('<div class="card"><p class="note-line">Log in to see your friends.</p></div>')); return w; }
@@ -7162,9 +7244,13 @@ function friendsPanel(){
     const duoBtn = el('<button class="btn ghost" type="button" style="margin-left:auto">Flame</button>');
     duoBtn.onclick = e=>{ e.stopPropagation(); startDuoSheet(f); };
     r.appendChild(duoBtn);
+    const rmBtn = el('<button class="btn ghost" type="button" aria-label="Remove friend">Remove</button>');
+    rmBtn.onclick = e=>{ e.stopPropagation(); unfriend(f); };
+    r.appendChild(rmBtn);
     fc.appendChild(r);
   });
   w.appendChild(fc);
+  w.appendChild(blockedCard());
   return w;
 }
 
@@ -7400,6 +7486,11 @@ function waKey(label, cls, fn){
   b.onclick = fn;
   return b;
 }
+function waShiftKey(shift){
+  const b = el('<button type="button" class="nk shift wide'+(shift?' on':'')+(shift===2?' caps':'')+'" aria-label="'+(shift===2?'Caps lock on':(shift?'Shift on':'Shift'))+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 21 12.5h-5.2v7.3H8.2v-7.3H3z"/></svg></button>');
+  b.onclick = waShift;
+  return b;
+}
 function waKeyboard(){
   const mode = fr.kbMode || 'alpha';
   const shift = fr.kbShift || 0;
@@ -7408,7 +7499,7 @@ function waKeyboard(){
     const row = el('<div class="wa-krow"></div>');
     if(ri === 1) row.classList.add('inset');
     r.forEach(k=>{
-      if(k === 'SHIFT') return row.appendChild(waKey(shift === 2 ? '\u21ea' : '\u21e7', 'fn wide'+(shift ? ' on' : ''), waShift));
+      if(k === 'SHIFT') return row.appendChild(waShiftKey(shift));
       if(k === 'BACK') return row.appendChild(waKey('\u232b', 'fn wide', waBack));
       if(k === 'MORE') return row.appendChild(waKey(mode === 'sym' ? '#+=' : '123', 'fn wide', ()=>{ fr.kbMode = mode === 'sym' ? 'sym2' : 'sym'; waRedrawKb(); }));
       const ch = (mode === 'alpha' && shift) ? k.toUpperCase() : k;
@@ -7435,6 +7526,9 @@ function chatScreen(f){
   head.appendChild(back);
   head.appendChild(avatarEl(f, true));
   head.appendChild(el('<div class="wa-hname"><b>'+esc(f.username||'Student')+'</b><small>'+esc(DOT_STATES[stateOf(fr.presence[f.id])].label)+'</small></div>'));
+  const blk = el('<button class="wa-block" type="button">Block</button>');
+  blk.onclick = ()=>blockUser(f);
+  head.appendChild(blk);
   w.appendChild(head);
 
   const list = el('<div class="wa-msgs" role="log" aria-live="polite"></div>');
@@ -7452,7 +7546,9 @@ function chatScreen(f){
       card.onclick = ()=>openDoubt(m.share_id);
       list.appendChild(card);
     } else {
-      list.appendChild(el('<div class="bubble '+(mine?'mine':'theirs')+'"><span>'+esc(m.body)+'</span><small>'+stamp+tick+'</small></div>'));
+      const bub = el('<div class="bubble '+(mine?'mine':'theirs')+'"><span>'+esc(m.body)+'</span><small>'+stamp+tick+'</small></div>');
+      if(!mine){ bub.style.cursor = 'pointer'; bub.title = 'Tap to report'; bub.onclick = ()=>reportMessage(m, f); }
+      list.appendChild(bub);
     }
   });
   list.onscroll = ()=>{ fr.waAtBottom = list.scrollHeight - list.scrollTop - list.clientHeight < 40; fr.waTop = list.scrollTop; };
