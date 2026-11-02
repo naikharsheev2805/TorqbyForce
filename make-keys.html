@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TORQ: make push keys</title>
+<style>
+  :root{ color-scheme: light dark; --bg:#f7f4ee; --surface:#fffdf8; --border:#e4dccb; --text:#2a2418; --muted:#7a705c; --accent:#8a5a3b; }
+  @media (prefers-color-scheme: dark){ :root{ --bg:#17130d; --surface:#221c13; --border:#3a3124; --text:#f3ead8; --muted:#a79b82; --accent:#d9a46f; } }
+  body{ margin:0; min-height:100vh; background:var(--bg); color:var(--text); font:16px/1.5 Inter,system-ui,sans-serif; padding:24px 18px 40px; box-sizing:border-box; }
+  h1{ font:600 26px/1.2 Lora,Georgia,serif; margin:8px 0 6px; }
+  p{ margin:8px 0; color:var(--muted); font-size:14px; }
+  .card{ background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:18px; margin-top:16px; }
+  .eyebrow{ font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); font-weight:600; }
+  button{ width:100%; padding:14px; border-radius:14px; border:1px solid var(--border); background:var(--accent); color:#fff; font:600 16px Inter,sans-serif; cursor:pointer; margin-top:12px; }
+  button.ghost{ background:var(--surface); color:var(--text); }
+  textarea{ width:100%; box-sizing:border-box; min-height:70px; margin-top:8px; border-radius:12px; border:1px solid var(--border); background:var(--bg); color:var(--text); font:13px/1.4 ui-monospace,Menlo,monospace; padding:10px; word-break:break-all; }
+  .warn{ color:var(--accent); font-weight:600; }
+  .ok{ color:#3a8a5a; font-weight:600; }
+</style>
+</head>
+<body>
+  <div class="eyebrow">TORQ setup</div>
+  <h1>Make your push keys</h1>
+  <p>This page creates two keys in your browser. Nothing is sent anywhere. Do this once.</p>
+
+  <div class="card">
+    <button id="gen" type="button">Generate keys</button>
+    <p id="status"></p>
+  </div>
+
+  <div class="card" id="out" hidden>
+    <div class="eyebrow">1. Public key (safe to share)</div>
+    <p>Put this in index.html as the value of VAPID_PUBLIC, and save it as Supabase secret VAPID_PUBLIC_KEY.</p>
+    <textarea id="pub" readonly></textarea>
+    <button class="ghost" type="button" data-copy="pub">Copy public key</button>
+
+    <div class="eyebrow" style="margin-top:22px">2. Private key (secret)</div>
+    <p class="warn">Never put this in index.html or share it. Save it only as Supabase secret VAPID_PRIVATE_KEY.</p>
+    <textarea id="priv" readonly></textarea>
+    <button class="ghost" type="button" data-copy="priv">Copy private key</button>
+  </div>
+
+<script>
+  function b64u(bytes){
+    let s = ''; const a = new Uint8Array(bytes);
+    for(const b of a) s += String.fromCharCode(b);
+    return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  }
+  document.getElementById('gen').onclick = async ()=>{
+    const status = document.getElementById('status');
+    if(!window.crypto || !crypto.subtle){ status.textContent = 'This browser cannot make keys. Try Chrome or Safari.'; return; }
+    try{
+      const kp = await crypto.subtle.generateKey({name:'ECDSA', namedCurve:'P-256'}, true, ['sign','verify']);
+      const rawPub = await crypto.subtle.exportKey('raw', kp.publicKey);
+      const jwk = await crypto.subtle.exportKey('jwk', kp.privateKey);
+      document.getElementById('pub').value = b64u(rawPub);
+      document.getElementById('priv').value = jwk.d;
+      document.getElementById('out').hidden = false;
+      status.innerHTML = '<span class="ok">Keys made. Copy each one now.</span>';
+    }catch(e){
+      status.textContent = 'Could not make keys: ' + (e && e.message ? e.message : e);
+    }
+  };
+  document.querySelectorAll('[data-copy]').forEach(btn=>{
+    btn.onclick = async ()=>{
+      const t = document.getElementById(btn.dataset.copy);
+      t.select(); t.setSelectionRange(0, 99999);
+      try{ await navigator.clipboard.writeText(t.value); }catch(e){ document.execCommand('copy'); }
+      btn.textContent = 'Copied';
+      setTimeout(()=>{ btn.textContent = btn.dataset.copy === 'pub' ? 'Copy public key' : 'Copy private key'; }, 1500);
+    };
+  });
+</script>
+</body>
+</html>

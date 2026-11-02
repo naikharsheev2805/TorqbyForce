@@ -88,6 +88,54 @@ html, body{ overscroll-behavior-y:none; }
 .bubble.mine{ align-self:flex-end; background:var(--accent-soft); border:1px solid var(--border); border-bottom-right-radius:6px; }
 .bubble.theirs{ align-self:flex-start; background:var(--surface); border:1px solid var(--border); border-bottom-left-radius:6px; }
 .chat-bar{ display:flex; gap:8px; margin-top:10px; }
+.wa-row{ display:flex; align-items:center; gap:12px; padding:12px 16px; border-bottom:1px solid var(--border); cursor:pointer; min-width:0; }
+.wa-row:last-child{ border-bottom:0; }
+.wa-row:hover{ background:var(--surface-2); }
+.wa-main{ flex:1; min-width:0; display:flex; flex-direction:column; gap:3px; }
+.wa-top,.wa-bot{ display:flex; align-items:center; gap:8px; min-width:0; }
+.wa-top b{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:15px; color:var(--text); }
+.wa-top small{ font-size:12px; color:var(--muted); flex-shrink:0; }
+.wa-bot span{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:13px; color:var(--muted); }
+.wa-badge{ font:700 11px Inter,sans-serif; min-width:20px; height:20px; padding:0 6px; border-radius:10px; background:var(--accent); color:var(--surface); display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; }
+.wa-avwrap{ position:relative; flex-shrink:0; width:48px; height:48px; }
+.wa-avwrap.sm{ width:40px; height:40px; }
+.wa-av{ width:100%; height:100%; border-radius:50%; overflow:hidden; display:flex; align-items:center; justify-content:center; background:var(--accent-soft); color:var(--accent-text); font:600 18px Lora,Georgia,serif; border:1px solid var(--border); padding:0; }
+.wa-avwrap.sm .wa-av{ font-size:15px; }
+.wa-av[data-photo]{ cursor:zoom-in; }
+.wa-av img{ width:100%; height:100%; object-fit:cover; display:block; }
+.wa-avwrap .pdot{ position:absolute; right:0; bottom:0; }
+.wa-chat{ display:flex; flex-direction:column; height:calc(100dvh - 210px); min-height:340px; }
+.wa-head{ display:flex; align-items:center; gap:12px; padding:10px 6px; border-bottom:1px solid var(--border); }
+.wa-back{ background:none; border:0; font-size:22px; color:var(--text); cursor:pointer; padding:4px 8px; }
+.wa-hname{ flex:1; min-width:0; display:flex; flex-direction:column; }
+.wa-hname b{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:16px; color:var(--text); }
+.wa-hname small{ font-size:12px; color:var(--muted); }
+.wa-msgs{ flex:1; min-height:0; overflow-y:auto; display:flex; flex-direction:column; gap:6px; padding:12px 4px; }
+.wa-day{ align-self:center; margin:8px 0 4px; }
+.wa-day span{ font-size:11px; color:var(--muted); background:var(--surface-2); border:1px solid var(--border); padding:3px 10px; border-radius:999px; }
+.wa-tick{ font-style:normal; margin-left:6px; color:var(--muted); letter-spacing:-1px; }
+.wa-tick.seen{ color:var(--accent-text); }
+.wa-compose{ display:flex; gap:8px; align-items:center; padding-top:10px; border-top:1px solid var(--border); }
+.wa-empty{ text-align:center; margin:24px 0; }
+.av-viewer{ position:fixed; inset:0; z-index:95; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; padding:24px; animation:fade var(--dur-fast) linear; }
+.av-viewer img{ width:min(86vw,440px); aspect-ratio:1; object-fit:cover; border-radius:24px; box-shadow:0 40px 90px -30px var(--shadow); border:1px solid var(--border); }
+.av-x{ position:absolute; top:calc(env(safe-area-inset-top,0px) + 16px); right:16px; width:40px; height:40px; border-radius:50%; border:1px solid var(--border); background:var(--surface); color:var(--text); font-size:24px; line-height:1; cursor:pointer; }
+.av-name{ font:600 15px Inter,sans-serif; color:var(--text); background:var(--surface); border:1px solid var(--border); padding:6px 14px; border-radius:999px; }
+@media (prefers-reduced-motion: reduce){ .av-viewer{ animation:none; } }
+.msg-tools{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 10px; }
+.plus-btn{ width:42px; height:42px; border-radius:50%; padding:0; font-size:24px; line-height:1; display:inline-flex; align-items:center; justify-content:center; }
+.on-strip{ position:fixed; top:calc(12px + env(safe-area-inset-top,0px)); left:72px; right:14px; height:46px; z-index:60; display:flex; align-items:center; gap:12px; padding:0 14px 0 10px; border-radius:15px; background:linear-gradient(160deg,var(--surface),var(--surface-2)); border:1px solid var(--border); box-shadow:0 18px 40px -22px var(--shadow); cursor:pointer; animation:onIn .45s var(--ease) both; transition:opacity var(--dur-fast), transform var(--dur-fast) var(--ease); }
+.on-strip.out{ opacity:0; transform:translateY(-8px); }
+@keyframes onIn{ from{ opacity:0; transform:translateY(-10px); } }
+.on-stack{ display:flex; align-items:center; flex-shrink:0; }
+.on-av,.on-more{ position:relative; width:30px; height:30px; border-radius:50%; border:2px solid var(--surface); margin-left:-10px; overflow:hidden; display:flex; align-items:center; justify-content:center; background:var(--accent-soft); color:var(--accent-text); font:600 13px Lora,Georgia,serif; box-shadow:0 2px 6px -2px var(--shadow); }
+.on-stack > :first-child{ margin-left:0; }
+.on-av img{ width:100%; height:100%; object-fit:cover; display:block; }
+.on-more{ background:var(--surface-2); color:var(--text); font:700 11px Inter,sans-serif; }
+.on-label{ min-width:0; display:flex; flex-direction:column; line-height:1.2; }
+.on-label b{ font:600 13px Inter,sans-serif; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.on-label small{ font-size:11px; color:var(--muted); }
+@media (prefers-reduced-motion: reduce){ .on-strip{ animation:none; } }
 
 /* Admin panels: calmer and smaller on a phone */
 .adm-soft{ margin-top:6px; }
@@ -6366,6 +6414,7 @@ function logOpenOnce(){
   logEvent('app_open', view);
   startPresence();
   checkDoubtInbox();
+  setTimeout(showOnlineStrip, 900);
 }
 let adminAnalytics = {days: 7, rows: null, loading: false, err: null};
 async function loadAnalytics(){
@@ -6624,7 +6673,7 @@ async function loadFriends(){
   const db = sbClient();
   const { data, error } = await db.rpc('my_friends');
   if(error){ fr.err = error.message; fr.list = []; }
-  else fr.list = (data || []).map(r=>({id:r.friend_id, username:r.friend_username, first:r.friend_first_name, status:r.friend_status, incoming:r.incoming}));
+  else fr.list = (data || []).map(r=>({id:r.friend_id, username:r.friend_username, first:r.friend_first_name, status:r.friend_status, incoming:r.incoming, avatar:r.friend_avatar||null}));
   await loadPresenceFor(fr.list.filter(f=>f.status==='accepted').map(f=>f.id));
   fr.loading = false;
   render();
@@ -6855,17 +6904,7 @@ function messagesView(){
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Chats</div><h1 class="hm-title">Mess<em>ages.</em></h1></div>'));
   if(fr.list === null && !fr.loading) loadFriends();
   if(fr.open){ w.appendChild(chatScreen(fr.open)); return w; }
-  const friends = (fr.list || []).filter(f=>f.status==='accepted');
-  const card = el('<div class="card" style="padding:18px 22px"></div>');
-  if(!friends.length) card.appendChild(el('<p class="note-line">No chats yet. Add a friend in Friends, then message them here.</p>'));
-  friends.forEach(f=>{
-    const r = el('<div class="lb-item" style="cursor:pointer"></div>');
-    r.appendChild(presenceDot(f.id));
-    r.appendChild(el('<span class="lb-who"><b>'+esc(f.username||'Student')+'</b><small>'+esc(DOT_STATES[stateOf(fr.presence[f.id])].label)+'</small></span>'));
-    r.onclick = ()=>openChat(f);
-    card.appendChild(r);
-  });
-  w.appendChild(card);
+  w.appendChild(chatToolsBlock());
   w.appendChild(savedNotesCard());
   return w;
 }
@@ -7048,41 +7087,215 @@ function friendsPanel(){
   return w;
 }
 
-function chatScreen(f){
+// ---- WhatsApp-style chat list and chat screen ----
+let chatPrev = {map:{}, at:0, loading:false};
+let waScrollN = -1;
+async function loadChatPreviews(){
+  if(chatPrev.loading || !sbSession) return;
+  chatPrev.loading = true;
+  const me = sbSession.user.id;
+  const { data } = await sbClient().from('chat_messages').select('sender, recipient, body, created_at, read_at, kind')
+    .or('sender.eq.'+me+',recipient.eq.'+me).order('created_at', {ascending:false}).limit(500);
+  const map = {};
+  (data || []).forEach(m=>{
+    const other = m.sender === me ? m.recipient : m.sender;
+    const p = map[other] || (map[other] = {last:null, unread:0});
+    if(!p.last) p.last = m;
+    if(m.recipient === me && !m.read_at) p.unread++;
+  });
+  chatPrev = {map, at: Date.now(), loading:false};
+  render();
+}
+function chatPreviewText(m, me){
+  if(!m) return '';
+  if(m.kind === 'question_card') return m.sender === me ? 'You asked a question' : 'Sent you a question';
+  if(m.kind === 'answer_card') return m.sender === me ? 'You sent back notes' : 'Sent you notes';
+  return (m.sender === me ? 'You: ' : '') + (m.body || '');
+}
+function fmtChatTime(iso){
+  const d = new Date(iso), now = new Date();
+  if(d.toDateString() === now.toDateString()) return d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+  const y = new Date(now); y.setDate(now.getDate() - 1);
+  if(d.toDateString() === y.toDateString()) return 'Yesterday';
+  return d.toLocaleDateString([], {day:'numeric', month:'short'});
+}
+function dayLabel(d){
+  const now = new Date(), y = new Date(now); y.setDate(now.getDate() - 1);
+  if(d.toDateString() === now.toDateString()) return 'Today';
+  if(d.toDateString() === y.toDateString()) return 'Yesterday';
+  return d.toLocaleDateString([], {day:'numeric', month:'long', year:'numeric'});
+}
+// Photo (or initial) with the online dot on it. Tapping a real photo opens the viewer.
+function avatarEl(f, small){
+  const wrap = el('<span class="wa-avwrap'+(small?' sm':'')+'"></span>');
+  const av = el('<span class="wa-av"></span>');
+  if(f.avatar){
+    const img = document.createElement('img'); img.alt = ''; img.src = f.avatar;
+    av.appendChild(img); av.setAttribute('data-photo', '1');
+    av.setAttribute('role', 'button'); av.setAttribute('tabindex', '0');
+    av.setAttribute('aria-label', 'Enlarge photo of '+(f.username||'student'));
+    const open = e=>{ e.stopPropagation(); avatarViewer(f.avatar, f.username); };
+    av.onclick = open;
+    av.onkeydown = e=>{ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(e); } };
+  } else {
+    av.appendChild(document.createTextNode((f.username || '?').charAt(0).toUpperCase()));
+  }
+  wrap.appendChild(av);
+  wrap.appendChild(presenceDot(f.id));
+  return wrap;
+}
+function chatListCard(){
+  const me = sbSession.user.id;
+  if(Date.now() - chatPrev.at > 4000 && !chatPrev.loading) loadChatPreviews();
+  const card = el('<div class="card" style="padding:6px 0"></div>');
+  const friends = (fr.list || []).filter(f=>f.status==='accepted');
+  if(!friends.length){
+    card.appendChild(el('<p class="note-line" style="padding:12px 16px">You have no friends yet. Add one in Friends to start chatting.</p>'));
+    return card;
+  }
+  const rows = friends.map(f=>({f, p: chatPrev.map[f.id]})).filter(r=>(r.p && r.p.last) || chatStarted.has(r.f.id));
+  rows.sort((a,b)=>{
+    const ta = a.p && a.p.last ? Date.parse(a.p.last.created_at) : 0;
+    const tb = b.p && b.p.last ? Date.parse(b.p.last.created_at) : 0;
+    return tb - ta;
+  });
+  if(!rows.length) card.appendChild(el('<p class="note-line" style="padding:12px 16px">No chats yet. Tap + to start one with a friend.</p>'));
+  rows.forEach(({f, p})=>{
+    const last = p && p.last, unread = p ? p.unread : 0;
+    const row = el('<div class="wa-row" role="button" tabindex="0"></div>');
+    row.appendChild(avatarEl(f));
+    const name = esc(f.username || 'Student');
+    const main = last
+      ? '<div class="wa-main"><div class="wa-top"><b>'+name+'</b><small>'+esc(fmtChatTime(last.created_at))+'</small></div>'
+        +'<div class="wa-bot"><span>'+esc(chatPreviewText(last, me))+'</span>'+(unread ? '<em class="wa-badge">'+unread+'</em>' : '')+'</div></div>'
+      : '<div class="wa-main"><div class="wa-top"><b>'+name+'</b></div><div class="wa-bot"><span>'+esc(DOT_STATES[stateOf(fr.presence[f.id])].label)+'</span></div></div>';
+    row.appendChild(el(main));
+    const open = ()=>openChat(f);
+    row.onclick = open;
+    row.onkeydown = e=>{ if(e.key === 'Enter'){ e.preventDefault(); open(); } };
+    card.appendChild(row);
+  });
+  return card;
+}
+// Friends you started a chat with this session stay in the list even before a message is sent
+const chatStarted = new Set();
+function chatToolsBlock(){
   const w = el('<div></div>');
-  const head = el('<div class="card" style="padding:14px 16px;display:flex;align-items:center;gap:12px"></div>');
-  const back = el('<button class="btn ghost" type="button" aria-label="Back to friends">&larr;</button>');
+  const bar = el('<div class="msg-tools"><div class="eyebrow" style="margin:0">Chats</div></div>');
+  const plus = el('<button class="btn plus-btn" type="button" aria-label="'+(fr.picking ? 'Close' : 'Start a new chat')+'">'+(fr.picking ? '\u00d7' : '+')+'</button>');
+  plus.onclick = ()=>{ fr.picking = !fr.picking; if(fr.picking && fr.list === null) loadFriends(); render(); };
+  bar.appendChild(plus);
+  w.appendChild(bar);
+  w.appendChild(fr.picking ? chatPickerCard() : chatListCard());
+  return w;
+}
+// Only accepted friends can be picked, so chats can only start between friends
+function chatPickerCard(){
+  const card = el('<div class="card" style="padding:18px 16px"></div>');
+  const friends = (fr.list || []).filter(f=>f.status==='accepted');
+  card.appendChild(el('<div class="eyebrow">Start a chat with a friend</div>'));
+  if(!friends.length){
+    card.appendChild(el('<p class="note-line">You have no friends yet. Add one in Friends first.</p>'));
+    return card;
+  }
+  friends.forEach(f=>{
+    const row = el('<div class="wa-row" role="button" tabindex="0"></div>');
+    row.appendChild(avatarEl(f));
+    row.appendChild(el('<div class="wa-main"><div class="wa-top"><b>'+esc(f.username||'Student')+'</b></div><div class="wa-bot"><span>'+esc(DOT_STATES[stateOf(fr.presence[f.id])].label)+'</span></div></div>'));
+    const start = ()=>{ chatStarted.add(f.id); fr.picking = false; openChat(f); };
+    row.onclick = start;
+    row.onkeydown = e=>{ if(e.key === 'Enter'){ e.preventDefault(); start(); } };
+    card.appendChild(row);
+  });
+  return card;
+}
+// Online-friends strip: shown once per app open, just right of the menu button, for about 6.5 seconds
+function stripAvatar(f){
+  const a = el('<span class="on-av"></span>');
+  if(f.avatar){ const img = document.createElement('img'); img.alt = ''; img.src = f.avatar; a.appendChild(img); }
+  else a.appendChild(document.createTextNode((f.username || '?').charAt(0).toUpperCase()));
+  return a;
+}
+async function showOnlineStrip(){
+  if(window.__onlineShown || !sbSession || !store.profile) return;
+  window.__onlineShown = true;
+  if(fr.list === null) await loadFriends();
+  const on = (fr.list || []).filter(f=>f.status==='accepted' && stateOf(fr.presence[f.id]) !== 'offline');
+  if(!on.length) return;
+  const SHOW = 3;
+  const stack = el('<div class="on-stack"></div>');
+  on.slice(0, SHOW).forEach((f, i)=>{ const a = stripAvatar(f); a.style.zIndex = String(10 - i); stack.appendChild(a); });
+  if(on.length > SHOW){ const more = el('<span class="on-more" style="z-index:5">+'+(on.length - SHOW)+'</span>'); stack.appendChild(more); }
+  const label = el('<div class="on-label"><b>'+(on.length === 1 ? '1 friend online' : on.length+' friends online')+'</b><small>Tap to close</small></div>');
+  const strip = el('<div class="on-strip" role="status" aria-live="polite"></div>');
+  strip.appendChild(stack); strip.appendChild(label);
+  document.body.appendChild(strip);
+  const dismiss = ()=>{ strip.classList.add('out'); setTimeout(()=>strip.remove(), 350); };
+  strip.onclick = dismiss;
+  setTimeout(dismiss, 6500);
+}
+function avatarViewer(url, name){
+  if(document.querySelector('.av-viewer')) return;
+  const sc = el('<div class="scrim" role="presentation"></div>');
+  const v = el('<div class="av-viewer" role="dialog" aria-modal="true"></div>');
+  v.setAttribute('aria-label', 'Profile photo of '+(name || 'student'));
+  const img = document.createElement('img'); img.alt = ''; img.src = url;
+  const x = el('<button type="button" class="av-x" aria-label="Close">&times;</button>');
+  v.appendChild(x); v.appendChild(img);
+  if(name) v.appendChild(el('<div class="av-name">'+esc(name)+'</div>'));
+  document.body.appendChild(sc); document.body.appendChild(v);
+  const onKey = e=>{ if(e.key === 'Escape') close(); };
+  const close = ()=>{ sc.remove(); v.remove(); document.removeEventListener('keydown', onKey); };
+  sc.onclick = close; x.onclick = close;
+  v.onclick = e=>{ if(e.target === v) close(); };
+  document.addEventListener('keydown', onKey);
+  x.focus();
+}
+function chatScreen(f){
+  const me = sbSession.user.id;
+  const w = el('<div class="wa-chat"></div>');
+  const head = el('<div class="wa-head"></div>');
+  const back = el('<button class="wa-back" type="button" aria-label="Back to chats">&larr;</button>');
   back.onclick = closeChat;
   head.appendChild(back);
-  head.appendChild(presenceDot(f.id));
-  head.appendChild(el('<div style="flex:1;min-width:0"><b>'+esc(f.username||'Student')+'</b><div class="note-line" style="margin:0">'+esc(DOT_STATES[stateOf(fr.presence[f.id])].label)+'</div></div>'));
+  head.appendChild(avatarEl(f, true));
+  head.appendChild(el('<div class="wa-hname"><b>'+esc(f.username||'Student')+'</b><small>'+esc(DOT_STATES[stateOf(fr.presence[f.id])].label)+'</small></div>'));
   w.appendChild(head);
 
-  const list = el('<div class="chat-list" role="log" aria-live="polite"></div>');
-  if(!fr.msgs.length) list.appendChild(el('<p class="note-line" style="text-align:center;margin:24px 0">Say hello. Only you and '+esc(f.username||'your friend')+' can read these messages.</p>'));
+  const list = el('<div class="wa-msgs" role="log" aria-live="polite"></div>');
+  if(!fr.msgs.length) list.appendChild(el('<p class="note-line wa-empty">Say hello. Only you and '+esc(f.username||'your friend')+' can read these messages.</p>'));
+  let lastDay = '';
   fr.msgs.forEach(m=>{
-    const mine = m.sender === sbSession.user.id;
-    const stamp = new Date(m.created_at).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    const d = new Date(m.created_at);
+    if(d.toDateString() !== lastDay){ lastDay = d.toDateString(); list.appendChild(el('<div class="wa-day"><span>'+esc(dayLabel(d))+'</span></div>')); }
+    const mine = m.sender === me;
+    const stamp = d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    const tick = mine ? (m.read_at ? '<i class="wa-tick seen">\u2713\u2713</i>' : '<i class="wa-tick">\u2713</i>') : '';
     if(m.kind === 'question_card' || m.kind === 'answer_card'){
       const isQ = m.kind === 'question_card';
-      const card = el('<button type="button" class="qcard-chat '+(mine?'mine':'theirs')+'"><b>'+(isQ ? (mine ? 'You asked a question' : 'A friend asked you a question') : (mine ? 'You sent back notes' : 'Notes came back'))+'</b><span>'+esc(m.body||'')+'</span><small>'+stamp+'</small></button>');
+      const card = el('<button type="button" class="qcard-chat '+(mine?'mine':'theirs')+'"><b>'+(isQ ? (mine ? 'You asked a question' : 'A friend asked you a question') : (mine ? 'You sent back notes' : 'Notes came back'))+'</b><span>'+esc(m.body||'')+'</span><small>'+stamp+tick+'</small></button>');
       card.onclick = ()=>openDoubt(m.share_id);
       list.appendChild(card);
     } else {
-      list.appendChild(el('<div class="bubble '+(mine?'mine':'theirs')+'"><span>'+esc(m.body)+'</span><small>'+stamp+(mine && m.read_at ? ' · seen' : '')+'</small></div>'));
+      list.appendChild(el('<div class="bubble '+(mine?'mine':'theirs')+'"><span>'+esc(m.body)+'</span><small>'+stamp+tick+'</small></div>'));
     }
   });
   w.appendChild(list);
   if(fr.note) w.appendChild(el('<p class="note-line err">'+esc(fr.note)+'</p>'));
 
-  const bar = el('<div class="chat-bar"><input class="login-in" placeholder="Message" maxlength="1000" style="flex:1"><button class="btn" type="button">Send</button></div>');
+  const bar = el('<div class="wa-compose"><input class="login-in" placeholder="Message" maxlength="1000" style="flex:1"><button class="btn" type="button">Send</button></div>');
   const input = bar.querySelector('input');
   input.value = fr.draft;
   input.oninput = ()=>{ fr.draft = input.value; };
-  input.onkeydown = e=>{ if(e.key==='Enter'){ e.preventDefault(); sendChat(); } };
+  // Enter sends on desktop only; on phones Enter stays a newline-free keypress for the keyboard's own Send.
+  input.onkeydown = e=>{ if(e.key === 'Enter' && window.matchMedia('(pointer:fine)').matches){ e.preventDefault(); sendChat(); } };
   bar.querySelector('button').onclick = sendChat;
   w.appendChild(bar);
-  if(scrollChatToEnd){ scrollChatToEnd = false; setTimeout(()=>{ list.scrollTop = list.scrollHeight; }, 0); }
+
+  // Scroll to the newest message on open, on send, and when new messages arrive
+  const grew = fr.msgs.length !== waScrollN;
+  waScrollN = fr.msgs.length;
+  if(scrollChatToEnd || grew){ scrollChatToEnd = false; setTimeout(()=>{ list.scrollTop = list.scrollHeight; }, 0); }
   return w;
 }
 
@@ -7398,6 +7611,34 @@ function tickEyes(){
 }
 
 // General settings: how the app treats you, in one place
+// ---- Push notifications (chat messages and doubt cards) ----
+// Paste the public key from make-keys.html here. It is safe to be in the page.
+const VAPID_PUBLIC = 'PASTE_VAPID_PUBLIC_KEY_HERE';
+function urlB64ToUint8(b64){
+  const pad = '='.repeat((4 - b64.length % 4) % 4);
+  const raw = atob((b64 + pad).replace(/-/g,'+').replace(/_/g,'/'));
+  return Uint8Array.from(raw, c=>c.charCodeAt(0));
+}
+function pushSupported(){ return 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window; }
+async function enablePush(btn){
+  const say = t=>{ btn.textContent = t; };
+  try{
+    if(!pushSupported()){ say('Not supported in this browser'); return; }
+    if(!sbSession){ say('Log in first'); return; }
+    if(VAPID_PUBLIC.startsWith('PASTE')){ say('Setup not finished'); return; }
+    const perm = await Notification.requestPermission();
+    if(perm !== 'granted'){ say('Permission not given'); return; }
+    const reg = await navigator.serviceWorker.register('/sw.js');
+    await navigator.serviceWorker.ready;
+    let sub = await reg.pushManager.getSubscription();
+    if(!sub) sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: urlB64ToUint8(VAPID_PUBLIC) });
+    const j = sub.toJSON();
+    const { error } = await sbClient().from('push_subscriptions').upsert(
+      { user_id: sbSession.user.id, endpoint: j.endpoint, p256dh: j.keys.p256dh, auth: j.keys.auth },
+      { onConflict: 'endpoint' });
+    say(error ? 'Could not save. Try again.' : 'Notifications on');
+  }catch(e){ console.error(e); say('Could not turn on'); }
+}
 function settingsPanel(){
   const p = store.profile || {};
   const card = el('<div class="card" style="padding:22px"></div>');
@@ -7409,8 +7650,11 @@ function settingsPanel(){
     +'<p class="note-line">Finishing your goal earns '+DAILY_REWARD+' pts. Unfinished days earn nothing.</p></div>'
     +'<div class="pf vis-block"><span class="eyebrow">Show me on the leaderboard</span><label class="vis-toggle"><input type="checkbox" name="visible"'+(p.visible!==false?' checked':'')+'><span class="vis-sw" aria-hidden="true"></span><span class="vis-lbl">'+(p.visible!==false?'Visible to others':'Anonymous to others')+'</span></label></div>'
     +(isGuard() ? '<div class="pf vis-block"><span class="eyebrow">Admin: appear on the leaderboard</span><label class="vis-toggle"><input type="checkbox" name="adminboard"'+(p.adminBoard?' checked':'')+'><span class="vis-sw" aria-hidden="true"></span><span class="vis-lbl">'+(p.adminBoard?'Ranked with everyone':'Kept off the leaderboard')+'</span></label></div>' : '')
+    +'<div class="pf"><span class="eyebrow">Notifications</span>'
+    +'<p class="note-line">Get a message when a friend writes to you or sends you a doubt.</p>'
+    +'<button class="btn ghost block" id="pushBtn" type="button">'+(pushSupported() && Notification.permission==='granted' ? 'Notifications on' : 'Turn on notifications')+'</button></div>'
     +'<p class="note-line err" hidden></p><p class="note-line ok" hidden></p>'
-    +'<button class="btn block" type="submit">Save settings</button></form>';
+  const pb = card.querySelector('#pushBtn'); if(pb) pb.onclick = ()=>enablePush(pb);
   const f = card.querySelector('form');
   f.onsubmit = async e=>{
     e.preventDefault();
