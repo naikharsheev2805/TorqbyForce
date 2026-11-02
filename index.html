@@ -334,6 +334,48 @@ body.msg-fit .msg-hero{ display:none; }
 @media (prefers-reduced-motion: reduce){
   .sog-mark::after, .onb-tags span.onb-tag-hot::after, .usp-card.usp-gold::after, .onb-card .btn.block::after, .spl-bar i::after{ animation:none !important; display:none !important; }
 }
+
+/* ---- Voice messages ---- */
+@keyframes vrPulse{ 0%,100%{opacity:1} 50%{opacity:.35} }
+.bubble.audio{ width:min(252px, 74vw); padding:8px 10px 6px; }
+.vb-row{ display:flex; align-items:center; gap:10px; }
+.vb-play{ width:36px; height:36px; flex:none; border-radius:50%; padding:0; border:0; display:inline-flex; align-items:center; justify-content:center; background:var(--accent); color:var(--accent-ink); box-shadow:0 2px 6px rgba(0,0,0,.18); cursor:pointer; }
+.vb-play svg{ width:16px; height:16px; fill:currentColor; stroke:none; }
+.vb-play .ic-pause{ display:none; }
+.bubble.audio.playing .vb-play .ic-play{ display:none; }
+.bubble.audio.playing .vb-play .ic-pause{ display:block; }
+.bubble.audio[data-state="loading"] .vb-play{ opacity:.55; }
+.vb-wave{ flex:1; min-width:0; height:30px; display:flex; align-items:center; gap:3px; cursor:pointer; touch-action:none; }
+.vb-bar{ flex:1 1 0; width:2px; min-height:4px; border-radius:2px; background:var(--border); }
+.vb-bar.on{ background:var(--accent-text); }
+.vb-meta{ display:flex; align-items:center; gap:8px; margin-top:4px; font-size:11px; color:var(--muted); }
+.vb-dur{ font-variant-numeric:tabular-nums; }
+.vb-sp{ border:1px solid var(--border); background:transparent; color:var(--muted); border-radius:999px; padding:3px 8px; font:600 10px/1 Inter,sans-serif; cursor:pointer; }
+.bubble.audio .vb-meta small{ display:flex; align-items:center; gap:3px; margin:0 0 0 auto; font-size:10px; color:var(--muted); text-align:right; }
+.vb-err{ display:none; margin-top:4px; font-size:11px; color:var(--muted); }
+.bubble.audio[data-state="error"] .vb-err{ display:block; }
+
+.vr-mic{ width:46px; height:46px; flex:none; border-radius:50%; padding:0; border:0; display:inline-flex; align-items:center; justify-content:center; background:var(--accent); color:var(--accent-ink); box-shadow:0 3px 0 rgba(0,0,0,.25); cursor:pointer; touch-action:none; -webkit-touch-callout:none; -webkit-user-select:none; user-select:none; transition:transform var(--dur-fast) var(--ease); }
+.vr-mic svg{ width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.vr-mic.live{ transform:scale(1.08); }
+.vr-pill{ flex:1; min-width:0; height:44px; box-sizing:border-box; display:flex; align-items:center; gap:10px; padding:0 14px; border-radius:999px; background:var(--surface); border:1px solid var(--border); color:var(--text); font:600 13px/1 Inter,sans-serif; overflow:hidden; }
+.vr-dot{ width:9px; height:9px; flex:none; border-radius:50%; background:#e0584f; animation:vrPulse 1.1s ease-in-out infinite; }
+.vr-time{ flex:none; font-variant-numeric:tabular-nums; }
+.vr-msg{ flex:1; min-width:0; font-weight:400; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.vr-live{ flex:none; display:flex; align-items:center; gap:2px; height:24px; }
+.vr-live .vr-bar{ width:2px; min-height:3px; background:var(--accent-text); }
+.vr-pill.cancel{ opacity:.6; }
+.vr-pill.cancel .vr-dot{ animation:none; background:var(--muted); }
+.wa-compose.vr-lock{ justify-content:space-between; }
+.vr-lock .vr-time{ flex:1; text-align:center; font:600 14px/1 Inter,sans-serif; color:var(--text); }
+.vr-round{ width:44px; height:44px; flex:none; border-radius:50%; padding:0; display:inline-flex; align-items:center; justify-content:center; background:var(--surface); color:var(--text); border:1px solid var(--border); cursor:pointer; }
+.vr-round svg{ width:18px; height:18px; }
+.vr-trash svg{ fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.vr-pause svg{ fill:currentColor; stroke:none; }
+.vr-lock .wa-send{ height:44px; }
+.vr-lock:not(.paused) .vr-pause .ic-play{ display:none; }
+.vr-lock.paused .vr-pause .ic-pause{ display:none; }
+@media (prefers-reduced-motion: reduce){ .vr-dot{ animation:none; } }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -6814,11 +6856,11 @@ async function openChat(f){
   clearInterval(fr.poll);
   fr.poll = setInterval(()=>{ if(fr.open) refreshChat(false); }, 4000);
 }
-function closeChat(){ fr.open = null; clearInterval(fr.poll); fr.poll = null; render(); }
+function closeChat(){ voiceAbort(); voicePause(); fr.open = null; clearInterval(fr.poll); fr.poll = null; render(); }
 async function refreshChat(markRead){
   if(!fr.open || !sbSession) return;
   const db = sbClient(), me = sbSession.user.id, other = fr.open.id;
-  const { data } = await db.from('chat_messages').select('id, sender, recipient, body, created_at, read_at, kind, share_id')
+  const { data } = await db.from('chat_messages').select('id, sender, recipient, body, created_at, read_at, kind, share_id, audio_path, audio_mime, audio_ms, audio_peaks')
     .or('and(sender.eq.'+me+',recipient.eq.'+other+'),and(sender.eq.'+other+',recipient.eq.'+me+')')
     .order('created_at', {ascending:true}).limit(300);
   const before = fr.msgs.length;
@@ -7307,6 +7349,7 @@ function chatPreviewText(m, me){
   if(!m) return '';
   if(m.kind === 'question_card') return m.sender === me ? 'You asked a question' : 'Sent you a question';
   if(m.kind === 'answer_card') return m.sender === me ? 'You sent back notes' : 'Sent you notes';
+  if(m.kind === 'audio') return (m.sender === me ? 'You: ' : '') + 'Voice message';
   return (m.sender === me ? 'You: ' : '') + (m.body || '');
 }
 function fmtChatTime(iso){
@@ -7675,6 +7718,8 @@ function chatScreen(f){
       const card = el('<button type="button" class="qcard-chat '+(mine?'mine':'theirs')+'"><b>'+(isQ ? (mine ? 'You asked a question' : 'A friend asked you a question') : (mine ? 'You sent back notes' : 'Notes came back'))+'</b><span>'+esc(m.body||'')+'</span><small>'+stamp+tick+'</small></button>');
       card.onclick = ()=>openDoubt(m.share_id);
       list.appendChild(card);
+    } else if(m.kind === 'audio'){
+      list.appendChild(voiceBubble(f, m, mine, stamp, tick));
     } else {
       const bub = el('<div class="bubble '+(mine?'mine':'theirs')+'"><span>'+esc(m.body)+'</span><small>'+stamp+tick+'</small></div>');
       if(!mine){ bub.style.cursor = 'pointer'; bub.title = 'Tap to report'; bub.onclick = ()=>reportMessage(m, f); }
@@ -7685,14 +7730,7 @@ function chatScreen(f){
   w.appendChild(list);
   if(fr.note) w.appendChild(el('<p class="note-line err">'+esc(fr.note)+'</p>'));
 
-  const field = el('<button type="button" class="wa-field" aria-label="Type a message"></button>');
-  waShowDraft(field);
-  field.onclick = ()=>{ fr.kb = !fr.kb; scrollChatToEnd = true; render(); };
-  const send = el('<button class="btn wa-send" type="button">Send</button>');
-  send.onclick = ()=>{ fr.kb = false; sendChat(); };
-  const bar = el('<div class="wa-compose"></div>');
-  bar.appendChild(field); bar.appendChild(send);
-  w.appendChild(bar);
+  w.appendChild(chatComposeBar(f));
   if(fr.kb) w.appendChild(waKeyboard());
 
   // Scroll: go to the newest message when new ones arrive (unless the reader scrolled up); otherwise keep the place
@@ -7702,6 +7740,393 @@ function chatScreen(f){
   else { setTimeout(()=>{ list.scrollTop = fr.waTop || 0; }, 0); }
   return w;
 }
+
+// ---- Voice messages: hold to record, slide left to cancel, slide up to lock ----
+const VOICE_HOLD_MS = 120, VOICE_LOCK_PX = 50, VOICE_CANCEL_PX = 90, VOICE_MIN_MS = 1000, VOICE_MAX_MS = 60000;
+const VOICE_MIC_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/></svg>';
+const VOICE_TRASH_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"/><path d="M9.5 7V4.5h5V7"/><path d="M6.5 7l1 12.5h9l1-12.5"/></svg>';
+const VOICE_PLAY_SVG = '<svg class="ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>';
+const VOICE_PAUSE_SVG = '<svg class="ic-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+let voiceRec = {state:'idle', chat:null, mic:null, stream:null, recorder:null, ctx:null, analyser:null, buf:null, chunks:[], peaks:[], live:[], mime:'', elapsed:0, runSince:0, paused:false, startX:0, startY:0, cancelArmed:false, holdTimer:null, tick:null, releasedEarly:false, aborted:false};
+let voicePlayer = {id:null, audio:null, speed:1, status:'', failed:null};
+const voiceUrlCache = new Map();
+
+function vibrate(ms){ try{ if(navigator.vibrate) navigator.vibrate(ms); }catch(e){} }
+function voiceUuid(){ try{ if(crypto.randomUUID) return crypto.randomUUID(); }catch(e){} return Date.now().toString(36) + Math.random().toString(36).slice(2,10); }
+function fmtDuration(ms){ const s = Math.max(0, Math.round(ms/1000)); return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0'); }
+function audioExt(mime){ return /mp4/.test(mime) ? 'mp4' : (/ogg/.test(mime) ? 'ogg' : 'webm'); }
+function pickAudioMime(){
+  if(typeof MediaRecorder === 'undefined') return null;
+  const cands = ['audio/webm;codecs=opus','audio/mp4;codecs=mp4a.40.2','audio/mp4','audio/ogg;codecs=opus'];
+  for(const m of cands){ try{ if(MediaRecorder.isTypeSupported(m)) return m; }catch(e){} }
+  return '';
+}
+function voiceElapsed(){ const r = voiceRec; return r.elapsed + (r.paused ? 0 : Date.now() - r.runSince); }
+function voiceDownsample(arr, n){
+  const out = [];
+  if(!arr.length){ for(let i=0;i<n;i++) out.push(0.1); return out; }
+  for(let i = 0; i < n; i++){
+    const a = Math.floor(i * arr.length / n), b = Math.max(a + 1, Math.floor((i + 1) * arr.length / n));
+    let mx = 0; for(let j = a; j < b && j < arr.length; j++) mx = Math.max(mx, arr[j]);
+    out.push(Math.round(mx * 100) / 100);
+  }
+  return out;
+}
+function voiceCachedUrl(path){ const h = voiceUrlCache.get(path); return (h && h.exp > Date.now()) ? h.url : null; }
+async function signedAudioUrl(path){
+  const hit = voiceCachedUrl(path); if(hit) return hit;
+  const res = await sbClient().storage.from('voice-notes').createSignedUrl(path, 3600);
+  if(!res || res.error || !res.data || !res.data.signedUrl) throw new Error('sign');
+  voiceUrlCache.set(path, {url: res.data.signedUrl, exp: Date.now() + 50*60*1000});
+  return res.data.signedUrl;
+}
+
+// Recorder state
+function removeVoiceListeners(){
+  window.removeEventListener('pointermove', voiceMove);
+  window.removeEventListener('pointerup', voiceUp);
+  window.removeEventListener('pointercancel', voiceUp);
+}
+function voiceArm(e){
+  const r = voiceRec;
+  if(e.button !== undefined && e.button !== 0) return;
+  if(r.state !== 'idle' || fr.kb || !fr.open) return;
+  r.mic = e.currentTarget; r.startX = e.clientX; r.startY = e.clientY; r.releasedEarly = false;
+  r.holdTimer = setTimeout(function(){ r.holdTimer = null; voiceStart(); }, VOICE_HOLD_MS);
+  window.addEventListener('pointermove', voiceMove);
+  window.addEventListener('pointerup', voiceUp);
+  window.addEventListener('pointercancel', voiceUp);
+}
+async function voiceStart(){
+  const r = voiceRec;
+  if(!fr.open || fr.kb){ r.state = 'idle'; r.mic = null; return; }
+  const mime = pickAudioMime();
+  if(mime === null || !(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)){
+    fr.note = 'Voice messages are not supported in this browser.'; render(); return;
+  }
+  r.state = 'starting'; r.chat = fr.open.id; r.cancelArmed = false; r.aborted = false; r.releasedEarly = false;
+  render();
+  let stream = null;
+  try{
+    stream = await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true, noiseSuppression:true, autoGainControl:true}});
+  }catch(err){
+    r.state = 'idle'; r.mic = null;
+    fr.note = (err && err.name === 'NotAllowedError') ? 'Allow microphone access to send voice messages.' : 'Could not start the microphone.';
+    render(); return;
+  }
+  if(r.aborted || r.releasedEarly){
+    stream.getTracks().forEach(function(t){ try{ t.stop(); }catch(e){} });
+    const tapped = r.releasedEarly && !r.aborted;
+    r.state = 'idle'; r.mic = null;
+    if(tapped) fr.note = 'Hold the mic to record a voice message.';
+    render(); return;
+  }
+  let rec;
+  try{
+    rec = new MediaRecorder(stream, mime ? {mimeType: mime, audioBitsPerSecond: 32000} : {audioBitsPerSecond: 32000});
+  }catch(err){
+    stream.getTracks().forEach(function(t){ try{ t.stop(); }catch(e){} });
+    r.state = 'idle'; r.mic = null; fr.note = 'Voice messages are not supported in this browser.'; render(); return;
+  }
+  r.chunks = []; r.peaks = []; r.live = []; r.elapsed = 0; r.runSince = Date.now(); r.paused = false;
+  rec.ondataavailable = function(e){ if(e.data && e.data.size) r.chunks.push(e.data); };
+  try{ rec.start(250); }catch(err){
+    stream.getTracks().forEach(function(t){ try{ t.stop(); }catch(e){} });
+    r.state = 'idle'; r.mic = null; fr.note = 'Could not start recording.'; render(); return;
+  }
+  r.stream = stream; r.recorder = rec; r.mime = rec.mimeType || mime || 'audio/webm';
+  try{
+    const AC = window.AudioContext || window.webkitAudioContext;
+    r.ctx = new AC();
+    if(r.ctx.state === 'suspended') r.ctx.resume().catch(function(){});
+    const src = r.ctx.createMediaStreamSource(stream);
+    r.analyser = r.ctx.createAnalyser(); r.analyser.fftSize = 512;
+    src.connect(r.analyser);
+    r.buf = new Uint8Array(r.analyser.fftSize);
+  }catch(e){ r.analyser = null; }
+  r.state = 'holding';
+  r.tick = setInterval(voiceTick, 100);
+  vibrate(10);
+  render();
+}
+function voiceSample(){
+  const r = voiceRec;
+  if(!r.analyser || r.paused) return;
+  r.analyser.getByteTimeDomainData(r.buf);
+  let s = 0;
+  for(let i = 0; i < r.buf.length; i++){ const d = (r.buf[i] - 128) / 128; s += d*d; }
+  const lvl = Math.min(1, Math.sqrt(s / r.buf.length) * 3.5);
+  r.live.push(lvl); if(r.live.length > 40) r.live.shift();
+  r.peaks.push(lvl);
+}
+function voiceTick(){
+  const r = voiceRec;
+  if(r.state !== 'holding' && r.state !== 'locked') return;
+  voiceSample();
+  if(voiceElapsed() >= VOICE_MAX_MS){ voiceFinish(true); return; }
+  updateVoiceUI();
+}
+function voiceMove(e){
+  const r = voiceRec;
+  if(r.state !== 'holding') return;
+  const dx = e.clientX - r.startX, dy = e.clientY - r.startY;
+  const armed = dx < -VOICE_CANCEL_PX;
+  if(armed !== r.cancelArmed){ r.cancelArmed = armed; vibrate(10); updateVoiceUI(); }
+  if(!armed && dy < -VOICE_LOCK_PX) voiceLock();
+}
+function voiceUp(){
+  const r = voiceRec;
+  removeVoiceListeners();
+  if(r.holdTimer){
+    clearTimeout(r.holdTimer); r.holdTimer = null;
+    fr.note = 'Hold the mic to record a voice message.'; render(); return;
+  }
+  if(r.state === 'starting'){ r.releasedEarly = true; return; }
+  if(r.state === 'holding') voiceFinish(!r.cancelArmed);
+}
+function voiceLock(){
+  const r = voiceRec;
+  if(r.state !== 'holding') return;
+  r.state = 'locked'; r.cancelArmed = false; r.paused = false;
+  vibrate(10); render();
+}
+function voicePauseToggle(){
+  const r = voiceRec;
+  if(r.state !== 'locked') return;
+  if(!r.paused){
+    r.elapsed = voiceElapsed(); r.paused = true;
+    try{ r.recorder.pause(); }catch(e){}
+  } else {
+    r.runSince = Date.now(); r.paused = false;
+    try{ r.recorder.resume(); }catch(e){}
+  }
+  updateVoiceUI();
+}
+function voiceFinish(send){
+  const r = voiceRec;
+  if(r.state !== 'holding' && r.state !== 'locked') return;
+  const ms = voiceElapsed(), mime = r.mime, chatId = r.chat, rec = r.recorder, chunks = r.chunks;
+  const peaks = voiceDownsample(r.peaks, 40);
+  r.state = 'idle'; r.mic = null;
+  clearInterval(r.tick); r.tick = null;
+  removeVoiceListeners();
+  const stopped = new Promise(function(res){
+    if(!rec || rec.state === 'inactive'){ res(); return; }
+    rec.onstop = function(){ res(); };
+    try{ rec.stop(); }catch(e){ res(); }
+  });
+  stopped.then(function(){
+    voiceReleaseMedia();
+    if(send && !r.aborted){
+      if(ms < VOICE_MIN_MS){ fr.note = 'Voice message too short. Hold to record.'; render(); }
+      else { voiceSend(new Blob(chunks, {type: mime}), mime, ms, peaks, chatId); return; }
+    }
+    render();
+  });
+}
+function voiceAbort(note){
+  const r = voiceRec;
+  if(r.holdTimer){ clearTimeout(r.holdTimer); r.holdTimer = null; }
+  removeVoiceListeners();
+  if(r.state === 'idle'){ if(note) fr.note = note; return; }
+  r.aborted = true;
+  if(r.recorder && r.recorder.state !== 'inactive'){ try{ r.recorder.onstop = null; r.recorder.stop(); }catch(e){} }
+  r.state = 'idle'; r.mic = null;
+  voiceReleaseMedia();
+  if(note) fr.note = note;
+}
+function voiceReleaseMedia(){
+  const r = voiceRec;
+  clearInterval(r.tick); r.tick = null;
+  if(r.stream){ r.stream.getTracks().forEach(function(t){ try{ t.stop(); }catch(e){} }); }
+  if(r.ctx){ try{ r.ctx.close(); }catch(e){} }
+  r.stream = null; r.recorder = null; r.ctx = null; r.analyser = null; r.buf = null;
+}
+async function voiceSend(blob, mime, ms, peaks, recipient){
+  const db = sbClient(), me = sbSession.user.id;
+  const path = me + '/' + voiceUuid() + '.' + audioExt(mime);
+  const up = await db.storage.from('voice-notes').upload(path, blob, {contentType: (mime || 'audio/webm').split(';')[0], upsert: false});
+  if(up.error){ fr.note = 'Voice message not sent. Check your connection.'; render(); return; }
+  const ins = await db.from('chat_messages').insert({sender: me, recipient: recipient, body: 'Voice message', kind: 'audio', audio_path: path, audio_mime: mime, audio_ms: Math.round(ms), audio_peaks: peaks});
+  if(ins.error){
+    db.storage.from('voice-notes').remove([path]).then(function(){}, function(){});
+    fr.note = 'Voice message not sent. Check your connection.'; render(); return;
+  }
+  scrollChatToEnd = true;
+  await refreshChat(false);
+}
+
+// Recorder UI
+function voiceBarsHTML(n){ let h = ''; for(let i = 0; i < n; i++) h += '<span class="vr-bar"></span>'; return h; }
+function voicePill(){
+  return el('<div class="vr-pill"><span class="vr-dot"></span><span class="vr-time">0:00</span><span class="vr-msg">Slide left to cancel, up to lock</span><span class="vr-live">' + voiceBarsHTML(16) + '</span></div>');
+}
+function voiceMicBtn(live){
+  const r = voiceRec;
+  if(r.mic && r.state !== 'idle'){ r.mic.classList.toggle('live', !!live); return r.mic; }
+  const b = el('<button type="button" class="vr-mic' + (live ? ' live' : '') + '" aria-label="Hold to record a voice message">' + VOICE_MIC_SVG + '</button>');
+  b.addEventListener('pointerdown', voiceArm);
+  b.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+  return b;
+}
+function voiceLockBar(){
+  const bar = el('<div class="wa-compose vr-lock">'
+    + '<button type="button" class="vr-round vr-trash" aria-label="Delete recording">' + VOICE_TRASH_SVG + '</button>'
+    + '<span class="vr-time">0:00</span>'
+    + '<button type="button" class="vr-round vr-pause" aria-label="Pause recording">' + VOICE_PAUSE_SVG + VOICE_PLAY_SVG + '</button>'
+    + '<button type="button" class="btn wa-send vr-send">Send</button>'
+    + '</div>');
+  bar.querySelector('.vr-trash').onclick = function(){ voiceAbort(null); render(); };
+  bar.querySelector('.vr-pause').onclick = function(){ voicePauseToggle(); };
+  bar.querySelector('.vr-send').onclick = function(){ voiceFinish(true); };
+  return bar;
+}
+function voiceFillBars(bars){
+  const live = voiceRec.live, n = bars.length;
+  bars.forEach(function(b, i){
+    const idx = live.length - n + i;
+    const v = idx >= 0 ? live[idx] : 0;
+    b.style.height = Math.max(3, Math.round(v * 22)) + 'px';
+  });
+}
+function updateVoiceUI(){
+  const r = voiceRec, t = fmtDuration(voiceElapsed());
+  const pill = document.querySelector('.vr-pill');
+  if(pill){
+    pill.classList.toggle('cancel', r.cancelArmed);
+    pill.querySelector('.vr-time').textContent = t;
+    pill.querySelector('.vr-msg').textContent = r.cancelArmed ? 'Release to cancel' : 'Slide left to cancel, up to lock';
+    voiceFillBars(pill.querySelectorAll('.vr-bar'));
+  }
+  const lock = document.querySelector('.vr-lock');
+  if(lock){
+    lock.querySelector('.vr-time').textContent = t;
+    lock.classList.toggle('paused', r.paused);
+    lock.querySelector('.vr-pause').setAttribute('aria-label', r.paused ? 'Resume recording' : 'Pause recording');
+  }
+}
+function chatComposeBar(f){
+  const r = voiceRec, mine = r.chat === f.id && r.state !== 'idle';
+  if(mine && r.state === 'locked') return voiceLockBar();
+  const bar = el('<div class="wa-compose"></div>');
+  if(mine && (r.state === 'holding' || r.state === 'starting')){
+    bar.appendChild(voicePill());
+    bar.appendChild(voiceMicBtn(true));
+    return bar;
+  }
+  const field = el('<button type="button" class="wa-field" aria-label="Type a message"></button>');
+  waShowDraft(field);
+  field.onclick = function(){ fr.kb = !fr.kb; scrollChatToEnd = true; render(); };
+  bar.appendChild(field);
+  if(!fr.kb && !fr.draft.trim()){
+    bar.appendChild(voiceMicBtn(false));
+  } else {
+    const send = el('<button class="btn wa-send" type="button">Send</button>');
+    send.onclick = function(){ fr.kb = false; sendChat(); };
+    bar.appendChild(send);
+  }
+  return bar;
+}
+
+// Playback
+function voiceApplyBubble(bub){
+  const p = voicePlayer, id = bub.dataset.vid, total = Number(bub.dataset.ms) || 0;
+  const cur = p.id === id && !!p.audio;
+  const playing = cur && !p.audio.paused && !p.audio.ended;
+  const frac = cur && total ? Math.min(1, p.audio.currentTime * 1000 / total) : 0;
+  bub.classList.toggle('playing', playing);
+  bub.dataset.state = (p.id === id && p.status) ? p.status : (p.failed === id ? 'error' : '');
+  bub.querySelectorAll('.vb-bar').forEach(function(b, i){ b.classList.toggle('on', cur && (i + 0.5) / 40 <= frac); });
+  bub.querySelector('.vb-dur').textContent = fmtDuration(cur ? p.audio.currentTime * 1000 : total);
+  bub.querySelector('.vb-sp').textContent = p.speed + 'x';
+}
+function voiceUpdateBubbles(){
+  document.querySelectorAll('.bubble.audio[data-vid]').forEach(function(b){ voiceApplyBubble(b); });
+}
+function voiceBubble(f, m, mine, stamp, tick){
+  const peaks = Array.isArray(m.audio_peaks) ? m.audio_peaks : [];
+  let bars = '';
+  for(let i = 0; i < 40; i++){
+    const v = Math.max(0, Math.min(1, Number(peaks[i]) || 0));
+    bars += '<span class="vb-bar" style="height:' + Math.max(4, Math.min(24, Math.round(v * 24))) + 'px"></span>';
+  }
+  const bub = el('<div class="bubble audio ' + (mine ? 'mine' : 'theirs') + '" data-vid="' + esc(m.id) + '" data-ms="' + (Number(m.audio_ms) || 0) + '">'
+    + '<div class="vb-row"><button type="button" class="vb-play" aria-label="Play voice message">' + VOICE_PLAY_SVG + VOICE_PAUSE_SVG + '</button>'
+    + '<div class="vb-wave" aria-label="Seek">' + bars + '</div></div>'
+    + '<div class="vb-meta"><span class="vb-dur"></span><button type="button" class="vb-sp" aria-label="Playback speed">1x</button><small>' + stamp + tick + '</small></div>'
+    + '<span class="vb-err">Could not play this message</span>'
+    + '</div>');
+  bub.querySelector('.vb-play').onclick = function(e){ e.stopPropagation(); voiceToggle(m, null); };
+  bub.querySelector('.vb-sp').onclick = function(e){ e.stopPropagation(); voiceCycleSpeed(); };
+  const wave = bub.querySelector('.vb-wave');
+  wave.onclick = function(e){
+    e.stopPropagation();
+    const rect = wave.getBoundingClientRect();
+    const frac = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
+    voiceToggle(m, frac);
+  };
+  if(!mine){
+    bub.style.cursor = 'pointer'; bub.title = 'Tap to report';
+    bub.onclick = function(e){ if(e.target.closest && e.target.closest('button, .vb-wave')) return; reportMessage(m, f); };
+  }
+  voiceApplyBubble(bub);
+  return bub;
+}
+function voiceFail(id){
+  const p = voicePlayer;
+  if(p.audio){ try{ p.audio.pause(); }catch(e){} }
+  p.audio = null; p.id = null; p.status = ''; p.failed = id;
+  voiceUpdateBubbles();
+}
+function voicePause(){
+  const p = voicePlayer;
+  if(p.audio){ try{ p.audio.pause(); }catch(e){} }
+  p.audio = null; p.id = null; p.status = '';
+  voiceUpdateBubbles();
+}
+function voiceCycleSpeed(){
+  const p = voicePlayer;
+  p.speed = p.speed === 1 ? 1.5 : (p.speed === 1.5 ? 2 : 1);
+  if(p.audio) p.audio.playbackRate = p.speed;
+  voiceUpdateBubbles();
+}
+async function voiceToggle(m, seekFrac){
+  const p = voicePlayer;
+  if(p.id === m.id && p.audio){
+    if(seekFrac != null) p.audio.currentTime = seekFrac * (m.audio_ms || 0) / 1000;
+    if(p.audio.paused){ p.audio.play().catch(function(){ if(p.id === m.id) voiceFail(m.id); }); }
+    else { p.audio.pause(); }
+    voiceUpdateBubbles(); return;
+  }
+  voicePause();
+  p.failed = null; p.id = m.id; p.status = 'loading'; voiceUpdateBubbles();
+  let url = voiceCachedUrl(m.audio_path);
+  if(!url){
+    try{ url = await signedAudioUrl(m.audio_path); }
+    catch(e){ if(p.id === m.id) voiceFail(m.id); return; }
+  }
+  if(p.id !== m.id) return;
+  const a = new Audio(url);
+  a.preload = 'auto';
+  a.playbackRate = p.speed;
+  p.audio = a; p.status = '';
+  a.addEventListener('timeupdate', voiceUpdateBubbles);
+  a.addEventListener('ended', function(){ if(p.audio === a){ p.audio = null; p.id = null; } voiceUpdateBubbles(); });
+  a.addEventListener('error', function(){ if(p.audio === a) voiceFail(m.id); });
+  if(seekFrac != null) a.addEventListener('loadedmetadata', function(){ a.currentTime = seekFrac * (m.audio_ms || 0) / 1000; }, {once: true});
+  try{ await a.play(); }
+  catch(e){ if(p.audio === a) voiceFail(m.id); return; }
+  voiceUpdateBubbles();
+}
+
+// Leaving the app stops recording and playback
+document.addEventListener('visibilitychange', function(){
+  if(document.visibilityState !== 'hidden') return;
+  const busy = voiceRec.state !== 'idle' || !!voiceRec.holdTimer;
+  voiceAbort(busy ? 'Recording stopped when the app went to the background. Not sent.' : null);
+  voicePause();
+});
+window.addEventListener('pagehide', function(){ voiceAbort(null); voicePause(); });
 
 // Admin: how many students are online right now, and what they are doing
 let liveNow = {at:0, total:0, byState:{}, loading:false};
