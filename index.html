@@ -68,6 +68,115 @@ html, body{ overscroll-behavior-y:none; }
 .ub{ flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; }
 .ub i{ display:block; width:100%; max-width:26px; min-height:3px; border-radius:8px 8px 3px 3px; background:linear-gradient(180deg,var(--accent),var(--accent-text)); }
 .ub span{ margin-top:6px; font:600 10px Inter,sans-serif; color:var(--muted); }
+
+/* Friends and chat, in TORQ's own tokens */
+.pdot{ width:12px; height:12px; border-radius:50%; border:2px solid var(--surface); flex-shrink:0; padding:0; cursor:pointer; box-shadow:0 0 0 1px var(--border); }
+.pdot:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+.dot-online{ background:#4fd18b; }
+.dot-questions{ background:#6aa8ff; }
+.dot-custom{ background:#f0b35a; }
+.dot-mock{ background:#e4737a; }
+.dot-offline{ background:transparent; box-shadow:inset 0 0 0 2px var(--muted), 0 0 0 1px var(--border); }
+.pdot-tip{ position:absolute; z-index:120; width:min(280px, calc(100vw - 24px)); padding:14px 16px; border-radius:var(--r-lg); background:linear-gradient(160deg,var(--surface),var(--surface-2)); border:1px solid var(--border); box-shadow:0 24px 50px -24px var(--shadow); }
+.pdot-tip-h{ font:700 11px Inter,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-text); margin-bottom:8px; }
+.pdot-row{ display:flex; align-items:center; gap:10px; padding:6px 4px; font-size:14px; color:var(--text); border-radius:8px; }
+.pdot-row.now{ background:var(--accent-soft); }
+.pdot-row .pdot{ box-shadow:none; }
+.chat-list{ display:flex; flex-direction:column; gap:8px; max-height:52vh; overflow-y:auto; padding:14px 4px; }
+.bubble{ max-width:78%; padding:9px 13px; border-radius:var(--r-lg); font-size:15px; line-height:1.45; color:var(--text); word-wrap:break-word; }
+.bubble small{ display:block; margin-top:4px; font-size:11px; color:var(--muted); }
+.bubble.mine{ align-self:flex-end; background:var(--accent-soft); border:1px solid var(--border); border-bottom-right-radius:6px; }
+.bubble.theirs{ align-self:flex-start; background:var(--surface); border:1px solid var(--border); border-bottom-left-radius:6px; }
+.chat-bar{ display:flex; gap:8px; margin-top:10px; }
+
+/* Admin panels: calmer and smaller on a phone */
+.adm-soft{ margin-top:6px; }
+.adm-soft .card{ padding:16px !important; margin-bottom:12px; }
+.adm-soft .onb-cardhead{ font-size:19px; margin:2px 0 10px; }
+.adm-soft .stats{ gap:8px; }
+.adm-soft .stat{ padding:10px; }
+.adm-soft .stat .n{ font-size:19px; }
+.adm-soft .stat .l{ font-size:11px; }
+.adm-soft .usage-bars{ height:96px; }
+.adm-soft .strat-list li{ padding:10px 12px; font-size:14px; }
+.adm-soft .note-line{ font-size:12.5px; }
+
+/* Dual Flame card, in TORQ's own tokens */
+.duo-card{ border-color:var(--accent) !important; }
+.duo-top{ display:flex; justify-content:space-between; align-items:flex-end; gap:12px; margin-top:6px; }
+.duo-num{ font:600 26px Lora,Georgia,serif; color:var(--text); }
+.duo-days{ font:600 22px Lora,Georgia,serif; color:var(--accent-text); text-align:right; }
+.duo-days small{ font:600 11px Inter,sans-serif; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+.duo-reward{ color:var(--accent-text); font-weight:600; }
+
+/* Doubt Relay, Doubt screen, card chats and USP cards: TORQ's own tokens */
+.ask-bar{ margin-top:14px; }
+.ask-seg button{ font-size:13px; }
+.doubt-sheet{ position:relative; padding:20px 20px 22px; border-radius:var(--r-lg); background:var(--surface); border:1px dashed var(--accent-text); }
+.doubt-sheet::before{ content:""; position:absolute; left:0; right:0; top:0; height:4px; background:linear-gradient(90deg,var(--accent),var(--c-phys),var(--c-chem)); border-radius:var(--r-lg) var(--r-lg) 0 0; }
+.doubt-tag{ font:700 11px Inter,sans-serif; letter-spacing:.16em; text-transform:uppercase; color:var(--accent-text); }
+.doubt-meta{ font-size:12.5px; color:var(--muted); margin:4px 0 12px; }
+.doubt-ask{ font:italic 15px/1.5 Lora,Georgia,serif; color:var(--text); margin:0 0 12px; }
+.doubt-q{ font-size:15px; line-height:1.55; color:var(--text); margin-bottom:12px; }
+.doubt-opts{ display:grid; gap:8px; margin-bottom:12px; }
+.doubt-opt{ display:flex; gap:10px; align-items:center; text-align:left; padding:10px 12px; border-radius:var(--r-md); border:1px solid var(--border); background:var(--surface-2); color:var(--text); font-size:14px; cursor:pointer; }
+.doubt-opt b{ color:var(--accent-text); min-width:18px; }
+.doubt-opt.on{ border-color:var(--accent); box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%, transparent); }
+.doubt-opt:disabled{ cursor:default; opacity:.85; }
+.doubt-label{ font:700 11px Inter,sans-serif; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:14px 0 6px; }
+.doubt-note{ margin:0; line-height:1.6; color:var(--text); white-space:pre-line; }
+.qcard-chat{ display:flex; flex-direction:column; gap:4px; align-items:flex-start; max-width:82%; padding:11px 13px; border-radius:var(--r-lg); border:1px dashed var(--accent-text); background:var(--surface); color:var(--text); text-align:left; cursor:pointer; font:inherit; }
+.qcard-chat.mine{ align-self:flex-end; background:var(--accent-soft); }
+.qcard-chat.theirs{ align-self:flex-start; }
+.qcard-chat b{ font:700 11px Inter,sans-serif; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-text); }
+.qcard-chat span{ font-size:14px; line-height:1.4; }
+.qcard-chat small{ font-size:11px; color:var(--muted); }
+.usp{ cursor:pointer; transition:transform .2s var(--ease); }
+.usp:hover{ transform:translateY(-1px); }
+.usp:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+.usp-scrim{ z-index:90 !important; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
+.usp-card{ position:fixed; left:50%; top:50%; z-index:91; width:min(92vw,440px); max-height:86vh; overflow:auto; padding:26px 24px 22px; border-radius:26px; background:linear-gradient(165deg,var(--surface),var(--surface-2)); border:1px solid var(--border); box-shadow:0 40px 90px -30px var(--shadow); transform:translate(-50%,-50%); animation:uspGrow .5s var(--ease) both; }
+@keyframes uspGrow{ from{ opacity:0; transform:translate(-50%,-50%) scale(.55); } to{ opacity:1; transform:translate(-50%,-50%) scale(1); } }
+@media (prefers-reduced-motion: reduce){ .usp-card{ animation:none; } }
+.usp-eye{ font:700 11px Inter,sans-serif; letter-spacing:.18em; text-transform:uppercase; color:var(--accent-text); margin-bottom:8px; }
+.usp-title{ font:600 26px/1.15 Lora,Georgia,serif; margin:0 0 10px; color:var(--text); }
+.usp-what{ margin:0 0 14px; line-height:1.6; color:var(--text); font-size:15.5px; }
+.usp-block{ padding:12px 14px; border-radius:var(--r-lg); background:var(--surface-2); border:1px solid var(--border); margin-top:10px; }
+.usp-block p{ margin:0; line-height:1.6; font-size:14.5px; color:var(--text); }
+.usp-k{ font:700 10.5px Inter,sans-serif; letter-spacing:.12em; text-transform:uppercase; color:var(--accent-text); margin-bottom:4px; }
+
+/* The SoG card takes the same gold, premium treatment as its chip on the sign-in screen */
+.usp-card.usp-gold{ color:#f6e7bf; overflow:hidden; border:1.5px solid transparent;
+  background:linear-gradient(135deg,#2a2112,#3d2e15 45%,#1f180d) padding-box, linear-gradient(120deg,#8a6a2b,#f3d98b 35%,#b8893a 60%,#f7e3a1 80%,#8a6a2b) border-box;
+  box-shadow:0 0 0 1px rgba(243,217,139,.14), 0 40px 90px -30px rgba(184,137,58,.5), inset 0 1px 0 rgba(255,240,200,.25); }
+.usp-card.usp-gold::after{ content:""; position:absolute; top:0; bottom:0; left:-60%; width:45%; pointer-events:none;
+  background:linear-gradient(100deg,transparent,rgba(255,244,210,.5),transparent); animation:goldSheen 3.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce){ .usp-card.usp-gold::after{ animation:none; display:none; } }
+.usp-gold .sog-mark{ margin-bottom:12px; }
+.usp-gold .usp-eye, .usp-gold .usp-k{ color:#f3d98b; }
+.usp-gold .usp-title{ color:#fbeec4; }
+.usp-gold .usp-what, .usp-gold .usp-block p{ color:#f6e7bf; }
+.usp-gold .usp-block{ background:rgba(255,236,190,.06); border-color:rgba(243,217,139,.22); }
+.usp-gold .btn.block{ background:linear-gradient(120deg,#8a6a2b,#f3d98b 40%,#b8893a 70%,#f7e3a1); color:#2a2112; border-color:transparent; }
+
+/* ---- Glints, unified: one soft light band that sweeps across each element and is clipped to its own shape.
+   It replaces the narrow, rounded strips that looked like overlapping ovals. ---- */
+.sog-mark::after,
+.onb-tags span.onb-tag-hot::after,
+.usp-card.usp-gold::after,
+.onb-card .btn.block::after,
+.spl-bar i::after{
+  content:"" !important; position:absolute !important; top:0 !important; right:0 !important; bottom:0 !important; left:0 !important;
+  width:auto !important; height:auto !important; border-radius:inherit !important; pointer-events:none !important; z-index:1;
+  background:linear-gradient(105deg, transparent 36%, rgba(255,255,255,.2) 50%, transparent 64%) !important;
+  transform:translateX(-120%); animation:glintSweep 4.2s ease-in-out infinite !important;
+}
+.sog-mark::after{ z-index:0; }
+.usp-card.usp-gold::after{ background:linear-gradient(105deg, transparent 36%, rgba(255,244,210,.28) 50%, transparent 64%) !important; }
+@keyframes glintSweep{ 0%{ transform:translateX(-120%); } 55%,100%{ transform:translateX(120%); } }
+@media (prefers-reduced-motion: reduce){
+  .sog-mark::after, .onb-tags span.onb-tag-hot::after, .usp-card.usp-gold::after, .onb-card .btn.block::after, .spl-bar i::after{ animation:none !important; display:none !important; }
+}
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -2699,7 +2808,7 @@ let view = 'home';
 let session = null;
 let nav = {tab:'home', subject:SUBJECTS[0], pyqTab:'questions', paper:null, meTab:'analysis', cfg:null,
            mockCfg:{subjects:[...SUBJECTS], perSubject:5, minutes:60}};
-const TAB_OF = {viva:'viva', flash:'notehub', myflash:'notehub', myflashnew:'notehub', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', notebooks:'notebooks', leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', notes:'notehub', notehub:'notehub', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
+const TAB_OF = {friends:'friends', messages:'messages', doubt:'messages', viva:'viva', flash:'notehub', myflash:'notehub', myflashnew:'notehub', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', notebooks:'notebooks', leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', notes:'notehub', notehub:'notehub', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
 
 const LAST_VIEW_KEY = 'torq_last_view_v1';
 function saveLastView(){
@@ -2768,6 +2877,7 @@ function recordAttempt(q, ok, time){
   const att = {q:q.id, c:ok, conf:null, t:time, d:dayKey(), at:Date.now(), mock:!!(session && session.mode==='mock')};
   store.attempts.push(att);
   logEvent('answer', view);
+  bumpDuo();
   checkDailyReward();
   if(store.attempts.length>3000) store.attempts.shift();
   scheduleUpload();
@@ -3852,7 +3962,7 @@ function renderInner(){
   const needSignIn = !store.profile && !sbSession;
   app.classList.toggle('is-onb', needSignIn || !store.profile);
   if(view!=='practice' && store.profile && !needSignIn) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
-  const V = {privacy:()=>legalPaperView('privacy'), terms:()=>legalPaperView('terms'), copyright:()=>legalPaperView('copyright'), disclaimer:()=>legalPaperView('disclaimer'), contact:contactPageView, notebooks:notebooksView, leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
+  const V = {friends:()=>friendsHubView(), messages:()=>messagesView(), doubt:()=>doubtView(), privacy:()=>legalPaperView('privacy'), terms:()=>legalPaperView('terms'), copyright:()=>legalPaperView('copyright'), disclaimer:()=>legalPaperView('disclaimer'), contact:contactPageView, notebooks:notebooksView, leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
              me:meView, analytics:analyticsView, practice:practiceView, results:resultsView, notes:notesView, notehub:notehubView, viva:vivaView, flash:flashView, myflash:myFlashView, myflashnew:myFlashNewView, admin:adminView, eyes:eyesView};
   const needCoaching = !needSignIn && !!store.profile && !store.profile.coachingAnswered && !store.profile.coachingOnline && !store.profile.coachingOffline;
   app.appendChild(needSignIn ? authView() :(!store.profile ? (sbSession ? authView() : onboardView()) : (needCoaching ? coachingCatchupView() : (V[view]||homeView)())));
@@ -3879,6 +3989,8 @@ const TABS = [
   {id:'leaderboard', label:'Leaderboard', icon:'<path d=\"M8 4h8v5a4 4 0 0 1-8 0z\"/><path d=\"M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4\"/><path d=\"M12 13v4M9 20h6M10 17h4\"/>'},
   {id:'mocks', label:'Mocks', title:'Mocks, coming soon', disabled:true, icon:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>'},
   {id:'notebooks', label:'Notebooks', icon:'<path d="M7 3h10v18l-5-4-5 4z"/>'},
+  {id:'friends', label:'Friends', icon:'<circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2c2.6.2 5 2.3 5 5.3"/>'},
+  {id:'messages', label:'Messages', icon:'<path d="M4 5h16v11H9l-5 4z"/>'},
   {id:'notehub', label:'Notes', icon:'<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M8 8h7M8 12h7"/>'},
   {id:'me', label:'Me', icon:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>'}
 ];
@@ -5607,7 +5719,7 @@ function onboardView(){
     +'<div class="onb-eyebrow">JEE Main \u00B7 Previous-year papers</div>'
     +'<h1 class="onb-title'+(introAlreadyPlayed ? ' no-intro' : '')+'"><span class="w onb-outline">Crack</span><span class="w">JEE</span><em class="w">with intent.</em></h1>'
     +'<p class="onb-sub">Real papers, shift by shift, and timed mocks that feel like exam day. Tell us a little about you to begin.</p>'
-    +'<div class="onb-tags"><span class="onb-tag-hot">SoG On Every Answer</span><span>Shift-wise PYQs</span><span>Timed mocks</span><span>Chapter drills</span><span>Live leaderboard</span></div>'
+    +'<div class="onb-tags"><span class="onb-tag-hot usp" data-usp="0" role="button" tabindex="0">SoG On Every Answer</span><span class="usp" data-usp="1" role="button" tabindex="0">Shift-wise PYQs</span><span class="usp" data-usp="2" role="button" tabindex="0">Timed mocks</span><span class="usp" data-usp="3" role="button" tabindex="0">Chapter drills</span><span class="usp" data-usp="4" role="button" tabindex="0">Live leaderboard</span><span class="usp" data-usp="5" role="button" tabindex="0">Doubt Relay</span></div>'
     +'</div>'));
   const card = el('<div class="onb-card"></div>');
   card.appendChild(el('<div class="onb-cardhead">Set up your profile</div>'));
@@ -5742,6 +5854,13 @@ function openAdminStudent(r){
     body.appendChild(send);
   });
 }
+// Friends-only view: keeps you and your friends, and ranks them among themselves. Works on a copy, never on the saved board.
+function lbFriendsView(c){
+  if(!c || !lbState.friendsOnly || !c.rows) return c;
+  const names = new Set((fr.list || []).filter(f=>f.status==='accepted').map(f=>f.username));
+  const rows = c.rows.filter(r=>r.me || names.has(r.name));
+  return Object.assign({}, c, {rows: rows.map((r,i)=>Object.assign({}, r, {place: i+1}))});
+}
 function leaderboardView(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Leaderboard</div><h1 class="hm-title">Who is <em>leading?</em></h1></div>'));
@@ -5759,11 +5878,14 @@ function leaderboardView(){
   bar.appendChild(pickerField('Time range', LB_PERIODS.map(p=>({v:p[0], l:p[1]})), lbState.period, v=>{ lbState.period = v; render(); }));
   w.appendChild(bar);
   w.appendChild(el('<p class="lb-blurb">'+esc(meta.sub)+'</p>'));
+  const fo = el('<label class="vis-toggle" style="margin:0 0 12px"><input type="checkbox"'+(lbState.friendsOnly?' checked':'')+'><span class="vis-sw" aria-hidden="true"></span><span class="vis-lbl">Show only my friends</span></label>');
+  fo.querySelector('input').onchange = e=>{ lbState.friendsOnly = e.target.checked; if(lbState.friendsOnly && fr.list === null) loadFriends(); render(); };
+  w.appendChild(fo);
 
   // Send any answers still waiting on this device first, so your own result is up to date
   if(sbSession) uploadPending();
   lbFetch();
-  const c = lbState.cache[lbKey()];
+  const c = lbFriendsView(lbState.cache[lbKey()]);
   if(!c || c.loading){ w.appendChild(lbSkeleton()); return w; }
   if(c.err){ w.appendChild(lbMessage(LB_TROPHY, 'Leaderboard unavailable', c.err, true)); return w; }
   if(!c.rows.length){
@@ -6242,6 +6364,8 @@ function logOpenOnce(){
   if(window.__openLogged || !sbSession) return;
   window.__openLogged = true;
   logEvent('app_open', view);
+  startPresence();
+  checkDoubtInbox();
 }
 let adminAnalytics = {days: 7, rows: null, loading: false, err: null};
 async function loadAnalytics(){
@@ -6251,6 +6375,12 @@ async function loadAnalytics(){
   const { data, error } = await sbClient().from('app_events').select('user_id, event, page, device, created_at').gte('created_at', since).order('created_at', {ascending:false}).limit(5000);
   adminAnalytics.loading = false;
   adminAnalytics.rows = data || [];
+  const ids = [...new Set(adminAnalytics.rows.filter(r=>r.user_id).map(r=>r.user_id))].slice(0, 1000);
+  adminAnalytics.names = {};
+  if(ids.length){
+    const { data: pd } = await sbClient().from('profiles').select('id, username').in('id', ids);
+    (pd || []).forEach(x=>{ adminAnalytics.names[x.id] = x.username; });
+  }
   adminAnalytics.err = error ? error.message : null;
   render();
 }
@@ -6280,12 +6410,20 @@ function analyticsPanel(){
   const max = Math.max(1, ...Object.values(days));
   box.appendChild(el('<div class="eyebrow" style="margin:18px 0 8px">Opens per day</div>'));
   box.appendChild(el('<div class="usage-bars">'+Object.keys(days).map(k=>'<div class="ub" title="'+k+': '+days[k]+'"><i style="height:'+Math.round(days[k]/max*100)+'%"></i><span>'+k.slice(8)+'</span></div>').join('')+'</div>'));
-  // Pages
+  // Visits by student: who came in, how often, and when they were last seen
+  const byUser = {};
+  rows.filter(r=>r.event==='page' && r.user_id).forEach(r=>{
+    const u = byUser[r.user_id] || (byUser[r.user_id] = {visits:0, last:r.created_at});
+    u.visits++; if(r.created_at > u.last) u.last = r.created_at;
+  });
+  const who = Object.entries(byUser).sort((x,y)=>y[1].visits - x[1].visits).slice(0,10);
+  box.appendChild(el('<div class="eyebrow" style="margin:18px 0 8px">Visits by student</div>'));
+  box.appendChild(el('<ul class="strat-list">'+(who.length ? who.map(([uid,u])=>'<li><b>'+esc((a.names||{})[uid] || 'Student')+'</b> · '+u.visits+' visits · last seen '+new Date(u.last).toLocaleDateString()+'</li>').join('') : '<li>No student visits in this period.</li>')+'</ul>'));
+  // Sections, for reference
   const pages = {};
   rows.filter(r=>r.event==='page').forEach(r=>{ const k = r.page || 'other'; pages[k] = (pages[k]||0)+1; });
-  const top = Object.entries(pages).sort((x,y)=>y[1]-x[1]).slice(0,8);
-  box.appendChild(el('<div class="eyebrow" style="margin:18px 0 8px">Most visited pages</div>'));
-  box.appendChild(el('<ul class="strat-list">'+(top.length ? top.map(([k,v])=>'<li>'+esc(k)+' · '+v+' visits</li>').join('') : '<li>No page visits yet in this period.</li>')+'</ul>'));
+  const top = Object.entries(pages).sort((x,y)=>y[1]-x[1]).slice(0,5);
+  if(top.length) box.appendChild(el('<p class="note-line" style="margin-top:10px">Most visited sections: '+top.map(([k,v])=>esc(k)+' ('+v+')').join(', ')+'</p>'));
   box.appendChild(el('<p class="note-line" style="margin-top:12px">Counts come from up to 5,000 recent events. Typed text is never recorded.</p>'));
   return box;
 }
@@ -6358,7 +6496,16 @@ function cohortPanel(){
   const matches = cohortMatches();
   const names = matches.slice(0,12).map(p=>'<li>'+esc(p.username || 'student')+(p.first_name ? ' · '+esc(p.first_name) : '')+'</li>').join('');
   box.appendChild(el('<div class="strat-stats"><div><b>'+matches.length+'</b><span>students in this group</span></div></div>'));
-  box.appendChild(el('<ul class="strat-list">'+(names || '<li>No students match these choices.</li>')+'</ul>'+(matches.length>12?'<p class="note-line">and '+(matches.length-12)+' more</p>':'')));
+  if(!cohortState.showNames){
+    const showBtn = el('<button class="btn ghost block" type="button" style="margin-top:6px">Show student names</button>');
+    showBtn.onclick = ()=>{ cohortState.showNames = true; render(); };
+    box.appendChild(showBtn);
+  } else {
+    box.appendChild(el('<ul class="strat-list">'+(names || '<li>No students match these choices.</li>')+'</ul>'+(matches.length>12?'<p class="note-line">and '+(matches.length-12)+' more</p>':'')));
+    const hideBtn = el('<button class="btn ghost block" type="button" style="margin-top:6px">Hide names</button>');
+    hideBtn.onclick = ()=>{ cohortState.showNames = false; render(); };
+    box.appendChild(hideBtn);
+  }
 
   // Tag the group
   const tagRow = el('<div class="pf" style="margin-top:16px"><span class="eyebrow">Tag this group</span></div>');
@@ -6409,12 +6556,576 @@ function cohortPanel(){
   box.appendChild(msgRow);
   return box;
 }
+
+// ---- Friends, chat and live presence ----
+const DOT_STATES = {
+  online:    {cls:'dot-online',    label:'Online, browsing'},
+  questions: {cls:'dot-questions', label:'Doing a question set'},
+  custom:    {cls:'dot-custom',    label:'Doing a custom test'},
+  mock:      {cls:'dot-mock',      label:'Doing a mock test'},
+  offline:   {cls:'dot-offline',   label:'Offline'}
+};
+const PRESENCE_FRESH_MS = 150000;   // online if updated in the last 2.5 minutes
+let fr = {list:null, presence:{}, loading:false, err:null, open:null, msgs:[], draft:'', note:null, poll:null};
+
+function currentActivity(){
+  if(!session) return 'online';
+  if(session.mode === 'mock') return session.title === 'Custom test' ? 'custom' : 'mock';
+  return 'questions';
+}
+function beatPresence(){
+  const db = sbClient(); if(!db || !sbSession) return;
+  db.from('presence').upsert({user_id: sbSession.user.id, last_seen: new Date().toISOString(), activity: currentActivity()}, {onConflict:'user_id'}).then(()=>{}, ()=>{});
+}
+function startPresence(){
+  if(window.__beat) return;
+  beatPresence();
+  window.__beat = setInterval(beatPresence, 60000);
+}
+function stateOf(p){
+  if(!p || Date.now() - Date.parse(p.last_seen) > PRESENCE_FRESH_MS) return 'offline';
+  return p.activity || 'online';
+}
+function presenceDot(uid){
+  const st = stateOf(fr.presence[uid]);
+  const b = el('<button type="button" class="pdot '+DOT_STATES[st].cls+'" aria-label="'+DOT_STATES[st].label+'. Tap to see what the colours mean."></button>');
+  b.onclick = e=>{ e.stopPropagation(); showDotLegend(b, st); };
+  return b;
+}
+// Small explainer that opens when a dot is tapped
+function showDotLegend(anchor, current){
+  const old = document.querySelector('.pdot-tip'); if(old){ old.remove(); return; }
+  const tip = el('<div class="pdot-tip" role="dialog" aria-label="What the colours mean"></div>');
+  tip.appendChild(el('<div class="pdot-tip-h">Status colours</div>'));
+  ['online','questions','custom','mock','offline'].forEach(k=>{
+    const row = el('<div class="pdot-row'+(k===current?' now':'')+'"><i class="pdot '+DOT_STATES[k].cls+'" aria-hidden="true"></i><span>'+DOT_STATES[k].label+'</span></div>');
+    tip.appendChild(row);
+  });
+  tip.appendChild(el('<p class="note-line" style="margin:8px 0 0">Only your friends can see this. The TORQ team sees how many students are online.</p>'));
+  document.body.appendChild(tip);
+  const r = anchor.getBoundingClientRect();
+  tip.style.left = Math.max(12, Math.min(r.left, window.innerWidth - tip.offsetWidth - 12)) + 'px';
+  tip.style.top = (r.bottom + 8 + window.scrollY) + 'px';
+  setTimeout(()=>{
+    const close = ev=>{ if(!tip.contains(ev.target)){ tip.remove(); document.removeEventListener('click', close); } };
+    document.addEventListener('click', close);
+  }, 0);
+}
+
+async function loadPresenceFor(ids){
+  fr.presence = {};
+  if(!ids.length) return;
+  const { data } = await sbClient().from('presence').select('user_id, last_seen, activity').in('user_id', ids);
+  (data || []).forEach(p=>{ fr.presence[p.user_id] = p; });
+}
+async function loadFriends(){
+  if(fr.loading || !sbSession) return;
+  fr.loading = true; fr.err = null;
+  const db = sbClient();
+  const { data, error } = await db.rpc('my_friends');
+  if(error){ fr.err = error.message; fr.list = []; }
+  else fr.list = (data || []).map(r=>({id:r.friend_id, username:r.friend_username, first:r.friend_first_name, status:r.friend_status, incoming:r.incoming}));
+  await loadPresenceFor(fr.list.filter(f=>f.status==='accepted').map(f=>f.id));
+  fr.loading = false;
+  render();
+}
+async function sendFriendRequest(username){
+  const db = sbClient(), me = sbSession.user.id;
+  const { data, error } = await db.rpc('find_user', { p_username: username });
+  const hit = data && data[0];
+  if(error || !hit){ fr.note = 'No student with that username.'; return render(); }
+  if(hit.id === me){ fr.note = 'That is your own username.'; return render(); }
+  const known = (fr.list || []).find(f=>f.id === hit.id);
+  if(known){ fr.note = known.status === 'accepted' ? 'You are already friends.' : 'A request is already waiting.'; return render(); }
+  const { error: e2 } = await db.from('friendships').insert({ requester: me, addressee: hit.id, status: 'pending' });
+  fr.note = e2 ? 'Could not send the request. Try again.' : 'Request sent to '+hit.username+'.';
+  await loadFriends();
+}
+async function answerRequest(id, accept){
+  const db = sbClient(), me = sbSession.user.id;
+  if(accept) await db.from('friendships').update({status:'accepted'}).match({requester: id, addressee: me});
+  else await db.from('friendships').delete().or('and(requester.eq.'+me+',addressee.eq.'+id+'),and(requester.eq.'+id+',addressee.eq.'+me+')');
+  await loadFriends();
+}
+async function openChat(f){
+  fr.open = f; fr.msgs = []; fr.draft = '';
+  await refreshChat(true);
+  clearInterval(fr.poll);
+  fr.poll = setInterval(()=>{ if(fr.open) refreshChat(false); }, 4000);
+}
+function closeChat(){ fr.open = null; clearInterval(fr.poll); fr.poll = null; render(); }
+async function refreshChat(markRead){
+  if(!fr.open || !sbSession) return;
+  const db = sbClient(), me = sbSession.user.id, other = fr.open.id;
+  const { data } = await db.from('chat_messages').select('id, sender, recipient, body, created_at, read_at, kind, share_id')
+    .or('and(sender.eq.'+me+',recipient.eq.'+other+'),and(sender.eq.'+other+',recipient.eq.'+me+')')
+    .order('created_at', {ascending:true}).limit(300);
+  const before = fr.msgs.length;
+  fr.msgs = data || [];
+  if(markRead) scrollChatToEnd = true;
+  if(fr.msgs.length !== before || markRead) render();
+  if(fr.open) db.from('chat_messages').update({read_at: new Date().toISOString()}).eq('sender', other).eq('recipient', me).is('read_at', null).then(()=>{}, ()=>{});
+}
+let scrollChatToEnd = false;
+async function sendChat(){
+  if(!fr.open) return;
+  const text = fr.draft.trim(); if(!text) return;
+  fr.draft = '';
+  const { error } = await sbClient().from('chat_messages').insert({ sender: sbSession.user.id, recipient: fr.open.id, body: text });
+  if(error){ fr.note = 'Message not sent. Check your connection.'; render(); return; }
+  scrollChatToEnd = true;
+  await refreshChat(false);
+}
+
+
+// ---- Dual Flame: one friend, one shared daily goal of at least 100 questions ----
+const DUO_GOALS = [100, 120, 150, 200];
+let duo = {list:null, loading:false, days:[], claimed:{}, err:null};
+async function loadDuo(){
+  if(duo.loading || !sbSession) return;
+  duo.loading = true;
+  const db = sbClient();
+  const { data, error } = await db.rpc('my_shared_streaks');
+  duo.err = error ? error.message : null;
+  duo.list = data || [];
+  const s0 = duo.list[0];
+  const today = dayKey();
+  duo.days = []; duo.claimed = {};
+  if(s0){
+    const { data: days } = await db.from('shared_streak_days').select('day, progress').eq('streak_id', s0.streak_id).order('day', {ascending:false}).limit(60);
+    duo.days = days || [];
+    const { data: cl } = await db.from('shared_streak_claims').select('day').eq('streak_id', s0.streak_id);
+    (cl || []).forEach(c=>{ duo.claimed[c.day] = true; });
+  }
+  duo.loading = false;
+  window.__duoActive = !!s0;
+  render();
+}
+// Each answer adds one to today's shared total
+function bumpDuo(){
+  if(!window.__duoActive || !duo.list || !duo.list[0] || !sbSession) return;
+  sbClient().rpc('add_shared_progress', { p_streak: duo.list[0].streak_id, p_day: dayKey(), p_n: 1 }).then(({data})=>{
+    const t = dayKey(); const row = duo.days.find(d=>d.day===t);
+    if(row) row.progress = data; else duo.days.unshift({day: t, progress: data});
+    if(view==='me' && nav.meTab==='friends') render();
+  }, ()=>{});
+}
+let duoStats = {loaded:false, best:0, days:0, points:0};
+async function loadDuoStats(){
+  if(!sbSession || duoStats.loaded) return;
+  duoStats.loaded = true;
+  const db = sbClient();
+  const s0 = duo.list && duo.list[0];
+  if(s0){
+    const { data: days } = await db.from('shared_streak_days').select('day, progress').eq('streak_id', s0.streak_id).order('day', {ascending:true});
+    const reached = (days||[]).filter(d=>d.progress >= s0.goal).map(d=>d.day);
+    duoStats.days = reached.length;
+    let best = 0, run = 0, prev = null;
+    reached.forEach(d=>{
+      const gap = prev ? (Date.parse(d) - Date.parse(prev)) / 864e5 : 0;
+      run = (prev && gap === 1) ? run + 1 : 1; best = Math.max(best, run); prev = d;
+    });
+    duoStats.best = best;
+  }
+  const { data: cl } = await db.from('shared_streak_claims').select('points').eq('user_id', sbSession.user.id);
+  duoStats.points = (cl||[]).reduce((t,c)=>t + (c.points||0), 0);
+  render();
+}
+function duoStatsCard(){
+  const box = el('<div class="stats" style="margin-bottom:14px"></div>');
+  if(!duoStats.loaded) loadDuoStats();
+  box.innerHTML = '<div class="stat"><div class="n">'+duoStreakCount((duo.list&&duo.list[0]||{goal:100}).goal)+'</div><div class="l">Current streak</div></div>'
+    +'<div class="stat"><div class="n">'+duoStats.best+'</div><div class="l">Best streak</div></div>'
+    +'<div class="stat"><div class="n">'+duoStats.days+'</div><div class="l">Days reached</div></div>'
+    +'<div class="stat"><div class="n">'+duoStats.points+'</div><div class="l">Points earned</div></div>';
+  return box;
+}
+function duoStreakCount(goal){
+  // Consecutive days reached, counting back from today (or from yesterday if today is not yet done)
+  const reached = new Set(duo.days.filter(d=>d.progress >= goal).map(d=>d.day));
+  let n = 0; let cursor = new Date();
+  if(!reached.has(dayKey(cursor))) cursor = new Date(Date.now() - 864e5);
+  while(reached.has(dayKey(cursor))){ n++; cursor = new Date(cursor.getTime() - 864e5); }
+  return n;
+}
+function duoPanel(){
+  const box = el('<div></div>');
+  if(duo.list === null && !duo.loading) loadDuo();
+  if(duo.list && duo.list[0]) box.appendChild(duoStatsCard());
+  if(duo.err){ box.appendChild(el('<p class="note-line err">Could not load Dual Flame: '+esc(duo.err)+'</p>')); return box; }
+  const s0 = duo.list && duo.list[0];
+  if(!s0) return box;
+  const today = dayKey();
+  const row = duo.days.find(d=>d.day===today);
+  const got = row ? row.progress : 0;
+  const pct = Math.min(100, Math.round(got / s0.goal * 100));
+  const reached = got >= s0.goal;
+  const claimed = !!duo.claimed[today];
+  const card = el('<div class="card duo-card" style="padding:20px 22px;margin-bottom:14px"></div>');
+  card.innerHTML = '<div class="eyebrow">Dual Flame · with '+esc(s0.partner_username || 'your friend')+'</div>'
+    +'<div class="duo-top"><div><b class="duo-num">'+got+'</b><span class="note-line" style="margin:0"> / '+s0.goal+' questions today, together</span></div>'
+    +'<div class="duo-days">'+duoStreakCount(s0.goal)+'<small> day streak</small></div></div>'
+    +'<div class="goal-bar" style="margin:12px 0 10px"><i style="width:'+pct+'%"></i></div>'
+    +'<p class="note-line" style="margin:0">'+(claimed ? 'Today\u2019s reward is claimed. Both of you get '+Math.floor(s0.goal/10)+' pts.' : reached ? 'Goal reached. Claim your '+Math.floor(s0.goal/10)+' pts.' : 'Each of you earns '+Math.floor(s0.goal/10)+' pts when you reach the goal together.')+'</p>';
+  const acts = el('<div style="display:flex;gap:8px;margin-top:12px"></div>');
+  if(reached && !claimed){
+    const b = el('<button class="btn" type="button" style="flex:1">Claim '+Math.floor(s0.goal/10)+' pts</button>');
+    b.onclick = async ()=>{
+      b.disabled = true;
+      const { data, error } = await sbClient().rpc('claim_shared_award', { p_streak: s0.streak_id, p_day: today });
+      if(error){ b.disabled = false; appNotice('Not claimed', error.message); return; }
+      if(data > 0){ store.points = Math.round((store.points||0) + data); persist(); cacheUser({points: store.points}); }
+      duo.claimed[today] = true;
+      appNotice('Points added', '+'+data+' pts for your Dual Flame.');
+      render();
+    };
+    acts.appendChild(b);
+  }
+  const end = el('<button class="btn ghost" type="button">End Dual Flame</button>');
+  end.onclick = ()=>{
+    if(!window.confirm('End your Dual Flame with '+(s0.partner_username||'your friend')+'? This cannot be undone.')) return;
+    sbClient().rpc('end_shared_streak', { p_streak: s0.streak_id }).then(({error})=>{
+      if(error) return appNotice('Not ended', error.message);
+      duo.list = []; window.__duoActive = false; render();
+    });
+  };
+  acts.appendChild(end);
+  card.appendChild(acts);
+  box.appendChild(card);
+  return box;
+}
+// Start one with a friend: choose a daily goal of at least 100
+function startDuoSheet(f){
+  if(duo.list === null){ loadDuo(); appNotice('One moment', 'Checking your Dual Flame first. Try again in a second.'); return; }
+  if(duo.list.length){ appNotice('Already running', 'You already have an active Dual Flame. End it first to start another.'); return; }
+  adminSheetLike('Dual Flame', 'Study together with '+(f.username||'your friend'), (body, close)=>{
+    body.appendChild(el('<p class="note-line" style="margin:0 0 12px">Set one shared daily goal. Every answer either of you makes counts toward it. When you reach it, each of you earns goal ÷ 10 points. You can have one Dual Flame at a time.</p>'));
+    let goal = 100;
+    const seg = el('<div class="seg duo-seg" role="group" aria-label="Daily goal"></div>');
+    DUO_GOALS.forEach(g=>{
+      const b = el('<button type="button" aria-pressed="'+(g===goal)+'"'+(g===goal?' class="on"':'')+'>'+g+'</button>');
+      b.onclick = ()=>{ goal = g; seg.querySelectorAll('button').forEach(x=>{ x.classList.toggle('on', x===b); x.setAttribute('aria-pressed', x===b?'true':'false'); }); };
+      seg.appendChild(b);
+    });
+    body.appendChild(seg);
+    body.appendChild(el('<p class="note-line" style="margin:10px 0 14px">Reward: '+'<span class="duo-reward">each of you gets goal ÷ 10 pts</span></p>'));
+    const go = el('<button class="btn block" type="button">Start Dual Flame</button>');
+    go.onclick = async ()=>{
+      go.disabled = true;
+      const { error } = await sbClient().rpc('create_shared_streak', { p_friend: f.id, p_goal: goal });
+      if(error){ go.disabled = false; appNotice('Not started', error.message); return; }
+      close(); appNotice('Dual Flame started', 'Your shared goal is '+goal+' questions a day.');
+      loadDuo();
+    };
+    body.appendChild(go);
+  });
+}
+function adminSheetLike(eyebrow, title, build){ return adminSheet(eyebrow, title, build); }
+
+// ---- Friends hub and Messages ----
+function friendsHubView(){
+  const w = el('<div></div>');
+  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Study circle</div><h1 class="hm-title">Your <em>friends.</em></h1></div>'));
+  w.appendChild(friendsPanel());
+  return w;
+}
+let savedNotes = {list:null, loaded:false, loading:false};
+async function loadSavedNotes(){
+  if(savedNotes.loading || !sbSession) return;
+  savedNotes.loading = true;
+  const { data } = await sbClient().from('saved_doubt_notes').select('share_id, question_id, solver_notes, solver_comments, created_at').order('created_at', {ascending:false}).limit(200);
+  savedNotes.list = data || []; savedNotes.loaded = true; savedNotes.loading = false;
+  render();
+}
+function savedNotesCard(){
+  const card = el('<div class="card" style="padding:18px 22px;margin-top:14px"><div class="eyebrow">Saved doubt notes</div></div>');
+  if(savedNotes.list === null && !savedNotes.loading) loadSavedNotes();
+  if(savedNotes.list === null){ card.appendChild(el('<p class="note-line">Loading...</p>')); return card; }
+  if(!savedNotes.list.length){ card.appendChild(el('<p class="note-line">Notes you save from a friend\u2019s doubt appear here.</p>')); return card; }
+  savedNotes.list.forEach(n=>{
+    const r = el('<div class="lb-item" style="cursor:pointer;align-items:flex-start"><span class="lb-who"><b>Question '+esc(String(n.question_id))+'</b><small>'+esc((n.solver_notes||'').slice(0,90))+'</small></span></div>');
+    r.onclick = ()=>openDoubt(n.share_id);
+    card.appendChild(r);
+  });
+  return card;
+}
+function messagesView(){
+  const w = el('<div></div>');
+  if(!sbSession){ w.appendChild(el('<div class="card"><p class="note-line">Log in to see your messages.</p></div>')); return w; }
+  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Chats</div><h1 class="hm-title">Mess<em>ages.</em></h1></div>'));
+  if(fr.list === null && !fr.loading) loadFriends();
+  if(fr.open){ w.appendChild(chatScreen(fr.open)); return w; }
+  const friends = (fr.list || []).filter(f=>f.status==='accepted');
+  const card = el('<div class="card" style="padding:18px 22px"></div>');
+  if(!friends.length) card.appendChild(el('<p class="note-line">No chats yet. Add a friend in Friends, then message them here.</p>'));
+  friends.forEach(f=>{
+    const r = el('<div class="lb-item" style="cursor:pointer"></div>');
+    r.appendChild(presenceDot(f.id));
+    r.appendChild(el('<span class="lb-who"><b>'+esc(f.username||'Student')+'</b><small>'+esc(DOT_STATES[stateOf(fr.presence[f.id])].label)+'</small></span>'));
+    r.onclick = ()=>openChat(f);
+    card.appendChild(r);
+  });
+  w.appendChild(card);
+  w.appendChild(savedNotesCard());
+  return w;
+}
+
+// ---- Doubt Relay: send a question from the review screen ----
+function askFriendBar(q){
+  const bar = el('<div class="ask-bar"><button class="btn ghost block" type="button">Doubt Relay</button></div>');
+  bar.querySelector('button').onclick = ()=>askFriendSheet(q);
+  return bar;
+}
+function askFriendSheet(q){
+  const friends = (fr.list || []).filter(f=>f.status==='accepted');
+  if(!friends.length){ appNotice('No friends yet', 'Add a friend in Friends first, then you can ask them a question.'); return; }
+  adminSheet('Doubt Relay', 'Send this question to a friend', (body, close)=>{
+    body.appendChild(el('<p class="note-line" style="margin:0 0 10px">They will get it as a card in Messages. They can answer it and send the notes back to you.</p>'));
+    let pick = friends[0].id;
+    const seg = el('<div class="seg ask-seg" role="group" aria-label="Choose a friend"></div>');
+    friends.forEach(f=>{
+      const b = el('<button type="button" aria-pressed="'+(f.id===pick)+'"'+(f.id===pick?' class="on"':'')+'>'+esc(f.username||'Friend')+'</button>');
+      b.onclick = ()=>{ pick = f.id; seg.querySelectorAll('button').forEach(x=>{ x.classList.toggle('on', x===b); x.setAttribute('aria-pressed', x===b?'true':'false'); }); };
+      seg.appendChild(b);
+    });
+    body.appendChild(seg);
+    const note = el('<textarea class="ad-reply" rows="3" maxlength="500" placeholder="What is confusing you? (optional)"></textarea>');
+    body.appendChild(note);
+    const go = el('<button class="btn block" type="button" style="margin-top:12px">Send to my friend</button>');
+    go.onclick = async ()=>{
+      go.disabled = true;
+      const db = sbClient(), me = sbSession.user.id;
+      const { data: share, error: e1 } = await db.from('question_shares').insert({ from_user: me, to_user: pick, question_id: String(q.id), asker_note: note.value.trim() || null }).select('id').single();
+      if(e1){ go.disabled = false; appNotice('Not sent', e1.message); return; }
+      const preview = (q.text || 'A question').slice(0, 120);
+      const { error: e2 } = await db.from('chat_messages').insert({ sender: me, recipient: pick, kind: 'question_card', share_id: share.id, body: preview });
+      if(e2){ go.disabled = false; appNotice('Not sent', e2.message); return; }
+      close(); appNotice('Sent', 'Your question is on its way to your friend.');
+    };
+    body.appendChild(go);
+  });
+}
+
+// ---- Doubt screen: a different layout from practice, like a note passed between friends ----
+let doubt = {id:null, share:null, q:null, loading:false, notes:'', comments:'', sel:null, err:null};
+async function openDoubt(shareId){
+  doubt = {id: shareId, share: null, q: null, loading: true, notes:'', comments:'', sel:null, err:null};
+  go('doubt');
+  const { data, error } = await sbClient().from('question_shares').select('*').eq('id', shareId).maybeSingle();
+  doubt.loading = false;
+  if(error || !data){ doubt.err = 'This doubt could not be opened.'; }
+  else {
+    doubt.share = data;
+    doubt.q = QUESTIONS.find(x=>String(x.id)===String(data.question_id)) || null;
+    doubt.notes = data.solver_notes || ''; doubt.comments = data.solver_comments || '';
+    if(!doubt.q) doubt.err = 'This question is not in the question bank on this device.';
+  }
+  render();
+}
+function doubtView(){
+  const w = el('<div></div>');
+  if(!sbSession){ w.appendChild(el('<div class="card"><p class="note-line">Log in to open doubts.</p></div>')); return w; }
+  const back = el('<button class="btn ghost" type="button">&larr; Messages</button>');
+  back.onclick = ()=>go('messages');
+  w.appendChild(back);
+  if(doubt.loading){ w.appendChild(el('<p class="note-line" style="margin-top:14px">Opening the doubt...</p>')); return w; }
+  if(doubt.err || !doubt.share){ w.appendChild(el('<div class="card" style="margin-top:12px"><p class="note-line err">'+esc(doubt.err || 'Nothing to show.')+'</p></div>')); return w; }
+
+  const me = sbSession.user.id, s0 = doubt.share, iAsked = s0.from_user === me;
+  const sheet = el('<article class="doubt-sheet"></article>');
+  sheet.appendChild(el('<div class="doubt-tag">'+(iAsked ? 'Your doubt' : 'Doubt from a friend')+'</div>'));
+  sheet.appendChild(el('<div class="doubt-meta">'+(s0.status==='returned' ? 'Answered and sent back' : 'Waiting for an answer')+'</div>'));
+  if(s0.asker_note) sheet.appendChild(el('<p class="doubt-ask">&ldquo;'+esc(s0.asker_note)+'&rdquo;</p>'));
+  const q = doubt.q;
+  if(q){
+    sheet.appendChild(el('<div class="doubt-q">'+qtextHTML(q.text)+'</div>'));
+    if(Array.isArray(q.options) && q.options.length){
+      const list = el('<div class="doubt-opts"></div>');
+      q.options.forEach((o,i)=>{
+        const b = el('<button type="button" class="doubt-opt'+(doubt.sel===i?' on':'')+'"'+(iAsked||s0.status==='returned'?' disabled':'')+'><b>'+L(i)+'</b><span>'+esc(o)+'</span></button>');
+        b.onclick = ()=>{ doubt.sel = i; render(); };
+        list.appendChild(b);
+      });
+      sheet.appendChild(list);
+    }
+  }
+  // Solver writes the notes; the asker reads them
+  const canWrite = !iAsked && s0.status === 'sent';
+  if(canWrite){
+    const n = el('<textarea class="ad-reply" rows="5" placeholder="Your working and notes for your friend. Explain the step that helped you."></textarea>');
+    n.value = doubt.notes; n.oninput = ()=>{ doubt.notes = n.value; };
+    const c = el('<textarea class="ad-reply" rows="3" placeholder="Comments or a tip (optional)"></textarea>');
+    c.value = doubt.comments; c.oninput = ()=>{ doubt.comments = c.value; };
+    sheet.appendChild(el('<div class="doubt-label">Your notes</div>')); sheet.appendChild(n);
+    sheet.appendChild(el('<div class="doubt-label">Comments</div>')); sheet.appendChild(c);
+    const send = el('<button class="btn block" type="button" style="margin-top:12px">Send back</button>');
+    send.onclick = async ()=>{
+      if(!doubt.notes.trim()){ appNotice('Add a note', 'Write at least a line of notes before you send it back.'); return; }
+      send.disabled = true;
+      const db = sbClient();
+      const { error: e1 } = await db.from('question_shares').update({ status:'returned', solver_answer: doubt.sel==null ? null : L(doubt.sel), solver_notes: doubt.notes.trim(), solver_comments: doubt.comments.trim() || null, returned_at: new Date().toISOString() }).eq('id', s0.id);
+      if(e1){ send.disabled = false; appNotice('Not sent', e1.message); return; }
+      const { error: e2 } = await db.from('chat_messages').insert({ sender: me, recipient: s0.from_user, kind: 'answer_card', share_id: s0.id, body: 'Sent back your doubt with notes' });
+      if(e2){ send.disabled = false; appNotice('Not sent', e2.message); return; }
+      doubt.share.status = 'returned';
+      appNotice('Sent back', 'Your friend can now see your notes.');
+      render();
+    };
+    sheet.appendChild(send);
+  } else {
+    if(s0.solver_answer) sheet.appendChild(el('<div class="doubt-label">Their answer</div><p class="doubt-note">'+esc(s0.solver_answer)+'</p>'));
+    sheet.appendChild(el('<div class="doubt-label">Their notes</div><p class="doubt-note">'+esc(s0.solver_notes || 'No notes yet.')+'</p>'));
+    if(s0.solver_comments) sheet.appendChild(el('<div class="doubt-label">Comments</div><p class="doubt-note">'+esc(s0.solver_comments)+'</p>'));
+    if(iAsked && s0.status==='returned'){
+      const save = el('<button class="btn block" type="button" style="margin-top:12px">Save to my notes</button>');
+      save.onclick = async ()=>{
+        save.disabled = true;
+        const { error } = await sbClient().from('saved_doubt_notes').upsert({ user_id: me, share_id: s0.id, question_id: s0.question_id, solver_notes: s0.solver_notes, solver_comments: s0.solver_comments || null }, { onConflict: 'user_id,share_id' });
+        if(error){ save.disabled = false; appNotice('Not saved', error.message); return; }
+        savedNotes.list = null;
+        appNotice('Saved', 'Saved to your notes. They are on the server, so they appear on any device.');
+        render();
+      };
+      sheet.appendChild(save);
+    }
+  }
+  w.appendChild(sheet);
+  return w;
+}
+
+// On opening the app: tell the student if friends have sent them doubts
+async function checkDoubtInbox(){
+  const db = sbClient(); if(!db || !sbSession) return;
+  const { count } = await db.from('chat_messages').select('id', {count:'exact', head:true})
+    .eq('recipient', sbSession.user.id).in('kind', ['question_card','answer_card']).is('read_at', null);
+  if(count > 0) appNotice('New from your friends', count === 1 ? 'You have 1 new doubt or reply. Open Messages to see it.' : 'You have '+count+' new doubts or replies. Open Messages to see them.');
+}
+function friendsPanel(){
+  const w = el('<div></div>');
+  if(!sbSession){ w.appendChild(el('<div class="card"><p class="note-line">Log in to see your friends.</p></div>')); return w; }
+  if(fr.list === null && !fr.loading) loadFriends();
+  if(fr.open) return chatScreen(fr.open);
+
+  w.appendChild(duoPanel());
+  const add = el('<div class="card" style="padding:22px"></div>');
+  add.innerHTML = '<div class="eyebrow">Add a friend</div><p class="note-line" style="margin:6px 0 12px">Type their username exactly as it appears on the leaderboard.</p>';
+  const row = el('<div style="display:flex;gap:8px"><input class="login-in" placeholder="username" maxlength="20" style="flex:1"><button class="btn" type="button">Send request</button></div>');
+  const input = row.querySelector('input');
+  row.querySelector('button').onclick = ()=>{ const u = input.value.trim(); if(u){ fr.note = null; sendFriendRequest(u); } };
+  add.appendChild(row);
+  if(fr.note) add.appendChild(el('<p class="note-line" style="margin-top:10px">'+esc(fr.note)+'</p>'));
+  w.appendChild(add);
+
+  if(fr.err) w.appendChild(el('<p class="note-line err">Could not load friends: '+esc(fr.err)+'</p>'));
+  const list = fr.list || [];
+  const incoming = list.filter(f=>f.status==='pending' && f.incoming);
+  const accepted = list.filter(f=>f.status==='accepted');
+  if(incoming.length){
+    const c = el('<div class="card" style="padding:18px 22px;margin-top:14px"><div class="eyebrow">Requests</div></div>');
+    incoming.forEach(f=>{
+      const r = el('<div class="lb-item"><span class="lb-who"><b>'+esc(f.username||'Student')+'</b></span><span style="display:flex;gap:6px"><button class="btn" type="button">Accept</button><button class="btn ghost" type="button">Decline</button></span></div>');
+      const [acc, dec] = r.querySelectorAll('button');
+      acc.onclick = ()=>answerRequest(f.id, true);
+      dec.onclick = ()=>answerRequest(f.id, false);
+      c.appendChild(r);
+    });
+    w.appendChild(c);
+  }
+  const fc = el('<div class="card" style="padding:18px 22px;margin-top:14px"><div class="eyebrow">Friends</div></div>');
+  if(!accepted.length) fc.appendChild(el('<p class="note-line">No friends yet. Send a request above to start chatting.</p>'));
+  accepted.forEach(f=>{
+    const r = el('<div class="lb-item" style="cursor:pointer"></div>');
+    r.appendChild(presenceDot(f.id));
+    r.appendChild(el('<span class="lb-who"><b>'+esc(f.username||'Student')+'</b>'+(f.first?'<small>'+esc(f.first)+'</small>':'')+'</span>'));
+    r.appendChild(el('<span class="note-line" style="margin:0">'+esc(DOT_STATES[stateOf(fr.presence[f.id])].label)+'</span>'));
+    const duoBtn = el('<button class="btn ghost" type="button" style="margin-left:auto">Flame</button>');
+    duoBtn.onclick = e=>{ e.stopPropagation(); startDuoSheet(f); };
+    r.appendChild(duoBtn);
+    r.onclick = ()=>openChat(f);
+    fc.appendChild(r);
+  });
+  w.appendChild(fc);
+  return w;
+}
+
+function chatScreen(f){
+  const w = el('<div></div>');
+  const head = el('<div class="card" style="padding:14px 16px;display:flex;align-items:center;gap:12px"></div>');
+  const back = el('<button class="btn ghost" type="button" aria-label="Back to friends">&larr;</button>');
+  back.onclick = closeChat;
+  head.appendChild(back);
+  head.appendChild(presenceDot(f.id));
+  head.appendChild(el('<div style="flex:1;min-width:0"><b>'+esc(f.username||'Student')+'</b><div class="note-line" style="margin:0">'+esc(DOT_STATES[stateOf(fr.presence[f.id])].label)+'</div></div>'));
+  w.appendChild(head);
+
+  const list = el('<div class="chat-list" role="log" aria-live="polite"></div>');
+  if(!fr.msgs.length) list.appendChild(el('<p class="note-line" style="text-align:center;margin:24px 0">Say hello. Only you and '+esc(f.username||'your friend')+' can read these messages.</p>'));
+  fr.msgs.forEach(m=>{
+    const mine = m.sender === sbSession.user.id;
+    const stamp = new Date(m.created_at).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    if(m.kind === 'question_card' || m.kind === 'answer_card'){
+      const isQ = m.kind === 'question_card';
+      const card = el('<button type="button" class="qcard-chat '+(mine?'mine':'theirs')+'"><b>'+(isQ ? (mine ? 'You asked a question' : 'A friend asked you a question') : (mine ? 'You sent back notes' : 'Notes came back'))+'</b><span>'+esc(m.body||'')+'</span><small>'+stamp+'</small></button>');
+      card.onclick = ()=>openDoubt(m.share_id);
+      list.appendChild(card);
+    } else {
+      list.appendChild(el('<div class="bubble '+(mine?'mine':'theirs')+'"><span>'+esc(m.body)+'</span><small>'+stamp+(mine && m.read_at ? ' · seen' : '')+'</small></div>'));
+    }
+  });
+  w.appendChild(list);
+  if(fr.note) w.appendChild(el('<p class="note-line err">'+esc(fr.note)+'</p>'));
+
+  const bar = el('<div class="chat-bar"><input class="login-in" placeholder="Message" maxlength="1000" style="flex:1"><button class="btn" type="button">Send</button></div>');
+  const input = bar.querySelector('input');
+  input.value = fr.draft;
+  input.oninput = ()=>{ fr.draft = input.value; };
+  input.onkeydown = e=>{ if(e.key==='Enter'){ e.preventDefault(); sendChat(); } };
+  bar.querySelector('button').onclick = sendChat;
+  w.appendChild(bar);
+  if(scrollChatToEnd){ scrollChatToEnd = false; setTimeout(()=>{ list.scrollTop = list.scrollHeight; }, 0); }
+  return w;
+}
+
+// Admin: how many students are online right now, and what they are doing
+let liveNow = {at:0, total:0, byState:{}, loading:false};
+async function loadLiveNow(){
+  if(liveNow.loading) return;
+  liveNow.loading = true;
+  const cutoff = new Date(Date.now() - PRESENCE_FRESH_MS).toISOString();
+  const { data } = await sbClient().from('presence').select('activity').gte('last_seen', cutoff).limit(5000);
+  const byState = {online:0, questions:0, custom:0, mock:0};
+  (data || []).forEach(p=>{ byState[p.activity] = (byState[p.activity]||0) + 1; });
+  liveNow = {at: Date.now(), total: (data||[]).length, byState, loading:false};
+  render();
+}
+function liveNowPanel(){
+  const box = el('<div class="card" style="padding:22px"></div>');
+  if(!liveNow.at && !liveNow.loading) loadLiveNow();
+  if(!window.__liveTimer){ window.__liveTimer = setInterval(()=>{ if(view==='admin') loadLiveNow(); }, 30000); }
+  const b = liveNow.byState || {};
+  box.innerHTML = '<div class="eyebrow">Online right now</div>'
+    +'<div class="stats" style="margin-top:12px"><div class="stat"><div class="n">'+(liveNow.total||0)+'</div><div class="l">Students online</div></div>'
+    +'<div class="stat"><div class="n">'+(b.questions||0)+'</div><div class="l">Question sets</div></div>'
+    +'<div class="stat"><div class="n">'+(b.custom||0)+'</div><div class="l">Custom tests</div></div>'
+    +'<div class="stat"><div class="n">'+(b.mock||0)+'</div><div class="l">Mock tests</div></div></div>'
+    +'<p class="note-line" style="margin-top:12px">Updates every 30 seconds. Counts students active in the last 2.5 minutes.</p>';
+  return box;
+}
 function adminView(){
+  const w = adminViewCore();
+  if(isGuard()){
+    const soft = el('<div class="adm-soft"></div>');
+    soft.appendChild(liveNowPanel());
+    soft.appendChild(analyticsPanel());
+    soft.appendChild(cohortPanel());
+    w.appendChild(soft);
+  }
+  return w;
+}
+function adminViewCore(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Admin</div><h1 class="hm-title">Dash<em>board.</em></h1></div>'));
   if(!isGuard()){ w.appendChild(el('<div class="card"><div class="eyebrow">Restricted</div><p class="note-line">This area is for the TORQ team.</p></div>')); return w; }
-  w.appendChild(analyticsPanel());
-  w.appendChild(cohortPanel());
   if(adminState.reports===null && !adminState.loading && !adminState.err) loadAdmin();
   if(adminState.templates===undefined){ adminState.templates = null; loadTemplates(); }
 
@@ -7066,7 +7777,9 @@ function topRow(title, rightHtml, exitFn){
 function practiceView(){
   const w = el('<div></div>');
   if(!session){ go('home'); return w; }
-  return (session.mode==='mock' && !session.review) ? mockPractice(w) : pyqPractice(w);
+  const body = (session.mode==='mock' && !session.review) ? mockPractice(w) : pyqPractice(w);
+  if(session.review && session.mode !== 'mock' && session.queue[session.idx]) body.appendChild(askFriendBar(session.queue[session.idx]));
+  return body;
 }
 // Wide screens: the question sits on the left, the options and the Sure / Guessing choice on the right.
 // The page then fits without scrolling. Phones and narrow tablets keep the single column.
@@ -8369,6 +9082,42 @@ keepAwake();
   new MutationObserver(sync).observe(document.body, {childList:true});
   sync();
 })();
+
+// ---- Login USPs: tap a chip, and it grows into a card that explains it simply ----
+const USP_CARDS = [
+  {t:'SoG On Every Answer', what:'Before each answer, say whether you are sure or guessing. SoG stands for Sure or Guess.', ex:'You pick option B but you are only guessing. Mark it Guess. Over time you learn which of your guesses are really knowledge.', an:'Like a weather forecaster who says "70% chance of rain". The confidence is part of the answer, and it teaches you when to trust yourself.'},
+  {t:'Shift-wise PYQs', what:'Real past papers, split into the sessions (shifts) they were actually sat in.', ex:'Practise only JEE Main Physics from one shift, so the questions match the paper you will face.', an:'Like training on the exact track you will race on, not a random one.'},
+  {t:'Timed mocks', what:'Full practice papers with a clock, at exam pace.', ex:'90 questions in 3 hours. You learn when to move on from a hard question before time runs out.', an:'Like a fire drill. You learn the route before you ever need it.'},
+  {t:'Chapter drills', what:'Focused practice on one chapter or topic at a time.', ex:'Twenty questions on Rotational motion only, then check what you missed.', an:'Like fixing one weak tyre, instead of servicing the whole car.'},
+  {t:'Live leaderboard', what:'See how you compare with other students, updated as people answer.', ex:'You are 14th this week, 3 points behind 13th. Tomorrow\u2019s set can close the gap.', an:'Like a running club\u2019s timing board: it pushes you to improve, and you can choose whether to show your name.'},
+  {t:'Doubt Relay', what:'Stuck on a question? Pass it to a friend. They solve it, write their notes, and send it back to you.', ex:'You get a question wrong and cannot see why. You send it to a friend in one tap. They reply with their working and a tip, and it lands in your Messages.', an:'Like a study group at a whiteboard: one person asks, another explains, and the answer goes back to the first person in their own handwriting.'}
+];
+function openUsp(idx){
+  const c = USP_CARDS[idx]; if(!c) return;
+  const scrim = el('<div class="scrim usp-scrim"></div>');
+  const card = el('<div class="usp-card'+(idx===0?' usp-gold':'')+'" role="dialog" aria-modal="true" aria-label="'+esc(c.t)+'"></div>');
+  card.innerHTML = (idx===0?sogMark('lg'):'')+'<div class="usp-eye">TORQ</div><h3 class="usp-title">'+esc(c.t)+'</h3>'
+    +'<p class="usp-what">'+esc(c.what)+'</p>'
+    +'<div class="usp-block"><div class="usp-k">Example</div><p>'+esc(c.ex)+'</p></div>'
+    +'<div class="usp-block"><div class="usp-k">Think of it as</div><p>'+esc(c.an)+'</p></div>'
+    +'<button class="btn block" type="button" style="margin-top:14px">Got it</button>';
+  const close = ()=>{ scrim.remove(); card.remove(); document.removeEventListener('keydown', onKey); };
+  const onKey = e=>{ if(e.key==='Escape') close(); };
+  scrim.onclick = close;
+  card.querySelector('button').onclick = close;
+  document.addEventListener('keydown', onKey);
+  document.body.appendChild(scrim); document.body.appendChild(card);
+  card.querySelector('button').focus();
+}
+document.addEventListener('click', e=>{
+  const t = e.target.closest && e.target.closest('.onb-tags [data-usp]');
+  if(t) openUsp(Number(t.dataset.usp));
+});
+document.addEventListener('keydown', e=>{
+  if(e.key !== 'Enter') return;
+  const t = e.target.closest && e.target.closest('.onb-tags [data-usp]');
+  if(t) openUsp(Number(t.dataset.usp));
+});
 </script>
 </body>
 </html>
