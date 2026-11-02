@@ -354,9 +354,15 @@ body.msg-fit .msg-hero{ display:none; }
 .wa-chat .wa-compose > .wa-field{ flex:1 1 auto; min-width:0; }
 .wa-chat .wa-compose > .vr-pill{ flex:1 1 auto; }
 
-/* ---- Copyable chat text ---- */
-.bubble, .bubble *, .qcard-chat, .qcard-chat *{ -webkit-user-select:text !important; user-select:text !important; -webkit-touch-callout:default !important; }
-.vb-play, .vb-sp, .vb-wave{ -webkit-user-select:none !important; user-select:none !important; }
+/* ---- Message menu ---- */
+.bubble, .qcard-chat{ -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
+.mm-scrim{ position:fixed; inset:0; z-index:90; background:rgba(0,0,0,.45); display:flex; align-items:flex-end; justify-content:center; padding:12px; padding-bottom:calc(12px + env(safe-area-inset-bottom,0px)); box-sizing:border-box; }
+.mm-sheet{ width:100%; max-width:480px; background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:8px; box-shadow:0 12px 40px rgba(0,0,0,.35); }
+.mm-snip{ padding:10px 12px 12px; font-size:12px; line-height:1.4; color:var(--muted); overflow-wrap:anywhere; border-bottom:1px solid var(--border); margin-bottom:6px; }
+.mm-item{ display:block; width:100%; text-align:left; background:none; border:0; border-radius:12px; padding:14px 12px; font:500 16px/1.2 Inter,sans-serif; color:var(--text); cursor:pointer; }
+.mm-item:active{ background:rgba(255,255,255,.06); }
+.mm-item.danger{ color:var(--accent-text); }
+.mm-toast{ position:fixed; left:50%; bottom:calc(24px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); z-index:95; background:var(--surface); color:var(--text); border:1px solid var(--border); padding:10px 16px; border-radius:999px; font:500 14px/1.2 Inter,sans-serif; box-shadow:0 8px 24px rgba(0,0,0,.3); }
 
 /* ---- Voice messages ---- */
 @keyframes vrPulse{ 0%,100%{opacity:1} 50%{opacity:.35} }
@@ -375,8 +381,8 @@ body.msg-fit .msg-hero{ display:none; }
 .vb-dur{ font-variant-numeric:tabular-nums; }
 .vb-sp{ border:1px solid var(--border); background:transparent; color:var(--muted); border-radius:999px; padding:3px 8px; font:600 10px/1 Inter,sans-serif; cursor:pointer; }
 .bubble.audio .vb-meta small{ display:flex; align-items:center; gap:3px; margin:0 0 0 auto; font-size:10px; color:var(--muted); text-align:right; }
-.vb-err{ display:none; margin-top:4px; font-size:11px; color:var(--muted); }
-.bubble.audio[data-state="error"] .vb-err{ display:block; }
+.bubble.audio .vb-err{ display:none !important; margin-top:4px; font-size:11px; color:var(--muted); }
+.bubble.audio[data-state="error"] .vb-err{ display:block !important; }
 
 .vr-mic{ width:46px; height:46px; flex:none; border-radius:50%; padding:0; border:0; display:inline-flex; align-items:center; justify-content:center; background:var(--accent); color:var(--accent-ink); box-shadow:0 3px 0 rgba(0,0,0,.25); cursor:pointer; touch-action:none; -webkit-touch-callout:none; -webkit-user-select:none; user-select:none; transition:transform var(--dur-fast) var(--ease); }
 .vr-mic svg{ width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
@@ -7133,7 +7139,11 @@ function askFriendSheet(q){
       const db = sbClient(), me = sbSession.user.id;
       const { data: share, error: e1 } = await db.from('question_shares').insert({ from_user: me, to_user: pick, question_id: String(q.id), asker_note: note.value.trim() || null }).select('id').single();
       if(e1){ go.disabled = false; appNotice('Not sent', e1.message); return; }
-      const preview = (q.text || 'A question').slice(0, 900);
+      // Keep the card text whole where possible: cut at a word boundary, never inside a $...$ math expression
+      const fullQ = String(q.text || 'A question');
+      let cut = fullQ.slice(0, 880).replace(/\s+\S*$/, '');
+      if((cut.match(/\$/g) || []).length % 2) cut = cut.slice(0, cut.lastIndexOf('$')).trim();
+      const preview = fullQ.length <= 900 ? fullQ : cut + ' …';
       const { error: e2 } = await db.from('chat_messages').insert({ sender: me, recipient: pick, kind: 'question_card', share_id: share.id, body: preview });
       if(e2){ go.disabled = false; appNotice('Not sent', e2.message); return; }
       close(); appNotice('Sent', 'Your question is on its way to your friend.');
@@ -7752,12 +7762,14 @@ function chatScreen(f){
       const isQ = m.kind === 'question_card';
       const card = el('<div role="button" tabindex="0" class="qcard-chat '+(mine?'mine':'theirs')+'"><b>'+(isQ ? (mine ? 'You asked a question' : 'A friend asked you a question') : (mine ? 'You sent back notes' : 'Notes came back'))+'</b><span>'+esc(cleanCardText(m.body))+'</span><small>'+stamp+tick+'</small></div>');
       card.onclick = ()=>openDoubt(m.share_id);
+      attachMsgPress(card, m, f, mine);
       list.appendChild(card);
     } else if(m.kind === 'audio'){
       list.appendChild(voiceBubble(f, m, mine, stamp, tick));
     } else {
       const bub = el('<div class="bubble '+(mine?'mine':'theirs')+'"><span>'+esc(m.body)+'</span><small>'+stamp+tick+'</small></div>');
       if(!mine){ bub.style.cursor = 'pointer'; bub.title = 'Tap to report'; bub.onclick = ()=>reportMessage(m, f); }
+      attachMsgPress(bub, m, f, mine);
       list.appendChild(bub);
     }
   });
@@ -8105,6 +8117,7 @@ function voiceBubble(f, m, mine, stamp, tick){
     bub.onclick = function(e){ if(e.target.closest && e.target.closest('button, .vb-wave')) return; reportMessage(m, f); };
   }
   voiceApplyBubble(bub);
+  attachMsgPress(bub, m, f, mine);
   return bub;
 }
 function voiceFail(id){
@@ -8166,6 +8179,61 @@ window.addEventListener('pagehide', function(){ voiceAbort(null); voicePause(); 
 
 // Chat card text: one clean line of prose (no stray line breaks or invisible characters)
 function cleanCardText(t){ return String(t || '').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F-\u009F\u200B-\u200F\u2028\u2029\uFEFF]/g, '').replace(/\s+/g, ' ').trim(); }
+
+// ---- Message menu: press and hold a message for Copy (and Report for friends' messages) ----
+function msgPlainText(m){ return m.kind === 'audio' ? '' : cleanCardText(m.body).replace(/\$/g, ''); }
+function copyText(t){
+  const legacy = function(){
+    const ta = document.createElement('textarea'); ta.value = t; ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+    let ok = false; try{ ok = document.execCommand('copy'); }catch(e){} ta.remove(); return ok;
+  };
+  if(navigator.clipboard && window.isSecureContext){ return navigator.clipboard.writeText(t).then(function(){ return true; }, function(){ return legacy(); }); }
+  return Promise.resolve(legacy());
+}
+function toast(msg){
+  const t = document.createElement('div'); t.className = 'mm-toast'; t.textContent = msg; document.body.appendChild(t);
+  setTimeout(function(){ t.remove(); }, 1800);
+}
+function closeMsgMenu(){ document.querySelectorAll('.mm-scrim').forEach(function(n){ n.remove(); }); }
+function openMsgMenu(m, f, mine){
+  closeMsgMenu();
+  const scrim = el('<div class="mm-scrim"></div>');
+  const sheet = el('<div class="mm-sheet" role="menu"></div>');
+  const text = msgPlainText(m);
+  const snip = document.createElement('div'); snip.className = 'mm-snip'; snip.textContent = (text || 'Voice message').slice(0, 90);
+  sheet.appendChild(snip);
+  if(text){
+    const copy = el('<button type="button" class="mm-item" role="menuitem">Copy</button>');
+    copy.onclick = async function(){ closeMsgMenu(); const ok = await copyText(text); toast(ok ? 'Copied' : 'Could not copy'); };
+    sheet.appendChild(copy);
+  }
+  if(!mine){
+    const rep = el('<button type="button" class="mm-item danger" role="menuitem">Report</button>');
+    rep.onclick = function(){ closeMsgMenu(); reportMessage(m, f); };
+    sheet.appendChild(rep);
+  }
+  const cancel = el('<button type="button" class="mm-item" role="menuitem">Cancel</button>');
+  cancel.onclick = closeMsgMenu;
+  sheet.appendChild(cancel);
+  scrim.appendChild(sheet);
+  scrim.addEventListener('click', function(e){ if(e.target === scrim) closeMsgMenu(); });
+  document.body.appendChild(scrim);
+}
+function attachMsgPress(node, m, f, mine){
+  let timer = null, sx = 0, sy = 0, fired = false;
+  const cancelPress = function(){ clearTimeout(timer); timer = null; };
+  node.addEventListener('pointerdown', function(e){
+    if(e.button > 0) return;
+    fired = false; sx = e.clientX; sy = e.clientY; cancelPress();
+    timer = setTimeout(function(){ timer = null; fired = true; vibrate(12); openMsgMenu(m, f, mine); }, 450);
+  });
+  node.addEventListener('pointermove', function(e){ if(timer && Math.hypot(e.clientX - sx, e.clientY - sy) > 10) cancelPress(); });
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach(function(t){ node.addEventListener(t, cancelPress); });
+  node.addEventListener('contextmenu', function(e){ e.preventDefault(); cancelPress(); openMsgMenu(m, f, mine); });
+  // after a long press, swallow the click that follows so the tap action does not also run
+  node.addEventListener('click', function(e){ if(fired){ fired = false; e.preventDefault(); e.stopImmediatePropagation(); } }, true);
+}
 
 // Admin: how many students are online right now, and what they are doing
 let liveNow = {at:0, total:0, byState:{}, loading:false};
@@ -9854,8 +9922,8 @@ function cloudSync(){
   })();
 })();
 
-document.addEventListener('contextmenu',function(e){ if(!e.target.closest('input,textarea,.bubble,.qcard-chat')) e.preventDefault(); });
-document.addEventListener('selectstart',function(e){ if(!e.target.closest('input,textarea,.bubble,.qcard-chat')) e.preventDefault(); });
+document.addEventListener('contextmenu',function(e){ if(!e.target.closest('input,textarea')) e.preventDefault(); });
+document.addEventListener('selectstart',function(e){ if(!e.target.closest('input,textarea')) e.preventDefault(); });
 document.addEventListener('dragstart',function(e){ e.preventDefault(); });
 document.addEventListener('keydown',function(e){ var k=(e.key||'').toLowerCase();
   if(e.key==='F12' || (e.ctrlKey&&e.shiftKey&&(k==='i'||k==='j'||k==='c')) || (e.ctrlKey&&(k==='u'||k==='s'||k==='p'))) e.preventDefault(); });
