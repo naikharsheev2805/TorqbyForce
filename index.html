@@ -2831,7 +2831,95 @@ body.msg-fit .wa-compose, body.chat-full .wa-compose{ flex:none !important; posi
 /* Very short or very narrow screens: keep the message bar usable */
 @media (max-height:560px){ body.msg-fit .wa-msgs{ min-height:120px; } }
 </style>
-</head>
+<style id="tablet-wide-fixes">
+/* 1. Wider screens (tablet, laptop, PC): the chat list is already on the left, so the back button beside the chat header is removed */
+@media (min-width:600px){
+  .wa-chat .wa-head .wa-back{ display:none !important; }
+}
+/* 2. Messenger on tablets: remove the reserved bottom gap and extra header space so the chat fills the screen */
+@media (min-width:600px) and (max-width:959px){
+  body.msg-fit #app{ padding-bottom:env(safe-area-inset-bottom,0px) !important; }
+  body.msg-fit #app > .header{ margin-bottom:0 !important; }
+  body.msg-fit .wa-chat, body.msg-fit .msg-screen{ flex:1 1 auto !important; min-height:0 !important; height:auto !important; }
+  body.msg-fit .wa-msgs{ flex:1 1 auto !important; min-height:0 !important; }
+}
+/* 3. Flashcards on tablets: keep the card a sensible size, with the formula centred and no large empty area */
+@media (min-width:600px) and (max-width:959px){
+  .fc-open{ width:min(92vw,520px) !important; max-width:520px !important; margin:0 auto !important; }
+  .fc-open .fc-art{ aspect-ratio:auto !important; height:300px !important; display:flex !important; align-items:center !important; justify-content:center !important; }
+  .fc-open .fc-eq, .fc-open .fc-big-eq{ text-align:center !important; }
+}
+</style><style id="profile-themes">
+/* ===== Profile themes (top 5 students). Each has its own colours, font and layout. ===== */
+.pubp-skin[data-ptheme="gold"],.lb-card[data-ptheme="gold"]{--pt-bg:#17130a;--pt-card:#241d10;--pt-fg:#f5ecd2;--pt-acc:#f3d98b;--pt-muted:#b9a77a;--pt-font:Lora,Georgia,serif;--pt-r:18px;}
+.pubp-skin[data-ptheme="ink-paper"],.lb-card[data-ptheme="ink-paper"]{--pt-bg:#f6f1e7;--pt-card:#fffdf7;--pt-fg:#1b1b1b;--pt-acc:#9b2c2c;--pt-muted:#6b6357;--pt-font:Lora,Georgia,serif;--pt-r:6px;}
+.pubp-skin[data-ptheme="midnight-ticket"],.lb-card[data-ptheme="midnight-ticket"]{--pt-bg:#0b1026;--pt-card:#151d3d;--pt-fg:#e8edff;--pt-acc:#7aa2ff;--pt-muted:#8d97c4;--pt-font:Inter,sans-serif;--pt-r:14px;}
+.pubp-skin[data-ptheme="sunset-poster"],.lb-card[data-ptheme="sunset-poster"]{--pt-bg:#ffb38a;--pt-card:#ffd2b8;--pt-fg:#2a0f08;--pt-acc:#7a1f0e;--pt-muted:#5b2a1c;--pt-font:Inter,sans-serif;--pt-r:4px;}
+.pubp-skin[data-ptheme="mint-banner"],.lb-card[data-ptheme="mint-banner"]{--pt-bg:#f1fbf6;--pt-card:#ffffff;--pt-fg:#10261c;--pt-acc:#1f8f63;--pt-muted:#4f6b5e;--pt-font:Inter,sans-serif;--pt-r:20px;}
+.pubp-skin[data-ptheme="lavender-split"],.lb-card[data-ptheme="lavender-split"]{--pt-bg:#f4f0ff;--pt-card:#ffffff;--pt-fg:#241c3d;--pt-acc:#6b4fd8;--pt-muted:#6d6291;--pt-font:Inter,sans-serif;--pt-r:16px;}
+.pubp-skin[data-ptheme="forest-arch"],.lb-card[data-ptheme="forest-arch"]{--pt-bg:#0f1f17;--pt-card:#17302f;--pt-fg:#e6f3ea;--pt-acc:#9ed8a6;--pt-muted:#8aa897;--pt-font:Lora,Georgia,serif;--pt-r:20px;}
+.pubp-skin[data-ptheme="neon-orbit"],.lb-card[data-ptheme="neon-orbit"]{--pt-bg:#05040f;--pt-card:#14102a;--pt-fg:#f4eaff;--pt-acc:#ff3d9a;--pt-muted:#9b8fbf;--pt-font:Inter,sans-serif;--pt-r:18px;}
+.pubp-skin[data-ptheme="terracotta-banner"],.lb-card[data-ptheme="terracotta-banner"]{--pt-bg:#fbeee7;--pt-card:#ffffff;--pt-fg:#3a1d13;--pt-acc:#c2553a;--pt-muted:#7d5a4c;--pt-font:Lora,Georgia,serif;--pt-r:18px;}
+.pubp-skin[data-ptheme="ocean-ticket"],.lb-card[data-ptheme="ocean-ticket"]{--pt-bg:#e6f4fb;--pt-card:#ffffff;--pt-fg:#0b2a38;--pt-acc:#0c6b8f;--pt-muted:#4d7384;--pt-font:Inter,sans-serif;--pt-r:14px;}
+.pubp-skin[data-ptheme="blueprint-split"],.lb-card[data-ptheme="blueprint-split"]{--pt-bg:#0d2b45;--pt-card:#12395c;--pt-fg:#d9f0ff;--pt-acc:#bfe6ff;--pt-muted:#8fb6cf;--pt-font:ui-monospace,Menlo,Consolas,monospace;--pt-r:4px;}
+.pubp-skin[data-ptheme="rose-arch"],.lb-card[data-ptheme="rose-arch"]{--pt-bg:#fff0f3;--pt-card:#ffffff;--pt-fg:#3b1220;--pt-acc:#b83a64;--pt-muted:#8a5a68;--pt-font:Lora,Georgia,serif;--pt-r:20px;}
+.pubp-skin[data-ptheme="newsprint"],.lb-card[data-ptheme="newsprint"]{--pt-bg:#f4f1ea;--pt-card:#fbfaf6;--pt-fg:#111111;--pt-acc:#111111;--pt-muted:#555555;--pt-font:Georgia,serif;--pt-r:2px;}
+.pubp-skin[data-ptheme="aurora-orbit"],.lb-card[data-ptheme="aurora-orbit"]{--pt-bg:#0d2a2e;--pt-card:#15393f;--pt-fg:#e9fffb;--pt-acc:#7ef0d0;--pt-muted:#8fc7bf;--pt-font:Inter,sans-serif;--pt-r:18px;}
+.pubp-skin[data-ptheme="monochrome"],.lb-card[data-ptheme="monochrome"]{--pt-bg:#ffffff;--pt-card:#f4f4f4;--pt-fg:#000000;--pt-acc:#000000;--pt-muted:#666666;--pt-font:Inter,sans-serif;--pt-r:0px;}
+.pubp-skin[data-ptheme="cocoa-stack"],.lb-card[data-ptheme="cocoa-stack"]{--pt-bg:#2a1d17;--pt-card:#3a2a21;--pt-fg:#f6e7da;--pt-acc:#e8b58a;--pt-muted:#b89c88;--pt-font:Lora,Georgia,serif;--pt-r:18px;}
+.pubp-skin{background-color:var(--pt-bg);color:var(--pt-fg);font-family:var(--pt-font);border-radius:var(--pt-r);padding:18px;}
+.pubp-skin .pubp-name{color:var(--pt-fg);font-family:var(--pt-font);}
+.pubp-skin .pubp-av{border:3px solid var(--pt-acc);}
+.pubp-skin .pubp-chip{background:var(--pt-card);color:var(--pt-fg);border:1px solid var(--pt-acc);}
+.pubp-skin .pubp-stats > div{background:var(--pt-card);border:1px solid color-mix(in srgb,var(--pt-acc) 35%,transparent);border-radius:calc(var(--pt-r)*.6);}
+.pubp-skin .pubp-stats b{color:var(--pt-acc);}
+.pubp-skin .pubp-stats span{color:var(--pt-muted);}
+.pubp-skin[data-play="banner"] .pubp-head{background:linear-gradient(120deg,var(--pt-acc),var(--pt-card));border-radius:calc(var(--pt-r)*.8);padding:24px 16px 16px;}
+.pubp-skin[data-play="banner"] .pubp-name{color:var(--pt-bg);}
+.pubp-skin[data-play="ticket"]{outline:2px dashed var(--pt-acc);outline-offset:-10px;}
+.pubp-skin[data-play="ticket"] .pubp-stats > div{border-style:dashed;}
+.pubp-skin[data-play="poster"] .pubp-name{font-size:34px;line-height:1;text-transform:uppercase;letter-spacing:.02em;}
+.pubp-skin[data-play="split"] .pubp-head{display:flex;align-items:center;gap:14px;}
+@media (min-width:700px){ .pubp-skin[data-play="split"]{display:grid;grid-template-columns:minmax(220px,36%) 1fr;gap:14px;align-items:start;} .pubp-skin[data-play="split"] .pubp-chips,.pubp-skin[data-play="split"] .pubp-stats{grid-column:2;} .pubp-skin[data-play="split"] .pubp-head{grid-column:1;grid-row:1 / span 2;flex-direction:column;align-items:center;} }
+.pubp-skin[data-play="minimal"]{padding:10px 4px;}
+.pubp-skin[data-play="minimal"] .pubp-stats > div{background:transparent;border:0;border-top:1px solid var(--pt-acc);border-radius:0;}
+.pubp-skin[data-play="arch"] .pubp-av{border-radius:999px 999px 22px 22px;}
+.pubp-skin[data-play="orbit"]{background-image:radial-gradient(color-mix(in srgb,var(--pt-acc) 40%,transparent) 1px,transparent 1px);background-size:16px 16px;}
+.pubp-skin[data-play="orbit"] .pubp-av{box-shadow:0 0 0 6px var(--pt-card),0 0 0 8px var(--pt-acc);}
+/* Leaderboard cards for top 5 */
+.lb-card[data-ptheme]{background:var(--pt-card);border-color:color-mix(in srgb,var(--pt-acc) 55%,transparent);}
+.lb-card[data-ptheme] .lb-card-no,.lb-card[data-ptheme] .lb-name{color:var(--pt-acc);}
+.lb-card[data-ptheme] .lb-st{background:var(--pt-bg);}
+/* Theme picker */
+.pt-picker{margin:18px 0 8px;}
+.pt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:10px;}
+.pt-opt{border:1.5px solid var(--border);border-radius:14px;padding:6px;background:var(--surface);cursor:pointer;text-align:left;font:inherit;color:var(--text);}
+.pt-opt.on{border-color:var(--accent-text);box-shadow:0 0 0 2px var(--accent-soft);}
+.pt-prev{height:64px;border-radius:10px;margin-bottom:6px;}
+.pt-opt b{display:block;font-size:12.5px;}
+.pt-lock{padding:12px 14px;border-radius:var(--r-md);background:var(--surface-2);border:1px dashed var(--border);color:var(--muted);font-size:13px;}
+</style><style id="profile-themes-2">
+.pubp-skin[data-ptheme="platinum"],.lb-card[data-ptheme="platinum"]{--pt-bg:#1a1d24;--pt-card:#262a34;--pt-fg:#f2f4f8;--pt-acc:#c9d3e0;--pt-muted:#9aa3b2;--pt-font:Lora,Georgia,serif;--pt-r:18px;}
+.pubp-skin[data-ptheme="royal-emerald"],.lb-card[data-ptheme="royal-emerald"]{--pt-bg:#0b2318;--pt-card:#123524;--pt-fg:#e8f7ee;--pt-acc:#4fd69a;--pt-muted:#88b9a2;--pt-font:Lora,Georgia,serif;--pt-r:20px;}
+.pubp-skin[data-ptheme="amethyst-crown"],.lb-card[data-ptheme="amethyst-crown"]{--pt-bg:#1d0f2e;--pt-card:#2c1846;--pt-fg:#f3e9ff;--pt-acc:#b78cff;--pt-muted:#a592c4;--pt-font:Lora,Georgia,serif;--pt-r:18px;}
+.pubp-skin[data-ptheme="ruby-regal"],.lb-card[data-ptheme="ruby-regal"]{--pt-bg:#2a0a12;--pt-card:#3d1020;--pt-fg:#ffe9ee;--pt-acc:#ff5a7a;--pt-muted:#c08a97;--pt-font:Georgia,serif;--pt-r:6px;}
+</style><style id="torq-profile-glass">
+/* TORQ house style for every profile page: glass panels, blur and glowing orbs.
+   Theme colours (--pt-*) come from the chosen profile theme; plain profiles use the app accent. */
+.pubp{ position:relative; isolation:isolate; overflow:hidden; --pt-bg:var(--bg,#0d0b09); --pt-card:var(--surface,#1a1714); --pt-fg:var(--text,#f5efe6); --pt-acc:var(--accent-text,#f0643a); --pt-muted:var(--muted,#a79c8f); --pt-font:Inter,sans-serif; --pt-r:20px; }
+.pubp-skin{ position:relative; isolation:isolate; overflow:hidden; }
+.pubp::before, .pubp-skin::before, .pubp::after, .pubp-skin::after{ content:""; position:absolute; border-radius:50%; pointer-events:none; z-index:-1; filter:blur(40px); }
+.pubp::before, .pubp-skin::before{ width:260px; height:260px; right:-90px; top:-80px; background:radial-gradient(circle, color-mix(in srgb,var(--pt-acc) 55%,transparent), transparent 70%); }
+.pubp::after, .pubp-skin::after{ width:220px; height:220px; left:-80px; bottom:-60px; background:radial-gradient(circle, color-mix(in srgb,var(--pt-acc) 40%,transparent), transparent 70%); }
+.pubp .pubp-head, .pubp-skin .pubp-head{ position:relative; background:linear-gradient(160deg, color-mix(in srgb,var(--pt-card) 82%,transparent), color-mix(in srgb,var(--pt-card) 55%,transparent)); backdrop-filter:blur(16px) saturate(140%); -webkit-backdrop-filter:blur(16px) saturate(140%); border:1px solid rgba(255,255,255,.12); border-radius:var(--pt-r); padding:18px; box-shadow:0 24px 50px -28px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08); }
+.pubp .pubp-stats > div, .pubp-skin .pubp-stats > div{ background:color-mix(in srgb,var(--pt-card) 60%,transparent) !important; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid rgba(255,255,255,.12) !important; box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 14px 30px -20px rgba(0,0,0,.6); }
+.pubp .pubp-chip, .pubp-skin .pubp-chip{ backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+.pubp .pubp-av, .pubp-skin .pubp-av{ box-shadow:0 0 0 1px rgba(255,255,255,.1), 0 0 36px -6px color-mix(in srgb,var(--pt-acc) 70%,transparent); }
+@media (prefers-reduced-motion: no-preference){ .pubp-skin .pubp-av{ animation:ptGlow 4s ease-in-out infinite; } }
+@keyframes ptGlow{ 0%,100%{ box-shadow:0 0 0 1px rgba(255,255,255,.1), 0 0 28px -8px color-mix(in srgb,var(--pt-acc) 55%,transparent); } 50%{ box-shadow:0 0 0 1px rgba(255,255,255,.14), 0 0 46px -4px color-mix(in srgb,var(--pt-acc) 85%,transparent); } }
+.pubp-skin[data-play="minimal"] .pubp-head{ background:transparent; backdrop-filter:none; -webkit-backdrop-filter:none; box-shadow:none; }
+.lb-card[data-ptheme]{ backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); box-shadow:0 20px 40px -26px color-mix(in srgb,var(--pt-acc) 70%,transparent); }
+</style></head>
 <body>
 <div id="app"></div>
 <style>
@@ -4175,7 +4263,7 @@ async function saveRemote(p, newPhoto){
   const uid = sbSession.user.id;
   const row = {id:uid, username:(p.username||'').trim(), first_name:p.name||null, surname:p.surname||null, standard:p.standard||null, exam:p.exam||null, age:parseInt(p.age,10)||null,
     hide_from_leaderboard: p.visible===false, birthdate:p.birthdate||null, updated_at:new Date().toISOString()};
-  row.coaching_online = p.coachingOnline || null; row.coaching_offline = p.coachingOffline || null;
+  row.coaching_online = p.coachingOnline || null; row.coaching_offline = p.coachingOffline || null; row.profile_theme = p.profileTheme || null;
   if(isGuard()) row.admin_on_leaderboard = !!p.adminBoard;
   // A newly picked photo is saved in the profile row (a small 256px image)
   if(hasPhoto) row.avatar_data = newPhoto;
@@ -6592,7 +6680,7 @@ function lbPodiumHTML(top){
   return '<div class="lb-pod" role="list" aria-label="Top three">'+cols.join('')+'</div>';
 }
 // Top ranks get a whole card. 'flag' is the most ambitious style (rank 1), 'runner' is the quieter one (ranks 2 and 3, and 4 and 5 on the all-time board).
-function lbCardHTML(r, tier){
+function __base_lbCardHTML(r, tier){
   const board = LB_BOARDS.find(b=>b.k===lbState.board);
   const ps = r.pubStats || {};
   const accV = r.acc!=null ? r.acc : ps.accuracy;
@@ -6682,7 +6770,7 @@ function publicProfileView(){
   });
   return w;
 }
-function pubProfileHTML(p){
+function __base_pubProfileHTML(p){
   const hidden = !!p.anon;
   const name = hidden ? 'Anonymous User' : (p.username || 'Student');
   const pic = hidden ? ANON_SVG : (p.avatar ? '<img alt="" src="'+esc(p.avatar)+'">' : '<i>'+esc(name.charAt(0).toUpperCase())+'</i>');
@@ -6840,7 +6928,7 @@ function leaderboardView(){
   return w;
 }
 
-function profilePart(){
+function __base_profilePart(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="eyebrow" style="margin:6px 0 10px">Your profile</div>'));
   const chosen = (store.profile && store.profile.exam) === 'adv' ? 1 : 0;
@@ -12249,5 +12337,48 @@ body.flash-session .fl-wrap{ display:block !important; max-width:none !important
 .pubp-badge small{ font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; }
 .lb-st small{ white-space:nowrap; }
 </style>
-</body>
+<script id="profile-theme-logic">
+const PT_LIST = [{"id": "gold", "name": "Gold Standard", "play": "stack", "bg": "#17130a", "acc": "#f3d98b"}, {"id": "ink-paper", "name": "Ink & Paper", "play": "minimal", "bg": "#f6f1e7", "acc": "#9b2c2c"}, {"id": "midnight-ticket", "name": "Midnight Ticket", "play": "ticket", "bg": "#0b1026", "acc": "#7aa2ff"}, {"id": "sunset-poster", "name": "Sunset Poster", "play": "poster", "bg": "#ffb38a", "acc": "#7a1f0e"}, {"id": "mint-banner", "name": "Mint Banner", "play": "banner", "bg": "#f1fbf6", "acc": "#1f8f63"}, {"id": "lavender-split", "name": "Lavender Split", "play": "split", "bg": "#f4f0ff", "acc": "#6b4fd8"}, {"id": "forest-arch", "name": "Forest Arch", "play": "arch", "bg": "#0f1f17", "acc": "#9ed8a6"}, {"id": "neon-orbit", "name": "Neon Orbit", "play": "orbit", "bg": "#05040f", "acc": "#ff3d9a"}, {"id": "terracotta-banner", "name": "Terracotta Banner", "play": "banner", "bg": "#fbeee7", "acc": "#c2553a"}, {"id": "ocean-ticket", "name": "Ocean Ticket", "play": "ticket", "bg": "#e6f4fb", "acc": "#0c6b8f"}, {"id": "blueprint-split", "name": "Blueprint", "play": "split", "bg": "#0d2b45", "acc": "#bfe6ff"}, {"id": "rose-arch", "name": "Rose Arch", "play": "arch", "bg": "#fff0f3", "acc": "#b83a64"}, {"id": "newsprint", "name": "Newsprint", "play": "poster", "bg": "#f4f1ea", "acc": "#111111"}, {"id": "aurora-orbit", "name": "Aurora Orbit", "play": "orbit", "bg": "#0d2a2e", "acc": "#7ef0d0"}, {"id": "monochrome", "name": "Monochrome", "play": "minimal", "bg": "#ffffff", "acc": "#000000"}, {"id": "cocoa-stack", "name": "Cocoa Stack", "play": "stack", "bg": "#2a1d17", "acc": "#e8b58a"}];
+function ptIsTop5(){ return !!(store.profile && store.profile.top5); }
+function ptDefault(place){ return ['gold','platinum','royal-emerald','amethyst-crown','ruby-regal'][(place||1)-1] || 'gold'; }
+PT_LIST.push({id:"platinum",name:"Platinum Crown",play:"stack",bg:"#1a1d24",acc:"#c9d3e0"},{id:"royal-emerald",name:"Royal Emerald",play:"arch",bg:"#0b2318",acc:"#4fd69a"},{id:"amethyst-crown",name:"Amethyst Crown",play:"banner",bg:"#1d0f2e",acc:"#b78cff"},{id:"ruby-regal",name:"Ruby Regal",play:"poster",bg:"#2a0a12",acc:"#ff5a7a"});
+function ptValid(id){ return PT_LIST.some(t=>t.id===id) ? id : null; }
+function pubProfileHTML(p){
+  const top = nav.pubRow && nav.pubRow.place <= 5;
+  const tid = ptValid(p.profile_theme) || (top ? ptDefault(nav.pubRow.place) : null);
+  const play = tid ? PT_LIST.find(t=>t.id===tid).play : '';
+  const base = __base_pubProfileHTML(p);
+  return tid ? '<div class="pubp-skin" data-ptheme="'+tid+'" data-play="'+play+'">'+base+'</div>' : base;
+}
+function lbCardHTML(r, tier){
+  let html = __base_lbCardHTML(r, tier);
+  if(r.me){ cacheUser({top5: r.place <= 5, place: r.place}); }
+  if(r.place <= 5){
+    const tid = ptValid(r.profile_theme) || ptDefault(r.place);
+    html = html.replace('class="lb-card lb-', 'data-ptheme="'+tid+'" class="lb-card lb-');
+  }
+  return html;
+}
+function profilePart(){
+  const w = __base_profilePart();
+  const cur = (store.profile && ptValid(store.profile.profileTheme)) || ptDefault(store.profile && store.profile.place);
+  const box = el('<div class="pt-picker"></div>');
+  box.appendChild(el('<div class="eyebrow">Profile theme</div>'));
+  if(!ptIsTop5()){
+    box.appendChild(el('<div class="pt-lock">Reach the top 5 on the leaderboard to unlock profile themes. Your profile and the leaderboard card will use the theme you pick.</div>'));
+  } else {
+    box.appendChild(el('<p class="note-line" style="margin:0">Pick how your profile and leaderboard card look to other students.</p>'));
+    const grid = el('<div class="pt-grid"></div>');
+    PT_LIST.forEach(t=>{
+      const on = t.id === cur;
+      const b = el('<button type="button" class="pt-opt'+(on?' on':'')+'" aria-pressed="'+on+'"><div class="pt-prev" style="background:'+t.bg+';box-shadow:inset 0 0 0 3px '+t.acc+'"></div><b>'+esc(t.name)+'</b></button>');
+      b.onclick = ()=>{ cacheUser({profileTheme: t.id}); syncProfile(); render(); };
+      grid.appendChild(b);
+    });
+    box.appendChild(grid);
+  }
+  w.appendChild(box);
+  return w;
+}
+</script></body>
 </html>
