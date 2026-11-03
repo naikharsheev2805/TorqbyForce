@@ -2919,6 +2919,14 @@ body.msg-fit .wa-compose, body.chat-full .wa-compose{ flex:none !important; posi
 @keyframes ptGlow{ 0%,100%{ box-shadow:0 0 0 1px rgba(255,255,255,.1), 0 0 28px -8px color-mix(in srgb,var(--pt-acc) 55%,transparent); } 50%{ box-shadow:0 0 0 1px rgba(255,255,255,.14), 0 0 46px -4px color-mix(in srgb,var(--pt-acc) 85%,transparent); } }
 .pubp-skin[data-play="minimal"] .pubp-head{ background:transparent; backdrop-filter:none; -webkit-backdrop-filter:none; box-shadow:none; }
 .lb-card[data-ptheme]{ backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); box-shadow:0 20px 40px -26px color-mix(in srgb,var(--pt-acc) 70%,transparent); }
+</style><style id="pt-editor">
+.lb-pencil,.pubp-pencil{ position:absolute; top:8px; right:8px; z-index:5; width:34px; height:34px; border-radius:50%; border:1px solid rgba(255,255,255,.18); background:color-mix(in srgb,var(--pt-card,#1a1714) 75%,transparent); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); color:var(--pt-fg,var(--text)); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; padding:0; }
+.lb-pencil svg,.pubp-pencil svg{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+.pubp-pencil{ top:10px; right:10px; }
+.pt-sheet-scrim{ position:fixed; inset:0; z-index:110; background:rgba(0,0,0,.5); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
+.pt-sheet{ position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); z-index:111; width:min(94vw,560px); max-height:86vh; overflow:auto; padding:22px; border-radius:24px; background:linear-gradient(165deg,var(--surface),var(--surface-2)); border:1px solid var(--border); box-shadow:0 40px 90px -30px var(--shadow); }
+.pt-sheet h3{ margin:0 0 6px; font:600 20px Lora,Georgia,serif; color:var(--text); }
+.pt-sheet .pt-grid{ grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); }
 </style></head>
 <body>
 <div id="app"></div>
@@ -12339,6 +12347,27 @@ body.flash-session .fl-wrap{ display:block !important; max-width:none !important
 </style>
 <script id="profile-theme-logic">
 const PT_LIST = [{"id": "gold", "name": "Gold Standard", "play": "stack", "bg": "#17130a", "acc": "#f3d98b"}, {"id": "ink-paper", "name": "Ink & Paper", "play": "minimal", "bg": "#f6f1e7", "acc": "#9b2c2c"}, {"id": "midnight-ticket", "name": "Midnight Ticket", "play": "ticket", "bg": "#0b1026", "acc": "#7aa2ff"}, {"id": "sunset-poster", "name": "Sunset Poster", "play": "poster", "bg": "#ffb38a", "acc": "#7a1f0e"}, {"id": "mint-banner", "name": "Mint Banner", "play": "banner", "bg": "#f1fbf6", "acc": "#1f8f63"}, {"id": "lavender-split", "name": "Lavender Split", "play": "split", "bg": "#f4f0ff", "acc": "#6b4fd8"}, {"id": "forest-arch", "name": "Forest Arch", "play": "arch", "bg": "#0f1f17", "acc": "#9ed8a6"}, {"id": "neon-orbit", "name": "Neon Orbit", "play": "orbit", "bg": "#05040f", "acc": "#ff3d9a"}, {"id": "terracotta-banner", "name": "Terracotta Banner", "play": "banner", "bg": "#fbeee7", "acc": "#c2553a"}, {"id": "ocean-ticket", "name": "Ocean Ticket", "play": "ticket", "bg": "#e6f4fb", "acc": "#0c6b8f"}, {"id": "blueprint-split", "name": "Blueprint", "play": "split", "bg": "#0d2b45", "acc": "#bfe6ff"}, {"id": "rose-arch", "name": "Rose Arch", "play": "arch", "bg": "#fff0f3", "acc": "#b83a64"}, {"id": "newsprint", "name": "Newsprint", "play": "poster", "bg": "#f4f1ea", "acc": "#111111"}, {"id": "aurora-orbit", "name": "Aurora Orbit", "play": "orbit", "bg": "#0d2a2e", "acc": "#7ef0d0"}, {"id": "monochrome", "name": "Monochrome", "play": "minimal", "bg": "#ffffff", "acc": "#000000"}, {"id": "cocoa-stack", "name": "Cocoa Stack", "play": "stack", "bg": "#2a1d17", "acc": "#e8b58a"}];
+
+const PENCIL_LB = '<button class="lb-pencil" type="button" aria-label="Edit profile theme" onclick="ptOpenEditor(event)"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg></button>';
+const PENCIL_PUB = '<button class="pubp-pencil" type="button" aria-label="Edit profile theme" onclick="ptOpenEditor(event)"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg></button>';
+function ptOpenEditor(ev){
+  if(ev){ ev.preventDefault(); ev.stopPropagation(); }
+  if(!ptIsTop5()) return;
+  const cur = ptValid(store.profile && store.profile.profileTheme) || ptDefault(store.profile && store.profile.place);
+  const scrim = el('<div class="pt-sheet-scrim"></div>');
+  const sheet = el('<div class="pt-sheet" role="dialog" aria-modal="true" aria-label="Profile theme"><h3>Your profile theme</h3><p class="note-line" style="margin:0 0 6px">Changes your leaderboard card and your profile page.</p></div>');
+  const grid = el('<div class="pt-grid"></div>');
+  const close = ()=>{ scrim.remove(); sheet.remove(); };
+  PT_LIST.forEach(t=>{
+    const on = t.id === cur;
+    const b = el('<button type="button" class="pt-opt'+(on?' on':'')+'" aria-pressed="'+on+'"><div class="pt-prev" style="background:'+t.bg+';box-shadow:inset 0 0 0 3px '+t.acc+'"></div><b>'+esc(t.name)+'</b></button>');
+    b.onclick = ()=>{ cacheUser({profileTheme: t.id}); syncProfile(); close(); render(); };
+    grid.appendChild(b);
+  });
+  sheet.appendChild(grid);
+  scrim.onclick = close;
+  document.body.appendChild(scrim); document.body.appendChild(sheet);
+}
 function ptIsTop5(){ return !!(store.profile && store.profile.top5); }
 function ptDefault(place){ return ['gold','platinum','royal-emerald','amethyst-crown','ruby-regal'][(place||1)-1] || 'gold'; }
 PT_LIST.push({id:"platinum",name:"Platinum Crown",play:"stack",bg:"#1a1d24",acc:"#c9d3e0"},{id:"royal-emerald",name:"Royal Emerald",play:"arch",bg:"#0b2318",acc:"#4fd69a"},{id:"amethyst-crown",name:"Amethyst Crown",play:"banner",bg:"#1d0f2e",acc:"#b78cff"},{id:"ruby-regal",name:"Ruby Regal",play:"poster",bg:"#2a0a12",acc:"#ff5a7a"});
@@ -12348,18 +12377,25 @@ function pubProfileHTML(p){
   const tid = ptValid(p.profile_theme) || (top ? ptDefault(nav.pubRow.place) : null);
   const play = tid ? PT_LIST.find(t=>t.id===tid).play : '';
   const base = __base_pubProfileHTML(p);
-  return tid ? '<div class="pubp-skin" data-ptheme="'+tid+'" data-play="'+play+'">'+base+'</div>' : base;
+  const pen = (nav.pubRow && nav.pubRow.me && ptIsTop5()) ? PENCIL_PUB : '';
+  return tid ? '<div class="pubp-skin" data-ptheme="'+tid+'" data-play="'+play+'">'+pen+base+'</div>' : pen+base;
 }
 function lbCardHTML(r, tier){
   let html = __base_lbCardHTML(r, tier);
-  if(r.me){ cacheUser({top5: r.place <= 5, place: r.place}); }
+  if(r.me && lbState.period === 'all'){ cacheUser({top5: r.place <= 5, place: r.place}); }
   if(r.place <= 5){
     const tid = ptValid(r.profile_theme) || ptDefault(r.place);
     html = html.replace('class="lb-card lb-', 'data-ptheme="'+tid+'" class="lb-card lb-');
   }
+  if(r.me && ptIsTop5()){
+    html = html.replace(/(<div class="lb-card[^>]*>)/, '$1' + PENCIL_LB);
+  }
   return html;
 }
 function profilePart(){
+  return __base_profilePart();
+}
+function __old_profilePart(){
   const w = __base_profilePart();
   const cur = (store.profile && ptValid(store.profile.profileTheme)) || ptDefault(store.profile && store.profile.place);
   const box = el('<div class="pt-picker"></div>');
