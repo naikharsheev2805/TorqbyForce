@@ -602,6 +602,83 @@ body.msg-fit #app{ background:transparent !important; position:relative; z-index
   .msg-empty .msg-empty-title em{ color:var(--accent-text); font-style:italic; font-weight:500; }
   .msg-empty p{ color:var(--muted); margin:0; font-size:15px; line-height:1.55; max-width:340px; position:relative; }
 }
+
+/* ---- Leaderboard top ranks: whole cards ---- */
+.lb-cards{ display:grid; gap:12px; margin:4px 0 16px; }
+.lb-card{ position:relative; display:grid; grid-template-columns:auto auto 1fr auto; align-items:center; gap:12px; padding:14px 16px; border-radius:var(--r-lg); background:var(--surface); border:1px solid var(--border); overflow:hidden; }
+.lb-card-no{ font:italic 500 24px/1 Lora,Georgia,serif; color:var(--muted); min-width:30px; }
+.lb-card-av{ width:44px; height:44px; flex-shrink:0; }
+.lb-card-who{ min-width:0; display:flex; flex-direction:column; gap:2px; }
+.lb-card-name{ font:600 15px/1.25 Inter,sans-serif; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.lb-card-who small{ font-size:12px; color:var(--muted); }
+.lb-card-who em{ font-style:normal; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-text); }
+.lb-card-score{ text-align:right; display:flex; flex-direction:column; gap:3px; }
+.lb-card-score b{ font:700 15px/1.2 Inter,sans-serif; color:var(--text); }
+.lb-card-score small{ font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+.lb-card-stats{ grid-column:1 / -1; display:flex; gap:10px; padding-top:12px; border-top:1px dashed var(--border); }
+.lb-st{ flex:1; display:flex; flex-direction:column; gap:3px; padding:9px 12px; border-radius:var(--r-md); background:var(--surface-2); }
+.lb-st b{ font:700 15px/1.2 Inter,sans-serif; color:var(--text); }
+.lb-st small{ font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+/* runner: quieter, same structure */
+.lb-runner{ border-color:color-mix(in srgb, var(--accent) 30%, var(--border)); }
+.lb-runner .lb-card-no{ font-size:26px; color:var(--accent-text); }
+/* flag: the most ambitious card. Warm glow, larger numeral and avatar, a thin sheen along the top edge */
+.lb-flag{ padding:20px 18px; gap:14px; border:1.5px solid color-mix(in srgb, var(--accent) 65%, var(--border)); background: radial-gradient(120% 110% at 0% 0%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 62%), var(--surface); box-shadow:0 24px 44px -26px color-mix(in srgb, var(--accent) 80%, transparent); }
+.lb-flag::before{ content:""; position:absolute; left:0; right:0; top:0; height:3px; background:linear-gradient(90deg, transparent, var(--accent), transparent); }
+.lb-flag .lb-card-no{ font-size:44px; color:var(--accent-text); }
+.lb-flag .lb-card-av{ width:64px; height:64px; box-shadow:0 0 0 3px var(--surface), 0 0 0 5px var(--accent); }
+.lb-flag .lb-card-name{ font:italic 600 22px/1.2 Lora,Georgia,serif; white-space:normal; }
+.lb-flag .lb-card-score b{ font:italic 700 24px/1.1 Lora,Georgia,serif; color:var(--accent-text); }
+.lb-flag .lb-card-stats .lb-st{ background:color-mix(in srgb, var(--accent) 12%, var(--surface-2)); }
+.lb-card.me{ outline:1.5px solid var(--accent); outline-offset:2px; }
+
+/* Home greeting: smaller, so the thought for the day leads the screen */
+.home-hero{ padding:16px 20px 14px; margin-bottom:10px; }
+.home-hero .hm-eyebrow{ margin-bottom:6px; font-size:10.5px; }
+.home-hero .hm-title{ font-size:18px !important; line-height:1.2; }
+
+/* ---- Markdown in chat bubbles ---- */
+.bubble.md{ max-width:92%; }
+.bubble.md > span{ white-space:normal !important; display:block; }
+.md-body p{ margin:0 0 6px; }
+.md-body p:last-child{ margin-bottom:0; }
+.md-h{ font:italic 600 16px/1.3 Lora,Georgia,serif; margin:4px 0 6px; }
+.md-ul{ margin:0 0 6px; padding-left:18px; }
+.md-body code{ font:13px/1.4 ui-monospace,Menlo,Consolas,monospace; background:var(--surface-2); padding:1px 5px; border-radius:6px; }
+.md-table-wrap{ overflow-x:auto; margin:6px 0; border-radius:var(--r-md); border:1px solid var(--border); }
+.md-table{ border-collapse:collapse; width:100%; font-size:13px; }
+.md-table th, .md-table td{ padding:6px 9px; border-bottom:1px solid var(--border); text-align:left; vertical-align:top; white-space:nowrap; }
+.md-table th{ font-weight:700; color:var(--accent-text); background:var(--surface-2); }
+.md-table tr:last-child td{ border-bottom:0; }
+.md-code{ margin:6px 0; border-radius:var(--r-md); border:1px solid var(--border); background:var(--surface-2); overflow:hidden; }
+.md-code-h{ display:flex; align-items:center; justify-content:space-between; gap:8px; padding:6px 8px 6px 12px; border-bottom:1px solid var(--border); font:700 11px/1 Inter,sans-serif; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+.md-code-acts{ display:flex; gap:6px; }
+.md-code-acts button{ font:600 12px/1 Inter,sans-serif; padding:6px 9px; border-radius:999px; border:1px solid var(--border); background:var(--surface); color:var(--text); cursor:pointer; }
+.md-code pre{ margin:0; padding:10px 12px; overflow:auto; font:13px/1.5 ui-monospace,Menlo,Consolas,monospace; white-space:pre; color:var(--text); }
+.md-code.md-code-full{ position:fixed; inset:0; z-index:300; margin:0; border-radius:0; display:flex; flex-direction:column; background:var(--surface); padding-top:env(safe-area-inset-top,0px); }
+.md-code.md-code-full pre{ flex:1; max-height:none; font-size:14px; }
+
+/* ---- Calendar ---- */
+.cal-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin:4px 0 10px; }
+.cal-head b{ font:italic 600 18px/1.2 Lora,Georgia,serif; color:var(--text); }
+.cal-grid{ display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:5px; }
+.cal-dow{ font:700 10px/1 Inter,sans-serif; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); text-align:center; padding:4px 0; }
+.cal-cell{ aspect-ratio:1 / 1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; border-radius:var(--r-md); border:1px solid transparent; background:var(--surface-2); color:var(--text); font:600 13px/1 Inter,sans-serif; cursor:pointer; padding:0; }
+.cal-cell.blank{ background:transparent; cursor:default; }
+.cal-cell.today{ border-color:var(--accent); }
+.cal-cell.sel{ background:color-mix(in srgb, var(--accent) 24%, var(--surface)); border-color:var(--accent-text); }
+.cal-dots{ display:flex; gap:3px; height:5px; }
+.cal-dots i{ width:5px; height:5px; border-radius:50%; background:var(--c); }
+.cal-agenda{ margin-top:16px; }
+.cal-ev{ display:flex; align-items:center; gap:12px; padding:12px 12px 12px 14px; border-radius:var(--r-md); background:var(--surface); border:1px solid var(--border); margin-bottom:8px; }
+.cal-ev .bar{ width:4px; align-self:stretch; border-radius:4px; background:var(--c); }
+.cal-ev b{ display:block; font:600 14px/1.3 Inter,sans-serif; color:var(--text); }
+.cal-ev small{ font-size:12px; color:var(--muted); }
+.cal-tag{ font:700 10px/1 Inter,sans-serif; letter-spacing:.06em; text-transform:uppercase; padding:4px 8px; border-radius:999px; background:var(--surface-2); color:var(--muted); white-space:nowrap; }
+.cal-kinds{ display:flex; flex-wrap:wrap; gap:8px; margin:8px 0 14px; }
+.cal-kinds button{ padding:8px 12px; border-radius:999px; border:1px solid var(--border); background:var(--surface-2); color:var(--text); font:600 13px Inter,sans-serif; cursor:pointer; }
+.cal-kinds button.on{ border-color:var(--c); background:color-mix(in srgb, var(--c) 18%, var(--surface)); }
+.cal-input{ width:100%; box-sizing:border-box; padding:12px 14px; margin-bottom:10px; border-radius:var(--r-md); border:1px solid var(--border); background:var(--surface-2); color:var(--text); font:15px Inter,sans-serif; }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -1598,6 +1675,7 @@ body.has-nav .bn{ flex:none; }
 .share-sheet .share-preview{ font-size:14px; line-height:1.5; color:var(--muted); background:var(--surface-2); border:1px solid var(--border); border-radius:var(--r-lg); padding:12px 14px; margin:4px 0 14px; max-height:120px; overflow:auto; }
 .share-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-bottom:6px; }
 .share-opt{ display:flex; flex-direction:column; align-items:center; gap:7px; padding:8px 0; border:none; background:transparent; color:var(--text); cursor:pointer; font:500 12px Inter,sans-serif; }
+.share-badge svg{ width:22px; height:22px; display:block; }
 .share-badge{ width:52px; height:52px; border-radius:50%; display:grid; place-items:center; font:700 19px Lora,Georgia,serif; color:#fff; background:var(--accent); box-shadow:0 10px 20px -12px var(--shadow); }
 .share-badge.copy{ background:var(--surface-2); color:var(--accent-text); border:1.5px solid var(--border); }
 .share-badge.wa{ background:#25D366; }
@@ -3069,7 +3147,7 @@ body.qnav-open .gutter{ opacity:0; }
 <script>
 // ---------- Data paths (adjust here if the folder layout changes) ----------
 // Serve the repo root with a local server (e.g. `python3 -m http.server`); opening the file directly blocks fetch().
-const APP_BUILD = '2026-11-03-e';   // bumped with every release; the app compares it with the hosted file
+const APP_BUILD = '2026-11-03-l';   // bumped with every release; the app compares it with the hosted file
 const PATHS = {
   index: 'data/index.json',  // lists every paper; each paper's "file" field points at its question JSON
   solutions: 'data/solutions/'    // one file per paper: data/solutions/<paper-id>.json
@@ -3465,7 +3543,15 @@ function streakInfo(){
   return {n, frozen};
 }
 // ---- Streak pause: one missed day is covered, earned at each 3-day milestone, held at most one ----
-function pauseState(){ store.streakPause = store.streakPause || {tokens:0, days:{}, lastAwardN:0, popup:null}; return store.streakPause; }
+// Pause object. tokens = pauses held (max 1). soloEarned = the one-time solo reward has been given.
+// duoMilestones = Dual Flame milestones already rewarded (key: streakId:30 or streakId:60).
+function pauseState(){
+  store.streakPause = store.streakPause || {tokens:0, days:{}, soloEarned:false, duoMilestones:{}, popup:null};
+  const sp = store.streakPause;
+  if(sp.soloEarned === undefined) sp.soloEarned = (sp.lastAwardN || 0) > 0; // migrate older saves
+  sp.duoMilestones = sp.duoMilestones || {};
+  return sp;
+}
 function streakDaysSet(){ const s = qotdDays(); Object.keys(pauseState().days).forEach(k=>s.add(k)); return s; }
 function shiftDay(k, delta){ const [y,m,d] = k.split('-').map(Number); return dayKey(new Date(y, m-1, d+delta)); }
 function applyStreakPause(){
@@ -3479,14 +3565,25 @@ function applyStreakPause(){
     sp.popup = {type:'used', n: streakInfo().n};
   }
   const n = streakInfo().n;
-  if(n === 0 && sp.lastAwardN){ sp.lastAwardN = 0; changed = true; }
-  // Earn one pause at each 3-day milestone, holding at most one
-  if(n >= 3 && n % 3 === 0 && n !== sp.lastAwardN){
-    sp.lastAwardN = n; changed = true;
-    if(sp.tokens < 1){ sp.tokens = 1; sp.popup = {type:'earned', n}; }
+  // Solo reward: one pause, the first time a 3-day streak is reached. Never again from solo play.
+  if(!sp.soloEarned && n >= 3){
+    sp.soloEarned = true; changed = true;
+    if(sp.tokens < 1){ sp.tokens = 1; sp.popup = {type:'earned', n, source:'solo'}; }
   }
   if(changed) persist();
   if(sp.popup && view === 'home') setTimeout(showStreakPausePopup, 900);
+}
+// Called with the current Dual Flame run length. Awards one pause per milestone, held at most one.
+function awardDuoPause(streakId, n){
+  const sp = pauseState(); let changed = false;
+  [30, 60].forEach(m=>{
+    const key = streakId + ':' + m;
+    if(n >= m && !sp.duoMilestones[key]){
+      sp.duoMilestones[key] = true; changed = true;
+      if(sp.tokens < 1){ sp.tokens = 1; sp.popup = {type:'earned', n, source:'duo'}; }
+    }
+  });
+  if(changed){ persist(); if(view === 'home') setTimeout(showStreakPausePopup, 900); }
 }
 function showStreakPausePopup(){
   const sp = pauseState(); const p = sp.popup; if(!p) return;
@@ -3494,8 +3591,10 @@ function showStreakPausePopup(){
   const earned = p.type === 'earned';
   const title = earned ? 'Missed a day? You are covered.' : 'No worries, your streak is safe.';
   const eyebrow = earned ? 'Streak pause unlocked' : 'Streak paused';
-  const text = earned
-    ? 'You have a '+p.n+'-day streak. If you miss one day, we pause it instead of ending it. You can use it once, and you earn another at your next 3-day milestone.'
+  const text = earned && p.source === 'duo'
+    ? 'Your Dual Flame reached '+p.n+' days together, so you each get a streak pause. If you miss one day, we pause it instead of ending it. You hold one at a time.'
+    : earned
+    ? 'You have a '+p.n+'-day streak. If you miss one day, we pause it instead of ending it. This first pause is yours to keep. Dual Flames can earn more at 30 and 60 days.'
     : 'We paused yesterday for you, so your streak is still '+p.n+' days. Answer today\u2019s question to keep it growing.';
   const html = '<div class="sp-hero"><div class="sp-orb"><b>'+Number(p.n||0)+'</b></div></div><p>'+esc(text)+'</p>';
   appDialog({eyebrow:eyebrow, title:title, body:html, html:true, ok:'Nice', cancel:false});
@@ -4446,7 +4545,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v1.4.4';
+const APP_VERSION = 'v1.5.0';
 const LAST_UPDATED = '3 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -4580,7 +4679,7 @@ function renderInner(){
   const needSignIn = !store.profile && !sbSession;
   app.classList.toggle('is-onb', needSignIn || !store.profile);
   if(view!=='practice' && store.profile && !needSignIn) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
-  const V = {friends:()=>friendsHubView(), messages:()=>messagesView(), doubt:()=>doubtView(), privacy:()=>legalPaperView('privacy'), terms:()=>legalPaperView('terms'), copyright:()=>legalPaperView('copyright'), disclaimer:()=>legalPaperView('disclaimer'), contact:contactPageView, notebooks:notebooksView, leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
+  const V = {calendar:()=>calendarView(), friends:()=>friendsHubView(), messages:()=>messagesView(), doubt:()=>doubtView(), privacy:()=>legalPaperView('privacy'), terms:()=>legalPaperView('terms'), copyright:()=>legalPaperView('copyright'), disclaimer:()=>legalPaperView('disclaimer'), contact:contactPageView, notebooks:notebooksView, leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
              me:meView, analytics:analyticsView, practice:practiceView, results:resultsView, notes:notesView, notehub:notehubView, viva:vivaView, flash:flashView, myflash:myFlashView, myflashnew:myFlashNewView, admin:adminView, eyes:eyesView};
   const needCoaching = !needSignIn && !!store.profile && !store.profile.coachingAnswered && !store.profile.coachingOnline && !store.profile.coachingOffline;
   app.appendChild(needSignIn ? authView() :(!store.profile ? (sbSession ? authView() : onboardView()) : (needCoaching ? coachingCatchupView() : (V[view]||homeView)())));
@@ -4603,6 +4702,7 @@ function renderMath(){
 const TABS = [
   {id:'home', label:'Home', icon:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>'},
   {id:'pyq', label:'PYQs', icon:'<path d="M5 4h10l4 4v12H5z"/><path d="M14 4v5h5M9 13h6M9 17h4"/>'},
+  {id:'calendar', label:'Calendar', icon:'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>'},
   {id:'syllabus', label:'Syllabus', icon:'<path d="M4 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>'},
   {id:'leaderboard', label:'Leaderboard', icon:'<path d=\"M8 4h8v5a4 4 0 0 1-8 0z\"/><path d=\"M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4\"/><path d=\"M12 13v4M9 20h6M10 17h4\"/>'},
   {id:'mocks', label:'Mocks', title:'Mocks, coming soon', disabled:true, icon:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>'},
@@ -5153,14 +5253,15 @@ function homeView(){
   const mood = timeMood();
   const firstName = (store.profile && store.profile.name ? store.profile.name : '').split(' ')[0];
   const clock = new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit', hour12:true});
-  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div>'
+  w.appendChild(el('<div class="hm-hero home-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div>'
     +'<div class="hm-eyebrow">'+esc(mood.mood)+' · '+esc(clock)+'</div>'
     +'<h1 class="hm-title">'+esc(mood.hi(firstName||'there'))+'</h1></div>'));
+  // The thought for the day sits directly under the greeting, at the largest size that fits the screen
+  w.appendChild(quoteCard()); bindQuoteResize();
   // Home, decluttered: one main focus at the top, the rest grouped quietly below it
   const hmMore = el('<div class="hm-more"></div>');
   hmMore.appendChild(el('<div class="eyebrow hm-more-h">Your progress</div>'));
   const all = statsOf(store.attempts);
-  hmMore.appendChild(quoteCard()); bindQuoteResize();
   hmMore.appendChild(dailyGoalCard());
   hmMore.appendChild(examRowEl());
   hmMore.appendChild(examDayCardEl());
@@ -6386,12 +6487,15 @@ function lbFetch(force){
   if(!db || !sbSession){ setC(key, {err:'Sign in to see the leaderboard.'}); return; }
   const tok = ++lbSeq, board = lbState.board, period = lbState.period;
   setC(key, {loading:true, tok});
-  db.rpc('leaderboard', {p_board:board, p_period:period, p_limit:LB_LIMIT}).then(({data,error})=>{
+  // Newer function with PYQ count and accuracy; falls back to the original one until the SQL is installed
+  const lbArgs = {p_board:board, p_period:period, p_limit:LB_LIMIT};
+  db.rpc('leaderboard_with_stats', lbArgs).then(res => res.error ? db.rpc('leaderboard', lbArgs) : res).then(({data,error})=>{
     const cur = lbState.cache[key];
     if(!cur || cur.tok!==tok) return;
     if(error){ console.error(error); setC(key, {err:'Could not load the leaderboard. Check your connection and try again.'}); return; }
     const rows = (data||[]).map(r=>({place:Number(r.place), name:r.username||'Anonymous User', first:r.first_name||'',
-      avatar:r.avatar_data||null, anon:!!r.is_anonymous, me:!!r.is_me, score:(r.score==null ? null : Number(r.score))}));
+      avatar:r.avatar_data||null, anon:!!r.is_anonymous, me:!!r.is_me, score:(r.score==null ? null : Number(r.score)),
+      pyqs:(r.pyqs==null ? null : Number(r.pyqs)), acc:(r.accuracy==null ? null : Number(r.accuracy))}));
     // Remember our all-time points rank so future awards can taper for top ranks.
     if(board==='points' && period==='all'){
       const me = rows.find(r=>r.me), rank = me ? me.place : null;
@@ -6417,6 +6521,23 @@ function lbPodiumHTML(top){
       +'<span class="lb-ped" aria-hidden="true">'+r.place+'</span></div>';
   });
   return '<div class="lb-pod" role="list" aria-label="Top three">'+cols.join('')+'</div>';
+}
+// Top ranks get a whole card. 'flag' is the most ambitious style (rank 1), 'runner' is the quieter one (ranks 2 and 3, and 4 and 5 on the all-time board).
+function lbCardHTML(r, tier){
+  const board = LB_BOARDS.find(b=>b.k===lbState.board);
+  const stats = r.anon ? '' : (
+    (r.pyqs!=null ? '<span class="lb-st"><b>'+Number(r.pyqs).toLocaleString('en-IN')+'</b><small>PYQs done</small></span>' : '')
+    + (r.acc!=null ? '<span class="lb-st"><b>'+(Math.round(r.acc*10)/10)+'%</b><small>Accuracy</small></span>' : ''));
+  const label = 'Rank '+r.place+', '+r.name+(r.me?' (you)':'')+', '+lbFmt(lbState.board, r.score);
+  return '<div class="lb-card lb-'+tier+(r.me?' me':'')+'" role="listitem" aria-label="'+esc(label)+'">'
+    +'<span class="lb-card-no" aria-hidden="true">'+String(r.place).padStart(2,'0')+'</span>'
+    +'<span class="lb-av lb-card-av">'+lbAvHTML(r)+'</span>'
+    +'<span class="lb-card-who"><b class="lb-card-name">'+esc(r.name)+'</b>'
+      +(r.first && !r.anon ? '<small>'+esc(r.first)+'</small>' : '')
+      +(r.me ? '<em>You</em>' : '')+'</span>'
+    +'<span class="lb-card-score"><b>'+esc(lbFmt(lbState.board, r.score))+'</b><small>'+esc(board ? board.l : '')+'</small></span>'
+    +(stats ? '<span class="lb-card-stats">'+stats+'</span>' : '')
+    +'</div>';
 }
 function lbItemHTML(r){
   const sub = r.me ? '<em>You</em>' : (r.first && !r.anon ? '<small>'+esc(r.first)+'</small>' : '');
@@ -6545,21 +6666,25 @@ function leaderboardView(){
   w.appendChild(el(lbStandingHTML(c.rows, meta)));
   { const mine = c.rows.find(r=>r.me);
     if(mine) w.appendChild(shareRow('I am ranked #'+mine.place+' on the TORQ leaderboard ('+meta.l+'). Think you can beat me?', 'Share my rank', 'Share your rank')); }
-  const hasPodium = c.rows.length>=3 && c.rows[2].place<=LB_LIMIT;
-  const podRows = c.rows.slice(0,3);
-  if(hasPodium){
-    w.appendChild(el(lbPodiumHTML(podRows)));
-    // Podium columns are drawn in the order 2, 1, 3 (see lbPodiumHTML)
-    const podOrder = [1,0,2];
-    w.querySelectorAll('.lb-pod .lb-pc').forEach(function(node, k){
-      const r = podRows[podOrder[k]];
+  const topN = lbState.period === 'all' ? 5 : 3;
+  const topRows = c.rows.slice(0, topN);
+  if(topRows.length){
+    const cards = topRows.map((r,i)=>{
+      // Rank 1 is the flagship card. On the all-time board, ranks 1 to 3 use it, and ranks 4 and 5 use the runner style.
+      const tier = (topN === 5) ? (i < 3 ? 'flag' : 'runner') : (i === 0 ? 'flag' : 'runner');
+      return lbCardHTML(r, tier);
+    }).join('');
+    const cardsEl = el('<div class="lb-cards" role="list" aria-label="Top ranks">'+cards+'</div>');
+    w.appendChild(cardsEl);
+    cardsEl.querySelectorAll('.lb-card').forEach((node, i)=>{
+      const r = topRows[i];
       if(!r || r.me) return;
       attachLbHold(node, r);
       node.style.cursor = 'pointer';
       node.onclick = isGuard() ? function(){ openAdminStudent(r); } : function(){ openPublicProfile(r); };
     });
   }
-  const rest = hasPodium ? c.rows.slice(3) : c.rows;
+  const rest = c.rows.slice(topN);
   if(rest.length){
     // A row past the top 50 is your own, pinned under a gap
     const html = rest.map(r=>(r.me && r.place>LB_LIMIT ? '<div class="lb-gap" aria-hidden="true">···</div>' : '')+lbItemHTML(r)).join('');
@@ -7485,13 +7610,14 @@ async function loadDuo(){
   const today = dayKey();
   duo.days = []; duo.claimed = {};
   if(s0){
-    const { data: days } = await db.from('shared_streak_days').select('day, progress').eq('streak_id', s0.streak_id).order('day', {ascending:false}).limit(60);
+    const { data: days } = await db.from('shared_streak_days').select('day, progress').eq('streak_id', s0.streak_id).order('day', {ascending:false}).limit(120);
     duo.days = days || [];
     const { data: cl } = await db.from('shared_streak_claims').select('day').eq('streak_id', s0.streak_id);
     (cl || []).forEach(c=>{ duo.claimed[c.day] = true; });
   }
   duo.loading = false;
   window.__duoActive = !!s0;
+  if(s0) awardDuoPause(s0.streak_id, duoStreakCount(s0.goal));
   render();
 }
 // Each answer adds one to today's shared total
@@ -7950,6 +8076,180 @@ function friendsPanel(){
   return w;
 }
 
+
+
+// ---- Calendar: a month view with the student's own events and a few default weekly ones ----
+const CAL_KINDS = {
+  revision:{l:'Revision', c:'var(--c-easy)'}, test:{l:'Test', c:'var(--c-hard)'},
+  class:{l:'Class', c:'var(--c-chem)'}, mock:{l:'Mock', c:'var(--c-medium)'}, other:{l:'Other', c:'var(--accent)'}
+};
+// Defaults are added once per account. weekday: 0 = Sunday ... 6 = Saturday. Students can remove any of them.
+const CAL_DEFAULTS = [
+  {id:'def-rev',   kind:'revision', title:'Weekend revision', weekday:0, time:'10:00', repeat:'weekly', from:'default'},
+  {id:'def-test',  kind:'test',     title:'Coaching test',    weekday:6, time:'17:00', repeat:'weekly', from:'default'},
+  {id:'def-class', kind:'class',    title:'Online class',     weekday:3, time:'18:00', repeat:'weekly', from:'default'}
+];
+function calStore(){
+  store.calendar = store.calendar || {seeded:false, events:[]};
+  if(!store.calendar.seeded){
+    store.calendar.seeded = true;
+    store.calendar.events = CAL_DEFAULTS.map(d=>Object.assign({start: dayKey()}, d)).concat(store.calendar.events || []);
+    persist();
+  }
+  return store.calendar;
+}
+function calEventsOn(key){
+  const wd = new Date(key+'T12:00:00').getDay();
+  return calStore().events
+    .filter(e => e.repeat==='weekly' ? (e.weekday===wd && (!e.start || e.start<=key)) : e.date===key)
+    .sort((a,b)=>String(a.time||'').localeCompare(String(b.time||'')));
+}
+function calTime(t){ if(!t) return 'All day'; const [h,m]=t.split(':').map(Number); return ((h+11)%12+1)+':'+String(m).padStart(2,'0')+(h>=12?' PM':' AM'); }
+function calLong(key){ return new Date(key+'T12:00:00').toLocaleDateString('en-IN',{weekday:'long', day:'numeric', month:'long'}); }
+let calUI = {month: dayKey().slice(0,7), sel: dayKey()};
+function calendarView(){
+  const w = el('<div></div>');
+  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Plan</div><h1 class="hm-title">Your <em>calendar.</em></h1></div>'));
+  const exam = EXAMS[0];
+  if(exam) w.appendChild(el('<p class="note-line" style="margin:0 0 12px"><b>'+daysLeft(exam.date)+'</b> days to '+esc(exam.name)+'</p>'));
+
+  const [yy, mm] = calUI.month.split('-').map(Number);
+  const first = new Date(yy, mm-1, 1), total = new Date(yy, mm, 0).getDate(), lead = (first.getDay()+6)%7;
+  const head = el('<div class="cal-head"><button class="btn ghost small" type="button" aria-label="Previous month">‹</button>'
+    +'<b>'+esc(first.toLocaleDateString('en-IN',{month:'long', year:'numeric'}))+'</b>'
+    +'<button class="btn ghost small" type="button" aria-label="Next month">›</button></div>');
+  head.children[0].onclick = ()=>{ calUI.month = dayKey(new Date(yy, mm-2, 1)).slice(0,7); render(); };
+  head.children[2].onclick = ()=>{ calUI.month = dayKey(new Date(yy, mm, 1)).slice(0,7); render(); };
+  w.appendChild(head);
+
+  const grid = el('<div class="cal-grid" role="grid" aria-label="'+esc(first.toLocaleDateString('en-IN',{month:'long', year:'numeric'}))+'"></div>');
+  ['M','T','W','T','F','S','S'].forEach(d=>grid.appendChild(el('<div class="cal-dow" aria-hidden="true">'+d+'</div>')));
+  for(let i=0;i<lead;i++) grid.appendChild(el('<div class="cal-cell blank" aria-hidden="true"></div>'));
+  const today = dayKey();
+  for(let d=1; d<=total; d++){
+    const key = dayKey(new Date(yy, mm-1, d));
+    const evs = calEventsOn(key);
+    const dots = evs.slice(0,3).map(e=>'<i style="--c:'+(CAL_KINDS[e.kind]||CAL_KINDS.other).c+'"></i>').join('');
+    const cell = el('<button class="cal-cell'+(key===today?' today':'')+(key===calUI.sel?' sel':'')+'" type="button" aria-label="'+esc(calLong(key))+', '+evs.length+' events">'
+      +'<span>'+d+'</span><span class="cal-dots">'+dots+'</span></button>');
+    cell.onclick = ()=>{ calUI.sel = key; render(); };
+    grid.appendChild(cell);
+  }
+  w.appendChild(grid);
+
+  const agenda = el('<div class="cal-agenda"></div>');
+  agenda.appendChild(el('<div class="eyebrow" style="margin:0 0 10px">'+esc(calLong(calUI.sel))+'</div>'));
+  const evs = calEventsOn(calUI.sel);
+  if(!evs.length) agenda.appendChild(el('<p class="note-line">Nothing planned. Add a revision block or a test.</p>'));
+  evs.forEach(e=>{
+    const k = CAL_KINDS[e.kind] || CAL_KINDS.other;
+    const row = el('<div class="cal-ev" style="--c:'+k.c+'"><span class="bar" aria-hidden="true"></span>'
+      +'<div style="flex:1;min-width:0"><b>'+esc(e.title)+'</b><small>'+esc(calTime(e.time))+(e.repeat==='weekly'?' · every week':'')+'</small></div>'
+      +'<span class="cal-tag">'+esc(k.l)+(e.from==='default'?' · default':'')+'</span></div>');
+    const rm = el('<button class="btn ghost small" type="button" style="margin-left:6px">Remove</button>');
+    rm.onclick = ()=>{ if(!window.confirm('Remove "'+e.title+'" from your calendar?')) return; calRemove(e.id); render(); };
+    row.appendChild(rm);
+    agenda.appendChild(row);
+  });
+  const add = el('<button class="btn block" type="button" style="margin-top:6px">Add an event</button>');
+  add.onclick = ()=>calAddSheet(calUI.sel);
+  agenda.appendChild(add);
+  w.appendChild(agenda);
+  return w;
+}
+function calAdd(ev){ calStore().events.push(Object.assign({id:'e'+Date.now()}, ev)); persist(); }
+function calRemove(id){ const c = calStore(); c.events = c.events.filter(e=>e.id!==id); persist(); }
+function calAddSheet(dateKey){
+  let kind = 'revision', repeat = false;
+  const scrim = el('<div class="scrim"></div>');
+  const sheet = el('<div class="sheet" role="dialog" aria-modal="true" aria-label="New event"><div class="grab"></div><div class="sheet-title">New event</div></div>');
+  const kinds = el('<div class="cal-kinds" role="group" aria-label="Type"></div>');
+  const kb = {};
+  Object.keys(CAL_KINDS).forEach(k=>{
+    const b = el('<button type="button" style="--c:'+CAL_KINDS[k].c+'"'+(k===kind?' class="on"':'')+'>'+esc(CAL_KINDS[k].l)+'</button>');
+    b.onclick = ()=>{ kind = k; kinds.querySelectorAll('button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); };
+    kinds.appendChild(b);
+  });
+  sheet.appendChild(kinds);
+  const title = el('<input class="cal-input" type="text" maxlength="60" placeholder="e.g. Chapter 4 revision" aria-label="Title">');
+  const date = el('<input class="cal-input" type="date" aria-label="Date" value="'+esc(dateKey)+'">');
+  const time = el('<input class="cal-input" type="time" aria-label="Time" value="18:00">');
+  const rep = el('<label class="vis-toggle" style="margin:0 0 14px"><input type="checkbox"><span class="vis-sw" aria-hidden="true"></span><span class="vis-lbl">Repeat every week</span></label>');
+  rep.querySelector('input').onchange = e=>{ repeat = e.target.checked; };
+  sheet.appendChild(title); sheet.appendChild(date); sheet.appendChild(time); sheet.appendChild(rep);
+  const save = el('<button class="btn block" type="button">Save event</button>');
+  const close = ()=>{ scrim.remove(); sheet.remove(); };
+  save.onclick = ()=>{
+    const t = title.value.trim();
+    if(!t){ title.focus(); return; }
+    if(!date.value){ date.focus(); return; }
+    const ev = {kind, title:t, time:time.value || null, from:'custom', start:date.value, weekday:new Date(date.value+'T12:00:00').getDay()};
+    if(repeat){ ev.repeat = 'weekly'; } else { ev.date = date.value; }
+    calAdd(ev); calUI.sel = date.value; calUI.month = date.value.slice(0,7);
+    close(); render();
+  };
+  sheet.appendChild(save);
+  scrim.onclick = close;
+  document.body.appendChild(scrim); document.body.appendChild(sheet);
+  title.focus();
+}
+// ---- Markdown in chat: tables, fenced code (copy and full screen), headings, lists, bold, italics, inline code ----
+function mdLooksLike(t){ return /```|^\s*\|.*\|\s*$|^\s*#{1,3}\s|\*\*[^*]+\*\*|^\s*[-*]\s+/m.test(String(t||'')); }
+function mdInline(x){
+  return x.replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/(^|[^*\w])\*([^*\n]+)\*/g,'$1<em>$2</em>');
+}
+function mdRow(ln){ return ln.trim().replace(/^\|/,'').replace(/\|$/,'').split('|').map(c=>c.trim()); }
+function mdTableHTML(head, rows){
+  return '<div class="md-table-wrap"><table class="md-table"><thead><tr>'+head.map(c=>'<th>'+mdInline(esc(c))+'</th>').join('')
+    +'</tr></thead><tbody>'+rows.map(r=>'<tr>'+r.map(c=>'<td>'+mdInline(esc(c))+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
+}
+function mdCodeHTML(lang, code){
+  return '<div class="md-code"><div class="md-code-h"><span>'+esc(lang||'code')+'</span><span class="md-code-acts">'
+    +'<button type="button" class="md-copy">Copy</button><button type="button" class="md-full">Full screen</button></span></div>'
+    +'<pre><code>'+esc(code)+'</code></pre></div>';
+}
+function mdChatHTML(text){
+  const lines = String(text||'').split('\n'); const out = []; let i = 0;
+  while(i < lines.length){
+    const ln = lines[i];
+    if(/^\s*```/.test(ln)){
+      const lang = ln.replace(/^\s*```\s*/,'').trim(); const code = []; i++;
+      while(i < lines.length && !/^\s*```\s*$/.test(lines[i])){ code.push(lines[i]); i++; }
+      i++; out.push(mdCodeHTML(lang, code.join('\n'))); continue;
+    }
+    if(/^\s*\|.*\|\s*$/.test(ln) && i+1 < lines.length && /^\s*\|?\s*:?-{2,}/.test(lines[i+1])){
+      const head = mdRow(ln); i += 2; const rows = [];
+      while(i < lines.length && /^\s*\|.*\|\s*$/.test(lines[i])){ rows.push(mdRow(lines[i])); i++; }
+      out.push(mdTableHTML(head, rows)); continue;
+    }
+    const h = ln.match(/^\s*(#{1,3})\s+(.*)$/);
+    if(h){ out.push('<div class="md-h">'+mdInline(esc(h[2]))+'</div>'); i++; continue; }
+    if(/^\s*[-*]\s+/.test(ln)){
+      const items = [];
+      while(i < lines.length && /^\s*[-*]\s+/.test(lines[i])){ items.push('<li>'+mdInline(esc(lines[i].replace(/^\s*[-*]\s+/,'')))+'</li>'); i++; }
+      out.push('<ul class="md-ul">'+items.join('')+'</ul>'); continue;
+    }
+    if(ln.trim() === ''){ i++; continue; }
+    out.push('<p>'+mdInline(esc(ln))+'</p>'); i++;
+  }
+  return '<div class="md-body">'+out.join('')+'</div>';
+}
+// Capture phase, so the bubble's own tap (report) does not fire when someone taps Copy or Full screen
+document.addEventListener('click', function(e){
+  const cp = e.target.closest && e.target.closest('.md-copy');
+  const fs = e.target.closest && e.target.closest('.md-full');
+  if(!cp && !fs) return;
+  e.stopPropagation(); e.preventDefault();
+  const box = (cp || fs).closest('.md-code'); if(!box) return;
+  if(cp){
+    const txt = box.querySelector('code').textContent;
+    const done = ()=>{ cp.textContent = 'Copied'; setTimeout(()=>{ cp.textContent = 'Copy'; }, 1600); };
+    if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, done); else done();
+  } else {
+    const on = box.classList.toggle('md-code-full');
+    fs.textContent = on ? 'Close' : 'Full screen';
+  }
+}, true);
 // ---- WhatsApp-style chat list and chat screen ----
 let chatPrev = {map:{}, at:0, loading:false};
 let waScrollN = -1;
@@ -8554,7 +8854,8 @@ function chatScreen(f){
       attachMsgPress(sb, m, f, mine);
       list.appendChild(sb);
     } else {
-      const bub = el('<div class="bubble '+(mine?'mine':'theirs')+'"><span>'+esc(m.body)+'</span><small>'+stamp+tick+'</small></div>');
+      const bodyHTML = mdLooksLike(m.body) ? mdChatHTML(m.body) : esc(m.body);
+      const bub = el('<div class="bubble '+(mine?'mine':'theirs')+(mdLooksLike(m.body)?' md':'')+'"><span>'+bodyHTML+'</span><small>'+stamp+tick+'</small></div>');
       if(!mine){ bub.style.cursor = 'pointer'; bub.title = 'Tap to report'; bub.onclick = ()=>reportMessage(m, f); }
       attachMsgPress(bub, m, f, mine);
       list.appendChild(bub);
@@ -10418,6 +10719,14 @@ function appLink(){
   try{ if(location.protocol.indexOf('http') === 0) return location.origin + location.pathname.replace(/index\.html$/, ''); }catch(e){}
   return '';
 }
+const SHARE_ICONS = {
+  COPY: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>',
+  TICK: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  WA: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.2z"/><path d="M9 8.8c.2 3 2.9 5.9 5.9 6.2l1.2-1.4-2-1-.9.9c-1.1-.5-2-1.4-2.5-2.5l.9-.9-1-2z"/></svg>',
+  TG: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4L3 11l6 2 2 7 3.5-4.5L19 20z"/><path d="M9 13l10-7"/></svg>',
+  X: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4l16 16M20 4L4 20"/></svg>',
+  MORE: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.6M8.2 13.2l7.6 4.6"/></svg>'
+};
 function openShareSheet(text){
   const link = appLink();
   const full = link ? text + '\n' + link : text;
@@ -10433,19 +10742,19 @@ function openShareSheet(text){
     o.onclick = fn; grid.appendChild(o); return o;
   };
   const encFull = encodeURIComponent(full), encText = encodeURIComponent(text), encLink = encodeURIComponent(link);
-  opt('copy', '&#10697;', 'Copy', ()=>{
+  opt('copy', SHARE_ICONS.COPY, 'Copy', ()=>{
     const done = ()=>{
       const b = sheet.querySelector('.share-badge.copy'), lbl = b && b.parentNode.querySelector('.share-lbl');
-      if(b){ b.classList.add('done'); b.innerHTML = '&#10003;'; }
+      if(b){ b.classList.add('done'); b.innerHTML = SHARE_ICONS.TICK; }
       if(lbl) lbl.textContent = 'Copied';
-      setTimeout(()=>{ if(b){ b.classList.remove('done'); b.innerHTML = '&#10697;'; } if(lbl) lbl.textContent = 'Copy'; }, 1800);
+      setTimeout(()=>{ if(b){ b.classList.remove('done'); b.innerHTML = SHARE_ICONS.COPY; } if(lbl) lbl.textContent = 'Copy'; }, 1800);
     };
     if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(full).then(done, done); else done();
   });
-  opt('wa', 'W', 'WhatsApp', ()=>window.open('https://wa.me/?text='+encFull, '_blank', 'noopener'));
-  opt('tg', 'T', 'Telegram', ()=>window.open(link ? 'https://t.me/share/url?url='+encLink+'&text='+encText : 'https://t.me/share/url?url='+encFull, '_blank', 'noopener'));
-  opt('x', 'X', 'X', ()=>window.open('https://twitter.com/intent/tweet?text='+encText+(link ? '&url='+encLink : ''), '_blank', 'noopener'));
-  if(navigator.share) opt('more', '&#8943;', 'More', ()=>{ navigator.share(link ? {title:'TORQ', text, url:link} : {title:'TORQ', text}).catch(()=>{}); close(); });
+  opt('wa', SHARE_ICONS.WA, 'WhatsApp', ()=>window.open('https://wa.me/?text='+encFull, '_blank', 'noopener'));
+  opt('tg', SHARE_ICONS.TG, 'Telegram', ()=>window.open(link ? 'https://t.me/share/url?url='+encLink+'&text='+encText : 'https://t.me/share/url?url='+encFull, '_blank', 'noopener'));
+  opt('x', SHARE_ICONS.X, 'X', ()=>window.open('https://twitter.com/intent/tweet?text='+encText+(link ? '&url='+encLink : ''), '_blank', 'noopener'));
+  if(navigator.share) opt('more', SHARE_ICONS.MORE, 'More', ()=>{ navigator.share(link ? {title:'TORQ', text, url:link} : {title:'TORQ', text}).catch(()=>{}); close(); });
   sheet.appendChild(grid);
   const cancel = el('<button class="btn ghost block" style="margin-top:10px">Close</button>');
   cancel.onclick = close;
@@ -10551,15 +10860,15 @@ function qotdCard(){
     +'<span class="tag shift">'+esc(q.year+' · '+SHIFT_NAME[q.shift])+'</span>'
     +'<span class="tag diff diff-'+q.difficulty.toLowerCase()+'">'+esc(q.difficulty)+'</span>'+wtTag(q.subject,q.chapter)+'</div>'
     +'<div class="qtext qclamp">'+qtextHTML(q.text)+'</div></div>');
-  if(qotdOpen) c.appendChild(el('<div class="note">Answer: '+esc(answerLabel(q))+'. '+esc(q.explanation)+'</div>'));
+  if(qotdOpen || st) c.appendChild(el('<div class="note">Answer: '+esc(answerLabel(q))+'. '+esc(q.explanation)+'</div>'));
   const actions = el('<div class="qotd-actions"></div>');
   const rv = el('<button class="btn secondary small">'+(qotdOpen?'Hide answer':'Reveal answer')+'</button>');
   rv.onclick = ()=>{ qotdOpen = !qotdOpen; render(); };
   const tr = el('<button class="btn small">Try it</button>');
   tr.onclick = ()=>startSession({mode:'pyq', title:'Question of the day', queue:[q]});
   if(!st){ actions.appendChild(tr); }
-  actions.appendChild(rv);
-  c.appendChild(actions);
+  if(!st) actions.appendChild(rv);
+  if(actions.childNodes.length) c.appendChild(actions);
   if(st){ const lab = {ok:'Answered correctly', bad:'Answered wrong', skip:'Skipped'}[st]; c.appendChild(el('<div class="qotd-status st-'+st+'">'+lab+'</div>')); }
   const wrap = el('<div></div>');
   wrap.appendChild(c);
