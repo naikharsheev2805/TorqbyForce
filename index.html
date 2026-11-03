@@ -4370,7 +4370,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v1.1.7';
+const APP_VERSION = 'v1.1.8';
 const LAST_UPDATED = '3 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -8530,7 +8530,9 @@ function callCleanup(){
 function callFinish(reason){
   if(CALL.state === 'idle') return;
   const notes = { declined:'Your friend declined the call.', ended:'The call has ended.', failed:'The call dropped. Please try again.', missed:'Your friend is not available right now.' };
+  const staleId = CALL.id;
   callCleanup();
+  if(reason === 'failed' && staleId) sbClient().rpc('update_call', { p_call: staleId, p_action:'failed' }).catch(()=>{});
   if(notes[reason]) appDialog({ eyebrow:'Voice call', title: reason === 'missed' ? 'Not available right now' : 'Call ended', body: notes[reason], cancel:false, ok:'OK' });
 }
 
@@ -8581,7 +8583,9 @@ async function startCall(f){
     CALL.ringTimer = setTimeout(() => { if(CALL.state === 'calling') callMissed(); }, CALL_RING_MS);
   }catch(err){
     const msg = String((err && err.message) || '');
+    const staleId = CALL.id;
     callCleanup();
+    if(staleId) sbClient().rpc('update_call', { p_call: staleId, p_action:'failed' }).catch(()=>{});
     let body = 'Check your connection and microphone, then try again.';
     if(/friends/i.test(msg)) body = 'You can only call your friends.';
     else if(/cannot call|blocked/i.test(msg)) body = 'You cannot call this student.';
