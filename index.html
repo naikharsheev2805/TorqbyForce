@@ -1732,6 +1732,7 @@ body.has-nav .bn{ flex:none; }
 .exam-orb{ position:absolute; right:-28px; bottom:-34px; width:110px; height:110px; border-radius:50%; background:var(--ec); opacity:.22; filter:blur(18px); pointer-events:none; }
 .exam-num{ font:600 58px/1 Lora,Georgia,serif; color:var(--text); margin-top:12px; letter-spacing:-.02em; font-variant-numeric:tabular-nums; position:relative; }
 .exam-unit{ font-size:13px; color:var(--muted); margin-top:6px; position:relative; }
+.cal-card .cal-line{ font:500 22px/1.35 Lora,Georgia,serif; color:var(--text); margin-top:10px; letter-spacing:0; }
 .exam-card .eyebrow{ color:var(--ec); position:relative; }
 
 /* ---------- Question of the day: tinted and greyed once answered ---------- */
@@ -3015,6 +3016,10 @@ body.qnav-open .gutter{ opacity:0; }
 .av-sheet button.av-primary{ background:var(--accent); color:var(--accent-ink); border-color:transparent; }
 .av-sheet button.av-cancel{ background:transparent; color:var(--muted); }
 @media (prefers-reduced-motion: reduce){ .iv, .av-sheet-wrap, .av-sheet, .iv-img{ animation:none !important; transition:none !important; } }
+/* ---- Avatar choice dialog: same look as the other pop-ups ---- */
+.av-dialog-actions{ position:relative; display:grid; gap:12px; }
+.av-dialog-actions .btn{ padding:16px 18px; font-size:16.5px; border-radius:18px; margin:0; }
+.av-dialog{ width:min(92vw,440px); }
 </style>
 <script>
 (function(){
@@ -3086,12 +3091,17 @@ body.qnav-open .gutter{ opacity:0; }
   function avatarSheet(pick){
     var old = document.getElementById('avSheet'); if(old) old.remove();
     var hasPhoto = !!(pick.querySelector('.av-circle img'));
-    var wrap = document.createElement('div'); wrap.id = 'avSheet'; wrap.className = 'av-sheet-wrap';
-    wrap.innerHTML = '<div class="av-sheet" role="dialog" aria-modal="true">'
-      + '<div class="av-sheet-title">Profile photo</div>'
-      + '<button type="button" class="av-primary av-upload">Upload new profile picture</button>'
-      + (hasPhoto ? '<button type="button" class="av-view">View profile picture</button>' : '')
-      + '<button type="button" class="av-cancel">Cancel</button></div>';
+    var wrap = document.createElement('div'); wrap.id = 'avSheet'; wrap.className = 'scrim ad-scrim';
+    wrap.innerHTML = '<div class="ad-sheet av-dialog" role="dialog" aria-modal="true" aria-labelledby="av-title">'
+      + '<div class="ad-glow" aria-hidden="true"></div>'
+      + '<div class="ad-eyebrow">Profile photo</div>'
+      + '<h2 class="ad-title" id="av-title">' + (hasPhoto ? 'Your photo' : 'Add a photo') + '</h2>'
+      + '<p class="ad-body">' + (hasPhoto ? 'Upload a new picture to replace this one, or view the current picture.' : 'Choose a picture from your gallery. It will be shown as a small square.') + '</p>'
+      + '<div class="av-dialog-actions">'
+      + '<button type="button" class="btn block av-upload">' + (hasPhoto ? 'Upload new picture' : 'Choose from gallery') + '</button>'
+      + (hasPhoto ? '<button type="button" class="btn secondary block av-view">View picture</button>' : '')
+      + '<button type="button" class="btn secondary block av-cancel">Cancel</button>'
+      + '</div></div>';
     function close(){ wrap.remove(); document.removeEventListener('keydown', onKey, true); }
     function onKey(e){ if(e.key === 'Escape') close(); }
     wrap.addEventListener('click', function(e){ if(e.target === wrap) close(); });
@@ -3445,7 +3455,7 @@ let view = 'home';
 let session = null;
 let nav = {tab:'home', subject:SUBJECTS[0], pyqTab:'questions', paper:null, meTab:'analysis', cfg:null,
            mockCfg:{subjects:[...SUBJECTS], perSubject:5, minutes:60}};
-const TAB_OF = {friends:'friends', messages:'messages', doubt:'messages', viva:'viva', flash:'notehub', myflash:'notehub', myflashnew:'notehub', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', notebooks:'notebooks', leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', notes:'notehub', notehub:'notehub', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
+const TAB_OF = {publicprofile:'leaderboard', calendar:'calendar', friends:'friends', messages:'messages', doubt:'messages', viva:'viva', flash:'notehub', myflash:'notehub', myflashnew:'notehub', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', notebooks:'notebooks', leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', notes:'notehub', notehub:'notehub', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
 
 const LAST_VIEW_KEY = 'torq_last_view_v1';
 function saveLastView(){
@@ -3466,6 +3476,8 @@ function go(v, patch){
   Object.assign(nav, patch||{});
   if(cloudDirty) flushCloud();
   view = v; saveLastView(); render(); window.scrollTo(0,0);
+  const __a = document.getElementById('app');
+  if(__a){ __a.classList.remove('page-in'); void __a.offsetWidth; __a.classList.add('page-in'); }
   keepTabInView();
 }
 function setCfg(patch){ nav.cfg = Object.assign({}, nav.cfg, patch); render(); }
@@ -4074,7 +4086,7 @@ function startReviewFromRecord(rec){
     answers[it.q] = (it.skip || it.sel==null) ? {skip:true, auto:true, pts:0, time:it.t||0} : {sel:it.sel, correct:!!it.correct, time:it.t||0, pts:0};
   });
   session = {mode:'review', title:rec.title, queue:queue, answers:answers, idx:0, hints:{}, marks:{}, times:{}, draft:{}, conf:{}, pad:{}, started:{},
-             points:0, navOpen:false, qStart:Date.now(), sessionStart:Date.now(), limit:0, submitted:true, review:true, reviewFrom:'history'};
+             points:0, navOpen:false, qStart:Date.now(), sessionStart:Date.now(), limit:0, submitted:true, review:true, reviewFrom:rec.from||'history'};
   go('practice');
 }
 function openReviewFromResults(i){
@@ -4085,6 +4097,7 @@ function openReviewFromResults(i){
 function exitReview(){
   session.review = false;
   if(session.reviewFrom === 'history'){ session = null; go('me', {meTab:'history'}); }
+  else if(session.reviewFrom === 'home'){ session = null; go('home'); }
   else go('results');
 }
 // The list of every question in a finished set, each one opens for review
@@ -4152,22 +4165,28 @@ function sbClient(){
 }
 // Save the profile row (and the photo) to Supabase. Returns {taken:true} if the username is already used.
 async function saveRemote(p, newPhoto){
-  const db = sbClient(); if(!db || !sbSession) return {};
+  const hasPhoto = !!(newPhoto && newPhoto.indexOf('data:image/') === 0);
+  // The new photo shows on this device straight away, whatever happens with the server
+  if(hasPhoto) cacheUser({avatar: newPhoto});
+  const db = sbClient();
+  if(!db || !sbSession){
+    return hasPhoto ? {avatar: newPhoto, error: {message: 'You are not connected, so the photo could not be saved to your account. Check your connection and try again.'}} : {};
+  }
   const uid = sbSession.user.id;
   const row = {id:uid, username:(p.username||'').trim(), first_name:p.name||null, surname:p.surname||null, standard:p.standard||null, exam:p.exam||null, age:parseInt(p.age,10)||null,
     hide_from_leaderboard: p.visible===false, birthdate:p.birthdate||null, updated_at:new Date().toISOString()};
   row.coaching_online = p.coachingOnline || null; row.coaching_offline = p.coachingOffline || null;
   if(isGuard()) row.admin_on_leaderboard = !!p.adminBoard;
   // A newly picked photo is saved in the profile row (a small 256px image)
-  if(newPhoto && newPhoto.indexOf('data:image/') === 0) row.avatar_data = newPhoto;
+  if(hasPhoto) row.avatar_data = newPhoto;
   const {error} = await db.from('profiles').upsert(row, {onConflict:'id'});
   if(error){ console.error(error); return {error, taken: error.code==='23505'}; }
   if(row.avatar_data) cacheUser({avatar: row.avatar_data});
-  return {avatar: row.avatar_data || null};
+  return {avatar: row.avatar_data || cacheAvatarOrNull()};
 }
 function syncProfile(){ if(store.profile) return saveRemote(store.profile, loadAvatarCache()); }
 let __upTimer = null, __upBusy = false, __upAgain = false;
-function scheduleUpload(){ clearTimeout(__upTimer); __upTimer = setTimeout(()=>{ if(sbSession) uploadPending(); }, 800); }
+function scheduleUpload(){ clearTimeout(__upTimer); __upTimer = setTimeout(()=>{ if(sbSession){ uploadPending(); publishBadges(); } }, 800); }
 // Uploads every attempt that has not gone up yet (answers, skips). Safe to call often.
 // The columns stored for one answer on the server
 function attemptFields(a){
@@ -4692,7 +4711,7 @@ function renderInner(){
   const needSignIn = !store.profile && !sbSession;
   app.classList.toggle('is-onb', needSignIn || !store.profile);
   if(view!=='practice' && store.profile && !needSignIn) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
-  const V = {calendar:()=>calendarView(), friends:()=>friendsHubView(), messages:()=>messagesView(), doubt:()=>doubtView(), privacy:()=>legalPaperView('privacy'), terms:()=>legalPaperView('terms'), copyright:()=>legalPaperView('copyright'), disclaimer:()=>legalPaperView('disclaimer'), contact:contactPageView, notebooks:notebooksView, leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
+  const V = {publicprofile:()=>publicProfileView(), calendar:()=>calendarView(), friends:()=>friendsHubView(), messages:()=>messagesView(), doubt:()=>doubtView(), privacy:()=>legalPaperView('privacy'), terms:()=>legalPaperView('terms'), copyright:()=>legalPaperView('copyright'), disclaimer:()=>legalPaperView('disclaimer'), contact:contactPageView, notebooks:notebooksView, leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
              me:meView, analytics:analyticsView, practice:practiceView, results:resultsView, notes:notesView, notehub:notehubView, viva:vivaView, flash:flashView, myflash:myFlashView, myflashnew:myFlashNewView, admin:adminView, eyes:eyesView};
   const needCoaching = !needSignIn && !!store.profile && !store.profile.coachingAnswered && !store.profile.coachingOnline && !store.profile.coachingOffline;
   app.appendChild(needSignIn ? authView() :(!store.profile ? (sbSession ? authView() : onboardView()) : (needCoaching ? coachingCatchupView() : (V[view]||homeView)())));
@@ -4748,7 +4767,7 @@ function setNavOpen(open){
       p.__closeT = setTimeout(()=>p.classList.remove('closing'), 600);
     }
   }
-  if(p && navOpen){ const r = p.querySelector('.np-draw rect'); if(r){ r.setAttribute('width', Math.max(0, p.offsetWidth-1.6)); r.setAttribute('height', Math.max(0, p.offsetHeight-1.6)); } }
+  if(p && navOpen){ const r = p.querySelector('.np-draw rect'); if(r){ r.setAttribute('width', Math.max(0, p.offsetWidth-1.6)); r.setAttribute('height', Math.max(0, Math.max(p.offsetHeight, p.scrollHeight)-1.6)); } }
   if(t){ t.classList.toggle('x', navOpen); t.setAttribute('aria-expanded', navOpen ? 'true' : 'false'); }
   if(sc) sc.classList.toggle('on', navOpen);
 }
@@ -4813,6 +4832,7 @@ function bottomNav(){
   ANALYSIS_ITEMS.forEach(it=>{
     const on = view==='analytics' && nav.anTab===it[0];
     const b = el('<button class="bn navana'+(on?' on':'')+'"'+(on?' aria-current="page"':'')+'><svg viewBox="0 0 24 24">'+it[2]+'</svg><span>'+esc(it[1])+'</span></button>');
+    b.style.setProperty('--i', 12 + ANALYSIS_ITEMS.indexOf(it));
     b.onclick = ()=>{ setNavOpen(false); go('analytics',{anTab:it[0]}); };
     bar.appendChild(b);
   });
@@ -4820,6 +4840,7 @@ function bottomNav(){
   bar.appendChild(el('<div class="navsec">Support</div>'));
   SUPPORT_ITEMS.forEach(it=>{
     const b = el('<button class="bn navsup'+(view===it[0]?' on':'')+'"'+(view===it[0]?' aria-current="page"':'')+'><svg viewBox="0 0 24 24">'+it[2]+'</svg><span>'+esc(it[1])+'</span></button>');
+    b.style.setProperty('--i', 16 + SUPPORT_ITEMS.indexOf(it));
     b.onclick = ()=>openLegal(it[0]);
     bar.appendChild(b);
   });
@@ -5033,6 +5054,30 @@ function sylUnits(units){
   return list;
 }
 
+function setSyllabusDone(c, on){ const m = syllabusDoneMap(); if(on) m[c] = true; else delete m[c]; persist(); }
+function syllabusDoneCard(){
+  const done = syllabusDoneMap();
+  const all = SUBJECTS.reduce((n,s)=>n+(SYLLABUS[s]||[]).length, 0);
+  const have = SUBJECTS.reduce((n,s)=>n+(SYLLABUS[s]||[]).filter(c=>done[c]).length, 0);
+  const pct = all ? Math.round(have/all*100) : 0;
+  const card = el('<div class="card syl-done" style="margin-top:14px"><div class="eyebrow">Syllabus you have done</div>'
+    +'<div class="dg-num">'+pct+'%<span> done ('+have+' of '+all+' chapters)</span></div>'
+    +'<div class="goal-bar"><i style="width:'+pct+'%"></i></div>'
+    +'<div class="note-line" style="margin-top:8px">Tick each chapter once you have covered it. The question of the day then comes only from these chapters, shuffled.</div></div>');
+  SUBJECTS.forEach(sub=>{
+    const chs = SYLLABUS[sub] || []; if(!chs.length) return;
+    const block = el('<div><div class="eyebrow" style="margin:14px 0 8px">'+esc(sub)+'</div></div>');
+    const grid = el('<div class="syl-done-grid"></div>');
+    chs.forEach(c=>{
+      const on = !!done[c];
+      const b = el('<button type="button" class="syl-done-chip'+(on?' on':'')+'" aria-pressed="'+on+'"><span class="syl-done-box" aria-hidden="true">'+(on?'\u2713':'')+'</span><span>'+esc(c)+'</span></button>');
+      b.onclick = ()=>{ setSyllabusDone(c, !on); render(); };
+      grid.appendChild(b);
+    });
+    block.appendChild(grid); card.appendChild(block);
+  });
+  return card;
+}
 function syllabusView(){
   const w = el('<div></div>');
   w.appendChild(el('<h1 class="title">Syllabus</h1>'));
@@ -5047,6 +5092,7 @@ function syllabusView(){
   });
   w.appendChild(tabs);
   w.appendChild(chapterMap());
+  if(isClass1112()) w.appendChild(syllabusDoneCard());
 
   if(!paper.subjects){
     w.appendChild(el('<div class="card empty" style="margin-top:14px">JEE Advanced syllabus is not added yet.</div>'));
@@ -6254,12 +6300,14 @@ function cacheUser(patch){
   Object.assign(c, patch, {updated: Date.now()});
   try{ localStorage.setItem(USER_CACHE_KEY, JSON.stringify(c)); }catch(e){}
 }
+function cacheAvatarOrNull(){ return loadAvatarCache(); }
 function loadAvatarCache(){
   try{ return (JSON.parse(localStorage.getItem(USER_CACHE_KEY)) || {}).avatar || null; }catch(e){ return null; }
 }
 // Shrink a chosen photo to a 160px square JPEG before it is cached (shown at 54px at most, so this stays sharp and small)
 function readAvatar(file, done){
-  if(!file || !file.type || file.type.indexOf('image/') !== 0){ appNotice('Photo not supported', 'Please choose a photo (JPG or PNG).'); return; }
+  const looksLikeImage = !!file && ((file.type && file.type.indexOf('image/') === 0) || (!file.type && /\.(jpe?g|png|gif|webp|heic|heif|bmp)$/i.test(file.name || '')));
+  if(!looksLikeImage){ appNotice('Photo not supported', 'Please choose a photo (JPG or PNG).'); return; }
   const fr = new FileReader();
   fr.onerror = ()=>appNotice('Photo not read', 'That photo could not be read. Try another one.');
   fr.onload = ()=>{
@@ -6513,7 +6561,7 @@ function lbFetch(force){
     const cur = lbState.cache[key];
     if(!cur || cur.tok!==tok) return;
     if(error){ console.error(error); setC(key, {err:'Could not load the leaderboard. Check your connection and try again.'}); return; }
-    const rows = (data||[]).map(r=>({place:Number(r.place), name:r.username||'Anonymous User', first:r.first_name||'',
+    const rows = (data||[]).map(r=>({place:Number(r.place), id:r.user_id||null, name:r.username||'Anonymous User', first:r.first_name||'',
       avatar:r.avatar_data||null, anon:!!r.is_anonymous, me:!!r.is_me, score:(r.score==null ? null : Number(r.score)),
       pyqs:(r.pyqs==null ? null : Number(r.pyqs)), acc:(r.accuracy==null ? null : Number(r.accuracy))}));
     // Remember our all-time points rank so future awards can taper for top ranks.
@@ -6522,6 +6570,7 @@ function lbFetch(force){
       if(store.lbRank !== rank){ store.lbRank = rank; persist(); }
     }
     setC(key, {rows});
+    enrichTopStats(rows);
   }).catch(()=>{
     const cur = lbState.cache[key];
     if(cur && cur.tok===tok) setC(key, {err:'Could not load the leaderboard. Check your connection and try again.'});
@@ -6545,9 +6594,12 @@ function lbPodiumHTML(top){
 // Top ranks get a whole card. 'flag' is the most ambitious style (rank 1), 'runner' is the quieter one (ranks 2 and 3, and 4 and 5 on the all-time board).
 function lbCardHTML(r, tier){
   const board = LB_BOARDS.find(b=>b.k===lbState.board);
+  const ps = r.pubStats || {};
+  const accV = r.acc!=null ? r.acc : ps.accuracy;
   const stats = r.anon ? '' : (
     (r.pyqs!=null ? '<span class="lb-st"><b>'+Number(r.pyqs).toLocaleString('en-IN')+'</b><small>PYQs done</small></span>' : '')
-    + (r.acc!=null ? '<span class="lb-st"><b>'+(Math.round(r.acc*10)/10)+'%</b><small>Accuracy</small></span>' : ''));
+    + (accV!=null ? '<span class="lb-st"><b>'+(Math.round(accV*10)/10)+'%</b><small>Accuracy</small></span>' : '')
+    + (ps.avg_time_s!=null ? '<span class="lb-st"><b>'+ps.avg_time_s+' s</b><small>Avg per question</small></span>' : ''));
   const label = 'Rank '+r.place+', '+r.name+(r.me?' (you)':'')+', '+lbFmt(lbState.board, r.score);
   return '<div class="lb-card lb-'+tier+(r.me?' me':'')+'" role="listitem" aria-label="'+esc(label)+'">'
     +'<span class="lb-card-no" aria-hidden="true">'+String(r.place).padStart(2,'0')+'</span>'
@@ -6588,11 +6640,80 @@ function openPublicProfile(r){
     + (first ? '<div class="pp-first">' + esc(first) + '</div>' : '')
     + '<div class="pp-stats"><div><b>#' + r.place + '</b><span>Rank</span></div>'
     + '<div><b>' + esc(lbFmt(lbState.board, r.score)) + '</b><span>' + esc(LB_BOARDS.find(b=>b.k===lbState.board).l) + '</span></div></div>'
-    + '<button class="btn block" type="button">Close</button>';
+    + '<button class="btn block pp-view" type="button">View profile</button>';
   const close = function(){ scrim.remove(); card.remove(); };
   scrim.onclick = close;
-  card.querySelector('button').onclick = close;
+  card.querySelector('.pp-view').onclick = function(){ close(); go('publicprofile', {pubRow: r}); };
   document.body.appendChild(scrim); document.body.appendChild(card);
+}
+// ---------- Public profile: what other students can see of a student ----------
+// Loads the public fields and stats through the public_profile function on the server
+async function pubLoad(r){
+  const db = sbClient(); if(!db || !sbSession) throw new Error('not signed in');
+  let id = r.id;
+  if(!id && !r.anon && r.name && r.name !== 'Anonymous User'){
+    const { data } = await db.rpc('find_user', { p_username: r.name });
+    id = data && data[0] && data[0].id;
+  }
+  if(!id) throw new Error('no profile');
+  const { data, error } = await db.rpc('public_profile', { p_user: id });
+  if(error) throw error;
+  if(!data) throw new Error('no profile');
+  return data;
+}
+// Top-five cards get their accuracy and average time from the same public stats
+function enrichTopStats(rows){
+  rows.slice(0, 5).forEach(r=>{
+    if(!r.id || r.anon || r.pubStats || r.pubPending) return;
+    r.pubPending = true;
+    pubLoad(r).then(p=>{ r.pubPending = false; if(p && !p.anon){ r.pubStats = p; if(view === 'leaderboard') render(); } }, ()=>{ r.pubPending = false; });
+  });
+}
+function publicProfileView(){
+  const r = nav.pubRow || {};
+  const w = el('<div></div>');
+  const back = el('<button class="btn ghost small pubp-back" type="button">Back to leaderboard</button>');
+  back.onclick = ()=>go('leaderboard');
+  w.appendChild(back);
+  const box = el('<div class="pubp"><p class="note-line">Loading profile\u2026</p></div>');
+  w.appendChild(box);
+  pubLoad(r).then(p=>{ box.innerHTML = pubProfileHTML(p); }, ()=>{
+    box.innerHTML = '<div class="card empty">This profile could not be loaded. Check your connection and try again.</div>';
+  });
+  return w;
+}
+function pubProfileHTML(p){
+  const hidden = !!p.anon;
+  const name = hidden ? 'Anonymous User' : (p.username || 'Student');
+  const pic = hidden ? ANON_SVG : (p.avatar ? '<img alt="" src="'+esc(p.avatar)+'">' : '<i>'+esc(name.charAt(0).toUpperCase())+'</i>');
+  const aim = p.exam==='adv' ? 'JEE Main + Advanced' : 'JEE Main';
+  const coach = [p.coaching_online, p.coaching_offline].filter(x=>x && !/^none/i.test(x));
+  const chips = [p.standard, aim].concat(coach).filter(Boolean).map(x=>'<span class="pubp-chip">'+esc(x)+'</span>').join('');
+  const acc = p.accuracy==null ? '\u2014' : (Math.round(p.accuracy*10)/10)+'%';
+  const avg = p.avg_time_s==null ? '\u2014' : p.avg_time_s+' s';
+  const badges = (p.badges||[]).map(n=>{ const b = BADGES.find(x=>x.name===n); return b ? '<div class="pubp-badge tier-'+b.tier.toLowerCase()+'"><span>'+esc(b.g)+'</span><b>'+esc(b.name)+'</b><small>'+esc(b.tier)+'</small></div>' : ''; }).join('');
+  return '<div class="pubp-head"><div class="pubp-av">'+pic+'</div><div class="pubp-who">'
+    +'<h2 class="pubp-name">'+esc(name)+'</h2>'+(!hidden && p.first_name ? '<div class="pubp-first">'+esc(p.first_name)+'</div>' : '')+'</div></div>'
+    +(chips ? '<div class="pubp-chips">'+chips+'</div>' : '')
+    +'<div class="pubp-stats"><div><b>'+esc(acc)+'</b><span>Accuracy</span></div>'
+    +'<div><b>'+esc(avg)+'</b><span>Avg per question</span></div>'
+    +'<div><b>'+esc(String(p.pyqs==null ? 0 : p.pyqs))+'</b><span>PYQs done</span></div></div>'
+    +'<div class="eyebrow pubp-k">Badges unlocked</div>'
+    +'<div class="pubp-badges">'+(badges || '<p class="note-line" style="margin:0">No badges unlocked yet.</p>')+'</div>';
+}
+
+// The badges this student has unlocked, published so that others can see them on the public profile
+function earnedBadgeNames(){
+  const c = badgeCtx();
+  c.allOthers = BADGES.filter(b=>!b.top).every(b=>b.ok(c));
+  return BADGES.filter(b=>b.ok(c)).map(b=>b.name);
+}
+let __badgesSent = null;
+function publishBadges(){
+  if(!sbSession) return;
+  const ids = earnedBadgeNames(), key = ids.join('|');
+  if(key === __badgesSent) return;
+  sbClient().from('profiles').update({badges: ids}).eq('id', sbSession.user.id).then(({error})=>{ if(!error) __badgesSent = key; }, ()=>{});
 }
 function lbStandingHTML(rows, meta){
   const me = rows.find(r=>r.me);
@@ -7495,6 +7616,8 @@ function draftLine(text){
 }
 async function openChat(f){
   fr.open = f; fr.msgs = []; fr.draft = loadDraft(f.id); fr.sel = null;
+  fr.loading = true; fr.waChat = null;
+  render();                       // the chat appears at once, with no messages yet
   await refreshChat(true);
   clearInterval(fr.poll);
   fr.poll = setInterval(()=>{ if(fr.open) refreshChat(false); }, 1000);
@@ -7587,6 +7710,7 @@ async function refreshChat(markRead){
     .order('created_at', {ascending:true}).limit(300);
   const before = fr.msgs.length;
   fr.msgs = (data || []).filter(function(m){ return !chatHiddenIds().has(m.id); });
+  if(markRead) fr.loading = false;
   db.from('chat_typing').select('user_id, updated_at, activity').eq('user_id', other).eq('peer_id', me).limit(1).then(function(r){
     const row = r.data && r.data[0];
     const t = (row && Date.now() - Date.parse(row.updated_at) < 3000) ? (row.activity || 'typing') : null;
@@ -8119,9 +8243,7 @@ const CAL_KINDS = {
 };
 // Defaults are added once per account. weekday: 0 = Sunday ... 6 = Saturday. Students can remove any of them.
 const CAL_DEFAULTS = [
-  {id:'def-rev',   kind:'revision', title:'Weekend revision', weekday:0, time:'10:00', repeat:'weekly', from:'default'},
-  {id:'def-test',  kind:'test',     title:'Coaching test',    weekday:6, time:'17:00', repeat:'weekly', from:'default'},
-  {id:'def-class', kind:'class',    title:'Online class',     weekday:3, time:'18:00', repeat:'weekly', from:'default'}
+  {id:'def-rev',   kind:'revision', title:'Weekend revision', weekday:0, time:'10:00', repeat:'weekly', from:'default'}
 ];
 const CAL_DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const CAL_ICS_DAYS = ['SU','MO','TU','WE','TH','FR','SA'];
@@ -8161,8 +8283,7 @@ function calTestToday(){ return calEventsOn(dayKey()).find(e=>e.kind==='test') |
 function calendarView(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Plan</div><h1 class="hm-title">Your <em>calendar.</em></h1></div>'));
-  const exam = EXAMS[0];
-  if(exam) w.appendChild(el('<p class="note-line" style="margin:0 0 12px"><b>'+daysLeft(exam.date)+'</b> days to '+esc(exam.name)+'</p>'));
+  w.appendChild(examRowEl());
 
   const [yy, mm] = calUI.month.split('-').map(Number);
   const first = new Date(yy, mm-1, 1), total = new Date(yy, mm, 0).getDate(), lead = (first.getDay()+6)%7;
@@ -8180,8 +8301,9 @@ function calendarView(){
   for(let d=1; d<=total; d++){
     const key = dayKey(new Date(yy, mm-1, d));
     const evs = calEventsOn(key);
-    const dots = evs.slice(0,3).map(e=>'<i style="--c:'+(CAL_KINDS[e.kind]||CAL_KINDS.other).c+'"></i>').join('');
-    const cell = el('<button class="cal-cell'+(key===today?' today':'')+(key===calUI.sel?' sel':'')+'" type="button" aria-label="'+esc(calLong(key))+', '+evs.length+' events">'
+    const isExam = EXAMS.some(x=>x.date===key);
+    const dots = (isExam?'<i class="exam-pip" aria-hidden="true"></i>':'')+evs.slice(0,3).map(e=>'<i style="--c:'+(CAL_KINDS[e.kind]||CAL_KINDS.other).c+'"></i>').join('');
+    const cell = el('<button class="cal-cell'+(key===today?' today':'')+(key===calUI.sel?' sel':'')+(isExam?' exam-day':'')+'" type="button" aria-label="'+esc(calLong(key))+', '+evs.length+' events">'
       +'<span>'+d+'</span><span class="cal-dots">'+dots+'</span></button>');
     cell.onclick = ()=>{ calUI.sel = key; render(); };
     grid.appendChild(cell);
@@ -8192,6 +8314,8 @@ function calendarView(){
   const agenda = el('<div class="cal-agenda"></div>');
   const isToday = calUI.sel === today;
   agenda.appendChild(el('<div class="eyebrow" style="margin:0 0 10px">'+esc(calLong(calUI.sel))+'</div>'));
+  const xIdx = EXAMS.findIndex(x=>x.date===calUI.sel);
+  if(xIdx>=0) agenda.appendChild(examCardEl(EXAMS[xIdx], xIdx));
   const evs = calEventsOn(calUI.sel);
   const doneToday = c.done[calUI.sel] || [];
   if(!evs.length) agenda.appendChild(el('<p class="note-line">Nothing planned. Add a revision block or a test.</p>'));
@@ -8217,11 +8341,9 @@ function calendarView(){
   add.onclick = ()=>calAddSheet(calUI.sel);
   agenda.appendChild(add);
   const acts = el('<div class="cal-actions"></div>');
-  const coach = el('<button class="btn ghost small" type="button">Set coaching times</button>');
-  coach.onclick = ()=>calCoachSheet();
   const ics = el('<button class="btn ghost small" type="button">Add to phone calendar</button>');
   ics.onclick = ()=>calExport();
-  acts.appendChild(coach); acts.appendChild(ics);
+  acts.appendChild(ics);
   agenda.appendChild(acts);
   w.appendChild(agenda);
   return w;
@@ -8328,12 +8450,15 @@ function calCoachSheet(){
 }
 
 // Test day card, shown on Home when a test is on today's date
+// A short line of encouragement, chosen per day so it changes from one day to the next
+const TEST_DAY_LINES = ['Take a deep breath. You have prepared for this.', 'All the best. Read each question twice.', 'Stay calm. One question at a time.', 'Trust your preparation and your pace.', 'Breathe, focus, and give it your best.', 'You have done the work. Now show it.'];
+function testDayLine(key){ return TEST_DAY_LINES[seed('testday-'+key) % TEST_DAY_LINES.length]; }
 function calTestDayCard(ev){
   const key = dayKey(), exam = EXAMS[0];
   const checks = calStore().checks[key] || {};
   const card = el('<div class="cal-card" style="--ec:var(--c-hard)"><i class="exam-orb" aria-hidden="true"></i>'
     +'<div class="eyebrow">Test day</div>'
-    +(exam ? '<div class="cal-num">'+Math.max(0, daysLeft(exam.date))+'<span> days to go</span></div><div class="cal-sub">'+esc(exam.name)+'</div>' : '')
+    +'<div class="cal-num cal-line">'+esc(testDayLine(key))+'</div>'
     +'<div class="cal-sub">'+esc(ev.title)+(ev.time ? ' at '+esc(calTime(ev.time)) : '')+'</div></div>');
   const list = el('<div class="cal-checks" role="group" aria-label="Test day checklist"></div>');
   CAL_TEST_CHECKS.forEach((t,i)=>{
@@ -9014,7 +9139,7 @@ function chatScreen(f){
 
   const list = el('<div class="wa-msgs" role="log" aria-live="polite"></div>');
   if(openedNow) list.classList.add('fresh');
-  if(!fr.msgs.length) list.appendChild(el('<p class="note-line wa-empty">Say hello. Only you and '+esc(f.username||'your friend')+' can read these messages.</p>'));
+  if(!fr.msgs.length && !fr.loading) list.appendChild(el('<p class="note-line wa-empty">Say hello. Only you and '+esc(f.username||'your friend')+' can read these messages.</p>'));
   let lastDay = '';
   const seenId = ((fr.msgs.filter(function(x){ return x.sender === me && x.read_at; })).pop() || {}).id;
   const pinned = pinsFor(f).filter(function(id){ return fr.msgs.some(function(x){ return x.id === id; }); });
@@ -10425,6 +10550,7 @@ function contactForm(){
 }
 const LEGAL_DOCS = {
   privacy: {no:'01', title:'Privacy policy', paras:[
+    'Public profiles. Other students can open your public profile from the leaderboard. It shows your username, first name, photo, standard, exam you are preparing for, coaching institute or classes, accuracy, average time per question, PYQs done and the badges you have unlocked. Your surname, email, age and birthdate are never shown. If you have turned off the leaderboard, your profile is anonymous: only your stats, standard, exam and coaching are shown, and your name, username and photo are hidden.',
     'Voice recordings. Audio is recorded only when you press and hold the microphone to send a voice message, or when you start an audio call, and only after you agree in the app. The recording is used to deliver that message or call and for no other purpose. It is never used for advertising, for training models, or for anything else, and you can delete a voice message you sent at any time.',
     'What we collect. Your account details: email, username, name, surname, age, optional birthdate, standard, the exam you prepare for, and whether you appear on the leaderboard. Your study data: answers, marks, notes, bookmarks, your own solutions and submitted sets. If you use the contact form, the name, email, optional phone number and comment you send us.',
     'Why we collect it. To run your account, keep your progress and sync it across your devices, show the leaderboard the way you chose, and reply to your messages.',
@@ -10441,22 +10567,23 @@ const LEGAL_DOCS = {
     '1. Using TORQ. TORQ is a study app for JEE preparation. You must be able to form a binding agreement, or have a parent or guardian agree for you if you are under 18. You agree to use the app only for lawful, personal study.',
     '2. Your account. You are responsible for keeping your login details private and for activity on your account. Tell us at once if you think someone else has used it. Provide accurate details, including your age and exam.',
     '3. What you give us. Your account details, study activity, notes and contact messages, as described in the privacy policy. You keep ownership of your own notes, solutions and profile content, and you give TORQ permission to store and show them to you across your devices.',
-    '4. Leaderboard. If you choose to be visible, your username and photo may be shown to other users. Do not use an offensive name, photo or username. We may remove any content or account that breaks these terms.',
-    '5. Acceptable use. Do not copy, resell or scrape TORQ, its notes, formula cards or explanations, or try to access the app\'s data, servers or other users\' accounts. Do not interfere with the app, bypass its limits or submit false reports.',
-    '6. Study content. TORQ provides practice material, notes and explanations to help you study. *It does not guarantee any result in any exam.* Check official sources for dates, syllabus and rules.',
-    '7. Independence. TORQ is *not affiliated with* the National Testing Agency, NCERT, the IITs or any exam body. See the Disclaimer for details.',
-    '8. Ending your account. You can log out or delete your account at any time from your profile. We may suspend an account that breaks these terms.',
-    '9. No warranty. TORQ is provided as is, without warranties of any kind, to the extent the law allows. We are not liable for indirect loss arising from your use of the app.',
-    '10. Changes. We may update these terms. We will show the date of the latest update here. Continued use after an update means you accept the new terms.',
-    '11. Contact. Questions about these terms can be sent through the Contact Us form on this page.',
-    '12. Screen awake. While TORQ is open and in view, it asks your device to keep the screen on so timed practice is not interrupted. This uses the browser\'s Screen Wake Lock. It stops when you leave the app, and you can turn the screen off yourself at any time.',
-    '13. Usage records and messages. TORQ records basic usage as described in the privacy policy, and admins may message you through For Your Eyes Only. Messages are for study and account matters only.'
+    '4. Public profiles. Your public profile can be opened by other students from the leaderboard. It shows your username, first name, photo (if you have one), standard, exam, coaching, accuracy, average time, PYQs done and unlocked badges. If you turn off the leaderboard, your name, username and photo are hidden and only your stats are shown. Do not add anything to your profile that you would not want other students to see.',
+    '5. Leaderboard. If you choose to be visible, your username and photo may be shown to other users. Do not use an offensive name, photo or username. We may remove any content or account that breaks these terms.',
+    '6. Acceptable use. Do not copy, resell or scrape TORQ, its notes, formula cards or explanations, or try to access the app\'s data, servers or other users\' accounts. Do not interfere with the app, bypass its limits or submit false reports.',
+    '7. Study content. TORQ provides practice material, notes and explanations to help you study. *It does not guarantee any result in any exam.* Check official sources for dates, syllabus and rules.',
+    '8. Independence. TORQ is *not affiliated with* the National Testing Agency, NCERT, the IITs or any exam body. See the Disclaimer for details.',
+    '9. Ending your account. You can log out or delete your account at any time from your profile. We may suspend an account that breaks these terms.',
+    '10. No warranty. TORQ is provided as is, without warranties of any kind, to the extent the law allows. We are not liable for indirect loss arising from your use of the app.',
+    '11. Changes. We may update these terms. We will show the date of the latest update here. Continued use after an update means you accept the new terms.',
+    '12. Contact. Questions about these terms can be sent through the Contact Us form on this page.',
+    '13. Screen awake. While TORQ is open and in view, it asks your device to keep the screen on so timed practice is not interrupted. This uses the browser\'s Screen Wake Lock. It stops when you leave the app, and you can turn the screen off yourself at any time.',
+    '14. Usage records and messages. TORQ records basic usage as described in the privacy policy, and admins may message you through For Your Eyes Only. Messages are for study and account matters only.'
   ]},
   copyright: {no:'03', title:'Copyright', paras:[
     'The app, its design, its notes, formula cards, explanations and worked examples are copyright TORQ, 2026. *Please do not copy or redistribute them without permission.*',
     'Question papers are the public previous-year papers used for practice. All trademarks and names belong to their owners.'
   ]},
-  disclaimer: {no:'04', title:'Independence notice', paras:['Usage figures. Totals such as active users, questions answered and coaching choices are used to improve TORQ. They are not a measure of any student or of any exam result, and they are not shared with exam bodies or coaching institutes.'], links:[
+  disclaimer: {no:'04', title:'Independence notice', paras:['Public profiles. Stats and badges on a public profile are based on your study data and are shown as they are. They are not checked against official results and do not show your real score in any exam.', 'Usage figures. Totals such as active users, questions answered and coaching choices are used to improve TORQ. They are not a measure of any student or of any exam result, and they are not shared with exam bodies or coaching institutes.'], links:[
     {label:'JEE Main, National Testing Agency', note:'Syllabus, important dates and rules for JEE Main', url:'https://jeemain.nta.ac.in'},
     {label:'JEE Advanced, IIT', note:'Syllabus PDF, schedule and brochure for JEE Advanced', url:'https://jeeadv.ac.in'},
     {label:'National Testing Agency', note:'Official notices and exam calendar', url:'https://nta.ac.in'}
@@ -11017,11 +11144,21 @@ function streakStrip(){
     +'<div class="sk-days">'+tiles.join('')+'</div><div class="sk-pts">'+Math.round(store.points||0)+' points</div>'+(pauseState().tokens>0?'<div class="sk-pause">Streak pause ready. One missed day will not break your streak.</div>':'')+'</div>');
 }
 // The question for a given day, the same for every user that day
+// Class 11 and 12 students mark the chapters they have done; the question of the day then comes only from those
+function isClass1112(){ const s = (store.profile && store.profile.standard) || ''; return /Class (11|12)/.test(s); }
+function syllabusDoneMap(){ store.syllabusDone = store.syllabusDone || {}; return store.syllabusDone; }
+function qotdPool(){
+  if(!isClass1112()) return QUESTIONS;
+  const done = syllabusDoneMap();
+  const ok = QUESTIONS.filter(q=>done[q.chapter]);
+  return ok.length ? ok : QUESTIONS;   // nothing ticked yet: no restriction
+}
 function qotdFor(d){
   if(!QUESTIONS.length) return null;
   const pinned = store.qotdPick && store.qotdPick[d];
   if(pinned && QMAP[pinned]) return QMAP[pinned];
-  return QUESTIONS[seed('qotd-'+d) % QUESTIONS.length];
+  const pool = qotdPool();
+  return pool[seed('qotd-'+d) % pool.length];
 }
 // Days on which the question of the day was answered (right or wrong). A skip does not count.
 function qotdDays(){
@@ -11037,6 +11174,16 @@ function qotdState(d){
   if(last && last.skipped) return 'skip';
   if(last) return last.c ? 'ok' : 'bad';
   if(store.qotdSkip && store.qotdSkip[d]===q.id) return 'skip';
+  return null;
+}
+// The answer to today's question, as recorded in its practice session (if it was answered in one)
+function qotdReviewRecord(){
+  const q = qotdFor(dayKey()); if(!q) return null;
+  for(const s of (store.sessions || [])){
+    if(s.title !== 'Question of the day' || dayKey(new Date(s.at)) !== dayKey()) continue;
+    const it = (s.items || []).find(x=>x.q === q.id);
+    if(it) return {title:'Question of the day', from:'home', items:[it]};
+  }
   return null;
 }
 function qotdCard(){
@@ -11059,6 +11206,16 @@ function qotdCard(){
   if(!st) actions.appendChild(rv);
   if(actions.childNodes.length) c.appendChild(actions);
   if(st){ const lab = {ok:'Answered correctly', bad:'Answered wrong', skip:'Skipped'}[st]; c.appendChild(el('<div class="qotd-status st-'+st+'">'+lab+'</div>')); }
+  if(st){
+    const rr = qotdReviewRecord();
+    if(rr){
+      const open = ()=>startReviewFromRecord(rr);
+      c.classList.add('qotd-review'); c.setAttribute('role','button'); c.tabIndex = 0;
+      c.onclick = open;
+      c.onkeydown = e=>{ if(e.key==='Enter'){ e.preventDefault(); open(); } };
+      c.appendChild(el('<div class="qotd-hint">Tap to review your answer</div>'));
+    }
+  }
   const wrap = el('<div></div>');
   wrap.appendChild(c);
   wrap.appendChild(el('<div class="qotd-rule"><b>Keep your streak:</b> answer today\u2019s question, right or wrong. Skipping it or missing the day breaks the streak. The easiest way is to open it first thing.</div>'));
@@ -11755,6 +11912,7 @@ function fxFace(c, side){
 }
 function flashSession(w){
   document.body.classList.add('flash-session');
+  if(!flashState.splashed && !swipeSplashSeenToday()){ flashState.splashed = true; showSwipeSplash(); }
   const st = flashState, n = st.pool.length, c = st.pool[st.i];
   const enterCls = st.enter ? ' fx2-swap-in' : ''; st.enter = false; st.busy = false;
   const top = el('<div class="fx2-top"><button type="button" class="fx2-back" id="fx2Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>'+(st.mine?'My cards':'Chapters')+'</span></button><span class="fx2-count">'+(st.i+1)+' / '+n+'</span></div>');
@@ -11770,7 +11928,7 @@ function flashSession(w){
   }
   const stage = el('<div class="fx2-stage" role="button" tabindex="0" aria-label="Flip card"><div class="fx2-stack"><div class="fx2-card'+(st.flipped?' flip':'')+'">'
     +fxFace(c,'front')+fxFace(c,'back')+'</div></div></div>');
-  stage.onclick = flashFlip;
+  flashBindSwipe(stage);
   stage.onkeydown = e=>{ if(e.key==='Enter'){ e.preventDefault(); flashFlip(); } };
   deck.appendChild(stage);
   split.appendChild(deck);
@@ -11778,7 +11936,7 @@ function flashSession(w){
   const side = el('<div class="fx2-side"><div class="fx2-side-k">'+esc(st.chapter)+'</div><div class="fx2-big">'+(st.i+1)+'<span> / '+n+'</span></div>'
     +'<div class="fx2-progress"><i style="width:'+(st.i/n*100)+'%"></i></div>'
     +'<div class="fx2-actions"><button type="button" class="fx2-btn quiet">Still learning</button><button type="button" class="fx2-btn primary">Got it</button></div>'
-    +'<div class="fx2-keys pc-only">Space to flip · arrows to answer</div></div>');
+    +'<div class="fx2-keys pc-only">Swipe right: got it · left: still learning · tap to flip</div></div>');
   const bs = side.querySelectorAll('.fx2-btn');
   bs[0].onclick = ()=>flashAnswer(false);
   bs[1].onclick = ()=>flashAnswer(true);
@@ -11786,6 +11944,57 @@ function flashSession(w){
   w.appendChild(split);
   setTimeout(fitFront, 0);
   return w;
+}
+// Swipe right: got it. Swipe left: still learning. A short drag moves the card; a tap still flips it.
+function flashBindSwipe(stage){
+  let x0 = null, y0 = null, dx = 0, drag = false, swiped = 0;
+  const card = ()=> stage.querySelector('.fx2-card');
+  stage.addEventListener('pointerdown', e=>{
+    if(flashState.busy || e.button > 0) return;
+    x0 = e.clientX; y0 = e.clientY; dx = 0; drag = false;
+  });
+  stage.addEventListener('pointermove', e=>{
+    if(x0 === null) return;
+    const mx = e.clientX - x0, my = e.clientY - y0;
+    if(!drag){
+      if(Math.abs(my) > Math.abs(mx) && Math.abs(my) > 12){ x0 = null; return; }   // vertical scroll wins
+      if(Math.abs(mx) < 8) return;
+      drag = true;
+      const c0 = card(); if(c0) c0.classList.add('dragging');
+      try{ stage.setPointerCapture(e.pointerId); }catch(_){}
+    }
+    dx = mx;
+    const c = card(); if(c) c.style.transform = 'translateX('+mx+'px) rotate('+(mx/22)+'deg)';
+  });
+  const end = ()=>{
+    if(x0 === null) return;
+    const wasDrag = drag, mx = dx, w = stage.getBoundingClientRect().width;
+    x0 = null; drag = false;
+    const c = card(); if(c) c.classList.remove('dragging');
+    if(!wasDrag) return;                 // a tap: the click below flips the card
+    swiped = Date.now();
+    if(Math.abs(mx) > Math.max(70, w * 0.25)){ if(c) c.style.transform = ''; flashAnswer(mx > 0); }
+    else if(c) c.style.transform = '';
+  };
+  stage.addEventListener('pointerup', end);
+  stage.addEventListener('pointercancel', end);
+  stage.addEventListener('click', e=>{
+    if(Date.now() - swiped < 350){ e.preventDefault(); e.stopImmediatePropagation(); return; }
+    flashFlip();
+  });
+  window.addEventListener('resize', ()=>{ if(view === 'flash') setTimeout(fitFront, 0); });
+}
+// Shown once a day before flashcards, like the pop-up before a practice set
+function swipeSplashSeenToday(){ return store.flashSwipeDay === dayKey(); }
+function showSwipeSplash(){
+  const ov = el('<div class="rules-splash" role="dialog" aria-modal="true"><div class="rules-card">'
+    +'<div class="eyebrow">Before you start</div>'
+    +'<h2 class="rules-title">Swipe to show what you know.</h2>'
+    +'<p class="rules-body">Swipe <span class="pop-kw">right</span> if you have got the topic. Swipe <span class="pop-kw">left</span> if you are still learning it.</p>'
+    +'<p class="rules-body">You can also use the buttons, or tap the card to flip it. Your choices show which topics need more time.</p>'
+    +'<button class="btn block rules-ok" type="button">Okay, I understand</button></div></div>');
+  document.body.appendChild(ov);
+  ov.querySelector('.rules-ok').onclick = ()=>{ ov.remove(); store.flashSwipeDay = dayKey(); persist(); };
 }
 function flashAnswer(ok){
   const st = flashState, c = st.pool[st.i];
@@ -11941,5 +12150,104 @@ document.addEventListener('keydown', e=>{
   if(t) openUsp(Number(t.dataset.usp));
 });
 </script>
+<style id="final-fixes">
+/* Flashcards: sized from the viewport, never clipped on phones, never oversized on wide screens */
+.fx2-stage{ height:auto !important; touch-action:pan-y; user-select:none; -webkit-user-select:none; }
+.fx2-card.dragging{ transition:none !important; }
+.fx2-stack, .fx2-under{ width:min(82vw,330px) !important; max-width:82vw !important; height:auto !important; aspect-ratio:1 / 1.42 !important; }
+.fx2-deck{ height:auto !important; width:100% !important; }
+.fx2-split{ height:auto !important; min-height:0 !important; }
+body.flash-session{ overflow:auto !important; height:auto !important; }
+body.flash-session #app{ height:auto !important; overflow:visible !important; display:block !important; padding-top:14px !important; padding-bottom:28px !important; }
+body.flash-session .fl-wrap{ display:block !important; max-width:none !important; }
+@media (min-width:960px){
+  body.flash-session{ overflow:hidden !important; height:100dvh !important; }
+  body.flash-session #app{ height:100dvh !important; display:flex !important; flex-direction:column !important; overflow:hidden !important; padding-top:18px !important; padding-bottom:18px !important; box-sizing:border-box !important; }
+  body.flash-session .fl-wrap{ flex:1 1 auto !important; min-height:0 !important; display:flex !important; flex-direction:column !important; width:100% !important; max-width:1100px !important; margin:0 auto !important; }
+  body.flash-session .fx2-split{ flex:1 1 auto !important; min-height:0 !important; align-items:center !important; }
+  body.flash-session .fx2-deck{ height:100% !important; width:auto !important; flex-shrink:0 !important; }
+  body.flash-session .fx2-stage{ height:100% !important; align-items:center !important; }
+  body.flash-session .fx2-stack{ width:auto !important; max-width:none !important; height:min(100%, 420px) !important; aspect-ratio:1 / 1.42 !important; }
+  body.flash-session .fx2-under{ width:auto !important; max-width:none !important; height:min(100%, 420px) !important; aspect-ratio:1 / 1.42 !important; top:50% !important; transform:translate(-50%,-50%) !important; }
+  body.flash-session .fx2-side{ width:260px !important; height:auto !important; max-height:100%; justify-content:center; flex-shrink:0; }
+}
+/* Syllabus done (Class 11 and 12) */
+.syl-done-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:8px; }
+.syl-done-chip{ display:flex; align-items:center; gap:10px; text-align:left; padding:10px 12px; border-radius:var(--r-md); border:1px solid var(--border); background:var(--surface-2); color:var(--text); font:500 13.5px/1.3 Inter,sans-serif; cursor:pointer; }
+.syl-done-chip.on{ border-color:var(--accent); background:var(--accent-soft); }
+.syl-done-box{ width:18px; height:18px; flex-shrink:0; border-radius:5px; border:1.5px solid var(--muted); display:grid; place-items:center; font-size:12px; font-weight:700; color:var(--accent-ink); }
+.syl-done-chip.on .syl-done-box{ background:var(--accent); border-color:var(--accent); }
+/* JEE exam dates: the same card as the home page, animated; calendar cells marked */
+.cal-agenda > .exam-card{ margin-bottom:12px; }
+.exam-card{ animation:examRise .7s cubic-bezier(.2,.8,.2,1) both; }
+.exam-orb{ animation:examFloat 6s ease-in-out infinite; }
+.cal-cell.exam-day{ box-shadow:inset 0 0 0 1.5px var(--accent); animation:examPulse 2.4s ease-in-out infinite; }
+.exam-pip{ display:inline-block; width:6px; height:6px; border-radius:50%; background:linear-gradient(135deg,var(--c-phys),var(--accent)); margin-right:2px; }
+@keyframes examRise{ from{ opacity:0; transform:translateY(12px) scale(.97); } to{ opacity:1; transform:none; } }
+@keyframes examFloat{ 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(-10px,-14px); } }
+@keyframes examPulse{ 0%,100%{ box-shadow:inset 0 0 0 1.5px var(--accent), 0 0 0 0 transparent; } 50%{ box-shadow:inset 0 0 0 1.5px var(--accent), 0 0 0 5px color-mix(in srgb,var(--accent) 18%,transparent); } }
+@media (prefers-reduced-motion:reduce){ .exam-card, .exam-orb, .cal-cell.exam-day{ animation:none !important; } }
+</style>
+<style id="micro-motion">
+.qotd-hint{ font-size:12px; color:var(--muted); margin-top:10px; }
+.card.qotd.qotd-review{ cursor:pointer; }
+@media (hover:hover){ .card.qotd.qotd-review:hover{ transform:translateY(-2px); box-shadow:0 18px 34px -24px var(--shadow); } }
+.card.qotd.qotd-review{ transition:transform .2s ease, box-shadow .2s ease; }
+.card.qotd.qotd-review:active{ transform:scale(.985); }
+@media (prefers-reduced-motion:no-preference){
+  @keyframes pageFade{ from{ opacity:0; } to{ opacity:1; } }
+  @keyframes pillIn{ from{ opacity:0; transform:scale(.8); } to{ opacity:1; transform:none; } }
+  @keyframes boxPop{ 0%{ transform:scale(.4); } 70%{ transform:scale(1.12); } 100%{ transform:none; } }
+  @keyframes selPop{ from{ transform:scale(.9); } to{ transform:none; } }
+  @keyframes goalGrow{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
+  /* Page change: a quick fade-in of the page (opacity only, so fixed pop-ups are unaffected) */
+  #app.page-in{ animation:pageFade .32s ease backwards; }
+  /* Progress bars grow from the left when they appear */
+  .goal-bar i, .fx2-progress i{ transform-origin:left center; animation:goalGrow .9s cubic-bezier(.2,.8,.2,1) backwards; }
+  /* Status pill and tick boxes pop in */
+  .qotd-status{ animation:pillIn .45s cubic-bezier(.2,1.4,.4,1) .15s backwards; }
+  .syl-done-chip{ transition:background .2s ease, border-color .2s ease, transform .12s ease; }
+  .syl-done-chip.on .syl-done-box{ animation:boxPop .4s cubic-bezier(.2,1.2,.4,1); }
+  /* Calendar: the chosen day eases into its selected state */
+  .cal-cell{ transition:background .2s ease, transform .12s ease; }
+  .cal-cell:active{ transform:scale(.92); }
+  .cal-cell.sel{ animation:selPop .28s cubic-bezier(.2,1.3,.4,1); }
+  /* Segmented controls and menu items glide between states */
+  .seg button{ transition:background .25s ease, color .25s ease, box-shadow .25s ease; }
+  .bn{ transition:background .2s ease, color .2s ease; }
+  /* Buttons: a soft lift on hover (pointer devices only) and a tactile press */
+  .btn{ transition:transform .15s ease, box-shadow .2s ease, filter .2s ease; }
+  @media (hover:hover){
+    .btn:not(:active):hover{ filter:brightness(1.06); }
+    .subjcard:not(:active):hover{ transform:translateY(-2px); transition:transform .25s cubic-bezier(.2,.8,.2,1); }
+    .wa-row{ transition:background .15s ease; }
+  }
+  /* Inputs: the focus ring fades in instead of snapping */
+  input:not([type=checkbox]):not([type=radio]), select, textarea{ transition:border-color .2s ease, box-shadow .2s ease; }
+}
+</style>
+<style id="public-profile">
+.pubp{ display:flex; flex-direction:column; gap:14px; margin-top:8px; }
+.pubp-back{ margin-bottom:4px; }
+.pubp-head{ display:flex; align-items:center; gap:16px; padding:18px; border-radius:var(--r-xl); background:linear-gradient(160deg,var(--surface),var(--surface-2)); border:1px solid var(--border); }
+.pubp-av{ width:72px; height:72px; flex-shrink:0; border-radius:50%; overflow:hidden; display:grid; place-items:center; background:var(--accent); color:var(--accent-ink); font:600 28px Lora,Georgia,serif; }
+.pubp-av img{ width:100%; height:100%; object-fit:cover; display:block; }
+.pubp-av svg{ width:100%; height:100%; }
+.pubp-name{ font:600 22px/1.2 Lora,Georgia,serif; margin:0; color:var(--text); overflow-wrap:anywhere; }
+.pubp-first{ font-size:13px; color:var(--muted); margin-top:3px; }
+.pubp-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+.pubp-chip{ font:600 12px Inter,sans-serif; padding:6px 12px; border-radius:999px; background:var(--accent-soft); color:var(--accent-text); border:1px solid var(--border); }
+.pubp-stats{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+.pubp-stats > div{ padding:14px 10px; border-radius:var(--r-lg); background:var(--surface-2); border:1px solid var(--border); text-align:center; min-width:0; }
+.pubp-stats b{ display:block; font:600 20px Lora,Georgia,serif; color:var(--text); font-variant-numeric:tabular-nums; }
+.pubp-stats span{ font-size:11.5px; color:var(--muted); }
+.pubp-k{ margin-top:4px; }
+.pubp-badges{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+.pubp-badge{ display:flex; flex-direction:column; align-items:center; gap:4px; padding:14px 10px; border-radius:var(--r-lg); border:1px solid var(--border); background:var(--surface); text-align:center; }
+.pubp-badge > span{ font:600 26px/1 Lora,Georgia,serif; color:var(--accent-text); }
+.pubp-badge b{ font-size:13px; color:var(--text); }
+.pubp-badge small{ font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; }
+.lb-st small{ white-space:nowrap; }
+</style>
 </body>
 </html>
