@@ -678,6 +678,18 @@ body.msg-fit #app{ background:transparent !important; position:relative; z-index
 .cal-kinds{ display:flex; flex-wrap:wrap; gap:8px; margin:8px 0 14px; }
 .cal-kinds button{ padding:8px 12px; border-radius:999px; border:1px solid var(--border); background:var(--surface-2); color:var(--text); font:600 13px Inter,sans-serif; cursor:pointer; }
 .cal-kinds button.on{ border-color:var(--c); background:color-mix(in srgb, var(--c) 18%, var(--surface)); }
+.cal-sheet{ max-height:88vh; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+.cal-kbslot{ margin-top:6px; }
+.cal-actions{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.cal-checks{ display:grid; gap:8px; margin:14px 0 6px; }
+.cal-check{ display:flex; align-items:center; gap:10px; padding:11px 12px; border-radius:var(--r-md); border:1px solid var(--border); background:var(--surface-2); color:var(--text); font:500 14px/1.3 Inter,sans-serif; text-align:left; cursor:pointer; }
+.cal-check.on{ color:var(--muted); text-decoration:line-through; }
+.cal-box{ width:18px; height:18px; flex:0 0 18px; border-radius:6px; border:1.5px solid var(--border); background:var(--surface); }
+.cal-check.on .cal-box{ background:var(--accent); border-color:var(--accent); }
+.cal-breathe{ height:120px; display:flex; align-items:center; justify-content:center; }
+.cal-breathe i{ width:72px; height:72px; border-radius:50%; background:radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--accent) 70%, #fff), var(--accent)); opacity:.85; animation:calBreathe 14s ease-in-out infinite; }
+@keyframes calBreathe{ 0%,100%{ transform:scale(.6); } 29%,57%{ transform:scale(1); } }
+@media (prefers-reduced-motion: reduce){ .cal-breathe i{ animation:none; transform:scale(.8); } }
 .cal-input{ width:100%; box-sizing:border-box; padding:12px 14px; margin-bottom:10px; border-radius:var(--r-md); border:1px solid var(--border); background:var(--surface-2); color:var(--text); font:15px Inter,sans-serif; }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
@@ -3099,6 +3111,7 @@ body.qnav-open .gutter{ opacity:0; }
     document.body.appendChild(wrap);
   }
   document.addEventListener('click', function(e){
+    if(e.target && e.target.tagName === 'INPUT') return;   // let the file picker open
     var pick = e.target && e.target.closest && e.target.closest('label.av-pick');
     if(!pick) return;
     e.preventDefault(); e.stopPropagation();   // stop the browser opening the file picker straight away
@@ -3147,7 +3160,7 @@ body.qnav-open .gutter{ opacity:0; }
 <script>
 // ---------- Data paths (adjust here if the folder layout changes) ----------
 // Serve the repo root with a local server (e.g. `python3 -m http.server`); opening the file directly blocks fetch().
-const APP_BUILD = '2026-11-03-l';   // bumped with every release; the app compares it with the hosted file
+const APP_BUILD = '2026-11-03-m';   // bumped with every release; the app compares it with the hosted file
 const PATHS = {
   index: 'data/index.json',  // lists every paper; each paper's "file" field points at its question JSON
   solutions: 'data/solutions/'    // one file per paper: data/solutions/<paper-id>.json
@@ -3552,7 +3565,7 @@ function pauseState(){
   sp.duoMilestones = sp.duoMilestones || {};
   return sp;
 }
-function streakDaysSet(){ const s = qotdDays(); Object.keys(pauseState().days).forEach(k=>s.add(k)); return s; }
+function streakDaysSet(){ const s = qotdDays(); Object.keys(pauseState().days).forEach(k=>s.add(k)); calDoneDays().forEach(k=>s.add(k)); return s; }
 function shiftDay(k, delta){ const [y,m,d] = k.split('-').map(Number); return dayKey(new Date(y, m-1, d+delta)); }
 function applyStreakPause(){
   const sp = pauseState();
@@ -4545,7 +4558,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v1.5.0';
+const APP_VERSION = 'v1.6.0';
 const LAST_UPDATED = '3 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -5296,6 +5309,8 @@ function homeView(){
   }
   w.appendChild(wc);
   w.appendChild(hmMore);
+  const testToday = calTestToday();
+  if(testToday) w.insertBefore(calTestDayCard(testToday), w.children[1] || null);
 
   return w;
 }
@@ -6457,24 +6472,29 @@ const LB_TROPHY = '<svg viewBox="0 0 24 24" width="32" height="32" fill="none" s
 const LB_CROWN = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z" fill="currentColor"/></svg>';
 const LB_BOARDS = [
   {k:'points', l:'Points',   sub:'Most points earned',            need:false, note:'Points come from your answers. A correct, sure answer earns the most, a quick one adds a bonus, and a wrong answer costs a little.'},
-  {k:'time',   l:'Time',     sub:'Most time spent answering',     need:false, note:'Total time spent answering questions in this period.'},
-  {k:'speed',  l:'Speed',    sub:'Fastest correct answers',       need:true,  note:'Average seconds per correct answer. Lower is faster. Needs 5 or more correct answers in the period.'},
+  {k:'time',   l:'Avg time',  sub:'Average seconds per question. Lower is faster.', need:true,  note:'Average seconds per question in this period. Choose all answered or correct only. Skipped questions are never counted. Needs 5 or more answers in the period.'},
   {k:'clean',  l:'Accuracy', sub:'Correct share of all answers',  need:true,  note:'Correct answers as a share of every question in the period, skips included. Needs 5 or more answers.'}
 ];
 const LB_PERIODS = [['day','Today'],['week','This week'],['month','This month'],['3m','Last 3 months'],['6m','Last 6 months'],['year','Last year'],['all','All time']];
 const LB_LIMIT = 50, LB_TTL = 60000, LB_STUCK = 15000;
-let lbState = {board:'points', period:'all', cache:{}};
+let lbState = {board:'points', period:'all', timeFilter:'all', cache:{}};
 let lbSeq = 0;
-function lbKey(){ return lbState.board+'|'+lbState.period; }
+function lbKey(){ return lbState.board+'|'+lbState.period+(lbState.board==='time' ? '|'+lbState.timeFilter : ''); }
 function setC(key, v){ v.at = Date.now(); lbState.cache[key] = v; }
 function lbFmt(board, s){
   if(s==null || isNaN(s)) return '–';
   if(board==='points') return Math.round(s).toLocaleString('en-IN')+' pts';
   if(board==='clean') return (Math.round(s*10)/10)+'%';
-  if(board==='speed') return (Math.round(s*10)/10)+' s';
+  if(board==='time') return (Math.round(s*10)/10)+' s';
   const m = Math.round(s);
   if(m<1) return '<1 min';
   return m>=60 ? Math.floor(m/60)+' h '+(m%60)+' min' : m+' min';
+}
+// Average time boards read their own function; every other board keeps the original calls
+function lbRequest(db, board, period, filt){
+  if(board==='time') return db.rpc('leaderboard_avg_time', {p_period:period, p_filter:filt, p_limit:LB_LIMIT});
+  const a = {p_board:board, p_period:period, p_limit:LB_LIMIT};
+  return db.rpc('leaderboard_with_stats', a).then(res => res.error ? db.rpc('leaderboard', a) : res);
 }
 // Loads one board. A newer request for the same board replaces an older one, so a slow reply can never overwrite fresh data.
 function lbFetch(force){
@@ -6485,11 +6505,11 @@ function lbFetch(force){
   }
   const db = sbClient();
   if(!db || !sbSession){ setC(key, {err:'Sign in to see the leaderboard.'}); return; }
-  const tok = ++lbSeq, board = lbState.board, period = lbState.period;
+  const tok = ++lbSeq, board = lbState.board, period = lbState.period, filt = lbState.timeFilter;
   setC(key, {loading:true, tok});
   // Newer function with PYQ count and accuracy; falls back to the original one until the SQL is installed
   const lbArgs = {p_board:board, p_period:period, p_limit:LB_LIMIT};
-  db.rpc('leaderboard_with_stats', lbArgs).then(res => res.error ? db.rpc('leaderboard', lbArgs) : res).then(({data,error})=>{
+  lbRequest(db, board, period, filt).then(({data,error})=>{
     const cur = lbState.cache[key];
     if(!cur || cur.tok!==tok) return;
     if(error){ console.error(error); setC(key, {err:'Could not load the leaderboard. Check your connection and try again.'}); return; }
@@ -6645,6 +6665,7 @@ function leaderboardView(){
   w.appendChild(seg);
   const bar = el('<div class="lb-bar"></div>');
   bar.appendChild(pickerField('Time range', LB_PERIODS.map(p=>({v:p[0], l:p[1]})), lbState.period, v=>{ lbState.period = v; render(); }));
+  if(lbState.board==='time') bar.appendChild(pickerField('Answers', [{v:'all', l:'All answered'}, {v:'correct', l:'Correct only'}], lbState.timeFilter, v=>{ lbState.timeFilter = v; render(); }));
   w.appendChild(bar);
   w.appendChild(el('<p class="lb-blurb">'+esc(meta.sub)+'</p>'));
   const fo = el('<label class="vis-toggle" style="margin:0 0 12px"><input type="checkbox"'+(lbState.friendsOnly?' checked':'')+'><span class="vis-sw" aria-hidden="true"></span><span class="vis-lbl">Show only my friends</span></label>');
@@ -7569,7 +7590,7 @@ async function refreshChat(markRead){
   db.from('chat_typing').select('user_id, updated_at, activity').eq('user_id', other).eq('peer_id', me).limit(1).then(function(r){
     const row = r.data && r.data[0];
     const t = (row && Date.now() - Date.parse(row.updated_at) < 3000) ? (row.activity || 'typing') : null;
-    if(fr.peerActivity !== t){ fr.peerActivity = t; if(voiceRec.state === 'idle') render(); }
+    if(fr.peerActivity !== t){ fr.peerActivity = t; if(voiceRec.state === 'idle') repaintChat(); }
   }, function(){});
   const ids = fr.msgs.map(function(x){ return x.id; });
   if(ids.length){
@@ -7577,14 +7598,27 @@ async function refreshChat(markRead){
       const grouped = {};
       (r.data || []).forEach(function(x){ (grouped[x.message_id] = grouped[x.message_id] || []).push(x); });
       const key = JSON.stringify(grouped);
-      if(key !== fr.reactKey){ fr.reactKey = key; fr.reacts = grouped; if(voiceRec.state === 'idle') render(); }
+      if(key !== fr.reactKey){ fr.reactKey = key; fr.reacts = grouped; if(voiceRec.state === 'idle') repaintChat(); }
     }, function(){});
   }
   if(markRead) scrollChatToEnd = true;
-  if((fr.msgs.length !== before || markRead) && voiceRec.state === 'idle') render();
+  if((fr.msgs.length !== before || markRead) && voiceRec.state === 'idle') repaintChat();
   if(fr.open) db.from('chat_messages').update({read_at: new Date().toISOString()}).eq('sender', other).eq('recipient', me).is('read_at', null).then(()=>{}, ()=>{});
 }
 let scrollChatToEnd = false;
+// Redraw only the open chat, keeping scroll position, instead of rebuilding the whole page every second
+function repaintChat(){
+  const pane = document.querySelector('.msg-split .msg-pane-right');
+  if(!pane || !fr.open){ render(); return; }
+  const old = pane.querySelector('.wa-msgs');
+  const top = old ? old.scrollTop : 0;
+  const atEnd = old ? (old.scrollHeight - old.scrollTop - old.clientHeight < 60) : true;
+  pane.innerHTML = '';
+  pane.appendChild(chatScreen(fr.open));
+  const next = pane.querySelector('.wa-msgs');
+  if(next){ next.scrollTop = (atEnd || scrollChatToEnd) ? next.scrollHeight : top; }
+  scrollChatToEnd = false;
+}
 async function sendChat(){
   if(!fr.open) return;
   const text = fr.draft.trim(); if(!text) return;
@@ -8089,14 +8123,19 @@ const CAL_DEFAULTS = [
   {id:'def-test',  kind:'test',     title:'Coaching test',    weekday:6, time:'17:00', repeat:'weekly', from:'default'},
   {id:'def-class', kind:'class',    title:'Online class',     weekday:3, time:'18:00', repeat:'weekly', from:'default'}
 ];
+const CAL_DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const CAL_ICS_DAYS = ['SU','MO','TU','WE','TH','FR','SA'];
+const CAL_TEST_CHECKS = ['Admit card and ID', 'Pens, pencils and eraser', 'Water and a light snack', 'Sleep well the night before'];
 function calStore(){
   store.calendar = store.calendar || {seeded:false, events:[]};
-  if(!store.calendar.seeded){
-    store.calendar.seeded = true;
-    store.calendar.events = CAL_DEFAULTS.map(d=>Object.assign({start: dayKey()}, d)).concat(store.calendar.events || []);
+  const c = store.calendar;
+  c.done = c.done || {}; c.checks = c.checks || {};
+  if(!c.seeded){
+    c.seeded = true;
+    c.events = CAL_DEFAULTS.map(d=>Object.assign({start: dayKey()}, d)).concat(c.events || []);
     persist();
   }
-  return store.calendar;
+  return c;
 }
 function calEventsOn(key){
   const wd = new Date(key+'T12:00:00').getDay();
@@ -8107,6 +8146,18 @@ function calEventsOn(key){
 function calTime(t){ if(!t) return 'All day'; const [h,m]=t.split(':').map(Number); return ((h+11)%12+1)+':'+String(m).padStart(2,'0')+(h>=12?' PM':' AM'); }
 function calLong(key){ return new Date(key+'T12:00:00').toLocaleDateString('en-IN',{weekday:'long', day:'numeric', month:'long'}); }
 let calUI = {month: dayKey().slice(0,7), sel: dayKey()};
+
+// Streak: a revision block marked done on its day counts that day towards the streak
+function calDoneDays(){ const c = calStore(); return Object.keys(c.done).filter(k=>c.done[k] && c.done[k].length); }
+function calToggleDone(key, id){
+  const c = calStore(); const list = c.done[key] || [];
+  c.done[key] = list.includes(id) ? list.filter(x=>x!==id) : list.concat(id);
+  if(!c.done[key].length) delete c.done[key];
+  persist();
+}
+// Test day: the first test on today's date, if there is one
+function calTestToday(){ return calEventsOn(dayKey()).find(e=>e.kind==='test') || null; }
+
 function calendarView(){
   const w = el('<div></div>');
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Plan</div><h1 class="hm-title">Your <em>calendar.</em></h1></div>'));
@@ -8137,51 +8188,95 @@ function calendarView(){
   }
   w.appendChild(grid);
 
+  const c = calStore();
   const agenda = el('<div class="cal-agenda"></div>');
+  const isToday = calUI.sel === today;
   agenda.appendChild(el('<div class="eyebrow" style="margin:0 0 10px">'+esc(calLong(calUI.sel))+'</div>'));
   const evs = calEventsOn(calUI.sel);
+  const doneToday = c.done[calUI.sel] || [];
   if(!evs.length) agenda.appendChild(el('<p class="note-line">Nothing planned. Add a revision block or a test.</p>'));
   evs.forEach(e=>{
     const k = CAL_KINDS[e.kind] || CAL_KINDS.other;
     const row = el('<div class="cal-ev" style="--c:'+k.c+'"><span class="bar" aria-hidden="true"></span>'
       +'<div style="flex:1;min-width:0"><b>'+esc(e.title)+'</b><small>'+esc(calTime(e.time))+(e.repeat==='weekly'?' · every week':'')+'</small></div>'
       +'<span class="cal-tag">'+esc(k.l)+(e.from==='default'?' · default':'')+'</span></div>');
+    if(e.kind==='revision'){
+      const on = doneToday.includes(e.id);
+      const dn = el('<button class="btn ghost small" type="button" style="margin-left:6px" aria-pressed="'+on+'"'+(isToday?'':' disabled')+'>'+(on?'Done ✓':'Mark done')+'</button>');
+      dn.onclick = ()=>{ calToggleDone(calUI.sel, e.id); render(); };
+      row.appendChild(dn);
+    }
     const rm = el('<button class="btn ghost small" type="button" style="margin-left:6px">Remove</button>');
     rm.onclick = ()=>{ if(!window.confirm('Remove "'+e.title+'" from your calendar?')) return; calRemove(e.id); render(); };
     row.appendChild(rm);
     agenda.appendChild(row);
   });
+  if(doneToday.length) agenda.appendChild(el('<p class="cal-note">Revision done. This day counts towards your streak.</p>'));
+  else if(isToday && evs.some(e=>e.kind==='revision')) agenda.appendChild(el('<p class="cal-note">Mark a revision block done to count today towards your streak.</p>'));
   const add = el('<button class="btn block" type="button" style="margin-top:6px">Add an event</button>');
   add.onclick = ()=>calAddSheet(calUI.sel);
   agenda.appendChild(add);
+  const acts = el('<div class="cal-actions"></div>');
+  const coach = el('<button class="btn ghost small" type="button">Set coaching times</button>');
+  coach.onclick = ()=>calCoachSheet();
+  const ics = el('<button class="btn ghost small" type="button">Add to phone calendar</button>');
+  ics.onclick = ()=>calExport();
+  acts.appendChild(coach); acts.appendChild(ics);
+  agenda.appendChild(acts);
   w.appendChild(agenda);
   return w;
 }
 function calAdd(ev){ calStore().events.push(Object.assign({id:'e'+Date.now()}, ev)); persist(); }
 function calRemove(id){ const c = calStore(); c.events = c.events.filter(e=>e.id!==id); persist(); }
+
+// A keyboard target for a text field inside a sheet (the same pattern as the Doubt Relay note)
+function makeKbTarget(field, placeholder, max){
+  const box = {v: ''};
+  const target = {
+    get: ()=>box.v,
+    field: ()=>field,
+    set: v=>{
+      box.v = String(v).replace(/[\r\n]/g,'').slice(0, max || 60);
+      field.innerHTML = box.v ? '<span>'+esc(box.v)+'</span>' : '<i>'+esc(placeholder||'')+'</i>';
+    }
+  };
+  target.set('');
+  return target;
+}
+// Shows the app keypad at the foot of a sheet, for the given target (null hides it)
+function calKbShow(slot, target){
+  fr.kbTarget = target || null; fr.kbPanel = null;
+  slot.innerHTML = '';
+  if(target) slot.appendChild(waKeyboard());
+}
+
 function calAddSheet(dateKey){
   let kind = 'revision', repeat = false;
   const scrim = el('<div class="scrim"></div>');
-  const sheet = el('<div class="sheet" role="dialog" aria-modal="true" aria-label="New event"><div class="grab"></div><div class="sheet-title">New event</div></div>');
+  const sheet = el('<div class="sheet cal-sheet" role="dialog" aria-modal="true" aria-label="New event"><div class="grab"></div><div class="sheet-title">New event</div></div>');
   const kinds = el('<div class="cal-kinds" role="group" aria-label="Type"></div>');
-  const kb = {};
   Object.keys(CAL_KINDS).forEach(k=>{
     const b = el('<button type="button" style="--c:'+CAL_KINDS[k].c+'"'+(k===kind?' class="on"':'')+'>'+esc(CAL_KINDS[k].l)+'</button>');
     b.onclick = ()=>{ kind = k; kinds.querySelectorAll('button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); };
     kinds.appendChild(b);
   });
   sheet.appendChild(kinds);
-  const title = el('<input class="cal-input" type="text" maxlength="60" placeholder="e.g. Chapter 4 revision" aria-label="Title">');
+  const titleField = el('<div class="cal-input wa-field" role="textbox" aria-label="Title"></div>');
+  const titleTarget = makeKbTarget(titleField, 'e.g. Chapter 4 revision', 60);
   const date = el('<input class="cal-input" type="date" aria-label="Date" value="'+esc(dateKey)+'">');
   const time = el('<input class="cal-input" type="time" aria-label="Time" value="18:00">');
   const rep = el('<label class="vis-toggle" style="margin:0 0 14px"><input type="checkbox"><span class="vis-sw" aria-hidden="true"></span><span class="vis-lbl">Repeat every week</span></label>');
   rep.querySelector('input').onchange = e=>{ repeat = e.target.checked; };
-  sheet.appendChild(title); sheet.appendChild(date); sheet.appendChild(time); sheet.appendChild(rep);
+  const kbSlot = el('<div class="cal-kbslot"></div>');
+  titleField.onclick = ()=>calKbShow(kbSlot, titleTarget);
+  // Native pickers take over from the keypad
+  date.onfocus = time.onfocus = ()=>calKbShow(kbSlot, null);
+  sheet.appendChild(titleField); sheet.appendChild(date); sheet.appendChild(time); sheet.appendChild(rep);
   const save = el('<button class="btn block" type="button">Save event</button>');
-  const close = ()=>{ scrim.remove(); sheet.remove(); };
+  const close = ()=>{ if(fr.kbTarget===titleTarget){ fr.kbTarget = null; fr.kbPanel = null; } scrim.remove(); sheet.remove(); };
   save.onclick = ()=>{
-    const t = title.value.trim();
-    if(!t){ title.focus(); return; }
+    const t = titleTarget.get().trim();
+    if(!t){ calKbShow(kbSlot, titleTarget); return; }
     if(!date.value){ date.focus(); return; }
     const ev = {kind, title:t, time:time.value || null, from:'custom', start:date.value, weekday:new Date(date.value+'T12:00:00').getDay()};
     if(repeat){ ev.repeat = 'weekly'; } else { ev.date = date.value; }
@@ -8189,9 +8284,103 @@ function calAddSheet(dateKey){
     close(); render();
   };
   sheet.appendChild(save);
+  sheet.appendChild(kbSlot);
   scrim.onclick = close;
   document.body.appendChild(scrim); document.body.appendChild(sheet);
-  title.focus();
+  calKbShow(kbSlot, titleTarget);
+}
+
+// Coaching sync: the class and the test become the student's real weekly timetable
+function calSetDefault(id, weekday, time){
+  const c = calStore();
+  let ev = c.events.find(e=>e.id===id);
+  if(!ev){ ev = Object.assign({start: dayKey()}, CAL_DEFAULTS.find(d=>d.id===id)); c.events.push(ev); }
+  ev.weekday = weekday; ev.time = time || null;
+  persist();
+}
+function calCoachSheet(){
+  const c = calStore();
+  const rows = [['def-class','Online class'], ['def-test','Coaching test']];
+  const pick = {}, times = {};
+  const scrim = el('<div class="scrim"></div>');
+  const sheet = el('<div class="sheet cal-sheet" role="dialog" aria-modal="true" aria-label="Coaching times"><div class="grab"></div><div class="sheet-title">Coaching times</div></div>');
+  sheet.appendChild(el('<p class="note-line" style="margin:0 0 6px">Your class and test repeat every week on these days.</p>'));
+  rows.forEach(([id,label])=>{
+    const ev = c.events.find(e=>e.id===id) || CAL_DEFAULTS.find(d=>d.id===id);
+    pick[id] = ev.weekday;
+    sheet.appendChild(el('<div class="eyebrow" style="margin:12px 0 4px">'+esc(label)+'</div>'));
+    const seg = el('<div class="cal-kinds" role="group" aria-label="'+esc(label)+' day"></div>');
+    [1,2,3,4,5,6,0].forEach(wd=>{
+      const b = el('<button type="button" style="--c:var(--accent)"'+(pick[id]===wd?' class="on"':'')+'>'+CAL_DAYS[wd].slice(0,3)+'</button>');
+      b.onclick = ()=>{ pick[id] = wd; seg.querySelectorAll('button').forEach(x=>x.classList.toggle('on', x===b)); };
+      seg.appendChild(b);
+    });
+    sheet.appendChild(seg);
+    times[id] = el('<input class="cal-input" type="time" aria-label="'+esc(label)+' time" value="'+esc(ev.time || '')+'">');
+    sheet.appendChild(times[id]);
+  });
+  const close = ()=>{ scrim.remove(); sheet.remove(); };
+  const save = el('<button class="btn block" type="button" style="margin-top:8px">Save coaching times</button>');
+  save.onclick = ()=>{ rows.forEach(([id])=>calSetDefault(id, pick[id], times[id].value || null)); close(); render(); };
+  sheet.appendChild(save);
+  scrim.onclick = close;
+  document.body.appendChild(scrim); document.body.appendChild(sheet);
+}
+
+// Test day card, shown on Home when a test is on today's date
+function calTestDayCard(ev){
+  const key = dayKey(), exam = EXAMS[0];
+  const checks = calStore().checks[key] || {};
+  const card = el('<div class="cal-card" style="--ec:var(--c-hard)"><i class="exam-orb" aria-hidden="true"></i>'
+    +'<div class="eyebrow">Test day</div>'
+    +(exam ? '<div class="cal-num">'+Math.max(0, daysLeft(exam.date))+'<span> days to go</span></div><div class="cal-sub">'+esc(exam.name)+'</div>' : '')
+    +'<div class="cal-sub">'+esc(ev.title)+(ev.time ? ' at '+esc(calTime(ev.time)) : '')+'</div></div>');
+  const list = el('<div class="cal-checks" role="group" aria-label="Test day checklist"></div>');
+  CAL_TEST_CHECKS.forEach((t,i)=>{
+    const on = !!checks[i];
+    const b = el('<button type="button" class="cal-check'+(on?' on':'')+'" aria-pressed="'+on+'"><span class="cal-box" aria-hidden="true"></span>'+esc(t)+'</button>');
+    b.onclick = ()=>{ const cc = calStore(); cc.checks[key] = cc.checks[key] || {}; cc.checks[key][i] = !cc.checks[key][i]; persist(); render(); };
+    list.appendChild(b);
+  });
+  card.appendChild(list);
+  card.appendChild(el('<div class="cal-breathe" aria-hidden="true"><i></i></div>'));
+  card.appendChild(el('<p class="cal-note">Breathe in for 4, hold for 4, breathe out for 6. Do this for one minute before you start.</p>'));
+  return card;
+}
+
+// Phone calendar: an .ics file that Google Calendar or the iPhone calendar can open
+function calIcsText(){
+  const pad = n=>String(n).padStart(2,'0');
+  const ymd = d=>d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate());
+  const hms = d=>pad(d.getHours())+pad(d.getMinutes())+'00';
+  const txt = s=>String(s).replace(/\\/g,'\\\\').replace(/;/g,'\;').replace(/,/g,'\\,').replace(/\r?\n/g,'\\n');
+  const stamp = new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}Z$/,'Z');
+  const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//TORQ//Calendar//EN','CALSCALE:GREGORIAN'];
+  calStore().events.forEach(e=>{
+    const d = new Date((e.repeat==='weekly' ? (e.start || dayKey()) : e.date)+'T12:00:00');
+    if(e.repeat==='weekly'){ while(d.getDay()!==e.weekday) d.setDate(d.getDate()+1); }
+    const hm = e.time ? e.time.split(':').map(Number) : null;
+    lines.push('BEGIN:VEVENT', 'UID:'+e.id+'@torq', 'DTSTAMP:'+stamp, 'SUMMARY:'+txt(e.title),
+      'DESCRIPTION:'+txt((CAL_KINDS[e.kind]||CAL_KINDS.other).l));
+    if(hm){
+      const s = new Date(d.getFullYear(), d.getMonth(), d.getDate(), hm[0], hm[1]);
+      lines.push('DTSTART:'+ymd(s)+'T'+hms(s), 'DTEND:'+ymd(new Date(s.getTime()+36e5))+'T'+hms(new Date(s.getTime()+36e5)));
+    } else {
+      const s = new Date(d.getFullYear(), d.getMonth(), d.getDate()), n = new Date(s); n.setDate(n.getDate()+1);
+      lines.push('DTSTART;VALUE=DATE:'+ymd(s), 'DTEND;VALUE=DATE:'+ymd(n));
+    }
+    if(e.repeat==='weekly') lines.push('RRULE:FREQ=WEEKLY;BYDAY='+CAL_ICS_DAYS[e.weekday]);
+    lines.push('END:VEVENT');
+  });
+  lines.push('END:VCALENDAR');
+  return lines.join('\r\n');
+}
+function calExport(){
+  const text = calIcsText();
+  const file = new File([text], 'torq-calendar.ics', {type:'text/calendar'});
+  if(navigator.canShare && navigator.canShare({files:[file]})){ navigator.share({files:[file], title:'TORQ calendar'}).catch(()=>{}); return; }
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], {type:'text/calendar'})); a.download = 'torq-calendar.ics';
+  document.body.appendChild(a); a.click(); a.remove();
 }
 // ---- Markdown in chat: tables, fenced code (copy and full screen), headings, lists, bold, italics, inline code ----
 function mdLooksLike(t){ return /```|^\s*\|.*\|\s*$|^\s*#{1,3}\s|\*\*[^*]+\*\*|^\s*[-*]\s+/m.test(String(t||'')); }
