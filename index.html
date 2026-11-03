@@ -230,8 +230,6 @@ body.kb-open .wa-compose .wa-field{ flex:1 1 100%; }
 .wa-msgs .qcard-chat b{ display:block !important; width:100% !important; font:700 11px/1.3 Inter,sans-serif !important; letter-spacing:.1em !important; text-transform:uppercase !important; color:var(--accent-text) !important; white-space:normal !important; }
 .wa-msgs .qcard-chat > span{ display:block !important; width:100% !important; font:14px/1.45 Inter,sans-serif !important; color:var(--text) !important; white-space:normal !important; overflow-wrap:break-word !important; word-break:normal !important; height:auto !important; overflow:visible !important; }
 .wa-msgs .qcard-chat small{ display:block !important; width:100% !important; font-size:11px !important; color:var(--muted) !important; margin-top:2px !important; text-align:right !important; }
-.wa-msgs .qcard-chat .katex, .wa-msgs .qcard-chat .katex-display{ display:inline !important; max-width:100% !important; overflow-x:auto !important; white-space:normal !important; }
-.wa-msgs .qcard-chat .katex{ line-height:normal !important; } .wa-msgs .qcard-chat .katex .base{ line-height:normal !important; }
 /* Doubt screen: room between the buttons */
 .doubt-sheet .btn{ margin-top:14px !important; }
 .doubt-sheet .btn + .btn{ margin-top:10px !important; }
@@ -586,8 +584,6 @@ body.msg-fit #app{ background:transparent !important; position:relative; z-index
 @media (prefers-reduced-motion: reduce){ .vr-lockchip .vr-arrow, .vr-wave-wrap .vr-dot, .wa-scroll.swap-in > *, .wa-scroll.swap-in .wa-row, .vr-float-pill, .wa-chat .wa-compose > .vr-pill{ animation:none !important; } .plus-btn svg, .vr-mic, .wa-scroll{ transition:none !important; } }
 /* Chat cards: never squish when the chat scrolls; display maths gets its own line with space around it */
 .wa-msgs > *{ flex-shrink:0 !important; }
-.wa-msgs .qcard-chat .katex-display{ display:block !important; margin:6px 0 !important; overflow-x:auto !important; overflow-y:hidden !important; text-align:left !important; }
-.wa-msgs .qcard-chat .katex{ font-size:1.05em !important; }
 
 /* ===== Wide screens: friends list on the left, open chat on the right ===== */
 @media (min-width:960px){
@@ -2674,6 +2670,11 @@ body.has-nav .build-stamp{ margin-bottom:calc(96px + env(safe-area-inset-bottom,
 @keyframes spIn{ from{ opacity:0; transform:scale(.4) rotate(-18deg); } to{ opacity:1; transform:none; } }
 @keyframes spPulse{ 0%{ box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 45%, transparent); } 100%{ box-shadow:0 0 0 22px transparent; } }
 @media (prefers-reduced-motion: reduce){ .sp-orb{ animation:none; } }
+/* Doubt cards: the ONLY maths rules. Placed last so nothing later can override them. */
+.wa-msgs .qcard-chat > span .katex{ font-size:1.05em !important; line-height:1.2 !important; white-space:nowrap !important; display:inline-block !important; vertical-align:baseline !important; }
+.wa-msgs .qcard-chat > span .katex-display{ display:block !important; margin:6px 0 !important; overflow-x:auto !important; overflow-y:hidden !important; text-align:left !important; white-space:normal !important; }
+.wa-msgs .qcard-chat > span .katex-display > .katex{ white-space:nowrap !important; }
+.wa-msgs .qcard-chat > span{ white-space:pre-wrap !important; overflow-wrap:break-word !important; }
 </style>
 <style id="adaptive-fixes">
 /* Adaptive fixes: chat screens use the real visible height, which updates on resize and full screen */
@@ -2686,9 +2687,6 @@ body.msg-fit .wa-compose, body.chat-full .wa-compose{ flex:none !important; posi
   body.msg-fit #app, body.chat-full #app{ max-width:760px !important; margin-left:auto !important; margin-right:auto !important; }
 }
 /* Doubt cards in chat: keep inline maths on the text baseline, so subscripts such as d_2 sit where they belong */
-body .wa-msgs .qcard-chat .katex{ display:inline-block !important; white-space:nowrap !important; overflow:visible !important; vertical-align:baseline !important; line-height:normal !important; max-width:none !important; }
-body .wa-msgs .qcard-chat .katex-display{ display:inline-block !important; overflow:visible !important; margin:0 !important; }
-body .wa-msgs .qcard-chat .katex .vlist-t, body .wa-msgs .qcard-chat .katex .vlist{ vertical-align:baseline !important; }
 /* Recording preview: same look as the sent voice message (frozen waveform, orange progress), no pulsing dot */
 .vr-float .vr-wave .vr-bar{ background:#b9b9c2 !important; transition:none !important; }
 .vr-float .vr-wave .vr-bar.played{ background:#f08a3c !important; }
@@ -8399,7 +8397,7 @@ function chatScreen(f){
     const tick = mine ? '<i class="wa-tick'+(m.read_at ? ' seen' : '')+'">'+(m.read_at ? WA_TICK_SEEN : WA_TICK_SENT)+'</i>' : '';
     if(m.kind === 'question_card' || m.kind === 'answer_card'){
       const isQ = m.kind === 'question_card';
-      const card = el('<div role="button" tabindex="0" class="qcard-chat '+(mine?'mine':'theirs')+'"><b>'+(isQ ? (mine ? 'You asked a question' : 'A friend asked you a question') : (mine ? 'You sent back notes' : 'Notes came back'))+'</b><span>'+esc(cardText(m.body))+'</span><small>'+stamp+tick+'</small></div>');
+      const card = el('<div role="button" tabindex="0" class="qcard-chat '+(mine?'mine':'theirs')+'"><b>'+(isQ ? (mine ? 'You asked a question' : 'A friend asked you a question') : (mine ? 'You sent back notes' : 'Notes came back'))+'</b><span>'+mathCardHTML(cardText(m.body))+'</span><small>'+stamp+tick+'</small></div>');
       card.onclick = ()=>openDoubt(m.share_id);
       attachMsgPress(card, m, f, mine);
       list.appendChild(card);
@@ -9077,6 +9075,16 @@ document.addEventListener('visibilitychange', function(){
 });
 window.addEventListener('pagehide', function(){ voiceAbort(null); voicePause(); });
 
+// Doubt cards: render $...$ and $$...$$ maths directly when the card is built
+function mathCardHTML(text){
+  const esc2 = t => String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return String(text || '').split(/(\$\$[\s\S]+?\$\$|\$[^$\n]+?\$)/g).map(p=>{
+    const m = p.match(/^\$\$([\s\S]+)\$\$$/) || p.match(/^\$([^$\n]+)\$$/);
+    if(!m || typeof katex === 'undefined') return esc2(p);
+    try { return katex.renderToString(m[1].trim(), { displayMode: p.startsWith('$$'), throwOnError: false }); }
+    catch(e){ return esc2(p); }
+  }).join('');
+}
 // Chat card text: one clean line of prose (no stray line breaks or invisible characters)
 // Doubt cards keep line breaks (the card span uses pre-wrap), but still strip invisible characters
 function cardText(t){
