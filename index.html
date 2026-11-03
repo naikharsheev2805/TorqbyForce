@@ -218,11 +218,11 @@ body.chat-full .wa-head{ padding-top:6px; }
 .qcard-chat.theirs{ align-self:flex-start; }
 /* Open chat: no Back pill, no footer; one Send button (the keyboard's when it is open) */
 body.chat-full .navback, body.chat-full .build-stamp, body.chat-full .foot{ display:none !important; }
-body.kb-open .wa-compose .wa-send{ display:none; }
+
 body.kb-open .wa-compose .wa-field{ flex:1 1 100%; }
 /* Doubt cards: show the whole card, no fixed height */
 .wa-msgs .qcard-chat{ height:auto !important; min-height:0 !important; max-height:none !important; overflow:visible !important; }
-.wa-msgs .qcard-chat span{ height:auto !important; overflow:visible !important; }
+.wa-msgs .qcard-chat > span{ height:auto !important; overflow:visible !important; }
 /* Doubt cards (both the question you send and the reply): one clean layout in the chat */
 .wa-msgs .qcard-chat{ display:flex !important; flex-direction:column !important; align-items:stretch !important; justify-content:flex-start !important; gap:4px !important; width:auto !important; min-width:0 !important; max-width:82% !important; box-sizing:border-box !important; padding:12px 14px !important; margin:0 !important; height:auto !important; min-height:0 !important; max-height:none !important; overflow:visible !important; text-align:left !important; white-space:normal !important; line-height:1.45 !important; font:inherit !important; }
 .wa-msgs .qcard-chat.mine{ align-self:flex-end !important; }
@@ -2475,7 +2475,7 @@ body.has-nav .build-stamp{ margin-bottom:calc(96px + env(safe-area-inset-bottom,
 @media (min-width:760px){ .onb-title > span{ font-size:clamp(110px, 12vw, 168px); } .onb-title > em{ font-size:clamp(34px, 3.4vw, 52px); } .onb-vec{ right:-10%; top:-12%; width:min(92%, 480px); } }
 
 /* ---- Pop-ups: larger, more polished, and the keywords pop in orange italics ---- */
-.pop-kw{ color:var(--accent-text); font-style:italic; font-weight:600; }
+.pop-kw{ color:var(--accent-text); font-family:Lora,Georgia,serif; font-style:italic; font-weight:600; }
 .rules-card{ width:min(94vw,580px) !important; padding:42px 38px 36px !important; border-radius:30px !important; }
 .rules-title{ font-size:clamp(30px,7.6vw,44px) !important; line-height:1.08 !important; margin:10px 0 16px !important; }
 .rules-body{ font-size:clamp(16px,3.9vw,18.5px) !important; line-height:1.66 !important; margin:0 0 18px !important; }
@@ -2675,6 +2675,32 @@ body.has-nav .build-stamp{ margin-bottom:calc(96px + env(safe-area-inset-bottom,
 .wa-msgs .qcard-chat > span .katex-display{ display:block !important; margin:6px 0 !important; overflow-x:auto !important; overflow-y:hidden !important; text-align:left !important; white-space:normal !important; }
 .wa-msgs .qcard-chat > span .katex-display > .katex{ white-space:nowrap !important; }
 .wa-msgs .qcard-chat > span{ white-space:pre-wrap !important; overflow-wrap:break-word !important; }
+/* Keyboard: Enter key (new line), field line breaks, and the paper-plane send button */
+.wa-kb .nk.wa-enter{ color:var(--text); }
+.wa-kb .nk.wa-enter svg{ width:clamp(20px,2.8vh,24px); height:clamp(20px,2.8vh,24px); }
+.wa-field span{ white-space:pre-wrap; }
+.wa-compose .wa-send.vr-send-btn{ width:44px; height:44px; }
+.wa-compose .wa-send svg{ width:19px; height:19px; }
+/* Keyboard block: toolbar, options panel, hide triangle */
+.wa-kbwrap{ width:100%; box-sizing:border-box; margin-top:8px; }
+.wa-kbwrap.one-hand{ width:82%; margin-left:auto; }
+.wa-kbtool{ display:flex; align-items:center; height:40px; padding:0 4px; }
+.wa-grid, .wa-pcancel{ width:40px; height:36px; border-radius:10px; border:1px solid var(--border); background:var(--surface-2); color:var(--text); display:grid; place-items:center; cursor:pointer; padding:0; }
+.wa-grid svg, .wa-pcancel svg{ width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; }
+.wa-grid rect{ fill:none; stroke:currentColor; stroke-width:1.8; }
+.wa-pcancel{ font-size:20px; line-height:1; }
+.wa-panel{ display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:10px 6px; min-height:220px; }
+.wa-panel > button:not(.wa-pcancel):not(.wa-emo){ min-height:52px; border-radius:14px; border:1px solid var(--border); background:var(--surface-2); color:var(--text); font:500 14px Inter,sans-serif; cursor:pointer; text-align:left; padding:0 14px; }
+.wa-panel .wa-emo{ min-height:44px; padding:0; border:0; background:transparent; font-size:24px; cursor:pointer; }
+.wa-panel-foot{ grid-column:1 / -1; display:flex; align-items:center; justify-content:space-between; margin-top:4px; }
+.wa-hide{ display:grid; place-items:center; width:100%; height:28px; border:0; background:transparent; color:var(--muted); cursor:pointer; padding:0; }
+.wa-hide svg{ width:22px; height:14px; fill:currentColor; }
+.wa-kbwrap.tall .wa-kb{ max-height:58vh; }
+/* Home, decluttered: secondary items sit quietly below the main focus */
+.hm-more{ margin-top:22px; }
+.hm-more-h{ margin:0 4px 10px; }
+.hm-more > .card, .hm-more > .big-card, .hm-more > figure.qcard{ box-shadow:none; opacity:.94; }
+.hm-more > .stats{ margin-bottom:14px; }
 </style>
 <style id="adaptive-fixes">
 /* Adaptive fixes: chat screens use the real visible height, which updates on resize and full screen */
@@ -3038,7 +3064,7 @@ body.qnav-open .gutter{ opacity:0; }
 <script>
 // ---------- Data paths (adjust here if the folder layout changes) ----------
 // Serve the repo root with a local server (e.g. `python3 -m http.server`); opening the file directly blocks fetch().
-const APP_BUILD = '2026-11-01-c';   // bumped with every release; the app compares it with the hosted file
+const APP_BUILD = '2026-11-03-d';   // bumped with every release; the app compares it with the hosted file
 const PATHS = {
   index: 'data/index.json',  // lists every paper; each paper's "file" field points at its question JSON
   solutions: 'data/solutions/'    // one file per paper: data/solutions/<paper-id>.json
@@ -3149,6 +3175,26 @@ function sameAnswer(a, b){
   const nx = Number(x), ny = Number(y);
   if(x !== '' && y !== '' && !isNaN(nx) && !isNaN(ny)) return Math.abs(nx - ny) < 1e-9;
   return x.toLowerCase() === y.toLowerCase();
+}
+// Auto-lock: an answer locks in on its own once the student stops typing for a moment (and a Sure/Guessing choice is made).
+function scheduleAutoLock(qid){
+  clearTimeout(window.__autoLock);
+  window.__autoLock = setTimeout(()=>{
+    if(!session || session.submitted || session.review) return;
+    const q = session.queue[session.idx];
+    if(!q || q.id !== qid) return;
+    const v = session.draft[qid], prev = session.answers[qid];
+    if(!v || !session.conf[qid] || (prev && !prev.skip)) return;
+    answerNumeric(v); liveSave();
+  }, 1200);
+}
+// Live save: the in-progress set goes to the local copy and to the cloud at once, so a phone switch or a closed tab loses nothing
+function liveSave(){
+  saveSessionSnapshot();
+  let snap = null;
+  try{ snap = JSON.parse(localStorage.getItem(SESSION_SNAP_KEY)); }catch(e){}
+  store.liveSession = (session && !session.submitted && !session.review && snap) ? snap : null;
+  persist();
 }
 function answerNumeric(v){
   const q = session.queue[session.idx];
@@ -3867,7 +3913,7 @@ const SESSION_SNAP_KEY = 'torq.session.v1';
 function saveSessionSnapshot(){
   try{
     if(!session){ return; }                                   // nothing loaded yet: keep the saved copy
-    if(session.submitted || session.review){ localStorage.removeItem(SESSION_SNAP_KEY); return; }
+    if(session.submitted || session.review){ localStorage.removeItem(SESSION_SNAP_KEY); if(store.liveSession){ store.liveSession = null; persist(); } return; }
     const snap = Object.assign({}, session, {queue: undefined, queueIds: session.queue.map(q=>q.id)});
     localStorage.setItem(SESSION_SNAP_KEY, JSON.stringify(snap));
   }catch(e){}
@@ -3875,6 +3921,7 @@ function saveSessionSnapshot(){
 function restoreSessionSnapshot(){
   let snap = null;
   try{ snap = JSON.parse(localStorage.getItem(SESSION_SNAP_KEY)); }catch(e){}
+  if(!snap && store.liveSession) snap = store.liveSession;
   if(!snap || !snap.queueIds || !snap.queueIds.length || snap.submitted || snap.review) return;
   const queue = snap.queueIds.map(id=>QUESTIONS.find(q=>q.id===id));
   if(queue.some(q=>!q)) return;                              // the question bank changed: start clean
@@ -4394,7 +4441,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v1.3.0';
+const APP_VERSION = 'v1.4.3';
 const LAST_UPDATED = '3 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -5104,14 +5151,14 @@ function homeView(){
   w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div>'
     +'<div class="hm-eyebrow">'+esc(mood.mood)+' · '+esc(clock)+'</div>'
     +'<h1 class="hm-title">'+esc(mood.hi(firstName||'there'))+'</h1></div>'));
-  w.appendChild(quoteCard()); bindQuoteResize();
-
+  // Home, decluttered: one main focus at the top, the rest grouped quietly below it
+  const hmMore = el('<div class="hm-more"></div>');
+  hmMore.appendChild(el('<div class="eyebrow hm-more-h">Your progress</div>'));
   const all = statsOf(store.attempts);
-
-
-  w.appendChild(dailyGoalCard());
-  w.appendChild(examRowEl());
-  w.appendChild(examDayCardEl());
+  hmMore.appendChild(quoteCard()); bindQuoteResize();
+  hmMore.appendChild(dailyGoalCard());
+  hmMore.appendChild(examRowEl());
+  hmMore.appendChild(examDayCardEl());
   w.appendChild(streakStrip());
   w.appendChild(qotdCard());
   const daily = dailyQueue();
@@ -5123,7 +5170,7 @@ function homeView(){
   db.onclick = ()=>startSession({mode:'daily', title:'Daily set', queue:daily});
   dc.appendChild(db);
   w.appendChild(dc);
-  w.appendChild(el('<div class="stats">'
+  hmMore.appendChild(el('<div class="stats">'
     +'<div class="stat"><div class="n">'+streak()+'</div><div class="l">Day streak</div></div>'
     +'<div class="stat"><div class="n">'+all.total+'</div><div class="l">Attempted</div></div>'
     +'<div class="stat"><div class="n">'+(all.acc===null?'—':all.acc+'%')+'</div><div class="l">Accuracy</div></div>'
@@ -5142,6 +5189,7 @@ function homeView(){
     wc.appendChild(el('<p class="note-line" style="margin:0">Answer a few questions and we will point out the chapter that needs the most work.</p>'));
   }
   w.appendChild(wc);
+  w.appendChild(hmMore);
 
   return w;
 }
@@ -7631,13 +7679,19 @@ function askFriendSheet(q){
       seg.appendChild(b);
     });
     body.appendChild(seg);
-    const note = el('<textarea class="ad-reply" rows="3" maxlength="500" placeholder="What is confusing you? (optional)"></textarea>');
-    body.appendChild(note);
+    const noteBox = {v: ''};
+    const noteField = el('<div class="wa-field ad-note-field" role="textbox" aria-label="Note for your friend"></div>');
+    const noteTarget = { get: ()=>noteBox.v, field: ()=>noteField,
+      set: v=>{ noteBox.v = String(v).slice(0, 500); noteField.innerHTML = noteBox.v ? '<span>'+esc(noteBox.v)+'</span>' : '<i>What is confusing you? (optional)</i>'; } };
+    noteTarget.set('');
+    fr.kbTarget = noteTarget;
+    body.appendChild(noteField);
+    body.appendChild(waKeyboard());
     const go = el('<button class="btn block" type="button" style="margin-top:12px">Send to my friend</button>');
     go.onclick = async ()=>{
       go.disabled = true;
       const db = sbClient(), me = sbSession.user.id;
-      const { data: share, error: e1 } = await db.from('question_shares').insert({ from_user: me, to_user: pick, question_id: String(q.id), asker_note: note.value.trim() || null }).select('id').single();
+      const { data: share, error: e1 } = await db.from('question_shares').insert({ from_user: me, to_user: pick, question_id: String(q.id), asker_note: noteBox.v.trim() || null }).select('id').single();
       if(e1){ go.disabled = false; appNotice('Not sent', e1.message); return; }
       // Keep the card text whole where possible: cut at a word boundary, never inside a $...$ math expression
       const fullQ = String(q.text || 'A question');
@@ -8101,7 +8155,13 @@ const WA_LAYOUTS = {
     ['MORE','`','…','¡','¿','±','©','®','BACK']
   ]
 };
+// A keyboard target is a text field outside the chat (the Doubt Relay note). While it is on screen, the keys write to it.
+function waTarget(){ const t = fr.kbTarget; return (t && t.field().isConnected) ? t : null; }
+function waDraft(){ const t = waTarget(); return t ? t.get() : waDraft(); }
 function waSetDraft(v){
+  const t = waTarget();
+  if(t){ t.set(v); return; }
+  if(v !== fr.draft) fr.undoDraft = fr.draft;
   fr.draft = v;
   const f = document.querySelector('.wa-field'); if(f) waShowDraft(f);
 }
@@ -8131,27 +8191,29 @@ function waWantsCapital(draft){
 function waType(ch){
   noteTyping();
   if(Date.now() - (fr.glideAt || 0) < 350) return;
-  if(fr.draft.length >= 1000) return;
+  if(waDraft().length >= 1000) return;
   const isLetter = /^[A-Za-z]$/.test(ch);
-  const wasCap = waWantsCapital(fr.draft);
+  const wasCap = waWantsCapital(waDraft());
   if(isLetter && fr.kbMode !== 'sym' && fr.kbMode !== 'sym2' && fr.kbShift === 0 && wasCap) ch = ch.toUpperCase();
-  waSetDraft(fr.draft + ch);
+  waSetDraft(waDraft() + ch);
   if(fr.kbShift === 1){ fr.kbShift = 0; waRedrawKb(); }   // one-shot shift is used up after one letter
-  else if(isLetter && wasCap !== waWantsCapital(fr.draft) && document.querySelector('.wa-kb')) waRedrawKb();
+  else if(isLetter && wasCap !== waWantsCapital(waDraft()) && document.querySelector('.wa-kb')) waRedrawKb();
 }
-function waBack(){ waSetDraft(fr.draft.slice(0, -1)); }
+function waBack(){ waSetDraft(waDraft().slice(0, -1)); }
 function waShift(){
   const cur = fr.kbShift || 0;
   fr.kbShift = cur === 0 ? 1 : (cur === 1 ? 2 : 0);   // tap: shift once, tap again: caps lock, tap again: off
   waRedrawKb();
 }
 function waRedrawKb(){
-  const old = document.querySelector('.wa-kb');
+  const old = document.querySelector('.wa-kbwrap') || document.querySelector('.wa-kb');
   if(old) old.replaceWith(waKeyboard());
 }
 function waShowDraft(f){
-  f.innerHTML = fr.draft ? '<span>'+esc(fr.draft)+'</span>' : '<i>Message</i>';
+  f.innerHTML = waDraft() ? '<span>'+esc(waDraft())+'</span>' : '<i>Message</i>';
 }
+const ENTER_SVG = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 4v7a4 4 0 0 1-4 4H5"/><path d="M9 11l-4 4 4 4"/></svg>';
+const PLANE_SVG = '<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg>';
 function waKey(label, cls, fn){
   const b = el('<button type="button" class="nk '+(cls||'')+'" aria-label="'+esc(label)+'">'+esc(label)+'</button>');
   b.onclick = fn;
@@ -8179,26 +8241,28 @@ function waLCS(a, b){
   }
   return dp[n];
 }
-// Best word for a glide: same first and last letter, most letters matched, common words win ties
+// Best word for a glide. words.txt is ordered from most used to least used, so the line number
+// is the word's rank. Frequent words get a strong advantage; the letters matched still count.
 function waBestWord(path){
   if(!waWords || !waWords.length || path.length < 2) return '';
   const first = path[0], last = path[path.length - 1];
   let best = '', bestScore = -Infinity;
-  waWords.forEach((w, rank)=>{
-    if(w.charAt(0) !== first || w.charAt(w.length - 1) !== last) return;
-    const need = w.length >= 5 ? w.length - 1 : w.length;     // longer words may skip one letter
+  for(let rank = 0; rank < waWords.length; rank++){
+    const w = waWords[rank];
+    if(w.charAt(0) !== first || w.charAt(w.length - 1) !== last) continue;
+    const need = w.length >= 5 ? w.length - 1 : w.length;
     const l = waLCS(w, path);
-    if(l < need) return;
-    const score = l * 2 - (path.length - l) * 0.5 - (rank / waWords.length) * 0.5;
+    if(l < need) continue;
+    const score = l * 2 - (path.length - l) * 0.5 - 0.8 * Math.log2(rank + 2);
     if(score > bestScore){ bestScore = score; best = w; }
-  });
+  }
   return best;
 }
 function waCommitWord(w){
   const word = fr.kbShift ? w.charAt(0).toUpperCase() + w.slice(1) : w;
   if(fr.kbShift === 1) fr.kbShift = 0;
-  const sep = fr.draft && !/\s$/.test(fr.draft) ? ' ' : '';
-  waSetDraft(fr.draft + sep + word + ' ');
+  const sep = waDraft() && !/\s$/.test(waDraft()) ? ' ' : '';
+  waSetDraft(waDraft() + sep + word + ' ');
   waRedrawKb();
 }
 // Glide trail: a tapered streak that follows the finger. Speed sets its length (2 to 3 cm) and width:
@@ -8280,17 +8344,18 @@ function waBindGlide(kb){
   let down = false, moved = false, path = [], hits = [], lastEl = null;
   const keyAt = (x, y)=>{ const t = document.elementFromPoint(x, y); return t && t.closest ? t.closest('.wa-kb .nk') : null; };
   const clearHits = ()=>{ hits.forEach(h=>h.classList.remove('hit')); hits = []; };
+  const lightKey = b=>{ b.classList.add('hit'); hits.push(b); };
   const showField = ()=>{ const f = document.querySelector('.wa-field'); if(f) waShowDraft(f); };
   const preview = ()=>{
     const f = document.querySelector('.wa-field'); if(!f) return;
     const cand = waBestWord(path) || path.join('');
-    f.innerHTML = '<span>' + esc(fr.draft ? fr.draft + ' ' : '') + '<em>' + esc(cand) + '</em></span>';
+    f.innerHTML = '<span>' + esc(waDraft() ? waDraft() + ' ' : '') + '<em>' + esc(cand) + '</em></span>';
   };
   kb.addEventListener('pointerdown', e=>{
     const b = keyAt(e.clientX, e.clientY);
     if(!b || !b.dataset.ch) return;
     down = true; moved = false; path = [b.dataset.ch]; lastEl = b;
-    clearHits(); streak.start(e.clientX, e.clientY);
+    clearHits(); lightKey(b); streak.start(e.clientX, e.clientY);
     waLoadWords();
   });
   kb.addEventListener('pointermove', e=>{
@@ -8300,7 +8365,7 @@ function waBindGlide(kb){
     if(!b || b === lastEl) return;
     lastEl = b;
     if(!b.dataset.ch || path[path.length - 1] === b.dataset.ch) return;
-    path.push(b.dataset.ch); moved = true;
+    path.push(b.dataset.ch); moved = true; lightKey(b);
     preview();
   });
   kb.addEventListener('pointerup', ()=>{
@@ -8321,7 +8386,7 @@ function waPhysicalKeys(e){
   const t = e.target;
   if(t && t.closest && t.closest('input, textarea, select, [contenteditable="true"]')) return;
   if(e.ctrlKey || e.metaKey || e.altKey) return;
-  if(e.key === 'Enter'){ e.preventDefault(); if(fr.draft.trim()){ fr.kb = false; sendChat(); } return; }
+  if(e.key === 'Enter'){ e.preventDefault(); if(waTarget()){ waType('\n'); return; } if(waDraft().trim()){ fr.kb = false; sendChat(); } return; }
   if(e.key === 'Backspace'){ e.preventDefault(); waBack(); return; }
   if(e.key === 'Escape'){ if(fr.kb){ e.preventDefault(); fr.kb = false; render(); } return; }
   if(e.key && e.key.length === 1){ e.preventDefault(); waType(e.key); }
@@ -8332,7 +8397,69 @@ function waShiftKey(shift){
   b.onclick = waShift;
   return b;
 }
+const GRID_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/></svg>';
+const CANCEL_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+const DOWN_SVG = '<svg viewBox="0 0 24 14" aria-hidden="true"><path d="M2 2h20L12 12z"/></svg>';
+const WA_EMOJI = ['\u{1F62D}','\u{1F480}','\u{1F525}','\u{1F440}','\u{1FAE0}','\u{1F90C}','\u{1F979}','\u{1F9E0}','\u{1F602}','\u{1F643}','\u2728','\u{1F4AF}','\u{1FAE1}','\u{1F624}','\u{1F921}','\u{1F972}','\u2764\uFE0F','\u{1F44D}','\u{1F64F}','\u{1F605}'];
+
+// The keyboard block: a toolbar with the options button, then the keys or the options panel, then the hide triangle
 function waKeyboard(){
+  const wrap = el('<div class="wa-kbwrap'+(fr.oneHanded?' one-hand':'')+(fr.kbTall?' tall':'')+'"></div>');
+  const tool = el('<div class="wa-kbtool"></div>');
+  const grid = el('<button type="button" class="wa-grid" aria-label="Keyboard options">'+GRID_SVG+'</button>');
+  grid.onclick = ()=>{ fr.kbPanel = fr.kbPanel ? null : 'menu'; fr.kbPage = 0; waRedrawKb(); };
+  tool.appendChild(grid);
+  wrap.appendChild(tool);
+  wrap.appendChild(fr.kbPanel ? waPanel() : waKeysOnly());
+  const hide = el('<button type="button" class="wa-hide" aria-label="Hide keyboard">'+DOWN_SVG+'</button>');
+  hide.onclick = ()=>{ fr.kb = false; fr.kbPanel = null; render(); };
+  if(!waTarget()) wrap.appendChild(hide);
+  return wrap;
+}
+
+// The options panel, like the Gboard grid: page 1 and page 2, with a cancel button
+function waPanel(){
+  const p = el('<div class="wa-panel"></div>');
+  const back = ()=>{ if(fr.kbPanel === 'emoji'){ fr.kbPanel = 'menu'; waRedrawKb(); } else { fr.kbPanel = null; waRedrawKb(); } };
+  if(fr.kbPanel === 'emoji'){
+    WA_EMOJI.forEach(e=>{ const b = el('<button type="button" class="wa-emo">'+e+'</button>'); b.onclick = ()=>waSetDraft(waDraft() + e); p.appendChild(b); });
+  } else {
+    const page1 = [
+      ['Clipboard', ()=>{
+        if(!navigator.clipboard || !navigator.clipboard.readText){ softNotice('Clipboard is not available here.'); return; }
+        navigator.clipboard.readText().then(t=>waSetDraft(waDraft() + t)).catch(()=>softNotice('Allow clipboard access to paste.'));
+      }],
+      ['Emoji', ()=>{ fr.kbPanel = 'emoji'; waRedrawKb(); }],
+      ['One-handed', ()=>{ fr.oneHanded = !fr.oneHanded; waRedrawKb(); }],
+      ['Clear text', ()=>waSetDraft('')],
+      ['Share', ()=>{ if(navigator.share){ navigator.share({text: waDraft() || 'TORQ'}).catch(()=>{}); } else softNotice('Sharing is not available here.'); }],
+      ['Resize', ()=>{ fr.kbTall = !fr.kbTall; waRedrawKb(); }]
+    ];
+    const page2 = [
+      ['Floating', ()=>softNotice('A floating keyboard is a phone feature. TORQ cannot open it.')],
+      ['Undo', ()=>{ if(fr.undoDraft != null){ const cur = waDraft(); waSetDraft(fr.undoDraft); fr.undoDraft = cur; } }],
+      ['Next language', ()=>softNotice('Languages are switched in the phone keyboard.')],
+      ['Settings', ()=>{ fr.kbPanel = null; fr.kb = false; go('me'); }],
+      ['Translate', ()=>softNotice('Translation is not available inside TORQ.')]
+    ];
+    (fr.kbPage ? page2 : page1).forEach(([label, fn])=>{
+      const b = el('<button type="button">'+esc(label)+'</button>'); b.onclick = fn; p.appendChild(b);
+    });
+  }
+  const foot = el('<div class="wa-panel-foot"></div>');
+  const x = el('<button type="button" class="wa-pcancel" aria-label="Close options">'+CANCEL_SVG+'</button>');
+  x.onclick = back;
+  foot.appendChild(x);
+  if(fr.kbPanel !== 'emoji'){
+    const nx = el('<button type="button" class="wa-pcancel" aria-label="Next page">'+(fr.kbPage ? '\u2039' : '\u203A')+'</button>');
+    nx.onclick = ()=>{ fr.kbPage = fr.kbPage ? 0 : 1; waRedrawKb(); };
+    foot.appendChild(nx);
+  }
+  p.appendChild(foot);
+  return p;
+}
+
+function waKeysOnly(){
   const mode = fr.kbMode || 'alpha';
   const shift = fr.kbShift || 0;
   const kb = el('<div class="wa-kb" role="group" aria-label="Message keyboard"></div>');
@@ -8343,7 +8470,7 @@ function waKeyboard(){
       if(k === 'SHIFT') return row.appendChild(waShiftKey(shift));
       if(k === 'BACK') return row.appendChild(waKey('\u232b', 'fn wide', waBack));
       if(k === 'MORE') return row.appendChild(waKey(mode === 'sym' ? '#+=' : '123', 'fn wide', ()=>{ fr.kbMode = mode === 'sym' ? 'sym2' : 'sym'; waRedrawKb(); }));
-      const ch = (mode === 'alpha' && (shift || (shift === 0 && waWantsCapital(fr.draft)))) ? k.toUpperCase() : k;
+      const ch = (mode === 'alpha' && (shift || (shift === 0 && waWantsCapital(waDraft())))) ? k.toUpperCase() : k;
       const lk = waKey(ch, '', ()=>waType(ch));
       if(mode === 'alpha') lk.dataset.ch = k;
       row.appendChild(lk);
@@ -8355,7 +8482,9 @@ function waKeyboard(){
   last.appendChild(waKey(',', 'fn narrow', ()=>waType(',')));
   last.appendChild(waKey('space', 'sp', ()=>waType(' ')));
   last.appendChild(waKey('.', 'fn narrow', ()=>waType('.')));
-  last.appendChild(waKey('Send', 'send', ()=>{ fr.kb = false; sendChat(); }));
+  const enterKey = el('<button type="button" class="nk fn narrow wa-enter" aria-label="New line">'+ENTER_SVG+'</button>');
+  enterKey.onclick = ()=>waType('\n');
+  last.appendChild(enterKey);
   kb.appendChild(last);
   waBindGlide(kb);
   return kb;
@@ -8922,12 +9051,12 @@ function chatComposeBar(f){
   waShowDraft(field);
   field.onclick = function(){ fr.kb = !fr.kb; scrollChatToEnd = true; render(); };
   bar.appendChild(field);
-  if(!fr.kb && !fr.draft.trim()){
-    bar.appendChild(voiceMicBtn(false));
-  } else {
-    const send = el('<button class="btn wa-send" type="button">Send</button>');
+  if(fr.draft.trim()){
+    const send = el('<button type="button" class="vr-send-btn wa-send" aria-label="Send message">'+PLANE_SVG+'</button>');
     send.onclick = function(){ fr.kb = false; sendChat(); };
     bar.appendChild(send);
+  } else if(!fr.kb){
+    bar.appendChild(voiceMicBtn(false));
   }
   return bar;
 }
@@ -9988,7 +10117,7 @@ function pyqPractice(w){
     const cr0 = el('<div class="chips"></div>');
     [['sure','Sure'],['guess','Guessing']].forEach(p=>{
       const b = el('<button class="sog-choice sog-'+p[0]+(pre===p[0]?' on':'')+'" aria-pressed="'+(pre===p[0])+'"><span class="sog-ico">'+(p[0]==='sure'?'<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>':'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6M12 17h.01"/></svg>')+'</span><span>'+p[1]+'</span></button>');
-      b.onclick = ()=>{ session.conf[q.id] = pre===p[0] ? null : p[0]; render(); };
+      b.onclick = ()=>{ session.conf[q.id] = pre===p[0] ? null : p[0]; render(); liveSave(); scheduleAutoLock(q.id); };
       cr0.appendChild(b);
     });
     card.appendChild(cr0);
@@ -9997,8 +10126,8 @@ function pyqPractice(w){
   if(q.type==='integer'){
     const val = (answered || locked) ? String(a.sel||'') : (session.draft[q.id]||'');
     const state = answered && !sk ? (isOk?'ok':'bad') : '';
-    card.appendChild(numpad(q, val, v=>{ session.draft[q.id]=v; render(); },
-      ()=>{ const v = session.draft[q.id]; if(v) answerNumeric(v); }, answered || locked, state));
+    card.appendChild(numpad(q, val, v=>{ session.draft[q.id]=v; render(); liveSave(); scheduleAutoLock(q.id); },
+      ()=>{ const v = session.draft[q.id]; if(v){ answerNumeric(v); liveSave(); } }, answered || locked, state));
   } else q.options.forEach((o,i)=>{
     const picked = (answered || locked) && a && a.sel===i;
     const cls = answered ? (sk ? (i===q.correct ? 'skipans' : '') : (i===q.correct ? 'ok' : (picked ? 'bad' : ''))) : (picked ? 'sel' : '');
