@@ -4370,7 +4370,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v1.1.8';
+const APP_VERSION = 'v1.1.9';
 const LAST_UPDATED = '3 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -8384,7 +8384,7 @@ async function callFlushIce(){
 async function callOnMsg(ev, p){
   try{
     if(ev === 'accept' && CALL.role === 'caller' && CALL.pc){
-      clearTimeout(CALL.ringTimer); CALL.state = 'connecting'; callShowView();
+      clearTimeout(CALL.ringTimer); callRingback(false); CALL.state = 'connecting'; callShowView();
       await CALL.pc.setLocalDescription(await CALL.pc.createOffer());
       callSend('offer', { sdp: CALL.pc.localDescription });
     } else if(ev === 'offer' && CALL.role === 'callee' && CALL.pc){
@@ -8437,6 +8437,19 @@ function callTick(){
 }
 
 async function callKeepAwake(){ try{ if('wakeLock' in navigator) CALL.wake = await navigator.wakeLock.request('screen'); }catch(e){} }
+
+function callRingback(on){
+  clearInterval(CALL.backTimer); CALL.backTimer = null;
+  if(!on || !CALL.ctx) return;
+  const burst = () => {
+    const c = CALL.ctx, t = c.currentTime, g = c.createGain();
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.09, t + 0.03);
+    g.gain.setValueAtTime(0.09, t + 0.95); g.gain.linearRampToValueAtTime(0, t + 1.05);
+    g.connect(c.destination);
+    [440, 480].forEach(f => { const o = c.createOscillator(); o.type = 'sine'; o.frequency.value = f; o.connect(g); o.start(t); o.stop(t + 1.1); });
+  };
+  try{ burst(); CALL.backTimer = setInterval(burst, 4000); }catch(e){}
+}
 
 function callRinger(on){
   clearInterval(CALL.ringerTimer); CALL.ringerTimer = null;
@@ -8516,7 +8529,7 @@ function callToggleMute(){
 
 function callCleanup(){
   clearTimeout(CALL.ringTimer); clearTimeout(CALL.restartTimer); clearInterval(CALL.clockTimer);
-  callRinger(false);
+  callRinger(false); callRingback(false);
   if(CALL.stream) CALL.stream.getTracks().forEach(t => t.stop());
   if(CALL.pc){ try{ CALL.pc.close(); }catch(e){} }
   if(CALL.audioEl){ CALL.audioEl.srcObject = null; CALL.audioEl.remove(); }
@@ -8569,6 +8582,7 @@ async function startCall(f){
   if(CALL.state !== 'idle'){ appDialog({ eyebrow:'Voice call', title:'Already on a call', body:'Finish your current call first.', cancel:false }); return; }
   if(!callSupported()){ appDialog({ eyebrow:'Voice call', title:'Not supported', body:'This browser cannot start calls. Try Chrome or Safari.', cancel:false }); return; }
   CALL.state = 'calling'; CALL.role = 'caller'; CALL.peer = f; callOpenUI();
+  try{ CALL.ctx = CALL.ctx || new (window.AudioContext || window.webkitAudioContext)(); if(CALL.ctx.resume) CALL.ctx.resume(); }catch(e){}
   try{
     const { data: id, error } = await sbClient().rpc('start_call', { p_callee: f.id });
     if(error) throw error;
@@ -8581,6 +8595,7 @@ async function startCall(f){
     ring.send({ type:'broadcast', event:'ring', payload:{ callId:id, from:{ id:sbSession.user.id, name: (store.profile && store.profile.name) || 'A student' } } });
     setTimeout(() => { try{ sbClient().removeChannel(ring); }catch(e){} }, 1500);
     CALL.ringTimer = setTimeout(() => { if(CALL.state === 'calling') callMissed(); }, CALL_RING_MS);
+    callRingback(true);
   }catch(err){
     const msg = String((err && err.message) || '');
     const staleId = CALL.id;
