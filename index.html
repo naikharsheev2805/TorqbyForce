@@ -448,6 +448,11 @@ body.chat-full .wa-chat{ flex:1 1 auto; min-height:0; height:100%; display:flex;
 body.chat-full .wa-msgs{ flex:1 1 auto; min-height:0; }
 body.chat-full .wa-compose{ flex:none; padding-bottom:max(8px, env(safe-area-inset-bottom,0px)); }
 
+/* ===== Chat list: draft line under the name ===== */
+.wa-draft{ display:block; flex:1; min-width:0; overflow:hidden; white-space:nowrap; font-size:13px; color:var(--muted); }
+.wa-draft b{ color:var(--accent-text); font-weight:600; }
+.wa-draft-t{ display:inline-block; max-width:100%; overflow:hidden; white-space:nowrap; vertical-align:bottom; -webkit-mask-image:linear-gradient(90deg,#000 78%,transparent); mask-image:linear-gradient(90deg,#000 78%,transparent); }
+
 /* ===== Leaderboard rows: no text selection on long press ===== */
 .lb-item{ -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
 
@@ -3064,7 +3069,7 @@ body.qnav-open .gutter{ opacity:0; }
 <script>
 // ---------- Data paths (adjust here if the folder layout changes) ----------
 // Serve the repo root with a local server (e.g. `python3 -m http.server`); opening the file directly blocks fetch().
-const APP_BUILD = '2026-11-03-d';   // bumped with every release; the app compares it with the hosted file
+const APP_BUILD = '2026-11-03-e';   // bumped with every release; the app compares it with the hosted file
 const PATHS = {
   index: 'data/index.json',  // lists every paper; each paper's "file" field points at its question JSON
   solutions: 'data/solutions/'    // one file per paper: data/solutions/<paper-id>.json
@@ -4441,7 +4446,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v1.4.3';
+const APP_VERSION = 'v1.4.4';
 const LAST_UPDATED = '3 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -7333,13 +7338,24 @@ async function answerRequest(id, accept){
   else await db.from('friendships').delete().or('and(requester.eq.'+me+',addressee.eq.'+id+'),and(requester.eq.'+id+',addressee.eq.'+me+')');
   await loadFriends();
 }
+// ---- Drafts: unsent text is kept per friend, on this device, and survives closing the chat or the app ----
+function draftKey(id){ return 'torq.chat.draft.' + (sbSession ? sbSession.user.id : 'anon') + '.' + id; }
+function loadDraft(id){ try{ return localStorage.getItem(draftKey(id)) || ''; }catch(e){ return ''; } }
+function saveDraft(id, text){ try{ if(text && String(text).trim()) localStorage.setItem(draftKey(id), text); else localStorage.removeItem(draftKey(id)); }catch(e){} }
+function saveOpenDraft(){ if(fr && fr.open) saveDraft(fr.open.id, fr.draft || ''); }
+// One line under the name: "Draft:" in the accent colour, then the text, fading out at the end
+function draftLine(text){
+  return '<span class="wa-draft"><b>Draft:</b> <span class="wa-draft-t">'+esc(String(text).replace(/\s+/g,' ').trim())+'...</span></span>';
+}
 async function openChat(f){
-  fr.open = f; fr.msgs = []; fr.draft = ''; fr.sel = null;
+  fr.open = f; fr.msgs = []; fr.draft = loadDraft(f.id); fr.sel = null;
   await refreshChat(true);
   clearInterval(fr.poll);
   fr.poll = setInterval(()=>{ if(fr.open) refreshChat(false); }, 1000);
 }
-function closeChat(){ voiceAbort(); voicePause(); fr.open = null; fr.sel = null; clearInterval(fr.poll); fr.poll = null; render(); }
+window.addEventListener('pagehide', saveOpenDraft);
+document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState === 'hidden') saveOpenDraft(); });
+function closeChat(){ saveOpenDraft(); voiceAbort(); voicePause(); fr.open = null; fr.sel = null; clearInterval(fr.poll); fr.poll = null; render(); }
 let activitySentAt = 0, activitySentKind = null, listActivityBusy = false;
 function noteActivity(kind){
   if(!fr.open || !sbSession) return;
@@ -7447,7 +7463,7 @@ let scrollChatToEnd = false;
 async function sendChat(){
   if(!fr.open) return;
   const text = fr.draft.trim(); if(!text) return;
-  fr.draft = '';
+  fr.draft = ''; saveDraft(fr.open.id, '');
   const { error } = await sbClient().from('chat_messages').insert({ sender: sbSession.user.id, recipient: fr.open.id, body: text });
   if(error){ fr.note = 'Message not sent. Check your connection.'; render(); return; }
   scrollChatToEnd = true;
@@ -8013,7 +8029,7 @@ function chatListCard(){
     card.appendChild(el('<p class="note-line" style="padding:12px 16px">You have no friends yet. Add one in Friends to start chatting.</p>'));
     return card;
   }
-  const rows = friends.map(f=>({f, p: chatPrev.map[f.id]})).filter(r=>(r.p && r.p.last) || chatStarted.has(r.f.id));
+  const rows = friends.map(f=>({f, p: chatPrev.map[f.id]})).filter(r=>(r.p && r.p.last) || chatStarted.has(r.f.id) || !!loadDraft(r.f.id));
   rows.sort((a,b)=>{
     const ta = a.p && a.p.last ? Date.parse(a.p.last.created_at) : 0;
     const tb = b.p && b.p.last ? Date.parse(b.p.last.created_at) : 0;
@@ -8028,8 +8044,8 @@ function chatListCard(){
     const name = esc(f.username || 'Student');
     const main = last
       ? '<div class="wa-main"><div class="wa-top"><b>'+name+'</b><small>'+esc(fmtChatTime(last.created_at))+'</small></div>'
-        +'<div class="wa-bot">'+chatActivityHTML(f.id, chatPreviewText(last, me))+(unread ? '<em class="wa-badge">'+unread+'</em>' : '')+'</div></div>'
-      : '<div class="wa-main"><div class="wa-top"><b>'+name+'</b></div><div class="wa-bot"><span>'+esc(DOT_STATES[stateOf(fr.presence[f.id])].label)+'</span></div></div>';
+        +'<div class="wa-bot">'+(loadDraft(f.id) ? draftLine(loadDraft(f.id)) : chatActivityHTML(f.id, chatPreviewText(last, me)))+(unread ? '<em class="wa-badge">'+unread+'</em>' : '')+'</div></div>'
+      : '<div class="wa-main"><div class="wa-top"><b>'+name+'</b></div><div class="wa-bot">'+(loadDraft(f.id) ? draftLine(loadDraft(f.id)) : '<span>'+esc(DOT_STATES[stateOf(fr.presence[f.id])].label)+'</span>')+'</div></div>';
     row.appendChild(el(main));
     const open = ()=>openChat(f);
     row.onclick = open;
@@ -8157,12 +8173,13 @@ const WA_LAYOUTS = {
 };
 // A keyboard target is a text field outside the chat (the Doubt Relay note). While it is on screen, the keys write to it.
 function waTarget(){ const t = fr.kbTarget; return (t && t.field().isConnected) ? t : null; }
-function waDraft(){ const t = waTarget(); return t ? t.get() : waDraft(); }
+function waDraft(){ const t = waTarget(); return t ? t.get() : fr.draft; }
 function waSetDraft(v){
   const t = waTarget();
   if(t){ t.set(v); return; }
   if(v !== fr.draft) fr.undoDraft = fr.draft;
   fr.draft = v;
+  if(fr.open) saveDraft(fr.open.id, v);
   const f = document.querySelector('.wa-field'); if(f) waShowDraft(f);
 }
 // Capital letters at the start of a sentence or a name. A full stop ends a sentence unless the word before it is an abbreviation.
