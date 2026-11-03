@@ -12361,13 +12361,14 @@ function ptOpenEditor(ev){
   PT_LIST.forEach(t=>{
     const on = t.id === cur;
     const b = el('<button type="button" class="pt-opt'+(on?' on':'')+'" aria-pressed="'+on+'"><div class="pt-prev" style="background:'+t.bg+';box-shadow:inset 0 0 0 3px '+t.acc+'"></div><b>'+esc(t.name)+'</b></button>');
-    b.onclick = ()=>{ cacheUser({profileTheme: t.id}); syncProfile(); close(); render(); };
+    b.onclick = ()=>{ ptSetProfile({profileTheme: t.id}); syncProfile(); close(); render(); };
     grid.appendChild(b);
   });
   sheet.appendChild(grid);
   scrim.onclick = close;
   document.body.appendChild(scrim); document.body.appendChild(sheet);
 }
+function ptSetProfile(patch){ store.profile = Object.assign({}, store.profile || {}, patch); persist(); }
 function ptIsTop5(){ return !!(store.profile && store.profile.top5); }
 function ptDefault(place){ return ['gold','platinum','royal-emerald','amethyst-crown','ruby-regal'][(place||1)-1] || 'gold'; }
 PT_LIST.push({id:"platinum",name:"Platinum Crown",play:"stack",bg:"#1a1d24",acc:"#c9d3e0"},{id:"royal-emerald",name:"Royal Emerald",play:"arch",bg:"#0b2318",acc:"#4fd69a"},{id:"amethyst-crown",name:"Amethyst Crown",play:"banner",bg:"#1d0f2e",acc:"#b78cff"},{id:"ruby-regal",name:"Ruby Regal",play:"poster",bg:"#2a0a12",acc:"#ff5a7a"});
@@ -12382,7 +12383,7 @@ function pubProfileHTML(p){
 }
 function lbCardHTML(r, tier){
   let html = __base_lbCardHTML(r, tier);
-  if(r.me && lbState.period === 'all'){ cacheUser({top5: r.place <= 5, place: r.place}); }
+  if(r.me && lbState.period === 'all'){ ptSetProfile({top5: r.place <= 5, place: r.place}); }
   if(r.place <= 5){
     const tid = ptValid(r.profile_theme) || ptDefault(r.place);
     html = html.replace('class="lb-card lb-', 'data-ptheme="'+tid+'" class="lb-card lb-');
@@ -12408,7 +12409,7 @@ function __old_profilePart(){
     PT_LIST.forEach(t=>{
       const on = t.id === cur;
       const b = el('<button type="button" class="pt-opt'+(on?' on':'')+'" aria-pressed="'+on+'"><div class="pt-prev" style="background:'+t.bg+';box-shadow:inset 0 0 0 3px '+t.acc+'"></div><b>'+esc(t.name)+'</b></button>');
-      b.onclick = ()=>{ cacheUser({profileTheme: t.id}); syncProfile(); render(); };
+      b.onclick = ()=>{ ptSetProfile({profileTheme: t.id}); syncProfile(); render(); };
       grid.appendChild(b);
     });
     box.appendChild(grid);
