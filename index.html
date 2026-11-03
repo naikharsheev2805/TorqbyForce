@@ -2665,6 +2665,15 @@ body.has-nav .build-stamp{ margin-bottom:calc(96px + env(safe-area-inset-bottom,
 /* ==== Recorder: bigger stop/play glyphs ==== */
 .vr-stop svg{ width:22px; height:22px; }
 .vr-play-btn svg{ width:22px; height:22px; }
+/* Streak pause: paused day tile, status line, and the animated pop-up badge */
+.sd.paused{ background:var(--surface-2); box-shadow:inset 0 0 0 2px var(--accent-text); }
+.sk-pause{ margin-top:10px; font-size:12.5px; color:var(--accent-text); font-weight:600; }
+.sp-hero{ display:grid; place-items:center; margin:6px 0 14px; }
+.sp-orb{ width:84px; height:84px; border-radius:50%; display:grid; place-items:center; background:linear-gradient(160deg,var(--accent),var(--accent-text)); color:var(--accent-ink); box-shadow:0 0 0 0 transparent; animation:spIn .7s cubic-bezier(.2,.8,.2,1) both, spPulse 2.4s ease-out .7s 2; }
+.sp-orb b{ font:600 34px Lora,Georgia,serif; }
+@keyframes spIn{ from{ opacity:0; transform:scale(.4) rotate(-18deg); } to{ opacity:1; transform:none; } }
+@keyframes spPulse{ 0%{ box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 45%, transparent); } 100%{ box-shadow:0 0 0 22px transparent; } }
+@media (prefers-reduced-motion: reduce){ .sp-orb{ animation:none; } }
 </style>
 <style id="adaptive-fixes">
 /* Adaptive fixes: chat screens use the real visible height, which updates on resize and full screen */
@@ -3398,13 +3407,49 @@ const chapterStats = c => statsOf(attemptsWhere(q=>q.chapter===c));
 const subjectStats = s => statsOf(attemptsWhere(q=>q.subject===s));
 // Days in a row. While today is still open the streak is held (frozen) at yesterday's count.
 function streakInfo(){
-  const days = qotdDays();
+  const days = streakDaysSet();
   const d = new Date();
   let frozen = false;
   if(!days.has(dayKey(d))){ d.setDate(d.getDate()-1); frozen = true; }
   let n = 0;
   while(days.has(dayKey(d))){ n++; d.setDate(d.getDate()-1); }
   return {n, frozen};
+}
+// ---- Streak pause: one missed day is covered, earned at each 3-day milestone, held at most one ----
+function pauseState(){ store.streakPause = store.streakPause || {tokens:0, days:{}, lastAwardN:0, popup:null}; return store.streakPause; }
+function streakDaysSet(){ const s = qotdDays(); Object.keys(pauseState().days).forEach(k=>s.add(k)); return s; }
+function shiftDay(k, delta){ const [y,m,d] = k.split('-').map(Number); return dayKey(new Date(y, m-1, d+delta)); }
+function applyStreakPause(){
+  const sp = pauseState();
+  const real = qotdDays();
+  const yest = shiftDay(dayKey(), -1), dby = shiftDay(dayKey(), -2);
+  let changed = false;
+  // A single missed day inside a live streak is covered automatically
+  if(sp.tokens > 0 && !real.has(yest) && !sp.days[yest] && (real.has(dby) || sp.days[dby])){
+    sp.days[yest] = true; sp.tokens--; changed = true;
+    sp.popup = {type:'used', n: streakInfo().n};
+  }
+  const n = streakInfo().n;
+  if(n === 0 && sp.lastAwardN){ sp.lastAwardN = 0; changed = true; }
+  // Earn one pause at each 3-day milestone, holding at most one
+  if(n >= 3 && n % 3 === 0 && n !== sp.lastAwardN){
+    sp.lastAwardN = n; changed = true;
+    if(sp.tokens < 1){ sp.tokens = 1; sp.popup = {type:'earned', n}; }
+  }
+  if(changed) persist();
+  if(sp.popup && view === 'home') setTimeout(showStreakPausePopup, 900);
+}
+function showStreakPausePopup(){
+  const sp = pauseState(); const p = sp.popup; if(!p) return;
+  sp.popup = null; persist();
+  const earned = p.type === 'earned';
+  const title = earned ? 'Missed a day? You are covered.' : 'No worries, your streak is safe.';
+  const eyebrow = earned ? 'Streak pause unlocked' : 'Streak paused';
+  const text = earned
+    ? 'You have a '+p.n+'-day streak. If you miss one day, we pause it instead of ending it. You can use it once, and you earn another at your next 3-day milestone.'
+    : 'We paused yesterday for you, so your streak is still '+p.n+' days. Answer today\u2019s question to keep it growing.';
+  const html = '<div class="sp-hero"><div class="sp-orb"><b>'+Number(p.n||0)+'</b></div></div><p>'+esc(text)+'</p>';
+  appDialog({eyebrow:eyebrow, title:title, body:html, html:true, ok:'Nice', cancel:false});
 }
 function streak(){ return streakInfo().n; }
 
@@ -5054,6 +5099,7 @@ function examDayCardEl(){
 function homeView(){
   const w = el('<div></div>');
   window.__hour = moodHour();
+  applyStreakPause();
   const mood = timeMood();
   const firstName = (store.profile && store.profile.name ? store.profile.name : '').split(' ')[0];
   const clock = new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit', hour12:true});
@@ -10301,7 +10347,7 @@ function flair(w, pct, answered, goodAt){
 // ---------- Streak, question of the day, badges, score reveal, chapter map ----------
 let qotdOpen = false;
 function streakStrip(){
-  const days = qotdDays();
+  const days = streakDaysSet();
   const info = streakInfo();
   const n = info.n;
   const todayDone = days.has(dayKey());
@@ -10309,14 +10355,14 @@ function streakStrip(){
   for(let i=6;i>=0;i--){
     const d = new Date(); d.setDate(d.getDate()-i);
     const k = dayKey(d);
-    tiles.push('<span class="sd'+(days.has(k)?' on':'')+(i===0?' today':'')+'" title="'+k+'"></span>');
+    tiles.push('<span class="sd'+(days.has(k)?' on':'')+(pauseState().days[k]?' paused':'')+(i===0?' today':'')+'" title="'+k+'"></span>');
   }
   const nudge = n>0 && !todayDone ? 'Study today to keep your '+n+'-day streak alive.'
               : n>0 ? 'You are on fire. Keep it going tomorrow.'
               : 'Answer one question today to start a streak.';
   return el('<div class="card streak'+(info.frozen?' frozen':'')+'"><div class="sk-top"><div class="sk-n">'+n+'</div>'
     +'<div><div class="sk-l">Day streak</div><div class="note-line" style="margin:3px 0 0">'+esc(nudge)+'</div></div></div>'
-    +'<div class="sk-days">'+tiles.join('')+'</div><div class="sk-pts">'+Math.round(store.points||0)+' points</div></div>');
+    +'<div class="sk-days">'+tiles.join('')+'</div><div class="sk-pts">'+Math.round(store.points||0)+' points</div>'+(pauseState().tokens>0?'<div class="sk-pause">Streak pause ready. One missed day will not break your streak.</div>':'')+'</div>');
 }
 // The question for a given day, the same for every user that day
 function qotdFor(d){
