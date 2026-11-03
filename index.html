@@ -4370,7 +4370,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v1.1.9';
+const APP_VERSION = 'v1.2.0';
 const LAST_UPDATED = '3 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -8324,11 +8324,12 @@ function waKeyboard(){
 }
 /* ===== Voice calls (one-to-one; WebRTC audio; Supabase Realtime signalling; TURN from Edge Function) ===== */
 const CALL = { state:'idle', role:null, id:null, peer:null, pc:null, stream:null, audioEl:null, ch:null, ringCh:null, listening:false,
-  ringTimer:null, clockTimer:null, startedAt:0, muted:false, ice:null, iceAt:0, pendingIce:[], ui:null, wake:null, restartTimer:null, ringerTimer:null, ctx:null };
+  ringTimer:null, clockTimer:null, startedAt:0, muted:false, ice:null, iceAt:0, pendingIce:[], ui:null, wake:null, restartTimer:null, ringerTimer:null, ctx:null, stage:'' };
 const CALL_MAX_MS = 2 * 60 * 60 * 1000;
 const CALL_RING_MS = 30000;
 const CALL_EVENTS = ['accept','offer','answer','ice','decline','end'];
 
+function callStage(t){ CALL.stage = t; if(CALL.ui){ const e = CALL.ui.querySelector('.call-state'); if(e){ e.textContent = t; e.classList.add('call-dots'); } } }
 function callSupported(){ return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.RTCPeerConnection); }
 function callNameOf(p){ return (p && (p.first_name || p.username || p.name)) || 'A student'; }
 
@@ -8337,7 +8338,7 @@ async function callIceServers(){
   const r = await fetch(SB_URL + '/functions/v1/turn-credentials', {
     method:'POST', headers:{ apikey:SB_KEY, Authorization:'Bearer ' + sbSession.access_token, 'Content-Type':'application/json' }, body:'{}'
   });
-  if(!r.ok) throw new Error('relay');
+  if(!r.ok){ const why = await r.text().catch(()=> ''); throw new Error('relay ' + r.status + ' ' + why.slice(0,160)); }
   const j = await r.json();
   CALL.ice = j.iceServers || [{ urls:'stun:stun.l.google.com:19302' }];
   CALL.iceAt = Date.now();
@@ -8587,9 +8588,13 @@ async function startCall(f){
     const { data: id, error } = await sbClient().rpc('start_call', { p_callee: f.id });
     if(error) throw error;
     CALL.id = id;
+    callStage('Getting microphone');
     CALL.stream = await callMic();
+    callStage('Connecting to relay');
     CALL.pc = callMakePC(await callIceServers());
+    callStage('Opening signal channel');
     CALL.ch = await callJoin(id);
+    callStage('Ringing friend');
     const ring = sbClient().channel('user:' + f.id + ':calls', { config:{ private:true } });
     await new Promise((res, rej) => ring.subscribe(st => { if(st === 'SUBSCRIBED') res(); if(st === 'CHANNEL_ERROR' || st === 'TIMED_OUT') rej(new Error(st)); }));
     ring.send({ type:'broadcast', event:'ring', payload:{ callId:id, from:{ id:sbSession.user.id, name: (store.profile && store.profile.name) || 'A student' } } });
@@ -8601,7 +8606,9 @@ async function startCall(f){
     const staleId = CALL.id;
     callCleanup();
     if(staleId) sbClient().rpc('update_call', { p_call: staleId, p_action:'failed' }).catch(()=>{});
-    let body = 'Check your connection and microphone, then try again.';
+    const stage = CALL.stage || 'Starting call';
+    const detail = msg || String((err && (err.code || err.error_description)) || err || 'unknown error');
+    let body = 'Stopped at: ' + stage + '. Error: ' + detail;
     if(/friends/i.test(msg)) body = 'You can only call your friends.';
     else if(/cannot call|blocked/i.test(msg)) body = 'You cannot call this student.';
     else if(/already/i.test(msg)) body = 'Someone is already on a call.';
