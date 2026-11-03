@@ -588,6 +588,38 @@ body.msg-fit #app{ background:transparent !important; position:relative; z-index
 .wa-msgs > *{ flex-shrink:0 !important; }
 .wa-msgs .qcard-chat .katex-display{ display:block !important; margin:6px 0 !important; overflow-x:auto !important; overflow-y:hidden !important; text-align:left !important; }
 .wa-msgs .qcard-chat .katex{ font-size:1.05em !important; }
+/* ===== Voice calls ===== */
+.call-root{ position:fixed; inset:0; z-index:95; }
+.call-scrim{ position:absolute; inset:0; background:var(--scrim); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); animation:fade var(--dur-fast) linear; }
+.call-card{ position:absolute; left:50%; top:50%; width:min(92vw,400px); max-height:92dvh; overflow:hidden; padding:34px 26px 26px; border-radius:30px; text-align:center;
+  background:linear-gradient(165deg,var(--surface),var(--surface-2)); border:1px solid var(--border); box-shadow:0 40px 90px -30px var(--shadow);
+  transform:translate(-50%,-50%); animation:callIn .48s var(--ease) both; }
+@keyframes callIn{ from{ opacity:0; transform:translate(-50%,-44%) scale(.96); } to{ opacity:1; transform:translate(-50%,-50%) scale(1); } }
+.call-card .ad-glow{ opacity:.26; }
+.call-glow-green{ position:absolute; left:-80px; bottom:-90px; width:230px; height:230px; border-radius:50%; background:var(--ok); opacity:.2; filter:blur(34px); pointer-events:none; }
+.call-eyebrow{ font:700 11.5px/1.2 Inter,sans-serif; letter-spacing:.18em; text-transform:uppercase; color:var(--accent-text); margin-bottom:22px; position:relative; }
+.call-avatar{ position:relative; width:112px; height:112px; margin:0 auto 18px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font:600 44px/1 Lora,Georgia,serif; color:var(--accent-ink); background:linear-gradient(145deg,var(--accent),var(--accent-text)); box-shadow:0 14px 34px -12px var(--accent); }
+.call-ringing .call-avatar::before, .call-ringing .call-avatar::after{ content:""; position:absolute; inset:-8px; border-radius:50%; border:2px solid var(--accent); opacity:0; animation:callPulse 2.2s ease-out infinite; }
+.call-ringing .call-avatar::after{ animation-delay:1.1s; }
+@keyframes callPulse{ 0%{ transform:scale(.92); opacity:.7; } 100%{ transform:scale(1.4); opacity:0; } }
+.call-name{ font:600 25px/1.2 Lora,Georgia,serif; color:var(--text); margin:0; position:relative; word-break:break-word; }
+.call-state{ font:700 11.5px/1 Inter,sans-serif; letter-spacing:.16em; text-transform:uppercase; color:var(--accent-text); margin-top:12px; position:relative; min-height:14px; }
+.call-timer{ font:700 40px/1 Inter,sans-serif; font-variant-numeric:tabular-nums; color:var(--text); margin:20px 0 4px; position:relative; }
+.call-timer[hidden], .call-note[hidden]{ display:none; }
+.call-row{ display:flex; justify-content:center; align-items:flex-start; gap:22px; margin-top:28px; position:relative; flex-wrap:wrap; }
+.call-round{ display:flex; flex-direction:column; align-items:center; gap:9px; background:none; border:0; padding:0; cursor:pointer; color:var(--muted); font:500 12px/1 Inter,sans-serif; }
+.call-round[hidden]{ display:none; }
+.call-round-dot{ width:64px; height:64px; border-radius:50%; border:1.5px solid var(--border); background:var(--surface); color:var(--text); display:flex; align-items:center; justify-content:center; transition:transform .22s var(--ease), background .22s var(--ease); box-shadow:0 2px 0 var(--border); }
+.call-round:active .call-round-dot{ transform:scale(.92); }
+.call-round-dot svg{ width:26px; height:26px; fill:none; stroke:currentColor; stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round; }
+.call-round.mute.on .call-round-dot{ background:var(--accent-soft); color:var(--accent-text); border-color:var(--accent-soft); }
+.call-round.end .call-round-dot, .call-round.decline .call-round-dot{ background:var(--bad); color:#fff; border-color:transparent; box-shadow:0 10px 24px -10px var(--bad); }
+.call-round.accept .call-round-dot{ background:var(--ok); color:#fff; border-color:transparent; box-shadow:0 10px 24px -10px var(--ok); }
+.call-note{ font-size:13px; line-height:1.5; color:var(--muted); margin:18px 0 0; position:relative; }
+.call-btn-head{ margin-left:auto; }
+.call-btn-head + .wa-more{ margin-left:8px; }
+@media (prefers-reduced-motion: reduce){ .call-card, .call-scrim, .call-ringing .call-avatar::before, .call-ringing .call-avatar::after{ animation:none; } }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -2677,6 +2709,15 @@ body .wa-msgs .qcard-chat .katex .vlist-t, body .wa-msgs .qcard-chat .katex .vli
 .sel-bar{ display:flex; align-items:center; gap:10px; padding:8px 12px; }
 .sel-bar .sel-count{ flex:1; font:600 14px Inter,sans-serif; color:var(--text); text-align:center; }
 .bubble.picked, .qcard-chat.picked{ outline:2px solid var(--accent-text); outline-offset:2px; }
+/* Friends list: the status dot sits on the bottom-right edge of the avatar and always renders */
+.fr-row .fr-av{ display:inline-block !important; position:relative !important; width:44px !important; height:44px !important; overflow:visible !important; flex:0 0 44px; }
+.fr-row .fr-av .lb-av{ width:44px !important; height:44px !important; }
+.fr-row .fr-av .pdot{ display:block !important; position:absolute !important; right:-1px !important; bottom:-1px !important; left:auto !important; top:auto !important; width:14px !important; height:14px !important; min-width:14px; box-sizing:border-box !important; margin:0 !important; padding:0 !important; z-index:3 !important; border:2px solid var(--surface) !important; box-shadow:none !important; }
+/* Friends list: flame button in the app's own style (soft accent pill, no gradient) */
+.fr-flame{ display:inline-flex; align-items:center; gap:6px; border:1px solid var(--border); border-radius:999px; padding:7px 12px 7px 9px; font:600 12.5px/1 Inter,sans-serif; letter-spacing:.02em; color:var(--accent-text); background:var(--accent-soft); box-shadow:none; cursor:pointer; transition:transform .15s ease, border-color .2s ease; }
+.fr-flame svg{ width:14px; height:14px; fill:var(--accent-text); }
+.fr-flame:hover{ border-color:var(--accent-text); }
+.fr-flame:active{ transform:scale(.96); }
 /* Very short or very narrow screens: keep the message bar usable */
 @media (max-height:560px){ body.msg-fit .wa-msgs{ min-height:120px; } }
 </style>
@@ -4329,7 +4370,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v1.1.5';
+const APP_VERSION = 'v1.1.7';
 const LAST_UPDATED = '3 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -6907,6 +6948,7 @@ function logOpenOnce(){
   window.__openLogged = true;
   logEvent('app_open', view);
   startPresence();
+  startCallListener();
   checkDoubtInbox();
   setTimeout(showOnlineStrip, 900);
 }
@@ -8280,6 +8322,299 @@ function waKeyboard(){
   waBindGlide(kb);
   return kb;
 }
+/* ===== Voice calls (one-to-one; WebRTC audio; Supabase Realtime signalling; TURN from Edge Function) ===== */
+const CALL = { state:'idle', role:null, id:null, peer:null, pc:null, stream:null, audioEl:null, ch:null, ringCh:null, listening:false,
+  ringTimer:null, clockTimer:null, startedAt:0, muted:false, ice:null, iceAt:0, pendingIce:[], ui:null, wake:null, restartTimer:null, ringerTimer:null, ctx:null };
+const CALL_MAX_MS = 2 * 60 * 60 * 1000;
+const CALL_RING_MS = 30000;
+const CALL_EVENTS = ['accept','offer','answer','ice','decline','end'];
+
+function callSupported(){ return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.RTCPeerConnection); }
+function callNameOf(p){ return (p && (p.first_name || p.username || p.name)) || 'A student'; }
+
+async function callIceServers(){
+  if(CALL.ice && Date.now() - CALL.iceAt < 50 * 60 * 1000) return CALL.ice;
+  const r = await fetch(SB_URL + '/functions/v1/turn-credentials', {
+    method:'POST', headers:{ apikey:SB_KEY, Authorization:'Bearer ' + sbSession.access_token, 'Content-Type':'application/json' }, body:'{}'
+  });
+  if(!r.ok) throw new Error('relay');
+  const j = await r.json();
+  CALL.ice = j.iceServers || [{ urls:'stun:stun.l.google.com:19302' }];
+  CALL.iceAt = Date.now();
+  return CALL.ice;
+}
+
+async function callMic(){
+  return navigator.mediaDevices.getUserMedia({ audio:{ echoCancellation:true, noiseSuppression:true, autoGainControl:true }, video:false });
+}
+
+function callMakePC(ice){
+  const pc = new RTCPeerConnection({ iceServers: ice });
+  CALL.stream.getAudioTracks().forEach(t => pc.addTrack(t, CALL.stream));
+  pc.ontrack = e => {
+    if(!CALL.audioEl){
+      CALL.audioEl = document.createElement('audio');
+      CALL.audioEl.autoplay = true; CALL.audioEl.setAttribute('playsinline', '');
+      document.body.appendChild(CALL.audioEl);
+    }
+    CALL.audioEl.srcObject = e.streams[0];
+  };
+  pc.onicecandidate = e => { if(e.candidate) callSend('ice', { candidate: e.candidate }); };
+  pc.onconnectionstatechange = () => callOnPcState(pc.connectionState);
+  return pc;
+}
+
+function callJoin(id){
+  return new Promise((res, rej) => {
+    const ch = sbClient().channel('call:' + id, { config:{ broadcast:{ self:false }, private:true } });
+    CALL_EVENTS.forEach(ev => ch.on('broadcast', { event: ev }, m => callOnMsg(ev, m.payload || {})));
+    ch.subscribe(st => {
+      if(st === 'SUBSCRIBED') res(ch);
+      if(st === 'CHANNEL_ERROR' || st === 'TIMED_OUT') rej(new Error(st));
+    });
+  });
+}
+function callSend(ev, payload){ if(CALL.ch) CALL.ch.send({ type:'broadcast', event:ev, payload:payload || {} }); }
+
+async function callFlushIce(){
+  if(!CALL.pc || !CALL.pc.remoteDescription) return;
+  while(CALL.pendingIce.length){ try{ await CALL.pc.addIceCandidate(CALL.pendingIce.shift()); }catch(e){} }
+}
+
+async function callOnMsg(ev, p){
+  try{
+    if(ev === 'accept' && CALL.role === 'caller' && CALL.pc){
+      clearTimeout(CALL.ringTimer); CALL.state = 'connecting'; callShowView();
+      await CALL.pc.setLocalDescription(await CALL.pc.createOffer());
+      callSend('offer', { sdp: CALL.pc.localDescription });
+    } else if(ev === 'offer' && CALL.role === 'callee' && CALL.pc){
+      await CALL.pc.setRemoteDescription(p.sdp); await callFlushIce();
+      await CALL.pc.setLocalDescription(await CALL.pc.createAnswer());
+      callSend('answer', { sdp: CALL.pc.localDescription });
+    } else if(ev === 'answer' && CALL.role === 'caller' && CALL.pc){
+      await CALL.pc.setRemoteDescription(p.sdp); await callFlushIce();
+    } else if(ev === 'ice' && CALL.pc && p.candidate){
+      if(CALL.pc.remoteDescription) await CALL.pc.addIceCandidate(p.candidate).catch(()=>{});
+      else CALL.pendingIce.push(p.candidate);
+    } else if(ev === 'decline' && CALL.role === 'caller'){
+      callFinish('declined');
+    } else if(ev === 'end'){
+      callFinish('ended');
+    }
+  }catch(err){ callFinish('failed'); }
+}
+
+function callOnPcState(s){
+  if(!CALL.pc) return;
+  if(s === 'connected'){
+    clearTimeout(CALL.restartTimer);
+    if(CALL.state !== 'connected'){
+      CALL.state = 'connected'; CALL.startedAt = Date.now(); callShowView(); callKeepAwake();
+      CALL.clockTimer = setInterval(callTick, 1000); callTick();
+    } else { CALL.state = 'connected'; callShowView(); }
+  } else if(s === 'disconnected' && CALL.state === 'connected'){
+    CALL.state = 'reconnecting'; callShowView();
+    CALL.restartTimer = setTimeout(() => { if(CALL.pc && CALL.pc.connectionState !== 'connected') callRestart(); }, 5000);
+  } else if(s === 'failed'){
+    callFinish('failed');
+  }
+}
+async function callRestart(){
+  if(CALL.role !== 'caller' || !CALL.pc) return;
+  try{
+    CALL.pc.restartIce();
+    await CALL.pc.setLocalDescription(await CALL.pc.createOffer({ iceRestart:true }));
+    callSend('offer', { sdp: CALL.pc.localDescription });
+    CALL.restartTimer = setTimeout(() => { if(CALL.pc && CALL.pc.connectionState !== 'connected') callFinish('failed'); }, 20000);
+  }catch(e){ callFinish('failed'); }
+}
+
+function callTick(){
+  const ms = Date.now() - CALL.startedAt;
+  const t = CALL.ui && CALL.ui.querySelector('.call-timer');
+  if(t){ const sec = Math.floor(ms / 1000); t.textContent = String(Math.floor(sec / 60)).padStart(2,'0') + ':' + String(sec % 60).padStart(2,'0'); }
+  if(ms >= CALL_MAX_MS) callEnd('ended');
+}
+
+async function callKeepAwake(){ try{ if('wakeLock' in navigator) CALL.wake = await navigator.wakeLock.request('screen'); }catch(e){} }
+
+function callRinger(on){
+  clearInterval(CALL.ringerTimer); CALL.ringerTimer = null;
+  if(!on){ if(CALL.ctx){ CALL.ctx.close().catch(()=>{}); CALL.ctx = null; } if(navigator.vibrate) navigator.vibrate(0); return; }
+  try{
+    CALL.ctx = CALL.ctx || new (window.AudioContext || window.webkitAudioContext)();
+    const beep = () => {
+      const o = CALL.ctx.createOscillator(), g = CALL.ctx.createGain(), t = CALL.ctx.currentTime;
+      o.type = 'sine'; o.frequency.value = 620;
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.16, t + 0.06); g.gain.linearRampToValueAtTime(0, t + 0.55);
+      o.connect(g).connect(CALL.ctx.destination); o.start(t); o.stop(t + 0.6);
+    };
+    beep();
+    CALL.ringerTimer = setInterval(() => { if(navigator.vibrate) navigator.vibrate(400); beep(); }, 1800);
+  }catch(e){}
+}
+
+function callShowView(){
+  if(!CALL.ui) return;
+  const name = callNameOf(CALL.peer);
+  const card = CALL.ui.querySelector('.call-card');
+  const state = CALL.ui.querySelector('.call-state');
+  const timer = CALL.ui.querySelector('.call-timer');
+  const note = CALL.ui.querySelector('.call-note');
+  const labels = { idle:'', incoming:'Incoming call', calling:'Ringing', connecting:'Connecting', connected:'Connected', reconnecting:'Reconnecting' };
+  card.classList.toggle('call-ringing', CALL.state === 'calling' || CALL.state === 'incoming');
+  CALL.ui.querySelector('.call-name').textContent = name;
+  CALL.ui.querySelector('.call-avatar').textContent = name.charAt(0).toUpperCase();
+  state.textContent = labels[CALL.state] || '';
+  timer.hidden = CALL.state !== 'connected';
+  note.hidden = !(CALL.state === 'incoming' || CALL.state === 'calling');
+  note.textContent = CALL.state === 'incoming' ? 'Accept to talk. Only you and ' + name + ' can hear this call.' : 'Waiting for your friend to pick up.';
+  CALL.ui.querySelector('.call-round.accept').hidden = CALL.state !== 'incoming';
+  CALL.ui.querySelector('.call-round.decline').hidden = CALL.state !== 'incoming';
+  CALL.ui.querySelector('.call-round.mute').hidden = CALL.state === 'incoming' || CALL.state === 'calling';
+  CALL.ui.querySelector('.call-round.end').hidden = CALL.state === 'incoming';
+  CALL.ui.querySelector('.call-round.mute').classList.toggle('on', CALL.muted);
+}
+
+function callOpenUI(){
+  if(CALL.ui) CALL.ui.remove();
+  const root = document.createElement('div');
+  root.className = 'call-root';
+  root.innerHTML =
+    '<div class="call-scrim"></div>' +
+    '<div class="call-card" role="dialog" aria-modal="true" aria-labelledby="callName">' +
+      '<div class="ad-glow" aria-hidden="true"></div><div class="call-glow-green" aria-hidden="true"></div>' +
+      '<div class="call-eyebrow">TORQ &middot; Voice call</div>' +
+      '<div class="call-avatar" aria-hidden="true"></div>' +
+      '<h2 class="call-name" id="callName"></h2>' +
+      '<div class="call-state"></div>' +
+      '<div class="call-timer" hidden>00:00</div>' +
+      '<p class="call-note"></p>' +
+      '<div class="call-row">' +
+        '<button class="call-round accept" type="button" aria-label="Accept call"><span class="call-round-dot"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span><span>Accept</span></button>' +
+        '<button class="call-round mute" type="button" aria-label="Mute"><span class="call-round-dot"><svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4"/></svg></span><span class="mute-label">Mute</span></button>' +
+        '<button class="call-round end" type="button" aria-label="End call"><span class="call-round-dot"><svg viewBox="0 0 24 24" style="transform:rotate(135deg)"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span><span>End</span></button>' +
+        '<button class="call-round decline" type="button" aria-label="Decline call"><span class="call-round-dot"><svg viewBox="0 0 24 24" style="transform:rotate(135deg)"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span><span>Decline</span></button>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(root);
+  CALL.ui = root;
+  root.querySelector('.call-round.accept').onclick = callAccept;
+  root.querySelector('.call-round.decline').onclick = callDecline;
+  root.querySelector('.call-round.end').onclick = () => callEnd('ended');
+  root.querySelector('.call-round.mute').onclick = callToggleMute;
+  callShowView();
+}
+
+function callToggleMute(){
+  CALL.muted = !CALL.muted;
+  if(CALL.stream) CALL.stream.getAudioTracks().forEach(t => t.enabled = !CALL.muted);
+  const lbl = CALL.ui && CALL.ui.querySelector('.mute-label');
+  if(lbl) lbl.textContent = CALL.muted ? 'Unmute' : 'Mute';
+  callShowView();
+}
+
+function callCleanup(){
+  clearTimeout(CALL.ringTimer); clearTimeout(CALL.restartTimer); clearInterval(CALL.clockTimer);
+  callRinger(false);
+  if(CALL.stream) CALL.stream.getTracks().forEach(t => t.stop());
+  if(CALL.pc){ try{ CALL.pc.close(); }catch(e){} }
+  if(CALL.audioEl){ CALL.audioEl.srcObject = null; CALL.audioEl.remove(); }
+  if(CALL.ch){ try{ sbClient().removeChannel(CALL.ch); }catch(e){} }
+  if(CALL.wake){ try{ CALL.wake.release(); }catch(e){} }
+  if(CALL.ui) CALL.ui.remove();
+  Object.assign(CALL, { state:'idle', role:null, id:null, peer:null, pc:null, stream:null, audioEl:null, ch:null, ui:null, wake:null,
+    ringTimer:null, clockTimer:null, restartTimer:null, startedAt:0, muted:false, pendingIce:[], ctx:null, ringerTimer:null });
+}
+
+function callFinish(reason){
+  if(CALL.state === 'idle') return;
+  const notes = { declined:'Your friend declined the call.', ended:'The call has ended.', failed:'The call dropped. Please try again.', missed:'Your friend is not available right now.' };
+  callCleanup();
+  if(notes[reason]) appDialog({ eyebrow:'Voice call', title: reason === 'missed' ? 'Not available right now' : 'Call ended', body: notes[reason], cancel:false, ok:'OK' });
+}
+
+async function callEnd(reason){
+  if(CALL.state === 'idle') return;
+  const id = CALL.id;
+  callSend('end', {});
+  try{ if(id) await sbClient().rpc('update_call', { p_call: id, p_action: reason === 'failed' ? 'failed' : 'end' }); }catch(e){}
+  callCleanup();
+}
+
+async function callDecline(){
+  const id = CALL.id;
+  try{ await sbClient().rpc('update_call', { p_call: id, p_action:'decline' }); }catch(e){}
+  try{ CALL.ch = await callJoin(id); callSend('decline', {}); }catch(e){}
+  callCleanup();
+}
+
+async function callAccept(){
+  if(CALL.state !== 'incoming') return;
+  clearTimeout(CALL.ringTimer); callRinger(false);
+  CALL.state = 'connecting'; callShowView();
+  try{
+    await sbClient().rpc('update_call', { p_call: CALL.id, p_action:'accept' });
+    CALL.stream = await callMic();
+    CALL.pc = callMakePC(await callIceServers());
+    CALL.ch = await callJoin(CALL.id);
+    callSend('accept', {});
+  }catch(err){ callFinish('failed'); }
+}
+
+async function startCall(f){
+  if(!sbSession || !f || !f.id) return;
+  if(CALL.state !== 'idle'){ appDialog({ eyebrow:'Voice call', title:'Already on a call', body:'Finish your current call first.', cancel:false }); return; }
+  if(!callSupported()){ appDialog({ eyebrow:'Voice call', title:'Not supported', body:'This browser cannot start calls. Try Chrome or Safari.', cancel:false }); return; }
+  CALL.state = 'calling'; CALL.role = 'caller'; CALL.peer = f; callOpenUI();
+  try{
+    const { data: id, error } = await sbClient().rpc('start_call', { p_callee: f.id });
+    if(error) throw error;
+    CALL.id = id;
+    CALL.stream = await callMic();
+    CALL.pc = callMakePC(await callIceServers());
+    CALL.ch = await callJoin(id);
+    const ring = sbClient().channel('user:' + f.id + ':calls', { config:{ private:true } });
+    await new Promise((res, rej) => ring.subscribe(st => { if(st === 'SUBSCRIBED') res(); if(st === 'CHANNEL_ERROR' || st === 'TIMED_OUT') rej(new Error(st)); }));
+    ring.send({ type:'broadcast', event:'ring', payload:{ callId:id, from:{ id:sbSession.user.id, name: (store.profile && store.profile.name) || 'A student' } } });
+    setTimeout(() => { try{ sbClient().removeChannel(ring); }catch(e){} }, 1500);
+    CALL.ringTimer = setTimeout(() => { if(CALL.state === 'calling') callMissed(); }, CALL_RING_MS);
+  }catch(err){
+    const msg = String((err && err.message) || '');
+    callCleanup();
+    let body = 'Check your connection and microphone, then try again.';
+    if(/friends/i.test(msg)) body = 'You can only call your friends.';
+    else if(/cannot call|blocked/i.test(msg)) body = 'You cannot call this student.';
+    else if(/already/i.test(msg)) body = 'Someone is already on a call.';
+    appDialog({ eyebrow:'Voice call', title:'Could not start the call', body, cancel:false });
+  }
+}
+
+async function callMissed(){
+  const id = CALL.id;
+  try{ await sbClient().rpc('update_call', { p_call: id, p_action:'missed' }); }catch(e){}
+  callFinish('missed');
+}
+
+function callOnRing(p){
+  if(CALL.state !== 'idle' || !p || !p.callId) return;
+  CALL.state = 'incoming'; CALL.role = 'callee'; CALL.id = p.callId;
+  CALL.peer = { id: p.from && p.from.id, name: (p.from && p.from.name) || 'A student' };
+  callOpenUI(); callRinger(true);
+  CALL.ringTimer = setTimeout(() => { if(CALL.state === 'incoming') callCleanup(); }, CALL_RING_MS);
+}
+
+function startCallListener(){
+  if(CALL.listening || !sbSession) return;
+  CALL.listening = true;
+  const ch = sbClient().channel('user:' + sbSession.user.id + ':calls', { config:{ private:true } });
+  ch.on('broadcast', { event:'ring' }, m => callOnRing(m.payload));
+  ch.subscribe();
+  CALL.ringCh = ch;
+}
+
+window.addEventListener('pagehide', () => { if(CALL.state !== 'idle' && CALL.id) callEnd('failed'); });
+
 function chatScreen(f){
   const me = sbSession.user.id;
   const openedNow = fr.waChat !== f.id;
@@ -8293,6 +8628,9 @@ function chatScreen(f){
   head.appendChild(el('<div class="wa-hname"><b>'+esc(f.username||'Student')+'</b><small class="wa-typing-label">'+(fr.peerActivity ? (fr.peerActivity==='recording' ? '<span class="act-line">recording audio'+micWavesHTML()+'</span>' : '<span class="act-line">typing<span class="wa-dots"><i></i><i></i><i></i></span></span>') : esc(DOT_STATES[stateOf(fr.presence[f.id])].label))+'</small></div>'));
   const more = el('<button class="wa-more" type="button" aria-label="Chat options"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg></button>');
   more.onclick = ()=>openChatMenu(f);
+  const callBtn = el('<button class="wa-more call-btn-head" type="button" aria-label="Voice call"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z" fill="currentColor"/></svg></button>');
+  callBtn.onclick = ()=>startCall(f);
+  head.appendChild(callBtn);
   head.appendChild(more);
   w.appendChild(head);
 
