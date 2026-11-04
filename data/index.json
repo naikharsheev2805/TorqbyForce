@@ -17,9 +17,9 @@
         "Chemistry": 25
       },
       "difficulty_counts": {
-        "easy": 17,
-        "medium": 39,
-        "hard": 19
+        "medium": 26,
+        "hard": 41,
+        "easy": 8
       },
       "verified": false
     },
@@ -40,262 +40,9 @@
         "Chemistry": 25
       },
       "difficulty_counts": {
-        "easy": 19,
-        "medium": 34,
-        "hard": 22
-      },
-      "verified": false
-    },
-    {
-      "id": "main-2025-jan-s1-sh1-23jan",
-      "exam": "main",
-      "year": 2025,
-      "session": "Jan-S1",
-      "session_number": 1,
-      "shift": 1,
-      "shift_label": "Shift 1",
-      "date": "2025-01-23",
-      "file": "data/main-2025-jan-s1-sh1-23jan.json",
-      "question_count": 75,
-      "subjects": {
-        "Maths": 25,
-        "Physics": 25,
-        "Chemistry": 25
-      },
-      "difficulty_counts": {
-        "medium": 35,
-        "hard": 28,
-        "easy": 12
-      },
-      "verified": false
-    },
-    {
-      "id": "main-2025-jan-s1-sh2-23jan",
-      "exam": "main",
-      "year": 2025,
-      "session": "Jan-S1",
-      "session_number": 1,
-      "shift": 2,
-      "shift_label": "Shift 2",
-      "date": "2025-01-23",
-      "file": "data/main-2025-jan-s1-sh2-23jan.json",
-      "question_count": 75,
-      "subjects": {
-        "Maths": 25,
-        "Physics": 25,
-        "Chemistry": 25
-      },
-      "difficulty_counts": {
-        "medium": 35,
-        "hard": 22,
-        "easy": 18
-      },
-      "verified": false
-    },
-    {
-      "id": "main-2025-jan-s1-sh1-24jan",
-      "exam": "main",
-      "year": 2025,
-      "session": "Jan-S1",
-      "session_number": 1,
-      "shift": 1,
-      "shift_label": "Shift 1",
-      "date": "2025-01-24",
-      "file": "data/main-2025-jan-s1-sh1-24jan.json",
-      "question_count": 75,
-      "subjects": {
-        "Maths": 25,
-        "Physics": 25,
-        "Chemistry": 25
-      },
-      "difficulty_counts": {
-        "hard": 18,
-        "medium": 41,
-        "easy": 16
-      },
-      "verified": false
-    },
-    {
-      "id": "main-2025-jan-s1-sh2-24jan",
-      "exam": "main",
-      "year": 2025,
-      "session": "Jan-S1",
-      "session_number": 1,
-      "shift": 2,
-      "shift_label": "Shift 2",
-      "date": "2025-01-24",
-      "file": "data/main-2025-jan-s1-sh2-24jan.json",
-      "question_count": 75,
-      "subjects": {
-        "Maths": 25,
-        "Physics": 25,
-        "Chemistry": 25
-      },
-      "difficulty_counts": {
-        "medium": 37,
-        "hard": 13,
-        "easy": 25
-      },
-      "verified": false
-    },
-    {
-      "id": "main-2024-jan-s1-sh1-27jan",
-      "exam": "main",
-      "year": 2024,
-      "session": "Jan-S1",
-      "session_number": 1,
-      "shift": 1,
-      "shift_label": "Shift 1",
-      "date": "2024-01-27",
-      "file": "data/main-2024-jan-s1-sh1-27jan.json",
-      "question_count": 90,
-      "subjects": {
-        "Physics": 30,
-        "Chemistry": 30,
-        "Maths": 30
-      },
-      "difficulty_counts": {
-        "easy": 29,
-        "medium": 47,
-        "hard": 14
-      },
-      "verified": false
-    },
-    {
-      "id": "main-2024-jan-s1-sh1-29jan",
-      "exam": "main",
-      "year": 2024,
-      "session": "Jan-S1",
-      "session_number": 1,
-      "shift": 1,
-      "shift_label": "Shift 1",
-      "date": "2024-01-29",
-      "file": "data/main-2024-jan-s1-sh1-29jan.json",
-      "question_count": 90,
-      "subjects": {
-        "Physics": 30,
-        "Chemistry": 30,
-        "Maths": 30
-      },
-      "difficulty_counts": {
-        "easy": 20,
-        "medium": 45,
-        "hard": 25
-      },
-      "verified": false
-    },
-    {
-      "id": "main-2024-jan-s1-sh2-29jan",
-      "exam": "main",
-      "year": 2024,
-      "session": "Jan-S1",
-      "session_number": 1,
-      "shift": 2,
-      "shift_label": "Shift 2",
-      "date": "2024-01-29",
-      "file": "data/main-2024-jan-s1-sh2-29jan.json",
-      "question_count": 90,
-      "subjects": {
-        "Physics": 30,
-        "Chemistry": 30,
-        "Maths": 30
-      },
-      "difficulty_counts": {
-        "easy": 16,
-        "medium": 46,
-        "hard": 28
-      },
-      "verified": false
-    },
-    {
-      "id": "main-2024-jan-s1-sh1-30jan",
-      "exam": "main",
-      "year": 2024,
-      "session": "Jan-S1",
-      "session_number": 1,
-      "shift": 1,
-      "shift_label": "Shift 1",
-      "date": "2024-01-30",
-      "file": "data/main-2024-jan-s1-sh1-30jan.json",
-      "question_count": 90,
-      "subjects": {
-        "Physics": 30,
-        "Chemistry": 30,
-        "Maths": 30
-      },
-      "difficulty_counts": {
-        "easy": 17,
-        "medium": 42,
-        "hard": 31
-      },
-      "verified": false
-    },
-    {
-      "id": "main-2024-jan-s1-sh2-30jan",
-      "exam": "main",
-      "year": 2024,
-      "session": "Jan-S1",
-      "session_number": 1,
-      "shift": 2,
-      "shift_label": "Shift 2",
-      "date": "2024-01-30",
-      "file": "data/main-2024-jan-s1-sh2-30jan.json",
-      "question_count": 90,
-      "subjects": {
-        "Physics": 30,
-        "Chemistry": 30,
-        "Maths": 30
-      },
-      "difficulty_counts": {
-        "easy": 13,
-        "hard": 46,
-        "medium": 31
-      },
-      "verified": false
-    },
-    {
-      "id": "main-2024-jan-s1-sh1-31jan",
-      "exam": "main",
-      "year": 2024,
-      "session": "Jan-S1",
-      "session_number": 1,
-      "shift": 1,
-      "shift_label": "Shift 1",
-      "date": "2024-01-31",
-      "file": "data/main-2024-jan-s1-sh1-31jan.json",
-      "question_count": 90,
-      "subjects": {
-        "Physics": 30,
-        "Chemistry": 30,
-        "Maths": 30
-      },
-      "difficulty_counts": {
-        "easy": 16,
-        "medium": 37,
-        "hard": 37
-      },
-      "verified": false
-    },
-    {
-      "id": "main-2024-jan-s1-sh2-31jan",
-      "exam": "main",
-      "year": 2024,
-      "session": "Jan-S1",
-      "session_number": 1,
-      "shift": 2,
-      "shift_label": "Shift 2",
-      "date": "2024-01-31",
-      "file": "data/main-2024-jan-s1-sh2-31jan.json",
-      "question_count": 90,
-      "subjects": {
-        "Physics": 30,
-        "Chemistry": 30,
-        "Maths": 30
-      },
-      "difficulty_counts": {
-        "easy": 8,
-        "medium": 36,
-        "hard": 46
+        "hard": 42,
+        "medium": 27,
+        "easy": 6
       },
       "verified": false
     },
@@ -311,9 +58,9 @@
       "file": "data/main-2024-feb-s1-sh1-01feb.json",
       "question_count": 90,
       "subjects": {
+        "Maths": 30,
         "Physics": 31,
-        "Chemistry": 29,
-        "Maths": 30
+        "Chemistry": 29
       },
       "difficulty_counts": {
         "medium": 31,
@@ -334,14 +81,221 @@
       "file": "data/main-2024-feb-s1-sh2-01feb.json",
       "question_count": 90,
       "subjects": {
+        "Maths": 30,
         "Physics": 30,
-        "Chemistry": 30,
-        "Maths": 30
+        "Chemistry": 30
       },
       "difficulty_counts": {
         "medium": 31,
         "easy": 18,
         "hard": 41
+      },
+      "verified": false
+    },
+    {
+      "id": "main-2024-jan-s1-sh1-27jan",
+      "exam": "main",
+      "year": 2024,
+      "session": "Jan-S1",
+      "session_number": 1,
+      "shift": 1,
+      "shift_label": "Shift 1",
+      "date": "2024-01-27",
+      "file": "data/main-2024-jan-s1-sh1-27jan.json",
+      "question_count": 90,
+      "subjects": {
+        "Maths": 30,
+        "Physics": 30,
+        "Chemistry": 30
+      },
+      "difficulty_counts": {
+        "easy": 29,
+        "medium": 47,
+        "hard": 14
+      },
+      "verified": false
+    },
+    {
+      "id": "main-2024-jan-s1-sh1-29jan",
+      "exam": "main",
+      "year": 2024,
+      "session": "Jan-S1",
+      "session_number": 1,
+      "shift": 1,
+      "shift_label": "Shift 1",
+      "date": "2024-01-29",
+      "file": "data/main-2024-jan-s1-sh1-29jan.json",
+      "question_count": 90,
+      "subjects": {
+        "Maths": 30,
+        "Physics": 30,
+        "Chemistry": 30
+      },
+      "difficulty_counts": {
+        "easy": 20,
+        "medium": 45,
+        "hard": 25
+      },
+      "verified": false
+    },
+    {
+      "id": "main-2024-jan-s1-sh1-30jan",
+      "exam": "main",
+      "year": 2024,
+      "session": "Jan-S1",
+      "session_number": 1,
+      "shift": 1,
+      "shift_label": "Shift 1",
+      "date": "2024-01-30",
+      "file": "data/main-2024-jan-s1-sh1-30jan.json",
+      "question_count": 90,
+      "subjects": {
+        "Maths": 30,
+        "Physics": 30,
+        "Chemistry": 30
+      },
+      "difficulty_counts": {
+        "easy": 17,
+        "medium": 42,
+        "hard": 31
+      },
+      "verified": false
+    },
+    {
+      "id": "main-2024-jan-s1-sh1-31jan",
+      "exam": "main",
+      "year": 2024,
+      "session": "Jan-S1",
+      "session_number": 1,
+      "shift": 1,
+      "shift_label": "Shift 1",
+      "date": "2024-01-31",
+      "file": "data/main-2024-jan-s1-sh1-31jan.json",
+      "question_count": 90,
+      "subjects": {
+        "Maths": 30,
+        "Physics": 30,
+        "Chemistry": 30
+      },
+      "difficulty_counts": {
+        "easy": 16,
+        "medium": 37,
+        "hard": 37
+      },
+      "verified": false
+    },
+    {
+      "id": "main-2024-jan-s1-sh2-29jan",
+      "exam": "main",
+      "year": 2024,
+      "session": "Jan-S1",
+      "session_number": 1,
+      "shift": 2,
+      "shift_label": "Shift 2",
+      "date": "2024-01-29",
+      "file": "data/main-2024-jan-s1-sh2-29jan.json",
+      "question_count": 90,
+      "subjects": {
+        "Maths": 30,
+        "Physics": 30,
+        "Chemistry": 30
+      },
+      "difficulty_counts": {
+        "easy": 16,
+        "medium": 46,
+        "hard": 28
+      },
+      "verified": false
+    },
+    {
+      "id": "main-2024-jan-s1-sh2-30jan",
+      "exam": "main",
+      "year": 2024,
+      "session": "Jan-S1",
+      "session_number": 1,
+      "shift": 2,
+      "shift_label": "Shift 2",
+      "date": "2024-01-30",
+      "file": "data/main-2024-jan-s1-sh2-30jan.json",
+      "question_count": 90,
+      "subjects": {
+        "Maths": 30,
+        "Physics": 30,
+        "Chemistry": 30
+      },
+      "difficulty_counts": {
+        "easy": 13,
+        "hard": 46,
+        "medium": 31
+      },
+      "verified": false
+    },
+    {
+      "id": "main-2024-jan-s1-sh2-31jan",
+      "exam": "main",
+      "year": 2024,
+      "session": "Jan-S1",
+      "session_number": 1,
+      "shift": 2,
+      "shift_label": "Shift 2",
+      "date": "2024-01-31",
+      "file": "data/main-2024-jan-s1-sh2-31jan.json",
+      "question_count": 90,
+      "subjects": {
+        "Maths": 30,
+        "Physics": 30,
+        "Chemistry": 30
+      },
+      "difficulty_counts": {
+        "easy": 8,
+        "medium": 39,
+        "hard": 43
+      },
+      "verified": false
+    },
+    {
+      "id": "main-2025-jan-s1-sh1-23jan",
+      "exam": "main",
+      "year": 2025,
+      "session": "Jan-S1",
+      "session_number": 1,
+      "shift": 1,
+      "shift_label": "Shift 1",
+      "date": "2025-01-23",
+      "file": "data/main-2025-jan-s1-sh1-23jan.json",
+      "question_count": 75,
+      "subjects": {
+        "Maths": 25,
+        "Physics": 25,
+        "Chemistry": 25
+      },
+      "difficulty_counts": {
+        "medium": 31,
+        "hard": 42,
+        "easy": 2
+      },
+      "verified": false
+    },
+    {
+      "id": "main-2025-jan-s1-sh1-24jan",
+      "exam": "main",
+      "year": 2025,
+      "session": "Jan-S1",
+      "session_number": 1,
+      "shift": 1,
+      "shift_label": "Shift 1",
+      "date": "2025-01-24",
+      "file": "data/main-2025-jan-s1-sh1-24jan.json",
+      "question_count": 75,
+      "subjects": {
+        "Maths": 25,
+        "Physics": 25,
+        "Chemistry": 25
+      },
+      "difficulty_counts": {
+        "hard": 51,
+        "medium": 22,
+        "easy": 2
       },
       "verified": false
     },
@@ -362,9 +316,124 @@
         "Chemistry": 25
       },
       "difficulty_counts": {
-        "easy": 14,
-        "medium": 42,
-        "hard": 19
+        "hard": 47,
+        "easy": 2,
+        "medium": 26
+      },
+      "verified": false
+    },
+    {
+      "id": "main-2025-jan-s1-sh1-29jan",
+      "exam": "main",
+      "year": 2025,
+      "session": "Jan-S1",
+      "session_number": 1,
+      "shift": 1,
+      "shift_label": "Shift 1",
+      "date": "2025-01-29",
+      "file": "data/main-2025-jan-s1-sh1-29jan.json",
+      "question_count": 75,
+      "subjects": {
+        "Maths": 25,
+        "Physics": 25,
+        "Chemistry": 25
+      },
+      "difficulty_counts": {
+        "hard": 45,
+        "medium": 27,
+        "easy": 3
+      },
+      "verified": false
+    },
+    {
+      "id": "main-2025-jan-s1-sh2-23jan",
+      "exam": "main",
+      "year": 2025,
+      "session": "Jan-S1",
+      "session_number": 1,
+      "shift": 2,
+      "shift_label": "Shift 2",
+      "date": "2025-01-23",
+      "file": "data/main-2025-jan-s1-sh2-23jan.json",
+      "question_count": 75,
+      "subjects": {
+        "Maths": 25,
+        "Physics": 25,
+        "Chemistry": 25
+      },
+      "difficulty_counts": {
+        "hard": 42,
+        "medium": 27,
+        "easy": 6
+      },
+      "verified": false
+    },
+    {
+      "id": "main-2025-jan-s1-sh2-24jan",
+      "exam": "main",
+      "year": 2025,
+      "session": "Jan-S1",
+      "session_number": 1,
+      "shift": 2,
+      "shift_label": "Shift 2",
+      "date": "2025-01-24",
+      "file": "data/main-2025-jan-s1-sh2-24jan.json",
+      "question_count": 75,
+      "subjects": {
+        "Maths": 25,
+        "Physics": 25,
+        "Chemistry": 25
+      },
+      "difficulty_counts": {
+        "hard": 39,
+        "medium": 34,
+        "easy": 2
+      },
+      "verified": false
+    },
+    {
+      "id": "main-2025-jan-s1-sh2-28jan",
+      "exam": "main",
+      "year": 2025,
+      "session": "Jan-S1",
+      "session_number": 1,
+      "shift": 2,
+      "shift_label": "Shift 2",
+      "date": "2025-01-28",
+      "file": "data/main-2025-jan-s1-sh2-28jan.json",
+      "question_count": 75,
+      "subjects": {
+        "Maths": 25,
+        "Physics": 25,
+        "Chemistry": 25
+      },
+      "difficulty_counts": {
+        "hard": 42,
+        "medium": 30,
+        "easy": 3
+      },
+      "verified": false
+    },
+    {
+      "id": "main-2025-jan-s1-sh2-29jan",
+      "exam": "main",
+      "year": 2025,
+      "session": "Jan-S1",
+      "session_number": 1,
+      "shift": 2,
+      "shift_label": "Shift 2",
+      "date": "2025-01-29",
+      "file": "data/main-2025-jan-s1-sh2-29jan.json",
+      "question_count": 75,
+      "subjects": {
+        "Maths": 25,
+        "Physics": 25,
+        "Chemistry": 25
+      },
+      "difficulty_counts": {
+        "hard": 43,
+        "medium": 28,
+        "easy": 4
       },
       "verified": false
     }
