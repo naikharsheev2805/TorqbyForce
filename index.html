@@ -2927,6 +2927,52 @@ body.msg-fit .wa-compose, body.chat-full .wa-compose{ flex:none !important; posi
 .pt-sheet{ position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); z-index:111; width:min(94vw,560px); max-height:86vh; overflow:auto; padding:22px; border-radius:24px; background:linear-gradient(165deg,var(--surface),var(--surface-2)); border:1px solid var(--border); box-shadow:0 40px 90px -30px var(--shadow); }
 .pt-sheet h3{ margin:0 0 6px; font:600 20px Lora,Georgia,serif; color:var(--text); }
 .pt-sheet .pt-grid{ grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); }
+</style><style id="kb-polish">
+.wa-kbtool{ display:flex; align-items:center; gap:8px; }
+.wa-sugg{ flex:1; display:flex; gap:6px; min-width:0; overflow:hidden; }
+.wa-sg{ flex:1 1 0; min-width:0; height:34px; padding:0 10px; border-radius:999px; border:1px solid rgba(255,255,255,.14); background:linear-gradient(160deg, rgba(255,255,255,.10), rgba(255,255,255,.03)); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); color:var(--text); font:600 13.5px Inter,sans-serif; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor:pointer; box-shadow:0 0 18px -8px var(--accent-soft); transition:transform .15s, box-shadow .15s; }
+.wa-sg:active{ transform:scale(.96); box-shadow:0 0 0 1px var(--accent-text), 0 0 22px -4px var(--accent-soft); }
+.wa-panel{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; padding:14px; border-radius:24px; background:linear-gradient(160deg, rgba(255,255,255,.09), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.12); backdrop-filter:blur(18px) saturate(140%); -webkit-backdrop-filter:blur(18px) saturate(140%); box-shadow:0 0 44px -14px var(--accent-soft), inset 0 1px 0 rgba(255,255,255,.08); }
+.wa-panel button{ min-height:52px; padding:12px 8px; border-radius:16px; border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.05); color:var(--text); font:600 13px Inter,sans-serif; cursor:pointer; transition:transform .15s, box-shadow .15s, border-color .15s; }
+.wa-panel button:hover, .wa-panel button:focus-visible{ border-color:var(--accent-text); box-shadow:0 0 0 1px var(--accent-text), 0 0 22px -4px var(--accent-soft); }
+.wa-panel button:active{ transform:scale(.96); }
+.wa-panel .wa-emo{ font-size:24px; min-height:48px; padding:6px; }
+</style><style id="pt-colour-lock">
+/* Orb colours: each theme has its own pair, set above. Plain profiles fall back to the app accent. */
+.pubp{ --pt-orb1:var(--accent-text,#f0643a); --pt-orb2:var(--accent-soft,#f0643a); }
+.pubp-skin[data-ptheme="gold"],.lb-card[data-ptheme="gold"]{--pt-orb1:#ffb347;--pt-orb2:#ff7b2e;}
+.pubp-skin[data-ptheme="ink-paper"],.lb-card[data-ptheme="ink-paper"]{--pt-orb1:#d9485f;--pt-orb2:#f4a261;}
+.pubp-skin[data-ptheme="midnight-ticket"],.lb-card[data-ptheme="midnight-ticket"]{--pt-orb1:#3d7bff;--pt-orb2:#8b5cf6;}
+.pubp-skin[data-ptheme="sunset-poster"],.lb-card[data-ptheme="sunset-poster"]{--pt-orb1:#ff5e3a;--pt-orb2:#ffcc33;}
+.pubp-skin[data-ptheme="mint-banner"],.lb-card[data-ptheme="mint-banner"]{--pt-orb1:#22d3a0;--pt-orb2:#38bdf8;}
+.pubp-skin[data-ptheme="lavender-split"],.lb-card[data-ptheme="lavender-split"]{--pt-orb1:#a855f7;--pt-orb2:#f472b6;}
+.pubp-skin[data-ptheme="forest-arch"],.lb-card[data-ptheme="forest-arch"]{--pt-orb1:#4ade80;--pt-orb2:#facc15;}
+.pubp-skin[data-ptheme="neon-orbit"],.lb-card[data-ptheme="neon-orbit"]{--pt-orb1:#ff2e88;--pt-orb2:#00f5ff;}
+.pubp-skin[data-ptheme="terracotta-banner"],.lb-card[data-ptheme="terracotta-banner"]{--pt-orb1:#ff7849;--pt-orb2:#ffb347;}
+.pubp-skin[data-ptheme="ocean-ticket"],.lb-card[data-ptheme="ocean-ticket"]{--pt-orb1:#06b6d4;--pt-orb2:#3b82f6;}
+.pubp-skin[data-ptheme="blueprint-split"],.lb-card[data-ptheme="blueprint-split"]{--pt-orb1:#38bdf8;--pt-orb2:#a5f3fc;}
+.pubp-skin[data-ptheme="rose-arch"],.lb-card[data-ptheme="rose-arch"]{--pt-orb1:#fb7185;--pt-orb2:#f9a8d4;}
+.pubp-skin[data-ptheme="newsprint"],.lb-card[data-ptheme="newsprint"]{--pt-orb1:#e11d48;--pt-orb2:#1d4ed8;}
+.pubp-skin[data-ptheme="aurora-orbit"],.lb-card[data-ptheme="aurora-orbit"]{--pt-orb1:#2dd4bf;--pt-orb2:#a78bfa;}
+.pubp-skin[data-ptheme="monochrome"],.lb-card[data-ptheme="monochrome"]{--pt-orb1:#9ca3af;--pt-orb2:#e5e7eb;}
+.pubp-skin[data-ptheme="cocoa-stack"],.lb-card[data-ptheme="cocoa-stack"]{--pt-orb1:#f59e0b;--pt-orb2:#dc2626;}
+.pubp-skin[data-ptheme="platinum"],.lb-card[data-ptheme="platinum"]{--pt-orb1:#cbd5e1;--pt-orb2:#7dd3fc;}
+.pubp-skin[data-ptheme="royal-emerald"],.lb-card[data-ptheme="royal-emerald"]{--pt-orb1:#10b981;--pt-orb2:#fbbf24;}
+.pubp-skin[data-ptheme="amethyst-crown"],.lb-card[data-ptheme="amethyst-crown"]{--pt-orb1:#c084fc;--pt-orb2:#fb923c;}
+.pubp-skin[data-ptheme="ruby-regal"],.lb-card[data-ptheme="ruby-regal"]{--pt-orb1:#f43f5e;--pt-orb2:#fbbf24;}
+/* Everything on a profile or leaderboard card takes the theme's own text colour */
+.pubp, .pubp-skin, .lb-card[data-ptheme]{ color:var(--pt-fg); }
+.pubp-skin *, .lb-card[data-ptheme] *{ color:inherit; }
+.pubp-skin .pubp-stats span, .pubp-skin .pubp-sub, .lb-card[data-ptheme] .lb-sub{ color:var(--pt-muted) !important; }
+.pubp-skin .pubp-stats b, .pubp-skin .pubp-badge, .lb-card[data-ptheme] .lb-pts, .lb-card[data-ptheme] .lb-card-no{ color:var(--pt-acc) !important; }
+.pubp-skin .pubp-chip{ color:var(--pt-fg); border-color:var(--pt-acc); }
+.pubp-skin[data-play="banner"] .pubp-head *{ color:var(--pt-bg) !important; }
+/* Orbs in the theme's own colours */
+.pubp::before, .pubp-skin::before{ background:radial-gradient(circle, color-mix(in srgb,var(--pt-orb1) 80%,transparent), transparent 70%); }
+.pubp::after, .pubp-skin::after{ background:radial-gradient(circle, color-mix(in srgb,var(--pt-orb2) 70%,transparent), transparent 70%); }
+.pubp-skin .pubp-av{ box-shadow:0 0 0 1px rgba(255,255,255,.12), 0 0 36px -6px color-mix(in srgb,var(--pt-orb1) 75%,transparent); }
+@keyframes ptGlow{ 0%,100%{ box-shadow:0 0 0 1px rgba(255,255,255,.1), 0 0 28px -8px color-mix(in srgb,var(--pt-orb1) 55%,transparent); } 50%{ box-shadow:0 0 0 1px rgba(255,255,255,.14), 0 0 46px -4px color-mix(in srgb,var(--pt-orb2) 85%,transparent); } }
+.lb-card[data-ptheme]{ box-shadow:0 20px 40px -26px color-mix(in srgb,var(--pt-orb1) 80%,transparent); }
 </style></head>
 <body>
 <div id="app"></div>
@@ -4673,8 +4719,8 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v1.6.0';
-const LAST_UPDATED = '3 November 2026';
+const APP_VERSION = 'v1.7.0';
+const LAST_UPDATED = '4 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
   const showVer = VERSION_VIEWS.indexOf(view) >= 0;
@@ -8919,6 +8965,7 @@ function waType(ch){
   noteTyping();
   if(Date.now() - (fr.glideAt || 0) < 350) return;
   if(waDraft().length >= 1000) return;
+  if(ch === ' ') waAutoFix();
   const isLetter = /^[A-Za-z]$/.test(ch);
   const wasCap = waWantsCapital(waDraft());
   if(isLetter && fr.kbMode !== 'sym' && fr.kbMode !== 'sym2' && fr.kbShift === 0 && wasCap) ch = ch.toUpperCase();
@@ -8953,6 +9000,7 @@ function waLoadWords(){
   waWordsLoading = true;
   fetch('words.txt').then(r=>r.ok ? r.text() : '').then(t=>{
     waWords = t.split('\n').map(w=>w.trim().toLowerCase()).filter(w=>/^[a-z]{2,15}$/.test(w));
+    waRedrawKb();
   }).catch(()=>{ waWords = []; }).finally(()=>{ waWordsLoading = false; });
 }
 // Longest common subsequence: how many letters of the word appear in the glide, in order
@@ -8992,6 +9040,82 @@ function waCommitWord(w){
   waSetDraft(waDraft() + sep + word + ' ');
   waRedrawKb();
 }
+
+// ---- Keyboard neighbours: which keys sit around each letter (QWERTY, staggered rows) ----
+const KB_ROWS = ['qwertyuiop', 'asdfghjkl', 'zxcvbnm'];
+const KB_OFF = [0, 0.25, 0.75];
+const KB_NEIGH = (()=>{
+  const pos = {};
+  KB_ROWS.forEach((row, ri)=>{ [...row].forEach((c, ci)=>{ pos[c] = {x: ci + KB_OFF[ri], y: ri}; }); });
+  const keys = Object.keys(pos), m = {};
+  keys.forEach(a=>{ m[a] = keys.filter(b=>b !== a && Math.hypot(pos[a].x - pos[b].x, pos[a].y - pos[b].y) < 1.2); });
+  return m;
+})();
+// ---- Dictionary helpers ----
+let kbDictSet = null, kbDictSize = -1;
+function waDict(){
+  if(!kbDictSet || kbDictSize !== waWords.length){ kbDictSet = new Set(waWords); kbDictSize = waWords.length; }
+  return kbDictSet;
+}
+// Up to two wrong letters, same length. A wrong letter that sits next to the right one on the keyboard costs less.
+function waCorrect(word){
+  if(!waWords || !waWords.length || word.length < 3 || !/^[a-z]+$/.test(word)) return word;
+  if(waDict().has(word)) return word;
+  let best = null, bestScore = Infinity;
+  for(let rank = 0; rank < waWords.length; rank++){
+    const w = waWords[rank];
+    if(w.length !== word.length) continue;
+    let bad = 0, cost = 0;
+    for(let i = 0; i < w.length && bad <= 2; i++){
+      if(w[i] !== word[i]){ bad++; cost += (KB_NEIGH[word[i]] || []).indexOf(w[i]) >= 0 ? 0.5 : 1; }
+    }
+    if(bad === 0 || bad > 2) continue;
+    const score = cost + 0.3 * Math.log2(rank + 2);
+    if(score < bestScore){ bestScore = score; best = w; }
+  }
+  return best || word;
+}
+function waAutoFix(){
+  const d = waDraft();
+  const m = d.match(/([A-Za-z]+)$/);
+  if(!m) return;
+  const typed = m[1];
+  if(!waWords){ waLoadWords(); return; }
+  const fixed = waCorrect(typed.toLowerCase());
+  if(fixed === typed.toLowerCase()) return;
+  const cased = typed[0] === typed[0].toUpperCase() && typed[0] !== typed[0].toLowerCase() ? fixed.charAt(0).toUpperCase() + fixed.slice(1) : fixed;
+  waSetDraft(d.slice(0, d.length - typed.length) + cased);
+}
+// ---- Suggestions: the three best words for the word being typed ----
+function waSuggestions(){
+  if(!waWords || !waWords.length) return [];
+  const m = waDraft().match(/([A-Za-z]*)$/);
+  const pre = m ? m[1].toLowerCase() : '';
+  if(!pre){ return waWords.slice(0, 3); }   // nothing typed yet: the most-used words
+  const out = [];
+  for(const w of waWords){ if(w !== pre && w.startsWith(pre)){ out.push(w); if(out.length === 3) return out; } }
+  for(const w of waWords){ if(w !== pre && !w.startsWith(pre) && w.indexOf(pre) >= 0 && out.indexOf(w) < 0){ out.push(w); if(out.length === 3) return out; } }
+  return out;
+}
+function waPickSuggestion(w){
+  const d = waDraft();
+  const m = d.match(/[A-Za-z]*$/);
+  const base = d.slice(0, d.length - (m ? m[0].length : 0));
+  const word = fr.kbShift ? w.charAt(0).toUpperCase() + w.slice(1) : w;
+  if(fr.kbShift === 1) fr.kbShift = 0;
+  waSetDraft(base + word + ' ');
+  waRedrawKb();
+}
+function waSugBar(){
+  const bar = el('<div class="wa-sugg" role="group" aria-label="Word suggestions"></div>');
+  waSuggestions().forEach(w=>{
+    const b = el('<button type="button" class="wa-sg"></button>');
+    b.textContent = w;
+    b.onclick = ()=>waPickSuggestion(w);
+    bar.appendChild(b);
+  });
+  return bar;
+}
 // Glide trail: a tapered streak that follows the finger. Speed sets its length (2 to 3 cm) and width:
 // a fast swipe gives a longer, thinner streak; a slow one gives a shorter, thicker streak.
 const WA_PX_PER_CM = 96 / 2.54;
@@ -9027,8 +9151,8 @@ function waStreak(kb){
     if(pts.length){
       const v = speed();
       const fast = Math.min(1, Math.max(0, (v - 0.25) / 1.15));    // 0 = slow, 1 = fast
-      let len = (2 + fast) * WA_PX_PER_CM;                          // 2 cm slow, 3 cm fast
-      const headW = 14 - 11 * fast;                                 // thick when slow, thin when fast
+      let len = (4 + 2 * fast) * WA_PX_PER_CM;                          // 2 cm slow, 3 cm fast
+      const headW = 26 - 12 * fast;                                 // thick when slow, thin when fast
       if(releasedAt) len *= Math.max(0, 1 - (now - releasedAt) / 320);
       const line = [pts[pts.length - 1]];
       let acc = 0;
@@ -9068,7 +9192,7 @@ function waStreak(kb){
 function waBindGlide(kb){
   kb.style.touchAction = 'none';
   const streak = waStreak(kb);
-  let down = false, moved = false, path = [], hits = [], lastEl = null;
+  let down = false, moved = false, path = [], hits = [], lastEl = null, glideTapKey = null;
   const keyAt = (x, y)=>{ const t = document.elementFromPoint(x, y); return t && t.closest ? t.closest('.wa-kb .nk') : null; };
   const clearHits = ()=>{ hits.forEach(h=>h.classList.remove('hit')); hits = []; };
   const lightKey = b=>{ b.classList.add('hit'); hits.push(b); };
@@ -9082,7 +9206,7 @@ function waBindGlide(kb){
     const b = keyAt(e.clientX, e.clientY);
     if(!b || !b.dataset.ch) return;
     down = true; moved = false; path = [b.dataset.ch]; lastEl = b;
-    clearHits(); lightKey(b); streak.start(e.clientX, e.clientY);
+    clearHits(); glideTapKey = b; streak.start(e.clientX, e.clientY);
     waLoadWords();
   });
   kb.addEventListener('pointermove', e=>{
@@ -9092,13 +9216,14 @@ function waBindGlide(kb){
     if(!b || b === lastEl) return;
     lastEl = b;
     if(!b.dataset.ch || path[path.length - 1] === b.dataset.ch) return;
-    path.push(b.dataset.ch); moved = true; lightKey(b);
-    preview();
+    path.push(b.dataset.ch); moved = true;
   });
   kb.addEventListener('pointerup', ()=>{
     if(!down) return;
     down = false; streak.end();
     const glided = moved && path.length >= 2;
+    if(!moved && glideTapKey) lightKey(glideTapKey);   // a plain tap still lights its key
+    glideTapKey = null;
     const word = glided ? waBestWord(path) : '';
     path = []; lastEl = null;
     if(word){ fr.glideAt = Date.now(); waCommitWord(word); }
@@ -9136,7 +9261,9 @@ function waKeyboard(){
   const grid = el('<button type="button" class="wa-grid" aria-label="Keyboard options">'+GRID_SVG+'</button>');
   grid.onclick = ()=>{ fr.kbPanel = fr.kbPanel ? null : 'menu'; fr.kbPage = 0; waRedrawKb(); };
   tool.appendChild(grid);
+  tool.appendChild(waSugBar());
   wrap.appendChild(tool);
+  waLoadWords();
   wrap.appendChild(fr.kbPanel ? waPanel() : waKeysOnly());
   const hide = el('<button type="button" class="wa-hide" aria-label="Hide keyboard">'+DOWN_SVG+'</button>');
   hide.onclick = ()=>{ fr.kb = false; fr.kbPanel = null; render(); };
@@ -12391,7 +12518,7 @@ function lbCardHTML(r, tier){
     html = html.replace('class="lb-card lb-', 'data-ptheme="'+tid+'" class="lb-card lb-');
   }
   if(r.me && ptIsTop5()){
-    html = html.replace(/(<div class="lb-card[^>]*>)/, '$1' + PENCIL_LB);
+    html = html.replace(/(<div [^>]*class="lb-card[^>]*>)/, '$1' + PENCIL_LB);
   }
   return html;
 }
