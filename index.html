@@ -3285,13 +3285,13 @@ button, .card, .row, .wa-row, .lb-card, .subjcard, .pt-opt, .ft-card, .ft-btn, .
 body.chat-full .on-strip, body.msg-fit .on-strip{ display:none !important; }
 /* v1.10.1: the first-run screen keeps its original control sizes; the polish minimums apply everywhere else */
 .onb button, .onb .btn, #app.is-onb button{ min-height:0 !important; }
-</style><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,600;1,400&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+</style><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
 <style id="aesthetic-restore">
-.exam-num{ font-family:Fraunces,Lora,Georgia,serif; font-weight:600; font-size:64px; font-variation-settings:"opsz" 72; letter-spacing:-.03em; }
-.exam-unit{ font-family:Fraunces,Georgia,serif; font-style:italic; font-size:15px; }
+.exam-num{ font-family:Lora,Georgia,serif; font-weight:600; font-size:64px; font-variation-settings:"opsz" 72; letter-spacing:-.03em; }
+.exam-unit{ font-family:Lora,Georgia,serif; font-style:italic; font-size:15px; }
 .exam-card .eyebrow{ font-family:Inter,sans-serif; }
-.recap-grid b{ font-family:Fraunces,Lora,Georgia,serif; font-weight:600; }
-.cal-card .cal-line{ font-family:Fraunces,Lora,Georgia,serif; }
+.recap-grid b{ font-family:Lora,Georgia,serif; font-weight:600; }
+.cal-card .cal-line{ font-family:Lora,Georgia,serif; }
 </style>
 
 <style id="tablet-widescreen-fix">
@@ -4217,7 +4217,7 @@ function monthRecapCard(){
   return w;
 }
 async function saveRecapPicture(month, s){
-  try{ await Promise.all([document.fonts.load('600 200px Fraunces'), document.fonts.load('italic 400 50px Fraunces'), document.fonts.load('500 30px Inter')]); }catch(e){}
+  try{ await Promise.all([document.fonts.load('600 200px Lora'), document.fonts.load('italic 400 50px Lora'), document.fonts.load('500 30px Inter')]); }catch(e){}
   const W=1080, H=1350, R=64;
   const c=document.createElement('canvas'); c.width=W; c.height=H;
   const g=c.getContext('2d');
@@ -4231,7 +4231,7 @@ async function saveRecapPicture(month, s){
   glow(930,240,560,'217,119,87',.38);
   glow(110,1180,500,'238,155,124',.16);
   // Translucent watermark numeral behind everything
-  g.save(); g.globalAlpha=.07; g.fillStyle='#f0eee6'; g.font='600 820px Fraunces, Georgia, serif'; g.textAlign='right'; g.fillText(String(s.total),W+40,1190); g.restore();
+  g.save(); g.globalAlpha=.07; g.fillStyle='#f0eee6'; g.font='600 820px Lora, Georgia, serif'; g.textAlign='right'; g.fillText(String(s.total),W+40,1190); g.restore();
   g.textAlign='left';
   // Header pill
   const head='TORQ  \u00B7  '+month.toUpperCase()+' RECAP';
@@ -4239,15 +4239,15 @@ async function saveRecapPicture(month, s){
   g.fillStyle='rgba(217,119,87,.18)'; rr(96,104,hw,68,34); g.fill();
   g.fillStyle='#ee9b7c'; g.fillText(head,124,149);
   // Hero numeral and label
-  g.fillStyle='#f0eee6'; g.font='600 260px Fraunces, Georgia, serif'; g.fillText(String(s.total),84,470);
-  g.fillStyle='#c9c4b8'; g.font='italic 400 52px Fraunces, Georgia, serif'; g.fillText('questions answered',96,560);
+  g.fillStyle='#f0eee6'; g.font='600 260px Lora, Georgia, serif'; g.fillText(String(s.total),84,470);
+  g.fillStyle='#c9c4b8'; g.font='italic 400 52px Lora, Georgia, serif'; g.fillText('questions answered',96,560);
   // Stat tiles
   const tiles=[[(s.acc==null?'-':s.acc+'%'),'accuracy'],[String(s.days),'active days'],[String(s.longest),'best run, days']];
   const tw=(W-192-48)/3;
   tiles.forEach((t,i)=>{ const x=96+i*(tw+24), y=640;
     g.fillStyle='rgba(240,238,230,.08)'; rr(x,y,tw,170,32); g.fill();
     g.strokeStyle='rgba(240,238,230,.14)'; g.lineWidth=2; g.stroke();
-    g.fillStyle='#f0eee6'; g.font='600 84px Fraunces, Georgia, serif'; g.fillText(t[0],x+28,y+98);
+    g.fillStyle='#f0eee6'; g.font='600 84px Lora, Georgia, serif'; g.fillText(t[0],x+28,y+98);
     g.fillStyle='#a5a39a'; g.font='500 27px Inter, sans-serif'; g.fillText(t[1],x+30,y+142);
   });
   // Strongest pill
@@ -4258,7 +4258,7 @@ async function saveRecapPicture(month, s){
     g.fillStyle='#1f1e1d'; g.fillText(txt,136,962);
   }
   // Footer tagline
-  g.fillStyle='#a5a39a'; g.font='italic 400 44px Fraunces, Georgia, serif'; g.fillText('Practice for JEE, one question at a time',96,1230);
+  g.fillStyle='#a5a39a'; g.font='italic 400 44px Lora, Georgia, serif'; g.fillText('Practice for JEE, one question at a time',96,1230);
   g.restore();
   c.toBlob(blob=>{
     if(!blob) return;
@@ -6353,7 +6353,7 @@ function openFcard(src, f, chapter){
   requestAnimationFrame(()=>requestAnimationFrame(()=>{
     back.classList.add('on');
     src.classList.add('fc-open');
-    const w = Math.min(window.innerWidth-32, 560), h = Math.min(window.innerHeight*0.6, 360);
+    const w = Math.min(window.innerWidth-40, 400), h = Math.min(window.innerHeight*0.5, 320);
     src.style.left = ((window.innerWidth-w)/2)+'px'; src.style.top = ((window.innerHeight-h)/2)+'px';
     src.style.width = w+'px'; src.style.height = h+'px';
   }));
@@ -12787,7 +12787,7 @@ function flashBindSwipe(stage){
       try{ stage.setPointerCapture(e.pointerId); }catch(_){}
     }
     dx = mx;
-    const c = card(); if(c) c.style.transform = 'translateX('+mx+'px) rotate('+(mx/22)+'deg)';
+    const c = card(); if(c) c.style.transform = 'translateX('+mx+'px) rotate('+(mx/22)+'deg)'+(flashState.flipped?' rotateY(180deg)':'');
   });
   const end = ()=>{
     if(x0 === null) return;
@@ -12796,7 +12796,7 @@ function flashBindSwipe(stage){
     const c = card(); if(c) c.classList.remove('dragging');
     if(!wasDrag) return;                 // a tap: the click below flips the card
     swiped = Date.now();
-    if(Math.abs(mx) > Math.max(70, w * 0.25)){ if(c) c.style.transform = ''; flashAnswer(mx > 0); }
+    if(Math.abs(mx) > Math.max(70, w * 0.25)){ flashAnswer(mx > 0); }
     else if(c) c.style.transform = '';
   };
   stage.addEventListener('pointerup', end);
@@ -12824,8 +12824,18 @@ function flashAnswer(ok){
   if(!c || st.busy) return;
   st.busy = true;
   flashKnown(st.chapter)[c.key] = ok;
-  const top = document.querySelector('.fx2-stage .fx2-card');   // the card leaves sideways
-  if(top) top.classList.add(ok ? 'fx2-out-r' : 'fx2-out-l');
+  const top = document.querySelector('.fx2-stage .fx2-card');   // the card leaves sideways from where it is
+  if(top){
+    const base = flashState.flipped ? ' rotateY(180deg)' : '';
+    const from = top.style.transform || (base ? base.trim() : 'none');
+    top.style.transition = 'none';
+    top.classList.remove('dragging');
+    if(top.animate){
+      top.animate([{transform:from, opacity:1},
+                   {transform:(ok?'translate(30%,-2%) rotate(7deg)':'translate(-30%,-2%) rotate(-7deg)')+base, opacity:0}],
+                  {duration:460, easing:'cubic-bezier(.4,0,.2,1)', fill:'forwards'});
+    } else top.classList.add(ok ? 'fx2-out-r' : 'fx2-out-l');
+  }
   const next = document.querySelector('.fx2-under.u1');         // the next card rises into place
   if(next) next.classList.add('fx2-promote');
   setTimeout(swapFlashCard, 460);
@@ -12834,7 +12844,7 @@ function flashAnswer(ok){
 function swapFlashCard(){
   const st = flashState;
   if(st.i >= st.pool.length-1){ st.done = true; render(); return; }
-  st.i++; st.enter = true; st.flipped = false;
+  st.i++; st.enter = false; st.flipped = false;
   const split = document.querySelector('.fx2-split');
   if(!split){ render(); return; }
   const host = split.parentNode;
@@ -12846,6 +12856,7 @@ function swapFlashCard(){
   fresh.forEach(n=>host.insertBefore(n, old[old.length-1].nextSibling));
   old.forEach(n=>n.remove());
   renderMath();
+  fitFront();
 }
 
 
@@ -13923,6 +13934,62 @@ function seriesAdminView(){
 </style>
 <style id="ui-polish-r8">
 .cal-actions .btn.ghost.small{ background:transparent !important; border:1px solid var(--accent) !important; color:var(--accent) !important; border-radius:999px !important; }
+</style>
+
+<style id="round-fixes">
+/* Countdown cards: no entrance or floating animation, so they never flicker when the screen draws */
+.exam-card, .exam-orb, .cal-card .exam-orb{ animation:none !important; }
+.exam-num{ font-family:Lora,Georgia,serif; font-weight:600; font-size:56px; font-style:normal; font-variation-settings:normal; letter-spacing:-.02em; }
+.exam-unit{ font-family:Inter,sans-serif; font-style:normal; font-size:13px; }
+
+/* Formula pop-up: centred, and sized for phones */
+.fcard.fc-travel.fc-open{ width:min(calc(100vw - 40px),400px) !important; max-width:400px !important; margin:0 !important; }
+@media (min-width:600px) and (max-width:959px){ .fc-open{ margin:0 !important; } }
+
+/* Flashcards on phones and tablets: one screen, the menu, the torque mark and Back share one row */
+@media (max-width:959px){
+  body.flash-session{ overflow:hidden !important; height:100dvh !important; }
+  body.flash-session #app{ height:100dvh !important; display:flex !important; flex-direction:column !important; overflow:hidden !important; box-sizing:border-box !important; padding-top:env(safe-area-inset-top,0px) !important; padding-bottom:calc(env(safe-area-inset-bottom,0px) + 10px) !important; }
+  body.flash-session #app > .header{ margin:calc(env(safe-area-inset-top,0px) - 12px) 0 0 !important; flex:0 0 auto; }
+  body.flash-session .hm-hero{ display:none !important; }
+  body.flash-session .fl-wrap{ flex:1 1 auto !important; min-height:0 !important; display:flex !important; flex-direction:column !important; width:100% !important; max-width:none !important; margin:0 !important; padding:0 !important; }
+  body.flash-session .fx2-top{ flex:0 0 auto !important; height:46px !important; margin:-46px 0 0 !important; padding:0 4px 0 0 !important; justify-content:flex-end !important; align-items:center !important; pointer-events:none; }
+  body.flash-session .fx2-top .fx2-back{ pointer-events:auto; padding:8px 12px; }
+  body.flash-session .fx2-count{ display:none !important; }
+  body.flash-session .fx2-split{ flex:1 1 auto !important; min-height:0 !important; height:auto !important; display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important; gap:14px !important; }
+  body.flash-session .fx2-deck{ flex:1 1 auto !important; min-height:0 !important; height:auto !important; width:100% !important; display:flex !important; justify-content:center !important; }
+  body.flash-session .fx2-stage{ height:100% !important; width:auto !important; display:flex !important; align-items:center !important; justify-content:center !important; }
+  body.flash-session .fx2-stack, body.flash-session .fx2-under{ height:100% !important; width:auto !important; max-width:82vw !important; aspect-ratio:1 / 1.42 !important; }
+  body.flash-session .fx2-side{ flex:0 0 auto !important; width:100% !important; height:auto !important; max-height:none !important; }
+  body.flash-session .fx2-big, body.flash-session .fx2-side-k{ display:none !important; }
+}
+/* Calendar: the agenda never scrolls inside itself on phones; the page scrolls once, normally */
+@media (max-width:699px){
+  .cal-page > .cal-agenda{ position:static !important; max-height:none !important; overflow:visible !important; }
+  .cal-page{ max-height:none !important; overflow:visible !important; }
+}
+</style>
+
+<style id="round-fixes-2">
+/* Phones and tablets: Back sits on the same row as the menu and the torque mark; the card starts below the header */
+@media (max-width:959px){
+  body.flash-session #app{ position:relative !important; }
+  body.flash-session .fx2-top{ position:absolute !important; top:calc(env(safe-area-inset-top,0px) + 15px) !important; right:16px !important; left:auto !important; width:auto !important; height:40px !important; margin:0 !important; padding:0 !important; z-index:5; }
+  body.flash-session .fl-wrap{ padding-top:14px !important; }
+  body.flash-session #navBack{ display:none !important; }
+  body.flash-session #app > .header{ position:relative !important; height:46px !important; min-height:46px !important; padding-left:0 !important; margin:calc(env(safe-area-inset-top,0px) - 12px) 0 0 !important; top:-52px !important; overflow:visible !important; }
+  body.flash-session #app > .header .brand-lock{ position:absolute !important; left:50% !important; top:50% !important; transform:translate(-50%,-50%) !important; flex-direction:row !important; align-items:center !important; }
+  body.flash-session #app > .header .brand-sub{ display:none !important; }
+  body.flash-session #app > .header .brand-lock .wm{ width:112px !important; height:35px !important; display:block !important; }
+  body.flash-session .fx2-under{ top:50% !important; transform:translate(-50%,-50%) !important; }
+  body.flash-session .fx2-stack, body.flash-session .fx2-under{ height:min(100%, 620px) !important; }
+}
+/* Widescreen: the whole session fits the window, nothing below the fold */
+@media (min-width:960px){
+  body.flash-session .fx2-split{ height:calc(100dvh - 170px) !important; max-height:calc(100dvh - 170px) !important; flex:0 0 auto !important; overflow:hidden !important; }
+  body.flash-session .fl-wrap{ max-height:calc(100dvh - 86px) !important; overflow:hidden !important; }
+}
+html:has(body.flash-session){ overflow:hidden !important; height:100dvh !important; }
 </style>
 </body>
 </html>
