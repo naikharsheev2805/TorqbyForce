@@ -1,6 +1,6 @@
 // TORQ service worker: keeps the app usable offline and lets the browser offer installation.
 // Network first, so updates reach the device; the cache is the fallback when offline.
-const CACHE = 'torq-v4';
+const CACHE = 'torq-v5';
 // Each file is cached on its own, so one missing file cannot stop the worker installing.
 const SHELL = ['./', './index.html', './manifest.json', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png', './icons/badge-96.png'];
 
@@ -56,8 +56,15 @@ self.addEventListener('notificationclick', event => {
   const url = (event.notification.data && event.notification.data.url) || './';
   event.waitUntil((async () => {
     const all = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+    // Focus an open TORQ window and hand it the target instead of reloading it, so unsent drafts survive.
     for (const client of all) {
-      if ('focus' in client) { await client.navigate(url).catch(() => {}); return client.focus(); }
+      if ('focus' in client) {
+        // Chat messages are tagged 'torq-<senderId>', so the sender's id tells the app which chat to open.
+        const tag = event.notification.tag || '';
+        const friend = tag.startsWith('torq-') && !tag.startsWith('torq-call-') ? tag.slice(5) : null;
+        client.postMessage({ type: 'torq-open', url, friend });
+        return client.focus();
+      }
     }
     return self.clients.openWindow(url);
   })());
