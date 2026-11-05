@@ -5730,7 +5730,14 @@ function renderInner(){
   // No saved profile and no account session: show the sign-up / log-in screen first.
   const needSignIn = !store.profile && !sbSession;
   app.classList.toggle('is-onb', needSignIn || !store.profile);
-  if(view!=='practice' && store.profile && !needSignIn) app.appendChild(el('<div class="header"><div class="brand-lock">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>'));
+  if(view!=='practice' && store.profile && !needSignIn){
+    const hdr = el('<div class="header"><div class="brand-lock" role="button" tabindex="0" aria-label="Go to home" style="cursor:pointer">'+torqWordmark('wm-sm')+'<span class="brand-sub">JEE companion</span></div></div>');
+    const bl = hdr.querySelector('.brand-lock');
+    const goHome = ()=>{ if(mockLocked()){ mockNotice(); return; } requestLeave(()=>go('home')); };
+    bl.onclick = goHome;
+    bl.onkeydown = e=>{ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); goHome(); } };
+    app.appendChild(hdr);
+  }
   const V = {publicprofile:()=>publicProfileView(), calendar:()=>calendarView(), friends:()=>friendsHubView(), messages:()=>messagesView(), doubt:()=>doubtView(), privacy:()=>legalPaperView('privacy'), terms:()=>legalPaperView('terms'), copyright:()=>legalPaperView('copyright'), disclaimer:()=>legalPaperView('disclaimer'), contact:contactPageView, notebooks:notebooksView, leaderboard:leaderboardView, home:homeView, syllabus:syllabusView, pyq:pyqView, chapter:chapterView, setup:setupView, paper:paperView, mocks:mocksView,
              me:meView, analytics:analyticsView, practice:practiceView, results:resultsView, notes:notesView, notehub:notehubView, viva:vivaView, flash:flashView, myflash:myFlashView, myflashnew:myFlashNewView, admin:adminView, eyes:eyesView, duels:()=>duelsView(), duelplay:()=>duelPlayView(), series:()=>seriesPlayView(), seriesplay:()=>seriesPlayView(), seriesresults:()=>seriesResultsView()};
   const needCoaching = !needSignIn && !!store.profile && !store.profile.coachingAnswered && !store.profile.coachingOnline && !store.profile.coachingOffline;
@@ -10998,10 +11005,32 @@ function chatComposeBar(f){
     bar.appendChild(voiceMicBtn(true));
     return bar;
   }
-  const field = el('<button type="button" class="wa-field" aria-label="Type a message"></button>');
-  waShowDraft(field);
-  field.onclick = function(){ fr.kb = !fr.kb; scrollChatToEnd = true; render(); };
-  bar.appendChild(field);
+  const phoneLayout = !!(window.matchMedia && matchMedia('(max-width: 699px)').matches);
+  if(phoneLayout){
+    const field = el('<button type="button" class="wa-field" aria-label="Type a message"></button>');
+    waShowDraft(field);
+    field.onclick = function(){ fr.kb = !fr.kb; scrollChatToEnd = true; render(); };
+    bar.appendChild(field);
+  } else {
+    // Tablets and wide screens: the device keyboard types into a real text box
+    const ta = el('<textarea class="wa-field wa-compose-input" rows="1" aria-label="Type a message" placeholder="Message"></textarea>');
+    ta.value = fr.draft || '';
+    ta.style.resize = 'none';
+    ta.oninput = function(){
+      const had = !!(fr.draft || '').trim();
+      fr.draft = ta.value;
+      try{ saveOpenDraft(); }catch(e){}
+      if(had !== !!ta.value.trim()){
+        render();
+        const n = document.querySelector('.wa-compose-input');
+        if(n){ n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
+      }
+    };
+    ta.onkeydown = function(e){
+      if(e.key === 'Enter' && !e.shiftKey && !e.isComposing){ e.preventDefault(); if((fr.draft || '').trim()) sendChat(); }
+    };
+    bar.appendChild(ta);
+  }
   if(fr.draft.trim()){
     const send = el('<button type="button" class="vr-send-btn wa-send" aria-label="Send message">'+PLANE_SVG+'</button>');
     send.onclick = function(){ sendChat(); };
@@ -13719,6 +13748,8 @@ document.addEventListener('click', function(e){
     num:   [['1','2','3'], ['4','5','6'], ['7','8','9'], ['+','0','-'], ['BACK','.','ENTER']]
   };
   let target = null, mode = 'alpha', shift = 0, panel = null;
+  // Phones get the TORQ keyboard. Tablets, laptops and wide touch screens get the device keyboard.
+  function kbPhone(){ return !!(window.matchMedia && matchMedia('(max-width: 699px)').matches); }
 
   function isTextField(t){
     if(!t || !t.tagName) return false;
@@ -13828,6 +13859,7 @@ document.addEventListener('click', function(e){
     document.body.classList.remove('gk-on');
   }
   function kbLock(t){
+    if(!kbPhone()) return;
     if(!t || !t.tagName) return;
     if(t.tagName !== 'TEXTAREA' && !(t.tagName === 'INPUT' && TEXT_TYPES.indexOf((t.getAttribute('type')||'').toLowerCase()) >= 0)) return;
     if(t.closest && t.closest(SKIP)) return;
@@ -13842,6 +13874,7 @@ document.addEventListener('click', function(e){
   document.addEventListener('pointerdown', function(e){ kbLock(e.target); }, true);
   document.addEventListener('touchstart', function(e){ kbLock(e.target); }, {capture:true, passive:true});
   document.addEventListener('focusin', function(e){
+    if(!kbPhone()) return;
     const t = e.target;
     kbLock(t);
     if(!isTextField(t)) return;
