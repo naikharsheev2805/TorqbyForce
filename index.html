@@ -3785,6 +3785,14 @@ body.kb-open .wa-compose .wa-send{ display:grid !important; flex:none; }
 .ft-card{ margin-bottom:0; }
 /* ---- Group D (v01.10.21): other users' avatars stay a circle in every theme ---- */
 .pubp-skin[data-play="arch"] .pubp-av, .pubp-skin .pubp-av, .pubp .pubp-av{ border-radius:50% !important; }
+/* v1.10.5: the tab is attached to the drawer and slides with it; only the tile grid scrolls */
+.qnav-drawer{ transform:translateX(-100%); overflow:visible !important; display:flex !important; flex-direction:column; }
+.qnav-drawer.open{ transform:none; }
+.qnav-drawer > .qnav-grid{ overflow-y:auto; min-height:0; flex:1 1 auto; margin:16px 0; padding-bottom:8px; }
+.qnav-tab{ position:absolute !important; left:100% !important; top:50% !important; transform:translateY(-50%) !important; visibility:visible !important; transition:background .3s ease, color .3s ease !important; }
+.qnav-tab.open{ left:100% !important; }
+/* v01.10.28: on wide screens the Submit and Doubt Relay buttons sit under the question card's width (820px), not the full page */
+@media (min-width:960px){ .set-submit-wrap, .ask-bar{ max-width:820px; margin-left:auto; margin-right:auto; } }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -4013,7 +4021,7 @@ body.kb-open .wa-compose .wa-send{ display:grid !important; flex:none; }
 <script>
 // ---------- Data paths (adjust here if the folder layout changes) ----------
 // Serve the repo root with a local server (e.g. `python3 -m http.server`); opening the file directly blocks fetch().
-const APP_BUILD = '2026-11-04-j';   // bumped with every release; the app compares it with the hosted file
+const APP_BUILD = '2026-11-05-c';   // bumped with every release; the app compares it with the hosted file
 const PATHS = {
   index: 'data/index.json',  // lists every paper; each paper's "file" field points at its question JSON
   solutions: 'data/solutions/'    // one file per paper: data/solutions/<paper-id>.json
@@ -4027,7 +4035,14 @@ let BANK_ERROR = null;
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1).toLowerCase() : 'Medium';
 const MONTH_KEY = {jan:'Jan', feb:'Feb', mar:'Mar', apr:'April'};
 const monthKey = s => { const m = /(jan|feb|mar|apr)/i.exec(String(s || '')); return m ? MONTH_KEY[m[1].toLowerCase()] : 'Jan'; };
-const paperTitle = p => [p.year, p.session, p.shift_label].filter(Boolean).join(' · ');
+const PAPER_MONTHS = {jan:'January', feb:'February', mar:'March', apr:'April', may:'May'};
+const paperSession = p => { const m = /(\d+)/.exec(String(p.session || p.shift_label || '')); return m ? 'Session ' + m[1] : ''; };
+const paperMonth = p => { const m = /(jan|feb|mar|apr|may)/i.exec(String(p.session_month || p.shift_label || p.session || '')); return m ? PAPER_MONTHS[m[1].toLowerCase()] : ''; };
+const paperDate = p => {
+  if(p.date){ const d = new Date(String(p.date) + 'T00:00:00'); if(!isNaN(d)) return d.toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'}); return String(p.date); }
+  return [paperMonth(p), p.year].filter(Boolean).join(' ');
+};
+const paperTitle = p => [paperSession(p), paperMonth(p) + (paperMonth(p) && p.year ? ' ' : '') + (p.year || '')].filter(Boolean).join(' · ');
 
 function solText(v){
   if(typeof v === 'string') return v;
@@ -4086,8 +4101,9 @@ async function loadBank(){
       try{
         const raw = await loadJSON(paper.file);     // "file" is already a repo-root path, e.g. data/....json
         let sols = {};
-        try{ sols = readSolutions(await loadJSON(PATHS.solutions + paper.id + '.json')); }
-        catch(e){ /* no solutions file for this paper yet */ }
+        const solName = String(paper.file || '').split('/').pop() || (paper.id + '.json');
+        try{ sols = readSolutions(await loadJSON(PATHS.solutions + solName)); }
+        catch(e){ try{ sols = readSolutions(await loadJSON(PATHS.solutions + paper.id + '.json')); }catch(e2){ /* no solutions file for this paper yet */ } }
         raw.forEach(q => all.push(normaliseQuestion(q, paper, sols[q.id] || null)));
       }catch(e){ console.error('Skipped paper', paper.id, e); }
     }
@@ -5015,7 +5031,8 @@ function submitMock(){
 
 // Submitting a practice set: this is the only moment answers are marked, scored and recorded
 function submitPractice(silent){
-  if(!session || session.submitted || session.review) return;
+  if(!session || session.review) return;
+  if(session.submitted){ go('results'); return; }   // already marked: just show the result
   const untouched = session.queue.filter(q=>!session.answers[q.id]).length;
   if(!silent && untouched){
     appDialog({eyebrow:'Submit', title:'Submit now?', body:untouched+' question'+(untouched>1?'s are':' is')+' untouched. '+(untouched>1?'They':'It')+' will count as skipped with no points.', ok:'Submit', cancel:'Keep going'})
@@ -5038,9 +5055,15 @@ function submitPractice(silent){
     addPoints(pts - (a.prevPts || 0));
     session.answers[q.id] = {sel:a.sel, correct:ok, time:a.time || 0, att:att, at:Date.now(), pts:pts};
   });
-  checkDailyDone();
-  session.submitted = true;
-  saveSessionRecord();
+  try{
+    checkDailyDone();
+    saveSessionRecord();
+    session.submitted = true;
+  }catch(err){
+    console.error('Submit failed', err);
+    appNotice('Could not submit', 'Your answers are still here, nothing was lost. Error: ' + ((err && err.message) || err));
+    return;
+  }
   if(!silent) go('results');
 }
 // Practice sessions survive a refresh: the question, answers, marks and timers are saved and restored
@@ -5586,7 +5609,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.10.25';
+const APP_VERSION = 'v01.10.28';
 const LAST_UPDATED = '5 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -6560,7 +6583,7 @@ function papersPart(){
   const card = el('<div class="list"></div>');
   list.forEach(p=>{
     const counts = SUBJECTS.map(s=>s+' '+((p.subjects && p.subjects[s]) || 0)).join(' · ');
-    const row = el('<div class="row"><div><div class="name">'+esc(paperTitle(p))+'</div><div class="meta">'+esc(counts)+'</div></div><div class="end">&rsaquo;</div></div>');
+    const row = el('<div class="row"><div><div class="name">'+esc(paperTitle(p))+'</div><div class="meta">'+esc(paperDate(p))+' · '+esc(counts)+'</div></div><div class="end">&rsaquo;</div></div>');
     row.onclick = ()=>go('paper',{paper:p.id});
     card.appendChild(row);
   });
@@ -7359,7 +7382,7 @@ function mocksView(){
   const pl = el('<div class="list"></div>');
   papers.forEach(p=>{
     const n = QUESTIONS.filter(q=>q.paperId===p.id).length;
-    const row = el('<div class="row"><div><div class="name">'+esc(paperTitle(p))+'</div><div class="meta">'+n+' questions · 180 minutes</div></div><div class="end">Start</div></div>');
+    const row = el('<div class="row"><div><div class="name">'+esc(paperTitle(p))+'</div><div class="meta">'+esc(paperDate(p))+' · '+n+' questions · 180 minutes</div></div><div class="end">Start</div></div>');
     row.onclick = ()=>{
       const qs = QUESTIONS.filter(q=>q.paperId===p.id).sort((a,b)=>SUBJECTS.indexOf(a.subject)-SUBJECTS.indexOf(b.subject));
       if(!qs.length){ appNotice('Nothing to start', 'No questions for this paper yet.'); return; }
@@ -12182,7 +12205,7 @@ function pyqPractice(w){
 
   w.appendChild(card);
   if(!reviewing){
-    const sub = el('<div style="margin-top:12px"></div>');
+    const sub = el('<div class="set-submit-wrap" style="margin-top:12px"></div>');
     const sb = el('<button class="btn secondary block">Submit this set</button>');
     sb.onclick = ()=>submitPractice();
     sub.appendChild(sb);
@@ -12856,7 +12879,7 @@ function qNavDrawer(){
     };
     grid.appendChild(b);
   });
-  wrap.appendChild(tab); wrap.appendChild(drawer);
+  drawer.appendChild(tab); wrap.appendChild(drawer);   // the tab is part of the drawer, so it moves with it
   return wrap;
 }
 // Opens or closes the question drawer without rebuilding it, so the motion plays both ways
@@ -14392,7 +14415,7 @@ function seriesAdminView(){
 // ---------- Wiring ----------
 (function(){
   const origHome = featureHomeStack;
-  featureHomeStack = function(){ const st = origHome(); const c = seriesCard(); if(c) st.insertBefore(c, st.firstChild); return st; };
+  featureHomeStack = function(){ const st = origHome.apply(null, arguments); const c = seriesCard(); if(c) st.insertBefore(c, st.firstChild); return st; };
   const origAdmin = adminView;
   adminView = function(){ const w = origAdmin(); if((nav.adminTab||'reports')==='series' && isGuard()){ w.appendChild(seriesAdminView()); } return w; };
 })();
