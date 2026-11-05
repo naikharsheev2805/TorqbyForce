@@ -3798,12 +3798,21 @@ body.kb-open .wa-compose .wa-send{ display:grid !important; flex:none; }
 .sk-day.missed .sk-dot{ background:rgba(224,88,79,.16); border:1px solid #e0584f; color:#e0584f; opacity:1; font-size:18px; line-height:1; }
 .sk-day.missed .sk-dl{ color:#e0584f; }
 .lb-name, .lb-card-name, .lb-who > b, .lb-pod b{ font-family:Lora,Georgia,serif !important; }
-/* v01.10.36: chat list shimmer while it loads, same look as the streak skeleton */
-.chat-sk{ padding:12px 16px !important; }
-.chat-sk-row{ display:flex; gap:12px; align-items:center; padding:10px 0; }
-.chat-sk-row .sk-skel-dot{ width:44px; height:44px; flex:none; }
-.chat-sk-txt{ flex:1; min-width:0; }
-.chat-sk-txt .sk-skel-line{ margin:6px 0; }
+/* v01.11.00: solutions in TORQ style, and Lora for italic emphasis everywhere */
+em{ font-family:Lora,Georgia,serif; }
+.sol{ display:grid; gap:12px; margin-top:6px; }
+.sol-h{ font:600 13px Inter,sans-serif; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-text); }
+.sol-p{ margin:0; font:400 15px/1.6 Lora,Georgia,serif; color:var(--text); }
+.sol-step{ display:grid; grid-template-columns:30px 1fr; gap:10px; align-items:start; padding:10px 12px; border-radius:14px; background:var(--surface-2); border:1px solid var(--border); }
+.sol-step p{ margin:0; font:400 15px/1.55 Lora,Georgia,serif; color:var(--text); }
+.sol-n{ width:30px; height:30px; border-radius:50%; display:grid; place-items:center; background:var(--accent); color:var(--accent-ink); font:600 13px Inter,sans-serif; }
+.sol-ans{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding:12px 14px; border-radius:16px; background:var(--accent-soft); border:1px solid var(--accent); font:600 17px Lora,Georgia,serif; color:var(--text); }
+.sol-ans span{ font:700 11px Inter,sans-serif; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-text); }
+.sol-idea{ margin:0; font:italic 400 15px/1.55 Lora,Georgia,serif; color:var(--text); padding-left:12px; border-left:2px solid var(--accent); }
+.sol-idea span{ display:block; font:700 11px Inter,sans-serif; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-text); font-style:normal; margin-bottom:4px; }
+.sol-chips{ display:flex; flex-wrap:wrap; gap:6px; }
+.sol-chips span{ padding:4px 10px; border-radius:999px; border:1px solid var(--border); background:var(--surface-2); font:600 12px Inter,sans-serif; color:var(--muted); }
+.sol-empty{ margin:0; font:italic 500 14px Lora,Georgia,serif; color:var(--muted); }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -4032,7 +4041,7 @@ body.kb-open .wa-compose .wa-send{ display:grid !important; flex:none; }
 <script>
 // ---------- Data paths (adjust here if the folder layout changes) ----------
 // Serve the repo root with a local server (e.g. `python3 -m http.server`); opening the file directly blocks fetch().
-const APP_BUILD = '2026-11-05-k';   // bumped with every release; the app compares it with the hosted file
+const APP_BUILD = '2026-11-05-n';   // bumped with every release; the app compares it with the hosted file
 const PATHS = {
   index: 'data/index.json',  // lists every paper; each paper's "file" field points at its question JSON
   solutions: 'data/solutions/'    // one file per paper: data/solutions/<paper-id>.json
@@ -4055,6 +4064,32 @@ const paperDate = p => {
 };
 const paperTitle = p => [paperSession(p), paperMonth(p) + (paperMonth(p) && p.year ? ' ' : '') + (p.year || '')].filter(Boolean).join(' · ');
 
+// v01.11.00: the solution is laid out as sections, numbered steps and an answer badge, not one paragraph
+function solutionHTML(text){
+  const t = String(text || '').replace(/\s+/g, ' ').trim();
+  if(!t || t === 'Solution not added yet.') return '<p class="sol-empty">Solution not added yet.</p>';
+  const parts = t.split(/(?=Recommended method|Alternative method|Method tags:|Answer:|Idea:|Step \d+:)/);
+  let out = '<div class="sol">';
+  parts.forEach(function(raw){
+    const x = raw.trim(); if(!x) return;
+    let m;
+    if((m = /^((?:Recommended|Alternative) method[^:]*):\s*([\s\S]*)$/.exec(x))){
+      out += '<div class="sol-h">' + esc(m[1]) + '</div>' + (m[2] ? '<p class="sol-p">' + esc(m[2]) + '</p>' : '');
+    } else if((m = /^Step (\d+):\s*([\s\S]*)$/.exec(x))){
+      out += '<div class="sol-step"><span class="sol-n">' + esc(m[1]) + '</span><p>' + esc(m[2]) + '</p></div>';
+    } else if((m = /^Idea:\s*([\s\S]*)$/.exec(x))){
+      out += '<p class="sol-idea"><span>Idea</span>' + esc(m[1]) + '</p>';
+    } else if((m = /^Answer:\s*([\s\S]*)$/.exec(x))){
+      out += '<div class="sol-ans"><span>Answer</span>' + esc(m[1]) + '</div>';
+    } else if((m = /^Method tags:\s*([\s\S]*)$/.exec(x))){
+      const chips = m[1].split(';').map(function(c){ return c.trim().replace(/\.$/, ''); }).filter(Boolean);
+      out += '<div class="sol-chips">' + chips.map(function(c){ return '<span>' + esc(c) + '</span>'; }).join('') + '</div>';
+    } else {
+      out += '<p class="sol-p">' + esc(x) + '</p>';
+    }
+  });
+  return out + '</div>';
+}
 function solText(v){
   if(typeof v === 'string') return v;
   if(v && typeof v.text === 'string') return v.text;
@@ -5620,7 +5655,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.10.36';
+const APP_VERSION = 'v01.11.02';
 const LAST_UPDATED = '5 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -8713,34 +8748,7 @@ async function loadFriends(){
   const sig = JSON.stringify([fr.err, fr.avNote, (fr.list || []).map(f=>[f.id, f.status, f.incoming, !!f.avatar, stateOf(fr.presence[f.id])])]);
   // The profile tab does not show friends, so friend data arriving there should not repaint it (scroll and open forms stay put)
   const onProfileTab = view === 'me' && nav.meTab !== 'friends';
-  if(sig !== fr.lastSig){
-    fr.lastSig = sig;
-    if(!onProfileTab){
-      // v01.10.34: when only the chat list is waiting, refresh just that list, not the whole page (no flash of the header and cards)
-      if(view === 'messages' && !fr.open && !fr.picking && refreshChatListOnly()) return;
-      renderSoon();
-    }
-  }
-}
-// v01.10.36: the chat list opens with a shimmer skeleton for about 1.5 s, then the real list appears in one go
-let chatRevealAt = 0;
-const CHAT_SKELETON_MS = 1500;
-function chatSkeletonCard(){
-  let rows = '';
-  for(let i = 0; i < 4; i++){
-    rows += '<div class="chat-sk-row"><i class="sk-skel-dot"></i><div class="chat-sk-txt"><i class="sk-skel-line" style="width:45%"></i><i class="sk-skel-line" style="width:80%"></i></div></div>';
-  }
-  return el('<div class="card chat-sk" aria-busy="true" aria-label="Loading your chats">' + rows + '</div>');
-}
-// Redraws only the chat list inside the Messages screen; the header and the rest of the page stay as they are
-function refreshChatListOnly(){
-  if(chatRevealAt && Date.now() < chatRevealAt) return true;      // still showing the skeleton: the reveal timer will draw the list
-  const scroll = document.querySelector('.msg-screen .wa-scroll');
-  if(!scroll || scroll.classList.contains('swap-out') || scroll.classList.contains('swap-in')) return false;
-  scroll.innerHTML = '';
-  scroll.appendChild(chatListCard());
-  scroll.appendChild(savedNotesCard());
-  return true;
+  if(sig !== fr.lastSig){ fr.lastSig = sig; if(!onProfileTab) renderSoon(); }
 }
 async function sendFriendRequest(username){
   const db = sbClient(), me = sbSession.user.id;
@@ -9142,10 +9150,6 @@ function messagesView(){
   const w = el('<div class="msg-screen"></div>');
   if(!sbSession){ w.appendChild(el('<div class="card"><p class="note-line">Log in to see your messages.</p></div>')); return w; }
   if(!fr.open) w.appendChild(el('<div class="hm-hero msg-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Chats</div><h1 class="hm-title">Mess<em>ages.</em></h1></div>'));
-  if(!fr.open && (!chatRevealAt || Date.now() - chatRevealAt > 60000)){
-    chatRevealAt = Date.now() + CHAT_SKELETON_MS;
-    setTimeout(function(){ if(view === 'messages' && !fr.open && !fr.picking && !refreshChatListOnly()) render(); }, CHAT_SKELETON_MS + 30);
-  }
   if(fr.list === null && !fr.loading) loadFriends();
   if(fr.open){ w.appendChild(chatScreen(fr.open)); return w; }
   const pp = pushPromptCard(); if(pp) w.appendChild(pp);
@@ -9802,8 +9806,7 @@ async function loadChatPreviews(){
   const sig = JSON.stringify(Object.keys(map).sort().map(function(k){ const p = map[k]; return [k, p.unread, p.last && p.last.body, p.last && p.last.read_at, p.last && p.last.created_at]; }));
   const changed = sig !== chatPrev.sig;
   chatPrev = {map, at: Date.now(), loading:false, sig: sig};
-  // v01.10.35: when the chat list is on screen, only the list is redrawn (the flicker was the full-page redraw)
-  if(changed){ if(!(view === 'messages' && !fr.open && !fr.picking && refreshChatListOnly())) render(); }
+  if(changed) render();
 }
 function chatPreviewText(m, me){
   if(!m) return '';
@@ -9859,13 +9862,7 @@ function avatarEl(f, small){
 function chatListCard(){
   const me = sbSession.user.id;
   if(Date.now() - chatPrev.at > 4000 && !chatPrev.loading) loadChatPreviews();
-  if(fr.list === null || (chatRevealAt && Date.now() < chatRevealAt)) return chatSkeletonCard();
   const card = el('<div class="card" style="padding:6px 0"></div>');
-  // v01.10.33: while friends are still loading, show a neutral placeholder instead of "no friends yet" flashing first
-  if(fr.list === null){
-    card.appendChild(el('<p class="note-line" style="padding:12px 16px;min-height:120px;margin:0">Loading your chats…</p>'));
-    return card;
-  }
   const friends = (fr.list || []).filter(f=>f.status==='accepted');
   if(!friends.length){
     card.appendChild(el('<p class="note-line" style="padding:12px 16px">You have no friends yet. Add one in Friends to start chatting.</p>'));
@@ -10598,8 +10595,10 @@ function chatScreen(f){
   // Scroll: go to the newest message when new ones arrive (unless the reader scrolled up); otherwise keep the place
   const grew = fr.msgs.length !== waScrollN;
   waScrollN = fr.msgs.length;
-  if(scrollChatToEnd || grew || fr.waAtBottom !== false){ scrollChatToEnd = false; setTimeout(()=>{ list.scrollTop = list.scrollHeight; }, 0); }
-  else { setTimeout(()=>{ list.scrollTop = fr.waTop || 0; }, 0); }
+  // v01.11.02: the list is hidden until it is scrolled to its place, so the top of the history never shows for a frame
+  list.style.visibility = 'hidden';
+  if(scrollChatToEnd || grew || fr.waAtBottom !== false){ scrollChatToEnd = false; setTimeout(()=>{ list.scrollTop = list.scrollHeight; list.style.visibility = ''; }, 0); }
+  else { setTimeout(()=>{ list.scrollTop = fr.waTop || 0; list.style.visibility = ''; }, 0); }
   return w;
 }
 
@@ -12222,7 +12221,7 @@ function pyqPractice(w){
   } else {
     const ptsLine = (!reviewing && a.pts!=null) ? '<div class="ptsline">+'+a.pts+' points</div>' : '';
     const verdict = sk ? 'Skipped. The answer is '+answerLabel(q) : (isOk ? 'Correct' : 'Not quite. The answer is '+answerLabel(q));
-    card.appendChild(el('<div class="note '+(sk?'skipped':(isOk?'ok':'bad'))+'"><div class="verdict">'+verdict+'</div>'+ptsLine+esc(q.explanation)+'</div>'));
+    card.appendChild(el('<div class="note '+(sk?'skipped':(isOk?'ok':'bad'))+'"><div class="verdict">'+verdict+'</div>'+ptsLine+solutionHTML(q.explanation)+'</div>'));
 
     noteTa = el('<textarea placeholder="Add a note"></textarea>');
     noteTa.value = store.notes[q.id] || '';
