@@ -3871,6 +3871,55 @@ body:has(.contact-paper) .gutter{ display:none !important; }
 #app:has(.sol), #app:has(.qsplit){ max-width:1280px !important; padding-bottom:16px !important; }
 #app:has(.sol) .qcard, #app:has(.qsplit) .qcard{ max-width:none !important; width:100%; }
 #app:has(.sol) .note, #app:has(.sol) .sol{ width:100%; max-width:none; box-sizing:border-box; }
+
+/* v-fix: question drawer. Same 8px gap between all tiles (rows and columns); outer edges get double (16px);
+   scrollbar sits in its own gutter outside the padding so it never covers a tile. */
+.qnav-drawer > .qnav-grid{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); row-gap:8px; column-gap:8px; padding:8px 16px; margin:8px 0 16px; overflow-y:auto; scrollbar-gutter:stable; }
+
+/* ===== Review redesign: question column + right column; solution as legal-style numbered cards ===== */
+.qcard.qsplit{ display:flex; flex-direction:column; gap:14px; }
+.qgrid{ display:grid; gap:18px; align-items:start; width:100%; min-width:0; }
+.qmain{ min-width:0; width:100%; }
+.qside{ display:grid; gap:14px; align-content:start; min-width:0; width:100%; }
+@media (min-width:900px){
+  .qcard.qsplit{ max-width:1180px; margin-left:auto; margin-right:auto; }
+  .qgrid{ grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:28px; }
+}
+.sx{ display:grid; gap:14px; min-width:0; overflow-wrap:anywhere; }
+.sx-ans{ display:flex; align-items:baseline; gap:12px; padding:14px 18px; border-radius:18px; background:linear-gradient(135deg,var(--accent),var(--c-medium,var(--accent))); color:#1f1e1d; }
+.sx-ans > span:first-child{ font:700 10.5px Inter,sans-serif; letter-spacing:.14em; text-transform:uppercase; opacity:.85; }
+.sx-ans b{ font:600 22px/1.2 Lora,Georgia,serif; }
+.sx-card{ position:relative; overflow:hidden; isolation:isolate; border-radius:calc(var(--r-xl,18px) + 4px); padding:16px 18px 18px; border:1.5px solid transparent;
+  background:linear-gradient(var(--surface),var(--surface)) padding-box, linear-gradient(135deg,var(--accent),var(--c-phys,var(--accent)),var(--c-chem,var(--accent))) border-box; }
+.sx-num{ position:absolute; right:-18px; bottom:-54px; z-index:0; font:600 clamp(150px,30vw,220px)/1 Lora,Georgia,serif; color:transparent; -webkit-text-stroke:1.5px color-mix(in srgb,var(--accent) 45%,transparent); pointer-events:none; user-select:none; }
+.sx-hd, .sx-body{ position:relative; z-index:1; }
+.sx-hd{ display:flex; align-items:center; gap:10px; min-width:0; }
+.sx-code{ flex:none; height:26px; min-width:38px; padding:0 9px; border-radius:999px; display:grid; place-items:center; background:var(--accent); color:#1f1e1d; font:700 11px Inter,sans-serif; }
+.sx-hd h4{ margin:0; font:600 18px/1.25 Lora,Georgia,serif; color:var(--text); min-width:0; }
+.sx-body{ display:grid; gap:12px; margin-top:12px; }
+.sx-p{ margin:0; font:400 15px/1.7 Inter,sans-serif; color:var(--text); }
+.sx-idea{ margin:0; padding:12px 14px; border-radius:14px; background:color-mix(in srgb,var(--accent) 12%,transparent); font:italic 400 15px/1.6 Lora,Georgia,serif; color:var(--text); }
+.sx-idea > span:first-child{ display:block; font:700 10.5px Inter,sans-serif; letter-spacing:.12em; text-transform:uppercase; color:var(--accent-text); font-style:normal; margin-bottom:4px; }
+.sx-steps{ display:grid; gap:10px; }
+.sx-step{ display:grid; grid-template-columns:28px minmax(0,1fr); gap:12px; align-items:start; padding:12px 14px; border-radius:14px; background:var(--surface-2); border:1px solid var(--border); }
+.sx-sn{ width:28px; height:28px; border-radius:50%; display:grid; place-items:center; background:var(--accent); color:#1f1e1d; font:700 12px Inter,sans-serif; }
+.sx-step p{ margin:0; font:400 15px/1.6 Inter,sans-serif; color:var(--text); min-width:0; }
+.sx-tags{ display:flex; flex-wrap:wrap; gap:8px; }
+.sx-note{ padding:14px 16px; border-radius:16px; background:var(--surface-2); border-left:3px solid var(--accent); }
+.sx-note > span:first-child{ font:700 10.5px Inter,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-text); }
+.sx-note p{ margin:6px 0 0; font:italic 400 14.5px/1.6 Lora,Georgia,serif; color:var(--text); }
+.sx-empty{ margin:0; font:italic 500 14px Lora,Georgia,serif; color:var(--muted); }
+.qside .note, .qside .field{ margin-top:0; }
+
+/* ===== Background formulas: one layer for the whole page. It scrolls with the content and holds still (no drift). ===== */
+body{ position:relative; }
+.gutter, .gutter-msg{ position:absolute !important; top:0 !important; bottom:0 !important; left:0 !important; right:0 !important; height:auto !important; }
+.gutter .gf, .gutter-msg .gf{ animation:none !important; transform:rotate(var(--r,0deg)) !important; }
+
+/* ===== Question drawer performance: tiles fade only (no per-tile scale); the page blur applies at once instead of animating every frame ===== */
+.qnav-drawer .qn{ opacity:0; transform:none !important; transition:opacity .3s ease; }
+.qnav-drawer.open .qn{ transform:none !important; }
+.qnav-dim{ transition:none !important; }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -4167,41 +4216,50 @@ function texify(raw){
 }
 function solutionHTML(text){
   const t = String(text || '').replace(/\s+/g, ' ').trim();
-  if(!t || t === 'Solution not added yet.') return '<p class="sol-empty">Solution not added yet.</p>';
+  if(!t || t === 'Solution not added yet.') return '<p class="sx-empty">Solution not added yet.</p>';
   const parts = t.split(/(?=Recommended method|Alternative method|Method tags:|Answer:|Idea:|Step \d+:)/);
-  let out = '<div class="sol">', notes = [], tags = '', answer = '', inGrid = false;
+  let answer = '', tags = '', notes = [], cards = [], cur = null, stepsOpen = false;
+  function start(code, label){ cur = {code: code, label: label, body: '', n: cards.length + 1}; cards.push(cur); stepsOpen = false; }
+  function closeSteps(){ if(stepsOpen){ cur.body += '</div>'; stepsOpen = false; } }
   parts.forEach(function(raw){
     const x = raw.trim(); if(!x) return;
-    const isStep = /^Step \d+:/.test(x);
-    if(!isStep && inGrid){ out += '</div>'; inGrid = false; }   // steps sit side by side in one grid
     let m;
     if((m = /^((?:Recommended|Alternative) method[^:]*):\s*([\s\S]*)$/.exec(x))){
+      closeSteps();
       const code = (/\((M\d+)\)/.exec(m[1]) || [])[1] || '';
-      const label = m[1].replace(/\s*\(M\d+\)/, '');
-      out += '<section class="sol-m"><header class="sol-h"><span class="sol-code">' + esc(code || '•') + '</span><span class="sol-title">' + esc(label) + '</span></header>' + (m[2] ? '<p class="sol-p">' + esc(texify(m[2])) + '</p>' : '') + '</section>';
+      start(code, m[1].replace(/\s*\(M\d+\)/, ''));
+      if(m[2]) cur.body += '<p class="sx-p">' + esc(solTexify(m[2])) + '</p>';
     } else if((m = /^Step (\d+):\s*([\s\S]*)$/.exec(x))){
-      if(!inGrid){ out += '<div class="sol-grid">'; inGrid = true; }
-      out += '<div class="sol-card"><span class="sol-n">' + esc(m[1]) + '</span><p>' + esc(texify(m[2])) + '</p></div>';
+      if(!cur) start('', 'Steps');
+      if(!stepsOpen){ cur.body += '<div class="sx-steps">'; stepsOpen = true; }
+      cur.body += '<div class="sx-step"><span class="sx-sn">' + esc(m[1]) + '</span><p>' + esc(solTexify(m[2])) + '</p></div>';
     } else if((m = /^Idea:\s*([\s\S]*)$/.exec(x))){
-      out += '<p class="sol-idea"><span>Idea</span>' + esc(texify(m[1])) + '</p>';
+      closeSteps(); if(!cur) start('', 'Solution');
+      cur.body += '<p class="sx-idea"><span>Idea</span>' + esc(solTexify(m[1])) + '</p>';
     } else if((m = /^Answer:\s*([\s\S]*)$/.exec(x))){
-      // One answer card, right after the first method's steps
-      if(!answer && m[1].trim()){ answer = m[1].trim(); out += '<div class="sol-ans"><span>Answer</span><b class="sol-val">' + esc(texify(answer)) + '</b></div>'; }
+      if(!answer && m[1].trim()) answer = m[1].trim();
     } else if((m = /^Method tags:\s*([\s\S]*)$/.exec(x))){
-      const body = m[1];
-      const cut = body.indexOf('. ');
+      const body = m[1]; const cut = body.indexOf('. ');
       const tagPart = cut >= 0 ? body.slice(0, cut) : body;
       const notePart = cut >= 0 ? body.slice(cut + 2).trim() : '';
       tags = tagPart.split(';').map(function(c){ return c.trim().replace(/\.$/, ''); }).filter(Boolean)
         .map(function(c){ return '<span class="tag">' + esc(c) + '</span>'; }).join('');
       if(notePart) notes.push(notePart);
     } else {
-      out += '<p class="sol-p">' + esc(texify(x)) + '</p>';
+      closeSteps(); if(!cur) start('', 'Solution');
+      cur.body += '<p class="sx-p">' + esc(solTexify(x)) + '</p>';
     }
   });
-  if(inGrid) out += '</div>';
-  if(tags) out += '<div class="tags sol-tags">' + tags + '</div>';
-  notes.forEach(function(n){ out += '<div class="sol-note"><span>Important note</span><p>' + esc(texify(n)) + '</p></div>'; });
+  closeSteps();
+  let out = '<div class="sx">';
+  if(answer) out += '<div class="sx-ans"><span>Answer</span><b>' + esc(solTexify(answer)) + '</b></div>';
+  cards.forEach(function(c){
+    out += '<section class="sx-card"><span class="sx-num" aria-hidden="true">' + c.n + '</span>'
+      + '<div class="sx-hd">' + (c.code ? '<span class="sx-code">' + esc(c.code) + '</span>' : '') + '<h4>' + esc(c.label) + '</h4></div>'
+      + '<div class="sx-body">' + c.body + '</div></section>';
+  });
+  if(tags) out += '<div class="sx-tags">' + tags + '</div>';
+  notes.forEach(function(n){ out += '<div class="sx-note"><span>Important note</span><p>' + esc(solTexify(n)) + '</p></div>'; });
   return out + '</div>';
 }
 function solText(v){
@@ -5824,8 +5882,8 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.11.13';
-const LAST_UPDATED = '5 November 2026';
+const APP_VERSION = 'v01.11.14';
+const LAST_UPDATED = 'November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
   const showVer = VERSION_VIEWS.indexOf(view) >= 0;
@@ -12232,7 +12290,7 @@ function legalPaperView(key){
   const sheet = el('<article class="legal-paper" aria-labelledby="lp-title"></article>');
   sheet.appendChild(el('<div class="lp-top"><span class="lp-no">Document '+d.no+' of 04</span><span class="lp-kind">Legal</span></div>'));
   sheet.appendChild(el('<h1 class="lp-title" id="lp-title">'+esc(d.title)+'</h1>'));
-  sheet.appendChild(el('<div class="lp-date">Last updated 31 October 2026</div>'));
+  sheet.appendChild(el('<div class="lp-date">Last updated November 2026</div>'));
   d.paras.forEach(t=>sheet.appendChild(el('<section class="card lp-sec"><p class="lp-p">'+legalText(t)+'</p></section>')));
   if(d.links){ sheet.appendChild(el('<section class="card lp-sec lp-links"><div class="eyebrow">Official websites</div>'
     +'<p class="lp-p" style="margin:0">Syllabus, dates and rules are published on these sites. Open them to check the latest.</p>'
@@ -12407,6 +12465,7 @@ function pyqPractice(w){
     qo.appendChild(row);
   }); }
 
+  const side = el('<div class="qside"></div>');
   let noteTa = null;
   if(locked){
     card.appendChild(el('<div class="note">Your answer is locked in. It is marked when you submit this set.</div>'));
@@ -12425,21 +12484,21 @@ function pyqPractice(w){
     const solAns = /Answer:/.test(String(q.explanation || ''));
     const ansTxt = solAns ? '' : '. The answer is '+answerLabel(q);
     const verdict = sk ? 'Skipped'+ansTxt : (isOk ? 'Correct' : 'Not quite'+ansTxt);
-    card.appendChild(el('<div class="note '+(sk?'skipped':(isOk?'ok':'bad'))+'"><div class="verdict">'+verdict+'</div>'+ptsLine+solutionHTML(q.explanation)+'</div>'));
+    side.appendChild(el('<div class="note '+(sk?'skipped':(isOk?'ok':'bad'))+'"><div class="verdict">'+verdict+'</div>'+ptsLine+solutionHTML(q.explanation)+'</div>'));
 
     noteTa = el('<textarea placeholder="Add a note"></textarea>');
     noteTa.value = store.notes[q.id] || '';
-    card.appendChild(el('<div class="field">Note</div>'));
-    card.appendChild(noteTa);
-    logicBlock(q, card);
-    card.appendChild(el('<div class="field">My solution</div>'));
+    side.appendChild(el('<div class="field">Note</div>'));
+    side.appendChild(noteTa);
+    logicBlock(q, side);
+    side.appendChild(el('<div class="field">My solution</div>'));
     const mysTa = el('<textarea placeholder="Your own, better way to solve this. Only you can see it."></textarea>');
     mysTa.value = (store.mySol && store.mySol[q.id]) || '';
-    card.appendChild(mysTa);
+    side.appendChild(mysTa);
     const mysBtn = el('<button class="linkish">Save my solution</button>');
     mysBtn.onclick = ()=>{ store.mySol = store.mySol || {}; const t = mysTa.value.trim(); if(t) store.mySol[q.id] = t; else delete store.mySol[q.id]; persist(); mysBtn.innerText = 'Saved'; };
-    card.appendChild(mysBtn);
-    mistakeMirrorUI(q, card);
+    side.appendChild(mysBtn);
+    mistakeMirrorUI(q, side);
     const saved = store.bookmarks.indexOf(q.id)>=0;
     const bmRow = el('<div class="row" style="justify-content:flex-start;margin-top:12px;padding:0;border:none"></div>');
     const bm = el('<button class="linkish">'+(saved?'★ Saved':'☆ Save for later')+'</button>');
@@ -12448,9 +12507,17 @@ function pyqPractice(w){
     const rp = el('<button class="linkish" style="margin-left:14px">⚑ Report</button>');
     rp.onclick = ()=>reportGate(q);
     bmRow.appendChild(rp);
-    card.appendChild(bmRow);
+    side.appendChild(bmRow);
   }
 
+  if(side.childNodes.length){
+    const main = el('<div class="qmain"></div>');
+    [...card.childNodes].forEach(function(node){ if(node!==side) main.appendChild(node); });
+    const grid = el('<div class="qgrid"></div>');
+    grid.appendChild(main); grid.appendChild(side);
+    card.appendChild(grid);
+    card.classList.add('qsplit');
+  }
   const last = session.idx===n-1;
   const nv = el('<div class="qnav-row"></div>');
   const prev = el('<button class="btn secondary"'+(session.idx===0?' disabled':'')+'>Previous</button>');
@@ -14892,5 +14959,34 @@ function seriesAdminView(){
 })();
 </script>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="torq-sharpen" color-interpolation-filters="sRGB"><feConvolveMatrix order="3" kernelMatrix="0 -0.5 0 -0.5 3 -0.5 0 -0.5 0" preserveAlpha="true"/></filter></svg>
+
+<script id="sol-texify-patch">
+// v01.11.14: solution text -> proper maths. Subscripts (r_1, KE_A, v_rms), powers (10^2), Greek words, sqrt, trig.
+// Every maths token is wrapped in $...$ so KaTeX draws it; plain words stay as text.
+(function(){
+  var GREEK = 'alpha|beta|gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|xi|pi|rho|sigma|Sigma|tau|phi|Phi|chi|psi|omega|Omega';
+  var RE = new RegExp(
+    '\\b(' + GREEK + ')\\b' +
+    '|sqrt\\s*\\(([^()]*)\\)' +
+    '|sqrt\\s*(\\d+(?:\\.\\d+)?)' +
+    '|\\b(sin|cos|tan)\\s*\\(?\\s*(\\d+(?:\\.\\d+)?)\\s*\\)?' +
+    '|\\b([A-Za-z]+|[A-Za-z]\\d*)_\\{?([A-Za-z0-9]+)\\}?' +
+    '|\\b([A-Za-z]+\\d*|\\d+)\\^\\{?(-?[A-Za-z0-9]+)\\}?', 'g');
+  function sub(x){ return /^[A-Za-z]+$/.test(x) && x.length > 1 ? '\\mathrm{' + x + '}' : x; }
+  window.solTexify = function(raw){
+    var t = String(raw || '').replace(/\s*\*\s*/g, ' × ').replace(/->/g, '→').replace(/<=/g, '≤').replace(/>=/g, '≥');
+    if (t.indexOf('$') >= 0) return t;   // already LaTeX
+    return t.replace(RE, function(m, g, s1, s2, trig, ang, base, bsub, pbase, pexp){
+      if (g !== undefined) return '$\\' + g + '$';
+      if (s1 !== undefined) return '$\\sqrt{' + s1 + '}$';
+      if (s2 !== undefined) return '$\\sqrt{' + s2 + '}$';
+      if (trig !== undefined) return '$\\' + trig + '\\,' + ang + '^{\\circ}$';
+      if (base !== undefined) return '$' + sub(base) + '_{' + sub(bsub) + '}$';
+      if (pbase !== undefined) return '$' + sub(pbase) + '^{' + pexp + '}$';
+      return m;
+    });
+  };
+})();
+</script>
 </body>
 </html>
