@@ -4059,7 +4059,7 @@ em{ font-family:Lora,Georgia,serif; }
 <script>
 // ---------- Data paths (adjust here if the folder layout changes) ----------
 // Serve the repo root with a local server (e.g. `python3 -m http.server`); opening the file directly blocks fetch().
-const APP_BUILD = '2026-11-05-u';   // bumped with every release; the app compares it with the hosted file
+const APP_BUILD = '2026-11-05-v';   // bumped with every release; the app compares it with the hosted file
 const PATHS = {
   index: 'data/index.json',  // lists every paper; each paper's "file" field points at its question JSON
   solutions: 'data/solutions/'    // one file per paper: data/solutions/<paper-id>.json
@@ -4113,7 +4113,7 @@ function solutionHTML(text){
   const t = String(text || '').replace(/\s+/g, ' ').trim();
   if(!t || t === 'Solution not added yet.') return '<p class="sol-empty">Solution not added yet.</p>';
   const parts = t.split(/(?=Recommended method|Alternative method|Method tags:|Answer:|Idea:|Step \d+:)/);
-  let out = '<div class="sol">', notes = [], tags = '';
+  let out = '<div class="sol">', notes = [], tags = '', answer = '';
   parts.forEach(function(raw){
     const x = raw.trim(); if(!x) return;
     let m;
@@ -4125,8 +4125,9 @@ function solutionHTML(text){
       out += '<div class="sol-step"><span class="sol-n">' + esc(m[1]) + '</span><p>' + esc(prettyMath(m[2])) + '</p></div>';
     } else if((m = /^Idea:\s*([\s\S]*)$/.exec(x))){
       out += '<p class="sol-idea"><span>Idea</span>' + esc(prettyMath(m[1])) + '</p>';
-    } else if(/^Answer:/.test(x)){
-      // The answer is already shown from the question itself, so it is not repeated here
+    } else if((m = /^Answer:\s*([\s\S]*)$/.exec(x))){
+      // Only the first answer is kept, so the answer shows once
+      if(!answer && m[1].trim()) answer = m[1].trim();
     } else if((m = /^Method tags:\s*([\s\S]*)$/.exec(x))){
       const body = m[1];
       const cut = body.indexOf('. ');
@@ -4139,6 +4140,7 @@ function solutionHTML(text){
       out += '<p class="sol-p">' + esc(prettyMath(x)) + '</p>';
     }
   });
+  if(answer) out += '<div class="sol-ans"><span>Answer</span><b class="sol-val">' + esc(prettyMath(answer)) + '</b></div>';
   if(tags) out += '<div class="tags sol-tags">' + tags + '</div>';
   notes.forEach(function(n){ out += '<div class="sol-note"><span>Important note</span><p>' + esc(prettyMath(n)) + '</p></div>'; });
   return out + '</div>';
@@ -5711,7 +5713,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.11.09';
+const APP_VERSION = 'v01.11.10';
 const LAST_UPDATED = '5 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
