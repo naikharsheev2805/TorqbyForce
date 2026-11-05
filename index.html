@@ -3813,6 +3813,8 @@ em{ font-family:Lora,Georgia,serif; }
 .sol-chips{ display:flex; flex-wrap:wrap; gap:6px; }
 .sol-chips span{ padding:4px 10px; border-radius:999px; border:1px solid var(--border); background:var(--surface-2); font:600 12px Inter,sans-serif; color:var(--muted); }
 .sol-empty{ margin:0; font:italic 500 14px Lora,Georgia,serif; color:var(--muted); }
+/* v01.11.03: bubbles drop into place when a chat opens */
+@keyframes chatBlockDrop{ 0%{ opacity:0; transform:translateY(-26px) scale(.94); } 55%{ opacity:1; transform:translateY(4px) scale(1.01); } 75%{ transform:translateY(-2px); } 100%{ opacity:1; transform:none; } }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -4041,7 +4043,7 @@ em{ font-family:Lora,Georgia,serif; }
 <script>
 // ---------- Data paths (adjust here if the folder layout changes) ----------
 // Serve the repo root with a local server (e.g. `python3 -m http.server`); opening the file directly blocks fetch().
-const APP_BUILD = '2026-11-05-n';   // bumped with every release; the app compares it with the hosted file
+const APP_BUILD = '2026-11-05-o';   // bumped with every release; the app compares it with the hosted file
 const PATHS = {
   index: 'data/index.json',  // lists every paper; each paper's "file" field points at its question JSON
   solutions: 'data/solutions/'    // one file per paper: data/solutions/<paper-id>.json
@@ -5655,7 +5657,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.11.02';
+const APP_VERSION = 'v01.11.03';
 const LAST_UPDATED = '5 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -10596,12 +10598,22 @@ function chatScreen(f){
   const grew = fr.msgs.length !== waScrollN;
   waScrollN = fr.msgs.length;
   // v01.11.02: the list is hidden until it is scrolled to its place, so the top of the history never shows for a frame
+  // v01.11.03: when a chat opens, its newest bubbles drop into place one after another
   list.style.visibility = 'hidden';
-  if(scrollChatToEnd || grew || fr.waAtBottom !== false){ scrollChatToEnd = false; setTimeout(()=>{ list.scrollTop = list.scrollHeight; list.style.visibility = ''; }, 0); }
-  else { setTimeout(()=>{ list.scrollTop = fr.waTop || 0; list.style.visibility = ''; }, 0); }
+  const dropIn = openedNow;
+  if(scrollChatToEnd || grew || fr.waAtBottom !== false){ scrollChatToEnd = false; setTimeout(()=>{ list.scrollTop = list.scrollHeight; list.style.visibility = ''; if(dropIn) dropChatBlocks(list); }, 0); }
+  else { setTimeout(()=>{ list.scrollTop = fr.waTop || 0; list.style.visibility = ''; if(dropIn) dropChatBlocks(list); }, 0); }
   return w;
 }
 
+// The newest bubbles fall onto each other like blocks when a chat opens
+function dropChatBlocks(list){
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  Array.from(list.children).slice(-8).forEach(function(row, i){
+    row.style.animation = 'chatBlockDrop .5s cubic-bezier(.2,.9,.3,1.15) both';
+    row.style.animationDelay = (i * 90) + 'ms';
+  });
+}
 // ---- Voice messages: hold to record, slide left to cancel, slide up to lock ----
 const VOICE_HOLD_MS = 120, VOICE_LOCK_PX = 50, VOICE_CANCEL_PX = 90, VOICE_MIN_MS = 1000, VOICE_MAX_MS = 60000;
 const VOICE_MIC_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/></svg>';
