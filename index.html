@@ -4135,8 +4135,8 @@ function solutionHTML(text){
     } else if((m = /^Idea:\s*([\s\S]*)$/.exec(x))){
       out += '<p class="sol-idea"><span>Idea</span>' + esc(prettyMath(m[1])) + '</p>';
     } else if((m = /^Answer:\s*([\s\S]*)$/.exec(x))){
-      // Each method's answer shows right after that method's steps
-      if(m[1].trim()) out += '<div class="sol-ans"><span>Answer</span><b class="sol-val">' + esc(prettyMath(m[1].trim())) + '</b></div>';
+      // One answer card, right after the first method's steps. Later methods repeat the same answer, so they add no card.
+      if(!answer && m[1].trim()){ answer = m[1].trim(); out += '<div class="sol-ans"><span>Answer</span><b class="sol-val">' + esc(prettyMath(answer)) + '</b></div>'; }
     } else if((m = /^Method tags:\s*([\s\S]*)$/.exec(x))){
       const body = m[1];
       const cut = body.indexOf('. ');
