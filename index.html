@@ -3910,6 +3910,11 @@ body:has(.contact-paper) .gutter{ display:none !important; }
 .sx-note p{ margin:6px 0 0; font:italic 400 14.5px/1.6 Lora,Georgia,serif; color:var(--text); }
 .sx-empty{ margin:0; font:italic 500 14px Lora,Georgia,serif; color:var(--muted); }
 .qside .note, .qside .field{ margin-top:0; }
+/* Review layout: question, each solution method and the study tools are separate blocks, packed into two balanced columns. */
+.qgrid > .qcol{ display:grid; gap:18px; align-content:start; min-width:0; width:100%; }
+.qblk{ display:grid; gap:14px; align-content:start; min-width:0; width:100%; }
+.qcol .note, .qcol .field{ margin-top:0; }
+.qgrid > .qcol > .qblk.qmethod .sx-card{ margin:0; }
 
 /* ===== Background formulas: one layer for the whole page. It scrolls with the content and holds still (no drift). ===== */
 body{ position:relative; }
@@ -12398,8 +12403,17 @@ function practiceView(){
 }
 // Wide screens: the question sits on the left, the options and the Sure / Guessing choice on the right.
 // The page then fits without scrolling. Phones and narrow tablets keep the single column.
+// Rough height of a review block, from its text length and structure. Used to balance the two columns.
+function estBlockHeight(b){
+  const chars = (b.textContent || '').replace(/\s+/g, ' ').length;
+  const items = b.querySelectorAll('p, .opt, .sx-step, .sx-idea, .field, .tag, .verdict').length;
+  const areas = b.querySelectorAll('textarea').length;
+  const imgs = b.querySelectorAll('img, figure').length;
+  return Math.ceil(chars / 60) * 24 + items * 14 + areas * 110 + imgs * 220 + 48;
+}
 function splitQuestionCard(card){
   if(!window.matchMedia('(min-width:700px)').matches) return card;   // v01.11.13: tablets too
+  if(card.querySelector(':scope > .qgrid')) return card;             // review layout already built in pyqPractice
   const right = el('<div class="qside qside-r"></div>'), left = el('<div class="qside qside-l"></div>');
   [...card.children].forEach(k=>{
     const isRight = k.matches('.opt, .sog-head, .chips, .mock-sog, .numpad, .qopts');
@@ -12513,8 +12527,37 @@ function pyqPractice(w){
   if(side.childNodes.length){
     const main = el('<div class="qmain"></div>');
     [...card.childNodes].forEach(function(node){ if(node!==side) main.appendChild(node); });
+    // Blocks: the question, the verdict with the answer, one block per solution method, then the study tools.
+    const blocks = [main];
+    const vnote = side.firstElementChild;
+    const methods = [];
+    if(vnote && vnote.classList.contains('note')){
+      blocks.push(vnote);
+      const sx = vnote.querySelector('.sx');
+      if(sx) [...sx.querySelectorAll(':scope > .sx-card')].forEach(function(c){
+        const mb = el('<div class="qblk qmethod"></div>'); mb.appendChild(c); methods.push(mb);
+      });
+      methods.forEach(function(mb){ blocks.push(mb); });
+    }
+    const study = el('<div class="qblk qstudy"></div>');
+    [...side.childNodes].forEach(function(n){ if(n!==vnote) study.appendChild(n); });
+    if(study.childNodes.length) blocks.push(study);
+    // Wide screens: pack blocks into two columns by estimated height, keeping reading order.
+    // Narrower screens: one column, in order.
     const grid = el('<div class="qgrid"></div>');
-    grid.appendChild(main); grid.appendChild(side);
+    const colL = el('<div class="qcol"></div>');
+    if(window.matchMedia('(min-width:960px)').matches){
+      const colR = el('<div class="qcol"></div>'), cols = [colL, colR], hs = [0, 0];
+      blocks.forEach(function(b){
+        const i = hs[0] <= hs[1] ? 0 : 1;
+        const h = estBlockHeight(b);
+        cols[i].appendChild(b); hs[i] += h;
+      });
+      grid.appendChild(colL); grid.appendChild(colR);
+    } else {
+      blocks.forEach(function(b){ colL.appendChild(b); });
+      grid.appendChild(colL);
+    }
     card.appendChild(grid);
     card.classList.add('qsplit');
   }
