@@ -774,8 +774,8 @@ body.msg-fit #app{ background:transparent !important; position:relative; z-index
 *{box-sizing:border-box;}
 html{-webkit-text-size-adjust:100%;}
 body{margin:0; background:var(--bg); color:var(--text); font:15px/1.55 "Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
-  -webkit-font-smoothing:antialiased; overflow-x:hidden;}
-#app{max-width:640px; margin:0 auto; padding:24px 18px 128px; overflow-x:hidden;}
+  -webkit-font-smoothing:antialiased; overflow-x:clip;}
+#app{max-width:640px; margin:0 auto; padding:24px 18px 128px; overflow-x:clip;}
 #app > *{max-width:100%;}
 .header{display:flex; align-items:center; gap:10px; margin-bottom:26px;}
 .logo{width:30px; height:30px; border-radius:50%; background:var(--accent); color:var(--accent-ink); font:600 15px Lora,Georgia,serif; display:grid; place-items:center; flex-shrink:0;}
@@ -2342,8 +2342,8 @@ body{ overflow-x:clip; }
 
 /* ---- Responsive pass: phones first, then tablets and desktops scale up ---- */
 @media (max-width:759px){
-  #app{ overflow-x:hidden; overflow-clip-margin:0; padding-left:16px; padding-right:16px; }
-  body{ overflow-x:hidden; }
+  #app{ overflow-x:clip; overflow-clip-margin:0; padding-left:16px; padding-right:16px; }
+  body{ overflow-x:clip; }
   .hm-hero, .onb-card, .card{ overflow:hidden; }
   .hm-orbs{ inset:-20px -20px !important; }
   .onb-title > span, .onb-title > em{ font-size:clamp(40px,13vw,68px); }
@@ -3601,7 +3601,7 @@ html:has(body.flash-session){ overflow:hidden !important; height:100dvh !importa
 .ft-card.rank-day .ft-bar > i{ transition:none !important; }
 /* Decorative glow: clip sideways at the screen edge so it never widens the page (tablet scroll bug) */
 .hm-orbs{ overflow-x:clip !important; overflow-y:visible !important; }
-html, body{ overflow-x:hidden; }
+html, body{ overflow-x:clip; }
 /* Background formulas: gentle independent float (each has its own --dur, --dx, --dy); replaces the shared drift */
 .gf{ animation:gfDrift var(--dur,22s) ease-in-out infinite; }
 @keyframes gfDrift{ 0%,100%{ transform:translate(0,0) rotate(var(--r,0deg)); } 50%{ transform:translate(var(--dx,6px), var(--dy,-10px)) rotate(calc(var(--r,0deg) * -1)); } }
