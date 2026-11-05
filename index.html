@@ -3262,7 +3262,7 @@ body.chat-full .on-strip, body.msg-fit .on-strip{ display:none !important; }
 .gk-key.wide{ background:var(--surface) !important; color:var(--text) !important; }
 .gk-key.on{ background:var(--accent) !important; color:var(--bg) !important; }
 /* Tablet: keep the quote of the day in proportion */
-@media (min-width:700px) and (max-width:1199px){ .qcard .qtext, .qtext{ font-size:clamp(20px,2.4vw,26px) !important; line-height:1.4 !important; } }
+@media (min-width:700px) and (max-width:1199px){ .qcard .qtext, .qtext{ font-size:17.5px !important; line-height:1.4 !important; } }
 .qotd-rule{ margin-top:12px; }
 /* Tablet calendar: fit the viewport, the day panel scrolls on its own */
 @media (min-width:700px) and (max-height:1400px){ .cal-page{ max-height:calc(100dvh - 24px); overflow:hidden; } .cal-page > .cal-agenda{ max-height:none; } }
@@ -3831,6 +3831,14 @@ em{ font-family:Lora,Georgia,serif; }
 .sol-note{ display:grid; gap:6px; padding:14px 16px; border-radius:18px; background:var(--surface-2); border:1px solid var(--border); border-left:3px solid var(--accent); min-width:0; }
 .sol-note span{ font:700 10.5px Inter,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-text); }
 .sol-note p{ margin:0; font:italic 400 14.5px/1.6 Lora,Georgia,serif; color:var(--text); overflow-wrap:anywhere; }
+/* v01.11.13: tablet practice: question left, options right, text at phone size, compact top, sharper figures */
+.qcard.qsplit{ gap:22px; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); }
+.qcard.qsplit .qside-l .qtext{ font-size:17.5px !important; }
+#app:has(.qsplit){ padding-top:10px !important; }
+#app:has(.qsplit) .topline{ margin:0 0 6px; }
+#app:has(.qsplit) .qclock{ margin-bottom:8px; }
+.qimg, .qimg-opt{ filter:url(#torq-sharpen); }
+.optbox.inv .qimg-opt{ filter:url(#torq-sharpen) invert(1); }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -4002,9 +4010,10 @@ em{ font-family:Lora,Georgia,serif; }
     if(native) native.onchange = function(e){
       var f = e.target.files && e.target.files[0];
       var orig = pick.querySelector('input[type="file"]');
+      // v01.11.12: hand the file straight to the form's own handler. Copying it through DataTransfer failed silently on tablets.
       if(f && orig){
-        try{ var dt = new DataTransfer(); dt.items.add(f); orig.files = dt.files; }catch(err){}
-        orig.dispatchEvent(new Event('change', {bubbles:true}));
+        if(typeof orig.onchange === 'function'){ orig.onchange({target:{files:[f], value:''}}); }
+        else { try{ var dt = new DataTransfer(); dt.items.add(f); orig.files = dt.files; }catch(err){} orig.dispatchEvent(new Event('change', {bubbles:true})); }
       }
       close();
     };
@@ -4059,7 +4068,7 @@ em{ font-family:Lora,Georgia,serif; }
 <script>
 // ---------- Data paths (adjust here if the folder layout changes) ----------
 // Serve the repo root with a local server (e.g. `python3 -m http.server`); opening the file directly blocks fetch().
-const APP_BUILD = '2026-11-05-v';   // bumped with every release; the app compares it with the hosted file
+const APP_BUILD = '2026-11-05-y';   // bumped with every release; the app compares it with the hosted file
 const PATHS = {
   index: 'data/index.json',  // lists every paper; each paper's "file" field points at its question JSON
   solutions: 'data/solutions/'    // one file per paper: data/solutions/<paper-id>.json
@@ -4627,6 +4636,49 @@ function chime(ok){
     });
   }catch(e){}
 }
+// v01.11.11: every kind of feedback in one place. Haptic and sound follow the Feedback settings.
+const SFX = {
+  tap:     {h: 6,  s: [[1400, 0.03, 0.05]]},
+  open:    {h: 6,  s: [[700, 0.03, 0.06], [940, 0.03, 0.08]]},
+  toggle:  {h: 8,  s: [[1000, 0.02, 0.04]]},
+  send:    {h: 10, s: [[520, 0.06, 0.07], [780, 0.08, 0.09]]},
+  receive: {h: 12, s: [[880, 0.05, 0.08], [1100, 0.05, 0.1]]},
+  success: {h: [12, 50, 12], s: [[660, 0.12, 0.12], [880, 0.12, 0.14], [1100, 0.12, 0.22]]},
+  streak:  {h: [20, 40, 20, 40, 60], s: [[523, 0.1, 0.12], [659, 0.1, 0.12], [784, 0.1, 0.12], [1046, 0.16, 0.34]]},
+  error:   {h: [24, 60, 24], s: [[220, 0.12, 0.2], [180, 0.12, 0.2]]},
+};
+function playTones(list){
+  try{
+    __audioCtx = __audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if(__audioCtx.state === 'suspended') __audioCtx.resume();
+    const t0 = __audioCtx.currentTime;
+    list.forEach(function(n){
+      const o = __audioCtx.createOscillator(), g = __audioCtx.createGain();
+      o.type = 'sine'; o.frequency.value = n[0];
+      const st = t0 + (n.start || 0);
+      g.gain.setValueAtTime(0.0001, st);
+      g.gain.exponentialRampToValueAtTime(0.14, st + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, st + n[2]);
+      o.connect(g); g.connect(__audioCtx.destination);
+      o.start(st); o.stop(st + n[2] + 0.02);
+    });
+  }catch(e){}
+}
+function feedback(kind){
+  const d = SFX[kind]; if(!d) return;
+  const f = feedbackPrefs();
+  if(f.haptics) vibrate(d.h);
+  if(f.sound){
+    // stagger the notes: each entry is [frequency, offset seconds, length seconds]
+    let at = 0;
+    playTones(d.s.map(function(n){ const out = [n[0], at, n[2]]; at += n[1]; out.start = out[1]; return out; }));
+  }
+}
+// Taps on any button, row, chip, tab or toggle give a light touch; nothing else needs wiring
+document.addEventListener('click', function(e){
+  const t = e.target && e.target.closest && e.target.closest('button, .row, .chip, .qn, .nk, .tab, .vis-toggle, .lb-seg button, .ft-opt');
+  if(t && !t.disabled && !t.closest('.gk-kb, .wa-kb')) feedback(t.closest('.vis-toggle') ? 'toggle' : 'tap');
+}, true);
 function answerFeedback(ok){
   const f = feedbackPrefs();
   if(f.haptics) vibrate(ok ? 14 : [24, 60, 24]);
@@ -5023,6 +5075,7 @@ let lastOrigin = null;   // the page the student was on before a practice set st
 
 // In-app dialogs. These replace the browser's confirm() and alert() boxes, so every pop-up matches the app.
 function appDialog(o){
+  feedback(o && o.danger ? 'error' : 'open');
   return new Promise(resolve=>{
     const scrim = el('<div class="scrim ad-scrim"></div>');
     const box = el('<div class="ad-sheet'+(o.danger?' ad-danger':'')+'" role="alertdialog" aria-modal="true" aria-labelledby="ad-title">'
@@ -5127,6 +5180,7 @@ function submitMock(){
     a.att.conf = session.conf[q.id] || null; // data only: never used for marks
   });
   saveSessionRecord();
+  feedback('success');
   go('results');
 }
 
@@ -5168,6 +5222,7 @@ function submitPractice(silent){
     appNotice('Could not submit', 'Your answers are still here, nothing was lost. Error: ' + ((err && err.message) || err));
     return;
   }
+  feedback('success');
   if(!silent) go('results');
 }
 // Practice sessions survive a refresh: the question, answers, marks and timers are saved and restored
@@ -5713,7 +5768,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.11.10';
+const APP_VERSION = 'v01.11.13';
 const LAST_UPDATED = '5 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -7523,8 +7578,9 @@ function loadAvatarCache(){
 }
 // Shrink a chosen photo to a 160px square JPEG before it is cached (shown at 54px at most, so this stays sharp and small)
 function readAvatar(file, done){
-  const looksLikeImage = !!file && ((file.type && file.type.indexOf('image/') === 0) || (!file.type && /\.(jpe?g|png|gif|webp|heic|heif|bmp)$/i.test(file.name || '')));
-  if(!looksLikeImage){ appNotice('Photo not supported', 'Please choose a photo (JPG or PNG).'); return; }
+  // v01.11.12: camera and browse results often come with no type or name; the image decode below decides instead
+  if(!file) return;
+  if(file.type && file.type.indexOf('image/') !== 0){ appNotice('Photo not supported', 'Please choose a photo (JPG or PNG).'); return; }
   const fr = new FileReader();
   fr.onerror = ()=>appNotice('Photo not read', 'That photo could not be read. Try another one.');
   fr.onload = ()=>{
@@ -8934,6 +8990,7 @@ async function refreshChat(markRead){
     .order('created_at', {ascending:true}).limit(300);
   const before = fr.msgs.length;
   fr.msgs = (data || []).filter(function(m){ return !chatHiddenIds().has(m.id); });
+  if(before && fr.msgs.length > before && fr.msgs[fr.msgs.length - 1].sender !== me) feedback('receive');
   (fr.pending || []).forEach(function(p){ if(p.recipient === other) fr.msgs.push(p); });
   if(markRead) fr.loading = false;
   db.from('chat_typing').select('user_id, updated_at, activity').eq('user_id', other).eq('peer_id', me).limit(1).then(function(r){
@@ -8982,6 +9039,7 @@ function repaintChat(){
 }
 // v01.10.08: the message shows in the chat at once with a clock; the tick replaces the clock when the server has it
 async function sendChat(){
+  if(fr.open && sbSession && (waDraft() || '').trim()) feedback('send');
   try{ const d = waDraft(); if(d && !/\s$/.test(d)) kbLearnDraft(); }catch(e){}
   if(!fr.open || !sbSession) return;
   const text = (waDraft() || '').trim(); if(!text) return;
@@ -12216,7 +12274,7 @@ function practiceView(){
 // Wide screens: the question sits on the left, the options and the Sure / Guessing choice on the right.
 // The page then fits without scrolling. Phones and narrow tablets keep the single column.
 function splitQuestionCard(card){
-  if(!window.matchMedia('(min-width:1100px)').matches) return card;
+  if(!window.matchMedia('(min-width:700px)').matches) return card;   // v01.11.13: tablets too
   const right = el('<div class="qside qside-r"></div>'), left = el('<div class="qside qside-l"></div>');
   [...card.children].forEach(k=>{
     const isRight = k.matches('.opt, .sog-head, .chips, .mock-sog, .numpad, .qopts');
@@ -12338,7 +12396,7 @@ function pyqPractice(w){
   nv.appendChild(prev); nv.appendChild(skip); nv.appendChild(next);
   card.appendChild(nv);
 
-  w.appendChild(card);
+  w.appendChild(splitQuestionCard(card));
   if(!reviewing){
     const sub = el('<div class="set-submit-wrap" style="margin-top:12px"></div>');
     const sb = el('<button class="btn secondary block">Submit this set</button>');
@@ -12691,7 +12749,7 @@ function streakStrip(){
   const msRec = milestoneGet();
   let celebrate = false;
   if(!msRec) milestoneSet(topMs);                       // first run: remember, never celebrate old milestones
-  else if(topMs > msRec.max){ celebrate = (n === topMs); milestoneSet(topMs); }
+  else if(topMs > msRec.max){ celebrate = (n === topMs); milestoneSet(topMs); if(celebrate) setTimeout(function(){ feedback('streak'); }, 250); }
   const big = n >= 21 ? ' sk-celebrate-big' : '';
   const ms = STREAK_MILESTONES.indexOf(n) >= 0 ? '<div class="sk-ms'+(celebrate ? ' pop' : '')+'">Milestone: '+n+' days</div>' : '';
   return el('<div class="card streak'+(info.frozen?' frozen':'')+(bump?' sk-bump':'')+(celebrate?' sk-celebrate'+big:'')+'">'
@@ -14763,5 +14821,6 @@ function seriesAdminView(){
   render = function(){ baseRender.apply(this, arguments); try{ check(); }catch(e){} };
 })();
 </script>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="torq-sharpen" color-interpolation-filters="sRGB"><feConvolveMatrix order="3" kernelMatrix="0 -0.5 0 -0.5 3 -0.5 0 -0.5 0" preserveAlpha="true"/></filter></svg>
 </body>
 </html>
