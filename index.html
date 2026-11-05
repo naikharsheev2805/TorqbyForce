@@ -3931,45 +3931,47 @@ body{ position:relative; }
 }
 /* Menu button: the logo always starts clear of the fixed 3-bar button, on every width */
 #app > .header{ padding-left:72px !important; }
-/* ---- Streak card, redesigned: a warm glowing header, a connected week track, and a quiet footer ---- */
-.streak{ position:relative; overflow:hidden; isolation:isolate; padding:20px 20px 16px !important; background:radial-gradient(120% 100% at 0% 0%, color-mix(in srgb, var(--accent) 13%, transparent) 0%, transparent 62%), var(--surface) !important; }
-.streak::after{ content:""; position:absolute; right:-56px; top:-56px; width:170px; height:170px; border-radius:50%; background:radial-gradient(circle, color-mix(in srgb, var(--accent) 20%, transparent) 0%, transparent 70%); pointer-events:none; z-index:-1; }
-.streak .sk-top{ display:flex; align-items:center; gap:16px; }
-.streak .sk-flame{ width:50px; height:50px; flex:none; padding:12px; box-sizing:border-box; border-radius:50%; background:color-mix(in srgb, var(--accent) 12%, transparent); box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--accent) 24%, transparent); }
-.streak.frozen .sk-flame{ filter:grayscale(1); opacity:.55; }
+/* ---- Streak card, v2: restrained. The number leads, the flame keeps its warm tiers, the week is a calm row of day cells ---- */
+.streak{ padding:18px 18px 16px !important; }
+.streak .sk-top{ display:flex; align-items:center; gap:14px; }
+.streak .sk-flame{ width:34px; height:34px; }
 .streak .sk-count{ min-width:0; flex:none; }
-.streak .sk-n{ font:600 58px/0.9 Lora,Georgia,serif; letter-spacing:-.02em; color:var(--accent-text); }
+.streak .sk-n{ font:600 56px/0.9 Lora,Georgia,serif; letter-spacing:-.02em; color:var(--accent-text); }
 .streak .sk-txt{ flex:1; min-width:0; }
-.streak .sk-l{ font:700 11px/1.2 Inter,sans-serif; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
+.streak .sk-l{ font:700 10.5px/1.2 Inter,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
 .streak .sk-note{ margin:6px 0 0; font-size:14px; line-height:1.45; color:var(--text); }
-.streak .sk-ms{ display:inline-block; margin-top:10px; padding:5px 11px; border-radius:999px; font:700 11px/1.2 Inter,sans-serif; letter-spacing:.06em; text-transform:uppercase; background:var(--accent); color:var(--accent-ink); }
-.streak .sk-week{ position:relative; display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:4px; margin-top:22px; }
-.streak .sk-week::before{ content:""; position:absolute; top:16px; left:calc(100% / 14); right:calc(100% / 14); height:2px; border-radius:2px; background:var(--border); }
-.streak .sk-day{ position:relative; display:flex; flex-direction:column; align-items:center; gap:0; }
-.streak .sk-dot{ position:relative; z-index:1; width:34px; height:34px; border-radius:50%; display:grid; place-items:center; font:700 14px/1 Inter,sans-serif; background:var(--surface); border:1.5px solid var(--border); color:var(--muted); }
-.streak .sk-dl{ margin-top:9px; font:600 11px/1 Inter,sans-serif; letter-spacing:.08em; color:var(--muted); }
-.streak .sk-day.done .sk-dot{ background:var(--accent); border-color:transparent; color:var(--accent-ink); box-shadow:0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent); }
+.streak .sk-ms{ display:inline-block; margin-top:8px; padding:4px 10px; border-radius:999px; font:600 12px/1.2 Inter,sans-serif; background:var(--accent-soft); color:var(--accent-text); }
+.streak .sk-week{ display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:8px; margin-top:18px; }
+.streak .sk-day{ display:flex; flex-direction:column-reverse; align-items:stretch; gap:8px; }
+.streak .sk-dl{ font:600 10.5px/1 Inter,sans-serif; letter-spacing:.1em; text-align:center; color:var(--muted); }
+.streak .sk-dot{ height:30px; border-radius:10px; background:var(--surface-2); color:var(--muted); font:600 14px/1 Inter,sans-serif; display:grid; place-items:center; }
+.streak .sk-day.done .sk-dot{ background:var(--accent); color:var(--accent-ink); }
 .streak .sk-day.done .sk-dl, .streak .sk-day.today .sk-dl{ color:var(--text); }
-.streak .sk-day.today .sk-dot{ background:var(--surface); border:2px solid var(--accent); color:var(--accent-text); animation:skBreathe 2.4s ease-in-out infinite; }
+.streak .sk-day.today .sk-dot{ background:transparent; box-shadow:inset 0 0 0 1.5px var(--accent); color:var(--accent-text); }
 .streak .sk-day.today .sk-dl{ color:var(--accent-text); }
-.streak .sk-day.paused .sk-dot{ background:var(--accent-soft); border-color:transparent; color:var(--accent-text); }
-.streak .sk-day.missed .sk-dot{ background:transparent; border:1.5px solid color-mix(in srgb, #e0584f 55%, transparent); color:#e0584f; font-size:16px; }
-.streak .sk-day.missed .sk-dl{ color:#e0584f; }
-.streak .sk-day.future .sk-dot{ opacity:.45; }
-.streak.frozen .sk-day.done .sk-dot{ background:var(--surface-2); border:1.5px solid var(--border); color:var(--muted); box-shadow:none; }
-.streak .sk-foot{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px 12px; margin-top:18px; padding-top:12px; border-top:1px solid var(--border); }
-.streak .sk-pts{ font:600 13px/1.2 Inter,sans-serif; color:var(--muted); font-variant-numeric:tabular-nums; }
-.streak .sk-pause{ font:600 12px/1 Inter,sans-serif; color:var(--accent-text); background:var(--accent-soft); padding:6px 11px; border-radius:999px; }
-@keyframes skBreathe{ 0%,100%{ box-shadow:0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent); } 50%{ box-shadow:0 0 0 5px color-mix(in srgb, var(--accent) 16%, transparent); } }
-@media (prefers-reduced-motion: reduce){ .streak .sk-day.today .sk-dot{ animation:none; } }
+.streak .sk-day.paused .sk-dot{ background:var(--accent-soft); color:var(--accent-text); }
+.streak .sk-day.missed .sk-dot{ background:transparent; box-shadow:inset 0 0 0 1px var(--border); color:#e0584f; }
+.streak .sk-day.missed .sk-dl{ color:var(--muted); }
+.streak .sk-day.future .sk-dot{ background:transparent; box-shadow:inset 0 0 0 1px var(--border); }
+.streak.frozen .sk-day.done .sk-dot{ background:var(--surface-2); color:var(--muted); }
+.streak .sk-foot{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px 12px; margin-top:16px; }
+.streak .sk-pts{ font:600 12.5px/1.2 Inter,sans-serif; color:var(--muted); font-variant-numeric:tabular-nums; }
+.streak .sk-pause{ font:600 12px/1 Inter,sans-serif; color:var(--accent-text); background:var(--accent-soft); padding:6px 10px; border-radius:999px; }
 @media (max-width:360px){
   .streak{ padding:16px 14px 14px !important; }
-  .streak .sk-flame{ width:42px; height:42px; padding:10px; }
   .streak .sk-n{ font-size:48px; }
-  .streak .sk-dot{ width:30px; height:30px; font-size:13px; }
-  .streak .sk-week::before{ top:14px; }
-  .streak .sk-day.missed .sk-dot{ font-size:15px; }
+  .streak .sk-week{ gap:5px; }
+  .streak .sk-dot{ height:26px; border-radius:8px; }
 }
+/* Floating focus-music control: pause and resume while working, shown only when focus music is on */
+.music-dock{ position:fixed; right:16px; bottom:calc(88px + env(safe-area-inset-bottom,0px)); z-index:6; width:46px; height:46px; padding:0; border-radius:50%; border:1px solid var(--border); background:var(--surface); color:var(--text); box-shadow:0 10px 24px -12px var(--shadow); display:grid; place-items:center; cursor:pointer; transition:background .2s ease, color .2s ease, transform .15s ease; }
+.music-dock svg{ width:18px; height:18px; fill:currentColor; }
+.music-dock.playing{ background:var(--accent); color:var(--accent-ink); border-color:transparent; }
+.music-dock:active{ transform:scale(.94); }
+.music-dock:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+@media (min-width:960px){ .music-dock{ right:24px; bottom:24px; } }
+body.chat-full .music-dock, body.kb-open .music-dock{ display:none !important; }
+@media (prefers-reduced-motion: reduce){ .music-dock{ transition:none; } }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -4773,6 +4775,7 @@ function feedbackPrefs(){
   store.feedback = store.feedback || {};
   if(store.feedback.haptics === undefined) store.feedback.haptics = true;
   if(store.feedback.sound === undefined) store.feedback.sound = false;
+  if(store.feedback.music === undefined) store.feedback.music = false;
   return store.feedback;
 }
 let __audioCtx = null;
@@ -4781,10 +4784,10 @@ function chime(ok){
     __audioCtx = __audioCtx || new (window.AudioContext || window.webkitAudioContext)();
     if(__audioCtx.state === 'suspended') __audioCtx.resume();
     const t0 = __audioCtx.currentTime;
-    const notes = ok ? [660, 880] : [220, 180];
+    const notes = ok ? [330, 440] : [170, 140];
     notes.forEach((f, i)=>{
       const o = __audioCtx.createOscillator(), g = __audioCtx.createGain();
-      o.type = ok ? 'sine' : 'triangle'; o.frequency.value = f;
+      o.type = 'sine'; o.frequency.value = f;
       const s = t0 + i*0.09;
       g.gain.setValueAtTime(0.0001, s);
       g.gain.exponentialRampToValueAtTime(0.16, s+0.01);
@@ -4795,15 +4798,16 @@ function chime(ok){
   }catch(e){}
 }
 // v01.11.11: every kind of feedback in one place. Haptic and sound follow the Feedback settings.
+// Pitched low and warm: fundamentals sit between about 170 and 520 Hz. Taps drop slightly in pitch for a soft, physical "give".
 const SFX = {
-  tap:     {h: 14, s: [[1400, 0.03, 0.05]]},
-  open:    {h: 16, s: [[700, 0.03, 0.06], [940, 0.03, 0.08]]},
-  toggle:  {h: 18, s: [[1000, 0.02, 0.04]]},
-  send:    {h: 22, s: [[520, 0.06, 0.07], [780, 0.08, 0.09]]},
-  receive: {h: 24, s: [[880, 0.05, 0.08], [1100, 0.05, 0.1]]},
-  success: {h: [20, 45, 20, 45, 34], s: [[660, 0.12, 0.12], [880, 0.12, 0.14], [1100, 0.12, 0.22]]},
-  streak:  {h: [20, 40, 20, 40, 60], s: [[523, 0.1, 0.12], [659, 0.1, 0.12], [784, 0.1, 0.12], [1046, 0.16, 0.34]]},
-  error:   {h: [24, 60, 24], s: [[220, 0.12, 0.2], [180, 0.12, 0.2]]},
+  tap:     {h: 14, s: [[360, 0.0, 0.08, 240]]},
+  open:    {h: 16, s: [[280, 0.03, 0.10], [370, 0.04, 0.12]]},
+  toggle:  {h: 18, s: [[300, 0.0, 0.07, 220]]},
+  send:    {h: 22, s: [[240, 0.05, 0.10], [330, 0.06, 0.12]]},
+  receive: {h: 24, s: [[330, 0.05, 0.10], [440, 0.06, 0.12]]},
+  success: {h: [20, 45, 20, 45, 34], s: [[262, 0.12, 0.14], [330, 0.12, 0.16], [440, 0.12, 0.26]]},
+  streak:  {h: [20, 40, 20, 40, 60], s: [[196, 0.1, 0.14], [247, 0.1, 0.14], [294, 0.1, 0.14], [392, 0.16, 0.38]]},
+  error:   {h: [24, 60, 24], s: [[170, 0.12, 0.2], [140, 0.12, 0.2]]},
 };
 function playTones(list){
   try{
@@ -4811,16 +4815,17 @@ function playTones(list){
     if(__audioCtx.state === 'suspended') __audioCtx.resume();
     const ctx = __audioCtx, t0 = ctx.currentTime;
     const out = ctx.createGain(); out.gain.value = 0.9;
-    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 3600; lp.Q.value = 0.4;
+    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1600; lp.Q.value = 0.3;
     lp.connect(out); out.connect(ctx.destination);
     list.forEach(function(n){
       const st = t0 + (n.start || 0), dur = Math.max(0.08, n[2]);
       // a soft bell: fundamental plus a quiet octave, with a quick attack and a long, smooth decay
-      [[1, 0.13], [2, 0.035]].forEach(function(h){
+      [[1, 0.13], [2, 0.015]].forEach(function(h){
         const o = ctx.createOscillator(), g = ctx.createGain();
         o.type = 'sine'; o.frequency.value = n[0] * h[0];
+        if(n.end) o.frequency.exponentialRampToValueAtTime(n.end * h[0], st + Math.min(dur, 0.09));
         g.gain.setValueAtTime(0.0001, st);
-        g.gain.exponentialRampToValueAtTime(h[1], st + 0.008);
+        g.gain.exponentialRampToValueAtTime(h[1], st + 0.015);
         g.gain.exponentialRampToValueAtTime(0.0001, st + dur * 1.5);
         o.connect(g); g.connect(lp);
         o.start(st); o.stop(st + dur * 1.5 + 0.03);
@@ -4828,20 +4833,76 @@ function playTones(list){
     });
   }catch(e){}
 }
-function feedback(kind){
+// Focus music: a soft, slowly breathing drone built from sine waves. Generated in the browser (no audio files), off by default, and only starts after a tap.
+let __music = null;
+function focusMusic(on){
+  try{
+    if(!on){
+      if(__music && __audioCtx){
+        const m = __music; __music = null; const t = __audioCtx.currentTime;
+        m.master.gain.cancelScheduledValues(t);
+        m.master.gain.setValueAtTime(Math.max(m.master.gain.value, 0.0001), t);
+        m.master.gain.exponentialRampToValueAtTime(0.0001, t + 1.5);
+        m.nodes.forEach(function(n){ try{ n.stop(t + 1.6); }catch(e){} });
+      }
+      return;
+    }
+    if(__music) return;
+    __audioCtx = __audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if(__audioCtx.state === 'suspended') __audioCtx.resume();
+    const ctx = __audioCtx, t0 = ctx.currentTime;
+    const master = ctx.createGain();
+    master.gain.setValueAtTime(0.0001, t0);
+    master.gain.exponentialRampToValueAtTime(0.05, t0 + 4);
+    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 700; lp.Q.value = 0.5;
+    lp.connect(master); master.connect(ctx.destination);
+    const lfo = ctx.createOscillator(), lfoG = ctx.createGain();
+    lfo.frequency.value = 0.07; lfoG.gain.value = 0.03;
+    lfo.connect(lfoG);
+    const nodes = [lfo];
+    // A calm A-major sound: low root, fifth, octave and major third, each slightly detuned for warmth
+    [110, 164.81, 220, 277.18, 329.63].forEach(function(f){
+      [-5, 5].forEach(function(det){
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'sine'; o.frequency.value = f; o.detune.value = det;
+        g.gain.value = 0.1;
+        lfoG.connect(g.gain);
+        o.connect(g); g.connect(lp);
+        o.start(t0); nodes.push(o);
+      });
+    });
+    lfo.start(t0);
+    __music = {master: master, nodes: nodes};
+  }catch(e){}
+}
+// Pause the music while the page is in the background, and resume it when the page returns
+document.addEventListener('visibilitychange', function(){
+  if(!__audioCtx) return;
+  if(document.hidden) __audioCtx.suspend();
+  else if(__music) __audioCtx.resume();
+});
+// Start focus music after the first tap, if the user has turned it on (browsers block audio before a tap)
+document.addEventListener('pointerdown', function(){
+  try{ if(feedbackPrefs().music && !__music) focusMusic(true); }catch(e){}
+});
+function feedback(kind, quiet){
   const d = SFX[kind]; if(!d) return;
   const f = feedbackPrefs();
   if(f.haptics) vibrate(d.h);
-  if(f.sound){
+  if(f.sound && !quiet){
     // stagger the notes: each entry is [frequency, offset seconds, length seconds]
     let at = 0;
-    playTones(d.s.map(function(n){ const out = [n[0], at, n[2]]; at += n[1]; out.start = out[1]; return out; }));
+    playTones(d.s.map(function(n){ const out = [n[0], at, n[2]]; out.end = n[3]; at += n[1]; out.start = out[1]; return out; }));
   }
 }
 // Taps on any button, row, chip, tab or toggle give a light touch; nothing else needs wiring
 document.addEventListener('click', function(e){
   const t = e.target && e.target.closest && e.target.closest('button, .row, .chip, .qn, .nk, .tab, .vis-toggle, .lb-seg button, .ft-opt');
-  if(t && !t.disabled && !t.closest('.gk-kb, .wa-kb')) feedback(t.closest('.vis-toggle') ? 'toggle' : 'tap');
+  // Every tap gets a light touch. Only real buttons and switches make a sound, so navigation, rows and chips stay quiet.
+  if(t && !t.disabled && !t.closest('.gk-kb, .wa-kb')){
+    const sounded = t.closest('.vis-toggle') || t.closest('.btn');
+    feedback(t.closest('.vis-toggle') ? 'toggle' : 'tap', !sounded);
+  }
 }, true);
 function answerFeedback(ok){
   const f = feedbackPrefs();
@@ -4855,9 +4916,11 @@ function feedbackCard(){
   c.innerHTML = '<div class="eyebrow">Feedback</div>'
     +'<h2 class="onb-cardhead" style="margin:4px 0 14px">Sound and <em>touch.</em></h2>'
     + row('haptics', 'Vibrate on answers', f.haptics)
-    + row('sound', 'Sound on answers', f.sound);
+    + row('sound', 'Sound on answers', f.sound)
+    + row('music', 'Focus music, soft and looping', f.music)
+    + '<p class="note-line" style="margin:4px 0 0">Sound effects and focus music are separate. Turning one off leaves the other on.</p>';
   c.querySelectorAll('input[type="checkbox"]').forEach(inp=>{
-    inp.onchange = e=>{ f[inp.dataset.k] = e.target.checked; persist(); };
+    inp.onchange = e=>{ f[inp.dataset.k] = e.target.checked; persist(); if(inp.dataset.k === 'music'){ focusMusic(e.target.checked); if(window.__musicSync) window.__musicSync(); } };
   });
   return c;
 }
@@ -5239,7 +5302,8 @@ let lastOrigin = null;   // the page the student was on before a practice set st
 
 // In-app dialogs. These replace the browser's confirm() and alert() boxes, so every pop-up matches the app.
 function appDialog(o){
-  feedback(o && o.danger ? 'error' : 'open');
+  // Destructive dialogs (log out, delete) get only a light touch: the error sound is reserved for real failures
+  feedback(o && o.danger ? 'tap' : 'open', !!(o && o.danger));
   return new Promise(resolve=>{
     const scrim = el('<div class="scrim ad-scrim"></div>');
     const box = el('<div class="ad-sheet'+(o.danger?' ad-danger':'')+'" role="alertdialog" aria-modal="true" aria-labelledby="ad-title">'
@@ -9064,7 +9128,7 @@ async function openChat(f){
   render();                       // the chat appears at once, with no messages yet
   await refreshChat(true);
   clearInterval(fr.poll);
-  fr.poll = setInterval(()=>{ if(fr.open) refreshChat(false); }, 1000);
+  fr.poll = setInterval(()=>{ if(fr.open && document.visibilityState !== 'hidden') refreshChat(false); }, 2000);
 }
 window.addEventListener('pagehide', saveOpenDraft);
 document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState === 'hidden') saveOpenDraft(); });
@@ -9081,8 +9145,9 @@ function noteTyping(){ noteActivity('typing'); }
 function activityTick(){
   if(!sbSession) return;
   if(fr.open && voiceRec.chat === fr.open.id && ['starting','holding','locked'].indexOf(voiceRec.state) >= 0) noteActivity('recording');
-  if(view === 'messages' && !fr.open && fr.list) loadListActivity();
+  if(view === 'messages' && !fr.open && fr.list && Date.now() - listActivityAt >= 3000){ listActivityAt = Date.now(); loadListActivity(); }
 }
+let listActivityAt = 0;
 setInterval(activityTick, 1000);
 function loadListActivity(){
   if(listActivityBusy) return; listActivityBusy = true;
@@ -9203,7 +9268,6 @@ function repaintChat(){
 }
 // v01.10.08: the message shows in the chat at once with a clock; the tick replaces the clock when the server has it
 async function sendChat(){
-  if(fr.open && sbSession && (waDraft() || '').trim()) feedback('send');
   try{ const d = waDraft(); if(d && !/\s$/.test(d)) kbLearnDraft(); }catch(e){}
   if(!fr.open || !sbSession) return;
   const text = (waDraft() || '').trim(); if(!text) return;
@@ -9220,8 +9284,10 @@ async function sendChat(){
     fr.msgs = fr.msgs.filter(function(m){ return m.id !== tmp.id; });
     waSetDraft(text);
     fr.note = 'Message not sent. Check your connection.';
+    feedback('error');
     render(); return;
   }
+  feedback('send');
   scrollChatToEnd = true;
   await refreshChat(false);
 }
@@ -15074,6 +15140,40 @@ function seriesAdminView(){
       return m;
     });
   };
+})();
+</script>
+<script id="music-dock">
+// Floating pause and resume for focus music. Changing it also updates the Settings switch, since both use the same preference.
+(function(){
+  var ICON_PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="6" width="3.4" height="12" rx="1.2"/><rect x="13.6" y="6" width="3.4" height="12" rx="1.2"/></svg>';
+  var ICON_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 6.2v11.6c0 .6.7 1 1.2.6l9-5.8a.7.7 0 0 0 0-1.2l-9-5.8c-.5-.4-1.2 0-1.2.6z"/></svg>';
+  function prefOn(){ try{ return !!feedbackPrefs().music; }catch(e){ return false; } }
+  function toggle(){
+    var on = !__music;
+    feedbackPrefs().music = on; persist();
+    focusMusic(on);
+    sync();
+  }
+  function sync(){
+    var d = document.getElementById('musicDock');
+    if(!prefOn()){ if(d) d.remove(); return; }
+    if(!d){
+      d = document.createElement('button');
+      d.id = 'musicDock'; d.type = 'button'; d.className = 'music-dock';
+      d.addEventListener('click', toggle);
+      document.body.appendChild(d);
+    }
+    var playing = !!__music;
+    d.innerHTML = playing ? ICON_PAUSE : ICON_PLAY;
+    d.className = 'music-dock' + (playing ? ' playing' : '');
+    d.setAttribute('aria-label', playing ? 'Pause focus music' : 'Play focus music');
+    d.setAttribute('title', playing ? 'Pause focus music' : 'Play focus music');
+    d.setAttribute('aria-pressed', String(playing));
+  }
+  window.__musicSync = sync;
+  var baseRender = render;
+  render = function(){ baseRender.apply(this, arguments); try{ sync(); }catch(e){} };
+  sync();
 })();
 </script>
 </body>
