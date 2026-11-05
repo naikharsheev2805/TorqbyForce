@@ -3307,29 +3307,35 @@ body.chat-full .on-strip, body.msg-fit .on-strip{ display:none !important; }
   .navpanel::after{ display:none; }
 }
 /* ---- Question list drawer: slides out on a soft curve, tiles and legend settle in, a dim veil sits behind, and formulas step aside ---- */
-.qnav-tab{ transition:left .56s cubic-bezier(.16,1,.3,1), background .3s ease, color .3s ease; }
+/* v1.10.4: tab and drawer share one duration and one ease-in-out curve, so they move as one piece */
+.qnav-tab{ transition:left .8s cubic-bezier(.65,0,.35,1), background .3s ease, color .3s ease; }
 .qnav-drawer{
   background-color:var(--surface) !important; isolation:isolate;
   visibility:hidden;
-  transition:transform .56s cubic-bezier(.16,1,.3,1), box-shadow .56s ease, visibility 0s linear .56s;
+  transition:transform .8s cubic-bezier(.65,0,.35,1), box-shadow .8s ease, visibility 0s linear .8s;
 }
-.qnav-drawer.open{ visibility:visible; transition:transform .56s cubic-bezier(.16,1,.3,1), box-shadow .56s ease, visibility 0s; }
+.qnav-drawer.open{ visibility:visible; transition:transform .8s cubic-bezier(.65,0,.35,1), box-shadow .8s ease, visibility 0s; }
 .qnav-drawer .qnav-head, .qnav-drawer .qnav-legend, .qnav-drawer .qnav-grid{
   opacity:0; transform:translateX(-10px);
-  transition:opacity .25s ease, transform .35s cubic-bezier(.16,1,.3,1);
+  transition:opacity .35s ease, transform .5s cubic-bezier(.65,0,.35,1);
 }
 .qnav-drawer.open .qnav-head{ opacity:1; transform:none; transition-delay:.12s; }
 .qnav-drawer.open .qnav-grid{ opacity:1; transform:none; transition-delay:.16s; }
 .qnav-drawer.open .qnav-legend{ opacity:1; transform:none; transition-delay:.3s; }
 .qnav-drawer .qn{
   opacity:0; transform:translateY(8px) scale(.9);
-  transition:opacity .22s ease, transform .3s cubic-bezier(.16,1,.3,1);
+  transition:opacity .3s ease, transform .4s cubic-bezier(.65,0,.35,1);
 }
 .qnav-drawer.open .qn{ opacity:1; transform:none; transition-delay:calc(var(--qi,0) * 16ms + 170ms); }
 .gutter{ transition:opacity .45s ease; }
 body.qnav-open .gutter{ opacity:0; }
+/* v1.10.4: while the question list is open, the rest of the screen blurs and cannot be tapped, scrolled or moved */
+.qnav-dim{ filter:blur(7px); pointer-events:none !important; user-select:none; transition:filter .8s cubic-bezier(.65,0,.35,1); }
+body.qnav-open{ overflow:hidden !important; touch-action:none; }
+.qnav-wrap, .qnav-wrap *{ pointer-events:auto; }
+.qnav-wrap .qnav-drawer{ pointer-events:auto; }
 @media (prefers-reduced-motion: reduce){
-  .qnav-tab, .qnav-drawer, .qnav-drawer *, .gutter{ transition:none !important; }
+  .qnav-tab, .qnav-drawer, .qnav-drawer *, .gutter, .qnav-dim{ transition:none !important; }
 }
 /* ---- Colour codes across all themes: light themes get deep, readable code colours and white ink on coloured fills; dark themes keep their pastels with dark ink ---- */
 :root{ --c-ink:#1f1e1d; }
@@ -3656,6 +3662,100 @@ html, body{ overflow-x:clip; }
   #app > .header{ padding-left:0 !important; }
   #app > .header .brand-lock{ justify-content:flex-start !important; }
 }
+
+/* v1.10.3: the New event sheet stays centred and inside the window on wide screens */
+@media (min-width:700px){
+  .sheet.cal-sheet{ left:50%; right:auto; width:min(520px, calc(100vw - 48px)); max-width:520px; transform:translateX(-50%); bottom:auto; top:50%; transform:translate(-50%,-50%); max-height:calc(100dvh - 48px); border-radius:var(--r-xl); }
+}
+/* v1.10.2: the JEE countdown cards clip their glow orbs to the rounded card edge, so nothing leaks past the border */
+.exam-card{ overflow:hidden; isolation:isolate; clip-path:inset(0 round calc(var(--r-xl) + 4px)); }
+.exam-card .exam-orb{ z-index:0; }
+
+/* v1.10.6: option grid. Rows stack inside a grid; images and text share the same cells */
+.qopts{ display:grid; gap:10px; margin:6px 0 10px; }
+.qopts.col1{ grid-template-columns:minmax(0,1fr); }
+.qopts.grid2{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+.qopts.row4{ grid-template-columns:repeat(4,minmax(0,1fr)); }
+.qopts > .opt{ margin-bottom:0 !important; min-width:0; }
+.qopts.row4 > .opt{ flex-direction:column; justify-content:center; text-align:center; padding:12px 8px; }
+.qopts.row4 > .opt > span:last-child{ text-align:center; }
+.qopts.grid2 > .opt, .qopts.row4 > .opt{ min-height:64px; }
+.qopts .optbox{ height:auto; min-height:96px; max-height:168px; }
+.qopts .optbox .qimg-opt{ max-height:150px; }
+.qopts.row4 .optbox{ min-height:72px; max-height:110px; }
+.qopts.row4 .optbox .qimg-opt{ max-height:96px; }
+@media (min-width:960px){ .qopts{ gap:12px; } .qopts.grid2 > .opt, .qopts.row4 > .opt{ min-height:76px; } }
+
+/* v1.10.7: the 2 x 2 option grid also covers the series test, and option images scale to their cell */
+@media (min-width:700px){ .ft-opts{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+.qopts.grid2 .optbox{ height:auto; min-height:0; max-height:none; padding:4px 0; }
+.qopts.grid2 .optbox .qimg-opt{ max-height:100px; max-width:100%; width:auto; height:auto; }
+.qopts.grid2 .opt{ align-items:center; }
+
+/* v01.10.08: send flow. The keyboard stays open, the send button stays beside the text while typing, the paper plane is centred */
+body.kb-open .wa-compose .wa-field{ flex:1 1 auto !important; min-width:0; }
+body.kb-open .wa-compose .wa-send{ display:grid !important; flex:none; }
+.wa-tick.pending{ color:var(--muted); opacity:.75; }
+.wa-tick.pending .wa-tk{ width:12px; height:12px; }
+.wa-compose .wa-send.vr-send-btn svg, .wa-send.vr-send-btn svg{ display:block; margin:0 auto; }
+
+/* v01.10.09: streak card and Rank Day card: half the row each on tablets */
+.hm-pair{ display:grid; gap:14px; margin-top:14px; }
+.hm-pair > *{ margin:0 !important; min-width:0; }
+@media (min-width:700px){ .hm-pair{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:stretch; } }
+.sk-dot .sk-chk{ width:12px; height:12px; display:block; margin:auto; }
+
+/* v01.10.10: days-left cards: smaller, a cleaner numeral face, and the glow stays inside the rounded card */
+.exam-card{ overflow:hidden !important; isolation:isolate; clip-path:inset(0 round calc(var(--r-xl) + 4px)); padding:14px 14px 16px !important; min-height:0 !important; }
+.exam-row{ gap:10px !important; }
+.exam-card .exam-num{ font-family:Inter,sans-serif !important; font-weight:700 !important; font-size:40px !important; font-variation-settings:normal !important; font-style:normal !important; letter-spacing:-.03em !important; line-height:1 !important; margin-top:8px !important; font-variant-numeric:tabular-nums; }
+.exam-card .exam-unit{ font-family:Inter,sans-serif !important; font-style:normal !important; font-size:12px !important; margin-top:4px !important; }
+.exam-card .exam-orb{ z-index:0; }
+
+/* v01.10.11: calendar on tablets and wide screens: bigger date numbers in shorter cells, and the month fits without the page scrolling */
+@media (min-width:700px){
+  .cal-grid{ max-width:none !important; gap:6px !important; }
+  .cal-cell{ height:clamp(44px, 8.6vh, 62px) !important; font:700 clamp(16px, 2.5vh, 22px)/1 Inter,sans-serif !important; }
+  .cal-page{ overflow:hidden !important; max-height:calc(100dvh - 24px) !important; }
+  .cal-page > .cal-agenda{ max-height:calc(100dvh - 48px) !important; overflow-y:auto !important; }
+}
+
+/* v01.10.12: background formulas float visibly: wider, slower drift with its own timing for each one */
+.gf{ animation:gfFloat calc(var(--dur,22s) * .75) ease-in-out infinite !important; }
+@keyframes gfFloat{ 0%,100%{ transform:translate(0,0) rotate(var(--r,0deg)); } 50%{ transform:translate(calc(var(--dx,6px) * 3.5), calc(var(--dy,-10px) * 2.2)) rotate(calc(var(--r,0deg) * -1.6)); } }
+@media (prefers-reduced-motion: reduce){ .gf{ animation:none !important; } }
+
+/* v01.10.12: the menu blurs everything behind it, and the menu itself stays sharp */
+.navscrim.on{ backdrop-filter:blur(8px) saturate(.9) !important; -webkit-backdrop-filter:blur(8px) saturate(.9) !important; background:rgba(10,10,9,.22) !important; }
+.navpanel{ z-index:69; }
+
+/* v01.10.13: question figures never run taller than the screen; they scale down and stay zoomable */
+.qimg, .qfig img, .img-wrap img{ max-height:min(30vh, 260px) !important; width:auto !important; max-width:100% !important; height:auto !important; object-fit:contain; }
+@media (min-width:700px){ .qimg, .qfig img, .img-wrap img{ max-height:min(34vh, 320px) !important; } }
+.qfig{ max-height:min(36vh, 340px); overflow:hidden; }
+.qfig img{ cursor:zoom-in; }
+
+/* v01.10.15: monthly recap card mirrors the saved picture: same warm panel, serif numerals, orange pill */
+.recap{ position:relative; overflow:hidden; border-radius:26px; padding:24px 22px 20px; background:linear-gradient(160deg,#2a2725 0%,#33261f 55%,#4a2e22 100%); border:1px solid rgba(247,151,115,.22); color:#f0eee6; box-shadow:0 18px 40px -24px rgba(0,0,0,.6); }
+.recap::before{ content:""; position:absolute; right:-70px; top:-70px; width:240px; height:240px; border-radius:50%; background:#d97757; opacity:.22; filter:blur(28px); pointer-events:none; }
+.recap > *{ position:relative; }
+.rc-pill{ display:inline-block; padding:8px 16px; border-radius:999px; background:rgba(227,114,77,.18); color:#f79773; font:600 12px/1 Inter,sans-serif; letter-spacing:.14em; }
+.rc-hero{ font:600 clamp(84px,14vw,120px)/1 Lora,Georgia,serif; color:#f0eee6; margin-top:14px; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+.rc-label{ font:italic 400 clamp(20px,3vw,24px)/1.3 Lora,Georgia,serif; color:#c9c4b8; margin-top:4px; }
+.rc-tiles{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-top:18px; }
+.rc-tile{ padding:14px 14px 12px; border-radius:18px; background:rgba(240,238,230,.08); border:1px solid rgba(240,238,230,.14); }
+.rc-tile b{ display:block; font:600 clamp(26px,4vw,34px)/1 Lora,Georgia,serif; color:#f0eee6; font-variant-numeric:tabular-nums; }
+.rc-tile span{ display:block; margin-top:6px; font:500 12px/1.3 Inter,sans-serif; color:#a5a39a; }
+.rc-best{ display:inline-block; margin-top:16px; padding:12px 20px; border-radius:999px; background:#e3724d; color:#1f1e1d; font:600 15px/1.2 Inter,sans-serif; }
+.rc-foot{ margin-top:14px; font:italic 400 15px/1.4 Lora,Georgia,serif; color:#a5a39a; }
+.recap .recap-save{ position:relative; }
+
+/* v01.10.15: Rank Day card: the thought card's accent circle at the bottom right and a corner mark at the top right, with a trophy */
+.ft-card.rank-day{ position:relative; overflow:hidden; }
+.ft-card.rank-day::after{ content:""; pointer-events:none; position:absolute; right:-50px; bottom:-70px; width:190px; height:190px; border-radius:50%; background:var(--accent); opacity:.07; }
+.ft-card.rank-day > *{ position:relative; }
+.rd-trophy{ position:absolute !important; top:14px; right:18px; width:58px; height:58px; pointer-events:none; color:var(--accent-text); opacity:.26; }
+.rd-trophy svg{ width:100%; height:100%; fill:none; stroke:currentColor; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -3979,12 +4079,12 @@ function buildIndexes(){
 function answerLabel(q){ return q.type === 'integer' ? q.answer : L(q.correct); }
 function optBody(q, i){
   const img = q.optionImages && q.optionImages[i];
-  if(img && !q.options[i]) return '<span class="optbox'+(isDarkTheme()?' inv':'')+'"><img class="qimg-opt" style="opacity:0" onload="this.style.opacity=1" src="'+esc(img)+'" alt="Option '+L(i)+'" loading="lazy" onerror="this.parentNode.parentNode.classList.remove(\'hasimg\');this.parentNode.remove()"></span>';
+  if(img && !q.options[i]) return '<span class="optbox'+(isDarkTheme()?' inv':'')+'"><img class="qimg-opt" decoding="async" src="'+esc(img)+'" alt="Option '+L(i)+'" loading="lazy" onerror="this.parentNode.parentNode.classList.remove(\'hasimg\');this.parentNode.remove()"></span>';
   return '<span>'+esc(q.options[i])+'</span>';
 }
 function qImage(src){
-  const im = el('<img class="qimg" alt="Question figure" loading="lazy" style="opacity:0" src="'+esc(src)+'">');
-  im.onload = ()=>{ im.style.opacity = 1; };
+  // v01.10.14: no fade-in, so re-drawing the screen (Sure or Guessing) does not make the figure blink
+  const im = el('<img class="qimg" alt="Question figure" loading="lazy" decoding="async" src="'+esc(src)+'">');
   const fig = el('<div class="qfig'+(isDarkTheme()?' inv':'')+'"></div>'); fig.appendChild(im);
   im.onerror = ()=>fig.remove();   // images are optional until extracted
   return fig;
@@ -4200,6 +4300,20 @@ function setCfg(patch){ nav.cfg = Object.assign({}, nav.cfg, patch); render(); }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function el(html){ const d=document.createElement('div'); d.innerHTML=html.trim(); return d.firstElementChild; }
 function L(i){ return String.fromCharCode(65+i); }
+// v1.10.7: options sit in a 2 x 2 grid. Images are scaled down to fit their cell.
+// On phones, long text falls back to one column.
+function optsLayout(q){
+  const opts = q.options || [];
+  const n = opts.length;
+  const narrow = window.innerWidth < 700;
+  const hasImg = (q.optionImages || []).some(Boolean);
+  const maxLen = Math.max(0, ...opts.map(o => String(o || '').length));
+  // Always two rows of two (2 x 2). Images are scaled down to their cell.
+  // Only on a phone, with long text, the options stack in one column so they stay readable.
+  if(narrow && !hasImg && maxLen > 24) return 'col1';
+  return 'grid2';
+}
+function optsBox(q){ return el('<div class="qopts '+optsLayout(q)+'" role="group" aria-label="Options"></div>'); }
 function fmtTime(s){ s=Math.max(0,s); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
 // Custom test pacing: the ideal rate is 25 questions an hour (2.4 minutes each)
 function idealMinutes(n){ return Math.round(n*60/25); }
@@ -4291,7 +4405,8 @@ function pauseState(){
   sp.duoMilestones = sp.duoMilestones || {};
   return sp;
 }
-function streakDaysSet(){ const s = qotdDays(); Object.keys(pauseState().days).forEach(k=>s.add(k)); calDoneDays().forEach(k=>s.add(k)); return s; }
+// v01.10.15: any answered practice question keeps the streak going; the Question of the Day is not required
+function streakDaysSet(){ const s = qotdDays(); store.attempts.forEach(a=>{ if(a && a.d && !a.skipped && a.c!==null) s.add(a.d); }); Object.keys(pauseState().days).forEach(k=>s.add(k)); calDoneDays().forEach(k=>s.add(k)); return s; }
 function shiftDay(k, delta){ const [y,m,d] = k.split('-').map(Number); return dayKey(new Date(y, m-1, d+delta)); }
 function applyStreakPause(){
   const sp = pauseState();
@@ -4421,14 +4536,16 @@ function monthRecapCard(){
   if(!s.total) return null;
   const month = now.toLocaleString('en-GB', {month:'long'});
   const w = el('<div class="card recap"></div>');
-  w.innerHTML = '<div class="eyebrow">'+esc(month)+' recap</div>'
-    +'<div class="recap-grid">'
-    +'<div><b>'+s.total+'</b><span>questions</span></div>'
-    +'<div><b>'+(s.acc==null ? '-' : s.acc+'%')+'</b><span>accuracy</span></div>'
-    +'<div><b>'+s.days+'</b><span>active days</span></div>'
-    +'<div><b>'+s.longest+'</b><span>best run</span></div></div>'
-    +(s.best ? '<p class="note-line" style="margin:12px 0 0">Strongest subject: <b>'+esc(s.best.s)+'</b> at '+s.best.acc+'%</p>' : '')
-    +'<button class="btn secondary block recap-save" type="button" style="margin-top:12px">Save as picture</button>';
+  w.innerHTML = '<div class="rc-pill">TORQ &middot; '+esc(month.toUpperCase())+' RECAP</div>'
+    +'<div class="rc-hero">'+s.total+'</div>'
+    +'<div class="rc-label">questions answered</div>'
+    +'<div class="rc-tiles">'
+    +'<div class="rc-tile"><b>'+(s.acc==null ? '-' : s.acc+'%')+'</b><span>accuracy</span></div>'
+    +'<div class="rc-tile"><b>'+s.days+'</b><span>active days</span></div>'
+    +'<div class="rc-tile"><b>'+s.longest+'</b><span>best run, days</span></div></div>'
+    +(s.best ? '<div class="rc-best">Strongest: '+esc(s.best.s)+' at '+s.best.acc+'%</div>' : '')
+    +'<div class="rc-foot">Practice for JEE, one question at a time</div>'
+    +'<button class="btn secondary block recap-save" type="button" style="margin-top:14px">Save as picture</button>';
   w.querySelector('.recap-save').onclick = ()=>saveRecapPicture(month, s);
   return w;
 }
@@ -5439,8 +5556,8 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v1.10.1';
-const LAST_UPDATED = '4 November 2026';
+const APP_VERSION = 'v01.10.15';
+const LAST_UPDATED = '5 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
   const showVer = VERSION_VIEWS.indexOf(view) >= 0;
@@ -5529,11 +5646,16 @@ function measureViewport(){
   document.documentElement.style.setProperty('--app-h', h + 'px');
   return h;
 }
-function fitToScreen(){
+// v1.10.5: the zoom is worked out once per real change of screen size. The browser toolbar
+// collapsing or returning on scroll changes the height by a few dozen pixels; that must not re-zoom the app.
+let zoomBase = null;
+function fitToScreen(force){
   const app = document.getElementById('app');
   if(!app) return;
   measureViewport();
   const w = window.innerWidth, h = window.innerHeight;
+  if(!force && zoomBase && Math.abs(w - zoomBase.w) < 2 && Math.abs(h - zoomBase.h) < 150) return;
+  zoomBase = {w, h};
   const inChat = document.body.classList.contains('msg-fit') || document.body.classList.contains('chat-full');
   const landscapeTablet = !inChat && w >= 900 && w / h >= 1.2;
   const f = landscapeTablet ? Math.min(1.35, Math.max(1, h / 700)) : 1;
@@ -5541,16 +5663,16 @@ function fitToScreen(){
   if(app.style.zoom !== next) app.style.zoom = next;
 }
 // Re-run the adaptive layout whenever the size of the screen changes, including entering or leaving full screen
-function relayoutAll(){
-  fitToScreen();
+function relayoutAll(force){
+  fitToScreen(force === true);
   // Let open screens recalculate their own sizes (the keyboard and message bar are sized from the viewport)
   window.dispatchEvent(new Event('torq:relayout'));
 }
 window.addEventListener('resize', relayoutAll);
-window.addEventListener('orientationchange', relayoutAll);
-document.addEventListener('fullscreenchange', ()=>setTimeout(relayoutAll, 60));
-document.addEventListener('webkitfullscreenchange', ()=>setTimeout(relayoutAll, 60));
-if(window.visualViewport) window.visualViewport.addEventListener('resize', relayoutAll);
+window.addEventListener('orientationchange', ()=>relayoutAll(true));
+document.addEventListener('fullscreenchange', ()=>setTimeout(()=>relayoutAll(true), 60));
+document.addEventListener('webkitfullscreenchange', ()=>setTimeout(()=>relayoutAll(true), 60));
+if(window.visualViewport) window.visualViewport.addEventListener('resize', ()=>{ measureViewport(); window.dispatchEvent(new Event('torq:relayout')); });
 measureViewport();
 function renderInner(){
   { const __a = document.getElementById('app'); if(__a && __a.childNodes.length) window.__outHTML = __a.innerHTML; }
@@ -6248,9 +6370,13 @@ function homeView(){
   hmMore.appendChild(dailyGoalCard());
   hmMore.appendChild(examRowEl());
   hmMore.appendChild(examDayCardEl());
-  w.appendChild(streakStrip());
+  // Tablets: the streak card and the Rank Day card share the row, half each. Phones stack them.
+  const pair = el('<div class="hm-pair"></div>');
+  pair.appendChild(streakStrip());
+  pair.appendChild(rankDayCard());
+  w.appendChild(pair);
   w.appendChild(keepStreakRule());
-  w.appendChild(featureHomeStack());
+  w.appendChild(featureHomeStack(true));
   const recap = monthRecapCard(); if(recap) w.appendChild(recap);
   w.appendChild(qotdCard());
   const daily = dailyQueue();
@@ -8637,6 +8763,7 @@ async function refreshChat(markRead){
     .order('created_at', {ascending:true}).limit(300);
   const before = fr.msgs.length;
   fr.msgs = (data || []).filter(function(m){ return !chatHiddenIds().has(m.id); });
+  (fr.pending || []).forEach(function(p){ if(p.recipient === other) fr.msgs.push(p); });
   if(markRead) fr.loading = false;
   db.from('chat_typing').select('user_id, updated_at, activity').eq('user_id', other).eq('peer_id', me).limit(1).then(function(r){
     const row = r.data && r.data[0];
@@ -8654,7 +8781,7 @@ async function refreshChat(markRead){
   }
   if(markRead) scrollChatToEnd = true;
   if((fr.msgs.length !== before || markRead) && voiceRec.state === 'idle') repaintChat();
-  if(fr.open) db.from('chat_messages').update({read_at: new Date().toISOString()}).eq('sender', other).eq('recipient', me).is('read_at', null).then(()=>{}, ()=>{});
+  if(fr.open) db.from('chat_messages').update({read_at: new Date().toISOString()}).eq('sender', other).eq('recipient', me).is('read_at', null).then(()=>{ chatPrev.at = 0; loadChatPreviews(); }, ()=>{});
 }
 let scrollChatToEnd = false;
 // Redraw only the open chat, keeping scroll position, instead of rebuilding the whole page every second
@@ -8670,13 +8797,26 @@ function repaintChat(){
   if(next){ next.scrollTop = (atEnd || scrollChatToEnd) ? next.scrollHeight : top; }
   scrollChatToEnd = false;
 }
+// v01.10.08: the message shows in the chat at once with a clock; the tick replaces the clock when the server has it
 async function sendChat(){
   try{ const d = waDraft(); if(d && !/\s$/.test(d)) kbLearnDraft(); }catch(e){}
-  if(!fr.open) return;
-  const text = fr.draft.trim(); if(!text) return;
-  fr.draft = ''; saveDraft(fr.open.id, '');
-  const { error } = await sbClient().from('chat_messages').insert({ sender: sbSession.user.id, recipient: fr.open.id, body: text });
-  if(error){ fr.note = 'Message not sent. Check your connection.'; render(); return; }
+  if(!fr.open || !sbSession) return;
+  const text = (waDraft() || '').trim(); if(!text) return;
+  const to = fr.open.id, me = sbSession.user.id;
+  waSetDraft(''); saveDraft(to, '');
+  const tmp = { id: 'pending-' + Date.now() + '-' + Math.random().toString(36).slice(2,7), sender: me, recipient: to, body: text, created_at: new Date().toISOString(), read_at: null, kind: 'text', pending: true };
+  fr.pending = (fr.pending || []).concat([tmp]);
+  fr.msgs = (fr.msgs || []).concat([tmp]);
+  scrollChatToEnd = true;
+  render();
+  const { error } = await sbClient().from('chat_messages').insert({ sender: me, recipient: to, body: text });
+  fr.pending = (fr.pending || []).filter(function(p){ return p.id !== tmp.id; });
+  if(error){
+    fr.msgs = fr.msgs.filter(function(m){ return m.id !== tmp.id; });
+    waSetDraft(text);
+    fr.note = 'Message not sent. Check your connection.';
+    render(); return;
+  }
   scrollChatToEnd = true;
   await refreshChat(false);
 }
@@ -8968,7 +9108,7 @@ function doubtView(){
   if(q){
     // Same question card as the practice screen (subject bar, tags, question text), without the timer
     const qc = el('<div class="card qcard" style="--bar:'+(SUBJ_VAR[q.subject]||'')+';margin:0 0 12px"></div>');
-    qc.appendChild(el('<div class="tags"><span class="tag shift">'+q.year+' · '+SHIFT_NAME[q.shift]+'</span><span class="tag diff diff-'+String(q.difficulty||'').toLowerCase()+'">'+esc(q.difficulty||'')+'</span><span class="tag">'+esc(q.topic||'')+'</span>'+wtTag(q.subject,q.chapter)+'</div>'));
+    qc.appendChild(el('<div class="tags"><span class="tag shift">'+q.year+' · '+SHIFT_NAME[q.shift]+'</span><span class="tag diff diff-'+String(q.difficulty||'').toLowerCase()+'">'+esc(q.difficulty||'')+'</span><span class="tag">'+esc(q.chapter||'')+'</span>'+wtTag(q.subject,q.chapter)+'</div>'));
     qc.appendChild(el('<div class="qtext">'+qtextHTML(q.text)+'</div>'));
     if(q.image) qc.appendChild(qImage(q.image));
     sheet.appendChild(qc);
@@ -9717,6 +9857,7 @@ const WA_ROWS = [
   ['a','s','d','f','g','h','j','k','l'],
   ['z','x','c','v','b','n','m']
 ];
+const WA_TICK_PENDING = '<svg class="wa-tk" viewBox="0 0 16 16" aria-label="Sending"><circle cx="8" cy="8" r="6.2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 4.6V8l2.4 1.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
 const WA_TICK_SENT = '<svg class="wa-tk" viewBox="0 0 16 12" aria-hidden="true"><path d="M1.5 6.2l3 3 6-6.4"/></svg>';
 const WA_TICK_SEEN = '<svg class="wa-tk" viewBox="0 0 18 12" aria-hidden="true"><path d="M1 6.2l3 3 6-6.4"/><path d="M6.5 6.2l3 3 6-6.4"/></svg>';
 const WA_LAYOUTS = {
@@ -9993,7 +10134,9 @@ function waSuggestions(){
   const pre = m ? m[1].toLowerCase() : '';
   const uc = kbUserCounts();
   const out = [];
-  const add = w=>{ if(w !== pre && out.indexOf(w) < 0 && out.length < 3) out.push(w); };
+  // Rare words stay hidden until the person has written them at least 3 times
+  const usedEnough = w=>(uc[w] || 0) >= 3;
+  const add = w=>{ if(w !== pre && usedEnough(w) && out.indexOf(w) < 0 && out.length < 3) out.push(w); };
   // 1. the person's own most-typed words that start the same way
   Object.keys(uc).filter(w=>w.startsWith(pre)).sort((a,b)=>uc[b]-uc[a]).forEach(add);
   // 2. the dictionary, most used first
@@ -10283,7 +10426,7 @@ function chatScreen(f){
     if(d.toDateString() !== lastDay){ lastDay = d.toDateString(); list.appendChild(el('<div class="wa-day"><span>'+esc(dayLabel(d))+'</span></div>')); }
     const mine = m.sender === me;
     const stamp = d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit', hour12:true});
-    const tick = mine ? '<i class="wa-tick'+(m.read_at ? ' seen' : '')+'">'+(m.read_at ? WA_TICK_SEEN : WA_TICK_SENT)+'</i>' : '';
+    const tick = mine ? (m.pending ? '<i class="wa-tick pending">'+WA_TICK_PENDING+'</i>' : '<i class="wa-tick'+(m.read_at ? ' seen' : '')+'">'+(m.read_at ? WA_TICK_SEEN : WA_TICK_SENT)+'</i>') : '';
     if(m.kind === 'question_card' || m.kind === 'answer_card'){
       const isQ = m.kind === 'question_card';
       const card = el('<div role="button" tabindex="0" class="qcard-chat '+(mine?'mine':'theirs')+'"><b>'+(isQ ? (mine ? 'You asked a question' : 'A friend asked you a question') : (mine ? 'You sent back notes' : 'Notes came back'))+'</b><span>'+mathCardHTML(cardText(m.body))+'</span><small>'+stamp+tick+'</small></div>');
@@ -10814,7 +10957,7 @@ function chatComposeBar(f){
   bar.appendChild(field);
   if(fr.draft.trim()){
     const send = el('<button type="button" class="vr-send-btn wa-send" aria-label="Send message">'+PLANE_SVG+'</button>');
-    send.onclick = function(){ fr.kb = false; sendChat(); };
+    send.onclick = function(){ sendChat(); };
     bar.appendChild(send);
   } else if(!fr.kb){
     bar.appendChild(voiceMicBtn(false));
@@ -11876,7 +12019,7 @@ function pyqPractice(w){
     +'<div class="qc-pts">'+(session.points||0)+' pts</div></div>'));
 
   const card = el('<div class="card qcard" style="--bar:'+(SUBJ_VAR[q.subject]||'')+'"></div>');
-  card.appendChild(el('<div class="tags"><span class="tag shift">'+q.year+' · '+SHIFT_NAME[q.shift]+'</span><span class="tag diff diff-'+q.difficulty.toLowerCase()+'">'+q.difficulty+'</span><span class="tag">'+esc(q.topic)+'</span>'+wtTag(q.subject,q.chapter)+'</div>'));
+  card.appendChild(el('<div class="tags"><span class="tag shift">'+q.year+' · '+SHIFT_NAME[q.shift]+'</span><span class="tag diff diff-'+q.difficulty.toLowerCase()+'">'+q.difficulty+'</span><span class="tag">'+esc(q.chapter)+'</span>'+wtTag(q.subject,q.chapter)+'</div>'));
   card.appendChild(el('<div class="qtext">'+qtextHTML(q.text)+'</div>'));
   if(q.image) card.appendChild(qImage(q.image));
 
@@ -11897,13 +12040,13 @@ function pyqPractice(w){
     const state = answered && !sk ? (isOk?'ok':'bad') : '';
     card.appendChild(numpad(q, val, v=>{ session.draft[q.id]=v; render(); liveSave(); scheduleAutoLock(q.id); },
       ()=>{ const v = session.draft[q.id]; if(v){ answerNumeric(v); liveSave(); } }, answered || locked, state));
-  } else q.options.forEach((o,i)=>{
+  } else { const qo = optsBox(q); card.appendChild(qo); q.options.forEach((o,i)=>{
     const picked = (answered || locked) && a && a.sel===i;
     const cls = answered ? (sk ? (i===q.correct ? 'skipans' : '') : (i===q.correct ? 'ok' : (picked ? 'bad' : ''))) : (picked ? 'sel' : '');
     const row = el('<div class="opt '+cls+(fresh?' fx':'')+(q.optionImages && q.optionImages[i] ? ' hasimg' : '')+'"><span class="k">'+L(i)+'</span>'+optBody(q,i)+'</div>');
     if(!answered && !locked) row.onclick = ()=>answerPYQ(i);
-    card.appendChild(row);
-  });
+    qo.appendChild(row);
+  }); }
 
   let noteTa = null;
   if(locked){
@@ -11971,6 +12114,7 @@ function pyqPractice(w){
     w.appendChild(sub);
   }
   w.appendChild(qNavDrawer());
+  if(session.navOpen) setTimeout(()=>qnavDim(w.querySelector('.qnav-wrap'), true), 0);
   return w;
 }
 
@@ -12019,11 +12163,11 @@ function mockPractice(w){
   card.appendChild(sogPicker(q));
   if(q.type==='integer'){
     card.appendChild(numpad(q, a ? String(a.sel) : '', v=>setNumeric(v), null, false, ''));
-  } else q.options.forEach((o,i)=>{
+  } else { const qo = optsBox(q); card.appendChild(qo); q.options.forEach((o,i)=>{
     const row = el('<div class="opt '+(a && a.sel===i?'sel':'')+'"><span class="k">'+L(i)+'</span>'+optBody(q,i)+'</div>');
     row.onclick = ()=>selectMock(i);
-    card.appendChild(row);
-  });
+    qo.appendChild(row);
+  }); }
   if(a){
     const clr = el('<div style="margin-top:6px"><button class="linkish">Clear response</button></div>');
     clr.querySelector('button').onclick = ()=>{ delete session.answers[q.id]; render(); };
@@ -12279,6 +12423,8 @@ function milestoneGet(){ try{ const v = JSON.parse(localStorage.getItem(SK_MS_KE
 function milestoneSet(m){ try{ localStorage.setItem(SK_MS_KEY, JSON.stringify({max: m})); }catch(e){} }
 let streakWaitOver = false;   // after 8 seconds, show what is on the device rather than a skeleton forever (offline, slow network)
 setTimeout(function(){ streakWaitOver = true; }, 8000);
+// v01.10.09: a drawn check that matches the app's line style, in place of the text tick
+const SK_CHECK_SVG = '<svg class="sk-chk" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.6 8.5l2.7 2.7 6.1-6.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 function streakStrip(){
   if(sbSession && !cloudReady && !streakWaitOver) return streakSkeleton();
   const days = streakDaysSet();
@@ -12298,7 +12444,7 @@ function streakStrip(){
     else if(k === todayKey) state = 'today';
     else if(k < todayKey) state = 'missed';
     else state = 'future';
-    return '<div class="sk-day '+state+'" title="'+k+'"><span class="sk-dot">'+(state === 'done' ? '&#10003;' : '')+'</span><span class="sk-dl">'+L+'</span></div>';
+    return '<div class="sk-day '+state+'" title="'+k+'"><span class="sk-dot">'+(state === 'done' ? SK_CHECK_SVG : '')+'</span><span class="sk-dl">'+L+'</span></div>';
   }).join('');
   // The counter pops only when the streak has actually gone up since the card was last drawn
   const seen = streakSeenGet();
@@ -12638,9 +12784,20 @@ function qNavDrawer(){
   return wrap;
 }
 // Opens or closes the question drawer without rebuilding it, so the motion plays both ways
+// Blurs and locks everything except the question list (the drawer and its tab)
+function qnavDim(wrap, on){
+  document.querySelectorAll('.qnav-dim').forEach(n=>n.classList.remove('qnav-dim'));
+  if(!on || !wrap) return;
+  let node = wrap;
+  while(node && node !== document.body){
+    Array.from(node.parentNode.children).forEach(c=>{ if(c !== node) c.classList.add('qnav-dim'); });
+    node = node.parentNode;
+  }
+}
 function setQnavOpen(wrap, on){
   const tab = wrap.querySelector('.qnav-tab'), drawer = wrap.querySelector('.qnav-drawer');
   if(!tab || !drawer) return;
+  qnavDim(wrap, on);
   drawer.classList.toggle('open', on);
   tab.classList.toggle('open', on);
   tab.textContent = on ? '\u2039' : '\u203A';
@@ -13680,7 +13837,7 @@ function rankDayStats(){
 }
 function rankDayCard(){
   const s = rankDayStats();
-  const c = el('<div class="ft-card rank-day"><div class="ft-eyebrow">Rank Day · this week</div>'
+  const c = el('<div class="ft-card rank-day"><span class="rd-trophy" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/><path d="M12 13v4M8.5 20h7M9.5 17h5"/></svg></span><div class="ft-eyebrow">Rank Day · this week</div>'
     +'<div class="ft-title">'+(s.goalHit ? 'Target <em>cleared.</em>' : s.left+' to go, <em>champ.</em>')+'</div>'
     +'<p class="ft-sub">Answer '+RANK_DAY_TARGET+' questions before the week ends. Everyone gets the same target, so it is about you, not the leaderboard.</p>'
     +'<div class="ft-bar"><i style="width:'+s.pct+'%"></i></div>'
@@ -13876,9 +14033,9 @@ function duelPlayView(){
 }
 
 // ---------- Hooks into existing views ----------
-function featureHomeStack(){
+function featureHomeStack(skipRank){
   const stack = el('<div class="ft-stack"></div>');
-  stack.appendChild(rankDayCard());
+  if(!skipRank) stack.appendChild(rankDayCard());
   const m = mysteryCard(); if(m) stack.appendChild(m);
   return stack;
 }
