@@ -3798,6 +3798,12 @@ body.kb-open .wa-compose .wa-send{ display:grid !important; flex:none; }
 .sk-day.missed .sk-dot{ background:rgba(224,88,79,.16); border:1px solid #e0584f; color:#e0584f; opacity:1; font-size:18px; line-height:1; }
 .sk-day.missed .sk-dl{ color:#e0584f; }
 .lb-name, .lb-card-name, .lb-who > b, .lb-pod b{ font-family:Lora,Georgia,serif !important; }
+/* v01.10.36: chat list shimmer while it loads, same look as the streak skeleton */
+.chat-sk{ padding:12px 16px !important; }
+.chat-sk-row{ display:flex; gap:12px; align-items:center; padding:10px 0; }
+.chat-sk-row .sk-skel-dot{ width:44px; height:44px; flex:none; }
+.chat-sk-txt{ flex:1; min-width:0; }
+.chat-sk-txt .sk-skel-line{ margin:6px 0; }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -4026,7 +4032,7 @@ body.kb-open .wa-compose .wa-send{ display:grid !important; flex:none; }
 <script>
 // ---------- Data paths (adjust here if the folder layout changes) ----------
 // Serve the repo root with a local server (e.g. `python3 -m http.server`); opening the file directly blocks fetch().
-const APP_BUILD = '2026-11-05-j';   // bumped with every release; the app compares it with the hosted file
+const APP_BUILD = '2026-11-05-k';   // bumped with every release; the app compares it with the hosted file
 const PATHS = {
   index: 'data/index.json',  // lists every paper; each paper's "file" field points at its question JSON
   solutions: 'data/solutions/'    // one file per paper: data/solutions/<paper-id>.json
@@ -5614,7 +5620,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.10.35';
+const APP_VERSION = 'v01.10.36';
 const LAST_UPDATED = '5 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -8716,8 +8722,19 @@ async function loadFriends(){
     }
   }
 }
+// v01.10.36: the chat list opens with a shimmer skeleton for about 1.5 s, then the real list appears in one go
+let chatRevealAt = 0;
+const CHAT_SKELETON_MS = 1500;
+function chatSkeletonCard(){
+  let rows = '';
+  for(let i = 0; i < 4; i++){
+    rows += '<div class="chat-sk-row"><i class="sk-skel-dot"></i><div class="chat-sk-txt"><i class="sk-skel-line" style="width:45%"></i><i class="sk-skel-line" style="width:80%"></i></div></div>';
+  }
+  return el('<div class="card chat-sk" aria-busy="true" aria-label="Loading your chats">' + rows + '</div>');
+}
 // Redraws only the chat list inside the Messages screen; the header and the rest of the page stay as they are
 function refreshChatListOnly(){
+  if(chatRevealAt && Date.now() < chatRevealAt) return true;      // still showing the skeleton: the reveal timer will draw the list
   const scroll = document.querySelector('.msg-screen .wa-scroll');
   if(!scroll || scroll.classList.contains('swap-out') || scroll.classList.contains('swap-in')) return false;
   scroll.innerHTML = '';
@@ -9125,6 +9142,10 @@ function messagesView(){
   const w = el('<div class="msg-screen"></div>');
   if(!sbSession){ w.appendChild(el('<div class="card"><p class="note-line">Log in to see your messages.</p></div>')); return w; }
   if(!fr.open) w.appendChild(el('<div class="hm-hero msg-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Chats</div><h1 class="hm-title">Mess<em>ages.</em></h1></div>'));
+  if(!fr.open && (!chatRevealAt || Date.now() - chatRevealAt > 60000)){
+    chatRevealAt = Date.now() + CHAT_SKELETON_MS;
+    setTimeout(function(){ if(view === 'messages' && !fr.open && !fr.picking && !refreshChatListOnly()) render(); }, CHAT_SKELETON_MS + 30);
+  }
   if(fr.list === null && !fr.loading) loadFriends();
   if(fr.open){ w.appendChild(chatScreen(fr.open)); return w; }
   const pp = pushPromptCard(); if(pp) w.appendChild(pp);
@@ -9838,6 +9859,7 @@ function avatarEl(f, small){
 function chatListCard(){
   const me = sbSession.user.id;
   if(Date.now() - chatPrev.at > 4000 && !chatPrev.loading) loadChatPreviews();
+  if(fr.list === null || (chatRevealAt && Date.now() < chatRevealAt)) return chatSkeletonCard();
   const card = el('<div class="card" style="padding:6px 0"></div>');
   // v01.10.33: while friends are still loading, show a neutral placeholder instead of "no friends yet" flashing first
   if(fr.list === null){
