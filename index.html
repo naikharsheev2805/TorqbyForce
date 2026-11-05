@@ -3823,17 +3823,14 @@ em{ font-family:Lora,Georgia,serif; }
 .sol-ans{ position:relative; display:grid; grid-template-columns:auto minmax(0,1fr); align-items:center; gap:14px; padding:16px 18px; border-radius:22px; background:linear-gradient(135deg,var(--accent),var(--c-medium,var(--accent))); color:var(--accent-ink); box-shadow:0 16px 30px -18px var(--accent); min-width:0; overflow:hidden; }
 .sol-ans span{ font:700 10.5px Inter,sans-serif; letter-spacing:.14em; text-transform:uppercase; opacity:.85; }
 .sol-ans em, .sol-ans b{ font:600 20px/1.2 Lora,Georgia,serif; min-width:0; overflow-wrap:anywhere; }
-.sol-ans .sol-val{ font:600 20px/1.2 Lora,Georgia,serif; min-width:0; overflow-wrap:anywhere; }
-.sol-chips{ display:flex; flex-wrap:wrap; gap:8px; min-width:0; }
+
 .sol-chip{ max-width:100%; padding:6px 12px; border-radius:999px; font:600 12px/1.3 Inter,sans-serif; overflow-wrap:anywhere; border:1px solid transparent; }
-.sol-chip[data-k=fast]{ background:rgba(52,211,153,.16); color:#34d399; border-color:rgba(52,211,153,.4); }
-.sol-chip[data-k=slow]{ background:rgba(248,113,113,.16); color:#f87171; border-color:rgba(248,113,113,.4); }
-.sol-chip[data-k=long]{ background:rgba(251,191,36,.16); color:#fbbf24; border-color:rgba(251,191,36,.4); }
-.sol-chip[data-k=intuit]{ background:rgba(96,165,250,.16); color:#60a5fa; border-color:rgba(96,165,250,.4); }
-.sol-chip[data-k=common]{ background:rgba(192,132,252,.16); color:#c084fc; border-color:rgba(192,132,252,.4); }
-.sol-chip[data-k=other]{ background:var(--surface); color:var(--muted); border-color:var(--border); }
 .sol-empty{ margin:0; font:italic 500 14px Lora,Georgia,serif; color:var(--muted); }
-@media (max-width:420px){ .sol-m{ padding:14px; } .sol-title{ font-size:16px; } .sol-ans .sol-val{ font-size:18px; } }
+@media (max-width:420px){ .sol-m{ padding:14px; } .sol-title{ font-size:16px; } }
+.sol-tags{ margin-top:2px; }
+.sol-note{ display:grid; gap:6px; padding:14px 16px; border-radius:18px; background:var(--surface-2); border:1px solid var(--border); border-left:3px solid var(--accent); min-width:0; }
+.sol-note span{ font:700 10.5px Inter,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-text); }
+.sol-note p{ margin:0; font:italic 400 14.5px/1.6 Lora,Georgia,serif; color:var(--text); overflow-wrap:anywhere; }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -4062,7 +4059,7 @@ em{ font-family:Lora,Georgia,serif; }
 <script>
 // ---------- Data paths (adjust here if the folder layout changes) ----------
 // Serve the repo root with a local server (e.g. `python3 -m http.server`); opening the file directly blocks fetch().
-const APP_BUILD = '2026-11-05-s';   // bumped with every release; the app compares it with the hosted file
+const APP_BUILD = '2026-11-05-u';   // bumped with every release; the app compares it with the hosted file
 const PATHS = {
   index: 'data/index.json',  // lists every paper; each paper's "file" field points at its question JSON
   solutions: 'data/solutions/'    // one file per paper: data/solutions/<paper-id>.json
@@ -4095,31 +4092,55 @@ function solChipKind(c){
   if(/common/.test(x)) return 'common';
   return 'other';
 }
+// v01.11.08: plain-text notation becomes proper symbols (bars, roots, powers, subscripts, Greek, operators)
+const SOL_GREEK = {alpha:'α',beta:'β',gamma:'γ',delta:'δ',Delta:'Δ',theta:'θ',Theta:'Θ',lambda:'λ',Lambda:'Λ',mu:'μ',pi:'π',omega:'ω',Omega:'Ω',epsilon:'ε',sigma:'σ',Sigma:'Σ',rho:'ρ',phi:'φ',eta:'η',tau:'τ',nu:'ν'};
+const SOL_SUP = {'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','-':'⁻','+':'⁺','n':'ⁿ'};
+const SOL_SUB = {'0':'₀','1':'₁','2':'₂','3':'₃','4':'₄','5':'₅','6':'₆','7':'₇','8':'₈','9':'₉'};
+function prettyMath(s){
+  let t = String(s);
+  t = t.replace(/\b([A-Za-z])-bar\b/g, function(m, c){ return c + '\u0305'; });            // A-bar -> Ā
+  t = t.replace(/\bsqrt\(([^()]*)\)/g, '√($1)');
+  t = t.replace(/\s*\*\s*/g, ' × ');
+  t = t.replace(/\^(-?\d+|n)/g, function(m, d){ return d.split('').map(function(c){ return SOL_SUP[c] || c; }).join(''); });
+  t = t.replace(/\b([A-Za-z]+)\b/g, function(m){ return SOL_GREEK[m] || m; });
+  t = t.replace(/\b([A-Za-z])(\d+)\b/g, function(m, c, d){ return c + d.split('').map(function(x){ return SOL_SUB[x]; }).join(''); });
+  t = t.replace(/\+\/-/g, '±').replace(/->/g, '→').replace(/<=/g, '≤').replace(/>=/g, '≥').replace(/!=/g, '≠');
+  t = t.replace(/\boption (\d)/gi, 'Option $1');
+  return t;
+}
+function solChipKind(c){ return ''; }
 function solutionHTML(text){
   const t = String(text || '').replace(/\s+/g, ' ').trim();
   if(!t || t === 'Solution not added yet.') return '<p class="sol-empty">Solution not added yet.</p>';
   const parts = t.split(/(?=Recommended method|Alternative method|Method tags:|Answer:|Idea:|Step \d+:)/);
-  let out = '<div class="sol"><div class="sol-top"><span>Solution</span></div>';
+  let out = '<div class="sol">', notes = [], tags = '';
   parts.forEach(function(raw){
     const x = raw.trim(); if(!x) return;
     let m;
     if((m = /^((?:Recommended|Alternative) method[^:]*):\s*([\s\S]*)$/.exec(x))){
       const code = (/\((M\d+)\)/.exec(m[1]) || [])[1] || '';
       const label = m[1].replace(/\s*\(M\d+\)/, '');
-      out += '<section class="sol-m"><header class="sol-h"><span class="sol-code">' + esc(code || '•') + '</span><span class="sol-title">' + esc(label) + '</span></header>' + (m[2] ? '<p class="sol-p">' + esc(m[2]) + '</p>' : '') + '</section>';
+      out += '<section class="sol-m"><header class="sol-h"><span class="sol-code">' + esc(code || '•') + '</span><span class="sol-title">' + esc(label) + '</span></header>' + (m[2] ? '<p class="sol-p">' + esc(prettyMath(m[2])) + '</p>' : '') + '</section>';
     } else if((m = /^Step (\d+):\s*([\s\S]*)$/.exec(x))){
-      out += '<div class="sol-step"><span class="sol-n">' + esc(m[1]) + '</span><p>' + esc(m[2]) + '</p></div>';
+      out += '<div class="sol-step"><span class="sol-n">' + esc(m[1]) + '</span><p>' + esc(prettyMath(m[2])) + '</p></div>';
     } else if((m = /^Idea:\s*([\s\S]*)$/.exec(x))){
-      out += '<p class="sol-idea"><span>Idea</span>' + esc(m[1]) + '</p>';
-    } else if((m = /^Answer:\s*([\s\S]*)$/.exec(x))){
-      out += '<div class="sol-ans"><span>Answer</span><b class="sol-val">' + esc(m[1]) + '</b></div>';
+      out += '<p class="sol-idea"><span>Idea</span>' + esc(prettyMath(m[1])) + '</p>';
+    } else if(/^Answer:/.test(x)){
+      // The answer is already shown from the question itself, so it is not repeated here
     } else if((m = /^Method tags:\s*([\s\S]*)$/.exec(x))){
-      const chips = m[1].split(';').map(function(c){ return c.trim().replace(/\.$/, ''); }).filter(Boolean);
-      out += '<div class="sol-chips">' + chips.map(function(c){ return '<span class="sol-chip" data-k="' + solChipKind(c) + '">' + esc(c) + '</span>'; }).join('') + '</div>';
+      const body = m[1];
+      const cut = body.indexOf('. ');
+      const tagPart = cut >= 0 ? body.slice(0, cut) : body;
+      const notePart = cut >= 0 ? body.slice(cut + 2).trim() : '';
+      tags = tagPart.split(';').map(function(c){ return c.trim().replace(/\.$/, ''); }).filter(Boolean)
+        .map(function(c){ return '<span class="tag">' + esc(c) + '</span>'; }).join('');
+      if(notePart) notes.push(notePart);
     } else {
-      out += '<p class="sol-p">' + esc(x) + '</p>';
+      out += '<p class="sol-p">' + esc(prettyMath(x)) + '</p>';
     }
   });
+  if(tags) out += '<div class="tags sol-tags">' + tags + '</div>';
+  notes.forEach(function(n){ out += '<div class="sol-note"><span>Important note</span><p>' + esc(prettyMath(n)) + '</p></div>'; });
   return out + '</div>';
 }
 function solText(v){
@@ -5120,6 +5141,9 @@ function submitPractice(silent){
   session.queue.forEach(q=>{
     const a = session.answers[q.id];
     if(!a || !a.pending) return;
+    // v01.11.08: a real attempt needs time on the question: 30 s easy, 60 s medium, 90 s hard. Quicker ones are nullified.
+    const minSec = {easy:30, medium:60, hard:90}[String(q.difficulty || '').toLowerCase()] || 60;
+    if(!a.nullified && (a.time || 0) < minSec) a.nullified = true;
     if(a.nullified){
       const sec = a.time || 0;
       store.attempts.push({q:q.id, c:null, nullified:true, t:sec, d:dayKey(), at:Date.now()});
@@ -5174,7 +5198,7 @@ function hasPending(){ return !!(session && !session.submitted && session.queue 
 function saveSessionRecord(){
   const items = session.queue.map(q=>{
     const a = session.answers[q.id];
-    const skipped = !a || !!a.skip || a.sel==null || a.sel==='';
+    const skipped = !a || !!a.skip || !!a.nullified || a.sel==null || a.sel==='';
     const ok = skipped ? null : (a.correct!=null ? !!a.correct : (q.type==='integer' ? sameAnswer(a.sel,q.answer) : a.sel===q.correct));
     // t keeps the real time taken, including any time past 2 minutes
     const t = Math.round(a && a.time!=null ? a.time : (session.times[q.id]||0));
@@ -5687,7 +5711,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.11.07';
+const APP_VERSION = 'v01.11.09';
 const LAST_UPDATED = '5 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -8005,7 +8029,10 @@ function leaderboardView(){
     const cards = topRows.map((r,i)=>{
       // Rank 1 is the flagship card. On the all-time board, ranks 1 to 3 use it, and ranks 4 and 5 use the runner style.
       const tier = (topN === 5) ? (i < 3 ? 'flag' : 'runner') : (i === 0 ? 'flag' : 'runner');
-      return lbCardHTML(r, tier);
+      const heights = topN === 5 ? [220, 192, 166, 140, 116] : [220, 180, 146];
+      const h = heights[i];
+      const card = lbCardHTML(r, tier);
+      return h ? card.replace(/^<div /, '<div style="min-height:' + h + 'px" ') : card;
     }).join('');
     const cardsEl = el('<div class="lb-cards" role="list" aria-label="Top ranks">'+cards+'</div>');
     w.appendChild(cardsEl);
