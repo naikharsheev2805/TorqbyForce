@@ -3793,6 +3793,11 @@ body.kb-open .wa-compose .wa-send{ display:grid !important; flex:none; }
 .qnav-tab.open{ left:100% !important; }
 /* v01.10.28: on wide screens the Submit and Doubt Relay buttons sit under the question card's width (820px), not the full page */
 @media (min-width:960px){ .set-submit-wrap, .ask-bar{ max-width:820px; margin-left:auto; margin-right:auto; } }
+/* v01.10.31: broken days show red; done days carry no tick; leaderboard names use Lora */
+.sk-day.done .sk-chk{ display:none !important; }
+.sk-day.missed .sk-dot{ background:rgba(224,88,79,.16); border:1px solid #e0584f; color:#e0584f; opacity:1; font-size:18px; line-height:1; }
+.sk-day.missed .sk-dl{ color:#e0584f; }
+.lb-name, .lb-card-name, .lb-who > b, .lb-pod b{ font-family:Lora,Georgia,serif !important; }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -4021,7 +4026,7 @@ body.kb-open .wa-compose .wa-send{ display:grid !important; flex:none; }
 <script>
 // ---------- Data paths (adjust here if the folder layout changes) ----------
 // Serve the repo root with a local server (e.g. `python3 -m http.server`); opening the file directly blocks fetch().
-const APP_BUILD = '2026-11-05-e';   // bumped with every release; the app compares it with the hosted file
+const APP_BUILD = '2026-11-05-g';   // bumped with every release; the app compares it with the hosted file
 const PATHS = {
   index: 'data/index.json',  // lists every paper; each paper's "file" field points at its question JSON
   solutions: 'data/solutions/'    // one file per paper: data/solutions/<paper-id>.json
@@ -5609,7 +5614,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.10.30';
+const APP_VERSION = 'v01.10.32';
 const LAST_UPDATED = '5 November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -8832,7 +8837,7 @@ async function refreshChat(markRead){
   db.from('chat_typing').select('user_id, updated_at, activity').eq('user_id', other).eq('peer_id', me).limit(1).then(function(r){
     const row = r.data && r.data[0];
     const t = (row && Date.now() - Date.parse(row.updated_at) < 3000) ? (row.activity || 'typing') : null;
-    if(fr.peerActivity !== t){ fr.peerActivity = t; if(voiceRec.state === 'idle') repaintChat(); }
+    if(fr.peerActivity !== t){ fr.peerActivity = t; if(voiceRec.state === 'idle') repaintChatIfChanged(); }
   }, function(){});
   const ids = fr.msgs.map(function(x){ return x.id; });
   if(ids.length){
@@ -8840,16 +8845,27 @@ async function refreshChat(markRead){
       const grouped = {};
       (r.data || []).forEach(function(x){ (grouped[x.message_id] = grouped[x.message_id] || []).push(x); });
       const key = JSON.stringify(grouped);
-      if(key !== fr.reactKey){ fr.reactKey = key; fr.reacts = grouped; if(voiceRec.state === 'idle') repaintChat(); }
+      if(key !== fr.reactKey){ fr.reactKey = key; fr.reacts = grouped; if(voiceRec.state === 'idle') repaintChatIfChanged(); }
     }, function(){});
   }
   if(markRead) scrollChatToEnd = true;
-  if((fr.msgs.length !== before || markRead) && voiceRec.state === 'idle') repaintChat();
+  if((fr.msgs.length !== before || markRead) && voiceRec.state === 'idle') repaintChatIfChanged();
   // v01.10.16: only when a row really changed to read; the every-second poll no longer redraws the page
   if(fr.open) db.from('chat_messages').update({read_at: new Date().toISOString()}).eq('sender', other).eq('recipient', me).is('read_at', null).select('id').then(function(res){ const rows = (res && res.data) || []; if(rows.length){ chatPrev.at = 0; loadChatPreviews(); } }, ()=>{});
 }
 let scrollChatToEnd = false;
 // Redraw only the open chat, keeping scroll position, instead of rebuilding the whole page every second
+// v01.10.32: the once-a-second poll only redraws the open chat when something in it really changed.
+// Unchanged polls used to rebuild the whole pane, which made the chat flicker and restart its animations.
+let chatPollSig = null;
+function repaintChatIfChanged(){
+  if(!fr.open){ repaintChat(); return; }
+  const sig = JSON.stringify([fr.open.id, fr.peerActivity || null, fr.reactKey || '',
+    (fr.msgs || []).map(m => [m.id, m.body, m.read_at, m.pending ? 1 : 0])]);
+  if(sig === chatPollSig && !scrollChatToEnd) return;
+  chatPollSig = sig;
+  repaintChat();
+}
 function repaintChat(){
   const pane = document.querySelector('.msg-split .msg-pane-right');
   if(!pane || !fr.open){ render(); return; }
@@ -12523,7 +12539,7 @@ function milestoneSet(m){ try{ localStorage.setItem(SK_MS_KEY, JSON.stringify({m
 let streakWaitOver = false;   // after 8 seconds, show what is on the device rather than a skeleton forever (offline, slow network)
 setTimeout(function(){ streakWaitOver = true; }, 8000);
 // v01.10.09: a drawn check that matches the app's line style, in place of the text tick
-const SK_CHECK_SVG = '<svg class="sk-chk" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.6 8.5l2.7 2.7 6.1-6.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const SK_CHECK_SVG_UNUSED = '<svg class="sk-chk" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.6 8.5l2.7 2.7 6.1-6.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 function streakStrip(){
   if(sbSession && !cloudReady && !streakWaitOver) return streakSkeleton();
   const days = streakDaysSet();
@@ -12543,7 +12559,7 @@ function streakStrip(){
     else if(k === todayKey) state = 'today';
     else if(k < todayKey) state = 'missed';
     else state = 'future';
-    return '<div class="sk-day '+state+'" title="'+k+'"><span class="sk-dot">'+(state === 'done' ? SK_CHECK_SVG : '')+'</span><span class="sk-dl">'+L+'</span></div>';
+    return '<div class="sk-day '+state+'" title="'+k+'"><span class="sk-dot">'+(state === 'missed' ? '&times;' : '')+'</span><span class="sk-dl">'+L+'</span></div>';
   }).join('');
   // The counter pops only when the streak has actually gone up since the card was last drawn
   const seen = streakSeenGet();
@@ -13657,6 +13673,12 @@ function ptOpenEditor(ev){
 function ptLocal(){ try{ return JSON.parse(localStorage.getItem('torq_pt_v1')) || {}; }catch(e){ return {}; } }
 function ptSetLocal(patch){ try{ localStorage.setItem('torq_pt_v1', JSON.stringify(Object.assign(ptLocal(), patch))); }catch(e){} }
 function ptIsTop5(){ return !!ptLocal().top5; }
+// v01.10.31: rank themes belong to one stat. boardPlace records the user's best place on each board.
+function ptBoardPlaces(){ return ptLocal().boardPlace || {}; }
+// A rank theme (gold for #1, platinum for #2, ...) is unlocked only by holding that exact place on some board
+function ptWon(id){ const i = PT_TOP5.indexOf(id); if(i < 0) return false; return Object.values(ptBoardPlaces()).some(p => p === i + 1); }
+// ...and it only shows on the board where the user holds that place. Other themes show everywhere.
+function ptAllowedHere(id, place){ const i = PT_TOP5.indexOf(id); if(i < 0) return true; return place === i + 1; }
 PT_LIST.push({id:"doodle-sketch",name:"Doodle Sketch",play:"doodle",bg:"#fff8ec",acc:"#e0457b"});
 const DOODLE_SVG = '<svg class="pt-doodle" viewBox="0 0 400 700" preserveAspectRatio="none" aria-hidden="true"><path d="M30 60 C 60 20, 110 30, 120 70 S 90 130, 40 110 S 10 70, 30 60 Z"/><path class="d2" d="M300 40 q 20 -30 40 0 t 40 0 t 40 0"/><path d="M330 180 l 22 -40 l 22 40 l -44 0 z"/><path class="d2" d="M20 300 c 40 -20 60 20 100 0 s 60 20 100 0"/><path d="M250 380 c 30 -40 90 -10 60 30 c -20 26 -60 10 -40 -10"/><path class="d2" d="M30 520 l 60 -20 l -20 40 l 70 -10"/><path d="M300 600 c 0 -30 40 -30 40 0 c 0 30 -50 30 -50 -10 c 0 -40 60 -40 60 0"/></svg>';
 function ptDefault(place){ return ['gold','platinum','royal-emerald','amethyst-crown','ruby-regal'][(place||1)-1] || 'gold'; }
@@ -13689,18 +13711,19 @@ function themeStats(){
 }
 // Open or locked for this student, plus the requirement text
 function ptUnlockState(id){
-  if(PT_TOP5.indexOf(id) >= 0) return ptIsTop5() ? {open:true} : {open:false, text:'Reach the top 5 on the leaderboard'};
+  if(PT_TOP5.indexOf(id) >= 0){ const k = PT_TOP5.indexOf(id) + 1; return ptWon(id) ? {open:true} : {open:false, text: k === 1 ? 'Reach #1 on a leaderboard stat' : 'Reach #' + k + ' on a leaderboard stat'}; }
   const m = PT_MILESTONES[id];
   if(!m) return {open:true};
   return {open: !!m.ok(themeStats()), text: m.text};
 }
 // The pencil and the editor show when at least one theme is open
-function ptCanEdit(){ const st = themeStats(); return PT_LIST.some(t=>{ const m = PT_MILESTONES[t.id]; if(PT_TOP5.indexOf(t.id)>=0) return ptIsTop5(); return !m || !!m.ok(st); }); }
+function ptCanEdit(){ const st = themeStats(); return PT_LIST.some(t=>{ const m = PT_MILESTONES[t.id]; if(PT_TOP5.indexOf(t.id)>=0) return ptWon(t.id); return !m || !!m.ok(st); }); }
 
 function pubProfileHTML(p){
   const top = nav.pubRow && nav.pubRow.place <= 5;
   const mine = !!(nav.pubRow && nav.pubRow.me);
-  const tid = (mine && ptValid(ptLocal().theme)) || ptValid(p.profile_theme) || (top ? ptDefault(nav.pubRow.place) : null);
+  const pick = (mine && ptValid(ptLocal().theme)) || ptValid(p.profile_theme);
+  const tid = (pick && ptAllowedHere(pick, nav.pubRow ? nav.pubRow.place : 0)) ? pick : (top ? ptDefault(nav.pubRow.place) : null);
   const play = tid ? PT_LIST.find(t=>t.id===tid).play : '';
   const base = __base_pubProfileHTML(p);
   const pen = (nav.pubRow && nav.pubRow.me && ptCanEdit()) ? PENCIL_PUB : '';
@@ -13708,12 +13731,11 @@ function pubProfileHTML(p){
 }
 function lbCardHTML(r, tier){
   let html = __base_lbCardHTML(r, tier);
-  if(r.me && lbState.period === 'all'){ ptSetLocal({top5: r.place <= 5, place: r.place}); }
+  if(r.me && lbState.period === 'all'){ const bp = Object.assign({}, ptBoardPlaces()); bp[lbState.board] = r.place; ptSetLocal({top5: r.place <= 5, place: r.place, boardPlace: bp}); }
   if(r.me && r.profile_theme && !ptLocal().theme){ ptSetLocal({theme: r.profile_theme}); }
-  if(r.place <= 5 || (r.me && ptValid(ptLocal().theme))){
-    const tid = (r.me && ptValid(ptLocal().theme)) || ptValid(r.profile_theme) || ptDefault(r.place);
-    html = html.replace('class="lb-card lb-', 'data-ptheme="'+tid+'" class="lb-card lb-');
-  }
+  const pick = (r.me && ptValid(ptLocal().theme)) || ptValid(r.profile_theme);
+  const tid = (pick && ptAllowedHere(pick, r.place)) ? pick : (r.place <= 5 ? ptDefault(r.place) : null);
+  if(tid){ html = html.replace('class="lb-card lb-', 'data-ptheme="'+tid+'" class="lb-card lb-'); }
   if(r.me && ptCanEdit()){
     html = html.replace(/(<div [^>]*class="lb-card[^>]*>)/, '$1' + PENCIL_LB);
   }
