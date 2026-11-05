@@ -3839,6 +3839,38 @@ em{ font-family:Lora,Georgia,serif; }
 #app:has(.qsplit) .qclock{ margin-bottom:8px; }
 .qimg, .qimg-opt{ filter:url(#torq-sharpen); }
 .optbox.inv .qimg-opt{ filter:url(#torq-sharpen) invert(1); }
+
+/* ===== Contact page: one fixed layout. Header first, form beside it on wide screens, formulas in the empty space ===== */
+body:has(.contact-paper) #app{ padding-bottom:16px !important; }
+body:has(.contact-paper) .gutter{ display:none !important; }
+.legal-page:has(.contact-paper){ padding:20px 0 0 !important; overflow:hidden; }
+.legal-page:has(.contact-paper)::before{ display:none; }
+.contact-paper{ display:grid !important; width:min(1100px,100%) !important; grid-template-columns:minmax(0,1fr); gap:16px; align-items:start; }
+.contact-paper .lp-top{ grid-area:top; margin:0 !important; }
+.contact-paper .lp-title{ grid-area:title; margin:0 !important; }
+.contact-paper .lp-date{ grid-area:date; margin:0 !important; }
+.contact-paper .contact-float{ display:none; }
+.contact-paper .lp-form{ grid-area:form; min-width:0; }
+.contact-paper .lp-foot{ grid-area:foot; margin:0 !important; justify-self:start; }
+.contact-paper{ grid-template-areas:"top" "title" "date" "form" "foot"; }
+@media (min-width:900px){
+  .contact-paper{ grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr); grid-template-rows:auto auto auto minmax(150px,1fr) auto; column-gap:44px; row-gap:10px; grid-template-areas:"top form" "title form" "date form" "float form" "foot form"; }
+  .contact-paper .contact-float{ display:block; grid-area:float; position:relative; overflow:hidden; min-height:150px; margin-top:8px; }
+  .contact-paper .lp-form{ align-self:start; }
+}
+.contact-float .cf-f{ position:absolute; font:italic 500 16px Lora,Georgia,serif; color:var(--text); opacity:.2; white-space:nowrap; transform:rotate(var(--r,0deg)); animation:gfDrift var(--dur,18s) ease-in-out infinite; pointer-events:none; }
+@media (prefers-reduced-motion: reduce){ .contact-float .cf-f{ animation:none; } }
+
+/* ===== Solutions: steps as numbered cards side by side; practice and review use the full width ===== */
+.sol-grid{ display:grid; grid-template-columns:1fr; gap:12px; }
+@media (min-width:700px){ .sol-grid{ grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); } }
+.sol-card{ display:flex; gap:12px; align-items:flex-start; padding:14px 16px 14px 14px; border-radius:18px; background:linear-gradient(160deg,var(--surface),var(--surface-2)); border:1px solid var(--border); box-shadow:0 14px 30px -26px var(--shadow); min-width:0; }
+.sol-card .sol-n{ flex:none; width:30px; height:30px; border-radius:50%; display:grid; place-items:center; font:700 14px Inter,sans-serif; background:var(--accent); color:var(--accent-ink); box-shadow:0 0 0 3px var(--accent-soft); }
+.sol-card p{ margin:0; font:400 15px/1.6 Inter,sans-serif; color:var(--text); min-width:0; overflow-wrap:anywhere; }
+.sol-card .katex{ font-size:1.04em; }
+#app:has(.sol), #app:has(.qsplit){ max-width:1280px !important; padding-bottom:16px !important; }
+#app:has(.sol) .qcard, #app:has(.qsplit) .qcard{ max-width:none !important; width:100%; }
+#app:has(.sol) .note, #app:has(.sol) .sol{ width:100%; max-width:none; box-sizing:border-box; }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -4118,25 +4150,43 @@ function prettyMath(s){
   return t;
 }
 function solChipKind(c){ return ''; }
+// Plain-text maths in solutions becomes KaTeX: sqrt3 -> sqrt{3}, KE_A -> KE_{A}, 10^2 -> 10^{2}, cos30 -> cos 30 degrees
+function texify(raw){
+  let t = String(raw || '').replace(/\s*\*\s*/g, ' × ').replace(/->/g, '→').replace(/<=/g, '≤').replace(/>=/g, '≥');
+  if(t.indexOf('$') >= 0) return t;   // already written in LaTeX
+  const TEX = /sqrt\s*\(([^()]*)\)|sqrt\s*(\d+(?:\.\d+)?)|\b(sin|cos|tan)(?:\s*\(\s*(\d+)\s*\)|\s*(\d+))|\b([A-Za-z]+)_([A-Za-z0-9]+)\b|\b([A-Za-z]+\d*|\d+)\^(-?\d+)|\b([A-Za-z])(\d)\b|\)\^(-?\d+)/g;
+  return t.replace(TEX, function(m, a, b, trig, ang1, ang2, base, sub, pb, pe, l1, d1, cexp){
+    if(a !== undefined) return '$\\sqrt{' + a + '}$';
+    if(b !== undefined) return '$\\sqrt{' + b + '}$';
+    if(trig) return '$\\' + trig + '\\,' + (ang1 || ang2) + '^{\\circ}$';
+    if(base !== undefined) return '$' + (base.length > 1 ? '\\mathrm{' + base + '}' : base) + '_{' + (sub.length > 1 ? '\\mathrm{' + sub + '}' : sub) + '}$';
+    if(pb !== undefined) return '$' + pb + '^{' + pe + '}$';
+    if(l1 !== undefined) return '$' + l1 + '_{' + d1 + '}$';
+    return ')$^{' + cexp + '}$';
+  });
+}
 function solutionHTML(text){
   const t = String(text || '').replace(/\s+/g, ' ').trim();
   if(!t || t === 'Solution not added yet.') return '<p class="sol-empty">Solution not added yet.</p>';
   const parts = t.split(/(?=Recommended method|Alternative method|Method tags:|Answer:|Idea:|Step \d+:)/);
-  let out = '<div class="sol">', notes = [], tags = '', answer = '';
+  let out = '<div class="sol">', notes = [], tags = '', answer = '', inGrid = false;
   parts.forEach(function(raw){
     const x = raw.trim(); if(!x) return;
+    const isStep = /^Step \d+:/.test(x);
+    if(!isStep && inGrid){ out += '</div>'; inGrid = false; }   // steps sit side by side in one grid
     let m;
     if((m = /^((?:Recommended|Alternative) method[^:]*):\s*([\s\S]*)$/.exec(x))){
       const code = (/\((M\d+)\)/.exec(m[1]) || [])[1] || '';
       const label = m[1].replace(/\s*\(M\d+\)/, '');
-      out += '<section class="sol-m"><header class="sol-h"><span class="sol-code">' + esc(code || '•') + '</span><span class="sol-title">' + esc(label) + '</span></header>' + (m[2] ? '<p class="sol-p">' + esc(prettyMath(m[2])) + '</p>' : '') + '</section>';
+      out += '<section class="sol-m"><header class="sol-h"><span class="sol-code">' + esc(code || '•') + '</span><span class="sol-title">' + esc(label) + '</span></header>' + (m[2] ? '<p class="sol-p">' + esc(texify(m[2])) + '</p>' : '') + '</section>';
     } else if((m = /^Step (\d+):\s*([\s\S]*)$/.exec(x))){
-      out += '<div class="sol-step"><span class="sol-n">' + esc(m[1]) + '</span><p>' + esc(prettyMath(m[2])) + '</p></div>';
+      if(!inGrid){ out += '<div class="sol-grid">'; inGrid = true; }
+      out += '<div class="sol-card"><span class="sol-n">' + esc(m[1]) + '</span><p>' + esc(texify(m[2])) + '</p></div>';
     } else if((m = /^Idea:\s*([\s\S]*)$/.exec(x))){
-      out += '<p class="sol-idea"><span>Idea</span>' + esc(prettyMath(m[1])) + '</p>';
+      out += '<p class="sol-idea"><span>Idea</span>' + esc(texify(m[1])) + '</p>';
     } else if((m = /^Answer:\s*([\s\S]*)$/.exec(x))){
-      // One answer card, right after the first method's steps. Later methods repeat the same answer, so they add no card.
-      if(!answer && m[1].trim()){ answer = m[1].trim(); out += '<div class="sol-ans"><span>Answer</span><b class="sol-val">' + esc(prettyMath(answer)) + '</b></div>'; }
+      // One answer card, right after the first method's steps
+      if(!answer && m[1].trim()){ answer = m[1].trim(); out += '<div class="sol-ans"><span>Answer</span><b class="sol-val">' + esc(texify(answer)) + '</b></div>'; }
     } else if((m = /^Method tags:\s*([\s\S]*)$/.exec(x))){
       const body = m[1];
       const cut = body.indexOf('. ');
@@ -4146,11 +4196,12 @@ function solutionHTML(text){
         .map(function(c){ return '<span class="tag">' + esc(c) + '</span>'; }).join('');
       if(notePart) notes.push(notePart);
     } else {
-      out += '<p class="sol-p">' + esc(prettyMath(x)) + '</p>';
+      out += '<p class="sol-p">' + esc(texify(x)) + '</p>';
     }
   });
+  if(inGrid) out += '</div>';
   if(tags) out += '<div class="tags sol-tags">' + tags + '</div>';
-  notes.forEach(function(n){ out += '<div class="sol-note"><span>Important note</span><p>' + esc(prettyMath(n)) + '</p></div>'; });
+  notes.forEach(function(n){ out += '<div class="sol-note"><span>Important note</span><p>' + esc(texify(n)) + '</p></div>'; });
   return out + '</div>';
 }
 function solText(v){
@@ -4637,12 +4688,12 @@ function chime(ok){
 }
 // v01.11.11: every kind of feedback in one place. Haptic and sound follow the Feedback settings.
 const SFX = {
-  tap:     {h: 6,  s: [[1400, 0.03, 0.05]]},
-  open:    {h: 6,  s: [[700, 0.03, 0.06], [940, 0.03, 0.08]]},
-  toggle:  {h: 8,  s: [[1000, 0.02, 0.04]]},
-  send:    {h: 10, s: [[520, 0.06, 0.07], [780, 0.08, 0.09]]},
-  receive: {h: 12, s: [[880, 0.05, 0.08], [1100, 0.05, 0.1]]},
-  success: {h: [12, 50, 12], s: [[660, 0.12, 0.12], [880, 0.12, 0.14], [1100, 0.12, 0.22]]},
+  tap:     {h: 14, s: [[1400, 0.03, 0.05]]},
+  open:    {h: 16, s: [[700, 0.03, 0.06], [940, 0.03, 0.08]]},
+  toggle:  {h: 18, s: [[1000, 0.02, 0.04]]},
+  send:    {h: 22, s: [[520, 0.06, 0.07], [780, 0.08, 0.09]]},
+  receive: {h: 24, s: [[880, 0.05, 0.08], [1100, 0.05, 0.1]]},
+  success: {h: [20, 45, 20, 45, 34], s: [[660, 0.12, 0.12], [880, 0.12, 0.14], [1100, 0.12, 0.22]]},
   streak:  {h: [20, 40, 20, 40, 60], s: [[523, 0.1, 0.12], [659, 0.1, 0.12], [784, 0.1, 0.12], [1046, 0.16, 0.34]]},
   error:   {h: [24, 60, 24], s: [[220, 0.12, 0.2], [180, 0.12, 0.2]]},
 };
@@ -4650,16 +4701,22 @@ function playTones(list){
   try{
     __audioCtx = __audioCtx || new (window.AudioContext || window.webkitAudioContext)();
     if(__audioCtx.state === 'suspended') __audioCtx.resume();
-    const t0 = __audioCtx.currentTime;
+    const ctx = __audioCtx, t0 = ctx.currentTime;
+    const out = ctx.createGain(); out.gain.value = 0.9;
+    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 3600; lp.Q.value = 0.4;
+    lp.connect(out); out.connect(ctx.destination);
     list.forEach(function(n){
-      const o = __audioCtx.createOscillator(), g = __audioCtx.createGain();
-      o.type = 'sine'; o.frequency.value = n[0];
-      const st = t0 + (n.start || 0);
-      g.gain.setValueAtTime(0.0001, st);
-      g.gain.exponentialRampToValueAtTime(0.14, st + 0.01);
-      g.gain.exponentialRampToValueAtTime(0.0001, st + n[2]);
-      o.connect(g); g.connect(__audioCtx.destination);
-      o.start(st); o.stop(st + n[2] + 0.02);
+      const st = t0 + (n.start || 0), dur = Math.max(0.08, n[2]);
+      // a soft bell: fundamental plus a quiet octave, with a quick attack and a long, smooth decay
+      [[1, 0.13], [2, 0.035]].forEach(function(h){
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'sine'; o.frequency.value = n[0] * h[0];
+        g.gain.setValueAtTime(0.0001, st);
+        g.gain.exponentialRampToValueAtTime(h[1], st + 0.008);
+        g.gain.exponentialRampToValueAtTime(0.0001, st + dur * 1.5);
+        o.connect(g); g.connect(lp);
+        o.start(st); o.stop(st + dur * 1.5 + 0.03);
+      });
     });
   }catch(e){}
 }
@@ -4680,7 +4737,7 @@ document.addEventListener('click', function(e){
 }, true);
 function answerFeedback(ok){
   const f = feedbackPrefs();
-  if(f.haptics) vibrate(ok ? 14 : [24, 60, 24]);
+  if(f.haptics) vibrate(ok ? [22, 40, 22] : [30, 60, 30, 60, 30]);
   if(f.sound) chime(ok);
 }
 function feedbackCard(){
@@ -5190,7 +5247,7 @@ function submitPractice(silent){
   const untouched = session.queue.filter(q=>!session.answers[q.id]).length;
   if(!silent && untouched){
     appDialog({eyebrow:'Submit', title:'Submit now?', body:untouched+' question'+(untouched>1?'s are':' is')+' untouched. '+(untouched>1?'They':'It')+' will count as skipped with no points.', ok:'Submit', cancel:'Keep going'})
-      .then(ok=>{ if(ok) submitPractice(true); });
+      .then(ok=>{ if(ok){ submitPractice(true); if(session && session.submitted) go('results'); } });
     return;
   }
   session.queue.forEach(q=>{
@@ -12191,6 +12248,17 @@ function contactPageView(){
   sheet.appendChild(el('<div class="lp-top"><span class="lp-no">Contact</span><span class="lp-kind">Legal</span></div>'));
   sheet.appendChild(el('<h1 class="lp-title">Contact us</h1>'));
   sheet.appendChild(el('<div class="lp-date">Send a question, a problem or a request to delete your data.</div>'));
+  // formulas drift in the empty space on the left (wide screens only)
+  const fl = el('<div class="contact-float" aria-hidden="true"></div>');
+  BG_FORMULAS.slice(0, 12).forEach(function(f, i){
+    const t = el('<span class="cf-f">'+esc(f)+'</span>');
+    t.style.left = (4 + (i % 3) * 31 + (i % 2) * 4) + '%';
+    t.style.top = (6 + Math.floor(i / 3) * 24 + (i % 2) * 3) + '%';
+    t.style.setProperty('--dur', (14 + (i % 5) * 3) + 's');
+    t.style.setProperty('--r', ((i % 2 ? 1 : -1) * (2 + (i % 4))) + 'deg');
+    fl.appendChild(t);
+  });
+  sheet.appendChild(fl);
   const cf = contactForm(); cf.classList.add('lp-form'); sheet.appendChild(cf);
   sheet.appendChild(el('<div class="lp-foot">TORQ &middot; Legal</div>'));
   w.appendChild(sheet);
