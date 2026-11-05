@@ -4135,8 +4135,8 @@ function solutionHTML(text){
     } else if((m = /^Idea:\s*([\s\S]*)$/.exec(x))){
       out += '<p class="sol-idea"><span>Idea</span>' + esc(prettyMath(m[1])) + '</p>';
     } else if((m = /^Answer:\s*([\s\S]*)$/.exec(x))){
-      // Only the first answer is kept, so the answer shows once
-      if(!answer && m[1].trim()) answer = m[1].trim();
+      // Each method's answer shows right after that method's steps
+      if(m[1].trim()) out += '<div class="sol-ans"><span>Answer</span><b class="sol-val">' + esc(prettyMath(m[1].trim())) + '</b></div>';
     } else if((m = /^Method tags:\s*([\s\S]*)$/.exec(x))){
       const body = m[1];
       const cut = body.indexOf('. ');
@@ -4149,7 +4149,6 @@ function solutionHTML(text){
       out += '<p class="sol-p">' + esc(prettyMath(x)) + '</p>';
     }
   });
-  if(answer) out += '<div class="sol-ans"><span>Answer</span><b class="sol-val">' + esc(prettyMath(answer)) + '</b></div>';
   if(tags) out += '<div class="tags sol-tags">' + tags + '</div>';
   notes.forEach(function(n){ out += '<div class="sol-note"><span>Important note</span><p>' + esc(prettyMath(n)) + '</p></div>'; });
   return out + '</div>';
@@ -12354,7 +12353,10 @@ function pyqPractice(w){
     if(a && a.skip) card.appendChild(el('<div class="note skipnote">Skipped. Leaving a question you are unsure of is the right call. It still earns '+a.pts+' point.</div>'));
   } else {
     const ptsLine = (!reviewing && a.pts!=null) ? '<div class="ptsline">+'+a.pts+' points</div>' : '';
-    const verdict = sk ? 'Skipped. The answer is '+answerLabel(q) : (isOk ? 'Correct' : 'Not quite. The answer is '+answerLabel(q));
+    // The answer is shown once: from the solution's own Answer lines when it has them, otherwise from the question
+    const solAns = /Answer:/.test(String(q.explanation || ''));
+    const ansTxt = solAns ? '' : '. The answer is '+answerLabel(q);
+    const verdict = sk ? 'Skipped'+ansTxt : (isOk ? 'Correct' : 'Not quite'+ansTxt);
     card.appendChild(el('<div class="note '+(sk?'skipped':(isOk?'ok':'bad'))+'"><div class="verdict">'+verdict+'</div>'+ptsLine+solutionHTML(q.explanation)+'</div>'));
 
     noteTa = el('<textarea placeholder="Add a note"></textarea>');
@@ -12821,7 +12823,7 @@ function qotdCard(){
     +'<span class="tag shift">'+esc(q.year+' · '+SHIFT_NAME[q.shift])+'</span>'
     +'<span class="tag diff diff-'+q.difficulty.toLowerCase()+'">'+esc(q.difficulty)+'</span>'+wtTag(q.subject,q.chapter)+'</div>'
     +'<div class="qtext qclamp">'+qtextHTML(q.text)+'</div></div>');
-  if(qotdOpen || st) c.appendChild(el('<div class="note">Answer: '+esc(answerLabel(q))+'. '+esc(q.explanation)+'</div>'));
+  if(qotdOpen || st) c.appendChild(el('<div class="note">'+(/Answer:/.test(String(q.explanation || '')) ? solutionHTML(q.explanation) : 'Answer: '+esc(answerLabel(q))+'. '+esc(q.explanation))+'</div>'));
   const actions = el('<div class="qotd-actions"></div>');
   const rv = el('<button class="btn secondary small">'+(qotdOpen?'Hide answer':'Reveal answer')+'</button>');
   rv.onclick = ()=>{ qotdOpen = !qotdOpen; render(); };
@@ -14637,7 +14639,7 @@ function seriesAdminView(){
 // halfway point (or flicking) finishes the back step, otherwise the screen springs back.
 // The Back button plays the same motion without a finger.
 (function(){
-  var EASE = 'cubic-bezier(.2,.8,.2,1)', EDGE = 24, DUR = 360, DIM = 0.16;
+  var EASE = 'cubic-bezier(.2,.8,.2,1)', EDGE = 40, DUR = 360, DIM = 0.16;
   var busy = false, committed = false, drag = null, anims = [], timer = 0;
   var appE = null, layer = null, prevEl = null, dimEl = null;
   function reduced(){ return !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); }
