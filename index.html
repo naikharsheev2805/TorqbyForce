@@ -450,6 +450,13 @@ body.chat-full .msg-screen{ flex:1 1 auto; min-height:0; display:flex; flex-dire
 body.chat-full .wa-chat{ flex:1 1 auto; min-height:0; height:100%; display:flex; flex-direction:column; }
 body.chat-full .wa-msgs{ flex:1 1 auto; min-height:0; }
 body.chat-full .wa-compose{ flex:none; padding-bottom:max(8px, env(safe-area-inset-bottom,0px)); }
+@media (min-width:700px){
+  body.msg-fit:not(.chat-full) .header{ margin:0 0 8px; height:auto; min-height:0; }
+  body.msg-fit:not(.chat-full) #app{ padding-top:calc(env(safe-area-inset-top,0px) + 8px) !important; padding-bottom:8px !important; }
+  body.msg-fit:not(.chat-full) .msg-split{ flex:1 1 auto; min-height:0; height:auto; }
+  body.msg-fit:not(.chat-full) .msg-split .wa-chat{ flex:1 1 auto; min-height:0; }
+  body.msg-fit:not(.chat-full) .msg-split .wa-msgs{ flex:1 1 auto; min-height:0; }
+}
 
 /* ===== Chat list: draft line under the name ===== */
 .wa-draft{ display:block; flex:1; min-width:0; overflow:hidden; white-space:nowrap; font-size:13px; color:var(--muted); }
@@ -518,6 +525,8 @@ body.msg-fit #app{ background:transparent !important; position:relative; z-index
 .wa-dots i:nth-child(2){ animation-delay:.15s; }
 .wa-dots i:nth-child(3){ animation-delay:.3s; }
 @keyframes waBounce{ 0%,60%,100%{ transform:translateY(0); opacity:.4; } 30%{ transform:translateY(-4px); opacity:1; } }
+.bubble > .wa-dots, .bubble > span.wa-dots, .wa-bot .wa-dots, .act-line .wa-dots{ display:inline-flex !important; flex-direction:row; align-items:center; gap:3px; height:14px; padding-top:2px; overflow:visible; white-space:nowrap; flex:none; }
+.wa-bot .wa-dots i, .bubble .wa-dots i, .act-line .wa-dots i{ display:block; flex:none; }
 .act-line{ display:inline-flex; align-items:center; gap:6px; color:var(--accent-text); }
 .act-line em{ font-style:normal; }
 .act-mic{ display:inline-block; line-height:0; }
@@ -639,6 +648,8 @@ body.msg-fit #app{ background:transparent !important; position:relative; z-index
 .lb-flag{ padding:20px 18px; gap:14px; border:1.5px solid color-mix(in srgb, var(--accent) 65%, var(--border)); background: radial-gradient(120% 110% at 0% 0%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 62%), var(--surface); box-shadow:0 24px 44px -26px color-mix(in srgb, var(--accent) 80%, transparent); }
 .lb-flag::before{ content:""; position:absolute; left:0; right:0; top:0; height:3px; background:linear-gradient(90deg, transparent, var(--accent), transparent); }
 .lb-flag .lb-card-no{ font-size:44px; color:var(--accent-text); }
+.lb-laurel{ position:relative; display:grid; place-items:center; width:84px; min-width:84px; height:84px; color:var(--accent); }
+.lb-laurel svg{ position:absolute; inset:0; width:100%; height:100%; color:var(--accent); pointer-events:none; }
 .lb-flag .lb-card-av{ width:64px; height:64px; box-shadow:0 0 0 3px var(--surface), 0 0 0 5px var(--accent); }
 .lb-flag .lb-card-name{ font:italic 600 22px/1.2 Lora,Georgia,serif; white-space:normal; }
 .lb-flag .lb-card-score b{ font:italic 700 24px/1.1 Lora,Georgia,serif; color:var(--accent-text); }
@@ -3878,6 +3889,7 @@ body:has(.contact-paper) .gutter{ display:none !important; }
 
 /* ===== Review redesign: question column + right column; solution as legal-style numbered cards ===== */
 .qcard.qsplit{ display:flex; flex-direction:column; gap:14px; }
+@media (min-width:960px){ .qcard.qsplit:not(:has(> .qgrid)){ display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:28px; align-items:start; } .qcard.qsplit > .qside{ min-width:0; } }
 .qgrid{ display:grid; gap:18px; align-items:start; width:100%; min-width:0; }
 .qmain{ min-width:0; width:100%; }
 .qside{ display:grid; gap:14px; align-content:start; min-width:0; width:100%; }
@@ -3889,6 +3901,9 @@ body:has(.contact-paper) .gutter{ display:none !important; }
 .sx-ans{ display:flex; align-items:baseline; gap:12px; padding:14px 18px; border-radius:18px; background:linear-gradient(135deg,var(--accent),var(--c-medium,var(--accent))); color:#1f1e1d; }
 .sx-ans > span:first-child{ font:700 10.5px Inter,sans-serif; letter-spacing:.14em; text-transform:uppercase; opacity:.85; }
 .sx-ans b{ font:600 22px/1.2 Lora,Georgia,serif; }
+.sx-ans.sx-ok{ background:linear-gradient(135deg,#f59e0b,#22c55e); }
+.sx-ans.sx-bad{ background:linear-gradient(135deg,#f59e0b,#ef4444); color:#fff; }
+.sx-ans.sx-skip{ background:linear-gradient(135deg,#f59e0b,#facc15); }
 .sx-card{ position:relative; overflow:hidden; isolation:isolate; border-radius:calc(var(--r-xl,18px) + 4px); padding:16px 18px 18px; border:1.5px solid transparent;
   background:linear-gradient(var(--surface),var(--surface)) padding-box, linear-gradient(135deg,var(--accent),var(--c-phys,var(--accent)),var(--c-chem,var(--accent))) border-box; }
 .sx-num{ position:absolute; right:-18px; bottom:-54px; z-index:0; font:600 clamp(150px,30vw,220px)/1 Lora,Georgia,serif; color:transparent; -webkit-text-stroke:1.5px color-mix(in srgb,var(--accent) 45%,transparent); pointer-events:none; user-select:none; }
@@ -4266,7 +4281,7 @@ function texify(raw){
     return ')$^{' + cexp + '}$';
   });
 }
-function solutionHTML(text){
+function solutionHTML(text, state){
   const t = String(text || '').replace(/\s+/g, ' ').trim();
   if(!t || t === 'Solution not added yet.') return '<p class="sx-empty">Solution not added yet.</p>';
   const parts = t.split(/(?=Recommended method|Alternative method|Method tags:|Answer:|Idea:|Step \d+:)/);
@@ -4295,7 +4310,7 @@ function solutionHTML(text){
       const tagPart = cut >= 0 ? body.slice(0, cut) : body;
       const notePart = cut >= 0 ? body.slice(cut + 2).trim() : '';
       tags = tagPart.split(';').map(function(c){ return c.trim().replace(/\.$/, ''); }).filter(Boolean)
-        .map(function(c){ return '<span class="tag">' + esc(c) + '</span>'; }).join('');
+        .map(function(c){ c = c.charAt(0).toUpperCase() + c.slice(1); return '<span class="tag">' + esc(c) + '</span>'; }).join('');
       if(notePart) notes.push(notePart);
     } else {
       closeSteps(); if(!cur) start('', 'Solution');
@@ -4304,7 +4319,7 @@ function solutionHTML(text){
   });
   closeSteps();
   let out = '<div class="sx">';
-  if(answer) out += '<div class="sx-ans"><span>Answer</span><b>' + esc(solTexify(answer)) + '</b></div>';
+  if(answer) out += '<div class="sx-ans' + (state ? ' sx-' + state : '') + '"><span>Answer</span><b>' + esc(solTexify(answer)) + '</b></div>';
   cards.forEach(function(c){
     out += '<section class="sx-card"><span class="sx-num" aria-hidden="true">' + c.n + '</span>'
       + '<div class="sx-hd">' + (c.code ? '<span class="sx-code">' + esc(c.code) + '</span>' : '') + '<h4>' + esc(c.label) + '</h4></div>'
@@ -4680,7 +4695,9 @@ function recordAttempt(q, ok, time){
   return att;
 }
 // A question left unanswered when the session ends counts as skipped (for the leaderboard only)
+function minTimeFor(q){ return {easy:30, medium:60, hard:90}[String(q && q.difficulty || '').toLowerCase()] || 60; }
 function recordSkip(q, time, pts){
+  if((time || 0) < minTimeFor(q)) return;   // never opened or barely looked: not a skip, not counted
   store.attempts.push({q:q.id, c:null, skipped:true, pts:pts||0, t:time||0, d:dayKey(), at:Date.now(), mock:!!(session && session.mode==='mock')}); pinQotdFor(dayKey());
   if(store.attempts.length>3000) store.attempts.shift();
   scheduleUpload(); persist();
@@ -4934,7 +4951,7 @@ function settingsPanel(){
 // ---- Streak flame: grows with the streak, flickers once today's question is answered ----
 function flameHTML(n, lit){
   const tier = n>=14 ? 4 : n>=7 ? 3 : n>=3 ? 2 : n>=1 ? 1 : 0;
-  return '<span class="sk-flame t'+tier+(lit && n>0 ? ' lit' : '')+'" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2c1 3.5 4.5 5.5 4.5 10a4.5 4.5 0 0 1-9 0c0-2.2 1.2-3.6 2.2-4.8C10.6 5.6 11.8 4.3 12 2z"/></svg></span>';
+  return '<span class="sk-flame t'+tier+(lit && n>0 ? ' lit' : '')+'" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 21.5a7 7 0 0 1-7-7c0-3.6 2.4-5.7 4.1-8.1.3 2.2 1.3 3.6 2.9 4.4C11.7 7.9 12.6 4.6 15.1 2.5c.4 3.9 4.9 6.3 4.9 12a7 7 0 0 1-8 7zM12 18.5a2.9 2.9 0 0 0 2.9-2.9c0-1.6-1-2.5-1.7-3.6-.2 1.1-.7 1.7-1.2 2.1-.6-.9-.9-1.7-.8-2.6-1 1.1-2.2 2.3-2.2 4A2.9 2.9 0 0 0 12 18.5z"/></svg></span>';
 }
 
 // ---- Monthly recap: this month's practice, with a picture to save and share ----
@@ -5490,7 +5507,7 @@ function saveSessionRecord(){
     return {q:q.id, sel: (a && a.sel!=null) ? a.sel : null, correct: ok, skip: skipped, t:t};
   });
   // v1.9.2: count each mock once, however many times the result is saved
-  if(session.mode==='mock' && !session.mockCounted){ session.mockCounted = true; store.mocksDone = (store.mocksDone||0) + 1; }
+  if(session.mode==='mock' && !session.mockCounted && items.some(x=>!x.skip)){ session.mockCounted = true; store.mocksDone = (store.mocksDone||0) + 1; }
   store.sessions = [{id:Date.now().toString(36), title:session.title, mode:session.mode, at:Date.now(), items:items}]
     .concat(store.sessions || []).slice(0, 30);
   persist();
@@ -5633,7 +5650,7 @@ async function uploadPending(){
       persist();
       try{ localStorage.setItem(fixKey, '1'); }catch(e){}
     }
-    const todo = store.attempts.filter(a => a && a.q && !a.up && !a.mock && !a.nullified);
+    const todo = store.attempts.filter(a => a && a.q && !a.up && !a.mock && !a.nullified && !(a.skipped && (a.t || 0) < 30));
     for(let i = 0; i < todo.length; i += 500){
       const chunk = todo.slice(i, i + 500);
       const rows = chunk.map(a => Object.assign({ user_id: uid, question_id: String(a.q) }, attemptFields(a)));
@@ -8103,7 +8120,7 @@ function __base_lbCardHTML(r, tier){
     + (ps.avg_time_s!=null ? '<span class="lb-st"><b>'+ps.avg_time_s+' s</b><small>Avg per question</small></span>' : ''));
   const label = 'Rank '+r.place+', '+r.name+(r.me?' (you)':'')+', '+lbFmt(lbState.board, r.score);
   return '<div class="lb-card lb-'+tier+(r.me?' me':'')+'" role="listitem" aria-label="'+esc(label)+'">'
-    +'<span class="lb-card-no" aria-hidden="true">'+String(r.place).padStart(2,'0')+'</span>'
+    +(tier==='flag' && r.place===1 ? '<span class="lb-card-no lb-laurel" aria-hidden="true">'+LAUREL_SVG+String(r.place).padStart(2,'0')+'</span>' : '<span class="lb-card-no" aria-hidden="true">'+String(r.place).padStart(2,'0')+'</span>')
     +'<span class="lb-av lb-card-av">'+lbAvHTML(r)+'</span>'
     +'<span class="lb-card-who"><b class="lb-card-name">'+esc(r.name)+'</b>'
       +(r.first && !r.anon ? '<small>'+esc(r.first)+'</small>' : '')
@@ -8112,6 +8129,7 @@ function __base_lbCardHTML(r, tier){
     +(stats ? '<span class="lb-card-stats">'+stats+'</span>' : '')
     +'</div>';
 }
+const LAUREL_SVG = '<svg viewBox="0 0 60 60" aria-hidden="true"><ellipse cx="24.05" cy="7.78" rx="3.1" ry="6.2" transform="rotate(105.0 24.05 7.78)"/><ellipse cx="17.14" cy="10.93" rx="3.1" ry="6.2" transform="rotate(86.0 17.14 10.93)"/><ellipse cx="11.63" cy="16.16" rx="3.1" ry="6.2" transform="rotate(67.0 11.63 16.16)"/><ellipse cx="8.13" cy="22.89" rx="3.1" ry="6.2" transform="rotate(48.0 8.13 22.89)"/><ellipse cx="7.00" cy="30.40" rx="3.1" ry="6.2" transform="rotate(29.0 7.00 30.40)"/><ellipse cx="8.39" cy="37.87" rx="3.1" ry="6.2" transform="rotate(10.0 8.39 37.87)"/><ellipse cx="12.13" cy="44.47" rx="3.1" ry="6.2" transform="rotate(-9.0 12.13 44.47)"/><path d="M26.01 7.35 L24.44 7.68 L22.89 8.13 L21.38 8.67 L19.92 9.33 L18.50 10.08 L17.14 10.93 L15.84 11.88 L14.61 12.91 L13.46 14.02 L12.38 15.22 L11.39 16.48 L10.49 17.81 L9.69 19.20 L8.99 20.65 L8.39 22.13 L7.89 23.66 L7.50 25.22 L7.22 26.80 L7.06 28.40 L7.00 30.00 L7.06 31.60 L7.22 33.20 L7.50 34.78 L7.89 36.34 L8.39 37.87 L8.99 39.35 L9.69 40.80 L10.49 42.19 L11.39 43.52 L12.38 44.78 L13.46 45.98 L14.61 47.09 L15.84 48.12 L17.14 49.07 L18.50 49.92 L19.92 50.67 L21.38 51.33 L22.89 51.87 L24.44 52.32 L26.01 52.65" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><ellipse cx="35.95" cy="7.78" rx="3.1" ry="6.2" transform="rotate(-105.0 35.95 7.78)"/><ellipse cx="42.86" cy="10.93" rx="3.1" ry="6.2" transform="rotate(-86.0 42.86 10.93)"/><ellipse cx="48.37" cy="16.16" rx="3.1" ry="6.2" transform="rotate(-67.0 48.37 16.16)"/><ellipse cx="51.87" cy="22.89" rx="3.1" ry="6.2" transform="rotate(-48.0 51.87 22.89)"/><ellipse cx="53.00" cy="30.40" rx="3.1" ry="6.2" transform="rotate(-29.0 53.00 30.40)"/><ellipse cx="51.61" cy="37.87" rx="3.1" ry="6.2" transform="rotate(-10.0 51.61 37.87)"/><ellipse cx="47.87" cy="44.47" rx="3.1" ry="6.2" transform="rotate(9.0 47.87 44.47)"/><path d="M33.99 7.35 L35.56 7.68 L37.11 8.13 L38.62 8.67 L40.08 9.33 L41.50 10.08 L42.86 10.93 L44.16 11.88 L45.39 12.91 L46.54 14.02 L47.62 15.22 L48.61 16.48 L49.51 17.81 L50.31 19.20 L51.01 20.65 L51.61 22.13 L52.11 23.66 L52.50 25.22 L52.78 26.80 L52.94 28.40 L53.00 30.00 L52.94 31.60 L52.78 33.20 L52.50 34.78 L52.11 36.34 L51.61 37.87 L51.01 39.35 L50.31 40.80 L49.51 42.19 L48.61 43.52 L47.62 44.78 L46.54 45.98 L45.39 47.09 L44.16 48.12 L42.86 49.07 L41.50 49.92 L40.08 50.67 L38.62 51.33 L37.11 51.87 L35.56 52.32 L33.99 52.65" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
 function lbItemHTML(r){
   const sub = r.me ? '<em>You</em>' : (r.first && !r.anon ? '<small>'+esc(r.first)+'</small>' : '');
   return '<div class="lb-item'+(r.me?' me':'')+'" role="listitem"><span class="lb-no">'+r.place+'</span>'
@@ -9156,6 +9174,8 @@ function loadListActivity(){
     listActivityBusy = false;
     const map = {}; (r.data || []).forEach(function(x){ map[x.user_id] = x.activity || 'typing'; });
     if(JSON.stringify(map) !== JSON.stringify(fr.activityBy || {})){ fr.activityBy = map; if(voiceRec.state === 'idle') render(); }
+    clearTimeout(window.__listTypeT);
+    if(Object.keys(map).length){ window.__listTypeT = setTimeout(function(){ if(Object.keys(fr.activityBy || {}).length){ fr.activityBy = {}; if(voiceRec.state === 'idle') render(); } }, 3200); }
   }, function(){ listActivityBusy = false; });
 }
 function micWavesHTML(){
@@ -9226,6 +9246,9 @@ async function refreshChat(markRead){
     const row = r.data && r.data[0];
     const t = (row && Date.now() - Date.parse(row.updated_at) < 3000) ? (row.activity || 'typing') : null;
     if(fr.peerActivity !== t){ fr.peerActivity = t; if(voiceRec.state === 'idle') repaintChatIfChanged(); }
+    // Clear the indicator on its own once the 3 seconds run out, even if nothing else refreshes the chat
+    clearTimeout(window.__peerTypeT);
+    if(t){ window.__peerTypeT = setTimeout(function(){ if(fr.peerActivity){ fr.peerActivity = null; if(voiceRec.state === 'idle') repaintChatIfChanged(); } }, 3200); }
   }, function(){});
   const ids = fr.msgs.map(function(x){ return x.id; });
   if(ids.length){
@@ -12609,7 +12632,7 @@ function pyqPractice(w){
     const solAns = /Answer:/.test(String(q.explanation || ''));
     const ansTxt = solAns ? '' : '. The answer is '+answerLabel(q);
     const verdict = sk ? 'Skipped'+ansTxt : (isOk ? 'Correct' : 'Not quite'+ansTxt);
-    side.appendChild(el('<div class="note '+(sk?'skipped':(isOk?'ok':'bad'))+'"><div class="verdict">'+verdict+'</div>'+ptsLine+solutionHTML(q.explanation)+'</div>'));
+    side.appendChild(el('<div class="note '+(sk?'skipped':(isOk?'ok':'bad'))+'"><div class="verdict">'+verdict+'</div>'+ptsLine+solutionHTML(q.explanation, sk?'skip':(isOk?'ok':'bad'))+'</div>'));
 
     noteTa = el('<textarea placeholder="Add a note"></textarea>');
     noteTa.value = store.notes[q.id] || '';
