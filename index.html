@@ -3925,6 +3925,51 @@ body{ position:relative; }
 .qnav-drawer .qn{ opacity:0; transform:none !important; transition:opacity .3s ease; }
 .qnav-drawer.open .qn{ transform:none !important; }
 .qnav-dim{ transition:none !important; }
+/* Messenger on wide screens: the chat fills the full height. The bottom-nav gap is not needed there because the nav is a side rail. */
+@media (min-width:960px){
+  body.msg-fit #app:has(> .msg-split){ padding-bottom:env(safe-area-inset-bottom,0px) !important; }
+}
+/* Menu button: the logo always starts clear of the fixed 3-bar button, on every width */
+#app > .header{ padding-left:72px !important; }
+/* ---- Streak card, redesigned: a warm glowing header, a connected week track, and a quiet footer ---- */
+.streak{ position:relative; overflow:hidden; isolation:isolate; padding:20px 20px 16px !important; background:radial-gradient(120% 100% at 0% 0%, color-mix(in srgb, var(--accent) 13%, transparent) 0%, transparent 62%), var(--surface) !important; }
+.streak::after{ content:""; position:absolute; right:-56px; top:-56px; width:170px; height:170px; border-radius:50%; background:radial-gradient(circle, color-mix(in srgb, var(--accent) 20%, transparent) 0%, transparent 70%); pointer-events:none; z-index:-1; }
+.streak .sk-top{ display:flex; align-items:center; gap:16px; }
+.streak .sk-flame{ width:50px; height:50px; flex:none; padding:12px; box-sizing:border-box; border-radius:50%; background:color-mix(in srgb, var(--accent) 12%, transparent); box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--accent) 24%, transparent); }
+.streak.frozen .sk-flame{ filter:grayscale(1); opacity:.55; }
+.streak .sk-count{ min-width:0; flex:none; }
+.streak .sk-n{ font:600 58px/0.9 Lora,Georgia,serif; letter-spacing:-.02em; color:var(--accent-text); }
+.streak .sk-txt{ flex:1; min-width:0; }
+.streak .sk-l{ font:700 11px/1.2 Inter,sans-serif; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
+.streak .sk-note{ margin:6px 0 0; font-size:14px; line-height:1.45; color:var(--text); }
+.streak .sk-ms{ display:inline-block; margin-top:10px; padding:5px 11px; border-radius:999px; font:700 11px/1.2 Inter,sans-serif; letter-spacing:.06em; text-transform:uppercase; background:var(--accent); color:var(--accent-ink); }
+.streak .sk-week{ position:relative; display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:4px; margin-top:22px; }
+.streak .sk-week::before{ content:""; position:absolute; top:16px; left:calc(100% / 14); right:calc(100% / 14); height:2px; border-radius:2px; background:var(--border); }
+.streak .sk-day{ position:relative; display:flex; flex-direction:column; align-items:center; gap:0; }
+.streak .sk-dot{ position:relative; z-index:1; width:34px; height:34px; border-radius:50%; display:grid; place-items:center; font:700 14px/1 Inter,sans-serif; background:var(--surface); border:1.5px solid var(--border); color:var(--muted); }
+.streak .sk-dl{ margin-top:9px; font:600 11px/1 Inter,sans-serif; letter-spacing:.08em; color:var(--muted); }
+.streak .sk-day.done .sk-dot{ background:var(--accent); border-color:transparent; color:var(--accent-ink); box-shadow:0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent); }
+.streak .sk-day.done .sk-dl, .streak .sk-day.today .sk-dl{ color:var(--text); }
+.streak .sk-day.today .sk-dot{ background:var(--surface); border:2px solid var(--accent); color:var(--accent-text); animation:skBreathe 2.4s ease-in-out infinite; }
+.streak .sk-day.today .sk-dl{ color:var(--accent-text); }
+.streak .sk-day.paused .sk-dot{ background:var(--accent-soft); border-color:transparent; color:var(--accent-text); }
+.streak .sk-day.missed .sk-dot{ background:transparent; border:1.5px solid color-mix(in srgb, #e0584f 55%, transparent); color:#e0584f; font-size:16px; }
+.streak .sk-day.missed .sk-dl{ color:#e0584f; }
+.streak .sk-day.future .sk-dot{ opacity:.45; }
+.streak.frozen .sk-day.done .sk-dot{ background:var(--surface-2); border:1.5px solid var(--border); color:var(--muted); box-shadow:none; }
+.streak .sk-foot{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px 12px; margin-top:18px; padding-top:12px; border-top:1px solid var(--border); }
+.streak .sk-pts{ font:600 13px/1.2 Inter,sans-serif; color:var(--muted); font-variant-numeric:tabular-nums; }
+.streak .sk-pause{ font:600 12px/1 Inter,sans-serif; color:var(--accent-text); background:var(--accent-soft); padding:6px 11px; border-radius:999px; }
+@keyframes skBreathe{ 0%,100%{ box-shadow:0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent); } 50%{ box-shadow:0 0 0 5px color-mix(in srgb, var(--accent) 16%, transparent); } }
+@media (prefers-reduced-motion: reduce){ .streak .sk-day.today .sk-dot{ animation:none; } }
+@media (max-width:360px){
+  .streak{ padding:16px 14px 14px !important; }
+  .streak .sk-flame{ width:42px; height:42px; padding:10px; }
+  .streak .sk-n{ font-size:48px; }
+  .streak .sk-dot{ width:30px; height:30px; font-size:13px; }
+  .streak .sk-week::before{ top:14px; }
+  .streak .sk-day.missed .sk-dot{ font-size:15px; }
+}
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -12937,8 +12982,8 @@ function streakStrip(){
     +'<div class="sk-count"><span class="sk-n">'+n+'</span></div>'
     +'<div class="sk-txt"><div class="sk-l">'+(n === 1 ? 'Day' : 'Days')+' in a row</div><p class="sk-note">'+esc(nudge)+'</p>'+ms+'</div></div>'
     +'<div class="sk-week">'+tiles+'</div>'
-    +'<div class="sk-pts">'+Math.round(store.points||0)+' points</div>'
-    +(pauseState().tokens > 0 ? '<div class="sk-pause">Streak pause ready. One missed day will not break your streak.</div>' : '')
+    +'<div class="sk-foot"><span class="sk-pts">'+Math.round(store.points||0)+' points</span>'
+    +(pauseState().tokens > 0 ? '<span class="sk-pause" title="One missed day will not break your streak">Streak pause ready</span>' : '')+'</div>'
     +'</div>');
 }
 // The question for a given day, the same for every user that day
