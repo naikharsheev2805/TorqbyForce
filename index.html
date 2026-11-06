@@ -3978,15 +3978,7 @@ body{ position:relative; }
   .streak .sk-week{ gap:5px; }
   .streak .sk-dot{ height:26px; border-radius:8px; }
 }
-/* Floating focus-music control: pause and resume while working, shown only when focus music is on */
-.music-dock{ position:fixed; right:16px; bottom:calc(88px + env(safe-area-inset-bottom,0px)); z-index:6; width:46px; height:46px; padding:0; border-radius:50%; border:1px solid var(--border); background:var(--surface); color:var(--text); box-shadow:0 10px 24px -12px var(--shadow); display:grid; place-items:center; cursor:pointer; transition:background .2s ease, color .2s ease, transform .15s ease; }
-.music-dock svg{ width:18px; height:18px; fill:currentColor; }
-.music-dock.playing{ background:var(--accent); color:var(--accent-ink); border-color:transparent; }
-.music-dock:active{ transform:scale(.94); }
-.music-dock:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
-@media (min-width:960px){ .music-dock{ right:24px; bottom:24px; } }
-body.chat-full .music-dock, body.kb-open .music-dock{ display:none !important; }
-@media (prefers-reduced-motion: reduce){ .music-dock{ transition:none; } }
+.ctabs button{ overflow:hidden; text-overflow:ellipsis; min-width:0; }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -4600,7 +4592,7 @@ let view = 'home';
 let session = null;
 let nav = {tab:'home', subject:SUBJECTS[0], pyqTab:'questions', paper:null, meTab:'analysis', cfg:null,
            mockCfg:{subjects:[...SUBJECTS], perSubject:5, minutes:60}};
-const TAB_OF = {publicprofile:'leaderboard', calendar:'calendar', friends:'friends', messages:'messages', doubt:'messages', viva:'viva', flash:'notehub', myflash:'notehub', myflashnew:'notehub', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', notebooks:'notebooks', leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', notes:'notehub', notehub:'notehub', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
+const TAB_OF = {admin:'admin', publicprofile:'leaderboard', calendar:'calendar', friends:'friends', messages:'messages', doubt:'messages', viva:'viva', flash:'notehub', myflash:'notehub', myflashnew:'notehub', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', privacy:'legal', terms:'legal', copyright:'legal', disclaimer:'legal', contact:'legal', notebooks:'notebooks', leaderboard:'leaderboard', home:'home', pyq:'pyq', chapter:'pyq', notes:'notehub', notehub:'notehub', setup:'pyq', paper:'pyq', mocks:'mocks', syllabus:'syllabus', me:'me'};
 
 const LAST_VIEW_KEY = 'torq_last_view_v1';
 function saveLastView(){
@@ -4937,7 +4929,7 @@ function feedbackCard(){
     + row('music', 'Focus music, soft and looping', f.music)
     + '<p class="note-line" style="margin:4px 0 0">Sound effects and focus music are separate. Turning one off leaves the other on.</p>';
   c.querySelectorAll('input[type="checkbox"]').forEach(inp=>{
-    inp.onchange = e=>{ f[inp.dataset.k] = e.target.checked; persist(); if(inp.dataset.k === 'music'){ focusMusic(e.target.checked); if(window.__musicSync) window.__musicSync(); } };
+    inp.onchange = e=>{ f[inp.dataset.k] = e.target.checked; persist(); if(inp.dataset.k === 'music'){ focusMusic(e.target.checked); } };
   });
   return c;
 }
@@ -8120,7 +8112,7 @@ function __base_lbCardHTML(r, tier){
     + (ps.avg_time_s!=null ? '<span class="lb-st"><b>'+ps.avg_time_s+' s</b><small>Avg per question</small></span>' : ''));
   const label = 'Rank '+r.place+', '+r.name+(r.me?' (you)':'')+', '+lbFmt(lbState.board, r.score);
   return '<div class="lb-card lb-'+tier+(r.me?' me':'')+'" role="listitem" aria-label="'+esc(label)+'">'
-    +(tier==='flag' && r.place===1 ? '<span class="lb-card-no lb-laurel" aria-hidden="true">'+LAUREL_SVG+String(r.place).padStart(2,'0')+'</span>' : '<span class="lb-card-no" aria-hidden="true">'+String(r.place).padStart(2,'0')+'</span>')
+    +(tier==='flag' && r.place===1 ? '<span class="lb-card-no lb-laurel" aria-hidden="true">'+LAUREL_SVG+String(r.place)+'</span>' : '<span class="lb-card-no" aria-hidden="true">'+String(r.place)+'</span>')
     +'<span class="lb-av lb-card-av">'+lbAvHTML(r)+'</span>'
     +'<span class="lb-card-who"><b class="lb-card-name">'+esc(r.name)+'</b>'
       +(r.first && !r.anon ? '<small>'+esc(r.first)+'</small>' : '')
@@ -8129,7 +8121,7 @@ function __base_lbCardHTML(r, tier){
     +(stats ? '<span class="lb-card-stats">'+stats+'</span>' : '')
     +'</div>';
 }
-const LAUREL_SVG = '<svg viewBox="0 0 60 60" aria-hidden="true"><ellipse cx="24.05" cy="7.78" rx="3.1" ry="6.2" transform="rotate(105.0 24.05 7.78)"/><ellipse cx="17.14" cy="10.93" rx="3.1" ry="6.2" transform="rotate(86.0 17.14 10.93)"/><ellipse cx="11.63" cy="16.16" rx="3.1" ry="6.2" transform="rotate(67.0 11.63 16.16)"/><ellipse cx="8.13" cy="22.89" rx="3.1" ry="6.2" transform="rotate(48.0 8.13 22.89)"/><ellipse cx="7.00" cy="30.40" rx="3.1" ry="6.2" transform="rotate(29.0 7.00 30.40)"/><ellipse cx="8.39" cy="37.87" rx="3.1" ry="6.2" transform="rotate(10.0 8.39 37.87)"/><ellipse cx="12.13" cy="44.47" rx="3.1" ry="6.2" transform="rotate(-9.0 12.13 44.47)"/><path d="M26.01 7.35 L24.44 7.68 L22.89 8.13 L21.38 8.67 L19.92 9.33 L18.50 10.08 L17.14 10.93 L15.84 11.88 L14.61 12.91 L13.46 14.02 L12.38 15.22 L11.39 16.48 L10.49 17.81 L9.69 19.20 L8.99 20.65 L8.39 22.13 L7.89 23.66 L7.50 25.22 L7.22 26.80 L7.06 28.40 L7.00 30.00 L7.06 31.60 L7.22 33.20 L7.50 34.78 L7.89 36.34 L8.39 37.87 L8.99 39.35 L9.69 40.80 L10.49 42.19 L11.39 43.52 L12.38 44.78 L13.46 45.98 L14.61 47.09 L15.84 48.12 L17.14 49.07 L18.50 49.92 L19.92 50.67 L21.38 51.33 L22.89 51.87 L24.44 52.32 L26.01 52.65" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><ellipse cx="35.95" cy="7.78" rx="3.1" ry="6.2" transform="rotate(-105.0 35.95 7.78)"/><ellipse cx="42.86" cy="10.93" rx="3.1" ry="6.2" transform="rotate(-86.0 42.86 10.93)"/><ellipse cx="48.37" cy="16.16" rx="3.1" ry="6.2" transform="rotate(-67.0 48.37 16.16)"/><ellipse cx="51.87" cy="22.89" rx="3.1" ry="6.2" transform="rotate(-48.0 51.87 22.89)"/><ellipse cx="53.00" cy="30.40" rx="3.1" ry="6.2" transform="rotate(-29.0 53.00 30.40)"/><ellipse cx="51.61" cy="37.87" rx="3.1" ry="6.2" transform="rotate(-10.0 51.61 37.87)"/><ellipse cx="47.87" cy="44.47" rx="3.1" ry="6.2" transform="rotate(9.0 47.87 44.47)"/><path d="M33.99 7.35 L35.56 7.68 L37.11 8.13 L38.62 8.67 L40.08 9.33 L41.50 10.08 L42.86 10.93 L44.16 11.88 L45.39 12.91 L46.54 14.02 L47.62 15.22 L48.61 16.48 L49.51 17.81 L50.31 19.20 L51.01 20.65 L51.61 22.13 L52.11 23.66 L52.50 25.22 L52.78 26.80 L52.94 28.40 L53.00 30.00 L52.94 31.60 L52.78 33.20 L52.50 34.78 L52.11 36.34 L51.61 37.87 L51.01 39.35 L50.31 40.80 L49.51 42.19 L48.61 43.52 L47.62 44.78 L46.54 45.98 L45.39 47.09 L44.16 48.12 L42.86 49.07 L41.50 49.92 L40.08 50.67 L38.62 51.33 L37.11 51.87 L35.56 52.32 L33.99 52.65" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
+const LAUREL_SVG = '<svg viewBox="0 0 60 60" aria-hidden="true"><ellipse cx="20.28" cy="50.85" rx="3.4" ry="7" transform="rotate(140.0 20.28 50.85)"/><ellipse cx="13.27" cy="45.78" rx="3.4" ry="7" transform="rotate(161.7 13.27 45.78)"/><ellipse cx="8.63" cy="38.49" rx="3.4" ry="7" transform="rotate(183.3 8.63 38.49)"/><ellipse cx="7.00" cy="30.00" rx="3.4" ry="7" transform="rotate(205.0 7.00 30.00)"/><ellipse cx="8.63" cy="21.51" rx="3.4" ry="7" transform="rotate(226.7 8.63 21.51)"/><ellipse cx="13.27" cy="14.22" rx="3.4" ry="7" transform="rotate(248.3 13.27 14.22)"/><ellipse cx="20.28" cy="9.15" rx="3.4" ry="7" transform="rotate(270.0 20.28 9.15)"/><ellipse cx="39.72" cy="9.15" rx="3.4" ry="7" transform="rotate(-40.0 39.72 9.15)"/><ellipse cx="46.73" cy="14.22" rx="3.4" ry="7" transform="rotate(-18.3 46.73 14.22)"/><ellipse cx="51.37" cy="21.51" rx="3.4" ry="7" transform="rotate(3.3 51.37 21.51)"/><ellipse cx="53.00" cy="30.00" rx="3.4" ry="7" transform="rotate(25.0 53.00 30.00)"/><ellipse cx="51.37" cy="38.49" rx="3.4" ry="7" transform="rotate(46.7 51.37 38.49)"/><ellipse cx="46.73" cy="45.78" rx="3.4" ry="7" transform="rotate(68.3 46.73 45.78)"/><ellipse cx="39.72" cy="50.85" rx="3.4" ry="7" transform="rotate(90.0 39.72 50.85)"/></svg>';
 function lbItemHTML(r){
   const sub = r.me ? '<em>You</em>' : (r.first && !r.anon ? '<small>'+esc(r.first)+'</small>' : '');
   return '<div class="lb-item'+(r.me?' me':'')+'" role="listitem"><span class="lb-no">'+r.place+'</span>'
@@ -8838,7 +8830,7 @@ async function loadAnalytics(){
 function analyticsPanel(){
   const box = el('<div class="card" style="padding:22px"></div>');
   const a = adminAnalytics;
-  const tabs = [7,30].map(d=>'<button type="button" class="ctab'+(a.days===d?' on':'')+'" data-d="'+d+'">Last '+d+' days</button>').join('');
+  const tabs = [7,30].map(d=>'<button type="button" class="ctab'+(a.days===d?' on':'')+'" data-d="'+d+'">'+(d===7?'7 days':'30 days')+'</button>').join('');
   box.innerHTML = '<div class="eyebrow">Usage and traffic</div><div class="ctabs" style="margin:10px 0 16px">'+tabs+'</div>';
   box.querySelectorAll('[data-d]').forEach(b=>b.onclick = ()=>{ adminAnalytics.days = Number(b.dataset.d); adminAnalytics.rows = null; loadAnalytics(); });
   if(a.rows === null){ box.appendChild(el('<p class="note-line">Loading usage...</p>')); if(!a.loading) loadAnalytics(); return box; }
@@ -11797,7 +11789,7 @@ async function loadLiveNow(){
 function liveNowPanel(){
   const box = el('<div class="card" style="padding:22px"></div>');
   if(!liveNow.at && !liveNow.loading) loadLiveNow();
-  if(!window.__liveTimer){ window.__liveTimer = setInterval(()=>{ if(view==='admin') loadLiveNow(); }, 30000); }
+  if(!window.__liveTimer){ window.__liveTimer = setInterval(()=>{ if(view==='admin' && (nav.adminTab||'reports')==='reports') loadLiveNow(); }, 30000); }
   const b = liveNow.byState || {};
   box.innerHTML = '<div class="eyebrow">Online right now</div>'
     +'<div class="stats" style="margin-top:12px"><div class="stat"><div class="n">'+(liveNow.total||0)+'</div><div class="l">Students online</div></div>'
@@ -11809,7 +11801,7 @@ function liveNowPanel(){
 }
 function adminView(){
   const w = adminViewCore();
-  if(isGuard() && (nav.adminTab || 'reports') !== 'cohorts'){
+  if(isGuard() && (nav.adminTab || 'reports') === 'reports'){
     const soft = el('<div class="adm-soft"></div>');
     soft.appendChild(liveNowPanel());
     soft.appendChild(analyticsPanel());
@@ -14880,6 +14872,7 @@ function seriesResultsView(){
 }
 // ---------- Admin: schedule a test (admins only; the database checks too) ----------
 let seriesAdminState = {list:null};
+let seriesFormEl = null;
 async function seriesAdminLoad(){
   const { data } = await sbClient().from('test_series').select('id,title,starts_at,duration_min,question_ids').order('starts_at',{ascending:false}).limit(30);
   seriesAdminState.list = data || [];
@@ -14888,7 +14881,7 @@ async function seriesAdminLoad(){
 function seriesAdminView(){
   const w = el('<div class="msg-screen"></div>');
   if(seriesAdminState.list===null) seriesAdminLoad();
-  const form = el('<div class="ft-card"><div class="ft-eyebrow">Schedule a test series</div>'
+  const form = seriesFormEl || (seriesFormEl = el('<div class="ft-card"><div class="ft-eyebrow">Schedule a test series</div>'
     +'<div class="ft-stack" style="margin-top:10px">'
     +'<input class="ft-input" id="sr-title" placeholder="Title, e.g. All India Mock 1" aria-label="Title">'
     +'<input class="ft-input" id="sr-start" type="datetime-local" aria-label="Start time">'
@@ -14896,7 +14889,7 @@ function seriesAdminView(){
     +'<input class="ft-input" id="sr-n" type="number" min="10" max="150" value="90" aria-label="Number of questions">'
     +'<select class="ft-input" id="sr-sub" aria-label="Subject mix"><option value="mix">Physics, Chemistry and Maths</option><option value="Physics">Physics only</option><option value="Chemistry">Chemistry only</option><option value="Maths">Maths only</option></select>'
     +'<div class="ft-row"><button class="ft-btn" type="button" id="sr-go">Schedule</button></div>'
-    +'<p class="ft-sub" id="sr-msg"></p></div></div>');
+    +'<p class="ft-sub" id="sr-msg"></p></div></div>'));
   w.appendChild(form);
   form.querySelector('#sr-go').onclick = async ()=>{
     const msg = form.querySelector('#sr-msg');
@@ -15163,40 +15156,6 @@ function seriesAdminView(){
       return m;
     });
   };
-})();
-</script>
-<script id="music-dock">
-// Floating pause and resume for focus music. Changing it also updates the Settings switch, since both use the same preference.
-(function(){
-  var ICON_PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="6" width="3.4" height="12" rx="1.2"/><rect x="13.6" y="6" width="3.4" height="12" rx="1.2"/></svg>';
-  var ICON_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 6.2v11.6c0 .6.7 1 1.2.6l9-5.8a.7.7 0 0 0 0-1.2l-9-5.8c-.5-.4-1.2 0-1.2.6z"/></svg>';
-  function prefOn(){ try{ return !!feedbackPrefs().music; }catch(e){ return false; } }
-  function toggle(){
-    var on = !__music;
-    feedbackPrefs().music = on; persist();
-    focusMusic(on);
-    sync();
-  }
-  function sync(){
-    var d = document.getElementById('musicDock');
-    if(!prefOn()){ if(d) d.remove(); return; }
-    if(!d){
-      d = document.createElement('button');
-      d.id = 'musicDock'; d.type = 'button'; d.className = 'music-dock';
-      d.addEventListener('click', toggle);
-      document.body.appendChild(d);
-    }
-    var playing = !!__music;
-    d.innerHTML = playing ? ICON_PAUSE : ICON_PLAY;
-    d.className = 'music-dock' + (playing ? ' playing' : '');
-    d.setAttribute('aria-label', playing ? 'Pause focus music' : 'Play focus music');
-    d.setAttribute('title', playing ? 'Pause focus music' : 'Play focus music');
-    d.setAttribute('aria-pressed', String(playing));
-  }
-  window.__musicSync = sync;
-  var baseRender = render;
-  render = function(){ baseRender.apply(this, arguments); try{ sync(); }catch(e){} };
-  sync();
 })();
 </script>
 </body>
