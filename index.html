@@ -3979,6 +3979,11 @@ body{ position:relative; }
   .streak .sk-dot{ height:26px; border-radius:8px; }
 }
 .ctabs button{ overflow:hidden; text-overflow:ellipsis; min-width:0; }
+.streak .sk-day{ align-items:center; }
+.streak .sk-dot, .streak .sk-dl{ width:100%; }
+.streak .sk-dl{ letter-spacing:0; text-align:center; }
+/* Friends chat on tablets and desktop: the split chat fills the screen, so the footer band under it is hidden */
+@media (min-width:700px){ body.msg-fit .build-stamp, body.msg-fit .foot{ display:none !important; } body.msg-fit #app{ padding-bottom:env(safe-area-inset-bottom,0px) !important; } }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -4008,6 +4013,7 @@ body{ position:relative; }
 
 </head>
 <body>
+<div id="torqSplash" aria-hidden="true"><img class="sp-phone" alt="" src="icons/splash-iphone-1170x2532.png"><img class="sp-wide" alt="" src="icons/splash-ipad-1640x2360.png"></div>
 <div id="app"></div>
 
 
@@ -4180,9 +4186,7 @@ body{ position:relative; }
 (function(){
   var shown = false;
   try{ shown = sessionStorage.getItem('torq.splashSeen') === '1'; }catch(e){}
-  var s = document.createElement('div'); s.id = 'torqSplash'; s.setAttribute('aria-hidden','true');
-  s.innerHTML = '<img class="sp-phone" alt="" src="icons/splash-iphone-1170x2532.png" style="opacity:0" onload="this.style.opacity=1" onerror="this.remove()"><img class="sp-wide" alt="" src="icons/splash-ipad-1640x2360.png" style="opacity:0" onload="this.style.opacity=1" onerror="this.remove()">';
-  document.documentElement.appendChild(s);
+  var s = document.getElementById('torqSplash');
   var t0 = Date.now();
   window.torqHideSplash = function(){
     var wait = 0;
@@ -4192,8 +4196,8 @@ body{ position:relative; }
       try{ sessionStorage.setItem('torq.splashSeen','1'); }catch(e){}
     }, wait);
   };
-  // Safety net: never leave the loading screen up longer than 8 seconds
-  setTimeout(function(){ if(document.getElementById('torqSplash')) window.torqHideSplash(); }, 8000);
+  // Safety net: never leave the loading screen up longer than 20 seconds
+  setTimeout(function(){ if(document.getElementById('torqSplash')) window.torqHideSplash(); }, 20000);
 })();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" defer></script>
@@ -13644,8 +13648,8 @@ function cloudSync(){
     setTimeout(()=>{ TL.classList.add('off'); setTimeout(()=>{ TL.remove(); if(appEl) appEl.style.visibility = ''; }, 300); }, 200);
   };
   const withTimeout = (p, ms)=> Promise.race([p, new Promise(r=>setTimeout(r, ms))]);
-  const hardStop = setTimeout(finish, 3500);
-  setTimeout(()=>{ if(appEl) appEl.style.visibility = ''; }, 6000); // never leave the user on the splash indefinitely
+  const hardStop = setTimeout(finish, 20000);
+  setTimeout(()=>{ if(appEl) appEl.style.visibility = ''; }, 20000); // never leave the user on the splash indefinitely
 
   (async ()=>{
     await loadBank();
