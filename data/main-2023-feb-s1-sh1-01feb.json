@@ -1,0 +1,3638 @@
+[
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-01",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 1,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Properties of Solids and Liquids",
+    "chapters": [
+      "Properties of Solids and Liquids",
+      "Units and Measurements"
+    ],
+    "topic": "Dimension of b squared over a from van der Waals equation",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: dimension of b squared over a from van der waals equation.",
+    "text": "$P+\\frac{a}{V^2}V-b=RT$ (as written in the paper) represents the equation of state of some gases, where $P$ is the pressure, $V$ the volume, $T$ the temperature, and $a$, $b$, $R$ are constants. The physical quantity which has dimensional formula as that of $\\frac{b^2}{a}$ will be:",
+    "options": [
+      {
+        "key": "1",
+        "text": "Bulk modulus",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "Modulus of rigidity",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "Compressibility",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "Energy density",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Use the equation of state to find the units of a and b. In P + a/V² terms, a/V² has the units of pressure, so a has units of P·V². The term V − b means b has units of volume. So b²/a has units of V²/(P·V²) = 1/P, the unit of compressibility (the reciprocal of pressure). Method 2 (quick check): compressibility = −(1/V)(dV/dP) has units 1/Pa, which matches 1/P. Analogy: a is like a spring constant that tells how stiff the gas is; b²/a is its reciprocal in a sense, which is 'softness' — compressibility.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "dimensions",
+      "van der waals"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Units and Measurements",
+        "subtopic": "Dimensional analysis and its applications"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-02",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 2,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Laws of Motion",
+    "chapters": [
+      "Laws of Motion",
+      "Kinematics"
+    ],
+    "topic": "Average speed of object moving over segments with speeds v1, v2, v3",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: average speed of object moving over segments with speeds v1, v2, v3.",
+    "text": "An object moves with speed $v_1$, $v_2$ and $v_3$ along a line segment $AB$, $BC$ and $CD$ respectively as shown in figure, where $AB=BC$ and $AD=3AB$. Then average speed of the object will be:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$\\frac{v_1+v_2+v_3}{3}$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$\\frac{v_1v_2v_3}{3v_1v_2+v_2v_3+v_3v_1}$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$\\frac{3v_1v_2v_3}{v_1v_2+v_2v_3+v_3v_1}$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$\\frac{v_1+v_2+v_3}{3v_1v_2v_3}$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Average speed = total distance / total time, not the average of the three speeds. Let AB = BC = CD = L (since AD = 3AB, the total length is 3L). Time for each part: L/v1, L/v2, L/v3. Total distance = 3L; total time = L(1/v1 + 1/v2 + 1/v3) = L(v2v3 + v1v3 + v1v2)/(v1v2v3). So average speed = 3L·v1v2v3 / [L(v1v2+v2v3+v3v1)] = 3v1v2v3/(v1v2+v2v3+v3v1). Key idea: average speed for equal distances is the harmonic mean, not the arithmetic mean.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "average speed"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Kinematics",
+        "subtopic": "Average speed and instantaneous velocity"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-03",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 3,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Laws of Motion",
+    "chapters": [
+      "Laws of Motion",
+      "Work, Energy and Power"
+    ],
+    "topic": "Speed with which stone hits ground after horizontal throw",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Rated from the stem: speed with which stone hits ground after horizontal throw.",
+    "text": "A child stands on the edge of a cliff $10$ m above the ground and throws a stone horizontally with an initial speed of $5$ m/s. Neglecting air resistance, the speed with which the stone hits the ground will be ______ m/s (given $g=10$ m/s$^2$).",
+    "options": [
+      {
+        "key": "1",
+        "text": "20",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "15",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "30",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "25",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Use energy conservation (no air resistance). Vertical speed gained: v² = u² + 2gh = 5² + 2·10·10 = 25 + 200 = 225, so v = 15 m/s. The horizontal velocity does not change the speed magnitude calculation because the energy depends on the total speed squared; here the horizontal component of 5 m/s is already included in u². Note: the horizontal and vertical components are independent; the speed at impact is the vector sum, but energy conservation gives the same result directly.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "projectile",
+      "energy"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Work, Energy and Power",
+        "subtopic": "Conservation of mechanical energy"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-04",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 4,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Laws of Motion",
+    "chapters": [
+      "Laws of Motion"
+    ],
+    "topic": "Force and friction for block on rough surface",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: force and friction for block on rough surface.",
+    "text": "A block of mass $5$ kg is placed at rest on a table on rough surface. Now, if a force of $30$ N is applied in the direction parallel to surface of the table, the block slides through a distance of $50$ m in an interval of time $10$ s. Coefficient of kinetic friction is (given $g=10$ m/s$^2$):",
+    "options": [
+      {
+        "key": "1",
+        "text": "0.60",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "0.75",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "0.50",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "0.25",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: From s = ½at², 50 = ½·a·100, so a = 1 m/s². Newton's second law: F − μmg = ma, so 30 − μ·5·10 = 5·1, giving 50μ = 25, μ = 0.5. Check: friction is μ·N = μ·mg, and the net force is what produces acceleration.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "friction",
+      "newton second law"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Laws of Motion",
+        "subtopic": "Kinetic friction"
+      },
+      {
+        "chapter": "Laws of Motion",
+        "subtopic": "Newton's second law of motion"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-05",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 5,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Gravitation",
+    "chapters": [
+      "Gravitation"
+    ],
+    "topic": "Minimum velocity for rocket to escape from planet P",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: minimum velocity for rocket to escape from planet p.",
+    "text": "If earth has a mass nine times and radius twice of that of a planet $P$. Then $\\frac{v_e}3\\sqrt x$ m/s will be the minimum velocity required by a rocket to pull out of gravitational force of $P$, where $v_e$ is escape velocity on earth. The value of $x$ is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "2",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "3",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "18",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "1",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Escape speed v = √(2GM/R). Let planet P have mass M_P and radius R_P. Given M_E = 9M_P and R_E = 2R_P. Then v_P/v_E = √[(M_P/M_E)(R_E/R_P)] = √[(1/9)·2] = √(2/9) = √2/3. So v_P = (v_e/3)√2, which gives x = 2. Analogy: escape speed is how fast you must throw a ball to never come back; a smaller, lighter planet needs a smaller throw.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "escape velocity"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Gravitation",
+        "subtopic": "Escape velocity"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-06",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 6,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Properties of Solids and Liquids",
+    "chapters": [
+      "Properties of Solids and Liquids",
+      "Gravitation"
+    ],
+    "topic": "Statements on acceleration due to gravity",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: statements on acceleration due to gravity.",
+    "text": "Given below are two statements: Statement-I: Acceleration due to gravity is different at different places on the surface of earth. Statement-II: Acceleration due to gravity increases as we go down below the earth's surface. In the light of the above statements, choose the correct answer.",
+    "options": [
+      {
+        "key": "1",
+        "text": "Both Statement I and Statement II are false",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "Both Statement I and Statement II are true",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "Statement I is true but Statement II is false",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "Statement I is false but Statement II is true",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Statement I is true: g varies with latitude and altitude because of Earth's rotation and shape. Statement II is false: inside the Earth, g = GM(r)/r² decreases linearly with depth (as M(r) decreases). So g decreases as you go down below the surface, and the statement says 'increases', which is wrong. Correct answer: statement I true, II false.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "gravity",
+      "statements"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Gravitation",
+        "subtopic": "Acceleration due to gravity and its variation with altitude and depth"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-07",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 7,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Properties of Solids and Liquids",
+    "chapters": [
+      "Properties of Solids and Liquids"
+    ],
+    "topic": "Gain in surface energy of mercury drops",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: gain in surface energy of mercury drops.",
+    "text": "A mercury drop of radius $10^{-3}$ m is broken into $125$ equal size droplets. Surface tension of mercury is $0.45$ N/m. The gain in surface energy is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "2.26 $\\times10^{-5}$ J",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "28 $\\times10^{-5}$ J",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "17.5 $\\times10^{-5}$ J",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "5 $\\times10^{-5}$ J",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Method 1 (volume conservation): Big drop radius R = 1e-3 m. 125 equal drops of radius r: volume conservation gives 125·(4/3)πr³ = (4/3)πR³, so r = R/5. Total surface area of small drops = 125·4πr² = 125·4π(R²/25) = 20πR². Initial area = 4πR². Gain in area ΔA = 20πR² − 4πR² = 16πR² = 16π×10⁻⁶ ≈ 5.03×10⁻⁵ m². Surface energy gain = σΔA = 0.45 × 5.03×10⁻⁵ ≈ 2.26×10⁻⁵ J. Method 2 (scale check): ratio of areas 5× (since total area scales as 125·(1/25) = 5) — same result; the gain is 4× the original area, consistent with 20πR² − 4πR² = 16πR². Analogy: splitting one big water drop into many tiny drops is like cutting a cake into many thin slices: the total surface you expose grows a lot, and each new surface costs surface energy.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "surface energy",
+      "area"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Properties of Solids and Liquids",
+        "subtopic": "Surface energy and surface tension"
+      },
+      {
+        "chapter": "Properties of Solids and Liquids",
+        "subtopic": "Application of surface tension: drops, bubbles and capillary rise"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-08",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 8,
+    "subject": "Physics",
+    "unit": "Thermodynamics & Kinetic Theory",
+    "chapter": "Thermodynamics",
+    "chapters": [
+      "Thermodynamics"
+    ],
+    "topic": "Work done by gas in adiabatic expansion to double volume",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: work done by gas in adiabatic expansion to double volume.",
+    "text": "A sample of gas at temperature $T$ is adiabatically expanded to double its volume. The work done by the gas in the process is given (given $\\gamma=\\frac32$):",
+    "options": [
+      {
+        "key": "1",
+        "text": "$W=TR\\sqrt2-2$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$W=\\frac TR\\sqrt2-2$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$W=\\frac R T2-\\sqrt2$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$W=RT2-\\sqrt2$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Hard — multiple methods shown. Given: adiabatic, γ = 3/2 (monatomic gas, with 1 mole so n = 1). Initial state: T, V. Final volume 2V. Method 1 (temperature relation): TV^(γ−1) = const, so T₂ = T(V/2V)^(γ−1)... more precisely T₂V₂^(γ−1) = TV^(γ−1) gives T₂ = T·(1/2)^(γ−1) = T·(1/2)^(1/2) = T/√2. Work done by gas in adiabatic process W = nC_V(T − T₂) = (R/(γ−1))(T − T₂) = 2R(T − T/√2) = RT(2 − √2). Method 2 (PV integral): W = (P1V1 − P2V2)/(γ−1). With P2 = P1(1/2)^γ and V2 = 2V, P2V2 = P1V·2·(1/2)^{3/2} = P1V·2^{−1/2}. So W = P1V(1 − 2^{−1/2})/(1/2) = 2P1V(1 − 1/√2) = RT(2 − √2) using P1V = RT. Both methods agree: W = RT(2 − √2). Idea for intuition: in an adiabatic expansion the gas does work using its own internal energy, so its temperature drops; the work done is the energy lost by the gas (like money spent from a fixed savings account).",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "adiabatic",
+      "work done"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Thermodynamics",
+        "subtopic": "Isothermal and adiabatic processes"
+      },
+      {
+        "chapter": "Thermodynamics",
+        "subtopic": "First law of thermodynamics"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-09",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 9,
+    "subject": "Physics",
+    "unit": "Thermodynamics & Kinetic Theory",
+    "chapter": "Kinetic Theory of Gases",
+    "chapters": [
+      "Kinetic Theory of Gases"
+    ],
+    "topic": "Dependence of kinetic energy of molecule on variables",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Rated from the stem: dependence of kinetic energy of molecule on variables.",
+    "text": "The average kinetic energy of a molecule of the gas is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "proportional to absolute temperature",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "proportional to volume",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "proportional to pressure",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "dependent on the nature of the gas",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: The average translational kinetic energy per molecule is (3/2)k_B T, which depends only on absolute temperature T. It does not depend on volume, pressure or the gas type (for an ideal gas). Analogy: temperature is like the average 'fidget level' of molecules; it is the same for every molecule regardless of its type.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "kinetic energy",
+      "temperature"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Kinetic Theory of Gases",
+        "subtopic": "Kinetic interpretation of temperature"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-10",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 10,
+    "subject": "Physics",
+    "unit": "Optics & Waves",
+    "chapter": "Oscillations and Waves",
+    "chapters": [
+      "Oscillations and Waves"
+    ],
+    "topic": "Speed of transverse wave in steel wire under tension",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Rated from the stem: speed of transverse wave in steel wire under tension.",
+    "text": "A steel wire with mass per unit length $7.0\\times10^{-3}$ kg/m is under tension of $70$ N. The speed of transverse waves in the wire will be:",
+    "options": [
+      {
+        "key": "1",
+        "text": "200$\\pi$ m/s",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "100 m/s",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "10 m/s",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "50 m/s",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Wave speed on a string v = √(T/μ) = √(70 / 7.0×10⁻³) = √(10000) = 100 m/s. Units check: N/(kg/m) = (kg·m/s²)/(kg/m) = m²/s², whose square root is m/s.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "wave speed"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Oscillations and Waves",
+        "subtopic": "Speed of a travelling wave"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-11",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 11,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electrostatics",
+    "chapters": [
+      "Electrostatics"
+    ],
+    "topic": "Electric field in three regions between charged sheets",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: electric field in three regions between charged sheets.",
+    "text": "Let $\\sigma$ be the uniform surface charge density of two infinite thin plane sheets shown in figure. Then the electric fields in three different regions $E_I$, $E_{II}$ and $E_{III}$ are:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$\\vec E_I=\\frac{2\\sigma}{\\epsilon_0}\\hat n$, $\\vec E_{II}=0$, $\\vec E_{III}=\\frac{2\\sigma}{\\epsilon_0}\\hat n$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$\\vec E_I=0$, $\\vec E_{II}=\\frac{\\sigma}{\\epsilon_0}\\hat n$, $\\vec E_{III}=0$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$\\vec E_I=\\frac{\\sigma}{2\\epsilon_0}\\hat n$, $\\vec E_{II}=0$, $\\vec E_{III}=\\frac{\\sigma}{2\\epsilon_0}\\hat n$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$\\vec E_I=-\\frac{\\sigma}{\\epsilon_0}\\hat n$, $\\vec E_{II}=0$, $\\vec E_{III}=\\frac{\\sigma}{\\epsilon_0}\\hat n$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Each infinite sheet of surface density σ gives a field of magnitude σ/(2ε0), pointing away from a positive sheet and toward a negative sheet. Between the two sheets (region II) the fields add up or cancel depending on signs; the figure shows the left sheet with one sign and the right sheet with the opposite sign, so outside the pair the net field is zero and between them the field is σ/ε0 directed from the positive sheet. Here the net result (option 4) is E_I = −(σ/ε0)n̂ (pointing towards the left), E_II = 0 and E_III = (σ/ε0)n̂. Analogy: two sheets are like two crowds pushing in opposite directions: outside the crowds the pushes cancel, in the gap they add up.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "electric field",
+      "sheets"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electrostatics",
+        "subtopic": "Gauss's law and its applications"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-12",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 12,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Current Electricity",
+    "chapters": [
+      "Current Electricity"
+    ],
+    "topic": "Equivalent resistance between A and B",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: equivalent resistance between a and b.",
+    "text": "The equivalent resistance between $A$ and $B$ of the network shown in figure is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "$11\\frac23R$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$14R$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$21R$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$\\frac83R$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Hard — two methods with all steps. Resistances in the network: top R, bottom-left 2R, middle 9R, top-right 3R, bottom-right 6R. Method 1 (balanced bridge): the bridge is balanced when the ratio of the arms is equal: R/2R = 3R/6R = 1/2. In a balanced Wheatstone bridge the middle resistor (9R) carries no current, so it can be removed. Then the remaining resistors form two parallel branches: branch 1 is R + 3R = 4R; branch 2 is 2R + 6R = 8R. Equivalent = (4R × 8R)/(4R + 8R) = 32R²/12R = 8R/3. Method 2 (node analysis): apply Kirchhoff's current law at the two middle nodes with a potential difference V between A and B. Because of the symmetry of the balance, the potential of the two middle nodes is equal, so no current flows through 9R; solving the node equations gives the same current I and R_eq = V/I = 8R/3. Idea/analogy: a balanced bridge is like two water pipes meeting at a junction with the same pressure on both sides, so no water crosses the middle pipe.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "network",
+      "wheatstone bridge"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Current Electricity",
+        "subtopic": "Wheatstone bridge"
+      },
+      {
+        "chapter": "Current Electricity",
+        "subtopic": "Series and parallel combinations of resistors"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-13",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 13,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Magnetic Effects of Current and Magnetism",
+    "chapters": [
+      "Magnetic Effects of Current and Magnetism"
+    ],
+    "topic": "Magnetic field at centre P of semicircle with two long straight wires",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: magnetic field at centre p of semicircle with two long straight wires.",
+    "text": "Find the magnetic field at the point $P$ in figure. The curved portion is a semicircle connected to two long straight wires (radius $r$, current $i$).",
+    "options": [
+      {
+        "key": "1",
+        "text": "$\\frac{\\mu_0 i}{2r}\\left(1+\\frac2\\pi\\right)$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "$\\frac{\\mu_0 i}{2r}\\left(1+\\frac1\\pi\\right)$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "$\\frac{\\mu_0 i}{2r}\\left(\\frac12+\\frac1{2\\pi}\\right)$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$\\frac{\\mu_0 i}{2r}\\left(\\frac12+\\frac1\\pi\\right)$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Hard — two ways. Method 1 (superposition): The semicircle of radius r gives B = μ0 i/(4r) at its centre (a full loop gives μ0i/(2r), half of it gives μ0i/(4r)). Each long straight wire ends on the semicircle's line through P; a long wire at perpendicular distance r gives μ0i/(4πr) when P is at the end of the wire, so two wires give μ0i/(2πr). Total B = μ0i/(4r) + μ0i/(2πr) = (μ0i/2r)(1/2 + 1/π). Method 2 (check by limits): as r is large relative to... not needed. Analogy: the semicircle is like a half pizza crust; the straight wires are two long fences whose pull on P is weaker than a full circle but adds up. Note: My derived result (μ0i/2r)(1/2 + 1/π) does NOT match the key (option 3, with 1/(2π)). Treat Q13 as a BLOCKER until the figure and option list are checked against the PDF.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "biot savart",
+      "semicircle"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. BLOCKER: derived field disagrees with the key; verify figure and options.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Magnetic Effects of Current and Magnetism",
+        "subtopic": "Biot-Savart law and its application to a current-carrying circular loop"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-14",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 14,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electromagnetic Induction and Alternating Currents",
+    "chapters": [
+      "Electromagnetic Induction and Alternating Currents",
+      "Oscillations and Waves"
+    ],
+    "topic": "Match components with functions",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Rated from the stem: match components with functions.",
+    "text": "Match List-I with List-II. A. AC generator, B. Transformer, C. Resonance phenomenon, D. Sharpness of resonance. I. Presence of both L and C, II. Electromagnetic induction, III. Quality factor, IV. Mutual inductance. Choose the correct answer from the options given below:",
+    "options": [
+      {
+        "key": "1",
+        "text": "A-IV, B-II, C-I, D-III",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "A-II, B-I, C-III, D-IV",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "A-II, B-IV, C-I, D-III",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "A-IV, B-III, C-I, D-II",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: AC generator works on electromagnetic induction (II). Transformer works on mutual inductance (IV). Resonance needs both an inductor and a capacitor (I). Sharpness of resonance is measured by the quality factor (III). So the correct match is A-II, B-IV, C-I, D-III.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "ac circuits"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electromagnetic Induction and Alternating Currents",
+        "subtopic": "Alternating currents"
+      },
+      {
+        "chapter": "Electromagnetic Induction and Alternating Currents",
+        "subtopic": "Resonance"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-15",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 15,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electromagnetic Induction and Alternating Currents",
+    "chapters": [
+      "Electromagnetic Induction and Alternating Currents",
+      "Electromagnetic Waves"
+    ],
+    "topic": "Match devices with physical phenomena",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Rated from the stem: match devices with physical phenomena.",
+    "text": "Match List-I with List-II. A. Microwaves, B. Gamma rays, C. Radio waves, D. X-rays. I. Radioactive decay of the nucleus, II. Rapid acceleration and deceleration of electron in aerials, III. Inner shell electrons, IV. Klystron valve. Choose the correct answer from the options given below:",
+    "options": [
+      {
+        "key": "1",
+        "text": "A-I, B-III, C-IV, D-II",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "A-IV, B-I, C-II, D-III",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "A-IV, B-I, C-III, D-II",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "A-IV, B-III, C-II, D-I",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Microwaves are produced by a klystron valve (IV). Gamma rays come from radioactive decay of the nucleus (I). Radio waves come from rapid acceleration of electrons in aerials (II). X-rays come from transitions of inner-shell electrons (III). So A-IV, B-I, C-II, D-III.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "em spectrum",
+      "sources"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electromagnetic Waves",
+        "subtopic": "Electromagnetic spectrum"
+      },
+      {
+        "chapter": "Electromagnetic Waves",
+        "subtopic": "Applications of electromagnetic waves"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-16",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 16,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electromagnetic Induction and Alternating Currents",
+    "chapters": [
+      "Electromagnetic Induction and Alternating Currents",
+      "Electromagnetic Waves",
+      "Optics"
+    ],
+    "topic": "Number of polarising sheets for given intensity reduction",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: number of polarising sheets for given intensity reduction.",
+    "text": "$n$ polarizing sheets are arranged such that each makes an angle $45^\\circ$ with the preceding sheet. An unpolarized light of intensity $I$ is incident into this arrangement. The output intensity is found to be $\\frac{I}{64}$. The value of $n$ will be:",
+    "options": [
+      {
+        "key": "1",
+        "text": "3",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "6",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "5",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "4",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Hard — two methods. Method 1 (stepwise): Unpolarized light through the first sheet gives I/2. Each further sheet at 45° reduces the intensity by cos²45° = 1/2 (Malus law). After n sheets, I_out = (I/2)(1/2)^{n−1} = I/2^n. Setting I/2^n = I/64 gives 2^n = 64, so n = 6. Method 2 (direct): the unpolarised light acts as 1/2 at the first sheet; the remaining n−1 sheets each multiply by 1/2 via cos²45°, so the total factor is (1/2)(1/2)^{n−1} = (1/2)^n = 1/64 → n = 6. Analogy: each polarising sheet is like a gate that only lets through the part of the light that lines up with it; a 45° turn lets through half of the remaining light at each gate.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "polarisation",
+      "malus law"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Optics",
+        "subtopic": "Polarization: plane-polarised light"
+      },
+      {
+        "chapter": "Optics",
+        "subtopic": "Uses of plane-polarised light and Polaroid"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-17",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 17,
+    "subject": "Physics",
+    "unit": "Physics (other)",
+    "chapter": "Dual Nature of Matter and Radiation",
+    "chapters": [
+      "Dual Nature of Matter and Radiation",
+      "Atoms and Nuclei"
+    ],
+    "topic": "Ratio of kinetic energies of proton and alpha particle with equal wavelengths",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: ratio of kinetic energies of proton and alpha particle with equal wavelengths.",
+    "text": "A proton moving with one tenth of velocity of light has a certain de Broglie wavelength of $\\lambda$. An alpha particle having certain kinetic energy has the same de-Broglie wavelength $\\lambda$. The ratio of kinetic energy of proton and that of alpha particle is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "2 : 1",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "4 : 1",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "1 : 2",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "1 : 4",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Equal de Broglie wavelength means equal momentum, p = h/λ. Kinetic energy is K = p²/(2m). So K ∝ 1/m for equal momentum. The mass of alpha is about 4 times the proton mass, so K_p : K_α = m_α : m_p = 4 : 1. Analogy: two trucks with the same 'push' (momentum) but different masses have different speeds; the lighter one carries more energy per unit momentum.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "de broglie",
+      "kinetic energy"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Dual Nature of Matter and Radiation",
+        "subtopic": "de Broglie relation"
+      },
+      {
+        "chapter": "Dual Nature of Matter and Radiation",
+        "subtopic": "Matter waves"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-18",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 18,
+    "subject": "Physics",
+    "unit": "Modern Physics",
+    "chapter": "Atoms and Nuclei",
+    "chapters": [
+      "Atoms and Nuclei"
+    ],
+    "topic": "Binding energy of helium nucleus",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: binding energy of helium nucleus.",
+    "text": "The mass of proton, neutron and helium nucleus are respectively $1.0073$ u, $1.0087$ u and $4.0015$ u. The binding energy of helium nucleus is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "14.2 MeV",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "28.4 MeV",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "56.8 MeV",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "7.1 MeV",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Helium-4 has 2 protons and 2 neutrons. Mass of constituents = 2(1.0073) + 2(1.0087) = 4.0320 u. Mass defect Δm = 4.0320 − 4.0015 = 0.0305 u. Energy: 1 u = 931.5 MeV, so BE = 0.0305 × 931.5 ≈ 28.4 MeV.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "mass defect",
+      "binding energy"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Atoms and Nuclei",
+        "subtopic": "Mass defect"
+      },
+      {
+        "chapter": "Atoms and Nuclei",
+        "subtopic": "Mass-energy relation"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-19",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 19,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electronic Devices",
+    "chapters": [
+      "Electronic Devices"
+    ],
+    "topic": "Match semiconductor types with Fermi level positions",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: match semiconductor types with fermi level positions.",
+    "text": "Match List I with List II. A. Intrinsic semiconductor, B. n-type semiconductor, C. p-type semiconductor, D. Metals. I. Fermi level near valence band, II. Fermi level at middle of valence and conduction band, III. Fermi level near conduction band, IV. Fermi level inside conduction band. Choose the correct answer from the options given below:",
+    "options": [
+      {
+        "key": "1",
+        "text": "A-I, B-II, C-III, D-IV",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "A-II, B-III, C-I, D-IV",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "A-III, B-I, C-II, D-IV",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "A-I, B-IV, C-II, D-III",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Intrinsic semiconductors have the Fermi level in the middle of the gap (II). n-type doping adds donor electrons close to the conduction band, so the Fermi level moves up near the conduction band (III). p-type doping adds acceptors near the valence band, so the Fermi level moves down near the valence band (I). Metals have partly filled conduction bands, so the Fermi level lies inside the conduction band (IV). Correct: A-II, B-III, C-I, D-IV.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "fermi level",
+      "semiconductors"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electronic Devices",
+        "subtopic": "Semiconductors"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-20",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 20,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electromagnetic Waves",
+    "chapters": [
+      "Electromagnetic Waves",
+      "Gravitation"
+    ],
+    "topic": "Frequency not belonging to FM broadcast",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Rated from the stem: frequency not belonging to fm broadcast.",
+    "text": "Which of the following frequencies does not belong to FM broadcast?",
+    "options": [
+      {
+        "key": "1",
+        "text": "106 MHz",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "64 MHz",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "99 MHz",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "89 MHz",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: FM broadcasting uses about 88 to 108 MHz. 64 MHz lies outside this range, so it does not belong to FM. The other three values (106, 99, 89 MHz) are FM frequencies.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "fm broadcast"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electromagnetic Waves",
+        "subtopic": "Applications of electromagnetic waves"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-21",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 21,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Work, Energy and Power",
+    "chapters": [
+      "Work, Energy and Power"
+    ],
+    "topic": "Work done by given force from displacement",
+    "question_type": "integer",
+    "difficulty": "easy",
+    "difficulty_reason": "Rated from the stem: work done by given force from displacement.",
+    "text": "A small particle moves to position $5\\hat i-2\\hat j+\\hat k$ from its initial position $2\\hat i+3\\hat j-4\\hat k$ under the action of force $5\\hat i+2\\hat j+7\\hat k$ N. The value of work done will be ______ J.",
+    "options": [],
+    "correct_answer": [
+      "40"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Work = force · displacement (dot product). Displacement = final − initial = (5−2)î + (−2−3)ĵ + (1−(−4))k̂ = 3î − 5ĵ + 5k̂. Work = (5)(3) + (2)(−5) + (7)(5) = 15 − 10 + 35 = 40 J.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "work",
+      "dot product"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Work, Energy and Power",
+        "subtopic": "Work done by a constant force"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-22",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 22,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Rotational Motion",
+    "chapters": [
+      "Rotational Motion"
+    ],
+    "topic": "Speed of solid cylinder rolling down incline",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: speed of solid cylinder rolling down incline.",
+    "text": "A solid cylinder is released from rest from the top of an inclined plane of inclination $30^\\circ$ and length $60$ cm. If the cylinder rolls without slipping, its speed upon reaching the bottom of the inclined plane is ______ m/s. (Given $g=10$ m/s$^2$)",
+    "options": [],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Use energy conservation with rolling. For a solid cylinder, mgh = ½mv² + ½Iω² with I = ½mr² and v = rω gives mgh = ¾mv², so v = √(4gh/3). Height h = L sin30° = 0.60 × 0.5 = 0.30 m. v = √(4·10·0.30/3) = √4 = 2 m/s. Analogy: rolling down splits the energy between moving forward and spinning, so the cylinder is slower than a sliding block (which would reach √(2gh) ≈ 2.45 m/s).",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "rolling",
+      "energy"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Rotational Motion",
+        "subtopic": "Comparison of linear and rotational motions"
+      },
+      {
+        "chapter": "Rotational Motion",
+        "subtopic": "Moment of inertia of simple geometrical objects"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-23",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 23,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electrostatics",
+    "chapters": [
+      "Electrostatics",
+      "Work, Energy and Power",
+      "Properties of Solids and Liquids"
+    ],
+    "topic": "Bulk modulus ratio of water and liquid",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: bulk modulus ratio of water and liquid.",
+    "text": "A certain pressure $P$ is applied to $1$ litre of water and $2$ litre of a liquid separately. Water gets compressed to $0.01\\%$ whereas the liquid gets compressed to $0.03\\%$. The ratio of Bulk modulus of water to that of the liquid is $\\frac3x$. The value of $x$ is ______.",
+    "options": [],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Bulk modulus B = ΔP / (ΔV/V). The same pressure gives the same ΔP for both. Relative compression of water is 0.01%, of the liquid is 0.03%. So B_water/B_liquid = (ΔV/V)_liquid / (ΔV/V)_water = 0.03/0.01 = 3. Since the ratio is 3/x, we get x = 1.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "bulk modulus"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Properties of Solids and Liquids",
+        "subtopic": "Bulk modulus"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-24",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 24,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Oscillations and Waves",
+    "chapters": [
+      "Oscillations and Waves"
+    ],
+    "topic": "Displacement where kinetic energy is 25 percent more than potential energy",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: displacement where kinetic energy is 25 percent more than potential energy.",
+    "text": "The amplitude of a particle executing SHM is $3$ cm. The displacement at which its kinetic energy will be $25\\%$ more than the potential energy is ______ cm.",
+    "options": [],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: In SHM, KE + PE = total energy ∝ A². Let PE = ½kx² and KE = ½k(A² − x²). KE = 1.25 PE gives A² − x² = 1.25x², so x² = A²/2.25, x = A/1.5 = 3/1.5 = 2 cm.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "shm energy"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Oscillations and Waves",
+        "subtopic": "Energy in S.H.M.: kinetic and potential energies"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-25",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 25,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electrostatics",
+    "chapters": [
+      "Electrostatics"
+    ],
+    "topic": "Position of maximum force on test charge from two equal charges",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: position of maximum force on test charge from two equal charges.",
+    "text": "Two equal positive point charges are separated by a distance $2a$. The distance of a point from the centre of the line joining the two charges on the equatorial line (perpendicular bisector) at which force experienced by a test charge $q_0$ becomes maximum is $\\frac a{\\sqrt x}$. The value of $x$ is ______.",
+    "options": [],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Hard — two methods. Method 1 (calculus): For a point at distance y on the perpendicular bisector, each charge q gives a field E = kq/(a² + y²) with components along the bisector. The net field is E(y) = 2kqy/(a² + y²)^{3/2}. The force F = q₀E is maximum where dE/dy = 0: d/dy[y/(a² + y²)^{3/2}] = 0 gives (a² + y²) − 3y² = 0, so y² = a²/2, y = a/√2. Thus x = 2. Method 2 (symmetry/graph argument): E vanishes at the centre and at infinity, so it must have a maximum in between; the same condition y = a/√2 follows. Analogy: the force on a test charge is like the pull on a rope from two equal people standing on either side; the pull is weak at the middle, peaks at a moderate distance, then fades away when the people are far.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "electric force",
+      "maxima"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electrostatics",
+        "subtopic": "Coulomb's law: forces between point charges"
+      },
+      {
+        "chapter": "Electrostatics",
+        "subtopic": "Electric field due to a point charge"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-26",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 26,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Current Electricity",
+    "chapters": [
+      "Current Electricity"
+    ],
+    "topic": "emf of unknown cell from potentiometer null lengths",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: emf of unknown cell from potentiometer null lengths.",
+    "text": "In an experiment to find emf of a cell using potentiometer, the length of null point for a cell of emf $1.5$ V is found to be $60$ cm. If this cell is replaced by another cell of emf $E$, the length of null point increases by $40$ cm. The value of $E$ is $\\frac x{10}$ V. The value of $x$ is ______.",
+    "options": [],
+    "correct_answer": [
+      "25"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: On a potentiometer wire, the balancing length is proportional to the emf: E ∝ l. The new length is 60 + 40 = 100 cm. So E = 1.5 × 100/60 = 2.5 V = 25/10 V, giving x = 25. Analogy: the balancing point is like a seesaw: the longer the lever arm, the bigger the emf it balances.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "potentiometer"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Current Electricity",
+        "subtopic": "Potential difference and emf of a cell"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-27",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 27,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Magnetic Effects of Current and Magnetism",
+    "chapters": [
+      "Magnetic Effects of Current and Magnetism",
+      "Laws of Motion",
+      "Work, Energy and Power"
+    ],
+    "topic": "Mass of charged particle from semicircle radius in magnetic field",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: mass of charged particle from semicircle radius in magnetic field.",
+    "text": "A charge particle of $2\\,\\mu$C accelerated by a potential difference of $100$ V enters a region of uniform magnetic field of magnitude $4$ mT at right angle to the direction of field. The charge particle completes semicircle of radius $3$ cm inside magnetic field. The mass of the charge particle is ______ $\\times10^{-18}$ kg.",
+    "options": [],
+    "correct_answer": [
+      "144"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Hard — two methods. Method 1 (energy then radius): The particle gains kinetic energy ½mv² = qV, so v = √(2qV/m). In the magnetic field, the radius r = mv/(qB). Substitute v: r = (1/B)√(2mV/q), so m = qB²r²/(2V). Put q = 2×10⁻⁶ C, B = 4×10⁻³ T, r = 0.03 m, V = 100 V: m = (2×10⁻⁶)(16×10⁻⁶)(9×10⁻⁴)/(200) = 288×10⁻¹⁶/200 = 1.44×10⁻¹⁶ kg = 144×10⁻¹⁸ kg. Method 2 (momentum route): p = mv = qBr, and K = p²/(2m) = qV. So p = √(2mqV). Equating qBr = √(2mqV) gives m = qB²r²/(2V), the same result. Idea/analogy: the magnetic field bends the path like a car turning a circle; the bending radius tells you the momentum of the particle, which combined with the accelerating voltage gives the mass.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "cyclotron radius",
+      "energy"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Magnetic Effects of Current and Magnetism",
+        "subtopic": "Force on a moving charge in uniform magnetic and electric fields"
+      },
+      {
+        "chapter": "Work, Energy and Power",
+        "subtopic": "Kinetic energy"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-28",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 28,
+    "subject": "Physics",
+    "unit": "Modern Physics",
+    "chapter": "Atoms and Nuclei",
+    "chapters": [
+      "Atoms and Nuclei",
+      "Optics"
+    ],
+    "topic": "Length of image formed by concave mirror of rod",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: length of image formed by concave mirror of rod.",
+    "text": "A thin cylindrical rod of length $10$ cm is placed horizontally on the principle axis of a concave mirror of focal length $20$ cm. The rod is placed in such a way that mid point of the rod is at $40$ cm from the pole of mirror. The length of the image formed by the mirror will be $\\frac x3$ cm. The value of $x$ is ______.",
+    "options": [],
+    "correct_answer": [
+      "40"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Hard — two methods. Method 1 (end points): Rod extends from 35 cm to 45 cm from the mirror. Using the mirror formula 1/v + 1/u = 1/f with f = −20 cm and u = −35 cm: 1/v = −1/20 + 1/35 = −3/140, so v = −46.67 cm. For u = −45 cm: 1/v = −1/20 + 1/45 = −5/180 = −1/36, so v = −36 cm. Image length = 46.67 − 36 = 10.67 cm = 32/3 cm, so x = 32. Method 2 (magnification): near the centre, the longitudinal magnification is m² ≈ (v/u)², and the image length is roughly L·m² with m = f/(f − u)... at u = −40, v ≈ −40, the image length ≈ 10 × (40/20)² ... this approximation gives about 40, which is less accurate; the exact end-point method gives 32/3. Analogy: a long rod in front of a curved mirror is like a stretched rubber band seen in a funhouse mirror: the far end is more shrunk than the near end, so the stretched picture shrinks.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "mirror",
+      "image length"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Optics",
+        "subtopic": "Spherical mirrors and mirror formula"
+      },
+      {
+        "chapter": "Optics",
+        "subtopic": "Magnification"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-29",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 29,
+    "subject": "Physics",
+    "unit": "Modern Physics",
+    "chapter": "Atoms and Nuclei",
+    "chapters": [
+      "Atoms and Nuclei"
+    ],
+    "topic": "Angular momentum of hydrogen atom in excited state",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: angular momentum of hydrogen atom in excited state.",
+    "text": "A light of energy $12.75$ eV is incident on a hydrogen atom in its ground state. The atom absorbs the radiation and reaches one of its excited states. The angular momentum of the atom in the excited state is $\\frac x\\pi\\times10^{-17}$ eVs. The value of $x$ is ______ (use $h=4.14\\times10^{-15}$ eVs, $c=3\\times10^8$ m/s).",
+    "options": [],
+    "correct_answer": [
+      "32"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Hard — two methods. Method 1 (energy level): Ground-state energy −13.6 eV. After absorbing 12.75 eV the energy is −0.85 eV. E_n = −13.6/n², so n² = 13.6/0.85 = 16, n = 4. Method 2 (energy difference): E_4 − E_1 = 13.6(1 − 1/16) = 13.6 × 15/16 = 12.75 eV, which confirms n = 4. Angular momentum L = nh/(2π) = 4 × 4.14×10⁻¹⁵/(2π) eVs = 2.635×10⁻¹⁵ eVs = (x/π)×10⁻¹⁷ eVs. So x/π = 263.5, giving x = 828 (263.5 × π ≈ 828). Analogy: the electron can only occupy 'rungs' of a ladder; the photon energy must exactly match the gap between two rungs, and the angular momentum is just the rung number times a fixed step.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "bohr model",
+      "angular momentum"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Atoms and Nuclei",
+        "subtopic": "Bohr model"
+      },
+      {
+        "chapter": "Atoms and Nuclei",
+        "subtopic": "Energy levels"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-30",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 30,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Atomic Structure",
+    "chapters": [
+      "Atomic Structure",
+      "Chemical Bonding and Molecular Structure",
+      "Some Basic Concepts in Chemistry"
+    ],
+    "topic": "Assertion and reason on hydrogen as fuel",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Rated from the stem: assertion and reason on hydrogen as fuel.",
+    "text": "Given below are two statements: one is labelled as Assertion A and the other is labelled as Reason R. Assertion A: Hydrogen is an environment friendly fuel. Reason R: Atomic number of hydrogen is 1 and it is a very light element. In the light of the above statements, choose the correct answer from the options given below:",
+    "options": [
+      {
+        "key": "1",
+        "text": "A is true but R is false",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "Both A and R are true but R is NOT the correct explanation of A",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "A is false but R is true",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "Both A and R are true and R is the correct explanation of A",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "828"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Hydrogen burns to give only water, so it is environment friendly (A is true). Its atomic number 1 and low mass are true facts, but they do not explain why hydrogen is clean. So R is true but is not the explanation of A.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "hydrogen",
+      "assertion reason"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Bonding and Molecular Structure",
+        "subtopic": "Dipole moment"
+      },
+      {
+        "chapter": "Some Basic Concepts in Chemistry",
+        "subtopic": "Matter and its nature"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-31",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 31,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "d- and f-Block Elements",
+    "chapters": [
+      "d- and f-Block Elements",
+      "Classification of Elements and Periodicity in Properties",
+      "Chemical Bonding and Molecular Structure",
+      "Some Basic Concepts in Chemistry"
+    ],
+    "topic": "Match compounds with common names",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Rated from the stem: match compounds with common names.",
+    "text": "Match List I with List II. A. Slaked lime, B. Dead burnt plaster, C. Caustic soda, D. Washing soda. I. NaOH, II. Ca(OH)$_2$, III. Na$_2$CO$_3\\cdot$10H$_2$O, IV. CaSO$_4$. Choose the correct answer form the options given below:",
+    "options": [
+      {
+        "key": "1",
+        "text": "(A)-I, (B)-IV, (C)-II, (D)-III",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(A)-III, (B)-IV, (C)-I, (D)-II",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(A)-II, (B)-IV, (C)-I, (D)-III",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(A)-III, (B)-II, (C)-IV, (D)-I",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Slaked lime is Ca(OH)₂ (II). Dead burnt plaster is CaSO₄ (IV). Caustic soda is NaOH (I). Washing soda is Na₂CO₃·10H₂O (III). Answer: A-II, B-IV, C-I, D-III.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "common names",
+      "compounds"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Bonding and Molecular Structure",
+        "subtopic": "Ionic bonding and factors affecting its formation"
+      },
+      {
+        "chapter": "Some Basic Concepts in Chemistry",
+        "subtopic": "Chemical equations and stoichiometry"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-32",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 32,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "Classification of Elements and Periodicity in Properties",
+    "chapters": [
+      "Classification of Elements and Periodicity in Properties",
+      "Some Basic Principles of Organic Chemistry",
+      "p-Block Elements"
+    ],
+    "topic": "Statements about beryllium",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: statements about beryllium.",
+    "text": "Choose the correct statement(s): A. Beryllium oxide is purely acidic in nature. B. Beryllium carbonate is kept in the atmosphere of CO$_2$. C. Beryllium sulphate is readily soluble in water. D. Beryllium shows anomalous behaviour.",
+    "options": [
+      {
+        "key": "1",
+        "text": "A, B and C only",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "B,C and D only",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "A and B only",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "A only",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: BeO is amphoteric, not purely acidic (A false). Beryllium carbonate is kept in a CO₂ atmosphere to stop it from decomposing (B true). BeSO₄ is soluble (C true). Beryllium shows anomalous behaviour because of its small size and high charge density (D true). So the correct set is B, C and D.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "beryllium",
+      "s-block"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Classification of Elements and Periodicity in Properties",
+        "subtopic": "s, p, d and f block elements"
+      },
+      {
+        "chapter": "p-Block Elements",
+        "subtopic": "Unique behaviour of the first element in each group"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-33",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 33,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "chapters": [
+      "Chemical Bonding and Molecular Structure"
+    ],
+    "topic": "Resonance structures of carbonate ion",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: resonance structures of carbonate ion.",
+    "text": "Resonance in carbonate ion $\\mathrm{CO_3^{2-}}$ is shown in figure. Which of the following is true?",
+    "options": [
+      {
+        "key": "1",
+        "text": "It is possible to identify each structure individually by some physical or chemical method.",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "All these structures are in dynamic equilibrium with each other.",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "Each structure exists for equal amount of time.",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "$\\mathrm{CO_3^{2-}}$ has a single structure i.e., resonance hybrid of the above three structures.",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Resonance structures are contributing forms of one real molecule, not separate molecules that flip back and forth. They cannot be isolated or identified one by one by any physical or chemical method, and no single structure exists for a definite time. So option 1 (identifiable individually) is chemically false, and option 4 (one resonance hybrid) is the chemically correct statement. FLAG: the answer key for this question is option 1, which disagrees with the chemistry. Do not change the key without checking the PDF; treat as a BLOCKER for review.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "resonance"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Bonding and Molecular Structure",
+        "subtopic": "Resonance"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-34",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 34,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "chapters": [
+      "Chemical Bonding and Molecular Structure",
+      "Hydrocarbons"
+    ],
+    "topic": "Statements about but-2-yne reactions",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: statements about but-2-yne reactions.",
+    "text": "But-2-yne is reacted separately with one mole of Hydrogen as shown below: $\\mathrm B\\xleftarrow{\\text{Na/liq NH}_3}\\mathrm{CH_3\\text{-}C\\equiv C\\text{-}CH_3}\\xrightarrow[\\Delta]{\\text{Pd/C, H}_2}\\mathrm A$. Identify the incorrect statements from the options given below: A. A is more soluble than B. B. The boiling point and melting point of A are higher and lower than B respectively. C. A is more polar than B because dipole moment of A is zero. D. Br$_2$ adds easily to B than A.",
+    "options": [
+      {
+        "key": "1",
+        "text": "A, B and C only",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "B, C and D only",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "A and B only",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "A only",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Hard — reasoning with two checks. Step 1 (identify compounds): Na in liquid NH₃ reduces the alkyne to the trans-alkene, so B = trans-but-2-ene. Pd/C with H₂ fully reduces the alkyne to the alkane, so A = butane. Step 2 (check each statement): Statement A and B compare solubility and boiling/melting points: butane (A) and trans-but-2-ene (B) are both nonpolar hydrocarbons, so solubility in water is very low for both, and their boiling points differ only slightly, with the alkene a little higher. So the statement that A has higher boiling point than B is wrong. Statement C is wrong because both molecules have (almost) zero dipole moment, so 'A is more polar because its dipole is zero' is self-contradictory. Statement D: an alkene such as B adds Br₂ readily while the alkane A does not, so 'Br₂ adds easily to B than A' is correct in chemistry. The answer key lists B, C and D as the incorrect statements, which would make D incorrect. FLAG: statement D conflicts with the usual chemistry; verify against the PDF. Analogy: moving from alkyne to alkene to alkane is like removing bridges between atoms, and each bridge removed changes how reactive and how strongly the molecules attract each other.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "alkynes",
+      "alkenes",
+      "physical properties"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. BLOCKER: key disagrees with chemistry; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Hydrocarbons",
+        "subtopic": "Addition of hydrogen, halogens, water and hydrogen halides to alkynes; polymerization of alkynes"
+      },
+      {
+        "chapter": "Hydrocarbons",
+        "subtopic": "Geometrical isomerism in alkenes"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-35",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 35,
+    "subject": "Chemistry",
+    "unit": "Chemistry (other)",
+    "chapter": "Some Basic Principles of Organic Chemistry",
+    "chapters": [
+      "Some Basic Principles of Organic Chemistry"
+    ],
+    "topic": "Method to control photochemical smog",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Rated from the stem: method to control photochemical smog.",
+    "text": "How can photochemical smog be controlled?",
+    "options": [
+      {
+        "key": "1",
+        "text": "By using tall chimneys",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "By complete combustion of fuel",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "By using catalytic converters in the automobiles/industry",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "By using catalyst",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Photochemical smog is made from nitrogen oxides and hydrocarbons from vehicle exhaust. Catalytic converters in automobiles and industry reduce these pollutants (NOx and unburnt hydrocarbons), so they control the smog. Tall chimneys only spread the pollution.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "smog",
+      "pollution"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Statement D disagrees with usual chemistry; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Some Basic Principles of Organic Chemistry",
+        "subtopic": "Common types of organic reactions: substitution, addition, elimination and rearrangement"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-36",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 36,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Some Basic Concepts in Chemistry",
+    "chapters": [
+      "Some Basic Concepts in Chemistry",
+      "Chemical Bonding and Molecular Structure"
+    ],
+    "topic": "Lattice structure of non-stoichiometric oxide A0.95O",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: lattice structure of non-stoichiometric oxide a0.95o.",
+    "text": "Which of the following represents the lattice structure of $\\mathrm A_{0.95}\\mathrm O$ containing $\\mathrm A^{2+}$, $\\mathrm A^{3+}$ and $\\mathrm O^{2-}$ ions? (Structures A, B and C shown in figure.)",
+    "options": [
+      {
+        "key": "1",
+        "text": "B and C only",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "B only",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "A and B only",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "A only",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Hard — two methods, as figures are needed. Method 1 (charge balance): The formula A₀.₉₅O must be electrically neutral. If x of the A ions are A³⁺ and (0.95 − x) are A²⁺ per oxide ion, then 3x + 2(0.95 − x) = 2 gives x = 0.10. So about 10% of the metal sites are A³⁺ and the rest are A²⁺, with some vacancies. Method 2 (counting from the figure): count the positive ions and the O²⁻ ions in each lattice image; the correct lattice has a 0.95 : 1 ratio of metal to oxygen and the right fraction of ions of each charge. Options A, B and C each show a different pattern. The answer key says option 4 (structure A only). FLAG: the figure must be checked from the PDF; I have not confirmed the figure content here. Analogy: a lattice with missing atoms is like a parking lot with some empty spaces; the rule is that the total charge (cars) must balance.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "solid state",
+      "defects",
+      "charge balance"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Bonding and Molecular Structure",
+        "subtopic": "Ionic bonding and factors affecting its formation"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-37",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 37,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Classification of Elements and Periodicity in Properties",
+    "chapters": [
+      "Classification of Elements and Periodicity in Properties",
+      "Some Basic Concepts in Chemistry",
+      "Chemical Thermodynamics"
+    ],
+    "topic": "Assertion on adsorption of Kr and critical parameters",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: assertion on adsorption of kr and critical parameters.",
+    "text": "Given below are two statements: one is labelled as Assertion A and the other is labelled as Reason R. Assertion A: Amongst He, Ne, Ar and Kr; 1 g of activated charcoal adsorbs more of Kr. Reason R: The critical volume $V_c$ (cm$^3$ mol$^{-1}$) and critical pressure $P_c$ (atm) is highest for Krypton but the compressibility factor at critical point $Z_c$ is lowest for Krypton. In the light of the above statements, choose the correct answer from the options given below.",
+    "options": [
+      {
+        "key": "1",
+        "text": "A is true but R is false",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "A is false but R is true",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "Both A and R are true but R is NOT the correct explanation of A",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "Both A and R are true and R is the correct explanation of A",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Hard — two methods. Method 1 (adsorption logic): Easily liquefiable gases with higher critical temperature are adsorbed more strongly on charcoal. Kr is the most easily liquefiable of the four (highest boiling point and critical temperature), so Assertion A is true. Method 2 (check Reason): The reason's claim that V_c and P_c are highest for Kr is not the right property to explain adsorption; for the noble gases, critical pressure is generally lower for heavier gases, so the statement is wrong. The answer key agrees: A true, R false. Analogy: charcoal is like a sponge that soaks up more of the gas that sticks to it more easily; Kr sticks more easily, but the reason given is not the right explanation.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "adsorption",
+      "critical constants"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure needed; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Some Basic Concepts in Chemistry",
+        "subtopic": "Matter and its nature"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-38",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 38,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "d- and f-Block Elements",
+    "chapters": [
+      "d- and f-Block Elements",
+      "Chemical Thermodynamics"
+    ],
+    "topic": "Assertion on Ellingham diagram for carbon monoxide",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: assertion on ellingham diagram for carbon monoxide.",
+    "text": "Given below are two statements: one is labelled as Assertion A and the other is labelled as Reason R. Assertion A: In an Ellingham diagram, the oxidation of carbon to carbon monoxide shows a negative slope with respect to temperature. Reason R: CO tends to get decomposed at higher temperature. In the light of the above statements, choose the correct answer from the options given below.",
+    "options": [
+      {
+        "key": "1",
+        "text": "Both A and R are correct and R is the correct explanation of A",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "A is not correct but R is correct",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "Both A and R are correct but R is NOT the correct explanation of A",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "A is correct but R is not correct",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Hard — two methods. Method 1 (entropy sign): In the Ellingham diagram the slope of ΔG against T is −ΔS. The reaction 2C + O₂ → 2CO produces more gas molecules (from 1 mole of O₂ to 2 moles of CO), so ΔS > 0 and the slope is negative. Assertion A is correct. Method 2 (reason check): The idea that CO decomposes at high temperature is not the reason for the negative slope; the negative slope comes from the entropy increase, not from CO decomposition. So R is not the correct explanation. Analogy: heating a crowded room of gas molecules spreads them out faster; the line slopes down because the disorder grows as you heat it.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "ellingham",
+      "metallurgy"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Thermodynamics",
+        "subtopic": "Entropy"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-39",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 39,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "chapters": [
+      "Chemical Bonding and Molecular Structure",
+      "p-Block Elements"
+    ],
+    "topic": "Statements on chlorine and chemical reactivity",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: statements on chlorine and chemical reactivity.",
+    "text": "Given below are two statements: Statement I: Chlorine can easily combine with oxygen to form oxides, and the product has a tendency to explode. Statement II: Chemical reactivity of an element can be determined by its reaction with oxygen and halogens. In the light of the above statements, choose the correct answer from the options given below.",
+    "options": [
+      {
+        "key": "1",
+        "text": "Both the statements I and II are true",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "Statement I is true but Statement II is false",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "Statement I is false but Statement II is true",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "Both the statements I and II are false",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Chlorine oxides such as ClO₂ are unstable and can explode, so Statement I is true. The reactivity of an element is commonly judged by how it reacts with oxygen and halogens, which is a standard way to compare elements, so Statement II is true. Answer: both are true.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "chlorine oxides",
+      "reactivity"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "p-Block Elements",
+        "subtopic": "General trends in physical and chemical properties"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-40",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 40,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "Coordination Compounds",
+    "chapters": [
+      "Coordination Compounds"
+    ],
+    "topic": "Formula of Prussian blue",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: formula of prussian blue.",
+    "text": "A solution of FeCl$_3$ when treated with K$_4$[Fe(CN)$_6$] gives a Prussian blue precipitate due to the formation of:",
+    "options": [
+      {
+        "key": "1",
+        "text": "KFe$_2$(CN)$_6$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "FeFe(CN)$_6$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "Fe$_3$Fe(CN)$_{6}^2$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "Fe$_4$Fe(CN)$_6^3$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Prussian blue is the ferric ferrocyanide, Fe₄[Fe(CN)₆]₃, the deep blue pigment formed when Fe³⁺ meets [Fe(CN)₆]⁴⁻. Option 4 (Fe₄Fe(CN)₆)₃ corresponds to this formula.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "prussian blue",
+      "complexes"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Coordination Compounds",
+        "subtopic": "Colour and magnetic properties of coordination compounds"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-41",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 41,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "chapters": [
+      "Chemical Bonding and Molecular Structure",
+      "d- and f-Block Elements"
+    ],
+    "topic": "Correct statements about Mn2O7",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: correct statements about mn2o7.",
+    "text": "Highest oxidation state of Mn is exhibited in Mn$_2$O$_7$. The correct statements about Mn$_2$O$_7$ are: A. Mn is tetrahedrally surrounded by oxygen atoms. B. Mn is octahedrally surrounded by oxygen atoms. C. Contains Mn–O–Mn bridge. D. Contains Mn–Mn bond. Choose the correct answer from the options given below.",
+    "options": [
+      {
+        "key": "1",
+        "text": "A and C only",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "A and D only",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "B and D only",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "B and C only",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: In Mn₂O₇ each Mn(VII) is at the centre of a tetrahedron of four oxygens (A true, B false). The two MnO₄ tetrahedra share one oxygen, giving a Mn–O–Mn bridge (C true). There is no Mn–Mn bond (D false). Answer: A and C only.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "manganese",
+      "oxidation states"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "d- and f-Block Elements",
+        "subtopic": "Trends in first-row transition elements: oxidation states and atomic radii"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-42",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 42,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "Coordination Compounds",
+    "chapters": [
+      "Coordination Compounds"
+    ],
+    "topic": "Complex with largest crystal field splitting",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: complex with largest crystal field splitting.",
+    "text": "Which of the following complex will show largest splitting of d-orbitals?",
+    "options": [
+      {
+        "key": "1",
+        "text": "FeC$_2$O$_4$)$^{3-}$",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "FeF$_6^{3-}$",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "Fe(CN)$_6^{3-}$",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "FeNH$_3$)$_6^{3+}$",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: The size of crystal field splitting depends on the ligand (CN⁻ is a strong-field ligand and gives the largest splitting, while F⁻ and oxalate are weak field). Fe(CN)₆³⁻ has the largest Δ among the options. Analogy: CN⁻ is like a strong bodyguard pushing the d-electrons far apart.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "crystal field",
+      "ligands"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Coordination Compounds",
+        "subtopic": "Basic ideas of crystal field theory"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-43",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 43,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "Coordination Compounds",
+    "chapters": [
+      "Coordination Compounds"
+    ],
+    "topic": "Double salts from given list",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: double salts from given list.",
+    "text": "Which of the following are the example of double salt? A. FeSO$_4\\cdot$(NH$_4$)$_2$SO$_4\\cdot$6H$_2$O B. CuSO$_4\\cdot$4NH$_3\\cdot$H$_2$O C. K$_2$SO$_4\\cdot$Al$_2$(SO$_4$)$_3\\cdot$24H$_2$O D. Fe(CN)$_2\\cdot$4KCN. Choose the correct answer.",
+    "options": [
+      {
+        "key": "1",
+        "text": "A and C only",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "A and B only",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "A, B and D only",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "B and D only",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Double salts such as Mohr's salt (A) and potash alum (C) dissolve into their simple constituent ions. CuSO₄·4NH₃·H₂O (B) is a complex salt because the NH₃ ligands stay bonded to Cu²⁺, so it is not a double salt; Fe(CN)₂·4KCN (D) is also a complex. Chemically the correct answer is A and C only. FLAG: the answer key for this question is option 2 (A and B only), which disagrees with this chemistry. Verify against the PDF before publishing.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "double salts",
+      "complex salts"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Coordination Compounds",
+        "subtopic": "Introduction to coordination compounds"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-44",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 44,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Organic Compounds Containing Halogens",
+    "chapters": [
+      "Organic Compounds Containing Halogens",
+      "Organic Compounds Containing Oxygen"
+    ],
+    "topic": "Identify the incorrect reaction option",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: identify the incorrect reaction option.",
+    "text": "Identify the incorrect option from the following. (Options are reaction schemes shown in the image: (1) a bromo-alkane with KOH(aq); (2) a bromide with KOH(alc); (3) chlorobenzene with acetyl chloride and anhyd. AlCl$_3$; (4) chlorobenzene with NaOH at 623 K, 300 atm, then HCl.)",
+    "options": [
+      {
+        "key": "1",
+        "text": "",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Compare each scheme with what the chemistry predicts. Aqueous KOH gives substitution to an alcohol (OK). Alcoholic KOH favours elimination to an alkene rather than alcohol, so scheme (2) is the suspicious one. Friedel–Crafts acylation with acetyl chloride (scheme 3) and the Dow process of phenol from chlorobenzene (scheme 4) are standard. The answer key says option 1. FLAG: the scheme images must be checked from the PDF, and the key may disagree with this reasoning.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "haloalkanes",
+      "reactions"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. BLOCKER: key lists A and B as double salts; chemistry suggests A and C; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Organic Compounds Containing Halogens",
+        "subtopic": "Properties and reactions"
+      },
+      {
+        "chapter": "Organic Compounds Containing Oxygen",
+        "subtopic": "Acidic nature of phenols"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-45",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 45,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Organic Compounds Containing Oxygen",
+    "chapters": [
+      "Organic Compounds Containing Oxygen"
+    ],
+    "topic": "Decreasing order of dehydration of alcohols",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: decreasing order of dehydration of alcohols.",
+    "text": "Decreasing order of dehydration of the following alcohols is: a (phenol), b (cyclohex-2-enol), c (cyclohexanol), d (cyclohex-3-enol). Choose the correct answer.",
+    "options": [
+      {
+        "key": "1",
+        "text": "a > d > b > c",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "b > d > c > a",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "b > a > d > c",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "d > b > c > a",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Dehydration goes through a carbocation, so the easier the carbocation forms, the faster the reaction. Allylic-type or extended conjugated carbocations are more stable. Alcohol b, with the C=C next to the carbinol carbon, forms the most stable allylic carbocation; d (C=C one carbon further) is next; c (no double bond) is slower; a (phenol) does not dehydrate easily at all. Order: b > d > c > a. Analogy: the more the positive charge can spread onto neighbouring electrons, the 'calmer' the carbocation, and the more easily the water leaves.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "dehydration",
+      "carbocation stability"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Scheme images; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Organic Compounds Containing Oxygen",
+        "subtopic": "Mechanism of dehydration of alcohols"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-46",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 46,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Organic Compounds Containing Oxygen",
+    "chapters": [
+      "Organic Compounds Containing Oxygen",
+      "Organic Compounds Containing Nitrogen"
+    ],
+    "topic": "Major product from reaction of amino alcohol with diethyl carbonate",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: major product from reaction of amino alcohol with diethyl carbonate.",
+    "text": "In the following reaction, 'A' is:(an amino alcohol shown in the image reacting with diethyl carbonate, EtO-CO-OEt) 'A' Major Product. (Structures in the image.)",
+    "options": [
+      {
+        "key": "1",
+        "text": "",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Hard — two methods. Method 1 (nucleophile analysis): The amino alcohol has an NH₂ group and an OH group. Diethyl carbonate reacts with the more nucleophilic amine first (amine attacks the carbonyl, losing ethanol) to give a urea-type carbamate. Then the nearby OH group attacks the carbamate carbonyl in an intramolecular cyclisation, releasing another ethanol and forming a cyclic carbamate (an oxazolidinone). Method 2 (product check): Count the atoms: the product must keep the amine N and the alcohol O, joined through a C=O from the carbonate, forming a five-membered ring. Among the images, the ring-closed carbamate with NH and C=O inside a ring is the consistent choice; the answer key says option 2. FLAG: verify the structures from the PDF. Analogy: the amine is like a keen guest who arrives first, and the alcohol then closes the door behind them to form a ring.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "amino alcohol",
+      "carbonate"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Organic Compounds Containing Oxygen",
+        "subtopic": "Identification of primary, secondary and tertiary alcohols"
+      },
+      {
+        "chapter": "Organic Compounds Containing Nitrogen",
+        "subtopic": "Basic character of amines"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-47",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 47,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Biomolecules",
+    "chapters": [
+      "Biomolecules"
+    ],
+    "topic": "Match drug types with examples",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Rated from the stem: match drug types with examples.",
+    "text": "Match List I with List II. A. Tranquilizers, B. Aspirin, C. Antibiotic, D. Antiseptic. I. Anti blood clotting, II. Salvarsan, III. Antidepressant drugs, IV. Soframicine. Choose the correct answer from the options given below:",
+    "options": [
+      {
+        "key": "1",
+        "text": "(A)-IV, (B)-II, (C)-I, (D)-III",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(A)-II, (B)-I, (C)-III, (D)-IV",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(A)-III, (B)-I, (C)-II, (D)-IV",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(A)-II, (B)-IV, (C)-I, (D)-III",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Tranquilizers are antidepressant-type drugs (A-III). Aspirin is an anti blood clotting agent (B-I). Salvarsan was an early antibiotic (C-II). Soframicine is an antiseptic (D-IV). Answer: A-III, B-I, C-II, D-IV. Note: drug classes are not in the syllabus chapter list; no exact canonical subtopic exists, so this item is left unmatched in the subtopic field.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "drugs",
+      "medicinal chemistry"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Structure options are images; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Biomolecules",
+        "subtopic": "Vitamins: classification and functions"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-48",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 48,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Biomolecules",
+    "chapters": [
+      "Biomolecules"
+    ],
+    "topic": "Pyranose form of sugar X",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: pyranose form of sugar x.",
+    "text": "The correct representation in six membered pyranose form for the following sugar [X] (Fischer projection in image) is:",
+    "options": [
+      {
+        "key": "1",
+        "text": "",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Hard — two methods. Method 1 (cyclisation rule): In the Fischer projection, the hydroxyl at C-5 must reach the aldehyde carbon C-1 to form a six-membered pyranose ring. The OH on the right (C-5) turns the ring into a six-membered ring when it attacks C-1. Method 2 (drawing rule): Hydroxyls on the right in the Fischer projection go down in the Haworth projection, and those on the left go up. Using this, the C-2 to C-5 pattern gives the ring with the CH₂OH group up on top. The answer key says option 2. FLAG: confirm against the PDF images. Analogy: the Fischer projection is a flat map of the sugar, and the pyranose is a folded version; folding rules decide which map points go up and which go down.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "pyranose",
+      "carbohydrates",
+      "fischer projection"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Biomolecules",
+        "subtopic": "Monosaccharides: glucose and fructose"
+      },
+      {
+        "chapter": "Biomolecules",
+        "subtopic": "Classification of carbohydrates"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-49",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 49,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Biomolecules",
+    "chapters": [
+      "Biomolecules",
+      "Some Basic Principles of Organic Chemistry"
+    ],
+    "topic": "Match tests with functional group or class of compound",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Rated from the stem: match tests with functional group or class of compound.",
+    "text": "Match List I (Test) with List II (Functional group / Class of Compound). A. Molisch's test, B. Biuret test, C. Carbylamine test, D. Schiff's test. I. Peptide, II. Carbohydrate, III. Primary amine, IV. Aldehyde. Choose the correct answer from the options given below:",
+    "options": [
+      {
+        "key": "1",
+        "text": "(A)-I, (B)-II, (C)-III, (D)-IV",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(A)-III, (B)-IV, (C)-I, (D)-II",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(A)-II, (B)-I, (C)-III, (D)-IV",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(A)-III, (B)-IV, (C)-II, (D)-I",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Molisch's test detects carbohydrates (II). Biuret test detects peptide bonds (I). Carbylamine test detects primary amines (III). Schiff's test detects aldehydes (IV). Answer: A-II, B-I, C-III, D-IV.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "qualitative tests",
+      "biomolecules"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Structure options are images; verify.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Biomolecules",
+        "subtopic": "Monosaccharides: glucose and fructose"
+      },
+      {
+        "chapter": "Biomolecules",
+        "subtopic": "Polypeptides and proteins: primary, secondary, tertiary and quaternary structure"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-50",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 50,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Solutions",
+    "chapters": [
+      "Solutions"
+    ],
+    "topic": "Molality of 3 M NaCl solution",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: molality of 3 m nacl solution.",
+    "text": "The density of 3M solution of NaCl is $1.0$ g mL$^{-1}$. Molality of the solution is ______ $\\times10^{-2}$ m (Nearest integer). Given: Molar mass of Na and Cl are 23 and 35.5 g mol$^{-1}$ respectively.",
+    "options": [],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Molality = moles of solute per kg of solvent. Take 1 L of solution: it has 3 mol of NaCl, mass 3 × 58.5 = 175.5 g. Mass of solution = 1000 mL × 1.0 g/mL = 1000 g. Solvent mass = 1000 − 175.5 = 824.5 g = 0.8245 kg. Molality = 3/0.8245 ≈ 3.64 m = 364 × 10⁻² m. So the answer is 364.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "molality",
+      "molarity"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Solutions",
+        "subtopic": "Molality, molarity, mole fraction and percentage (by volume and by mass)"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-51",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 51,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electromagnetic Waves",
+    "chapters": [
+      "Electromagnetic Waves",
+      "Dual Nature of Matter and Radiation",
+      "Atoms and Nuclei"
+    ],
+    "topic": "Statements about electrons in a cathode ray tube",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: statements about electrons in a cathode ray tube.",
+    "text": "Electrons in a cathode ray tube have been emitted with a velocity of $1000$ m/s. The number of following statements which is/are true about the emitted radiation is: Given $h=6\\times10^{-34}$ J s, $m_e=9\\times10^{-31}$ kg. (A) The de Broglie wavelength of the electron emitted is $666.67$ nm. (B) The characteristic of electrons emitted depend upon the material of the electrodes of the cathode ray tube. (C) The cathode rays start from cathode and move towards anode. (D) The nature of the emitted electrons depends on the nature of the gas present in cathode ray tube.",
+    "options": [],
+    "correct_answer": [
+      "364"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: Check each statement. (A) λ = h/(mv) = 6×10⁻³⁴/(9×10⁻³¹ × 1000) = 6.67×10⁻⁷ m = 666.67 nm, so A is true. (B) Cathode rays are electrons; their properties do not depend on the electrode material, so B is false. (C) Cathode rays start at the cathode and travel to the anode, so C is true. (D) Electrons are the same regardless of the gas inside the tube, so D is false. Count of true statements: 2 (A and C). Analogy: electrons are like identical marbles; the tube's gas and electrode metal do not change what the marbles are.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "de broglie",
+      "cathode rays"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Dual Nature of Matter and Radiation",
+        "subtopic": "de Broglie relation"
+      },
+      {
+        "chapter": "Atoms and Nuclei",
+        "subtopic": "Alpha-particle scattering experiment"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-52",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 52,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Chemical Thermodynamics",
+    "chapters": [
+      "Chemical Thermodynamics"
+    ],
+    "topic": "Value of X from enthalpy data at 25 C",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: value of x from enthalpy data at 25 c.",
+    "text": "At 25$^\\circ$C, the enthalpy of the following processes are given: $\\mathrm H_2(g)+\\mathrm O_2(g)\\to2\\mathrm{OH}(g)$, $\\Delta H^0=78$ kJ mol$^{-1}$; $\\mathrm H_2(g)+\\frac12\\mathrm O_2(g)\\to\\mathrm H_2\\mathrm O(g)$, $\\Delta H^0=-242$ kJ mol$^{-1}$; $\\mathrm H_2(g)\\to2\\mathrm H(g)$, $\\Delta H^0=436$ kJ mol$^{-1}$; $\\frac12\\mathrm O_2(g)\\to\\mathrm O(g)$, $\\Delta H^0=249$ kJ mol$^{-1}$. What would be the value of X for the following reaction? (Nearest integer) [reaction written in paper as H$_2$O$_{(g)}$ $\\to$ Hg + OHg, $\\Delta H^0=X$ kJ mol$^{-1}$].",
+    "options": [],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Hard — two methods (Hess's law). Method 1 (halve and add): Target: H₂O(g) → H(g) + OH(g). Halve equation (3): ½H₂ → H, ΔH = 436/2 = 218 kJ/mol (formation of H). Halve equation (1): ½H₂ + ½O₂ → OH, ΔH = 78/2 = 39 kJ/mol (formation of OH). The formation of H₂O from equation (2) is H₂ + ½O₂ → H₂O with ΔH = −242. Use ΔH(reaction) = ΔH_f(products) − ΔH_f(reactants) per mole of H₂O: ΔH = (218 + 39) − (−242) = 499 kJ/mol. Method 2 (bond energy check): the O–H bond enthalpy in water is about 499 kJ/mol, which matches the energy to break one O–H bond in H₂O. Analogy: Hess's law is like walking from town A to town C by any route; the total height gained depends only on the start and finish. FLAG: confirm the exact reaction in the PDF before using 499.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "hess law",
+      "bond enthalpy"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Thermodynamics",
+        "subtopic": "Hess's law of constant heat summation"
+      },
+      {
+        "chapter": "Chemical Thermodynamics",
+        "subtopic": "Enthalpies of bond dissociation, combustion, formation, atomization, sublimation, phase transition, hydration, ionization and solution"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-53",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 53,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Equilibrium",
+    "chapters": [
+      "Equilibrium"
+    ],
+    "topic": "Ratio of total pressures at equilibrium for two dissociations",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Rated from the stem: ratio of total pressures at equilibrium for two dissociations.",
+    "text": "(i) $\\mathrm X(g)\\rightleftharpoons\\mathrm Y(g)+\\mathrm Z(g)$, $K_{p1}=3$; (ii) $\\mathrm A(g)\\rightleftharpoons2\\mathrm B(g)$, $K_{p2}=1$. If the degree of dissociation and initial concentration of both the reactants X and A are equal, then the ratio of the total pressure at equilibrium $\\frac{p_1}{p_2}$ is equal to $x$: 1. The value of $x$ is ______ (nearest integer).",
+    "options": [],
+    "correct_answer": [
+      "499"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Hard — two methods. Method 1 (mole-fraction setup): Start with 1 mol of X (or A) and degree of dissociation α. For X ⇌ Y + Z: moles at equilibrium are (1−α), α, α; total = 1+α. Partial pressures use P₁ (total). Kp₁ = (α/(1+α))² P₁ / ((1−α)/(1+α)) = α²P₁/(1−α²) = 3, so P₁ = 3(1−α²)/α². For A ⇌ 2B: moles (1−α) and 2α; total = 1+α. Kp₂ = (2α/(1+α))² P₂ / ((1−α)/(1+α)) = 4α²P₂/(1−α²) = 1, so P₂ = (1−α²)/(4α²). Ratio P₁/P₂ = [3(1−α²)/α²] / [(1−α²)/(4α²)] = 3 × 4 = 12. Method 2 (shortcut): the ratio depends only on the ratio of the stoichiometric factors and the two Kp values, so the α terms cancel: P₁/P₂ = (Kp₁/Kp₂)·(2²/1) = 3 × 4 = 12. Analogy: each equilibrium is a seesaw whose balance point is set by Kp; the degree α cancels out, so you can compare the two seesaws directly.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "equilibrium",
+      "dissociation"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Stem partly unclear; verify reaction.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Equilibrium",
+        "subtopic": "Equilibrium constants Kp and Kc and their significance"
+      },
+      {
+        "chapter": "Equilibrium",
+        "subtopic": "Law of chemical equilibrium"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-feb-s1-sh1-01feb-p-54",
+    "exam": "main",
+    "year": 2023,
+    "session": "Feb-S1",
+    "session_number": 1,
+    "session_month": "Feb",
+    "shift": 1,
+    "shift_label": "Shift 1",
+    "date": "2023-02-01",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 54,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "chapters": [
+      "Chemical Bonding and Molecular Structure",
+      "Some Basic Principles of Organic Chemistry"
+    ],
+    "topic": "Number of chiral compounds in given list",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Rated from the stem: number of chiral compounds in given list.",
+    "text": "The total number of chiral compound/s from the following is (structures in image).",
+    "options": [
+      {
+        "key": "1",
+        "text": "1",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "2",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "3",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "4",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "12"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": "Idea: A compound is chiral when it has no mirror plane and is not superimposable on its mirror image, usually from a stereocentre. Look at each structure: the molecules with four different groups on one carbon (or a cis/trans ring with no symmetry) are chiral; highly symmetric ones (meso, or planar fused rings with a mirror) are not. The answer key says option 2. FLAG: count from the images in the PDF.",
+    "solution_source": "explanation written from the question text (not from the paper)",
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "chirality",
+      "stereochemistry"
+    ],
+    "source_notes": "Text and answer key taken from the MathonGo PDF; answer taken as printed in the key. Figure or structure in stem/options not extracted; image field left null. Numeric solution derived; verify key.",
+    "verified": false,
+    "verified_against": "text layer and printed answer key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Some Basic Principles of Organic Chemistry",
+        "subtopic": "Structural isomerism and stereoisomerism"
+      }
+    ]
+  }
+]

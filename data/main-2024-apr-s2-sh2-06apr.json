@@ -1,0 +1,5582 @@
+[
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-01",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 1,
+    "subject": "Physics",
+    "unit": "Units & Measurements",
+    "chapter": "Units and Measurements",
+    "chapters": [
+      "Units and Measurements"
+    ],
+    "topic": "Dimensions of physical quantities",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Direct recall: specific heat is L^2 T^-2 K^-1 (correct); gas constant dimensions are ML^2 T^-2 K^-1, so the stated ML^2 T^-1 K^-1 is wrong",
+    "text": "Statement I: dimensions of specific heat are L^2 T^-2 K^-1. Statement II: dimensions of gas constant are ML^2 T^-1 K^-1; choose the correct option",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Both I and II correct",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) I correct, II incorrect",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Both I and II incorrect",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) I incorrect, II correct",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "dimensions of physical quantities"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Units and Measurements",
+        "subtopic": "Dimensions of physical quantities"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-02",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 2,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Kinematics",
+    "chapters": [
+      "Kinematics"
+    ],
+    "topic": "Relations for uniformly accelerated motion",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Eliminate the initial speed from the two up-and-down projections; standard result t = sqrt(t1 t2)",
+    "text": "Body projected up from the top of a tower reaches ground in t1; projected down from the same point with same speed reaches ground in t2; time to reach ground if dropped from the top",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) sqrt(t1 t2)",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) sqrt(t1 + t2)",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) sqrt(t1 - t2)",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) sqrt(t1/t2)",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "relations for uniformly accelerated motion"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Kinematics",
+        "subtopic": "Relations for uniformly accelerated motion"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-03",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 3,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Laws of Motion",
+    "chapters": [
+      "Laws of Motion"
+    ],
+    "topic": "Newton's third law of motion",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Chain and body form one system; force from branch equals total weight of body plus chain",
+    "text": "Body of weight 200 N suspended from a tree branch through a chain of mass 10 kg; force by which branch pulls the chain (g = 10 m/s^2)",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 100 N",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 200 N",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 300 N",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 150 N",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "newton's third law of motion"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Laws of Motion",
+        "subtopic": "Newton's third law of motion"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-04",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 4,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Laws of Motion",
+    "chapters": [
+      "Laws of Motion"
+    ],
+    "topic": "Vehicle on a banked road",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Apply v_max = sqrt(r g (sin θ + μ cos θ) / (cos θ - μ sin θ)) with sin 30 = 0.5 and cos 30 = 0.866",
+    "text": "Car of mass 800 kg on a banked road of radius 300 m and banking angle 30 degrees; coefficient of static friction 0.2; maximum safe speed (g = 10, √3 = 1.73)",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 264 m/s",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 51.4 m/s",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 70.4 m/s",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 102.8 m/s",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "vehicle on a banked road"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Laws of Motion",
+        "subtopic": "Vehicle on a banked road"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-05",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 5,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Work, Energy and Power",
+    "chapters": [
+      "Work, Energy and Power"
+    ],
+    "topic": "Kinetic energy",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "p = sqrt(2mK), so K x 36 gives p x 6, a 500% increase",
+    "text": "When kinetic energy of a body becomes 36 times its original value, percentage increase in momentum",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 6%",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 600%",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 60%",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 500%",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "kinetic energy"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Work, Energy and Power",
+        "subtopic": "Kinetic energy"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-06",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 6,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Gravitation",
+    "chapters": [
+      "Gravitation"
+    ],
+    "topic": "Acceleration due to gravity and its variation with altitude and depth",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Inside a uniform Earth g(d) = g(1 - d/R), so at d = R/4 weight is 3/4 of surface weight, 225 N",
+    "text": "Earth of uniform density; body weighs 300 N on surface; weight at R/4 depth below the surface",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 75 N",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 300 N",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 375 N",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 225 N",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "acceleration due to gravity and its variation with altitude and depth"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Gravitation",
+        "subtopic": "Acceleration due to gravity and its variation with altitude and depth"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-07",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 7,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Properties of Solids and Liquids",
+    "chapters": [
+      "Properties of Solids and Liquids"
+    ],
+    "topic": "Excess of pressure across a curved surface",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Soap bubble has two surfaces, so excess pressure = 4S / R",
+    "text": "Pressure inside a soap bubble exceeds outside pressure by: R = radius of bubble, S = surface tension",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 2S/R",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 4R/S",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) S/R",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 4S/R",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "excess of pressure across a curved surface"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Properties of Solids and Liquids",
+        "subtopic": "Excess of pressure across a curved surface"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-08",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 8,
+    "subject": "Physics",
+    "unit": "Thermodynamics & Kinetic Theory",
+    "chapter": "Thermodynamics",
+    "chapters": [
+      "Thermodynamics"
+    ],
+    "topic": "First law of thermodynamics",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Q = ΔU + W with ΔU = (3/2) R ΔT for one mole of helium; W = 48 - 24.9 = 23.1 J",
+    "text": "A total of 48 J heat is given to one mole of helium in a cylinder; temperature increases by 2 degrees C; work done by the gas (R = 8.3 J/K/mol)",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 24.9 J",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 72.9 J",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 48 J",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 23.1 J",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "first law of thermodynamics"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Thermodynamics",
+        "subtopic": "First law of thermodynamics"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-09",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 9,
+    "subject": "Physics",
+    "unit": "Thermodynamics & Kinetic Theory",
+    "chapter": "Kinetic Theory of Gases",
+    "chapters": [
+      "Kinetic Theory of Gases"
+    ],
+    "topic": "Degrees of freedom",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Non-rigid diatomic molecule has 7 degrees of freedom, so 7/2 k T per molecule; for 10 molecules 35 k_B T",
+    "text": "Energy of 10 non-rigid diatomic molecules at temperature T",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 70 K_B T",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 35 K_B T",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) (7/2) RT",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 35 RT",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "degrees of freedom"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Kinetic Theory of Gases",
+        "subtopic": "Degrees of freedom"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-10",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 10,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electrostatics",
+    "chapters": [
+      "Electrostatics"
+    ],
+    "topic": "Conductors and insulators",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Sharing charge by contact: P and R share Q, then R and S share; final charges give force 6 N",
+    "text": "Two identical conducting spheres P and S with charge Q each repel with 16 N; identical uncharged sphere R touched successively to P and S; new force between P and S",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 1 N",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 6 N",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 12 N",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 4 N",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "conductors and insulators"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electrostatics",
+        "subtopic": "Conductors and insulators"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-11",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 11,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Current Electricity",
+    "chapters": [
+      "Current Electricity"
+    ],
+    "topic": "Electric current and drift velocity",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Current I = P/V = 0.5 A; number of electrons per second n = I/e = 3.125 x 10^18",
+    "text": "Number of electrons flowing per second in the filament of a 110 W bulb operating at 220 V (e = 1.6 x 10^-19 C)",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 6.25 x 10^17",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 1.25 x 10^19",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 6.25 x 10^18",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 31.25 x 10^17",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "electric current and drift velocity"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Current Electricity",
+        "subtopic": "Electric current and drift velocity"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-12",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 12,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Magnetic Effects of Current and Magnetism",
+    "chapters": [
+      "Magnetic Effects of Current and Magnetism"
+    ],
+    "topic": "Para-, dia- and ferromagnetic substances",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Match each graph with its physical relation (susceptibility vs H, field inside/outside wire and solenoid); key from printed answer",
+    "text": "Match List I (Y vs X graphs A-D) with List II (shapes I-IV) for magnetic susceptibility, magnetic field of a current carrying wire inside and outside, and field inside a solenoid",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) (A)-(IV), (B)-(I), (C)-(III), (D)-(II)",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) (A)-(I), (B)-(III), (C)-(II), (D)-(IV)",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) (A)-(III), (B)-(IV), (C)-(I), (D)-(II)",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) (A)-(III), (B)-(I), (C)-(IV), (D)-(II)",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "para-, dia- and ferromagnetic substances"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. FIG Figure is in the PDF and is not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Magnetic Effects of Current and Magnetism",
+        "subtopic": "Para-, dia- and ferromagnetic substances"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-13",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 13,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electromagnetic Induction and Alternating Currents",
+    "chapters": [
+      "Electromagnetic Induction and Alternating Currents"
+    ],
+    "topic": "Self inductance",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Direct: L = emf x Δt / ΔI = 0.1 x 0.2 / 4 = 5 mH",
+    "text": "Current in a coil changes from -2 A to +2 A in 0.2 s and induces an emf of 0.1 V; self inductance",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 4 mH",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 1 mH",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 5 mH",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 2.5 mH",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "self inductance"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electromagnetic Induction and Alternating Currents",
+        "subtopic": "Self inductance"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-14",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 14,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electromagnetic Waves",
+    "chapters": [
+      "Electromagnetic Waves"
+    ],
+    "topic": "Electromagnetic waves and their characteristics",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Intensity I = c eps0 E0^2 / 2 with E0 = 600 V/m gives 486 W/m^2",
+    "text": "Electromagnetic wave E_y = 600 sin(ωt - kx) V/m; intensity of the associated beam (W/m^2), eps0 = 9 x 10^-12",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 243",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 729",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 972",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 486",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "electromagnetic waves and their characteristics"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electromagnetic Waves",
+        "subtopic": "Electromagnetic waves and their characteristics"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-15",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 15,
+    "subject": "Physics",
+    "unit": "Units & Measurements",
+    "chapter": "Experimental Skills",
+    "chapters": [
+      "Experimental Skills"
+    ],
+    "topic": "Refractive index of a glass slab using a travelling microscope",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Compute the real and apparent thickness from the vernier readings, then n = real/apparent; key from printed answer",
+    "text": "Refractive index of a glass slab from travelling microscope readings: MSD and VC values for mark on paper, through slab, and powder on slab surface (50 VSD = 49 MSD; 20 divisions per cm)",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 1.52",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 1.35",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 1.42",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 1.24",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "refractive index of a glass slab using a travelling microscope"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Experimental Skills",
+        "subtopic": "Refractive index of a glass slab using a travelling microscope"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-16",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 16,
+    "subject": "Physics",
+    "unit": "Optics & Waves",
+    "chapter": "Optics",
+    "chapters": [
+      "Optics"
+    ],
+    "topic": "Lens maker's formula",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "1/f = (mu - 1)(1/R1 - 1/R2) with R1 = 15 cm, R2 = -30 cm, f = 20 cm gives mu = 1.5",
+    "text": "Thin convex lens with radii of curvature 15 cm and 30 cm; focal length 20 cm; refractive index of the material",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 1.2",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 1.8",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 1.5",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 1.4",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "lens maker's formula"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Optics",
+        "subtopic": "Lens maker's formula"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-17",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 17,
+    "subject": "Physics",
+    "unit": "Modern Physics",
+    "chapter": "Dual Nature of Matter and Radiation",
+    "chapters": [
+      "Dual Nature of Matter and Radiation"
+    ],
+    "topic": "Einstein's photoelectric equation",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Photon energy 1240/300 = 4.13 eV; stopping potential = (4.13 - 2.13) = 2 V",
+    "text": "UV light of wavelength 300 nm incident on metal with work function 2.13 eV; stopping potential (given hc = 1240 eV nm)",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 1.5 V",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 4.1 V",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 2 V",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 4 V",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "einstein's photoelectric equation"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Dual Nature of Matter and Radiation",
+        "subtopic": "Einstein's photoelectric equation"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-18",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 18,
+    "subject": "Physics",
+    "unit": "Modern Physics",
+    "chapter": "Atoms and Nuclei",
+    "chapters": [
+      "Atoms and Nuclei"
+    ],
+    "topic": "Hydrogen spectrum",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Paschen longest wavelength is n = 4 to 3: 1/λ = R(1/9 - 1/16) = 7R/144, so λ = 1.876 x 10^-6 m",
+    "text": "Longest wavelength of the Paschen series of hydrogen (R_H = 1.097 x 10^7 per m)",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 3.646 x 10^-6 m",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 1.876 x 10^-6 m",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 2.973 x 10^-6 m",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 1.094 x 10^-6 m",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "hydrogen spectrum"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Atoms and Nuclei",
+        "subtopic": "Hydrogen spectrum"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-19",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 19,
+    "subject": "Physics",
+    "unit": "Modern Physics",
+    "chapter": "Electronic Devices",
+    "chapters": [
+      "Electronic Devices"
+    ],
+    "topic": "Semiconductors",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Maximum wavelength = hc / E = 1242 / 6 = 207 nm",
+    "text": "Acceptor level of a p-type semiconductor is 6 eV; maximum wavelength of light that can create a hole (hc = 1242 eV nm)",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 414 nm",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 103.5 nm",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 207 nm",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 407 nm",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "semiconductors"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electronic Devices",
+        "subtopic": "Semiconductors"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-20",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 20,
+    "subject": "Physics",
+    "unit": "Units & Measurements",
+    "chapter": "Units and Measurements",
+    "chapters": [
+      "Units and Measurements"
+    ],
+    "topic": "Least count",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Vernier and main scale relation (50 VSD = 49 MSD) with zero error 0.04 mm; count main-scale divisions in 1 cm; key from printed answer",
+    "text": "Vernier calliper: zero of vernier shifts left and 4th vernier division coincides; 50 vernier divisions equal 49 main scale divisions; zero error 0.04 mm; number of main scale divisions in 1 cm",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 10",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 5",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 20",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 40",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "least count"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Units and Measurements",
+        "subtopic": "Least count"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-21",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 21,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Kinematics",
+    "chapters": [
+      "Kinematics"
+    ],
+    "topic": "Motion in a straight line",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "x^2 = 1 + t^2 gives v = t/x and a = 1/x^3, so n = 3",
+    "text": "Particle moves so that displacement x satisfies x^2 = 1 + t^2; acceleration at time t is x^(-n); find n (integer)",
+    "options": [],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "motion in a straight line"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Kinematics",
+        "subtopic": "Motion in a straight line"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-22",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 22,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Rotational Motion",
+    "chapters": [
+      "Rotational Motion"
+    ],
+    "topic": "Moment of inertia of simple geometrical objects",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Balls at the mid-points of the sides lie at distance 1/sqrt(3) from the centroid, so I = (2+4+6)(1/3) = 4 kg m^2",
+    "text": "Three balls of masses 2 kg, 4 kg and 6 kg at the centre of the edges of an equilateral triangle of side 2 m; moment of inertia about axis through centroid and perpendicular to plane (kg m^2)",
+    "options": [],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "moment of inertia of simple geometrical objects"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Rotational Motion",
+        "subtopic": "Moment of inertia of simple geometrical objects"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-23",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 23,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Properties of Solids and Liquids",
+    "chapters": [
+      "Properties of Solids and Liquids"
+    ],
+    "topic": "Young's modulus of elasticity of a metallic wire",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Sag of a wire under load from geometry and Y = (F L)/(A ΔL), with small angle approximation; key from printed answer",
+    "text": "Wire of cross-section A, Young's modulus 2 x 10^11 N/m^2, length 2 m, stretched between rigid supports; 2 kg mass at middle sags; value of A in units of 10^-4 m^2 with angle θ = 1/100 rad",
+    "options": [],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "young's modulus of elasticity of a metallic wire"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. FIG Figure is in the PDF and is not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Properties of Solids and Liquids",
+        "subtopic": "Young's modulus"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-24",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 24,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Oscillations and Waves",
+    "chapters": [
+      "Oscillations and Waves"
+    ],
+    "topic": "Standing waves in strings and organ pipes",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Open pipe f_n = n v / 2L: pipe 60 cm gives f6 = 1665 Hz and pipe 90 cm gives f5 = 925 Hz; difference 740 Hz",
+    "text": "Two open organ pipes of lengths 60 cm and 90 cm resonate at 6th and 5th harmonics; difference of frequencies in Hz (v = 333 m/s)",
+    "options": [],
+    "correct_answer": [
+      "740"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "standing waves in strings and organ pipes"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Oscillations and Waves",
+        "subtopic": "Standing waves in strings and organ pipes"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-25",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 25,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electrostatics",
+    "chapters": [
+      "Electrostatics"
+    ],
+    "topic": "Capacitance of a parallel plate capacitor with and without dielectric",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Capacitor with half-dielectric filling: requires force formula and dielectric partition; key from printed answer",
+    "text": "Capacitor 10 uF with plates 10 mm apart and area 4 cm^2 is half filled with media K1 = 2 and K2 = 3 (as in figure); new force between the plates is 8 N; supply voltage in units of 10^-4 V",
+    "options": [],
+    "correct_answer": [
+      "93"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "capacitance of a parallel plate capacitor with and without dielectric"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. FIG Figure is in the PDF and is not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electrostatics",
+        "subtopic": "Capacitance of a parallel plate capacitor with and without dielectric"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-26",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 26,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Magnetic Effects of Current and Magnetism",
+    "chapters": [
+      "Magnetic Effects of Current and Magnetism"
+    ],
+    "topic": "Moving coil galvanometer, its sensitivity and conversion to ammeter and voltmeter",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Shunt divides current in ratio 240:10 for ammeter; reading from the 24 V circuit with 140.4 ohm; key from printed answer",
+    "text": "Ammeter made of 240 ohm coil in parallel with 10 ohm shunt, in a circuit with 140.4 ohm resistance and 24 V source; reading of ammeter in mA",
+    "options": [],
+    "correct_answer": [
+      "160"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "moving coil galvanometer, its sensitivity and conversion to ammeter and voltmeter"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. FIG Figure is in the PDF and is not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Magnetic Effects of Current and Magnetism",
+        "subtopic": "Moving coil galvanometer, its sensitivity and conversion to ammeter and voltmeter"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-27",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 27,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Magnetic Effects of Current and Magnetism",
+    "chapters": [
+      "Magnetic Effects of Current and Magnetism"
+    ],
+    "topic": "Torque on a current loop in a uniform magnetic field",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Work = N I A B = 100 x 1e-3 x 5e-3 x 0.2 = 1e-4 J = 100 μJ",
+    "text": "Coil of 100 turns, area 5 x 10^-3 m^2, current 1 mA, in uniform field 0.20 T with plane perpendicular to field; work done in turning through 90 degrees (μJ)",
+    "options": [],
+    "correct_answer": [
+      "100"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "torque on a current loop in a uniform magnetic field"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Magnetic Effects of Current and Magnetism",
+        "subtopic": "Torque on a current loop in a uniform magnetic field"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-28",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 28,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electromagnetic Induction and Alternating Currents",
+    "chapters": [
+      "Electromagnetic Induction and Alternating Currents"
+    ],
+    "topic": "Resonance",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "At maximum current f = 1/(2π sqrt(LC)); with L = 0.1 H and C = 25 nF this gives about 3.16 kHz, not the printed 10; check this item",
+    "text": "Series LCR circuit with R = 200 ohm, L = 100 mH, variable C set to 25 nF gives maximum current; frequency of ac source in units of 10^3 Hz (π^2 = 10)",
+    "options": [],
+    "correct_answer": [
+      "10"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "resonance"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electromagnetic Induction and Alternating Currents",
+        "subtopic": "Resonance"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-29",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 29,
+    "subject": "Physics",
+    "unit": "Optics & Waves",
+    "chapter": "Optics",
+    "chapters": [
+      "Optics"
+    ],
+    "topic": "Coherent sources and sustained interference of light",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Max = (sqrt(I) + sqrt(4I))^2 = 9I; min = (sqrt(4I) - sqrt(I))^2 = I; difference 8I",
+    "text": "Two coherent monochromatic beams of intensities I and 4I superimposed; difference between maximum and minimum possible intensities is x I; find x",
+    "options": [],
+    "correct_answer": [
+      "8"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "coherent sources and sustained interference of light"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Optics",
+        "subtopic": "Coherent sources and sustained interference of light"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-30",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 30,
+    "subject": "Physics",
+    "unit": "Modern Physics",
+    "chapter": "Atoms and Nuclei",
+    "chapters": [
+      "Atoms and Nuclei"
+    ],
+    "topic": "Energy levels",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "First excitation energy 10.2 eV, so lambda = hc / E = 1245 / 10.2 = 122 nm",
+    "text": "Franck-Hertz experiment: first dip at 10.2 V for hydrogen; wavelength (nm) of light emitted when atom is excited to first excitation level (hc = 1245 eV nm)",
+    "options": [],
+    "correct_answer": [
+      "122"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "energy levels"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Atoms and Nuclei",
+        "subtopic": "Energy levels"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-31",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 31,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Solutions",
+    "chapters": [
+      "Solutions"
+    ],
+    "topic": "Molality, molarity, mole fraction and percentage (by volume and by mass)",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Mass of solution 1250 g per litre, NaCl 175.5 g, water 1074.5 g; molality = 3 / 1.0745 = 2.79 m",
+    "text": "3 M aqueous NaCl solution, density 1.25 g/mL; molality (Na 23, Cl 35.5)",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 1.9 m",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 3.85 m",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 2.79 m",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 2.90 m",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "molality, molarity, mole fraction and percentage (by volume and by mass)"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Solutions",
+        "subtopic": "Molality, molarity, mole fraction and percentage (by volume and by mass)"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-32",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 32,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Equilibrium",
+    "chapters": [
+      "Equilibrium"
+    ],
+    "topic": "Equilibrium constants Kp and Kc and their significance",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Δn = 1 - 1.5 = -0.5, so Kp/Kc = (RT)^(-1/2)",
+    "text": "Ratio Kp/Kc for CO + (1/2) O2 <=> CO2",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 1/sqrt(RT)",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) (RT)^(1/2)",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) RT",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 1",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "equilibrium constants kp and kc and their significance"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Equilibrium",
+        "subtopic": "Equilibrium constants Kp and Kc and their significance"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-33",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 33,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Redox Reactions and Electrochemistry",
+    "chapters": [
+      "Redox Reactions and Electrochemistry"
+    ],
+    "topic": "Redox reactions and oxidation number",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Classify each reaction: combination, decomposition, displacement, disproportionation",
+    "text": "Match List I (reactions A-D) with List II (I decomposition, II displacement, III disproportionation, IV combination)",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) A-II, B-III, C-IV, D-I",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) A-III, B-II, C-I, D-IV",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) A-IV, B-I, C-II, D-III",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) A-I, B-II, C-III, D-IV",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "redox reactions and oxidation number"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Redox Reactions and Electrochemistry",
+        "subtopic": "Redox reactions and oxidation number"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-34",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 34,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Redox Reactions and Electrochemistry",
+    "chapters": [
+      "Redox Reactions and Electrochemistry"
+    ],
+    "topic": "Redox reactions and oxidation number",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Oxidising agents are ions in a high stable oxidation state: Tl3+ and Pb4+",
+    "text": "Number of ions from Sn4+, Sn2+, Pb2+, Tl3+, Pb4+, Tl+ expected to behave as oxidising agents",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 3",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 2",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 1",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 4",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "redox reactions and oxidation number"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Redox Reactions and Electrochemistry",
+        "subtopic": "Redox reactions and oxidation number"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-35",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 35,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "p-Block Elements",
+    "chapters": [
+      "p-Block Elements"
+    ],
+    "topic": "General trends in physical and chemical properties",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Assess statements on group 14: covalency and oxidation states, d-orbital expansion, and p-pi bonding; key from printed answer",
+    "text": "Statements (A)-(E) about group 14 elements C to Pb: covalent radius, electronegativity, covalency of C, p-pi bonding, negative oxidation states; choose the correct answer",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) (A), (B) and (C) only",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) (C), (D) and (E) only",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) (C) and (D) only",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) (A) and (B) only",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "general trends in physical and chemical properties"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "p-Block Elements",
+        "subtopic": "General trends in physical and chemical properties"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-36",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 36,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Purification and Characterisation of Organic Compounds",
+    "chapters": [
+      "Purification and Characterisation of Organic Compounds"
+    ],
+    "topic": "Chromatography: principles and applications",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Recall: Rf of a polar compound is smaller than that of a non-polar compound on silica",
+    "text": "Correct statement among the following about chromatography purification",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Organic compounds run faster than solvent in TLC",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) Rf is an integral value",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Rf of a polar compound is smaller than that of a non-polar compound",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Non-polar compounds are retained at top and polar compounds come down in column chromatography",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "chromatography: principles and applications"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Purification and Characterisation of Organic Compounds",
+        "subtopic": "Chromatography: principles and applications"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-37",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 37,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Some Basic Principles of Organic Chemistry",
+    "chapters": [
+      "Some Basic Principles of Organic Chemistry"
+    ],
+    "topic": "Structural isomerism and stereoisomerism",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Recall 2-butene isomerism: cis has more dipole moment than trans; statement 3 is the incorrect one",
+    "text": "Incorrect statement regarding geometrical isomers of 2-butene",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) cis and trans are not interconvertible at room temperature",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) cis and trans are stereoisomers",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) cis-2-butene has less dipole moment than trans-2-butene",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) trans-2-butene is more stable than cis-2-butene",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "structural isomerism and stereoisomerism"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Some Basic Principles of Organic Chemistry",
+        "subtopic": "Structural isomerism and stereoisomerism"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-38",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 38,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Redox Reactions and Electrochemistry",
+    "chapters": [
+      "Redox Reactions and Electrochemistry"
+    ],
+    "topic": "Electrolytic and Galvanic cells",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Applying an external potential greater than E°cell reverses the cell reaction and makes it electrolytic",
+    "text": "How can an electrochemical cell be converted into an electrolytic cell?",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Applying an external opposite potential lower than E°cell",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) Reversing the flow of ions in salt bridge",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Applying an external opposite potential greater than E°cell",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Exchanging the electrodes at anode and cathode",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "electrolytic and galvanic cells"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Redox Reactions and Electrochemistry",
+        "subtopic": "Electrolytic and Galvanic cells"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-39",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 39,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "d- and f-Block Elements",
+    "chapters": [
+      "d- and f-Block Elements"
+    ],
+    "topic": "Colour, catalytic behaviour and magnetic properties of transition elements",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Count unpaired electrons: Sc 1, Ti 2, V 3, Cr 6, Mn 5; increasing order A < D < C < E < B",
+    "text": "Arrange the elements Sc (A), Cr (B), V (C), Ti (D), Mn (E) in increasing order of number of unpaired electrons",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) A < D < C < B < E",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) C < E < B < A < D",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) A < D < C < E < B",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) B < C < D < E < A",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "colour, catalytic behaviour and magnetic properties of transition elements"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "d- and f-Block Elements",
+        "subtopic": "Colour, catalytic behaviour and magnetic properties of transition elements"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-40",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 40,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "Coordination Compounds",
+    "chapters": [
+      "Coordination Compounds"
+    ],
+    "topic": "IUPAC nomenclature of mononuclear coordination compounds",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Direct: ligands named alphabetically, bromo and trimethylphosphine (bis) with Pt(II)",
+    "text": "IUPAC name of [PtBr2(PMe3)2]",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) dibromodi(trimethylphosphine)platinum(II)",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) bis(trimethylphosphine)dibromoplatinum(II)",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) dibromobis(trimethylphosphine)platinum(II)",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) bis[bromo(trimethylphosphine)]platinum(II)",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "iupac nomenclature of mononuclear coordination compounds"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Coordination Compounds",
+        "subtopic": "IUPAC nomenclature of mononuclear coordination compounds"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-41",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 41,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "chapters": [
+      "Chemical Bonding and Molecular Structure"
+    ],
+    "topic": "Hybridization involving s, p and d orbitals",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "PF5 is sp3d and BrF5 is sp3d2 (statement I false); [Co(NH3)6]3+ is d2sp3, not sp3d2 (statement II false)",
+    "text": "Statement I: PF5 and BrF5 both exhibit sp3d hybridisation. Statement II: SF6 and [Co(NH3)6]3+ exhibit sp3d2 hybridisation; choose the correct answer",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) I true, II false",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) I false, II true",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Both true",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Both false",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "hybridization involving s, p and d orbitals"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Bonding and Molecular Structure",
+        "subtopic": "Hybridization involving s, p and d orbitals"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-42",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 42,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "d- and f-Block Elements",
+    "chapters": [
+      "d- and f-Block Elements"
+    ],
+    "topic": "Occurrence and characteristics of transition elements",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Match each species with its e and t2 electron counts and the redox type; key from printed answer",
+    "text": "Match List I (A TiCl4, B [FeO4]2-, C [FeCl4]-, D [CoCl4]2-) with List II (I e2 t2^0, II e4 t2^3, III e0 t2^0, IV e2 t2^3); choose the correct answer",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) (A)-(III), (B)-(IV), (C)-(II), (D)-(I)",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) (A)-(IV), (B)-(III), (C)-(I), (D)-(II)",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) (A)-(III), (B)-(I), (C)-(IV), (D)-(II)",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) (A)-(I), (B)-(III), (C)-(II), (D)-(IV)",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "occurrence and characteristics of transition elements"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "d- and f-Block Elements",
+        "subtopic": "Occurrence and characteristics of transition elements"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-43",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 43,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Hydrocarbons",
+    "chapters": [
+      "Hydrocarbons"
+    ],
+    "topic": "Directive influence of the functional group in mono-substituted benzene",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Activating groups (OCH3, CH3) increase rate; deactivating CF3 decreases it; key from printed answer",
+    "text": "Arrange compounds I (toluene), II (benzene), III (anisole), IV (benzotrifluoride) in decreasing order of electrophilic substitution reactivity",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) (III) > (I) > (II) > (IV)",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) (IV) > (I) > (II) > (III)",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) (III) > (IV) > (II) > (I)",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) (II) > (IV) > (III) > (I)",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "directive influence of the functional group in mono-substituted benzene"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. FIG Figure is in the PDF and is not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Hydrocarbons",
+        "subtopic": "Directive influence of the functional group in mono-substituted benzene"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-44",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 44,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Organic Compounds Containing Oxygen",
+    "chapters": [
+      "Organic Compounds Containing Oxygen"
+    ],
+    "topic": "Nucleophilic addition with HCN, NH3 and its derivatives",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Multi-step reduction and addition sequence from acetic acid; key from printed answer",
+    "text": "CH3-COOH treated with (i) LiAlH4, (ii) PCC, (iii) HCN/OH-, (iv) H2O/OH- with heat gives product P; identify P",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) IMG CH3-CH2-C(=O)-NH2",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) CH3-CH2-CH2-OH",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) CH3-CH(OH)-COOH",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) CH3-CO-CH2CH3",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "nucleophilic addition with hcn, nh3 and its derivatives"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. IMG Options are chemical structures in the PDF and are not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Organic Compounds Containing Oxygen",
+        "subtopic": "Nucleophilic addition with HCN, NH3 and its derivatives"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-45",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 45,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Organic Compounds Containing Oxygen",
+    "chapters": [
+      "Organic Compounds Containing Oxygen"
+    ],
+    "topic": "Identification of primary, secondary and tertiary alcohols",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Aqueous NaOH substitutes the chloride at the secondary carbon with retention of the carbon skeleton; key from printed answer",
+    "text": "Cyclohexyl chloro-alkane (chloro at secondary carbon next to cyclohexyl) + NaOH in H2O gives major product A",
+    "options": [
+      {
+        "key": "1",
+        "text": "[structure: see PDF]",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "[structure: see PDF]",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "[structure: see PDF]",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "[structure: see PDF]",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "identification of primary, secondary and tertiary alcohols"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. IMG Options are chemical structures in the PDF and are not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Organic Compounds Containing Oxygen",
+        "subtopic": "Identification of primary, secondary and tertiary alcohols"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-46",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 46,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Hydrocarbons",
+    "chapters": [
+      "Hydrocarbons"
+    ],
+    "topic": "Halogenation and nitration of benzene",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Anisole nitration gives p-nitroanisole (A); excess Br2 with Fe brominates the activated ring at the open ortho/para positions to give B",
+    "text": "Anisole (methoxybenzene) treated with HNO3/H2SO4 gives A, then excess Br2/Fe gives B; major products A and B respectively",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) p-nitroanisole and 2,6-dibromo-4-nitroanisole",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) o-nitroanisole and 2-bromo-4-nitroanisole",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) p-nitroanisole and 2-bromo-4-nitroanisole",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) o-nitroanisole and 2,6-dibromo-4-nitroanisole",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "halogenation and nitration of benzene"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. IMG",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Hydrocarbons",
+        "subtopic": "Halogenation and nitration of benzene"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-47",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 47,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Organic Compounds Containing Nitrogen",
+    "chapters": [
+      "Organic Compounds Containing Nitrogen"
+    ],
+    "topic": "Diazonium salts and their importance in synthetic organic chemistry",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Diazotisation and Sandmeyer chlorination, then high-temperature NaOH and acid give phenol",
+    "text": "Aniline treated with (i) NaNO2 + HCl, (ii) Cu2Cl2, (iii) NaOH at 623 K and 300 atm, (iv) H+ gives product A",
+    "options": [
+      {
+        "key": "1",
+        "text": "[structure: see PDF]",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "[structure: see PDF]",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "[structure: see PDF]",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "[structure: see PDF]",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "diazonium salts and their importance in synthetic organic chemistry"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. IMG Options are chemical structures in the PDF and are not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Organic Compounds Containing Nitrogen",
+        "subtopic": "Diazonium salts and their importance in synthetic organic chemistry"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-48",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 48,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "Principles Related to Practical Chemistry",
+    "chapters": [
+      "Principles Related to Practical Chemistry"
+    ],
+    "topic": "Chemical principles of qualitative salt analysis: cations and anions",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Pale yellow precipitate soluble with difficulty in NH4OH is AgBr, so the anion is Br-",
+    "text": "Acidic radical giving a pale yellow precipitate, soluble with difficulty in NH4OH, after acidifying the sodium carbonate extract with dilute HNO3 and adding AgNO3",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Br-",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) I-",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Cl-",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) CO3^2-",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "chemical principles of qualitative salt analysis: cations and anions"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Principles Related to Practical Chemistry",
+        "subtopic": "Chemical principles of qualitative salt analysis: cations and anions"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-49",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 49,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Redox Reactions and Electrochemistry",
+    "chapters": [
+      "Redox Reactions and Electrochemistry"
+    ],
+    "topic": "Redox reactions and oxidation number",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Match each alkali metal with its listed value in the printed table; key from printed answer",
+    "text": "Match List I (A Li, B Na, C Rb, D Cs) with List II (I 589.2, II 455.5, III 670.8, IV 780.0)",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) (A)-(II), (B)-(IV), (C)-(III), (D)-(I)",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) (A)-(I), (B)-(IV), (C)-(III), (D)-(II)",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) (A)-(IV), (B)-(II), (C)-(I), (D)-(III)",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) (A)-(III), (B)-(I), (C)-(IV), (D)-(II)",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "redox reactions and oxidation number"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. CHECK",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Redox Reactions and Electrochemistry",
+        "subtopic": "Redox reactions and oxidation number"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-50",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 50,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Biomolecules",
+    "chapters": [
+      "Biomolecules"
+    ],
+    "topic": "Enzymes",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Enzymes are biocatalysts and most are globular proteins (A, C true); they are substrate-specific (B false); oxidase does not hydrolyse maltose (D false)",
+    "text": "Incorrect statements about enzymes: A biocatalysts, B non-specific, C globular proteins, D oxidase catalyses hydrolysis of maltose",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) (B), (C) and (D)",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) (B) and (D)",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) (A), (B) and (C)",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) (B) and (C)",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "enzymes"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Biomolecules",
+        "subtopic": "Enzymes"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-51",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 51,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "chapters": [
+      "Chemical Bonding and Molecular Structure"
+    ],
+    "topic": "Hydrogen bonding and its applications",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Identify product B, then count protons (H) that are not involved in hydrogen bonding",
+    "text": "Reactions of NiS with HNO3 and HCl, then product A with NH4OH and a bis-imine (H3C-C=N-OH) type reagent give B; number of protons in B not involved in hydrogen bonding (integer)",
+    "options": [],
+    "correct_answer": [
+      "12"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "hydrogen bonding and its applications"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. FIG Figure is in the PDF and is not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Bonding and Molecular Structure",
+        "subtopic": "Hydrogen bonding and its applications"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-52",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 52,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Atomic Structure",
+    "chapters": [
+      "Atomic Structure"
+    ],
+    "topic": "Energy of electron and radii of orbits",
+    "question_type": "integer",
+    "difficulty": "easy",
+    "difficulty_reason": "E_n = -3.4 eV for n = 2 so KE = +3.4 eV = 34 x 10^-1 eV",
+    "text": "Energy of an electron in the first excited state of hydrogen is -3.4 eV; kinetic energy of the same electron is x x 10^-1 eV (nearest integer)",
+    "options": [],
+    "correct_answer": [
+      "34"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "energy of electron and radii of orbits"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Atomic Structure",
+        "subtopic": "Energy of electron and radii of orbits"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-53",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 53,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Organic Compounds Containing Nitrogen",
+    "chapters": [
+      "Organic Compounds Containing Nitrogen"
+    ],
+    "topic": "Identification of primary, secondary and tertiary amines",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Ammonolysis of benzyl chloride gives benzylamine; the clear solution with p-toluenesulphonyl chloride identifies the amine, then molar mass from C, H, O, N data",
+    "text": "An amine X is prepared by ammonolysis of benzyl chloride; on adding p-toluenesulphonyl chloride the solution remains clear; molar mass of X in g/mol (C 12, H 1, O 16, N 14)",
+    "options": [],
+    "correct_answer": [
+      "287"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "identification of primary, secondary and tertiary amines"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Organic Compounds Containing Nitrogen",
+        "subtopic": "Identification of primary, secondary and tertiary amines"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-54",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 54,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Chemical Thermodynamics",
+    "chapters": [
+      "Chemical Thermodynamics"
+    ],
+    "topic": "Spontaneity of processes",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Spontaneous when ΔG = ΔH - TΔS < 0, so T > ΔH/ΔS = 400 / 0.2 = 2000 K",
+    "text": "Reaction 2A + B -> C at 298 K has ΔH = 400 kJ/mol and ΔS = 0.2 kJ/mol/K; reaction becomes spontaneous above how many K",
+    "options": [],
+    "correct_answer": [
+      "2000"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "spontaneity of processes"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Thermodynamics",
+        "subtopic": "Spontaneity of processes"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-55",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 55,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Chemical Kinetics",
+    "chapters": [
+      "Chemical Kinetics"
+    ],
+    "topic": "Characteristics and half-lives of zero and first-order reactions",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Two first-order reactions with half-life ratio 5:2; times to 2/3 completion and 45th... combine logarithms (log 3 and log 5 given); key from printed answer",
+    "text": "Reaction 1 (A + B -> C) and Reaction 2 (P -> Q) first order with half-life ratio 5:2; t1 and t2 are times for 2/3 completion of Reaction 1 and 45 min...; ratio t1 : t2 in units of 10^-1 (nearest integer)",
+    "options": [],
+    "correct_answer": [
+      "17"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "characteristics and half-lives of zero and first-order reactions"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Kinetics",
+        "subtopic": "Characteristics and half-lives of zero and first-order reactions"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-56",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 56,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "d- and f-Block Elements",
+    "chapters": [
+      "d- and f-Block Elements"
+    ],
+    "topic": "Colour, catalytic behaviour and magnetic properties of transition elements",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Compare oxidising ability of VO2+, MnO4- and Cr2O7^2-; the species with least oxidising ability has zero unpaired electrons",
+    "text": "Among VO2+, MnO4- and Cr2O7^2-, spin-only magnetic moment of the species with least oxidising ability (BM, nearest integer; V 23, Mn 25, Cr 24)",
+    "options": [],
+    "correct_answer": [
+      "0"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "colour, catalytic behaviour and magnetic properties of transition elements"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "d- and f-Block Elements",
+        "subtopic": "Colour, catalytic behaviour and magnetic properties of transition elements"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-57",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 57,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Some Basic Principles of Organic Chemistry",
+    "chapters": [
+      "Some Basic Principles of Organic Chemistry"
+    ],
+    "topic": "Hyperconjugation",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Check each carbocation for alpha C-H or C-C bonds that can hyperconjugate; count those without",
+    "text": "Number of carbocations from the list that are not stabilised by hyperconjugation",
+    "options": [],
+    "correct_answer": [
+      "5"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "hyperconjugation"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. FIG Figure is in the PDF and is not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Some Basic Principles of Organic Chemistry",
+        "subtopic": "Hyperconjugation"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-58",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 58,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Solutions",
+    "chapters": [
+      "Solutions"
+    ],
+    "topic": "Depression of freezing point",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Freezing-point depression from the vapour-pressure diagram gives Kf and molality; solve for x from mass of methanol and density",
+    "text": "Methanol (molar mass 32 g/mol, density 0.792 g/cm^3) of x x 10^-2 mL is added to 100 mL water; freezing point shifts from 273.15 K to 270.65 K (Kf = 1.86 K kg/mol); x (nearest integer)",
+    "options": [],
+    "correct_answer": [
+      "543"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "depression of freezing point"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. FIG Figure is in the PDF and is not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Solutions",
+        "subtopic": "Depression of freezing point"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-59",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 59,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Hydrocarbons",
+    "chapters": [
+      "Hydrocarbons"
+    ],
+    "topic": "Mechanism of electrophilic addition to alkenes",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Nitration then bromination gives P and Q; count oxygen and bromine atoms in Q and compute the ratio",
+    "text": "Ethoxybenzene treated with HNO3/H2SO4 gives P, then 2Br2/Fe gives Q; ratio of number of oxygen atoms to bromine atoms in Q is x x 10^-1",
+    "options": [],
+    "correct_answer": [
+      "6"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "mechanism of electrophilic addition to alkenes"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. FIG Figure is in the PDF and is not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Hydrocarbons",
+        "subtopic": "Mechanism of electrophilic addition to alkenes"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-60",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 60,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Organic Compounds Containing Oxygen",
+    "chapters": [
+      "Organic Compounds Containing Oxygen"
+    ],
+    "topic": "Electrophilic substitution in phenols: halogenation, nitration and sulphonation",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Nitration gives P (nitro ethoxybenzene); two Br2 give Q; ratio of O to Br atoms",
+    "text": "Ethoxybenzene (OC2H5) treated with HNO3/H2SO4 gives major product P, then 2Br2/Fe gives major product Q; ratio of number of oxygen atoms to bromine atoms in Q is x x 10^-1",
+    "options": [],
+    "correct_answer": [
+      "15"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "electrophilic substitution in phenols: halogenation, nitration and sulphonation"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. FIG Figure is in the PDF and is not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Organic Compounds Containing Oxygen",
+        "subtopic": "Electrophilic substitution in phenols: halogenation, nitration and sulphonation"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-61",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 61,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Complex Numbers and Quadratic Equations",
+    "chapters": [
+      "Complex Numbers and Quadratic Equations"
+    ],
+    "topic": "Modulus and argument (amplitude) of a complex number",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Modulus condition |z1 - 2z2|/|1/2 - z1 conj(z2)| = 2 reduces to a circle condition on z1 or z2 with radius 1 or 1/2",
+    "text": "If z1, z2 are two distinct complex numbers with |(z1 - 2z2)/(1/2 - z1 conj(z2))| = 2, then",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) z1 on circle radius 1/2 and z2 on circle radius 1",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) both on same circle",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) either z1 on circle radius 1/2 or z2 on circle radius 1",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) either z1 on circle radius 1 or z2 on circle radius 1/2",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "modulus and argument (amplitude) of a complex number"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. CHECK",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Complex Numbers and Quadratic Equations",
+        "subtopic": "Modulus and argument (amplitude) of a complex number"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-62",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 62,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Binomial Theorem",
+    "chapters": [
+      "Binomial Theorem"
+    ],
+    "topic": "General term",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Ratio of consecutive binomial coefficients gives n and r; then 2n + 5r = 50",
+    "text": "For 0 <= r <= n, (n+1)C(r+1) : nCr : (n-1)C(r-1) = 55 : 35 : 21; then 2n + 5r equals",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 50",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 62",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 55",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 60",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "general term"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Binomial Theorem",
+        "subtopic": "General term"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-63",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 63,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Permutations and Combinations",
+    "chapters": [
+      "Permutations and Combinations"
+    ],
+    "topic": "Permutations",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Dictionary ordering of letters of NAGPUR (A, G, N, P, R, U) with 315th word",
+    "text": "All words formed from letters of NAGPUR arranged in dictionary order; word at 315th position",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) NRAGUP",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) NRAPUG",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) NRAGPU",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) NRAGPU",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "permutations"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. CHECK",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Permutations and Combinations",
+        "subtopic": "Permutations"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-64",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 64,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Sequence and Series",
+    "chapters": [
+      "Sequence and Series"
+    ],
+    "topic": "Geometric progression",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Perimeters form a GP with ratio 1/2 and areas with ratio 1/4; sums give P^2 = 36 sqrt(3) Q",
+    "text": "Equilateral triangle ABC; repeated joining of midpoints gives triangles; P = sum of perimeters, Q = sum of areas; relation between P and Q",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) P^2 = 6 sqrt(3) Q",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) P^2 = 36 sqrt(3) Q",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) P = 36 sqrt(3) Q^2",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) P^2 = 72 sqrt(3) Q",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "geometric progression"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Sequence and Series",
+        "subtopic": "Geometric progression"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-65",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 65,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Sequence and Series",
+    "chapters": [
+      "Sequence and Series"
+    ],
+    "topic": "Arithmetic progression",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Work-rate series for m systems over 17 days with crashes; sum to total work gives m = 150",
+    "text": "Software company uses m computer systems to finish an assignment in 17 days; 4 systems crash at start of day 2, 4 more at day 3, and so on, finishing 8 days later; value of m",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 150",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 180",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 160",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 125",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "arithmetic progression"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Sequence and Series",
+        "subtopic": "Arithmetic progression"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-66",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 66,
+    "subject": "Maths",
+    "unit": "Coordinate Geometry",
+    "chapter": "Co-ordinate Geometry",
+    "chapters": [
+      "Co-ordinate Geometry"
+    ],
+    "topic": "Standard form of equation of a circle",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Orthocentre condition with P(6,1) and triangle A(5,-2), B(8,3), C(h,k); C lies on x^2 + y^2 - 65 = 0",
+    "text": "Orthocentre of triangle with vertices A(5,-2), B(8,3), C(h,k) is P(6,1); the point C lies on the circle",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) x^2 + y^2 - 61 = 0",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) x^2 + y^2 - 52 = 0",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) x^2 + y^2 - 65 = 0",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) x^2 + y^2 - 74 = 0",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "standard form of equation of a circle"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Co-ordinate Geometry",
+        "subtopic": "Standard form of equation of a circle"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-67",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 67,
+    "subject": "Maths",
+    "unit": "Coordinate Geometry",
+    "chapter": "Co-ordinate Geometry",
+    "chapters": [
+      "Co-ordinate Geometry"
+    ],
+    "topic": "Locus and its equation",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Apollonius circle: (x-2)^2 + (y-1)^2 : (x-1)^2 + (y-3)^2 = 25 : 16, expanded and compared with the given equation gives a^2 + 2b + 3c + 4d + e = 37",
+    "text": "Locus of a point whose distances from (2,1) and (1,3) are in ratio 5:4 is a x^2 + b y^2 + c xy + d x + e y + 170 = 0; find a^2 + 2b + 3c + 4d + e",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 37",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 437",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) -27",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 5",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "locus and its equation"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Co-ordinate Geometry",
+        "subtopic": "Locus and its equation"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-68",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 68,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Limit, Continuity and Differentiability",
+    "chapters": [
+      "Limit, Continuity and Differentiability"
+    ],
+    "topic": "Limits",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Ratio of sums of n-th powers reduces to a limit of the form 1/3 as n tends to infinity",
+    "text": "lim (n -> inf) of [ (1^2-1)(n-1) + ... ] / [ (1^3 + ... + n^3) - (1^2 + ... + n^2) ]",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 2/3",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 1/3",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 3/4",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 1/2",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "limits"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Limit, Continuity and Differentiability",
+        "subtopic": "Limits"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-69",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 69,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Sets, Relations and Functions",
+    "chapters": [
+      "Sets, Relations and Functions"
+    ],
+    "topic": "Relations and types of relations",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Count pairs (x,y) in A x A with 4x <= 5y to get m; minimum pairs to add for symmetry gives n; m + n = 25",
+    "text": "A = {1,2,3,4,5}; relation R on A with x R y iff 4x <= 5y; m = number of elements in R; n = minimum elements to add to make R symmetric; m + n",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 25",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 24",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 26",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 23",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "relations and types of relations"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Sets, Relations and Functions",
+        "subtopic": "Relations and types of relations"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-70",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 70,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Matrices and Determinants",
+    "chapters": [
+      "Matrices and Determinants"
+    ],
+    "topic": "Adjoint and inverse of a square matrix",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Use det(adj M) = det(M)^(n-1) and det(kM) = k^n det(M) repeatedly on the nested adjugates; gives m + 2n = 4",
+    "text": "det(A) = 3 for square matrix A of order 3; det(adj(-4 adj(-3 adj(3 adj((2A)^-1))))) = 2^m 3^n; m + 2n",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 2",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 3",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 6",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 4",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "adjoint and inverse of a square matrix"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Matrices and Determinants",
+        "subtopic": "Adjoint and inverse of a square matrix"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-71",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 71,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Limit, Continuity and Differentiability",
+    "chapters": [
+      "Limit, Continuity and Differentiability"
+    ],
+    "topic": "Graphs of simple functions",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Range of 1/(7 - sin 5x): sin in [-1,1] gives denominator in [6,8], so range [1/8, 1/6]",
+    "text": "f(x) = 1/(7 - sin 5x) defined on R; range of f(x)",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) [1/7, 1/6]",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) [1/8, 1/5]",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) [1/7, 1/5]",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) [1/8, 1/6]",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "graphs of simple functions"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Limit, Continuity and Differentiability",
+        "subtopic": "Graphs of simple functions"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-72",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 72,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Limit, Continuity and Differentiability",
+    "chapters": [
+      "Limit, Continuity and Differentiability"
+    ],
+    "topic": "Differentiation of trigonometric, inverse trigonometric, logarithmic, exponential, composite and implicit functions",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Chain rule on g(x) = h(e^x) e^(h(x)) gives g'(0) from h(0), h(1), h'(0), h'(1)",
+    "text": "h differentiable with h(0) = 0, h(1) = 1, h'(0) = h'(1) = 2; g(x) = h(e^x) e^(h(x)); g'(0)",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 5",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 4",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 8",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 3",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "differentiation of trigonometric, inverse trigonometric, logarithmic, exponential, composite and implicit functions"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Limit, Continuity and Differentiability",
+        "subtopic": "Differentiation of trigonometric, inverse trigonometric, logarithmic, exponential, composite and implicit functions"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-73",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 73,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Limit, Continuity and Differentiability",
+    "chapters": [
+      "Limit, Continuity and Differentiability"
+    ],
+    "topic": "Maxima and minima of functions of one variable",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "f(x) = x^(-2x)... maximum of (1/x)^(2x) at x = 1/e; compare e^pi with pi^e",
+    "text": "f(x) = (1/x)^(2x), x > 0, attains its maximum at x = 1/e; which inequality holds",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) e^pi < pi^e",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) e^pi > pi^e",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) (2e)^pi > pi^(2e)",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) e^(2pi) < (2 pi)^e",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "maxima and minima of functions of one variable"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. CHECK",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Limit, Continuity and Differentiability",
+        "subtopic": "Maxima and minima of functions of one variable"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-74",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 74,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Integral Calculus",
+    "chapters": [
+      "Integral Calculus"
+    ],
+    "topic": "Integration by substitution",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Substitution t = tan 3x gives the standard arctangent form; then maximise a sin x + b cos x",
+    "text": "Integral of 1/(a^2 sin^2 x + b^2 cos^2 x) ... = (1/12) tan^-1(3 tan x) + constant; maximum of a sin x + b cos x",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) sqrt(40)",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) sqrt(41)",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) sqrt(39)",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) sqrt(42)",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "integration by substitution"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. CHECK",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Integral Calculus",
+        "subtopic": "Integration by substitution"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-75",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 75,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Integral Calculus",
+    "chapters": [
+      "Integral Calculus"
+    ],
+    "topic": "Determining areas of regions bounded by simple curves in standard forms",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Area between y = a/x^2 and y = 1/x over 1 <= x <= 2 is log2 - 1/7; solve for a and compute 7a - 3 = -1",
+    "text": "Area of region {(x, y): a/x^2 <= y <= 1/x, 1 <= x <= 2, 0 < a < 1} equals (log_e 2) - 1/7; value of 7a - 3",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 0",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 2",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) -1",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 1",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "determining areas of regions bounded by simple curves in standard forms"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Integral Calculus",
+        "subtopic": "Determining areas of regions bounded by simple curves in standard forms"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-76",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 76,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Differential Equations",
+    "chapters": [
+      "Differential Equations"
+    ],
+    "topic": "Solution of homogeneous differential equations",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Homogeneous-type equation whose solution is a circle through the origin; radius from the general circle form",
+    "text": "Solution of dy/dx = ((2+α)x - βy + 2) / (βx - 2αy - (βγ - 4α)) represents a circle through origin; radius of this circle",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 2",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) sqrt(17)",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 1/2",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) sqrt(17)/2",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "solution of homogeneous differential equations"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. CHECK",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Differential Equations",
+        "subtopic": "Solution of homogeneous differential equations"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-77",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 77,
+    "subject": "Maths",
+    "unit": "Vectors & 3D Geometry",
+    "chapter": "Vector Algebra",
+    "chapters": [
+      "Vector Algebra"
+    ],
+    "topic": "Scalar product",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Compute b first as a vector triple product, then the projection of a on b; square of projection",
+    "text": "a = 2i + j - k, b = ((a x (i + j)) x i) x i; square of projection of a on b",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 1/3",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 2/3",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 2",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 1/5",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "scalar product"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Vector Algebra",
+        "subtopic": "Scalar product"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-78",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 78,
+    "subject": "Maths",
+    "unit": "Vectors & 3D Geometry",
+    "chapter": "Vector Algebra",
+    "chapters": [
+      "Vector Algebra"
+    ],
+    "topic": "Vector product",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Use a x b, its vector product with c, and |c - a| = 2 sqrt(2) with |c| >= 6 and a.c = 6|c|",
+    "text": "a = 6i + j - k, b = i + j; c with |c| >= 6, a.c = 6|c|, |c - a| = 2 sqrt 2, angle between a x b and c is 60 degrees; |(a x b) x c|",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) (9/2)(6 - sqrt 6)",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) (3/2) sqrt 6",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) (9/2)(6 + sqrt 6)",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) (3/2) sqrt 3",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "vector product"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Vector Algebra",
+        "subtopic": "Vector product"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-79",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 79,
+    "subject": "Maths",
+    "unit": "Vectors & 3D Geometry",
+    "chapter": "Three Dimensional Geometry",
+    "chapters": [
+      "Three Dimensional Geometry"
+    ],
+    "topic": "Direction ratios and direction cosines",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Find the image P of Q(3,-3,1) in the line (x)/1 = (y-3)/1 = (z-1)/-1, then the area of triangle PQR; lambda^2 = 14K gives K = 81",
+    "text": "Image P of Q(3,-3,1) in the line x/1 = (y-3)/1 = (z-1)/(-1), and R(2,5,-1); area of triangle PQR is lambda, lambda^2 = 14K; K",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 36",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 81",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 72",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 18",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "direction ratios and direction cosines"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. CHECK",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Three Dimensional Geometry",
+        "subtopic": "Direction ratios and direction cosines"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-80",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 80,
+    "subject": "Maths",
+    "unit": "Statistics & Probability",
+    "chapter": "Statistics and Probability",
+    "chapters": [
+      "Statistics and Probability"
+    ],
+    "topic": "Probability of an event",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Count assignments of 3 letters to 5 addresses with exactly two addresses used: C(5,2) (2^3 - 2) = 60 out of 125 = 12/25",
+    "text": "Three letters are posted to any one of 5 different addresses; probability that the three letters are posted to exactly two addresses",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 18/25",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 12/25",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 6/25",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 4/25",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "probability of an event"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Statistics and Probability",
+        "subtopic": "Probability of an event"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-81",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 81,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Complex Numbers and Quadratic Equations",
+    "chapters": [
+      "Complex Numbers and Quadratic Equations"
+    ],
+    "topic": "Relations between roots and coefficients",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Recurrence U_n = alpha^n + beta^n with alpha + beta = -sqrt 2 and alpha beta = -8; ratio of combined terms reduces to an integer",
+    "text": "alpha, beta roots of x^2 + sqrt 2 x - 8 = 0; U_n = alpha^n + beta^n; (U10 + sqrt 2 U9) / (2 U8) (integer)",
+    "options": [],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "relations between roots and coefficients"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Complex Numbers and Quadratic Equations",
+        "subtopic": "Relations between roots and coefficients"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-82",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 82,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Binomial Theorem",
+    "chapters": [
+      "Binomial Theorem"
+    ],
+    "topic": "Simple applications",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Sum of binomial series with (1+x) powers gives closed form; compare coefficients at x = 60th power; key from printed answer",
+    "text": "S(x) = (1+x) + 2(1+x)^2 + ... + 60(1+x)^60 for x != 0; (60)^2 S(60) = a(b)^b + b with a, b in N; a + b (integer)",
+    "options": [],
+    "correct_answer": [
+      "3660"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "simple applications"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Binomial Theorem",
+        "subtopic": "Simple applications"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-83",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 83,
+    "subject": "Maths",
+    "unit": "Coordinate Geometry",
+    "chapter": "Co-ordinate Geometry",
+    "chapters": [
+      "Co-ordinate Geometry"
+    ],
+    "topic": "Sections of conics: parabola, ellipse and hyperbola in standard forms",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Hyperbola with eccentricity 9, latus rectum and directrix conditions; tangent line condition gives focal distances product; key from printed answer",
+    "text": "Latus rectum and directrices of hyperbola with eccentricity e = 9 and x = +- 4/sqrt 13; line y - sqrt3 x + sqrt3 = 0 touches hyperbola at (x0, y0); m = product of focal distances of (x0, y0); find 4e^2 + m (integer)",
+    "options": [],
+    "correct_answer": [
+      "61"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "sections of conics: parabola, ellipse and hyperbola in standard forms"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. CHECK",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Co-ordinate Geometry",
+        "subtopic": "Sections of conics: parabola, ellipse and hyperbola in standard forms"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-84",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 84,
+    "subject": "Maths",
+    "unit": "Trigonometry",
+    "chapter": "Trigonometry",
+    "chapters": [
+      "Trigonometry"
+    ],
+    "topic": "Trigonometrical identities",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Triangle with BC = 7, AC = 8, AB = alpha; cos A = 2/3 gives alpha = 4 and cos 3C from identity; key from printed answer",
+    "text": "Triangle ABC with BC = 7, AC = 8, AB = alpha in N and cos A = 2/3; if 49 cos 3C + 42 = m/n with gcd(m,n) = 1, find m + n (integer)",
+    "options": [],
+    "correct_answer": [
+      "39"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "trigonometrical identities"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key. CHECK",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Trigonometry",
+        "subtopic": "Trigonometrical identities"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-85",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 85,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Matrices and Determinants",
+    "chapters": [
+      "Matrices and Determinants"
+    ],
+    "topic": "Test of consistency of linear equations",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "System 2x + 7y + lambda z = 3, 3x + 2y + 5z = 4, x + mu y + 32z = -1 has infinitely many solutions; determinant and minors give lambda - mu",
+    "text": "Linear system has infinitely many solutions; find (lambda - mu) (integer)",
+    "options": [],
+    "correct_answer": [
+      "38"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "test of consistency of linear equations"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Matrices and Determinants",
+        "subtopic": "Test of consistency of linear equations"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-86",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 86,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Sets, Relations and Functions",
+    "chapters": [
+      "Sets, Relations and Functions"
+    ],
+    "topic": "Functions",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Evaluate f(x) = [x/2 + 3] - sqrt(x) on [0, 8] with greatest integer function; find discontinuity points and sum them as the set S; integer sum (integer)",
+    "text": "f: [0, inf) -> R, f(x) = [x/2 + 3] - sqrt(x); S = points in [0,8] where f is not continuous; sum of elements of S (integer)",
+    "options": [],
+    "correct_answer": [
+      "17"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "functions"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Sets, Relations and Functions",
+        "subtopic": "Functions"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-87",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 87,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Integral Calculus",
+    "chapters": [
+      "Integral Calculus"
+    ],
+    "topic": "Evaluation of definite integrals",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Integral of floor functions over [0,3] with sqrt terms; compare coefficients of a, b, c",
+    "text": "Integral from 0 to 3 of ([x^2] + [x^2/2]) dx = a + b sqrt2 - sqrt3 - sqrt5 + c sqrt6 - sqrt7 with a, b, c in Z; a + b + c (integer)",
+    "options": [],
+    "correct_answer": [
+      "23"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "evaluation of definite integrals"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Integral Calculus",
+        "subtopic": "Evaluation of definite integrals"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-88",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 88,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Differential Equations",
+    "chapters": [
+      "Differential Equations"
+    ],
+    "topic": "Solution by the method of separation of variables",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Separate variables: (e^y + 1) cos x dx + e^y sin x dy = 0 with the point (pi/2, 0) gives e^(y(pi/6)) integer; key from printed answer",
+    "text": "Solution y(x) of (e^y + 1) cos x dx + e^y sin x dy = 0 passes through (pi/2, 0); value of e^(y(pi/6)) (integer)",
+    "options": [],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "solution by the method of separation of variables"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Differential Equations",
+        "subtopic": "Solution by the method of separation of variables"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-89",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 89,
+    "subject": "Maths",
+    "unit": "Vectors & 3D Geometry",
+    "chapter": "Three Dimensional Geometry",
+    "chapters": [
+      "Three Dimensional Geometry"
+    ],
+    "topic": "Shortest distance between skew lines and its equation",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Shortest distance between two lines depending on lambda equals 44/sqrt 30; solve for lambda; key from printed answer",
+    "text": "Shortest distance between (x - lambda)/3 = (y-2)/-1 = (z-1)/1 and (x+2)/(-3) = (y+5)/2 = (z-4)/4 is 44/sqrt 30; largest possible |lambda| (integer)",
+    "options": [],
+    "correct_answer": [
+      "43"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "shortest distance between skew lines and its equation"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Three Dimensional Geometry",
+        "subtopic": "Shortest distance between skew lines and its equation"
+      }
+    ]
+  },
+  {
+    "id": "main-2024-apr-s2-sh2-06apr-p-90",
+    "exam": "main",
+    "year": 2024,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2024-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 90,
+    "subject": "Maths",
+    "unit": "Statistics & Probability",
+    "chapter": "Statistics and Probability",
+    "chapters": [
+      "Statistics and Probability"
+    ],
+    "topic": "Probability distribution of a random variable",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Hypergeometric draws without replacement: variance of X = m/n with gcd 1; n - m; key from printed answer",
+    "text": "12 items with 3 defective; sample of 5 drawn one by one without replacement; X = number of defectives; variance of X = m/n, gcd(m,n) = 1; find n - m",
+    "options": [],
+    "correct_answer": [
+      "71"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "probability distribution of a random variable"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2024); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Statistics and Probability",
+        "subtopic": "Probability distribution of a random variable"
+      }
+    ]
+  }
+]
