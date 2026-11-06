@@ -22,7 +22,7 @@
 @media (min-width:960px){ #app{ background:var(--bg); } }
 /* Header sits in the same row as the menu button and matches its height */
 html, body{ overscroll-behavior-y:none; }
-.header{ margin:calc(env(safe-area-inset-top,0px) - 12px) 0 26px; padding-left:72px; height:46px; min-height:46px; align-items:center; gap:12px; overflow:visible; }
+.header{ margin:12px 0 26px; padding-left:72px; height:46px; min-height:46px; align-items:center; gap:12px; overflow:visible; }
 .header .brand-lock{ justify-content:center; }
 /* Vertical rhythm: every card-type block keeps 14px of space below it, so cards never touch */
 #app > div > .card, #app > div > .list, #app > div > .big-card, #app > div > .cal-card, #app > div > .exam-row, #app > div > .subjgrid, #app > div > .stats, #app > div > figure.qcard, #app > div > .hm-hero,
@@ -2390,7 +2390,7 @@ body{ overflow-x:clip; }
 @media (max-width:759px){
   :root{ --fs-1:13px; }
   .subjlabel span{font-size:13px}
-  body:has(#navBack) #app .header{ margin-top:calc(env(safe-area-inset-top,0px) - 12px); }
+  body:has(#navBack) #app .header{ margin-top:12px; }
   .onb-step, .brand-sub{ white-space:nowrap; }
   .brand-sub{ letter-spacing:.08em; }
   .bn{font-size:13px}
@@ -3578,7 +3578,7 @@ body.flash-session .fl-wrap{ display:block !important; max-width:none !important
 @media (max-width:959px){
   body.flash-session{ overflow:hidden !important; height:100dvh !important; }
   body.flash-session #app{ height:100dvh !important; display:flex !important; flex-direction:column !important; overflow:hidden !important; box-sizing:border-box !important; padding-top:env(safe-area-inset-top,0px) !important; padding-bottom:calc(env(safe-area-inset-bottom,0px) + 10px) !important; }
-  body.flash-session #app > .header{ margin:calc(env(safe-area-inset-top,0px) - 12px) 0 0 !important; flex:0 0 auto; }
+  body.flash-session #app > .header{ margin:12px 0 0 !important; flex:0 0 auto; }
   body.flash-session .hm-hero{ display:none !important; }
   body.flash-session .fl-wrap{ flex:1 1 auto !important; min-height:0 !important; display:flex !important; flex-direction:column !important; width:100% !important; max-width:none !important; margin:0 !important; padding:0 !important; }
   body.flash-session .fx2-top{ flex:0 0 auto !important; height:46px !important; margin:-46px 0 0 !important; padding:0 4px 0 0 !important; justify-content:flex-end !important; align-items:center !important; pointer-events:none; }
@@ -3602,7 +3602,7 @@ body.flash-session .fl-wrap{ display:block !important; max-width:none !important
   body.flash-session .fx2-top{ position:absolute !important; top:calc(env(safe-area-inset-top,0px) + 15px) !important; right:16px !important; left:auto !important; width:auto !important; height:40px !important; margin:0 !important; padding:0 !important; z-index:5; }
   body.flash-session .fl-wrap{ padding-top:14px !important; }
   body.flash-session #navBack{ display:none !important; }
-  body.flash-session #app > .header{ position:relative !important; height:46px !important; min-height:46px !important; padding-left:0 !important; margin:calc(env(safe-area-inset-top,0px) - 12px) 0 0 !important; top:-52px !important; overflow:visible !important; }
+  body.flash-session #app > .header{ position:relative !important; height:46px !important; min-height:46px !important; padding-left:0 !important; margin:12px 0 0 !important; top:-52px !important; overflow:visible !important; }
   body.flash-session #app > .header .brand-lock{ position:absolute !important; left:50% !important; top:50% !important; transform:translate(-50%,-50%) !important; flex-direction:row !important; align-items:center !important; }
   body.flash-session #app > .header .brand-sub{ display:none !important; }
   body.flash-session #app > .header .brand-lock .wm{ width:112px !important; height:35px !important; display:block !important; }
