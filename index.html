@@ -6128,7 +6128,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.11.57';
+const APP_VERSION = 'v01.11.58';
 const LAST_UPDATED = 'November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -15444,6 +15444,8 @@ function seriesResultsView(){
             if(!box.childNodes.length){
               box.appendChild(el('<div class="qtext">'+qtextHTML(qInfo.text)+'</div>'));
               box.appendChild(el('<div class="note">Answer: '+esc(answerLabel(qInfo))+'</div>'));
+              // This box is added after the screen has rendered, so typeset its maths now
+              if(typeof renderMathInElement==='function'){ try{ renderMathInElement(box, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}], throwOnError:false}); }catch(e){} }
             }
             box.hidden = false; b.textContent = 'Hide question';
           } else { box.hidden = true; b.textContent = 'Show question'; }
