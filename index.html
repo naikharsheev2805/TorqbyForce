@@ -13681,9 +13681,10 @@ function cloudSync(){
     if(!cloudReady){ restoreCloudState(sbSession.user.id).then(()=>{ if(typeof render==='function' && !authBusy) render(); }); }
     else { flushCloud(); uploadPending(); flushReports(); }
   }, 15000);
-  document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState === 'hidden'){ sessionTick(true); flushCloud(); } });
-  window.addEventListener('pagehide', ()=>{ sessionTick(true); flushCloud(); });
-  setInterval(()=>sessionTick(false), 1000);
+  const saveNow = (u)=>{ if(typeof sessionTick === 'function') sessionTick(u); };
+  document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState === 'hidden'){ saveNow(true); flushCloud(); } });
+  window.addEventListener('pagehide', ()=>{ saveNow(true); flushCloud(); });
+  setInterval(()=>saveNow(false), 1000);
 
   const TL = el(splashHTML());
   // The progress card is no longer shown; the torqSplash overlay is the loading screen.
@@ -15202,10 +15203,12 @@ function tryRestoreSession(){
 async function restoreGuarded(st){
   if(st.seriesId){
     if(st.seriesEndsAt && Date.now() > st.seriesEndsAt){ clearSessionProgress(); return false; }
+    // Ask the server whether this student has already submitted it. If the check fails, do not reopen the test.
     try{
-      const { data } = await sbClient().from('test_series_attempts').select('id').eq('series_id', st.seriesId).limit(1);
-      if(data && data.length){ clearSessionProgress(); return false; }
-    }catch(e){}
+      const { data, error } = await sbClient().rpc('series_mine_submitted', { p_series: st.seriesId });
+      if(error) return false;
+      if(data === true){ clearSessionProgress(); return false; }
+    }catch(e){ return false; }
   }
   return restoreSessionFrom(st);
 }
