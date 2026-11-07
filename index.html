@@ -4688,7 +4688,7 @@ function saveLastView(){
   try{ const o = {view, nav: {}}; Object.keys(nav).forEach(k=>{ if(k!=='cfg' && k!=='mockCfg') o.nav[k]=nav[k]; }); localStorage.setItem(LAST_VIEW_KEY, JSON.stringify(o)); }catch(e){}
 }
 function restoreLastView(){
-  try{ const o = JSON.parse(localStorage.getItem(LAST_VIEW_KEY)); if(!o || !o.view || !TAB_OF[o.view]) return; const dis = TABS.find(t=>t.id===TAB_OF[o.view]); if(dis && dis.disabled) return; view = o.view; if(o.nav) Object.assign(nav, o.nav); if(TAB_OF[o.view]) nav.tab = TAB_OF[o.view]; }catch(e){}
+  try{ const o = JSON.parse(localStorage.getItem(LAST_VIEW_KEY)); if(!o || !o.view || !TAB_OF[o.view]) return; if(o.view === 'seriesplay') return; const dis = TABS.find(t=>t.id===TAB_OF[o.view]); if(dis && dis.disabled) return; view = o.view; if(o.nav) Object.assign(nav, o.nav); if(TAB_OF[o.view]) nav.tab = TAB_OF[o.view]; }catch(e){}
 }
 // Keeps the highlighted menu item on screen, so the section you are in is always visible in the bar
 function keepTabInView(){
@@ -6288,6 +6288,7 @@ const TABS = [
   {id:'me', label:'Me', icon:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>'}
 ];
 function registerSW(){
+  if('caches' in window){ caches.keys().then(ks=>ks.forEach(k=>{ if(/torq|static|app|v\d/i.test(k)) caches.delete(k); })).catch(()=>{}); }
   if('serviceWorker' in navigator && location.protocol.indexOf('http')===0){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
 }
 // Collapsible navigation: three bars at the top left open the tab list; they turn into a cross while it is open
