@@ -5561,6 +5561,7 @@ const SESSION_SNAP_KEY = 'torq.session.v1';
 function saveSessionSnapshot(){
   try{
     if(!session){ return; }                                   // nothing loaded yet: keep the saved copy
+    if(session.seriesId){ localStorage.removeItem(SESSION_SNAP_KEY); if(store.liveSession){ store.liveSession = null; persist(); } return; }
     if(session.submitted || session.review){ localStorage.removeItem(SESSION_SNAP_KEY); if(store.liveSession){ store.liveSession = null; persist(); } return; }
     const snap = Object.assign({}, session, {queue: undefined, queueIds: session.queue.map(q=>q.id)});
     localStorage.setItem(SESSION_SNAP_KEY, JSON.stringify(snap));
@@ -5570,6 +5571,7 @@ function restoreSessionSnapshot(){
   let snap = null;
   try{ snap = JSON.parse(localStorage.getItem(SESSION_SNAP_KEY)); }catch(e){}
   if(!snap && store.liveSession) snap = store.liveSession;
+  if(snap && snap.seriesId){ localStorage.removeItem(SESSION_SNAP_KEY); if(store.liveSession){ store.liveSession = null; persist(); } return; }
   if(!snap || !snap.queueIds || !snap.queueIds.length || snap.submitted || snap.review) return;
   const queue = snap.queueIds.map(id=>QUESTIONS.find(q=>q.id===id));
   if(queue.some(q=>!q)) return;                              // the question bank changed: start clean
