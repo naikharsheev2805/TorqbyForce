@@ -6280,7 +6280,7 @@ const TABS = [
   {id:'calendar', label:'Calendar', icon:'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>'},
   {id:'syllabus', label:'Syllabus', icon:'<path d="M4 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>'},
   {id:'leaderboard', label:'Leaderboard', icon:'<path d=\"M8 4h8v5a4 4 0 0 1-8 0z\"/><path d=\"M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4\"/><path d=\"M12 13v4M9 20h6M10 17h4\"/>'},
-  {id:'mocks', label:'Mocks', title:'Mocks, coming soon', disabled:true, icon:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>'},
+  {id:'mocks', label:'Mocks', icon:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>'},
   {id:'notebooks', label:'Notebooks', icon:'<path d="M7 3h10v18l-5-4-5 4z"/>'},
   {id:'friends', label:'Friends', icon:'<circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2c2.6.2 5 2.3 5 5.3"/>'},
   {id:'messages', label:'Messages', icon:'<path d="M4 5h16v11H9l-5 4z"/>'},
@@ -7855,7 +7855,7 @@ function customTestPart(){
   cb.onclick = ()=>{
     const pool = shuffle(QUESTIONS.filter(q=>tc.chapters.indexOf(q.chapter)>=0));
     if(!pool.length){ appNotice('Nothing to start', 'No questions in the chosen chapters yet.'); return; }
-    startSession({mode:'mock', title:'Custom test', queue:pool.slice(0, tc.n), limit:tc.minutes*60});
+    preMockStart(function(){ startSession({mode:'mock', title:'Custom test', queue:pool.slice(0, tc.n), limit:tc.minutes*60}); });
   };
   cc.appendChild(cb);
   w.appendChild(cc);
@@ -7863,11 +7863,41 @@ function customTestPart(){
 }
 
 function testCfg(){ return nav.testCfg || (nav.testCfg = {chapters:[], n:25, minutes:60}); }
-function mocksView(){
+// Pre-mock checklist: shown once a day before the first timed paper. Start goes ahead; Go back does not.
+function preMockStart(fn){
+  let seen = null;
+  try{ seen = localStorage.getItem('torq_premock_day'); }catch(e){}
+  if(seen === dayKey()){ fn(); return; }
+  appDialog({eyebrow:'Before you start', title:'Ready for a timed paper?',
+    body:'Set your own timer, put your phone on silent and out of reach, and mark sure or guess on each answer as you go.',
+    ok:'Start', cancel:'Go back'}).then(function(ok){
+      if(!ok) return;
+      try{ localStorage.setItem('torq_premock_day', dayKey()); }catch(e){}
+      fn();
+    });
+}
+// Starts a PYQ paper as a timed mock, after the checklist
+function startPyqPaper(p){
+  const qs = QUESTIONS.filter(function(q){ return q.paperId === p.id; }).sort(function(a,b){ return SUBJECTS.indexOf(a.subject) - SUBJECTS.indexOf(b.subject); });
+  if(!qs.length){ appNotice('Nothing to start', 'No questions for this paper yet.'); return; }
+  preMockStart(function(){ startSession({mode:'mock', title:'PYQ mock: ' + paperTitle(p), queue:qs, limit:180*60}); });
+}
+// Paper of the day: one paper a day, the same for everyone, chosen from the papers that have questions
+function paperOfTheDay(){
+  const ps = (PAPERS || []).filter(function(p){ return QUESTIONS.some(function(q){ return q.paperId === p.id; }); });
+  if(!ps.length) return null;
+  return ps[seed(dayKey()) % ps.length];
+}
+function mocksTakePart(){
   const w = el('<div></div>');
-  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Timed like the real paper</div><h1 class="hm-title">Test <em>zone.</em></h1></div>'));
   w.appendChild(el('<p class="note-line" style="margin:0 0 16px">Answer each question and submit. Marks use standard JEE marking, and mocks do not change your points or the leaderboard.</p>'));
 
+  const potd = paperOfTheDay();
+  if(potd){
+    const pc = el('<div class="card" style="margin-bottom:14px"><div class="eyebrow">Paper of the day</div><div class="big">' + esc(paperTitle(potd)) + '</div><div class="small">' + esc(paperDate(potd)) + ' · 180 minutes</div></div>');
+    pc.onclick = function(){ startPyqPaper(potd); };
+    w.appendChild(pc);
+  }
   // PYQ mock test: a real paper, timed, exactly as it was asked
   w.appendChild(el('<div class="eyebrow" style="margin:6px 0 10px">PYQ mock test</div>'));
   w.appendChild(el('<p class="note-line" style="margin:0 0 12px">Pick a previous year paper and sit it under exam conditions: 180 minutes, +4 for correct, −1 for wrong.</p>'));
@@ -7877,11 +7907,7 @@ function mocksView(){
   papers.forEach(p=>{
     const n = QUESTIONS.filter(q=>q.paperId===p.id).length;
     const row = el('<div class="row"><div><div class="name">'+esc(paperTitle(p))+'</div><div class="meta">'+esc(paperDate(p))+' · '+n+' questions · 180 minutes</div></div><div class="end">Start</div></div>');
-    row.onclick = ()=>{
-      const qs = QUESTIONS.filter(q=>q.paperId===p.id).sort((a,b)=>SUBJECTS.indexOf(a.subject)-SUBJECTS.indexOf(b.subject));
-      if(!qs.length){ appNotice('Nothing to start', 'No questions for this paper yet.'); return; }
-      startSession({mode:'mock', title:'PYQ mock: '+paperTitle(p), queue:qs, limit:180*60});
-    };
+    row.onclick = ()=>startPyqPaper(p);
     pl.appendChild(row);
   });
   if(papers.length) w.appendChild(pl);
@@ -7890,6 +7916,366 @@ function mocksView(){
   const ja = el('<div class="card preset" style="margin-top:14px"><div class="eyebrow">Full paper</div><div class="big">JEE Advanced style</div><div class="small">Approximate: 18 questions per subject · 180 minutes</div></div>');
   ja.onclick = ()=>startMock({title:'JEE Advanced style mock', subjects:SUBJECTS, perSubject:18, minutes:180});
   w.appendChild(ja);
+  return w;
+}
+
+// ----- Mocks: take a test, or review Upcoming, Attempted and Missed -----
+const MOCK_TABS = [['take','Take a test'],['upcoming','Upcoming'],['attempted','Attempted'],['missed','Missed']];
+// JEE marking for single-correct questions: +4 right, -1 wrong, 0 skipped (integer questions have no negative, so this is an estimate)
+function mockScore(items){
+  let c = 0, w = 0, sk = 0, t = 0;
+  items.forEach(function(it){ t += (it.t || 0); if(it.skip || it.correct == null) sk++; else if(it.correct) c++; else w++; });
+  return {correct: c, wrong: w, skipped: sk, total: items.length, marks: c * 4 - w, secs: t};
+}
+// Submitted mock sessions, newest first (the same records Me > History uses)
+function mockAttempts(){
+  return (store.sessions || []).filter(function(s){ return s && s.mode === 'mock' && Array.isArray(s.items) && s.items.some(function(x){ return !x.skip; }); });
+}
+// Papers in the bank that have no submitted mock yet
+function mockMissedPapers(){
+  const done = {};
+  mockAttempts().forEach(function(s){ done[s.title] = true; });
+  return (PAPERS || []).slice().sort(function(a,b){ return (b.date || '').localeCompare(a.date || ''); })
+    .filter(function(p){ return !done['PYQ mock: ' + paperTitle(p)]; });
+}
+// Upcoming and live series from the server (series_upcoming). null = not loaded yet.
+let mockUpcomingRemote = null, mockUpcomingLoading = false;
+async function mockUpcomingLoad(){
+  if(mockUpcomingLoading) return;
+  mockUpcomingLoading = true;
+  try{
+    const { data, error } = await sbClient().rpc('series_upcoming');
+    mockUpcomingRemote = error ? [] : (data || []);
+  }catch(e){ mockUpcomingRemote = []; }
+  mockUpcomingLoading = false;
+  render();
+}
+function mockUpcomingPart(){
+  const w = el('<div></div>');
+  if(!sbSession){
+    w.appendChild(el('<div class="card empty">Sign in to see the test series schedule.</div>'));
+    return w;
+  }
+  if(mockUpcomingRemote === null){
+    mockUpcomingLoad();
+    w.appendChild(el('<div class="card empty">Loading the schedule...</div>'));
+    return w;
+  }
+  if(!mockUpcomingRemote.length){
+    w.appendChild(el('<div class="card empty">No test series scheduled right now. New tests will appear here.</div>'));
+    return w;
+  }
+  const now = Date.now();
+  let counting = false;
+  const lst = el('<div class="list"></div>');
+  mockUpcomingRemote.forEach(function(n){
+    const start = new Date(n.starts_at).getTime(), close = new Date(n.closes_at).getTime();
+    const open = start - SERIES_WINDOW_MIN * 60000;
+    const when = new Date(n.starts_at).toLocaleString([], {weekday:'short', day:'numeric', month:'short', hour:'numeric', minute:'2-digit'});
+    // Each status is a label, plus a live countdown to the moment it changes where there is one
+    let label = '', target = null, action = null;
+    if(n.mine_done){
+      label = now < close ? 'Submitted' : 'Results ready';
+      action = function(){ seriesResult = null; go('seriesresults', {seriesId: n.id}); };
+    } else if(n.entered && now < close){
+      if(now < start){ label = 'Entered · starts in '; target = start; }
+      else label = 'Live now';
+      action = function(){ go('seriesplay', {seriesId: n.id}); };
+    } else if(now < open){
+      label = 'Entry opens in '; target = open;
+    } else if(now < start){
+      label = 'Entry open · starts in '; target = start;
+      action = function(){ seriesEnterNow(n); };
+    } else {
+      label = 'Entry closed';
+    }
+    let statusHtml = esc(label);
+    if(target != null){
+      statusHtml += '<span class="upc-cd" data-upc="' + target + '"></span>';
+      counting = true;
+    }
+    const endTxt = action ? (n.mine_done ? 'Results' : (n.entered ? 'Open' : 'Enter')) : '';
+    const row = el('<div class="row"><div><div class="name">' + esc(n.title) + '</div><div class="meta">' + esc((n.group_title ? n.group_title + ' · Paper ' + (n.paper_no || 1) + ' · ' : '') + n.question_count + ' questions · ' + n.duration_min + ' min') + '</div><div class="meta">' + statusHtml + '</div><div class="meta" style="opacity:.8">' + esc(when) + '</div></div><div class="end">' + endTxt + '</div></div>');
+    if(action) row.onclick = action;
+    lst.appendChild(row);
+  });
+  w.appendChild(lst);
+  if(counting){
+    requestAnimationFrame(tickUpcoming);
+    if(!upcTick) upcTick = setInterval(tickUpcoming, 1000);
+  }
+  return w;
+}
+// Keeps the Upcoming countdowns moving. Stops once no countdown is on screen; redraws once when a countdown reaches zero.
+let upcTick = null;
+function tickUpcoming(){
+  const nodes = document.querySelectorAll('.upc-cd');
+  if(!nodes.length){ clearInterval(upcTick); upcTick = null; return; }
+  const now = Date.now();
+  let changed = false;
+  nodes.forEach(function(n){
+    const left = Number(n.getAttribute('data-upc')) - now;
+    if(left <= 0){ changed = true; return; }
+    setFlipText(n, seriesFmtLeft(left));
+  });
+  if(changed){ render(); }
+}
+// Sure vs guessing: a 2x2 of right/wrong against confidence, from mock answers that were labelled
+function mockConfidenceCard(){
+  const rows = (store.attempts || []).filter(function(a){ return a && a.mock && (a.conf === 'sure' || a.conf === 'guess') && a.c != null; });
+  if(!rows.length) return null;
+  const q = {sr: 0, sw: 0, gr: 0, gw: 0};
+  rows.forEach(function(a){ q[(a.conf === 'sure' ? 's' : 'g') + (a.c ? 'r' : 'w')]++; });
+  const n = rows.length, sure = q.sr + q.sw, guess = q.gr + q.gw;
+  const pct = function(v, d){ return d ? Math.round(v / d * 100) + '%' : '–'; };
+  const cell = function(label, v, d, tone){
+    return '<div style="padding:12px 8px;border-radius:14px;background:' + tone + ';text-align:center">'
+      + '<b style="display:block;font:600 22px Lora,Georgia,serif;color:var(--text)">' + v + '</b>'
+      + '<span style="font-size:12px;color:var(--muted)">' + label + ' · ' + pct(v, d) + '</span></div>';
+  };
+  let takeaway;
+  if(n < 10) takeaway = 'Not enough labelled answers for a pattern yet. Keep marking sure or guess in mocks.';
+  else if(sure >= 5 && q.sw / sure >= 0.3) takeaway = 'Slow down on the answers you feel sure about: ' + pct(q.sw, sure) + ' of them were wrong.';
+  else if(guess >= 5 && q.gr / guess >= 0.5) takeaway = 'Your guesses land more often than not. Mark sure only when you can justify the answer.';
+  else takeaway = 'Your confidence is well matched to your answers. Keep it up.';
+  return el('<div class="card" style="margin-top:14px"><div class="eyebrow">Sure vs guessing</div>'
+    + '<p class="note-line" style="margin:6px 0 12px">' + n + ' labelled mock answers. Sure means you were confident. Guess means you were not.</p>'
+    + '<div style="display:grid;grid-template-columns:auto 1fr 1fr;gap:8px;align-items:stretch;font-size:12px;color:var(--muted)">'
+    + '<span></span><span style="text-align:center">Guess</span><span style="text-align:center">Sure</span>'
+    + '<span style="align-self:center">Right</span>'
+    + cell('guessed right', q.gr, guess, 'var(--surface-2)') + cell('sure and right', q.sr, sure, 'var(--accent-soft)')
+    + '<span style="align-self:center">Wrong</span>'
+    + cell('guessed wrong', q.gw, guess, 'var(--surface-2)') + cell('confident mistakes', q.sw, sure, 'var(--surface-2)')
+    + '</div><p class="note-line" style="margin:12px 0 0">' + takeaway + '</p></div>');
+}
+// All of this user's series submissions, from the server (series_my_history). null = not loaded yet.
+let mockSeriesRemote = null, mockSeriesLoading = false;
+async function mockSeriesLoad(){
+  if(mockSeriesLoading) return;
+  mockSeriesLoading = true;
+  try{
+    const { data, error } = await sbClient().rpc('series_my_history');
+    mockSeriesRemote = error ? [] : (data || []);
+  }catch(e){ mockSeriesRemote = []; }
+  mockSeriesLoading = false;
+  render();
+}
+// The series list for the Attempted tab: the server copy when it has loaded, otherwise this device's record
+function mockSeriesList(){
+  if(sbSession && mockSeriesRemote === null){ mockSeriesLoad(); }
+  if(mockSeriesRemote){
+    return mockSeriesRemote.map(function(r){
+      return {seriesId: r.series_id, title: r.title || 'Test series', at: Date.parse(r.submitted_at) || Date.now(),
+              c: r.correct || 0, w: r.wrong || 0, sk: r.skipped || 0, timeMs: r.time_ms || 0};
+    });
+  }
+  return store.seriesLog || [];
+}
+// Mock heatmap: each day's mock accuracy over the last 12 weeks (Sunday to Saturday columns)
+function mockHeatCard(){
+  const byDay = {};
+  (store.attempts || []).forEach(function(a){
+    if(!a || !a.mock || a.c == null || !a.d) return;
+    const b = byDay[a.d] || (byDay[a.d] = {ok: 0, n: 0});
+    b.n++; if(a.c) b.ok++;
+  });
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const start = new Date(today); start.setDate(today.getDate() - today.getDay() - 7 * 11);
+  const weeks = [];
+  for(let wk = 0; wk < 12; wk++){
+    const col = [];
+    for(let dow = 0; dow < 7; dow++){
+      const d = new Date(start); d.setDate(start.getDate() + wk * 7 + dow);
+      const future = d > today;
+      const key = dayKey(d);
+      const b = byDay[key];
+      const acc = b && b.n ? Math.round(b.ok / b.n * 100) : null;
+      const tip = d.toLocaleDateString(undefined, {day: 'numeric', month: 'short'}) + (acc == null ? '' : ' · ' + acc + '% (' + b.n + ' answers)');
+      const bg = future ? 'transparent' : (acc == null ? 'var(--surface-2)' : 'color-mix(in srgb, var(--accent) ' + Math.max(25, acc) + '%, var(--surface-2))');
+      col.push('<i title="' + esc(tip) + '" style="display:block;width:100%;aspect-ratio:1;border-radius:4px;background:' + bg + '"></i>');
+    }
+    weeks.push('<div style="display:grid;grid-template-rows:repeat(7,1fr);gap:3px">' + col.join('') + '</div>');
+  }
+  const days = Object.keys(byDay).length;
+  return el('<div class="card" style="margin-top:14px"><div class="eyebrow">Mock heatmap</div>'
+    + '<p class="note-line" style="margin:6px 0 12px">Last 12 weeks. Darker days were more accurate. ' + days + ' day' + (days === 1 ? '' : 's') + ' with mock answers.</p>'
+    + '<div style="display:grid;grid-template-columns:repeat(12,1fr);gap:3px">' + weeks.join('') + '</div></div>');
+}
+// Subject radar: accuracy by subject in your most recent mock, drawn as a polygon
+function mockRadarCard(){
+  const latest = mockAttempts()[0];
+  if(!latest) return null;
+  const subs = SUBJECTS.slice(0, 6);
+  if(subs.length < 3) return null;
+  const tot = {}, ok = {};
+  latest.items.forEach(function(it){
+    const q = QMAP[it.q]; if(!q) return;
+    tot[q.subject] = (tot[q.subject] || 0) + 1;
+    if(it.correct && !it.skip) ok[q.subject] = (ok[q.subject] || 0) + 1;
+  });
+  const cx = 120, cy = 120, R = 80, n = subs.length;
+  const pt = function(i, frac){
+    const a = -Math.PI / 2 + i * 2 * Math.PI / n;
+    return (cx + Math.cos(a) * R * frac).toFixed(1) + ',' + (cy + Math.sin(a) * R * frac).toFixed(1);
+  };
+  const ring = function(f){ return subs.map(function(_, i){ return pt(i, f); }).join(' '); };
+  const vals = subs.map(function(sub){ return tot[sub] ? (ok[sub] || 0) / tot[sub] : 0; });
+  const poly = vals.map(function(v, i){ return pt(i, Math.max(0.03, v)); }).join(' ');
+  const labels = subs.map(function(sub, i){
+    const a = -Math.PI / 2 + i * 2 * Math.PI / n;
+    const x = cx + Math.cos(a) * (R + 22), y = cy + Math.sin(a) * (R + 22);
+    const pctTxt = tot[sub] ? Math.round(vals[i] * 100) + '%' : '–';
+    return '<text x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="var(--muted)">' + esc(sub) + '</text>'
+      + '<text x="' + x.toFixed(1) + '" y="' + (y + 13).toFixed(1) + '" text-anchor="middle" font-size="11" font-weight="600" fill="var(--text)">' + pctTxt + '</text>';
+  }).join('');
+  const svg = '<svg viewBox="0 0 240 240" width="100%" style="max-width:300px;display:block;margin:0 auto;overflow:visible" role="img" aria-label="Accuracy by subject in your latest mock">'
+    + '<polygon points="' + ring(1) + '" fill="none" stroke="var(--border)"/>'
+    + '<polygon points="' + ring(0.5) + '" fill="none" stroke="var(--border)" stroke-dasharray="3 4"/>'
+    + '<polygon points="' + poly + '" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="2" style="transition:all .6s cubic-bezier(.2,.7,.2,1)"/>'
+    + labels + '</svg>';
+  return el('<div class="card" style="margin-top:14px"><div class="eyebrow">Subject shape</div>'
+    + '<p class="note-line" style="margin:6px 0 10px">Accuracy by subject in your latest mock, out of all its questions in each subject.</p>' + svg + '</div>');
+}
+function mockAttemptedPart(){
+  const w = el('<div></div>');
+  const list = mockAttempts();
+  const ser = mockSeriesList();
+  if(!list.length && !ser.length){
+    w.appendChild(el('<div class="card empty">No submitted mocks yet. Sit a paper and your report will appear here.</div>'));
+    return w;
+  }
+  if(ser.length){
+    w.appendChild(el('<div class="eyebrow" style="margin:0 0 10px">Test series</div>'));
+    const sl = el('<div class="list" style="margin-bottom:14px"></div>');
+    ser.forEach(function(x){
+      const mk = x.c * 4 - x.w;
+      const d = new Date(x.at).toLocaleDateString(undefined, {day:'numeric', month:'short', year:'numeric'});
+      const row = el('<div class="row"><div><div class="name">' + esc(x.title) + '</div><div class="meta">' + esc(d) + ' · ' + x.c + ' right, ' + x.w + ' wrong, ' + x.sk + ' skipped · ' + Math.round((x.timeMs || 0) / 60000) + ' min</div></div><div class="end">' + mk + '</div></div>');
+      row.onclick = function(){ seriesResult = null; go('seriesresults', {seriesId: x.seriesId}); };
+      sl.appendChild(row);
+    });
+    w.appendChild(sl);
+  }
+  if(!list.length) return w;
+  // Marks trend: oldest on the left, newest on the right
+  const rows = list.slice(0, 12).reverse().map(function(s){ return {s: s, sc: mockScore(s.items)}; });
+  const top = Math.max(1, Math.max.apply(null, rows.map(function(r){ return Math.abs(r.sc.marks); })));
+  const trend = el('<div class="card"><div class="eyebrow">Marks trend</div><div class="usage-bars" style="margin-top:10px"></div></div>');
+  const bars = trend.querySelector('.usage-bars');
+  rows.forEach(function(r){
+    const pct = Math.max(3, Math.round(Math.abs(r.sc.marks) / top * 100));
+    bars.appendChild(el('<div class="ub" title="' + esc(String(r.sc.marks)) + ' marks"><i style="height:' + pct + '%"></i><span>' + esc(String(r.sc.marks)) + '</span></div>'));
+  });
+  w.appendChild(trend);
+  const confCard = mockConfidenceCard();
+  if(confCard) w.appendChild(confCard);
+  const heat = mockHeatCard(); w.appendChild(heat);
+  const radar = mockRadarCard(); if(radar) w.appendChild(radar);
+  // Accuracy by subject across all attempts
+  const qm = {};
+  QUESTIONS.forEach(function(q){ qm[q.id] = q; });
+  const bySub = {};
+  list.forEach(function(s){ s.items.forEach(function(it){
+    const q = qm[it.q]; if(!q || it.skip || it.correct == null) return;
+    const b = bySub[q.subject] || (bySub[q.subject] = {ok: 0, n: 0});
+    b.n++; if(it.correct) b.ok++;
+  }); });
+  const subs = Object.keys(bySub).sort(function(a,b){ return SUBJECTS.indexOf(a) - SUBJECTS.indexOf(b); });
+  if(subs.length){
+    const sc = el('<div class="card" style="margin-top:14px"><div class="eyebrow">Accuracy by subject</div></div>');
+    subs.forEach(function(sub){
+      const b = bySub[sub], acc = Math.round(b.ok / b.n * 100);
+      sc.appendChild(el('<div style="margin-top:10px"><div style="display:flex;justify-content:space-between;font-size:13px"><span>' + esc(sub) + '</span><b>' + acc + '%</b></div><div style="height:8px;border-radius:99px;background:var(--surface-2);margin-top:6px;overflow:hidden"><i style="display:block;height:100%;width:' + acc + '%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-text));transition:width .6s cubic-bezier(.2,.7,.2,1)"></i></div></div>'));
+    });
+    w.appendChild(sc);
+  }
+  // Each attempt, newest first
+  w.appendChild(el('<div class="eyebrow" style="margin:18px 0 10px">Your mocks</div>'));
+  const lst = el('<div class="list"></div>');
+  list.slice(0, 30).forEach(function(s){
+    const sc = mockScore(s.items);
+    const mins = Math.round(sc.secs / 60);
+    const d = new Date(s.at).toLocaleDateString(undefined, {day:'numeric', month:'short', year:'numeric'});
+    lst.appendChild(el('<div class="row"><div><div class="name">' + esc(s.title || 'Mock') + '</div><div class="meta">' + esc(d) + ' · ' + sc.correct + ' right, ' + sc.wrong + ' wrong, ' + sc.skipped + ' skipped · ' + mins + ' min</div></div><div class="end">' + sc.marks + '</div></div>'));
+  });
+  w.appendChild(lst);
+  return w;
+}
+function mockMissedPart(){
+  const w = el('<div></div>');
+  const papers = mockMissedPapers();
+  if(!papers.length){
+    w.appendChild(el('<div class="card empty">You have sat every paper in the bank. Nothing missed.</div>'));
+    return w;
+  }
+  w.appendChild(el('<p class="note-line" style="margin:0 0 12px">Papers you have not sat as a mock yet. Tap one to start it under exam conditions.</p>'));
+  const pl = el('<div class="list"></div>');
+  papers.forEach(function(p){
+    const n = QUESTIONS.filter(function(q){ return q.paperId === p.id; }).length;
+    const row = el('<div class="row"><div><div class="name">' + esc(paperTitle(p)) + '</div><div class="meta">' + esc(paperDate(p)) + ' · ' + n + ' questions · 180 minutes</div></div><div class="end">Start</div></div>');
+    row.onclick = function(){ startPyqPaper(p); };
+    pl.appendChild(row);
+  });
+  w.appendChild(pl);
+  return w;
+}
+// Motion for the Mocks pages. Both respect reduced-motion: the numbers and tabs just jump.
+const MOTION_REDUCED = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+function countUp(node, to){
+  if(!node) return;
+  if(MOTION_REDUCED || !to){ node.textContent = String(to); return; }
+  const start = performance.now(), dur = 900;
+  const step = function(now){
+    const t = Math.min(1, (now - start) / dur);
+    const eased = 1 - Math.pow(1 - t, 3);
+    node.textContent = String(Math.round(to * eased));
+    if(t < 1) requestAnimationFrame(step);
+    else node.textContent = String(to);
+  };
+  node.textContent = '0';
+  requestAnimationFrame(step);
+}
+let mockInkLast = null;
+function slideInk(seg){
+  if(!seg) return;
+  const ink = seg.querySelector('.seg-ink'), on = seg.querySelector('button.on');
+  if(!ink || !on) return;
+  if(MOTION_REDUCED){ ink.style.left = on.offsetLeft + 'px'; ink.style.width = on.offsetWidth + 'px'; return; }
+  // Start where the ink was last, then glide to the active tab
+  if(mockInkLast){ ink.style.left = mockInkLast.left + 'px'; ink.style.width = mockInkLast.width + 'px'; void ink.offsetWidth; }
+  requestAnimationFrame(function(){
+    ink.style.left = on.offsetLeft + 'px';
+    ink.style.width = on.offsetWidth + 'px';
+    mockInkLast = {left: on.offsetLeft, width: on.offsetWidth};
+  });
+}
+(function(){
+  if(document.getElementById('mock-motion')) return;
+  const st = document.createElement('style'); st.id = 'mock-motion';
+  st.textContent = '.seg.slide-seg{position:relative;}'
+    + '.seg.slide-seg button{position:relative;z-index:1;}'
+    + '.seg.slide-seg button.on{background:transparent;box-shadow:none;}'
+    + '.seg-ink{position:absolute;top:4px;bottom:4px;left:0;width:0;border-radius:var(--r-sm);background:var(--surface);box-shadow:0 1px 2px rgba(0,0,0,.08);transition:left .42s cubic-bezier(.2,.8,.2,1),width .42s cubic-bezier(.2,.8,.2,1);pointer-events:none;z-index:0;}'
+    + '.fl-c{display:inline-block;transform-origin:50% 60%;}'
+    + '.fl-c.fl-go{animation:flipdown .38s cubic-bezier(.2,.8,.2,1);}'
+    + '@keyframes flipdown{from{transform:rotateX(-80deg);opacity:0}to{transform:none;opacity:1}}'
+    + '@media (prefers-reduced-motion: reduce){.seg-ink{transition:none;}.fl-c.fl-go{animation:none;}}';
+  document.head.appendChild(st);
+})();
+function mocksView(){
+  const w = el('<div></div>');
+  w.appendChild(el('<div class="hm-hero"><div class="hm-orbs" aria-hidden="true"><i></i><i></i></div><div class="hm-eyebrow">Timed like the real paper</div><h1 class="hm-title">Test <em>zone.</em></h1></div>'));
+  const tab = nav.mockTab || 'take';
+  const seg = el('<div class="seg slide-seg" role="group" aria-label="Mocks" style="margin-bottom:14px"><i class="seg-ink" aria-hidden="true"></i></div>');
+  MOCK_TABS.forEach(function(t){
+    const b = el('<button type="button" class="' + (tab === t[0] ? 'on' : '') + '">' + t[1] + '</button>');
+    b.onclick = function(){ nav.mockTab = t[0]; render(); };
+    seg.appendChild(b);
+  });
+  w.appendChild(seg);
+  requestAnimationFrame(function(){ slideInk(seg); });
+  const part = tab === 'upcoming' ? mockUpcomingPart() : tab === 'attempted' ? mockAttemptedPart() : tab === 'missed' ? mockMissedPart() : mocksTakePart();
+  w.appendChild(part);
   return w;
 }
 
@@ -8471,6 +8857,8 @@ function clearLocalData(){
   store = {bookmarks:[], errorLog:[], notes:{}, attempts:[]};
   lbState.cache = {};
   sbSession = null;
+  mockSeriesRemote = null;
+  mockUpcomingRemote = null;
 }
 // Logout confirmation: an in-app sheet in the app's own style, not the browser dialog
 function confirmLogout(onYes){
@@ -12914,6 +13302,15 @@ function mockResults(w){
     sl.appendChild(el('<div class="row" style="cursor:default"><div class="name">'+esc(s)+'</div><div class="end" style="color:var(--text);font-weight:600">'+d.score+' / '+d.max+'</div></div>'));
   });
   w.appendChild(sl);
+  // One-line read of this paper, from the subject split and the skipped and wrong counts
+  const subjRows = Object.keys(bySub).map(function(k){ const d = bySub[k]; return {sub: k, pct: d.max ? Math.round(d.score / d.max * 100) : 0}; })
+    .sort(function(a, b){ return b.pct - a.pct; });
+  let line = '';
+  if(subjRows.length > 1) line = 'Strongest in ' + subjRows[0].sub + ' (' + subjRows[0].pct + '%), weakest in ' + subjRows[subjRows.length - 1].sub + ' (' + subjRows[subjRows.length - 1].pct + '%). ';
+  if(sk >= 5) line += 'You left ' + sk + ' questions unanswered, so pace is the first thing to fix.';
+  else if(wr > c) line += 'More wrong answers than right ones, so slow down on questions you are not sure about.';
+  else line += 'A solid paper. Keep this pace and tighten the weakest subject.';
+  w.appendChild(el('<p class="note-line" style="margin:14px 0 0">' + esc(line) + '</p>'));
   w.appendChild(el('<div class="eyebrow" style="margin:22px 0 8px">Review</div>'));
   w.appendChild(reviewListEl());
 }
@@ -14827,6 +15224,22 @@ function seriesFmtLeft(ms){
   if(h > 0) return h+'h '+m+'m';
   return m+'m '+String(sec).padStart(2,'0')+'s';
 }
+// Split-flap countdown: each character is its own cell, and only the cells that change flip
+function setFlipText(node, text){
+  if(!node) return;
+  const chars = Array.from(text || '');
+  const reuse = node._flipCells && node._flipCells.length === chars.length && node.childElementCount === chars.length;
+  if(!reuse){
+    node.innerHTML = '';
+    node._flipCells = chars.map(function(){ const c = document.createElement('span'); c.className = 'fl-c'; node.appendChild(c); return c; });
+  }
+  chars.forEach(function(ch, i){
+    const cell = node._flipCells[i];
+    if(cell.textContent === ch) return;
+    cell.textContent = ch;
+    if(reuse && !MOTION_REDUCED){ cell.classList.remove('fl-go'); void cell.offsetWidth; cell.classList.add('fl-go'); }
+  });
+}
 function seriesCard(){
   if(!sbSession) return null;
   if(seriesNext === undefined){ seriesLoadNext(); return null; }
@@ -14865,7 +15278,7 @@ function seriesCard(){
       else note = 'Entry is closed. The test has started.';
     }
     c.querySelector('[data-label]').textContent = label;
-    c.querySelector('[data-cd]').textContent = cd;
+    setFlipText(c.querySelector('[data-cd]'), cd);
     c.querySelector('[data-note]').textContent = note;
     const slot = c.querySelector('[data-slot]');
     const k = label + '|' + (btn ? btn[0] : '');
@@ -14932,6 +15345,14 @@ function seriesResultsView(){
           +'<p class="ft-sub" style="text-align:center">Score '+m.score+' · time '+fmtMs(m.time_ms)+' · you beat '+m.percentile+'% of students.</p>'
           +((m.subject_places||[]).length ? '<p class="ft-sub" style="text-align:center">'+m.subject_places.map(x=>ftEsc(x.subj)+': rank '+x.place).join(' · ')+'</p>' : '')
         : '<p class="ft-sub">Your result is not in yet.</p>')+'</div>'));
+  if(m && m.percentile != null){
+    const pc = Math.max(0, Math.min(100, Number(m.percentile)));
+    w.appendChild(el('<div class="ft-card"><div class="ft-eyebrow">Where you stand</div>'
+      + '<div style="position:relative;height:14px;border-radius:99px;background:var(--surface-2);margin:22px 0 10px">'
+      + '<div style="position:absolute;top:0;bottom:0;left:0;width:' + pc + '%;border-radius:99px;background:linear-gradient(90deg,var(--accent-soft),var(--accent));transition:width .8s cubic-bezier(.2,.8,.2,1)"></div>'
+      + '<div style="position:absolute;top:50%;left:' + pc + '%;width:18px;height:18px;transform:translate(-50%,-50%);border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--surface);transition:left .8s cubic-bezier(.2,.8,.2,1)"></div></div>'
+      + '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted)"><span>Bottom</span><span>You beat ' + pc + '% of students</span><span>Top</span></div></div>'));
+  }
   const tops = el('<div class="ft-card"><div class="ft-eyebrow">Toppers</div></div>');
   const toppers = new Set();
   if(d.top_overall){ toppers.add(d.top_overall.username);
@@ -15126,6 +15547,7 @@ function seriesBegin(){
 async function seriesFinishRemote(auto){
   const s = session; if(!s || !s.seriesId) return;
   const sid = s.seriesId;
+  const sTitle = (seriesRun && seriesRun.title) || s.title || 'Test series';
   const rows = s.queue.map(q=>{
     const a = s.answers[q.id];
     return { id:q.id, subj:q.subject, c: a ? !!a.correct : null, t: Math.round((s.times[q.id]||0)*1000) };
@@ -15139,6 +15561,12 @@ async function seriesFinishRemote(auto){
     if(/already/i.test(error.message)){ clearSessionProgress(); go('home'); appNotice('Already Submitted', 'You have already submitted this test.'); return; }
     appNotice('Not Saved', friendlyErr(error.message)); return;
   }
+  // Local record of this test, so Mocks > Attempted can list it
+  try{
+    store.seriesLog = [{seriesId: sid, title: sTitle, at: Date.now(), c: c, w: w, sk: sk, timeMs: Date.now() - s.sessionStart}]
+      .concat(store.seriesLog || []).filter(function(x,i,a){ return a.findIndex(function(y){ return y.seriesId === x.seriesId; }) === i; }).slice(0, 50);
+    persist();
+  }catch(e){}
   if(auto){ go('home'); appNotice('Time is up', 'Your answers were submitted automatically. Ranks are published when the test closes.'); return; }
   go('seriesresults', {seriesId: sid});
 }
