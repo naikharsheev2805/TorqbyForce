@@ -15199,16 +15199,23 @@ function tryRestoreSession(){
   restoreGuarded(local);
   return true;
 }
-// A series test is only reopened if it is still running and this student has not submitted it
+// A series test is only reopened once the student is signed in and the server confirms they have not submitted it.
+// Until then it stays closed, and the check is tried again on the next tick.
+let seriesCheckBusy = false;
 async function restoreGuarded(st){
   if(st.seriesId){
+    if(!sbSession || !sbSession.user) return false;
     if(st.seriesEndsAt && Date.now() > st.seriesEndsAt){ clearSessionProgress(); return false; }
-    // Ask the server whether this student has already submitted it. If the check fails, do not reopen the test.
+    if(seriesCheckBusy) return false;
+    seriesCheckBusy = true;
+    let submitted = null;
     try{
       const { data, error } = await sbClient().rpc('series_mine_submitted', { p_series: st.seriesId });
-      if(error) return false;
-      if(data === true){ clearSessionProgress(); return false; }
-    }catch(e){ return false; }
+      if(!error) submitted = data;
+    }catch(e){ submitted = null; }
+    seriesCheckBusy = false;
+    if(submitted === true){ clearSessionProgress(); return false; }
+    if(submitted !== false) return false;
   }
   return restoreSessionFrom(st);
 }
