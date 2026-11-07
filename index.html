@@ -6345,7 +6345,7 @@ function openLegal(focus){
 function navProfileEl(){
   const p = store.profile || {};
   const name = [p.name, p.surname].filter(Boolean).join(' ') || p.username || 'Your profile';
-  const av = loadAvatarCache();
+  const av = loadAvatarCache() || p.avatar || null;
   const pic = av ? '<img alt="" src="'+av+'">' : '<i>'+esc((name||'?').trim().charAt(0).toUpperCase())+'</i>';
   const card = el('<button class="navprof" type="button"><span class="navprof-av">'+pic+'</span>'
     +'<span class="navprof-txt"><span class="navprof-name">'+esc(name)+'</span>'
@@ -6397,7 +6397,7 @@ function bottomNav(){
     de.requestFullscreen().catch(()=>appNotice('Full screen not allowed', 'Your browser did not allow full screen here. If you installed TORQ as an app, open it from your home screen and try again.'));
   };
   bar.appendChild(fs);
-  if(sbSession){
+  if(sbSession || store.profile){
     bar.appendChild(el('<div class="navdiv" aria-hidden="true"></div>'));
     const out = el('<button class="bn navout"><svg viewBox="0 0 24 24"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"/><path d="M10 8l-4 4 4 4M6 12h9"/></svg><span>Logout</span></button>');
     out.onclick = ()=>{
@@ -8517,6 +8517,11 @@ function accountBlock(){
   w.appendChild(el('<div class="eyebrow" style="margin:22px 0 10px">Account</div>'));
   if(!sbSession){
     w.appendChild(el('<p class="note-line">Log in to manage your account.</p>'));
+    if(store.profile){
+      const lo = el('<button class="btn block" type="button" style="margin-top:14px">Log out</button>');
+      lo.onclick = ()=>confirmLogout(()=>logOutNow());
+      w.appendChild(lo);
+    }
     return w;
   }
   w.appendChild(el('<p class="note-line" style="margin:0 0 10px">Signed in as '+esc(sbSession.user.email||'your account')+'</p>'));
