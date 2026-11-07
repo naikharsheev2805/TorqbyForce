@@ -4079,6 +4079,25 @@ body{ position:relative; }
 .streak .sk-dl{ letter-spacing:0; text-align:center; }
 /* Friends chat on tablets and desktop: the split chat fills the screen, so the footer band under it is hidden */
 @media (min-width:700px){ body.msg-fit .build-stamp, body.msg-fit .foot{ display:none !important; } body.msg-fit #app{ padding-bottom:env(safe-area-inset-bottom,0px) !important; } }
+
+/* ---- Profile theme carousel, pencil and colour morph ---- */
+.pubp-skin{ transition: background-color .5s ease, color .5s ease, border-color .5s ease, box-shadow .5s ease; }
+.pubp-skin *{ transition: background-color .5s ease, color .5s ease, border-color .5s ease, fill .5s ease; }
+.pubp-pencil{ position:absolute; top:12px; right:12px; z-index:5; width:36px !important; height:36px !important; min-width:36px !important; min-height:36px !important; padding:0 !important; border-radius:50% !important; display:grid !important; place-items:center; background:var(--surface) !important; border:1px solid var(--border) !important; color:var(--accent) !important; box-shadow:none !important; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; transform:none !important; }
+.pubp-pencil svg{ width:16px; height:16px; }
+.ptc{ margin:22px 0 0; }
+.ptc-h{ font:700 11px Inter,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-text); margin:0 2px 10px; }
+.ptc-rail{ display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; padding:8px calc(50% - 90px) 14px; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+.ptc-rail::-webkit-scrollbar{ display:none; }
+.ptc-item{ flex:0 0 180px; scroll-snap-align:center; border-radius:20px; padding:10px; background:var(--surface); border:1.5px solid var(--border); opacity:.55; transform:scale(.92); transition:transform .35s var(--ease-out), opacity .35s, border-color .35s; }
+.ptc-item.active{ opacity:1; transform:scale(1); border-color:var(--accent-text); box-shadow:0 10px 26px -18px rgba(0,0,0,.6); }
+.ptc-item.locked .ptc-prev{ filter:grayscale(.75); }
+.ptc-prev{ position:relative; height:112px; border-radius:14px; overflow:hidden; }
+.ptc-prev i{ position:absolute; left:14px; right:14px; bottom:14px; height:6px; border-radius:99px; opacity:.9; }
+.ptc-item b{ display:block; margin-top:10px; font-size:13px; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ptc-item small{ display:block; margin-top:3px; font-size:11px; color:var(--muted); min-height:14px; line-height:1.3; }
+.ptc-use{ display:block; margin:14px auto 0; padding:12px 22px; border-radius:999px; border:1px solid var(--accent-text); background:var(--accent); color:var(--accent-ink); font:600 14px Inter,sans-serif; cursor:pointer; }
+@media (prefers-reduced-motion: reduce){ .pubp-skin, .pubp-skin *, .ptc-item{ transition:none !important; } }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -6128,7 +6147,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.11.58';
+const APP_VERSION = 'v01.11.59';
 const LAST_UPDATED = 'November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -14650,28 +14669,8 @@ const PENCIL_LB = '<button class="lb-pencil" type="button" aria-label="Edit prof
 const PENCIL_PUB = '<button class="pubp-pencil" type="button" aria-label="Edit profile theme" onclick="ptOpenEditor(event)"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg></button>';
 function ptOpenEditor(ev){
   if(ev){ ev.preventDefault(); ev.stopPropagation(); }
-  if(!ptCanEdit()) return;
-  const cur = ptValid(ptLocal().theme) || ptDefault(ptLocal().place);
-  const scrim = el('<div class="pt-sheet-scrim"></div>');
-  const sheet = el('<div class="pt-sheet" role="dialog" aria-modal="true" aria-label="Profile theme"><h3>Your profile theme</h3><p class="note-line" style="margin:0 0 6px">Changes your leaderboard card and your profile page.</p></div>');
-  const grid = el('<div class="pt-grid"></div>');
-  const close = ()=>{ scrim.remove(); sheet.remove(); };
-  const stNow = PT_LIST.map(t=>[t, ptUnlockState(t.id)]);
-  stNow.forEach(([t, st])=>{
-    const on = t.id === cur;
-    if(!st.open){
-      const b = el('<button type="button" class="pt-opt pt-locked" aria-disabled="true"><div class="pt-prev" style="background:'+t.bg+';box-shadow:inset 0 0 0 3px '+t.acc+'"></div><b>'+esc(t.name)+'</b><small class="pt-req">'+esc(st.text)+'</small></button>');
-      b.onclick = ()=>appNotice('Locked', esc(t.name)+' unlocks when you '+st.text.charAt(0).toLowerCase()+st.text.slice(1)+'.');
-      grid.appendChild(b); return;
-    }
-    const b = el('<button type="button" class="pt-opt'+(on?' on':'')+'" aria-pressed="'+on+'"><div class="pt-prev" style="background:'+t.bg+';box-shadow:inset 0 0 0 3px '+t.acc+'"></div><b>'+esc(t.name)+'</b></button>');
-    b.onclick = ()=>{ ptSetLocal({theme: t.id}); syncProfile(); close(); render(); };
-    grid.appendChild(b);
-  });
-  sheet.appendChild(el('<p class="note-line" style="margin:0 0 10px">More themes unlock as you practise. Tap a locked one to see how.</p>'));
-  sheet.appendChild(grid);
-  scrim.onclick = close;
-  document.body.appendChild(scrim); document.body.appendChild(sheet);
+  const c = document.querySelector('.ptc');
+  if(c) c.scrollIntoView({behavior: 'smooth', block: 'center'});
 }
 function ptLocal(){ try{ return JSON.parse(localStorage.getItem('torq_pt_v1')) || {}; }catch(e){ return {}; } }
 function ptSetLocal(patch){ try{ localStorage.setItem('torq_pt_v1', JSON.stringify(Object.assign(ptLocal(), patch))); }catch(e){} }
@@ -14727,10 +14726,67 @@ function pubProfileHTML(p){
   const mine = !!(nav.pubRow && nav.pubRow.me);
   const pick = (mine && ptValid(ptLocal().theme)) || ptValid(p.profile_theme);
   const tid = (pick && ptAllowedHere(pick, nav.pubRow ? nav.pubRow.place : 0)) ? pick : (top ? ptDefault(nav.pubRow.place) : null);
-  const play = tid ? PT_LIST.find(t=>t.id===tid).play : '';
+  // While browsing the carousel, the card shows the previewed theme (only ever an unlocked one)
+  const useId = (mine && nav.ptPreview && ptUnlockState(nav.ptPreview).open) ? nav.ptPreview : tid;
+  const play = useId ? PT_LIST.find(t=>t.id===useId).play : '';
   const base = __base_pubProfileHTML(p);
-  const pen = (nav.pubRow && nav.pubRow.me && ptCanEdit()) ? PENCIL_PUB : '';
-  return tid ? '<div class="pubp-skin" data-ptheme="'+tid+'" data-play="'+play+'">'+(play==='doodle' ? DOODLE_SVG : '')+pen+base+'</div>' : pen+base;
+  const pen = mine ? PENCIL_PUB : '';
+  // Your own card is always a theme wrapper, so the carousel has something to morph ("base" is the plain look)
+  const card = (useId || mine) ? '<div class="pubp-skin" data-ptheme="'+(useId || 'base')+'" data-play="'+play+'">'+(play==='doodle' ? DOODLE_SVG : '')+pen+base+'</div>' : pen+base;
+  if(mine) setTimeout(ptBindCarousel, 0);
+  return card + (mine ? ptCarouselHTML(useId || '') : '');
+}
+// The theme carousel under your own profile: swipe sideways, and the card morphs to the theme in the middle
+function ptCarouselHTML(cur){
+  const items = PT_LIST.map(function(t){
+    const st = ptUnlockState(t.id), on = t.id === cur;
+    return '<div class="ptc-item'+(on?' active':'')+(st.open?'':' locked')+'" data-id="'+t.id+'" data-locked="'+(st.open?'0':'1')+'">'
+      + '<div class="ptc-prev" style="background:'+t.bg+';box-shadow:inset 0 0 0 3px '+t.acc+'"><i style="background:'+t.acc+'"></i></div>'
+      + '<b>'+esc(t.name)+'</b><small>'+(st.open ? 'Unlocked' : esc(st.text))+'</small></div>';
+  }).join('');
+  return '<div class="ptc"><div class="ptc-h">Swipe to try a theme</div><div class="ptc-rail">'+items+'</div>'
+    + '<button class="ptc-use" type="button" onclick="ptUseTheme()">Use this theme</button></div>';
+}
+function ptBindCarousel(){
+  const rail = document.querySelector('.ptc-rail');
+  if(!rail || rail.__bound) return;
+  rail.__bound = true;
+  const cur = rail.querySelector('.ptc-item.active');
+  if(cur) rail.scrollLeft = cur.offsetLeft - (rail.clientWidth - cur.offsetWidth) / 2;
+  let t = null;
+  rail.addEventListener('scroll', function(){ clearTimeout(t); t = setTimeout(function(){ ptSettle(rail); }, 110); }, {passive: true});
+}
+// Find the item closest to the middle, and morph the card to it if it is unlocked
+function ptSettle(rail){
+  const mid = rail.scrollLeft + rail.clientWidth / 2;
+  let best = null, bd = Infinity;
+  rail.querySelectorAll('.ptc-item').forEach(function(it){
+    const d = Math.abs(it.offsetLeft + it.offsetWidth / 2 - mid);
+    if(d < bd){ bd = d; best = it; }
+  });
+  if(!best) return;
+  rail.querySelectorAll('.ptc-item').forEach(function(it){ it.classList.toggle('active', it === best); });
+  if(best.dataset.locked === '1') return;
+  const id = best.dataset.id;
+  if(id === nav.ptPreview) return;
+  nav.ptPreview = id;
+  ptMorph(id);
+}
+// Changes the theme attributes in place, so the CSS transitions animate the colours
+function ptMorph(id){
+  const skin = document.querySelector('.pubp-skin');
+  const t = PT_LIST.find(function(x){ return x.id === id; });
+  if(!skin || !t) return;
+  skin.setAttribute('data-ptheme', id);
+  skin.setAttribute('data-play', t.play);
+}
+function ptUseTheme(){
+  const id = nav.ptPreview;
+  if(!id || !ptUnlockState(id).open){ appNotice('Pick a theme', 'Swipe to an unlocked theme first.'); return; }
+  ptSetLocal({theme: id});
+  nav.ptPreview = null;
+  syncProfile();
+  render();
 }
 function lbCardHTML(r, tier){
   let html = __base_lbCardHTML(r, tier);
