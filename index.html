@@ -1453,6 +1453,20 @@ svg.wm-lg{ --torq-stroke:1.9; }
 .sa-tb{ border:0; background:transparent; color:var(--text); font-size:13px; padding:6px 9px; border-radius:8px; }
 .sa-tb:active{ background:color-mix(in srgb, var(--accent) 18%, transparent); }
 /* ---------- Admin keypad (text fields in the schedule form) ---------- */
+.sa-kb{ margin-top:12px; padding:10px; border-radius:18px; background:var(--surface-2, var(--surface)); border:1px solid var(--border); }
+.sa-kb .sa-row{ display:flex; gap:6px; justify-content:center; margin-top:7px; }
+.sa-kb .nk{ flex:1 1 0; min-width:0; height:46px; border-radius:12px; font-size:17px; font-weight:600; display:inline-flex; align-items:center; justify-content:center; }
+.sa-kb .sa-wide, .sa-kb .sa-shift{ flex:1.4 1 0; }
+.sa-kb .sa-space{ flex:4 1 0; font-size:15px; font-weight:500; }
+.sa-kb .sa-shift.on{ background:color-mix(in srgb, var(--accent) 35%, var(--surface)); border:1px solid var(--accent); }
+.sa-kb .sa-shift.lock{ background:var(--accent); color:#fff; border:1px solid var(--accent); }
+.sa-kb .check{ flex:1.6 1 0; }
+.sa-sugg{ display:flex; gap:6px; min-height:0; }
+.sa-sugg:empty{ display:none; }
+.sa-sugg:not(:empty){ margin-bottom:6px; }
+/* Caret and handles stay hidden until their field has focus */
+.sa-caret, .sa-sel, .sa-h, .sa-tool{ display:none; }
+
 .sa-kb{ margin-top:10px; padding:10px; border-radius:16px; background:var(--surface-2, var(--surface)); border:1px solid var(--border); }
 .sa-kb .sa-row{ display:flex; gap:6px; justify-content:center; margin-top:6px; }
 .sa-kb .sa-row .nk{ flex:1 1 0; min-width:0; height:44px; font-size:16px; }
@@ -15102,7 +15116,10 @@ async function seriesFinishRemote(auto){
                                                            p_time_ms: Date.now() - s.sessionStart, p_answers: rows });
   seriesNext = undefined; seriesRun = null; seriesResult = null;
   session = null;
-  if(error){ appNotice('Not Saved', friendlyErr(error.message)); return; }
+  if(error){
+    if(/already/i.test(error.message)){ clearSessionProgress(); go('home'); appNotice('Already Submitted', 'You have already submitted this test.'); return; }
+    appNotice('Not Saved', friendlyErr(error.message)); return;
+  }
   if(auto){ go('home'); appNotice('Time is up', 'Your answers were submitted automatically. Ranks are published when the test closes.'); return; }
   go('seriesresults', {seriesId: sid});
 }
@@ -15177,7 +15194,20 @@ function restoreSessionFrom(st){
 function tryRestoreSession(){
   if(session && !session.submitted) return false;
   const local = readLocalSession();
-  return !!(local && restoreSessionFrom(local));
+  if(!local) return false;
+  restoreGuarded(local);
+  return true;
+}
+// A series test is only reopened if it is still running and this student has not submitted it
+async function restoreGuarded(st){
+  if(st.seriesId){
+    if(st.seriesEndsAt && Date.now() > st.seriesEndsAt){ clearSessionProgress(); return false; }
+    try{
+      const { data } = await sbClient().from('test_series_attempts').select('id').eq('series_id', st.seriesId).limit(1);
+      if(data && data.length){ clearSessionProgress(); return false; }
+    }catch(e){}
+  }
+  return restoreSessionFrom(st);
 }
 async function restoreSessionFromCloud(){
   if(!sbSession) return;
@@ -15187,7 +15217,7 @@ async function restoreSessionFromCloud(){
     const cloud = data.state, local = readLocalSession();
     if(session && !session.submitted) return;
     if(local && local.sid === cloud.sid && (local.savedAt||0) >= (cloud.savedAt||0)) return;
-    if(!local || (cloud.savedAt||0) > (local.savedAt||0)) restoreSessionFrom(cloud);
+    if(!local || (cloud.savedAt||0) > (local.savedAt||0)) restoreGuarded(cloud);
   }catch(e){ console.error(e); }
 }
 function friendlyErr(m){
@@ -15270,18 +15300,38 @@ function saDelete(input){
 }
 function saPad(input){
   document.querySelectorAll('.sa-kb').forEach(x=>x.remove());
-  const pad = el('<div class="sa-kb" role="group" aria-label="Keypad"></div>');
+  const pad = el('<div class="sa-kb" role="group" aria-label="Keyboard"></div>');
   const sug = el('<div class="sa-sugg"></div>');
   pad.appendChild(sug);
+  let shift = 0, lastShiftTap = 0;           // 0 off, 1 next letter capital, 2 caps lock
+  const shiftKey = el('<button type="button" class="nk fn sa-shift" aria-label="Shift">\u21e7</button>');
+  const paintShift = ()=>{
+    shiftKey.classList.toggle('on', shift === 1);
+    shiftKey.classList.toggle('lock', shift === 2);
+    pad.querySelectorAll('.sa-letter').forEach(k=>{ const c = k.dataset.k; k.textContent = shift ? c.toUpperCase() : c; });
+  };
   const hold = (b, fn)=>{ b.onmousedown = e=>e.preventDefault(); b.onclick = fn; return b; };
-  SA_ROWS.forEach((r,ri)=>{
-    const row = el('<div class="sa-row"></div>');
-    if(ri===2) row.appendChild(hold(el('<button type="button" class="nk fn sa-wide">\u232b</button>'), ()=>{ saDelete(input); saSuggest(input, sug); }));
-    r.forEach(k=>row.appendChild(hold(el('<button type="button" class="nk">'+k+'</button>'), ()=>{ saInsert(input, k); saSuggest(input, sug); })));
-    pad.appendChild(row);
+  shiftKey.onmousedown = e=>e.preventDefault();
+  shiftKey.onclick = ()=>{
+    const now = Date.now();
+    if(now - lastShiftTap < 450) shift = shift === 2 ? 0 : 2;     // double tap locks capitals
+    else shift = shift === 0 ? 1 : 0;                              // single tap: next letter only
+    lastShiftTap = now; paintShift();
+  };
+  ['qwertyuiop', 'asdfghjkl', 'zxcvbnm'].forEach((r,ri)=>{
+    const rowEl = el('<div class="sa-row"></div>');
+    if(ri === 2) rowEl.appendChild(shiftKey);
+    r.split('').forEach(c=>rowEl.appendChild(hold(el('<button type="button" class="nk sa-letter" data-k="'+c+'">'+c+'</button>'), ()=>{
+      saInsert(input, shift ? c.toUpperCase() : c);
+      if(shift === 1){ shift = 0; paintShift(); }
+      saSuggest(input, sug);
+    })));
+    if(ri === 2) rowEl.appendChild(hold(el('<button type="button" class="nk fn sa-wide" aria-label="Delete">\u232b</button>'), ()=>{ saDelete(input); saSuggest(input, sug); }));
+    pad.appendChild(rowEl);
   });
   const last = el('<div class="sa-row"></div>');
   last.appendChild(hold(el('<button type="button" class="nk fn">.</button>'), ()=>{ saInsert(input,'.'); saSuggest(input, sug); }));
+  last.appendChild(hold(el('<button type="button" class="nk fn">,</button>'), ()=>{ saInsert(input,','); saSuggest(input, sug); }));
   last.appendChild(hold(el('<button type="button" class="nk sa-space">space</button>'), ()=>{ saInsert(input,' '); saSuggest(input, sug); }));
   last.appendChild(hold(el('<button type="button" class="nk check">Done</button>'), ()=>{ pad.remove(); input.blur(); }));
   pad.appendChild(last);
