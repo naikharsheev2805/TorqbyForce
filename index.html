@@ -6153,7 +6153,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.11.60';
+const APP_VERSION = 'v01.11.61';
 const LAST_UPDATED = 'November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -11009,13 +11009,16 @@ function waKey(label, cls, fn){
 }
 // ---- Glide (swipe) typing: slide across the letters, lift your finger, and the word is written ----
 let waWords = null, waWordsLoading = false;
+// Built-in common words, used only if words.txt cannot be loaded, so suggestions still work
+const WA_FALLBACK_WORDS = ['the','be','to','of','and','a','in','that','have','it','for','not','on','with','he','as','you','do','at','this','but','his','by','from','they','we','say','her','she','or','an','will','my','one','all','would','there','their','what','so','up','out','if','about','who','get','which','go','me','when','make','can','like','time','no','just','him','know','take','people','into','year','your','good','some','could','them','see','other','than','then','now','look','only','come','its','over','think','also','back','after','use','two','how','our','work','first','well','way','even','new','want','because','any','these','give','day','most','us','is','are','was','were','been','has','had','did','does','hello','thanks','okay','yes','sure','please','sorry','tomorrow','today','really','think','going','right','where','why'];
 function waLoadWords(){
   if(waWords || waWordsLoading) return;
   waWordsLoading = true;
   fetch('words.txt').then(r=>r.ok ? r.text() : '').then(t=>{
     waWords = t.split('\n').map(w=>w.trim().toLowerCase()).filter(w=>/^[a-z]{2,15}$/.test(w));
+    if(!waWords.length) waWords = WA_FALLBACK_WORDS.slice();
     waRedrawKb();
-  }).catch(()=>{ waWords = []; }).finally(()=>{ waWordsLoading = false; });
+  }).catch(()=>{ waWords = WA_FALLBACK_WORDS.slice(); waRedrawKb(); }).finally(()=>{ waWordsLoading = false; });
 }
 // Words this person types. Counts are kept per account in Supabase (table kb_word_counts), so every
 // device they sign in on shares them. While signed out, counts go into a local 'anon' bucket and are
@@ -11196,14 +11199,15 @@ function waSuggestions(){
   const uc = kbUserCounts();
   const out = [];
   // Rare words stay hidden until the person has written them at least 3 times
-  const usedEnough = w=>(uc[w] || 0) >= 3;
-  const add = w=>{ if(w !== pre && usedEnough(w) && out.indexOf(w) < 0 && out.length < 3) out.push(w); };
+  // Only the person's own rare words are held back; dictionary words show straight away
+  const addUser = w=>{ if(w !== pre && (uc[w] || 0) >= 3 && out.indexOf(w) < 0 && out.length < 3) out.push(w); };
+  const addDict = w=>{ if(w !== pre && out.indexOf(w) < 0 && out.length < 3) out.push(w); };
   // 1. the person's own most-typed words that start the same way
-  Object.keys(uc).filter(w=>w.startsWith(pre)).sort((a,b)=>uc[b]-uc[a]).forEach(add);
+  Object.keys(uc).filter(w=>w.startsWith(pre)).sort((a,b)=>uc[b]-uc[a]).forEach(addUser);
   // 2. the dictionary, most used first
-  if(!pre){ waWords.forEach(add); return out; }
-  for(const w of waWords){ if(out.length === 3) break; if(w.startsWith(pre)) add(w); }
-  for(const w of waWords){ if(out.length === 3) break; if(w.indexOf(pre) >= 0) add(w); }
+  if(!pre){ waWords.forEach(addDict); return out; }
+  for(const w of waWords){ if(out.length === 3) break; if(w.startsWith(pre)) addDict(w); }
+  for(const w of waWords){ if(out.length === 3) break; if(w.indexOf(pre) >= 0) addDict(w); }
   return out;
 }
 function waPickSuggestion(w){
