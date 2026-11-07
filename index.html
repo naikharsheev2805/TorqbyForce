@@ -15092,6 +15092,16 @@ async function loadSeriesRun(id){
   if(error || !data){ seriesRun = {id, error:'Could not load this test. Check your connection and try again.'}; render(); return; }
   const qs = (data.question_ids||[]).map(qid=>QMAP && QMAP[qid]).filter(Boolean);
   if(qs.length < 10){ seriesRun = {id, error:'This test is missing questions. The team has been told.'}; render(); return; }
+  // Never start a test the student has already submitted, whichever screen brought them here
+  if(!sbSession || !sbSession.user){ seriesRun = {id, error:'Sign in to open this test.'}; render(); return; }
+  let done = null;
+  try{ const r = await sbClient().rpc('series_mine_submitted', { p_series: id }); if(!r.error) done = r.data; }catch(e){}
+  if(done !== false){
+    clearSessionProgress(); seriesRun = null;
+    go('home');
+    if(done === true) appNotice('Already Submitted', 'You have already submitted this test.');
+    return;
+  }
   seriesRun = { id:data.id, title:data.title, starts_at:data.starts_at,
     endsAt: new Date(data.starts_at).getTime() + data.duration_min*60000,
     queue: qs, begun:false, waitTimer:null };
