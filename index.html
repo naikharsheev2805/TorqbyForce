@@ -4098,6 +4098,12 @@ body{ position:relative; }
 .ptc-item small{ display:block; margin-top:3px; font-size:11px; color:var(--muted); min-height:14px; line-height:1.3; }
 .ptc-use{ display:block; margin:14px auto 0; padding:12px 22px; border-radius:999px; border:1px solid var(--accent-text); background:var(--accent); color:var(--accent-ink); font:600 14px Inter,sans-serif; cursor:pointer; }
 @media (prefers-reduced-motion: reduce){ .pubp-skin, .pubp-skin *, .ptc-item{ transition:none !important; } }
+
+/* Keyboard: Enter key uses the accent colour, sends when there is text; the hide arrow sits on the left and is easier to hit */
+.wa-kb .nk.wa-enter{ background:var(--accent) !important; color:#1f1e1d !important; border-color:transparent !important; }
+.wa-kb .nk.wa-enter svg{ fill:none; }
+.wa-hide{ justify-content:flex-start !important; justify-items:start; padding:0 18px !important; height:40px !important; }
+.wa-hide svg{ width:30px !important; height:18px !important; }
 </style><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#262624">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -6147,7 +6153,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.11.59';
+const APP_VERSION = 'v01.11.60';
 const LAST_UPDATED = 'November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -10971,11 +10977,17 @@ function waType(ch){
   const isLetter = /^[A-Za-z]$/.test(ch);
   const wasCap = waWantsCapital(waDraft());
   if(isLetter && fr.kbMode !== 'sym' && fr.kbMode !== 'sym2' && fr.kbShift === 0 && wasCap) ch = ch.toUpperCase();
+  const wasEmpty = !waDraft().trim();
   waSetDraft(waDraft() + ch);
+  if(wasEmpty !== !waDraft().trim() && document.querySelector('.wa-kb')) waRedrawKb();   // Enter key switches to send
   if(fr.kbShift === 1){ fr.kbShift = 0; waRedrawKb(); }   // one-shot shift is used up after one letter
   else if(isLetter && wasCap !== waWantsCapital(waDraft()) && document.querySelector('.wa-kb')) waRedrawKb();
 }
-function waBack(){ waSetDraft(waDraft().slice(0, -1)); }
+function waBack(){
+  const had = !!waDraft().trim();
+  waSetDraft(waDraft().slice(0, -1));
+  if(had !== !!waDraft().trim() && document.querySelector('.wa-kb')) waRedrawKb();
+}
 function waShift(){
   const cur = fr.kbShift || 0;
   fr.kbShift = cur === 0 ? 1 : (cur === 1 ? 2 : 0);   // tap: shift once, tap again: caps lock, tap again: off
@@ -11434,8 +11446,10 @@ function waKeysOnly(){
   last.appendChild(waKey(',', 'fn narrow', ()=>waType(',')));
   last.appendChild(waKey('space', 'sp', ()=>waType(' ')));
   last.appendChild(waKey('.', 'fn narrow', ()=>waType('.')));
-  const enterKey = el('<button type="button" class="nk fn narrow wa-enter" aria-label="New line">'+ENTER_SVG+'</button>');
-  enterKey.onclick = ()=>waType('\n');
+  // Like Gboard: the Enter key sends while there is text, and makes a new line when the box is empty
+  const hasText = !!(waDraft() && waDraft().trim());
+  const enterKey = el('<button type="button" class="nk fn narrow wa-enter'+(hasText?' send':'')+'" aria-label="'+(hasText?'Send message':'New line')+'">'+(hasText?PLANE_SVG:ENTER_SVG)+'</button>');
+  enterKey.onclick = hasText ? ()=>sendChat() : ()=>waType('\n');
   last.appendChild(enterKey);
   kb.appendChild(last);
   waBindGlide(kb);
