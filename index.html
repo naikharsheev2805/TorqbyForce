@@ -4115,7 +4115,8 @@ body{ position:relative; }
   .ptab-lbl{ line-height:1.1; }
   .ptab svg{ width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
   .ptab.on{ color:var(--accent-text); }
-  .ptab.on .ptab-ico{ background:var(--accent-soft); }
+  .ptab.on .ptab-ico{ background:none; }
+  .ptab.on .ptab-ico svg{ stroke:var(--accent-text); filter:drop-shadow(0 0 5px color-mix(in srgb,var(--accent) 45%,transparent)); }
   .ptab.on .ptab-lbl{ font-weight:700; }
   .ptab:active{ transform:scale(.96); }
   body.has-ptabs:not(.msg-fit):not(.chat-full) #app{ padding-bottom:calc(88px + env(safe-area-inset-bottom,0px)) !important; }
@@ -4177,9 +4178,9 @@ body{ position:relative; }
 #ptCradleGrad stop{ stop-color:var(--accent-text); }
 .ptabbar .ptab-cradle .cr-body{ fill:color-mix(in srgb,var(--accent) 8%,var(--surface)); }
 /* Glass: the bar itself is the blur. The hourglass dip is drawn as a light tint and an accent edge on top. */
-.ptabbar{ -webkit-backdrop-filter:blur(22px) saturate(170%); backdrop-filter:blur(22px) saturate(170%); }
+.ptabbar{ -webkit-backdrop-filter:none; backdrop-filter:none; }
 .ptabbar::before{ display:none; }
-.ptabbar .ptab-cradle .cr-body{ fill:var(--surface); fill-opacity:.42; }
+.ptabbar .ptab-cradle .cr-body{ fill:var(--surface); fill-opacity:1; }
 /* Browsers without backdrop blur keep a solid bar so text stays readable */
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
   .ptabbar .ptab-cradle .cr-body{ fill-opacity:1; }
@@ -4199,7 +4200,8 @@ body{ position:relative; }
   .ptabbar.qbar .ptab-lbl{ line-height:1.1; }
   .ptabbar.qbar .ptab svg{ width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
   .ptabbar.qbar .ptab.on{ color:var(--accent-text); }
-  .ptabbar.qbar .ptab.on .ptab-ico{ background:var(--accent-soft); }
+  .ptabbar.qbar .ptab.on .ptab-ico{ background:none; }
+  .ptabbar.qbar .ptab.on .ptab-ico svg{ stroke:var(--accent-text); filter:drop-shadow(0 0 5px color-mix(in srgb,var(--accent) 45%,transparent)); }
   .ptabbar.qbar .ptab.on .ptab-lbl{ font-weight:700; }
   .ptabbar.qbar .ptab:active{ transform:scale(.96); }
   body.has-ptabs:not(.msg-fit):not(.chat-full) #app{ padding-bottom:calc(88px + env(safe-area-inset-bottom,0px)) !important; }
