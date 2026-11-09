@@ -4176,7 +4176,7 @@ body{ position:relative; }
 /* Selected tab: a translucent glowing halo behind the icon (the PYQs orb keeps its own style) */
 .ptabbar:not(.qbar) .ptab:not([data-id="pyq"]){ min-height:58px; }
 .ptabbar:not(.qbar) .ptab:not([data-id="pyq"]) .ptab-ico{ position:relative; isolation:isolate; display:grid; place-items:center; width:42px; height:40px; margin:0 auto; border-radius:50%; }
-.ptabbar:not(.qbar) .ptab:not([data-id="pyq"]).on .ptab-ico::before{ content:""; position:absolute; inset:-6px; z-index:-1; border-radius:50%; background:radial-gradient(circle closest-side, color-mix(in srgb,var(--accent) 16%,transparent) 0%, color-mix(in srgb,var(--accent) 20%,transparent) 50%, color-mix(in srgb,var(--accent) 48%,transparent) 84%, transparent 100%); box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 60%,transparent), 0 0 14px 4px color-mix(in srgb,var(--accent) 60%,transparent), 0 0 30px 10px color-mix(in srgb,var(--accent) 30%,transparent); pointer-events:none; }
+.ptabbar:not(.qbar) .ptab:not([data-id="pyq"]).on .ptab-ico::before{ content:""; position:absolute; inset:-8px; z-index:-1; border-radius:50%; background:radial-gradient(circle closest-side, color-mix(in srgb,var(--accent) 20%,transparent) 0%, color-mix(in srgb,var(--accent) 24%,transparent) 60%, color-mix(in srgb,var(--accent) 70%,transparent) 95%, color-mix(in srgb,var(--accent) 70%,transparent) 100%); box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 90%,transparent), 0 0 14px 5px color-mix(in srgb,var(--accent) 70%,transparent), 0 0 30px 12px color-mix(in srgb,var(--accent) 35%,transparent); pointer-events:none; }
 /* Outer glow on the icon wrapper itself, so the halo spreads past the circle edge */
 .ptabbar:not(.qbar) .ptab:not([data-id="pyq"]).on .ptab-ico{ box-shadow:0 0 14px 4px color-mix(in srgb,var(--accent) 40%,transparent); }
 /* Menu square: translucent blur, the same as the bottom bar */
@@ -16614,5 +16614,47 @@ function applyHandedness(){ document.body.classList.toggle('lefty', isLefty()); 
   window.addEventListener('resize', phoneTabsSync);
 })();
 </script>
+<style id="navhide-v1">
+/* Bottom bar slides away on scroll down and returns on scroll up. Only transform and opacity animate, so it stays on the GPU. */
+body.has-ptabs .ptabbar{ transition:transform .46s cubic-bezier(.22,.8,.24,1), opacity .32s ease; will-change:transform, opacity; }
+body.nav-away .ptabbar{ transform:translate3d(0, calc(100% + 28px + env(safe-area-inset-bottom,0px)), 0); opacity:0; pointer-events:none; }
+@media (prefers-reduced-motion: reduce){
+  body.has-ptabs .ptabbar{ transition:opacity .2s ease; }
+  body.nav-away .ptabbar{ transform:none; }
+}
+</style>
+<script id="navhide-js">
+(function(){
+  // Hide the bottom bar when the page scrolls down, show it again on scroll up.
+  // Small dead zone (about 8px) so tiny jitters do not flicker it. Always shown near the top.
+  var lastY = window.pageYOffset || 0, acc = 0, ticking = false, away = false;
+  function setAway(v){
+    if (v === away) return;
+    away = v;
+    document.body.classList.toggle('nav-away', v);
+  }
+  function update(){
+    ticking = false;
+    var y = Math.max(0, window.pageYOffset || document.documentElement.scrollTop || 0);
+    var d = y - lastY;
+    lastY = y;
+    if (y <= 60){ acc = 0; setAway(false); return; }
+    if ((d > 0 && acc < 0) || (d < 0 && acc > 0)) acc = 0;
+    acc += d;
+    if (acc > 8) setAway(true);
+    else if (acc < -8) setAway(false);
+  }
+  window.addEventListener('scroll', function(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }, { passive: true });
+})();
+</script>
+<style id="noscrollbar-v1">
+/* No visible scrollbars anywhere. Scrolling still works with touch, wheel and trackpad. */
+*, *::before, *::after{ scrollbar-width:none !important; -ms-overflow-style:none !important; }
+*::-webkit-scrollbar, *::-webkit-scrollbar-track, *::-webkit-scrollbar-thumb, *::-webkit-scrollbar-corner{ display:none !important; width:0 !important; height:0 !important; background:transparent !important; }
+</style>
 </body>
 </html>
