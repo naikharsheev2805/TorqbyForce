@@ -4176,7 +4176,11 @@ body{ position:relative; }
 /* Selected tab: a translucent glowing halo behind the icon (the PYQs orb keeps its own style) */
 .ptabbar:not(.qbar) .ptab:not([data-id="pyq"]){ min-height:58px; }
 .ptabbar:not(.qbar) .ptab:not([data-id="pyq"]) .ptab-ico{ position:relative; isolation:isolate; display:grid; place-items:center; width:42px; height:40px; margin:0 auto; border-radius:50%; }
-.ptabbar:not(.qbar) .ptab:not([data-id="pyq"]).on .ptab-ico::before{ content:""; position:absolute; inset:0; z-index:-1; border-radius:50%; background:radial-gradient(circle at 50% 50%, color-mix(in srgb,var(--accent) 38%,transparent) 0%, color-mix(in srgb,var(--accent) 16%,transparent) 55%, transparent 74%); box-shadow:0 0 16px 2px color-mix(in srgb,var(--accent) 28%,transparent); pointer-events:none; }
+.ptabbar:not(.qbar) .ptab:not([data-id="pyq"]).on .ptab-ico::before{ content:""; position:absolute; inset:-6px; z-index:-1; border-radius:50%; background:radial-gradient(circle closest-side, color-mix(in srgb,var(--accent) 16%,transparent) 0%, color-mix(in srgb,var(--accent) 20%,transparent) 50%, color-mix(in srgb,var(--accent) 48%,transparent) 84%, transparent 100%); box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 60%,transparent), 0 0 14px 4px color-mix(in srgb,var(--accent) 60%,transparent), 0 0 30px 10px color-mix(in srgb,var(--accent) 30%,transparent); pointer-events:none; }
+/* Outer glow on the icon wrapper itself, so the halo spreads past the circle edge */
+.ptabbar:not(.qbar) .ptab:not([data-id="pyq"]).on .ptab-ico{ box-shadow:0 0 14px 4px color-mix(in srgb,var(--accent) 40%,transparent); }
+/* Menu square: translucent blur, the same as the bottom bar */
+.navtog{ background:none; -webkit-backdrop-filter:blur(10px) saturate(140%); backdrop-filter:blur(10px) saturate(140%); box-shadow:none; }
 @media (prefers-reduced-motion: reduce){ .ptabbar .ptab[data-id="pyq"].on .ptab-ico::after{ animation:none; } }
 /* Light-theme tuning: the edge uses each theme's readable accent, and the bar takes a faint tint of its accent */
 #ptCradleGrad stop, #qCradleGrad stop{ stop-color:var(--accent-text); }
