@@ -4176,19 +4176,15 @@ body{ position:relative; }
 /* Light-theme tuning: the edge uses each theme's readable accent, and the bar takes a faint tint of its accent */
 #ptCradleGrad stop{ stop-color:var(--accent-text); }
 .ptabbar .ptab-cradle .cr-body{ fill:color-mix(in srgb,var(--accent) 8%,var(--surface)); }
-/* Glass: a frosted layer clipped to the same hourglass shape as the bar edge */
-.ptabbar::before{ content:""; position:absolute; left:0; top:0; width:100%; height:100%; z-index:0; pointer-events:none;
-  background:color-mix(in srgb,var(--accent) 6%,var(--surface)); opacity:.74;
-  -webkit-backdrop-filter:blur(18px) saturate(165%); backdrop-filter:blur(18px) saturate(165%);
-  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M0,14 L33,14 C38,14 39,34 50,34 C61,34 62,14 67,14 L100,14 L100,100 L0,100 Z' fill='black'/></svg>");
-  mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M0,14 L33,14 C38,14 39,34 50,34 C61,34 62,14 67,14 L100,14 L100,100 L0,100 Z' fill='black'/></svg>");
-  -webkit-mask-size:100% 100%; mask-size:100% 100%; }
-/* The SVG body is now only a light wash over the blur, so the content behind shows through */
-.ptabbar .ptab-cradle .cr-body{ fill-opacity:0; }
+/* Glass: the bar itself is the blur. The hourglass dip is drawn as a light tint and an accent edge on top. */
+.ptabbar{ -webkit-backdrop-filter:blur(22px) saturate(170%); backdrop-filter:blur(22px) saturate(170%); }
+.ptabbar::before{ display:none; }
+.ptabbar .ptab-cradle .cr-body{ fill:var(--surface); fill-opacity:.42; }
 /* Browsers without backdrop blur keep a solid bar so text stays readable */
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
-  .ptabbar::before{ opacity:1; }
   .ptabbar .ptab-cradle .cr-body{ fill-opacity:1; }
+  .ptabbar{ background:var(--surface); }
+}
 }
 </style>
 <style id="quick7-v1">
@@ -6250,7 +6246,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.11.93';
+const APP_VERSION = 'v01.11.94';
 const LAST_UPDATED = 'November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
