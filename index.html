@@ -4179,14 +4179,16 @@ body{ position:relative; }
 .ptabbar.qbar .ptab-cradle .cr-edge{ stroke:url(#qCradleGrad); }
 .ptabbar .ptab-cradle .cr-body{ fill:color-mix(in srgb,var(--accent) 8%,var(--surface)); }
 /* Glass: the bar itself is the blur. The hourglass dip is drawn as a light tint and an accent edge on top. */
-.ptabbar{ background:none; -webkit-backdrop-filter:blur(10px) saturate(140%); backdrop-filter:blur(10px) saturate(140%); -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 26px); mask-image:linear-gradient(to bottom, transparent 0, #000 26px); }
-.ptabbar.qbar{ -webkit-mask-image:none; mask-image:none; -webkit-backdrop-filter:none; backdrop-filter:none; }
-.ptabbar::before{ display:none; }
+.ptabbar{ background:none; }
+/* The blur lives on its own layer behind the content, so the PYQs orb that rises above the bar is never faded */
+.ptabbar::before{ content:""; position:absolute; left:0; right:0; top:0; bottom:0; z-index:0; pointer-events:none; -webkit-backdrop-filter:blur(10px) saturate(140%); backdrop-filter:blur(10px) saturate(140%); -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 26px); mask-image:linear-gradient(to bottom, transparent 0, #000 26px); }
+.ptabbar.qbar::before{ display:none; }
 .ptabbar .ptab-cradle .cr-body{ fill:var(--surface); fill-opacity:0; }
 /* Browsers without backdrop blur keep a solid bar so text stays readable */
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
   .ptabbar .ptab-cradle .cr-body{ fill-opacity:1; }
-  .ptabbar{ background:var(--surface); -webkit-mask-image:none; mask-image:none; }
+  .ptabbar{ background:var(--surface); }
+  .ptabbar::before{ display:none; }
 }
 </style>
 <style id="quick7-v1">
