@@ -4175,17 +4175,17 @@ body{ position:relative; }
 .ptabbar .ptab-ico{ transition:background .2s ease; }
 @media (prefers-reduced-motion: reduce){ .ptabbar .ptab[data-id="pyq"].on .ptab-ico::after{ animation:none; } }
 /* Light-theme tuning: the edge uses each theme's readable accent, and the bar takes a faint tint of its accent */
-#ptCradleGrad stop{ stop-color:var(--accent-text); }
+#ptCradleGrad stop, #qCradleGrad stop{ stop-color:var(--accent-text); }
+.ptabbar.qbar .ptab-cradle .cr-edge{ stroke:url(#qCradleGrad); }
 .ptabbar .ptab-cradle .cr-body{ fill:color-mix(in srgb,var(--accent) 8%,var(--surface)); }
 /* Glass: the bar itself is the blur. The hourglass dip is drawn as a light tint and an accent edge on top. */
-.ptabbar{ -webkit-backdrop-filter:blur(3px) saturate(120%); backdrop-filter:blur(3px) saturate(120%); }
+.ptabbar{ background:color-mix(in srgb,var(--surface) 72%,transparent); -webkit-backdrop-filter:blur(14px) saturate(160%); backdrop-filter:blur(14px) saturate(160%); }
 .ptabbar::before{ display:none; }
-.ptabbar .ptab-cradle .cr-body{ fill:var(--surface); fill-opacity:.16; }
+.ptabbar .ptab-cradle .cr-body{ fill:var(--surface); fill-opacity:0; }
 /* Browsers without backdrop blur keep a solid bar so text stays readable */
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
   .ptabbar .ptab-cradle .cr-body{ fill-opacity:1; }
   .ptabbar{ background:var(--surface); }
-}
 }
 </style>
 <style id="quick7-v1">
@@ -16573,7 +16573,7 @@ function quickBarSync(){
   if(!qb){
     qb = document.createElement('nav');
     qb.id = 'qbar'; qb.className = 'ptabbar qbar'; qb.setAttribute('aria-label', 'Quick actions');
-    qb.insertAdjacentHTML('afterbegin', CRADLE_SVG);
+    qb.insertAdjacentHTML('afterbegin', CRADLE_SVG.replace('id="ptCradleGrad"', 'id="qCradleGrad"').replace('url(#ptCradleGrad)', 'url(#qCradleGrad)'));
     QUICK7.forEach(function(id){
       const t = TABS.find(function(x){ return x.id === id; });
       if(!t) return;
