@@ -4176,6 +4176,57 @@ body{ position:relative; }
 /* Light-theme tuning: the edge uses each theme's readable accent, and the bar takes a faint tint of its accent */
 #ptCradleGrad stop{ stop-color:var(--accent-text); }
 .ptabbar .ptab-cradle .cr-body{ fill:color-mix(in srgb,var(--accent) 8%,var(--surface)); }
+/* Glass: a frosted layer clipped to the same hourglass shape as the bar edge */
+.ptabbar::before{ content:""; position:absolute; left:0; top:0; width:100%; height:100%; z-index:0; pointer-events:none;
+  background:color-mix(in srgb,var(--accent) 6%,var(--surface)); opacity:.74;
+  -webkit-backdrop-filter:blur(18px) saturate(165%); backdrop-filter:blur(18px) saturate(165%);
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M0,14 L33,14 C38,14 39,34 50,34 C61,34 62,14 67,14 L100,14 L100,100 L0,100 Z' fill='black'/></svg>");
+  mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M0,14 L33,14 C38,14 39,34 50,34 C61,34 62,14 67,14 L100,14 L100,100 L0,100 Z' fill='black'/></svg>");
+  -webkit-mask-size:100% 100%; mask-size:100% 100%; }
+/* The SVG body is now only a light wash over the blur, so the content behind shows through */
+.ptabbar .ptab-cradle .cr-body{ fill-opacity:0; }
+/* Browsers without backdrop blur keep a solid bar so text stays readable */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .ptabbar::before{ opacity:1; }
+  .ptabbar .ptab-cradle .cr-body{ fill-opacity:1; }
+}
+</style>
+<style id="quick7-v1">
+/* Tablets and widescreens: the seven-action bar replaces the five-action one */
+@media (min-width:700px){
+  .ptabbar:not(.qbar){ display:none !important; }
+  .ptabbar.qbar{ display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); position:fixed; left:0; right:0; bottom:0; z-index:58; }
+  .ptabbar.qbar.hide{ display:none !important; }
+  .ptabbar.qbar{ background:var(--surface); border-top:1px solid var(--border); gap:4px; padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px)); border-radius:0; }
+  .ptabbar.qbar .ptab{ all:unset; box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; min-height:58px; padding:4px 2px; border-radius:14px; color:var(--muted); font:500 11px Inter,sans-serif; letter-spacing:.01em; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .ptabbar.qbar .ptab-ico{ width:46px; height:28px; border-radius:999px; display:grid; place-items:center; transition:background .2s ease; }
+  .ptabbar.qbar .ptab-lbl{ line-height:1.1; }
+  .ptabbar.qbar .ptab svg{ width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
+  .ptabbar.qbar .ptab.on{ color:var(--accent-text); }
+  .ptabbar.qbar .ptab.on .ptab-ico{ background:var(--accent-soft); }
+  .ptabbar.qbar .ptab.on .ptab-lbl{ font-weight:700; }
+  .ptabbar.qbar .ptab:active{ transform:scale(.96); }
+  body.has-ptabs:not(.msg-fit):not(.chat-full) #app{ padding-bottom:calc(88px + env(safe-area-inset-bottom,0px)) !important; }
+}
+/* Widescreen: the section panel floats on the RIGHT. Content, the quick bar and the back button all clear its 300px band */
+@media (min-width:960px){
+  body.has-nav{ padding-left:0 !important; padding-right:300px !important; }
+  body.has-nav .bottomnav.navpanel{ left:auto !important; right:14px !important; top:66px !important; }
+  body.has-nav .navback{ right:300px; }
+  body.has-nav .navtog{ left:auto; right:14px; }
+  .ptabbar.qbar{ right:300px; }
+}
+/* Left-handed mode: everything that sits on the edges moves to the other side */
+body.lefty .navtog{ left:auto; right:14px; }
+body.lefty .navback{ right:auto; left:14px; }
+@media (min-width:960px){
+  body.lefty.has-nav{ padding-right:0 !important; padding-left:300px !important; }
+  body.lefty.has-nav .bottomnav.navpanel{ right:auto !important; left:14px !important; }
+  body.lefty.has-nav .navback{ left:300px; right:auto; }
+  body.lefty.has-nav .navtog{ right:auto; left:14px; }
+  body.lefty .ptabbar.qbar{ left:300px; right:0; }
+}
+.navlh{ margin-top:4px; }
 </style>
 </head>
 <body>
@@ -6199,7 +6250,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.11.89';
+const APP_VERSION = 'v01.11.93';
 const LAST_UPDATED = 'November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -6506,6 +6557,11 @@ function bottomNav(){
     };
     bar.appendChild(out);
   }
+  // Left-handed mode: moves the widescreen rail and the menu and back buttons to the other side
+  bar.appendChild(el('<div class="navdiv" aria-hidden="true"></div>'));
+  const lh = el('<button class="bn navlh" type="button" aria-pressed="' + (isLefty() ? 'true' : 'false') + '"><svg viewBox="0 0 24 24"><path d="M9 4v16M9 4l-4 4M9 4l4 4M15 20V8M15 8l-4 4M15 8l4 4"/></svg><span>' + (isLefty() ? 'Right-handed mode' : 'Left-handed mode') + '</span></button>');
+  lh.onclick = function(){ setLefty(!isLefty()); render(); };
+  bar.appendChild(lh);
   return bar;
 }
 // the Back card at the top right replaces the in-page links
@@ -16508,7 +16564,40 @@ function phoneTabsSync(){
   document.body.classList.toggle('has-ptabs', show && window.innerWidth <= 959);
   // PYQ sub-screens (chapter, paper, setup) light up the PYQ button too
   bar.querySelectorAll('.ptab').forEach(function(b){ b.classList.toggle('on', (TAB_OF[view] || view) === b.dataset.id); });
+  quickBarSync(); applyHandedness();
 }
+// Tablets and widescreens: seven quick actions, PYQs in the centre (4th of 7). Friends and Notebooks are the two added here.
+const QUICK7 = ['home','mocks','friends','pyq','notebooks','leaderboard','notehub'];
+const CRADLE_SVG = '<svg class="ptab-cradle" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="ptCradleGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="var(--accent)" stop-opacity="0"/><stop offset="0.35" stop-color="var(--accent)" stop-opacity=".55"/><stop offset="0.5" stop-color="var(--accent)" stop-opacity=".9"/><stop offset="0.65" stop-color="var(--accent)" stop-opacity=".55"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs><path class="cr-body" d="M0,14 L33,14 C38,14 39,34 50,34 C61,34 62,14 67,14 L100,14 L100,100 L0,100 Z"/><path class="cr-edge" d="M0,14 L33,14 C38,14 39,34 50,34 C61,34 62,14 67,14 L100,14"/></svg>';
+function quickBarSync(){
+  if(typeof TABS === 'undefined' || !document.body) return;
+  let qb = document.getElementById('qbar');
+  if(!qb){
+    qb = document.createElement('nav');
+    qb.id = 'qbar'; qb.className = 'ptabbar qbar'; qb.setAttribute('aria-label', 'Quick actions');
+    qb.insertAdjacentHTML('afterbegin', CRADLE_SVG);
+    QUICK7.forEach(function(id){
+      const t = TABS.find(function(x){ return x.id === id; });
+      if(!t) return;
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'ptab'; b.dataset.id = id;
+      b.innerHTML = '<span class="ptab-ico"><svg viewBox="0 0 24 24" aria-hidden="true">' + t.icon + '</svg></span><span class="ptab-lbl">' + t.label + '</span>';
+      b.onclick = function(){ if(mockLocked()){ mockNotice(); return; } go(id); };
+      qb.appendChild(b);
+    });
+    document.body.appendChild(qb);
+  }
+  const wide = window.innerWidth >= 700;
+  // Hidden while a chat is open: the message box sits at the bottom on every width
+  const inChat = (view === 'messages' && !!fr.open) || view === 'chat';
+  const show = wide && !inChat && !!store.profile && !document.body.classList.contains('kb-open') && !document.body.classList.contains('chat-full');
+  qb.classList.toggle('hide', !show);
+  if(show) document.body.classList.add('has-ptabs');
+  qb.querySelectorAll('.ptab').forEach(function(b){ b.classList.toggle('on', (TAB_OF[view] || view) === b.dataset.id); });
+}
+function isLefty(){ try{ return localStorage.getItem('torq_lefty') === '1'; }catch(e){ return false; } }
+function setLefty(v){ try{ localStorage.setItem('torq_lefty', v ? '1' : '0'); }catch(e){} applyHandedness(); }
+function applyHandedness(){ document.body.classList.toggle('lefty', isLefty()); }
 (function(){
   const baseRender = render;
   render = function(){ const r = baseRender.apply(this, arguments); phoneTabsSync(); return r; };
