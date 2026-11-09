@@ -4179,13 +4179,14 @@ body{ position:relative; }
 .ptabbar.qbar .ptab-cradle .cr-edge{ stroke:url(#qCradleGrad); }
 .ptabbar .ptab-cradle .cr-body{ fill:color-mix(in srgb,var(--accent) 8%,var(--surface)); }
 /* Glass: the bar itself is the blur. The hourglass dip is drawn as a light tint and an accent edge on top. */
-.ptabbar{ background:color-mix(in srgb,var(--surface) 72%,transparent); -webkit-backdrop-filter:blur(14px) saturate(160%); backdrop-filter:blur(14px) saturate(160%); }
+.ptabbar{ background:none; -webkit-backdrop-filter:blur(10px) saturate(140%); backdrop-filter:blur(10px) saturate(140%); -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 26px); mask-image:linear-gradient(to bottom, transparent 0, #000 26px); }
+.ptabbar.qbar{ -webkit-mask-image:none; mask-image:none; -webkit-backdrop-filter:none; backdrop-filter:none; }
 .ptabbar::before{ display:none; }
 .ptabbar .ptab-cradle .cr-body{ fill:var(--surface); fill-opacity:0; }
 /* Browsers without backdrop blur keep a solid bar so text stays readable */
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
   .ptabbar .ptab-cradle .cr-body{ fill-opacity:1; }
-  .ptabbar{ background:var(--surface); }
+  .ptabbar{ background:var(--surface); -webkit-mask-image:none; mask-image:none; }
 }
 </style>
 <style id="quick7-v1">
