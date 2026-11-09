@@ -4150,16 +4150,32 @@ body{ position:relative; }
 
 <style id="mx-fseg-fix">.mx-ctl{flex-wrap:wrap;gap:8px}.mx-ctl .mx-fseg{flex:1 1 100%;min-width:0}.mx-ctl .mx-fseg button{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mx-ctl .mx-sort{margin-left:auto;white-space:nowrap}</style>
 <style id="mx-tabs-fix">.mx-tabseg button{white-space:nowrap;min-width:0;padding-left:4px;padding-right:4px;overflow:hidden;text-overflow:ellipsis}@media (max-width:399px){.mx-tabseg button{font-size:13px}}</style>
-<style id="ptabbar-v3">
-.ptabbar{ border-radius:22px 22px 0 0; background:linear-gradient(180deg,var(--surface),var(--bg)); border-top:1px solid var(--border); box-shadow:0 -12px 32px -10px rgba(0,0,0,.45); padding:6px 8px calc(8px + env(safe-area-inset-bottom,0px)); overflow:visible; }
-.ptabbar .ptab{ min-height:58px; }
-.ptabbar .ptab:nth-child(3){ min-height:64px; }
-.ptabbar .ptab:nth-child(3) .ptab-ico{ width:56px; height:56px; margin-top:-30px; border-radius:50%; background:linear-gradient(160deg,var(--accent),color-mix(in srgb,var(--accent) 62%,#ffffff)); color:var(--accent-ink); box-shadow:0 10px 22px -8px var(--accent), inset 0 1px 0 rgba(255,255,255,.35); border:4px solid var(--surface); box-sizing:content-box; }
-.ptabbar .ptab:nth-child(3) .ptab-ico svg{ width:26px; height:26px; stroke:var(--accent-ink); stroke-width:2.1; }
-.ptabbar .ptab:nth-child(3) .ptab-lbl{ color:var(--accent-text); font-weight:700; margin-top:0; }
-.ptabbar .ptab:nth-child(3).on .ptab-ico{ background:linear-gradient(160deg,var(--accent),color-mix(in srgb,var(--accent) 62%,#ffffff)); box-shadow:0 0 0 3px var(--accent-soft), 0 10px 22px -8px var(--accent), inset 0 1px 0 rgba(255,255,255,.35); }
-.ptabbar .ptab:nth-child(3):not(.on) .ptab-ico{ box-shadow:0 10px 22px -8px var(--accent), inset 0 1px 0 rgba(255,255,255,.35); }
-.ptabbar .ptab.on:not(:nth-child(3)) .ptab-lbl{ font-weight:700; }
+<style id="ptabbar-v4">
+/* Hourglass bar: the top edge pinches into a cradle that holds the PYQs orb (the waist of the glass) */
+.ptabbar{ background:transparent; border:none; box-shadow:none; padding:0 8px calc(6px + env(safe-area-inset-bottom,0px)); overflow:visible; position:fixed; }
+.ptabbar .ptab-cradle{ position:absolute; left:0; top:0; width:100%; height:100%; z-index:0; pointer-events:none; overflow:visible; }
+.ptabbar .ptab-cradle .cr-body{ fill:var(--surface); }
+.ptabbar .ptab-cradle .cr-edge{ fill:none; stroke:url(#ptCradleGrad); stroke-width:1.2px; vector-effect:non-scaling-stroke; }
+.ptabbar .ptab{ position:relative; z-index:1; min-height:58px; padding-top:8px; }
+.ptabbar .ptab[data-id="pyq"]{ min-height:64px; }
+/* The orb: neutral when idle, terracotta when a PYQs screen is open */
+.ptabbar .ptab[data-id="pyq"] .ptab-ico{ position:relative; width:56px; height:56px; margin-top:-34px; border-radius:50%; background:radial-gradient(circle at 35% 30%,var(--surface-2),var(--surface)); color:var(--muted); border:1px solid var(--border); box-sizing:border-box; box-shadow:0 8px 18px -10px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06); transition:background .25s ease, color .25s ease, box-shadow .25s ease; }
+.ptabbar .ptab[data-id="pyq"] .ptab-ico svg{ width:24px; height:24px; stroke:currentColor; stroke-width:1.9; }
+.ptabbar .ptab[data-id="pyq"] .ptab-ico::after{ content:""; position:absolute; inset:-7px; border-radius:50%; border:1.5px dashed transparent; opacity:0; transition:opacity .25s ease; pointer-events:none; }
+.ptabbar .ptab[data-id="pyq"].on .ptab-ico{ background:radial-gradient(circle at 35% 30%,#f2906c,var(--accent) 60%,color-mix(in srgb,var(--accent) 80%,#000)); color:var(--accent-ink); border-color:transparent; box-shadow:0 10px 26px -8px var(--accent), inset 0 1px 0 rgba(255,255,255,.35); }
+.ptabbar .ptab[data-id="pyq"].on .ptab-ico svg{ stroke:var(--accent-ink); }
+.ptabbar .ptab[data-id="pyq"].on .ptab-ico::after{ border-color:var(--accent); opacity:.7; animation:ptRing 14s linear infinite; }
+@keyframes ptRing{ to{ transform:rotate(360deg); } }
+/* Labels: Lora italic for the active tab, the same voice as the app's accent words */
+.ptabbar .ptab-lbl{ font-family:Inter,sans-serif; }
+.ptabbar .ptab.on .ptab-lbl{ font-family:Lora,Georgia,serif; font-style:italic; font-weight:600; font-size:12.5px; letter-spacing:0; }
+.ptabbar .ptab[data-id="pyq"] .ptab-lbl{ margin-top:0; }
+.ptabbar .ptab[data-id="pyq"].on .ptab-lbl{ color:var(--accent-text); }
+.ptabbar .ptab-ico{ transition:background .2s ease; }
+@media (prefers-reduced-motion: reduce){ .ptabbar .ptab[data-id="pyq"].on .ptab-ico::after{ animation:none; } }
+/* Light-theme tuning: the edge uses each theme's readable accent, and the bar takes a faint tint of its accent */
+#ptCradleGrad stop{ stop-color:var(--accent-text); }
+.ptabbar .ptab-cradle .cr-body{ fill:color-mix(in srgb,var(--accent) 8%,var(--surface)); }
 </style>
 </head>
 <body>
@@ -6183,7 +6199,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.11.85';
+const APP_VERSION = 'v01.11.89';
 const LAST_UPDATED = 'November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -16483,6 +16499,8 @@ function phoneTabsSync(){
       b.onclick = function(){ if(mockLocked()){ mockNotice(); return; } go(id); };
       bar.appendChild(b);
     });
+    // Hourglass cradle: the bar's top edge dips under the PYQs orb (x 50%) and rises again on both sides
+    bar.insertAdjacentHTML('afterbegin', '<svg class="ptab-cradle" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="ptCradleGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="var(--accent)" stop-opacity="0"/><stop offset="0.35" stop-color="var(--accent)" stop-opacity=".55"/><stop offset="0.5" stop-color="var(--accent)" stop-opacity=".9"/><stop offset="0.65" stop-color="var(--accent)" stop-opacity=".55"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs><path class="cr-body" d="M0,14 L33,14 C38,14 39,34 50,34 C61,34 62,14 67,14 L100,14 L100,100 L0,100 Z"/><path class="cr-edge" d="M0,14 L33,14 C38,14 39,34 50,34 C61,34 62,14 67,14 L100,14"/></svg>');
     document.body.appendChild(bar);
   }
   const show = !!store.profile && !document.body.classList.contains('kb-open') && !document.body.classList.contains('chat-full') && view !== 'chat';
