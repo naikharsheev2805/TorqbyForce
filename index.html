@@ -4178,9 +4178,9 @@ body{ position:relative; }
 #ptCradleGrad stop{ stop-color:var(--accent-text); }
 .ptabbar .ptab-cradle .cr-body{ fill:color-mix(in srgb,var(--accent) 8%,var(--surface)); }
 /* Glass: the bar itself is the blur. The hourglass dip is drawn as a light tint and an accent edge on top. */
-.ptabbar{ -webkit-backdrop-filter:blur(8px) saturate(130%); backdrop-filter:blur(8px) saturate(130%); }
+.ptabbar{ -webkit-backdrop-filter:blur(3px) saturate(120%); backdrop-filter:blur(3px) saturate(120%); }
 .ptabbar::before{ display:none; }
-.ptabbar .ptab-cradle .cr-body{ fill:var(--surface); fill-opacity:.42; }
+.ptabbar .ptab-cradle .cr-body{ fill:var(--surface); fill-opacity:.16; }
 /* Browsers without backdrop blur keep a solid bar so text stays readable */
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
   .ptabbar .ptab-cradle .cr-body{ fill-opacity:1; }
