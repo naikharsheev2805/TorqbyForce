@@ -4186,7 +4186,9 @@ body{ position:relative; }
 /* Glass: the bar itself is the blur. The hourglass dip is drawn as a light tint and an accent edge on top. */
 .ptabbar{ background:none; }
 /* The blur lives on its own layer behind the content, so the PYQs orb that rises above the bar is never faded */
-.ptabbar::before{ content:""; position:absolute; left:0; right:0; top:0; bottom:0; z-index:0; pointer-events:none; -webkit-backdrop-filter:blur(10px) saturate(140%); backdrop-filter:blur(10px) saturate(140%); -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 26px); mask-image:linear-gradient(to bottom, transparent 0, #000 26px); }
+.ptabbar::before{ content:""; position:absolute; left:0; right:0; top:-64px; bottom:0; z-index:0; pointer-events:none; -webkit-backdrop-filter:blur(12px) saturate(140%); backdrop-filter:blur(12px) saturate(140%);
+  -webkit-mask-image:linear-gradient(to top, #000 0, #000 34px, rgba(0,0,0,.55) 58%, transparent 100%), radial-gradient(ellipse 96px 96px at 50% 100%, #000 0%, rgba(0,0,0,.6) 45%, transparent 100%);
+  mask-image:linear-gradient(to top, #000 0, #000 34px, rgba(0,0,0,.55) 58%, transparent 100%), radial-gradient(ellipse 96px 96px at 50% 100%, #000 0%, rgba(0,0,0,.6) 45%, transparent 100%); }
 .ptabbar.qbar::before{ display:none; }
 .ptabbar .ptab-cradle .cr-body{ fill:var(--surface); fill-opacity:0; }
 /* Browsers without backdrop blur keep a solid bar so text stays readable */
@@ -14812,20 +14814,30 @@ function flashAnswer(ok){
   st.busy = true;
   flashKnown(st.chapter)[c.key] = ok;
   const top = document.querySelector('.fx2-stage .fx2-card');   // the card leaves sideways from where it is
-  if(top){
-    const base = flashState.flipped ? ' rotateY(180deg)' : '';
+  const base = flashState.flipped ? ' rotateY(180deg)' : '';
+  const endT = (ok?'translate(30%,-2%) rotate(7deg)':'translate(-30%,-2%) rotate(-7deg)')+base;
+  const next = document.querySelector('.fx2-under.u1');         // the next card rises into place
+  if(next) next.classList.add('fx2-promote');
+  if(top && top.animate){
     const from = top.style.transform || (base ? base.trim() : 'none');
     top.style.transition = 'none';
     top.classList.remove('dragging');
-    if(top.animate){
-      top.animate([{transform:from, opacity:1},
-                   {transform:(ok?'translate(30%,-2%) rotate(7deg)':'translate(-30%,-2%) rotate(-7deg)')+base, opacity:0}],
-                  {duration:460, easing:'cubic-bezier(.4,0,.2,1)', fill:'forwards'});
-    } else top.classList.add(ok ? 'fx2-out-r' : 'fx2-out-l');
+    const anim = top.animate([{transform:from, opacity:1},{transform:endT, opacity:0}],
+                             {duration:460, easing:'cubic-bezier(.4,0,.2,1)', fill:'forwards'});
+    let done = false;
+    // Only swap once the card has fully left. Pin its end position first so it cannot snap back.
+    const finish = ()=>{
+      if(done) return; done = true;
+      top.style.transform = endT; top.style.opacity = '0';
+      try{ anim.cancel(); }catch(_){}
+      swapFlashCard();
+    };
+    anim.onfinish = finish;
+    setTimeout(finish, 520);   // fallback if the animation never reports finish
+  } else {
+    if(top) top.classList.add(ok ? 'fx2-out-r' : 'fx2-out-l');
+    setTimeout(swapFlashCard, 460);
   }
-  const next = document.querySelector('.fx2-under.u1');         // the next card rises into place
-  if(next) next.classList.add('fx2-promote');
-  setTimeout(swapFlashCard, 460);
 }
 // Replaces only the top bar and the card area, in the same frame, so the screen never goes blank
 function swapFlashCard(){
