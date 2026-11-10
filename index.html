@@ -14830,7 +14830,7 @@ function flashSession(w){
 function fitFlashLandscape(){
   const split = document.querySelector('body.flash-session .fx2-split');
   if(!split) return;
-  const bar = [...document.querySelectorAll('.ptabbar:not(.qbar)')].find(b => b.getBoundingClientRect().height > 0);   // the tablet rail is not a bottom bar
+  const bar = [...document.querySelectorAll('.ptabbar')].find(b => b.getBoundingClientRect().height > 0);
   const wideLand = window.innerWidth >= 700 && window.innerWidth > window.innerHeight;
   const cards = document.querySelectorAll('body.flash-session .fx2-stack, body.flash-session .fx2-under');
   if(!wideLand || !bar){
@@ -16712,14 +16712,13 @@ function phoneTabsSync(){
 // Tablets and widescreens: seven quick actions, PYQs in the centre (4th of 7). Friends and Notebooks are the two added here.
 const QUICK7 = ['home','mocks','friends','pyq','notebooks','leaderboard','notehub'];
 const CRADLE_SVG = '<svg class="ptab-cradle" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="ptCradleGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="var(--accent)" stop-opacity="0"/><stop offset="0.35" stop-color="var(--accent)" stop-opacity=".55"/><stop offset="0.5" stop-color="var(--accent)" stop-opacity=".9"/><stop offset="0.65" stop-color="var(--accent)" stop-opacity=".55"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs><path class="cr-body" d="M0,14 L33,14 C38,14 39,34 50,34 C61,34 62,14 67,14 L100,14 L100,100 L0,100 Z"/><path class="cr-edge" d="M0,14 L33,14 C38,14 39,34 50,34 C61,34 62,14 67,14 L100,14"/></svg>';
-const RAIL_SVG = '<svg class="ptab-cradle" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="qRailGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity="0"/><stop offset="0.35" stop-color="var(--accent)" stop-opacity=".55"/><stop offset="0.5" stop-color="var(--accent)" stop-opacity=".9"/><stop offset="0.65" stop-color="var(--accent)" stop-opacity=".55"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs><path class="cr-body" d="M86,0 L86,33 C86,38 66,39 66,50 C66,61 86,62 86,67 L86,100 L0,100 L0,0 Z"/><path class="cr-edge" d="M86,0 L86,33 C86,38 66,39 66,50 C66,61 86,62 86,67 L86,100"/></svg>';
 function quickBarSync(){
   if(typeof TABS === 'undefined' || !document.body) return;
   let qb = document.getElementById('qbar');
   if(!qb){
     qb = document.createElement('nav');
     qb.id = 'qbar'; qb.className = 'ptabbar qbar'; qb.setAttribute('aria-label', 'Quick actions');
-    qb.insertAdjacentHTML('afterbegin', RAIL_SVG);
+    qb.insertAdjacentHTML('afterbegin', CRADLE_SVG.replace('id="ptCradleGrad"', 'id="qCradleGrad"').replace('url(#ptCradleGrad)', 'url(#qCradleGrad)'));
     QUICK7.forEach(function(id){
       const t = TABS.find(function(x){ return x.id === id; });
       if(!t) return;
@@ -16805,50 +16804,15 @@ body.has-nav.scrolled::before{ content:""; position:fixed; left:0; right:0; top:
   sync();
 })();
 </script>
-<style id="rail-v1">
-/* Tablets (700px and wider): the seven quick actions run down the LEFT edge as a rail, not a bottom bar.
-   Its right edge is the orange cradle line, dipping in around the PYQs item. Solid surface, so it never shows the blur over white screens. */
+<style id="hand-v2">
+/* Side menu follows handedness at every width: right-handed = left side, left-handed = right side */
+body.lefty .bottomnav.navpanel{ left:auto !important; right:14px !important; }
+body:not(.lefty) .bottomnav.navpanel{ left:14px !important; right:auto !important; }
+/* Bottom bar: thicker orange cradle line and larger icons */
 @media (min-width:700px){
-  .ptabbar.qbar{ position:fixed !important; top:0 !important; bottom:0 !important; left:0 !important; right:auto !important; width:96px !important; height:100% !important; display:flex !important; flex-direction:column !important; justify-content:space-evenly !important; grid-template-columns:none !important; gap:0 !important; padding:max(16px, env(safe-area-inset-top,0px)) 14px max(16px, env(safe-area-inset-bottom,0px)) 0 !important; box-sizing:border-box !important; background:none !important; border:none !important; border-radius:0 !important; box-shadow:none !important; overflow:visible !important; }
-  .ptabbar.qbar.hide{ display:none !important; }
-  .ptabbar.qbar::before{ display:none !important; }
-  .ptabbar.qbar .ptab-cradle{ position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; overflow:visible; }
-  .ptabbar.qbar .ptab-cradle .cr-body{ fill:var(--surface) !important; fill-opacity:1 !important; }
-  .ptabbar.qbar .ptab-cradle .cr-edge{ stroke:url(#qRailGrad) !important; stroke-width:3px !important; vector-effect:non-scaling-stroke; }
-  .ptabbar.qbar .ptab{ all:unset; position:relative; z-index:1; box-sizing:border-box; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; min-height:0; padding:4px 0; border-radius:16px; color:var(--muted); font:600 12.5px/1.1 Inter,sans-serif; letter-spacing:.01em; cursor:pointer; -webkit-tap-highlight-color:transparent; }
-  .ptabbar.qbar .ptab-ico{ width:52px; height:40px; border-radius:999px; display:grid; place-items:center; transition:background .2s ease; }
-  .ptabbar.qbar .ptab svg{ width:30px; height:30px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
-  .ptabbar.qbar .ptab-lbl{ line-height:1.1; }
-  .ptabbar.qbar .ptab.on{ color:var(--accent-text); }
-  .ptabbar.qbar .ptab.on .ptab-ico{ background:none; }
-  .ptabbar.qbar .ptab.on .ptab-ico svg{ stroke:var(--accent-text); filter:drop-shadow(0 0 5px color-mix(in srgb,var(--accent) 45%,transparent)); }
-  .ptabbar.qbar .ptab.on .ptab-lbl{ font-weight:700; }
-  .ptabbar.qbar .ptab:active{ transform:scale(.96); }
-  /* The PYQs item sits in the cradle's dip */
-  .ptabbar.qbar .ptab[data-id="pyq"]{ transform:translateX(4px); }
-  /* Flatten the PYQs orb from the bottom bar: in the rail it is an ordinary item with the same pill as the others */
-  .ptabbar.qbar .ptab[data-id="pyq"] .ptab-ico{ width:52px; height:40px; margin-top:0; border-radius:999px; background:none; border:none; box-shadow:none; color:inherit; }
-  .ptabbar.qbar .ptab[data-id="pyq"] .ptab-ico::after{ display:none; }
-  .ptabbar.qbar .ptab[data-id="pyq"] .ptab-lbl{ position:static; top:auto; }
-  .ptabbar.qbar .ptab[data-id="pyq"].on .ptab-ico{ background:none; box-shadow:none; }
-  .ptabbar.qbar .ptab[data-id="pyq"].on .ptab-ico svg{ stroke:var(--accent-text); }
-  .ptabbar.qbar .ptab[data-id="pyq"].on .ptab-lbl{ color:var(--accent-text); }
-  /* Content keeps clear of the rail; the bottom padding for a bar is no longer needed */
-  body.has-ptabs:not(:has(.navpanel.open, .navpanel.closing)){ padding-left:96px !important; padding-right:0 !important; }
-  body.has-ptabs:not(.msg-fit):not(.chat-full) #app{ padding-bottom:calc(24px + env(safe-area-inset-bottom,0px)) !important; }
-}
-@media (min-width:960px){
-  /* Widescreen side panel sits to the right of the rail */
-  body.has-ptabs:has(.navpanel.open, .navpanel.closing){ padding-left:396px !important; padding-right:0 !important; }
-  body.has-ptabs .bottomnav.navpanel{ left:110px !important; right:auto !important; }
-  body.has-ptabs .navtog{ left:110px !important; right:auto !important; }
-  body.has-ptabs .navback{ left:110px !important; right:auto !important; }
-  body.has-ptabs:has(.navpanel.open, .navpanel.closing) .navback{ left:396px !important; }
-  /* Left-handed mode keeps the panel on the right, so the rail stays on the left with the content between them */
-  body.lefty.has-ptabs:has(.navpanel.open, .navpanel.closing){ padding-left:96px !important; padding-right:300px !important; }
-  body.lefty.has-ptabs .bottomnav.navpanel{ left:auto !important; right:14px !important; }
-  body.lefty.has-ptabs .navback{ left:auto !important; right:300px !important; }
-  body.lefty.has-ptabs .navtog{ left:auto !important; right:14px !important; }
+  .ptabbar.qbar .ptab-cradle .cr-edge{ stroke-width:3px !important; }
+  .ptabbar.qbar .ptab-ico{ width:52px; height:34px; }
+  .ptabbar.qbar .ptab svg{ width:27px; height:27px; }
 }
 </style>
 </body>
