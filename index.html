@@ -2142,7 +2142,7 @@ img{ -webkit-user-drag:none; }
 .fx2-back svg{width:16px; height:16px; fill:none; stroke:var(--accent); stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
 .fx2-count{font:600 12px Inter,sans-serif; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);}
 .fx2-progress{height:5px; border-radius:99px; background:var(--surface-2); overflow:hidden; margin-bottom:22px;}
-.fx2-progress i{display:block; height:100%; background:var(--accent); border-radius:99px; transition:width .45s ease;}
+.fx2-progress i{display:block; height:100%; background:var(--accent); border-radius:99px; transition:width .45s ease; animation:none !important;}
 .fx2-stage{position:relative; display:flex; justify-content:center; perspective:1200px; margin-bottom:22px; cursor:pointer;}
 .fx2-stack{position:relative; width:min(88vw,360px); aspect-ratio:1 / 1.42;}
 .fx2-stack::before{content:""; position:absolute; inset:0; border-radius:22px; background:var(--surface-2); border:1px solid var(--border); transform:translate(8px,10px) rotate(2.5deg); opacity:.5;}
@@ -2610,6 +2610,12 @@ body.has-nav .build-stamp{ margin-bottom:calc(16px + env(safe-area-inset-bottom,
 }
 /* Tablet landscape: taller subject art so the cards use the screen */
 @media (min-width:900px){ .subjart, .fc-art{ height:clamp(150px,22vh,230px) !important; } }
+/* Motion: the card glows green when dragged right (got it) and red when dragged left (still learning), growing with the drag */
+.fx2-card.drag-r{ box-shadow:0 22px 46px -22px rgba(110,210,140,calc(var(--p,0) * .7)); }
+.fx2-card.drag-l{ box-shadow:0 22px 46px -22px rgba(232,110,90,calc(var(--p,0) * .7)); }
+/* Motion: the selected tab's icon springs into place */
+.ptabbar .ptab.on .ptab-ico svg, .ptabbar.qbar .ptab.on svg{ transform-box:fill-box; transform-origin:center; animation:tabPop .5s cubic-bezier(.3,1.5,.5,1); }
+@keyframes tabPop{ 0%{ transform:scale(.78); } 100%{ transform:scale(1); } }
 /* ---------- Flashcard transitions: the card leaves, the next one rises into place, no blank frame ---------- */
 .fx2-card.fx2-out-r{ animation:fx2OutR .46s cubic-bezier(.4,0,.2,1) forwards; }
 .fx2-card.fx2-out-l{ animation:fx2OutL .46s cubic-bezier(.4,0,.2,1) forwards; }
@@ -4255,6 +4261,13 @@ body.lefty .navback{ right:auto; left:14px; }
 }
 @media (min-width:960px) and (orientation:landscape){ figure.qcard{ margin-bottom:0 !important; } .hm-pair{ margin-top:0 !important; } }
 @media (min-width:960px) and (orientation:landscape) and (min-height:600px){ .hm-pair .ft-card.rank-day{ padding-top:14px !important; padding-bottom:14px !important; } }
+/* Flashcards on landscape tablets: the card stops above the bottom bar instead of running under it */
+@media (min-width:700px) and (orientation:landscape){
+  body.flash-session #app{ box-sizing:border-box !important; min-height:0 !important; max-height:100dvh !important; }
+  body.flash-session #navBack{ display:none !important; }
+  body.flash-session .fx2-split{ height:auto !important; max-height:none !important; flex:1 1 0 !important; min-height:0 !important; }
+  body.flash-session .fx2-stack, body.flash-session .fx2-under{ height:100% !important; max-height:none !important; }
+}
 </style>
 </head>
 <body>
@@ -4905,7 +4918,7 @@ function go(v, patch){
   if(TAB_OF[v]) nav.tab = TAB_OF[v];
   Object.assign(nav, patch||{});
   if(cloudDirty) flushCloud();
-  view = v; saveLastView(); render(); window.scrollTo(0,0);
+  const __prevView = view; view = v; if(__prevView !== v) feedback('whoosh', false); saveLastView(); render(); window.scrollTo(0,0);
   const __a = document.getElementById('app');
   if(__a){ __a.classList.remove('page-in'); void __a.offsetWidth; __a.classList.add('page-in'); }
   keepTabInView();
@@ -5110,7 +5123,32 @@ const SFX = {
   success: {h: [20, 45, 20, 45, 34], s: [[262, 0.12, 0.14], [330, 0.12, 0.16], [440, 0.12, 0.26]]},
   streak:  {h: [20, 40, 20, 40, 60], s: [[196, 0.1, 0.14], [247, 0.1, 0.14], [294, 0.1, 0.14], [392, 0.16, 0.38]]},
   error:   {h: [24, 60, 24], s: [[170, 0.12, 0.2], [140, 0.12, 0.2]]},
+  // Sound design: each cue has its own shape. Note entries are [frequency, gap before it, length, optional glide-to pitch]
+  flip:     {h: 8, s: [[520, 0.0, 0.07, 430]]},
+  swipeR:   {h: 14, s: [[392, 0.0, 0.10, 523], [659, 0.07, 0.16, 784]]},
+  swipeL:   {h: 14, s: [[330, 0.0, 0.10, 247], [220, 0.07, 0.16, 165]]},
+  cardIn:   {h: 6, s: [[740, 0.0, 0.07, 880]]},
+  bookmark: {h: 12, s: [[587, 0.0, 0.08], [784, 0.06, 0.14]]},
+  close:    {h: 10, s: [[370, 0.0, 0.06, 300], [277, 0.04, 0.10]]},
+  complete: {h: [20, 40, 20, 40, 50], s: [[262, 0.0, 0.14], [330, 0.10, 0.14], [392, 0.10, 0.14], [523, 0.10, 0.36]]},
+  warn:     {h: [30, 50, 30], s: [[220, 0.0, 0.14], [196, 0.10, 0.20]]},
+  whoosh:   {h: 0, noise: [0.22, 400, 1600, 0.05]},
 };
+// A soft filtered-noise sweep, for page changes: no pitch, just air moving
+function playNoise(dur, f0, f1, vol){
+  try{
+    __audioCtx = __audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if(__audioCtx.state === 'suspended') __audioCtx.resume();
+    const ctx = __audioCtx, t0 = ctx.currentTime;
+    const len = Math.floor(ctx.sampleRate * dur), buf = ctx.createBuffer(1, len, ctx.sampleRate), d = buf.getChannelData(0);
+    for(let i = 0; i < len; i++) d[i] = (Math.random()*2 - 1) * (1 - i/len);
+    const src = ctx.createBufferSource(); src.buffer = buf;
+    const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = 0.8;
+    bp.frequency.setValueAtTime(f0, t0); bp.frequency.exponentialRampToValueAtTime(f1, t0 + dur);
+    const g = ctx.createGain(); g.gain.setValueAtTime(vol, t0); g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    src.connect(bp); bp.connect(g); g.connect(ctx.destination); src.start(t0);
+  }catch(e){}
+}
 function playTones(list){
   try{
     __audioCtx = __audioCtx || new (window.AudioContext || window.webkitAudioContext)();
@@ -5190,8 +5228,9 @@ document.addEventListener('pointerdown', function(){
 function feedback(kind, quiet){
   const d = SFX[kind]; if(!d) return;
   const f = feedbackPrefs();
-  if(f.haptics) vibrate(d.h);
+  if(f.haptics && d.h) vibrate(d.h);
   if(f.sound && !quiet){
+    if(d.noise){ playNoise(d.noise[0], d.noise[1], d.noise[2], d.noise[3]); return; }
     // stagger the notes: each entry is [frequency, offset seconds, length seconds]
     let at = 0;
     playTones(d.s.map(function(n){ const out = [n[0], at, n[2]]; out.end = n[3]; at += n[1]; out.start = out[1]; return out; }));
@@ -5702,6 +5741,7 @@ function submitMock(){
   const cur = session.queue[session.idx];
   session.times[cur.id] = (session.times[cur.id]||0) + (Date.now()-session.qStart)/1000;
   session.submitted = true;
+  feedback('complete', false);
   if(session.seriesId){
     session.queue.forEach(q=>{ const a = session.answers[q.id]; if(a) a.correct = q.type==='integer' ? sameAnswer(a.sel, q.answer) : a.sel===q.correct; });
     seriesFinishRemote(!!session.auto);
@@ -5866,6 +5906,7 @@ function saveNote(qid, text){
 }
 function toggleBookmark(qid){
   store.bookmarks = store.bookmarks.indexOf(qid)>=0 ? store.bookmarks.filter(id=>id!==qid) : store.bookmarks.concat([qid]);
+  feedback(store.bookmarks.indexOf(qid)>=0 ? 'bookmark' : 'close', false);
   persist(); render();
 }
 
@@ -6357,7 +6398,7 @@ function render(){
   document.body.classList.remove('flash-session');   // no nested redraws
   document.body.classList.toggle('no-back', !!(session && session.mode==='mock' && !session.submitted && !session.review));
   __renderBusy = true;
-  try{ renderInner(); saveSessionSnapshot(); }
+  try{ renderInner(); saveSessionSnapshot(); if(view === 'flash') setTimeout(fitFlashLandscape, 0); }
   catch(err){
     console.error(err);
     const now = Date.now();
@@ -7664,6 +7705,7 @@ function flashView(){
 }
 function flashDone(w){
   const st = flashState, k = flashKnown(st.chapter), total = st.pool.length;
+  if(!st.celebrated){ st.celebrated = true; feedback('complete', false); }
   const got = st.pool.filter(x=>k[x.key]===true).length, pct = total ? Math.round(got/total*100) : 0;
   w.appendChild(el('<div class="card fl-done"><div class="fl-ch">Session complete</div><div class="fl-score">'+pct+'%</div><div class="meta">'+got+' of '+total+' marked Got it</div></div>'));
   const row = el('<div class="fl-ctl"><button class="btn secondary" type="button">'+(st.mine?'My cards':'Chapters')+'</button><button class="btn" type="button">Go again</button></div>');
@@ -14561,6 +14603,7 @@ document.addEventListener('keydown',function(e){ var k=(e.key||'').toLowerCase()
 function flashFlip(){
   if(flashState.busy) return;
   flashState.flipped = !flashState.flipped;
+  feedback('flip', false);
   const cd = document.querySelector('.fx2-card'); if(cd) cd.classList.toggle('flip', flashState.flipped);
 }
 
@@ -14767,7 +14810,7 @@ function flashSession(w){
   split.appendChild(deck);
   // Right (wide screens): progress and actions. On phones it stacks under the card.
   const side = el('<div class="fx2-side"><div class="fx2-side-k">'+esc(st.chapter)+'</div><div class="fx2-big">'+(st.i+1)+'<span> / '+n+'</span></div>'
-    +'<div class="fx2-progress"><i style="width:'+(st.i/n*100)+'%"></i></div>'
+    +'<div class="fx2-progress"><i style="width:'+((st.progFrom!=null?st.progFrom:st.i)/n*100)+'%"></i></div>'
     +'<div class="fx2-actions"><button type="button" class="fx2-btn quiet">Still learning</button><button type="button" class="fx2-btn primary">Got it</button></div>'
     +'<div class="fx2-keys pc-only">Swipe right: got it · left: still learning · tap to flip</div></div>');
   const bs = side.querySelectorAll('.fx2-btn');
@@ -14779,7 +14822,31 @@ function flashSession(w){
   return w;
 }
 // Swipe right: got it. Swipe left: still learning. A short drag moves the card; a tap still flips it.
+// Landscape tablets: the card ends just above the bottom bar, measured from where the bar really is
+function fitFlashLandscape(){
+  const split = document.querySelector('body.flash-session .fx2-split');
+  if(!split) return;
+  const bar = [...document.querySelectorAll('.ptabbar')].find(b => b.getBoundingClientRect().height > 0);
+  const wideLand = window.innerWidth >= 700 && window.innerWidth > window.innerHeight;
+  const cards = document.querySelectorAll('body.flash-session .fx2-stack, body.flash-session .fx2-under');
+  if(!wideLand || !bar){
+    ['flex','min-height','height','max-height'].forEach(k => split.style.removeProperty(k));
+    if(split.parentNode) split.parentNode.style.removeProperty('justify-content');
+    cards.forEach(n => { n.style.removeProperty('height'); n.style.removeProperty('max-height'); });
+    return;
+  }
+  const top = split.getBoundingClientRect().top;
+  // The app is zoomed on wide screens, so layout px must be divided by that zoom before they are written
+  const appEl = document.getElementById('app'); const zf = appEl ? (appEl.getBoundingClientRect().height / (parseFloat(getComputedStyle(appEl).height) || 1)) : 1;
+  const avail = Math.max(240, Math.floor((bar.getBoundingClientRect().top - top - 22) / (zf || 1)));
+  const wrap = split.parentNode; if(wrap){ wrap.style.setProperty('justify-content', 'flex-start', 'important'); }
+  // Important inline values: the stylesheet's own landscape rules are marked important too
+  split.style.setProperty('flex', 'none', 'important'); split.style.setProperty('min-height', '0', 'important');
+  split.style.setProperty('height', avail + 'px', 'important'); split.style.setProperty('max-height', avail + 'px', 'important');
+  cards.forEach(n => { n.style.setProperty('height', avail + 'px', 'important'); n.style.setProperty('max-height', avail + 'px', 'important'); });
+}
 function flashBindSwipe(stage){
+  setTimeout(fitFlashLandscape, 0);
   let x0 = null, y0 = null, dx = 0, drag = false, swiped = 0;
   const card = ()=> stage.querySelector('.fx2-card');
   stage.addEventListener('pointerdown', e=>{
@@ -14797,13 +14864,17 @@ function flashBindSwipe(stage){
       try{ stage.setPointerCapture(e.pointerId); }catch(_){}
     }
     dx = mx;
-    const c = card(); if(c) c.style.transform = 'translateX('+mx+'px) rotate('+(mx/22)+'deg)'+(flashState.flipped?' rotateY(180deg)':'');
+    const c = card(); if(c){
+      c.style.transform = 'translateX('+mx+'px) rotate('+(mx/22)+'deg)'+(flashState.flipped?' rotateY(180deg)':'');
+      c.classList.toggle('drag-r', mx > 0); c.classList.toggle('drag-l', mx < 0);
+      c.style.setProperty('--p', Math.min(1, Math.abs(mx)/120).toFixed(3));
+    }
   });
   const end = ()=>{
     if(x0 === null) return;
     const wasDrag = drag, mx = dx, w = stage.getBoundingClientRect().width;
     x0 = null; drag = false;
-    const c = card(); if(c) c.classList.remove('dragging');
+    const c = card(); if(c){ c.classList.remove('dragging', 'drag-r', 'drag-l'); c.style.removeProperty('--p'); }
     if(!wasDrag) return;                 // a tap: the click below flips the card
     swiped = Date.now();
     if(Math.abs(mx) > Math.max(70, w * 0.25)){ flashAnswer(mx > 0); }
@@ -14815,7 +14886,7 @@ function flashBindSwipe(stage){
     if(Date.now() - swiped < 350){ e.preventDefault(); e.stopImmediatePropagation(); return; }
     flashFlip();
   });
-  window.addEventListener('resize', ()=>{ if(view === 'flash') setTimeout(fitFront, 0); });
+  window.addEventListener('resize', ()=>{ if(view === 'flash'){ setTimeout(fitFront, 0); setTimeout(fitFlashLandscape, 0); } });
 }
 // Shown once a day before flashcards, like the pop-up before a practice set
 function swipeSplashSeenToday(){ return store.flashSwipeDay === dayKey(); }
@@ -14833,6 +14904,7 @@ function flashAnswer(ok){
   const st = flashState, c = st.pool[st.i];
   if(!c || st.busy) return;
   st.busy = true;
+  feedback(ok ? 'swipeR' : 'swipeL', false);
   flashKnown(st.chapter)[c.key] = ok;
   const top = document.querySelector('.fx2-stage .fx2-card');   // the card leaves sideways from where it is
   if(top){
@@ -14858,7 +14930,7 @@ function flashAnswer(ok){
 function swapFlashCard(){
   const st = flashState;
   if(st.i >= st.pool.length-1){ st.done = true; render(); return; }
-  st.i++; st.enter = false; st.flipped = false;
+  st.progFrom = st.i; st.i++; st.enter = false; st.flipped = false;
   const split = document.querySelector('.fx2-split');
   if(!split){ render(); return; }
   const host = split.parentNode;
@@ -14871,6 +14943,11 @@ function swapFlashCard(){
   old.forEach(n=>n.remove());
   renderMath();
   fitFront();
+  feedback('cardIn', false);
+  // The bar grows from the previous card's fraction to this card's, once the new bar is on screen
+  const total = st.pool.length, to = st.i/total*100;
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ const b = document.querySelector('.fx2-progress i'); if(b) b.style.width = to+'%'; }); });
+  st.progFrom = null;
 }
 
 
@@ -14878,6 +14955,7 @@ function swapFlashCard(){
 window.addEventListener('error', e=>{ console.error(e.error || e.message); softNotice('Something went wrong on that screen. You are still signed in.'); });
 window.addEventListener('unhandledrejection', e=>{ console.error(e.reason); });
 function softNotice(msg){
+  feedback('warn', false);
   const old = document.querySelector('.mock-notice'); if(old) old.remove();
   const n = el('<div class="mock-notice" role="status"></div>'); n.textContent = msg;
   document.body.appendChild(n);
