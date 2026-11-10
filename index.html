@@ -4202,7 +4202,7 @@ body{ position:relative; }
 /* Glass: the bar itself is the blur. The hourglass dip is drawn as a light tint and an accent edge on top. */
 .ptabbar{ background:none; }
 /* The blur lives on its own layer behind the content, so the PYQs orb that rises above the bar is never faded */
-.ptabbar::before{ content:""; position:absolute; left:0; right:0; top:-90px; bottom:0; z-index:-1; pointer-events:none; -webkit-backdrop-filter:blur(10px) saturate(140%); backdrop-filter:blur(10px) saturate(140%); -webkit-mask-image:linear-gradient(to top, #000 calc(100% - 90px), transparent calc(100% - 54px)), radial-gradient(ellipse 110px 90px at 50% 90px, #000 0%, #000 35%, transparent 100%); mask-image:linear-gradient(to top, #000 calc(100% - 90px), transparent calc(100% - 54px)), radial-gradient(ellipse 110px 90px at 50% 90px, #000 0%, #000 35%, transparent 100%); -webkit-mask-composite:source-over; mask-composite:add; }
+.ptabbar::before{ content:""; position:absolute; left:0; right:0; top:-50px; bottom:0; z-index:-1; pointer-events:none; -webkit-backdrop-filter:blur(10px) saturate(140%); backdrop-filter:blur(10px) saturate(140%); -webkit-mask-image:linear-gradient(to top, #000 calc(100% - 50px), transparent calc(100% - 24px)), radial-gradient(ellipse 84px 50px at 50% 50px, #000 0%, #000 35%, transparent 100%); mask-image:linear-gradient(to top, #000 calc(100% - 50px), transparent calc(100% - 24px)), radial-gradient(ellipse 84px 50px at 50% 50px, #000 0%, #000 35%, transparent 100%); -webkit-mask-composite:source-over; mask-composite:add; }
 .ptabbar .ptab-cradle .cr-body{ fill:var(--surface); fill-opacity:0; }
 /* Browsers without backdrop blur keep a solid bar so text stays readable */
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
@@ -4303,6 +4303,7 @@ body.lefty .navback{ right:auto; left:14px; }
   fill('oPhone'); fill('oWide');
   function place(){
     var S = document.getElementById('torqSplash');
+    if(!S) return;   // the splash is removed once the app is up; a later resize must not fail
     var ph = S.querySelector('.sp-phone'), wd = S.querySelector('.sp-wide');
     var phone = getComputedStyle(ph).display !== 'none';
     var base = phone ? ph : wd, o = document.getElementById(phone ? 'oPhone' : 'oWide');
@@ -4678,6 +4679,8 @@ async function loadJSON(url){
 }
 async function loadBank(){
   try{
+    // Opened straight from disk (file://), fetch can never read the data folder, so skip the request and its console noise.
+    if(location.protocol === 'file:') throw new Error('file:// cannot read the data folder');
     const index = await loadJSON(PATHS.index);
     PAPERS = index.papers || [];
     const all = [];
@@ -4693,8 +4696,8 @@ async function loadBank(){
     }
     QUESTIONS = all;
   }catch(e){
-    BANK_ERROR = 'Could not load PYQ data (' + e.message + '). Serve the app from a local server.';
-    console.error(e);
+    // A missing data folder is an expected state (e.g. the file opened on its own). Show the message in the app, without a console error.
+    BANK_ERROR = 'Could not load PYQ data (' + (e && e.message || 'unknown error') + '). Serve the app from a local server.';
   }
   buildIndexes();
   restoreSessionSnapshot();
@@ -6346,7 +6349,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.11.94';
+const APP_VERSION = 'v01.11.97';
 const LAST_UPDATED = 'November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
