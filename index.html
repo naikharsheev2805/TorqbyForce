@@ -5598,12 +5598,30 @@ function startSessionNow(o){
   if(session.limit){ if(window.__t) clearInterval(window.__t); const tk = session.mode==='mock' ? tickMock : tickExam; window.__t=setInterval(tk,1000); tk(); }
   else { if(window.__t) clearInterval(window.__t); window.__t=setInterval(tickQ,1000); tickQ(); }
 }
+function buildPaperBlocks(subject, pool, n, qtype){
+  // Subject block: MCQs first, then integers. Both types selected => 1 integer per 4 MCQs (20:5 of 25).
+  const mcq = shuffle(pool.filter(q=>q.type==='single'));
+  const int = shuffle(pool.filter(q=>q.type==='integer'));
+  let picks;
+  if(!qtype || qtype==='All'){
+    let nInt = Math.min(int.length, Math.round(n/5));
+    let nMcq = Math.min(mcq.length, n - nInt);
+    nInt = Math.min(int.length, n - nMcq);
+    picks = [];
+    mcq.slice(0,nMcq).forEach(q=>{ q._block = subject+' · MCQs'; picks.push(q); });
+    int.slice(0,nInt).forEach(q=>{ q._block = subject+' · Integer'; picks.push(q); });
+  } else {
+    const src = qtype==='MCQs' ? mcq : int;
+    picks = src.slice(0,n).map(q=>{ q._block = subject+' · '+(qtype==='MCQs'?'MCQs':'Integer'); return q; });
+  }
+  return picks;
+}
 function startMock(o){
   const queue=[], warn=[];
   o.subjects.forEach(s=>{
-    const pool = shuffle(QUESTIONS.filter(q=>q.subject===s));
+    const pool = QUESTIONS.filter(q=>q.subject===s);
     if(pool.length<o.perSubject) warn.push(s+' has '+pool.length);
-    queue.push(...pool.slice(0,o.perSubject));
+    queue.push(...buildPaperBlocks(s, pool, o.perSubject, 'All'));
   });
   if(!queue.length){ appNotice('Nothing to start', 'No questions yet.'); return; }
   if(warn.length){
@@ -8005,6 +8023,7 @@ function customTestPart(){
   const tw = el('<div class="two" style="margin-top:6px"></div>');
   const QOPTS = [10,20,25,30,40,50,60,70,75];
   tw.appendChild(pickerField('Questions', QOPTS.map(n=>({v:n,l:n+' questions'})), tc.n, v=>{ tc.n = v; tc.minutes = idealMinutes(v); render(); }));
+  tw.appendChild(pickerField('Question type', [{v:'All',l:'MCQs + Integer (20:5 per subject)'},{v:'MCQs',l:'MCQs only'},{v:'Integer',l:'Integer only'}], tc.qtype||'All', v=>{ tc.qtype = v; render(); }));
   const TOPTS = QOPTS.map(n=>idealMinutes(n)).filter((m,i,a)=>a.indexOf(m)===i);
   tw.appendChild(pickerField('Time', TOPTS.map(m=>({v:m,l:m+' minutes  (ideal for '+questionsForMinutes(m)+' questions)'})), tc.minutes, v=>{ tc.minutes = v; render(); }));
   const pace = tc.minutes*60/tc.n;
@@ -8013,9 +8032,16 @@ function customTestPart(){
   cc.appendChild(el('<p class="note-line">'+(tc.chapters.length ? tc.chapters.length+' chapter'+(tc.chapters.length>1?'s':'')+' selected' : 'Select one or more chapters to begin.')+'</p>'));
   const cb = el('<button class="btn block" style="margin-top:14px"'+(tc.chapters.length?'':' disabled')+'>Start my test</button>');
   cb.onclick = ()=>{
-    const pool = shuffle(QUESTIONS.filter(q=>tc.chapters.indexOf(q.chapter)>=0));
-    if(!pool.length){ appNotice('Nothing to start', 'No questions in the chosen chapters yet.'); return; }
-    preMockStart(function(){ startSession({mode:'mock', title:'Custom test', queue:pool.slice(0, tc.n), limit:tc.minutes*60}); });
+    const subs = SUBJECTS.filter(sub=>QUESTIONS.some(q=>q.subject===sub && tc.chapters.indexOf(q.chapter)>=0));
+    if(!subs.length){ appNotice('Nothing to start', 'No questions in the chosen chapters yet.'); return; }
+    const queue = [];
+    subs.forEach((sub,i)=>{
+      const pool = QUESTIONS.filter(q=>q.subject===sub && tc.chapters.indexOf(q.chapter)>=0);
+      const share = Math.floor(tc.n/subs.length) + (i < tc.n % subs.length ? 1 : 0);
+      queue.push(...buildPaperBlocks(sub, pool, share, tc.qtype||'All'));
+    });
+    if(!queue.length){ appNotice('Nothing to start', 'No questions in the chosen chapters yet.'); return; }
+    preMockStart(function(){ startSession({mode:'mock', title:'Custom test', queue:queue, limit:tc.minutes*60}); });
   };
   cc.appendChild(cb);
   w.appendChild(cc);
@@ -13528,6 +13554,8 @@ function pyqPractice(w){
     card.appendChild(grid);
     card.classList.add('qsplit');
   }
+  const blk = session.queue[session.idx] && session.queue[session.idx]._block;
+  if(blk){ card.insertBefore(el('<div class="eyebrow" style="margin:0 0 8px">'+esc(blk)+' · '+(session.idx+1)+' of '+n+'</div>'), card.firstChild); }
   const last = session.idx===n-1;
   const nv = el('<div class="qnav-row"></div>');
   const prev = el('<button class="btn secondary"'+(session.idx===0?' disabled':'')+'>Previous</button>');
