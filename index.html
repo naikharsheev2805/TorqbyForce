@@ -3342,7 +3342,9 @@ body.chat-full .on-strip, body.msg-fit .on-strip{ display:none !important; }
 @media (min-width:700px) and (max-width:1199px){ .qcard .qtext, .qtext{ font-size:17.5px !important; line-height:1.4 !important; } }
 .qotd-rule{ margin-top:12px; }
 /* Tablet calendar: fit the viewport, the day panel scrolls on its own */
-@media (min-width:700px) and (max-height:1400px){ .cal-page{ max-height:calc(100dvh - 24px); overflow:hidden; } .cal-page > .cal-agenda{ max-height:none; } }
+@media (min-width:700px) and (min-height:600px) and (max-height:1400px){ .cal-page{ max-height:calc(100dvh - 24px); overflow:hidden; } .cal-page > .cal-agenda{ max-height:none; } }
+/* Short landscape screens (phones turned sideways): nothing is clipped, the page scrolls past the floating bar */
+@media (min-width:700px) and (max-height:599px){ .cal-page{ max-height:none !important; overflow:visible !important; } .cal-page > .cal-agenda{ position:static !important; max-height:none !important; overflow:visible !important; } }
 /* Secondary calendar action: outlined, not solid */
 .cal-actions .btn.ghost{ background:transparent !important; border:1px solid var(--accent) !important; color:var(--accent) !important; box-shadow:none !important; }
 /* ---- Menu opening (performance pass): only transform and opacity animate, so it runs on the GPU and stays smooth on phones.
@@ -3841,7 +3843,7 @@ body.kb-open .wa-compose .wa-send{ display:grid !important; flex:none; }
 .exam-card .exam-orb{ z-index:0; }
 
 /* v01.10.11: calendar on tablets and wide screens: bigger date numbers in shorter cells, and the month fits without the page scrolling */
-@media (min-width:700px){
+@media (min-width:700px) and (min-height:600px){
   .cal-grid{ max-width:none !important; gap:6px !important; }
   .cal-cell{ height:clamp(44px, 8.6vh, 62px) !important; font:700 clamp(16px, 2.5vh, 22px)/1 Inter,sans-serif !important; }
   .cal-page{ overflow:hidden !important; max-height:calc(100dvh - 24px) !important; }
@@ -6357,7 +6359,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.12.03';
+const APP_VERSION = 'v01.12.04';
 const LAST_UPDATED = 'November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -6515,8 +6517,11 @@ function renderInner(){
   const needCoaching = !needSignIn && !!store.profile && !store.profile.coachingAnswered && !store.profile.coachingOnline && !store.profile.coachingOffline;
   app.appendChild(needSignIn ? authView() :(!store.profile ? (sbSession ? authView() : onboardView()) : (needCoaching ? coachingCatchupView() : (V[view]||homeView)())));
   if(view==='pyq') app.appendChild(el('<div class="foot">'+esc(BANK_ERROR || ('PYQ bank: '+QUESTIONS.length+' questions'))+'</div>'));
-  document.querySelectorAll('.bottomnav,#navTog,#navScrim').forEach(n=>n.remove());
-  if(view!=='practice' && store.profile && !needSignIn) mountNav();
+  // The menu's toggle and scrim survive page changes, so the cross folds back into bars and an open panel fades out on its own
+  const navKeep = view!=='practice' && !!store.profile && !needSignIn;
+  document.querySelectorAll('.bottomnav').forEach(n=>{ if(n.classList.contains('open')||n.classList.contains('closing')){ n.classList.add('leaving'); n.classList.remove('open','closing'); setTimeout(()=>n.remove(), 700); } else n.remove(); });
+  if(!navKeep) document.querySelectorAll('#navTog,#navScrim').forEach(n=>n.remove());
+  if(navKeep) mountNav();
   enhance(app);
   if(view==='results' && session && !session.revealed){ session.revealed = true; revealResult(app); }
   if(fi>=0){ const o = app.querySelectorAll('.opt')[fi]; if(o) o.focus({preventScroll:true}); }
@@ -6565,7 +6570,7 @@ function registerSW(){
 let navOpen = false;
 function setNavOpen(open){
   navOpen = !!open;
-  const p = document.querySelector('.navpanel'), t = document.getElementById('navTog'), sc = document.getElementById('navScrim');
+  const p = document.querySelector('.navpanel:not(.leaving)'), t = document.getElementById('navTog'), sc = document.getElementById('navScrim');
   if(p){
     clearTimeout(p.__closeT);
     if(navOpen){
@@ -6586,12 +6591,16 @@ function setNavOpen(open){
   if(sc) sc.classList.toggle('on', navOpen);
 }
 function mountNav(){
-  const tog = el('<button id="navTog" class="navtog" type="button" aria-label="Menu" aria-expanded="false"><i class="b1"></i><i class="b2"></i><i class="b3"></i></button>');
-  tog.onclick = ()=>setNavOpen(!navOpen);
-  const sc = el('<div id="navScrim" class="navscrim"></div>');
-  sc.onclick = ()=>setNavOpen(false);
-  document.body.appendChild(sc);
-  document.body.appendChild(tog);
+  if(!document.getElementById('navTog')){
+    const tog = el('<button id="navTog" class="navtog" type="button" aria-label="Menu" aria-expanded="false"><i class="b1"></i><i class="b2"></i><i class="b3"></i></button>');
+    tog.onclick = ()=>setNavOpen(!navOpen);
+    document.body.appendChild(tog);
+  }
+  if(!document.getElementById('navScrim')){
+    const sc = el('<div id="navScrim" class="navscrim"></div>');
+    sc.onclick = ()=>setNavOpen(false);
+    document.body.appendChild(sc);
+  }
   document.body.appendChild(bottomNav());
   setNavOpen(navOpen);
 }
@@ -7979,8 +7988,8 @@ function notesView(){
   oosNotice(c);
   const w = el('<div></div>');
   w.appendChild(el('<div class="eyebrow">Revision notes</div>'));
-  w.appendChild(el('<h1 class="title">'+esc(c)+'</h1>'));
-  if(rankTag(c)) w.appendChild(el('<div class="tags">'+rankTag(c)+'</div>'));
+  w.appendChild(el('<h1 class="title">'+esc(c||'Revision notes')+'</h1>'));
+  if(c && rankTag(c)) w.appendChild(el('<div class="tags">'+rankTag(c)+'</div>'));
   if(!data){ w.appendChild(el('<div class="card empty">Notes for this chapter are coming in a later batch.</div>')); return w; }
   { const fb = el('<button class="btn block" style="margin:0 0 16px">Practice this chapter</button>'); fb.onclick = ()=>flashStart(c, false); w.appendChild(fb); }
   w.appendChild(el('<div class="field">Formula cards</div>'));
@@ -8031,8 +8040,8 @@ function renderFlashDeck(host, formulas, i, flipped){
 function chapterView(){
   const s=nav.subject, c=nav.chapter;
   const w = el('<div></div>');
-  w.appendChild(el('<div class="eyebrow">'+esc(s)+'</div>'));
-  w.appendChild(el('<h1 class="title">'+esc(c)+'</h1>'));
+  w.appendChild(el('<div class="eyebrow">'+esc(s||'')+'</div>'));
+  w.appendChild(el('<h1 class="title">'+esc(c||'Chapter')+'</h1>'));
   { const sc = storyCard(c); if(sc) w.appendChild(sc); }
   const st = chapterStats(c);
   w.appendChild(el('<p class="sub">'+(st.total?st.acc+'% accuracy over '+st.total+' attempts':'Not attempted yet')+'</p>'));
@@ -16921,7 +16930,7 @@ body.lefty #navBack.navback{ right:auto !important; left:14px !important; top:ca
 <style id="top-glass-v1">
 /* Tablets: the top row (where the menu button sits) is a full-width transparent blur, not a flat band. Content scrolls under it. */
 @media (min-width:700px){
-  body::before{ content:""; position:fixed; left:0; right:0; top:0; height:calc(62px + env(safe-area-inset-top,0px)); z-index:60; pointer-events:none; background:color-mix(in srgb,var(--surface) 46%,transparent); -webkit-backdrop-filter:blur(18px) saturate(170%); backdrop-filter:blur(18px) saturate(170%); border-bottom:1px solid color-mix(in srgb,var(--border) 45%,transparent); }
+  body::before{ content:""; position:fixed; left:0; right:0; top:0; height:calc(50px + env(safe-area-inset-top,0px)); z-index:60; pointer-events:none; background:none; border:none; -webkit-backdrop-filter:blur(16px) saturate(160%); backdrop-filter:blur(16px) saturate(160%); -webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.5) 50%,transparent 100%); mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.5) 50%,transparent 100%); }
 }
 </style>
 <script id="auto-fullscreen">
@@ -16950,6 +16959,20 @@ body.lefty #navBack.navback{ right:auto !important; left:14px !important; top:ca
   .fcard{ padding:20px 20px 18px; }
   .fcard-eq{ font-size:19px; line-height:1.35; }
 }
+/* v01.12.04 fixes */
+/* Phones: the safe-area inset was counted twice (root and page), which left a big gap above the header. Count it once. */
+@media (max-width:959px){
+  html{ padding-top:0 !important; }
+  body.has-nav:not(.chat-full) #app{ padding-top:calc(env(safe-area-inset-top,0px) + 66px) !important; }
+}
+/* Tablets and wide screens: the header starts below the top glass strip, so the logo is never under it */
+@media (min-width:700px){
+  body.has-nav:not(.chat-full) #app{ padding-top:64px !important; }
+}
+/* The menu panel never runs off the screen: it scrolls inside itself when the list is taller than the screen */
+body.has-nav .navpanel, .navpanel{ max-height:calc(100dvh - 66px - env(safe-area-inset-top,0px) - 16px) !important; overflow-y:auto !important; overscroll-behavior:contain; }
+/* Theme carousel: room above and below so the raised, active preview is not clipped by the rail */
+.ptc-rail{ padding-top:18px !important; padding-bottom:22px !important; }
 </style>
 </body>
 </html>
