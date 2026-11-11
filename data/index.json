@@ -58,16 +58,17 @@
       "file": "data/main-2024-feb-s1-sh1-01feb.json",
       "question_count": 90,
       "subjects": {
-        "Maths": 30,
-        "Physics": 31,
-        "Chemistry": 29
+        "Physics": 30,
+        "Chemistry": 30,
+        "Maths": 30
       },
       "difficulty_counts": {
         "medium": 31,
         "easy": 14,
         "hard": 45
       },
-      "verified": false
+      "verified": false,
+      "notes": "Subject counts corrected from index to match file (30/30/30). Label and position agree for all questions."
     },
     {
       "id": "main-2024-feb-s1-sh2-01feb",
@@ -81,9 +82,9 @@
       "file": "data/main-2024-feb-s1-sh2-01feb.json",
       "question_count": 90,
       "subjects": {
-        "Maths": 30,
         "Physics": 30,
-        "Chemistry": 30
+        "Chemistry": 30,
+        "Maths": 30
       },
       "difficulty_counts": {
         "medium": 31,
@@ -104,9 +105,9 @@
       "file": "data/main-2024-jan-s1-sh1-27jan.json",
       "question_count": 90,
       "subjects": {
-        "Maths": 30,
         "Physics": 30,
-        "Chemistry": 30
+        "Chemistry": 30,
+        "Maths": 30
       },
       "difficulty_counts": {
         "easy": 29,
@@ -127,9 +128,9 @@
       "file": "data/main-2024-jan-s1-sh1-29jan.json",
       "question_count": 90,
       "subjects": {
-        "Maths": 30,
         "Physics": 30,
-        "Chemistry": 30
+        "Chemistry": 30,
+        "Maths": 30
       },
       "difficulty_counts": {
         "easy": 20,
@@ -150,9 +151,9 @@
       "file": "data/main-2024-jan-s1-sh1-30jan.json",
       "question_count": 90,
       "subjects": {
-        "Maths": 30,
         "Physics": 30,
-        "Chemistry": 30
+        "Chemistry": 30,
+        "Maths": 30
       },
       "difficulty_counts": {
         "easy": 17,
@@ -173,9 +174,9 @@
       "file": "data/main-2024-jan-s1-sh1-31jan.json",
       "question_count": 90,
       "subjects": {
-        "Maths": 30,
         "Physics": 30,
-        "Chemistry": 30
+        "Chemistry": 30,
+        "Maths": 30
       },
       "difficulty_counts": {
         "easy": 16,
@@ -196,9 +197,9 @@
       "file": "data/main-2024-jan-s1-sh2-29jan.json",
       "question_count": 90,
       "subjects": {
-        "Maths": 30,
         "Physics": 30,
-        "Chemistry": 30
+        "Chemistry": 30,
+        "Maths": 30
       },
       "difficulty_counts": {
         "easy": 16,
@@ -219,9 +220,9 @@
       "file": "data/main-2024-jan-s1-sh2-30jan.json",
       "question_count": 90,
       "subjects": {
-        "Maths": 30,
         "Physics": 30,
-        "Chemistry": 30
+        "Chemistry": 30,
+        "Maths": 30
       },
       "difficulty_counts": {
         "easy": 13,
@@ -242,9 +243,9 @@
       "file": "data/main-2024-jan-s1-sh2-31jan.json",
       "question_count": 90,
       "subjects": {
-        "Maths": 30,
         "Physics": 30,
-        "Chemistry": 30
+        "Chemistry": 30,
+        "Maths": 30
       },
       "difficulty_counts": {
         "easy": 8,
@@ -526,7 +527,8 @@
         "easy": 12,
         "hard": 17
       },
-      "verified": false
+      "verified": false,
+      "notes": "Incomplete: 54 questions (Physics 30, Chemistry 24, no Maths). Not corrected. Q30 Chemistry and Q51 Physics do not match their block; left unchanged until the paper is complete."
     },
     {
       "id": "main-2024-apr-s2-sh1-04apr",
@@ -563,9 +565,9 @@
       "file": "data/main-2024-apr-s2-sh1-06apr.json",
       "question_count": 90,
       "subjects": {
-        "Physics": 29,
-        "Maths": 31,
-        "Chemistry": 30
+        "Physics": 30,
+        "Chemistry": 30,
+        "Maths": 30
       },
       "difficulty_counts": {
         "medium": 47,
@@ -609,9 +611,9 @@
       "file": "data/main-2024-apr-s2-sh1-09apr.json",
       "question_count": 90,
       "subjects": {
-        "Physics": 29,
-        "Maths": 31,
-        "Chemistry": 30
+        "Physics": 30,
+        "Chemistry": 30,
+        "Maths": 30
       },
       "difficulty_counts": {
         "easy": 10,
@@ -678,14 +680,60 @@
       "file": "data/main-2024-apr-s2-sh2-09apr.json",
       "question_count": 90,
       "subjects": {
-        "Physics": 29,
-        "Maths": 31,
-        "Chemistry": 30
+        "Physics": 30,
+        "Chemistry": 30,
+        "Maths": 30
       },
       "difficulty_counts": {
         "easy": 12,
         "medium": 37,
         "hard": 41
+      },
+      "verified": false
+    },
+    {
+      "id": "main-2023-apr-s2-sh1-06apr",
+      "exam": "main",
+      "year": 2023,
+      "session": "Apr-S2",
+      "session_number": 2,
+      "shift": 1,
+      "shift_label": "Shift 1",
+      "date": "2023-04-06",
+      "file": "data/main-2023-apr-s2-sh1-06apr.json",
+      "question_count": 90,
+      "subjects": {
+        "Physics": 30,
+        "Chemistry": 30,
+        "Maths": 30
+      },
+      "difficulty_counts": {
+        "medium": 36,
+        "easy": 13,
+        "hard": 41
+      },
+      "verified": false
+    },
+    {
+      "id": "main-2023-apr-s2-sh2-06apr",
+      "exam": "main",
+      "year": 2023,
+      "session": "Apr-S2",
+      "session_number": 2,
+      "shift": 2,
+      "shift_label": "Shift 2",
+      "date": "2023-04-06",
+      "file": "data/main-2023-apr-s2-sh2-06apr.json",
+      "question_count": 90,
+      "subjects": {
+        "Physics": 30,
+        "Chemistry": 30,
+        "Maths": 30
+      },
+      "difficulty_counts": {
+        "easy": 19,
+        "medium": 28,
+        "hard": 43
       },
       "verified": false
     }

@@ -1,0 +1,5567 @@
+[
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-01",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 1,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Kinematics",
+    "chapters": [
+      "Kinematics"
+    ],
+    "topic": "Motion in a straight line",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Particle starts at 10 m/s, accelerates at 2 m/s² along x; time to reach 60 m/s",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 25 s",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 3 s",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 6 s",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 30 s",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "motion in a straight line"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Kinematics",
+        "subtopic": "Motion in a straight line"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-02",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 2,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Kinematics",
+    "chapters": [
+      "Kinematics"
+    ],
+    "topic": "Uniform circular motion",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Particle with constant speed π m/s moves from A to B on a circle (120° arc); magnitude of average velocity",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) √3 m/s",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) π m/s",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 1.5√3 m/s",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 2√3 m/s",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "uniform circular motion"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. FIG Figure is in the PDF and is not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Kinematics",
+        "subtopic": "Uniform circular motion"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-03",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 3,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Laws of Motion",
+    "chapters": [
+      "Laws of Motion"
+    ],
+    "topic": "Centripetal force and its applications",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Child of mass 5 kg on merry-go-round making 1 rotation in 3.14 s, radius 2 m; centrifugal force",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 80 N",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 40 N",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 100 N",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 50 N",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "centripetal force and its applications"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Laws of Motion",
+        "subtopic": "Centripetal force and its applications"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-04",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 4,
+    "subject": "Physics",
+    "unit": "Modern Physics",
+    "chapter": "Dual Nature of Matter and Radiation",
+    "chapters": [
+      "Dual Nature of Matter and Radiation"
+    ],
+    "topic": "de Broglie relation",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Radius of nth orbit of particle with U = ½ m ω² r² under Bohr quantisation is proportional to",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) √n",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 1/n",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) n²",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) n",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "de broglie relation"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Dual Nature of Matter and Radiation",
+        "subtopic": "de Broglie relation"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-05",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 5,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Work, Energy and Power",
+    "chapters": [
+      "Work, Energy and Power"
+    ],
+    "topic": "Conservation of mechanical energy",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Body dropped from h1 rebounds to h2; ratio of velocities before and after impact is 4; percentage KE loss = x/4; value of x",
+    "options": [],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "conservation of mechanical energy"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Work, Energy and Power",
+        "subtopic": "Conservation of mechanical energy"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-06",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 6,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Rotational Motion",
+    "chapters": [
+      "Rotational Motion"
+    ],
+    "topic": "Radius of gyration",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Ring and solid sphere with equal radii of gyration about axes through centres; ratio of radius of ring to sphere is √(2/x); value of x",
+    "options": [],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "radius of gyration"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Rotational Motion",
+        "subtopic": "Radius of gyration"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-07",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 7,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Gravitation",
+    "chapters": [
+      "Gravitation"
+    ],
+    "topic": "Acceleration due to gravity and its variation with altitude and depth",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Weight at surface is 100 N; gravitational force at height equal to one-fourth of Earth's radius",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 64 N",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 25 N",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 50 N",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 100 N",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "acceleration due to gravity and its variation with altitude and depth"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Gravitation",
+        "subtopic": "Acceleration due to gravity and its variation with altitude and depth"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-08",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 8,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Gravitation",
+    "chapters": [
+      "Gravitation"
+    ],
+    "topic": "Motion of a satellite",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Choose the incorrect statement about planetary and satellite motion",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Speed of satellite in given circular orbit remains constant",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) For planet in elliptical orbit around sun, total energy remains constant",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Linear speed of planet revolving around sun remains constant",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) When body falls to earth, displacement of earth negligible",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "motion of a satellite"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. Option (3) transcription approximate; check",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Gravitation",
+        "subtopic": "Motion of a satellite"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-09",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 9,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Properties of Solids and Liquids",
+    "chapters": [
+      "Properties of Solids and Liquids"
+    ],
+    "topic": "Stress-strain relationship",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Metal block of mass m on wire of diameter 14 mm with tensile stress 7×10^5 N/m²; mass m (kg), g = 9.8, π = 22/7",
+    "options": [],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "stress-strain relationship"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Properties of Solids and Liquids",
+        "subtopic": "Stress-strain relationship"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-10",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 10,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Properties of Solids and Liquids",
+    "chapters": [
+      "Properties of Solids and Liquids"
+    ],
+    "topic": "Pascal's law and its applications",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Assertion A: toothpaste tube squeezed (Pascal's principle observed). Reason R: pressure applied to enclosed fluid transmitted undiminished",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Both A and R correct, R NOT the correct explanation of A",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) A not correct, R correct",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) A correct, R not correct",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Both A and R correct, R correct explanation of A",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "pascal's law and its applications"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Properties of Solids and Liquids",
+        "subtopic": "Pascal's law and its applications"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-11",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 11,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Properties of Solids and Liquids",
+    "chapters": [
+      "Properties of Solids and Liquids"
+    ],
+    "topic": "Heat transfer: conduction, convection and radiation",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Body cools from 60 °C to 40 °C in 7 min, surroundings 10 °C; temperature after next 7 min",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 30 °C",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 32 °C",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 34 °C",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 28 °C",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "heat transfer: conduction, convection and radiation"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Properties of Solids and Liquids",
+        "subtopic": "Heat, temperature and thermal expansion"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-12",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 12,
+    "subject": "Physics",
+    "unit": "Thermodynamics & Kinetic Theory",
+    "chapter": "Kinetic Theory of Gases",
+    "chapters": [
+      "Kinetic Theory of Gases"
+    ],
+    "topic": "RMS speed of gas molecules",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Printed key (1) appears inconsistent with v_rms ∝ √T; verify against question paper and key",
+    "text": "r.m.s. speed at 800 K relative to 200 K (v0)",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) v0/4",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) v0",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 4v0",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 2v0",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "rms speed of gas molecules"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key (1) = v0/4; expected 2v0 (option 4) if v_rms ∝ √T",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Kinetic Theory of Gases",
+        "subtopic": "RMS speed of gas molecules"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-13",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 13,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Oscillations and Waves",
+    "chapters": [
+      "Oscillations and Waves"
+    ],
+    "topic": "Simple pendulum and derivation of its time period",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Simple pendulum length 100 cm, bob 250 g, amplitude 10 cm; maximum tension = x/40 N; value of x",
+    "options": [],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "simple pendulum and derivation of its time period"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Oscillations and Waves",
+        "subtopic": "Simple pendulum and derivation of its time period"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-14",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 14,
+    "subject": "Physics",
+    "unit": "Mechanics",
+    "chapter": "Oscillations and Waves",
+    "chapters": [
+      "Oscillations and Waves"
+    ],
+    "topic": "Speed of a travelling wave",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Printed key (1) appears inconsistent with v ∝ 1/√M for H2 vs O2; verify against question paper and key",
+    "text": "Ratio of speed of sound in hydrogen to speed of sound in oxygen at same temperature",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 1:2",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 4:1",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 1:4",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 1:1",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "speed of a travelling wave"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key (1) = 1:2; expected 4:1 (option 2)",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Oscillations and Waves",
+        "subtopic": "Speed of a travelling wave"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-15",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 15,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electrostatics",
+    "chapters": [
+      "Electrostatics"
+    ],
+    "topic": "Torque on a dipole in a uniform electric field",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Dipole of charges ±q with mass ratio m : 2m in uniform field E; angular frequency of small oscillations",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) √(3qE/2ml)",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) √(8qE/ml)",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) √(4qE/ml)",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) √(8qE/3ml)",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "torque on a dipole in a uniform electric field"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. Option transcription approximate; check",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electrostatics",
+        "subtopic": "Electric dipole and electric field due to a dipole"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-16",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 16,
+    "subject": "Physics",
+    "unit": "Modern Physics",
+    "chapter": "Atoms and Nuclei",
+    "chapters": [
+      "Atoms and Nuclei"
+    ],
+    "topic": "Energy levels",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "12.8 eV needed to separate hydrogen atom; orbital radius of electron given as (9/x)×10^−10 m; value of x",
+    "options": [],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "energy levels"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Atoms and Nuclei",
+        "subtopic": "Energy levels"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-17",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 17,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Current Electricity",
+    "chapters": [
+      "Current Electricity",
+      "Electrostatics"
+    ],
+    "topic": "Series and parallel combinations of resistors",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Two parallel plate capacitors of area 200 cm², spacings a ≠ b joined in combination; equivalent capacitance x ε0 F; value of x",
+    "options": [],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "series and parallel combinations of resistors"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. FIG Figure is in the PDF and is not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electrostatics",
+        "subtopic": "Combination of capacitors in series and parallel"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-18",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 18,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Current Electricity",
+    "chapters": [
+      "Current Electricity"
+    ],
+    "topic": "Wheatstone bridge",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Suitable circuit to verify Ohm's law using variable source, test resistor 10 Ω, two galvanometers and resistors 10 MΩ and 0.001 Ω",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Circuit with G1 across R2 and G2 in series",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) Circuit with G1 across R2 ...",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Circuit with G1 across R2 and G2 across R1",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Circuit with G1 across R1 and G2 in series !!",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "wheatstone bridge"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. FIG: circuit options; check Figure is in the PDF and is not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Current Electricity",
+        "subtopic": "Wheatstone bridge"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-19",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 19,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Current Electricity",
+    "chapters": [
+      "Current Electricity"
+    ],
+    "topic": "Kirchhoff's laws and their applications",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Potentials at a, b, c are 30 V, 12 V, 2 V; current through 20 Ω resistor",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 1.0 A",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 0.4 A",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 0.6 A",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 0.2 A",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "kirchhoff's laws and their applications"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. FIG Figure is in the PDF and is not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Current Electricity",
+        "subtopic": "Kirchhoff's laws and their applications"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-20",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 20,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Current Electricity",
+    "chapters": [
+      "Current Electricity"
+    ],
+    "topic": "Internal resistance",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Voltmeter reads 2 V across 5 Ω resistor in circuit with 3 V cell and 2 Ω resistor; resistance of voltmeter (Ω)",
+    "options": [],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "internal resistance"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. FIG Figure is in the PDF and is not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Current Electricity",
+        "subtopic": "Kirchhoff's laws and their applications"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-21",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 21,
+    "subject": "Physics",
+    "unit": "Modern Physics",
+    "chapter": "Dual Nature of Matter and Radiation",
+    "chapters": [
+      "Dual Nature of Matter and Radiation"
+    ],
+    "topic": "de Broglie relation",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Proton of KE 2.0 eV in magnetic field, angle 60°; pitch of helix (cm)",
+    "options": [],
+    "correct_answer": [
+      "375"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "de broglie relation"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Dual Nature of Matter and Radiation",
+        "subtopic": "de Broglie relation"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-22",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 22,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electromagnetic Induction and Alternating Currents",
+    "chapters": [
+      "Electromagnetic Induction and Alternating Currents"
+    ],
+    "topic": "Mutual inductance",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Concentric coils radii 1 cm and 1000 cm with 10 and 200 turns; mutual inductance (×10^−8 H), π² = 10",
+    "options": [],
+    "correct_answer": [
+      "5"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "mutual inductance"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electromagnetic Induction and Alternating Currents",
+        "subtopic": "Self inductance"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-23",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 23,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electromagnetic Induction and Alternating Currents",
+    "chapters": [
+      "Electromagnetic Induction and Alternating Currents"
+    ],
+    "topic": "Alternating currents",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key 11 does not match any printed option; verify",
+    "text": "Capacitor 150 μF across E = 36 sin(120πt) V; maximum current approximately",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 2 A",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) √2 A",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 2√2 A",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 1/√2 A",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "11"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "alternating currents"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key 11 not among options",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electromagnetic Induction and Alternating Currents",
+        "subtopic": "Alternating currents"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-24",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 24,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electromagnetic Waves",
+    "chapters": [
+      "Electromagnetic Waves"
+    ],
+    "topic": "Electromagnetic waves and their characteristics",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Energy densities of electric and magnetic fields of EM wave in free space",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) U_E = E²/(2ε0), U_B = B²/(2μ0)",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) U_E = ε0E²/2, U_B = B²/(2μ0)",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) U_E = ε0E²/2, U_B = μ0B²/2",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) U_E = E²/(2ε0), U_B = μ0B²/2",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "99"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "electromagnetic waves and their characteristics"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key 99 not among options",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electromagnetic Waves",
+        "subtopic": "Electromagnetic waves and their characteristics"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-25",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 25,
+    "subject": "Physics",
+    "unit": "Units & Measurements",
+    "chapter": "Units and Measurements",
+    "chapters": [
+      "Units and Measurements"
+    ],
+    "topic": "Errors in measurements",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key 16 does not match any printed option; verify",
+    "text": "Percentage error in focal length from scale-based readings (least count 0.2 cm) with object at 80 cm, lens at 100 cm, image at 180 cm",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 0.85",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 1.70",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 1.02",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 0.51",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "16"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "errors in measurements"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key 16 not among options",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Units and Measurements",
+        "subtopic": "Errors in measurements"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-26",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 26,
+    "subject": "Physics",
+    "unit": "Optics & Waves",
+    "chapter": "Optics",
+    "chapters": [
+      "Optics"
+    ],
+    "topic": "Interference: Young's double-slit experiment and fringe width",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key 5 does not match any printed option; verify",
+    "text": "Assertion: phase difference changes through media of same thickness, different refractive indices. Reason: wavelengths differ in different media",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Both A and R correct, R NOT correct explanation",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) A not correct, R correct",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) A correct, R not correct",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Both A and R correct, R correct explanation",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "5"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "interference: young's double-slit experiment and fringe width"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key 5 not among options",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Optics",
+        "subtopic": "Interference: Young's double-slit experiment and fringe width"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-27",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 27,
+    "subject": "Physics",
+    "unit": "Optics & Waves",
+    "chapter": "Optics",
+    "chapters": [
+      "Optics"
+    ],
+    "topic": "Interference: Young's double-slit experiment and fringe width",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Two wavelengths 7000 Å and 5500 Å in Young's double slit; slit separation 2.5 mm, screen at 150 cm; least distance of coincidence from central fringe n × 10^−5 m; value of n",
+    "options": [],
+    "correct_answer": [
+      "20"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "interference: young's double-slit experiment and fringe width"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Optics",
+        "subtopic": "Interference: Young's double-slit experiment and fringe width"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-28",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 28,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electromagnetic Waves",
+    "chapters": [
+      "Electromagnetic Waves",
+      "Dual Nature of Matter and Radiation"
+    ],
+    "topic": "Applications of electromagnetic waves",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key 40 does not match any printed option; verify",
+    "text": "Work functions of aluminium 4.1 eV and gold 5.1 eV; ratio of slope of stopping potential vs frequency for gold to aluminium",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 1.24",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 2",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 1",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 1.5",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "40"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "applications of electromagnetic waves"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key 40 not among options",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Dual Nature of Matter and Radiation",
+        "subtopic": "Photoelectric effect"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-29",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 29,
+    "subject": "Physics",
+    "unit": "Modern Physics",
+    "chapter": "Electronic Devices",
+    "chapters": [
+      "Electronic Devices"
+    ],
+    "topic": "Semiconductor diode: I-V characteristics in forward and reverse bias",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Assertion: diffusion current greater than drift current in forward-biased p-n junction. Reason: diffusion current from n-side to p-side",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Both A and R correct, R NOT correct explanation",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) A correct, R not correct",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) A not correct, R correct",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Both A and R correct, R correct explanation",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "semiconductor diode: i-v characteristics in forward and reverse bias"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electronic Devices",
+        "subtopic": "Semiconductor diode: I-V characteristics in forward and reverse bias"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-30",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 30,
+    "subject": "Physics",
+    "unit": "Electricity & Magnetism",
+    "chapter": "Electromagnetic Waves",
+    "chapters": [
+      "Electromagnetic Waves"
+    ],
+    "topic": "Applications of electromagnetic waves",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Amplitude-modulated wave: minimum amplitude 3 V, modulation index 60%; maximum amplitude",
+    "options": [],
+    "correct_answer": [
+      "462"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "applications of electromagnetic waves"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Electromagnetic Waves",
+        "subtopic": "Applications of electromagnetic waves"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-31",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 31,
+    "subject": "Chemistry",
+    "unit": "Modern Physics",
+    "chapter": "Dual Nature of Matter and Radiation",
+    "chapters": [
+      "Dual Nature of Matter and Radiation",
+      "Atomic Structure"
+    ],
+    "topic": "de Broglie relation",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "de Broglie wavelength of electron in 3rd orbit of hydrogen when first orbit radius is a0",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) πa0/6",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) πa0/3",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 6πa0",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 3πa0",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "de broglie relation"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Atomic Structure",
+        "subtopic": "Bohr model of hydrogen atom and its postulates"
+      }
+    ],
+    "subject_original": "Physics",
+    "classification_note": "Subject set to Chemistry by paper position (block 31-60); original label Physics did not match block."
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-32",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 32,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "p-Block Elements",
+    "chapters": [
+      "p-Block Elements"
+    ],
+    "topic": "General trends in physical and chemical properties",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Element that remains liquid in boiling water",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Ga",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) Br",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Li",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Cs",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "general trends in physical and chemical properties"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "p-Block Elements",
+        "subtopic": "General trends in physical and chemical properties"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-33",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 33,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "p-Block Elements",
+    "chapters": [
+      "p-Block Elements"
+    ],
+    "topic": "General trends in physical and chemical properties",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Group-13 oxides M2O3: most basic oxide",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Al2O3",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) B2O3",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Tl2O3",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Ga2O3",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "general trends in physical and chemical properties"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "p-Block Elements",
+        "subtopic": "General trends in physical and chemical properties"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-34",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 34,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "chapters": [
+      "Chemical Bonding and Molecular Structure"
+    ],
+    "topic": "VSEPR theory and shapes of simple molecules",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Number of species with square planar shape among XeF4, SF4, SiF4, BF4⁻, BrF4⁻, [Cu(NH3)4]²⁺, [FeCl4]²⁻, [PtCl4]²⁻",
+    "options": [],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "vsepr theory and shapes of simple molecules"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Bonding and Molecular Structure",
+        "subtopic": "VSEPR theory and shapes of simple molecules"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-35",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 35,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "chapters": [
+      "Chemical Bonding and Molecular Structure"
+    ],
+    "topic": "Hydrogen bonding and its applications",
+    "question_type": "integer",
+    "difficulty": "easy",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Number of hydrogen-bonded neighbours of each water molecule in ice",
+    "options": [],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "hydrogen bonding and its applications"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key 3",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Bonding and Molecular Structure",
+        "subtopic": "Hydrogen bonding and its applications"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-36",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 36,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Chemical Thermodynamics",
+    "chapters": [
+      "Chemical Thermodynamics"
+    ],
+    "topic": "Enthalpies of bond dissociation, combustion, formation, atomization, sublimation, phase transition, hydration, ionization and solution",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Heats of combustion of H2, C and C2H5OH given; heat of formation of ethanol (−) kJ/mol",
+    "options": [],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "enthalpies of bond dissociation, combustion, formation, atomization, sublimation, phase transition, hydration, ionization and solution"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key 1 looks inconsistent with Hess's law; verify",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Thermodynamics",
+        "subtopic": "Enthalpies of bond dissociation, combustion, formation, atomization, sublimation, phase transition, hydration, ionization and solution"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-37",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 37,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Equilibrium",
+    "chapters": [
+      "Equilibrium"
+    ],
+    "topic": "Law of chemical equilibrium",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "PCl3 + Cl2 ⇌ PCl5 at 298 K; equilibrium concentrations given; equilibrium PCl5 after adding 0.2 mol Cl2 (×10^−2 mol/L)",
+    "options": [],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "law of chemical equilibrium"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: verify against question paper",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Equilibrium",
+        "subtopic": "Equilibrium constants Kp and Kc and their significance"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-38",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 38,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Redox Reactions and Electrochemistry",
+    "chapters": [
+      "Redox Reactions and Electrochemistry"
+    ],
+    "topic": "Redox reactions and oxidation number",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Permanganate with thiosulphate; oxidation change of manganese by value 3; which medium favours the reaction",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Both aqueous acidic and neutral",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) Aqueous neutral",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Both aqueous acidic and faintly alkaline",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Aqueous acidic",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "redox reactions and oxidation number"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Redox Reactions and Electrochemistry",
+        "subtopic": "Redox reactions and oxidation number"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-39",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 39,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Some Basic Concepts in Chemistry",
+    "chapters": [
+      "Some Basic Concepts in Chemistry"
+    ],
+    "topic": "Mole concept and molar mass",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Volume of 0.02 M HBr needed to neutralise 10.0 mL of 0.01 M Ba(OH)2",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 2.5 mL",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 5.0 mL",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 10.0 mL",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 7.5 mL",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "mole concept and molar mass"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: verify against question paper",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Some Basic Concepts in Chemistry",
+        "subtopic": "Chemical equations and stoichiometry"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-40",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 40,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "Classification of Elements and Periodicity in Properties",
+    "chapters": [
+      "Classification of Elements and Periodicity in Properties"
+    ],
+    "topic": "Periodic trends in atomic and ionic radii",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Alkaline earth metal ion with highest hydration enthalpy",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Be²⁺",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) Sr²⁺",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Ba²⁺",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Ca²⁺",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "periodic trends in atomic and ionic radii"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: verify against question paper",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Classification of Elements and Periodicity in Properties",
+        "subtopic": "Periodic trends in atomic and ionic radii"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-41",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 41,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "chapters": [
+      "Chemical Bonding and Molecular Structure"
+    ],
+    "topic": "Hybridization involving s, p and d orbitals",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Structures of BeCl2 in solid state, vapour phase and at high temperature",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Monomeric, Dimeric, Polymeric",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) Dimeric, Polymeric, Monomeric",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Polymeric, Monomeric, Dimeric",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Polymeric, Dimeric, Monomeric",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "hybridization involving s, p and d orbitals"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Bonding and Molecular Structure",
+        "subtopic": "Hybridization involving s, p and d orbitals"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-42",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 42,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Purification and Characterisation of Organic Compounds",
+    "chapters": [
+      "Purification and Characterisation of Organic Compounds"
+    ],
+    "topic": "Chromatography: principles and applications",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Column chromatography figure: identify incorrect statements A–D",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) A, B and D only",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) A, B and C only",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) B and D only",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) B, C and D only",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "chromatography: principles and applications"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. FIG Figure is in the PDF and is not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Purification and Characterisation of Organic Compounds",
+        "subtopic": "Chromatography: principles and applications"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-43",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 43,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Organic Compounds Containing Oxygen",
+    "chapters": [
+      "Organic Compounds Containing Oxygen"
+    ],
+    "topic": "Acidic nature of phenols",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Strongest acid among given substituted phenols (nitro, methyl, chloro, unsubstituted)",
+    "options": [
+      {
+        "key": "1",
+        "text": "[structure: see PDF]",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "[structure: see PDF]",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "[structure: see PDF]",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "[structure: see PDF]",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "acidic nature of phenols"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. IMG: options are structures; check Options are chemical structures in the PDF and are not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Organic Compounds Containing Oxygen",
+        "subtopic": "Acidic nature of phenols"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-44",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 44,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Organic Compounds Containing Halogens",
+    "chapters": [
+      "Organic Compounds Containing Halogens"
+    ],
+    "topic": "Uses and environmental effects of chloroform, iodoform, freons and DDT",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Group of chemicals used as pesticides",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Aldrin, Sodium Chlorate, Sodium arsenite",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) DDT, Aldrin",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Sodium chlorate, DDT, PAN",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Dieldrin, Sodium arsenite, Tetrachloroethene",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "uses and environmental effects of chloroform, iodoform, freons and ddt"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Organic Compounds Containing Halogens",
+        "subtopic": "Uses and environmental effects of chloroform, iodoform, freons and DDT"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-45",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 45,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Some Basic Concepts in Chemistry",
+    "chapters": [
+      "Some Basic Concepts in Chemistry"
+    ],
+    "topic": "Matter and its nature",
+    "question_type": "integer",
+    "difficulty": "easy",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Number of crystal systems in which body-centred unit cell occurs",
+    "options": [],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "matter and its nature"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: solid state topic not in syllabus map; verify placement",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Some Basic Concepts in Chemistry",
+        "subtopic": "Matter and its nature"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-46",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 46,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Solutions",
+    "chapters": [
+      "Solutions"
+    ],
+    "topic": "Osmotic pressure",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Number of isotonic solution pairs among A–D (NaCl/urea, CaCl2/KCl, AlCl3/Na2SO4, KCl/Al2(SO4)3)",
+    "options": [],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "osmotic pressure"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Solutions",
+        "subtopic": "Osmotic pressure"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-47",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 47,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Redox Reactions and Electrochemistry",
+    "chapters": [
+      "Redox Reactions and Electrochemistry"
+    ],
+    "topic": "Electrolytic and Galvanic cells",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Product not obtained during electrolysis of brine",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) H2",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) HCl",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) NaOH",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Cl2",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "electrolytic and galvanic cells"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: H2 is a normal product of brine electrolysis; verify",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Redox Reactions and Electrochemistry",
+        "subtopic": "Electrolytic and Galvanic cells"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-48",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 48,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Redox Reactions and Electrochemistry",
+    "chapters": [
+      "Redox Reactions and Electrochemistry"
+    ],
+    "topic": "Standard electrode potential",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Number of metals oxidised by NO3⁻ in acidic solution from given E° values",
+    "options": [],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "standard electrode potential"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Redox Reactions and Electrochemistry",
+        "subtopic": "Standard electrode potential"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-49",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 49,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Chemical Kinetics",
+    "chapters": [
+      "Chemical Kinetics"
+    ],
+    "topic": "Half-lives of zero and first-order reactions",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Three-step reaction A to B energy profile: intermediates, activated complexes, rate-determining step",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 2, 3, I",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 2, 3, III",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 2, 3, II",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 3, 2, II",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "half-lives of zero and first-order reactions"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. FIG Figure is in the PDF and is not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Chemical Kinetics",
+        "subtopic": "Elementary and complex reactions"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-50",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 50,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "Principles Related to Practical Chemistry",
+    "chapters": [
+      "Principles Related to Practical Chemistry"
+    ],
+    "topic": "Preparation of lyophilic and lyophobic sols",
+    "question_type": "integer",
+    "difficulty": "easy",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Number of colloidal systems with liquid dispersion medium (gem stones, paints, smoke, cheese, milk, hair cream, insecticide sprays, froth, soap lather)",
+    "options": [],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "preparation of lyophilic and lyophobic sols"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Principles Related to Practical Chemistry",
+        "subtopic": "Preparation of lyophilic and lyophobic sols"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-51",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 51,
+    "subject": "Chemistry",
+    "unit": "Inorganic Chemistry",
+    "chapter": "Coordination Compounds",
+    "chapters": [
+      "Coordination Compounds"
+    ],
+    "topic": "IUPAC nomenclature of mononuclear coordination compounds",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "IUPAC name of K3[Co(C2O4)3]",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Potassium tris(oxalato)cobaltate(III)",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) Potassium tris(oxalato)cobalt(III)",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Potassium trioxalatocobaltate(III)",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Potassium trioxalatocobaltate(III)",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "iupac nomenclature of mononuclear coordination compounds"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. Options (3) and (4) as transcribed; check",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Coordination Compounds",
+        "subtopic": "IUPAC nomenclature of mononuclear coordination compounds"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-52",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 52,
+    "subject": "Chemistry",
+    "unit": "Physical Chemistry",
+    "chapter": "Redox Reactions and Electrochemistry",
+    "chapters": [
+      "Redox Reactions and Electrochemistry"
+    ],
+    "topic": "Redox reactions and oxidation number",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Assertion A: metals in Ni(CO)4 and Fe(CO)5 have zero oxidation state. Reason R: low oxidation states arise with pi-donor ligands",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) A correct, R not correct",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) A not correct, R correct",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Both correct, R NOT explanation",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Both correct, R explanation",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "redox reactions and oxidation number"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Redox Reactions and Electrochemistry",
+        "subtopic": "Redox reactions and oxidation number"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-53",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 53,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Purification and Characterisation of Organic Compounds",
+    "chapters": [
+      "Purification and Characterisation of Organic Compounds"
+    ],
+    "topic": "Qualitative analysis: detection of nitrogen, sulphur, phosphorus and halogens",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Key 278 does not match any printed option; verify",
+    "text": "Element not present in Nessler's reagent",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) N",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) Hg",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) I",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) K",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "278"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "qualitative analysis: detection of nitrogen, sulphur, phosphorus and halogens"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key 278 not among options",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Purification and Characterisation of Organic Compounds",
+        "subtopic": "Qualitative analysis: detection of nitrogen, sulphur, phosphorus and halogens"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-54",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 54,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Some Basic Principles of Organic Chemistry",
+    "chapters": [
+      "Some Basic Principles of Organic Chemistry"
+    ],
+    "topic": "Common types of organic reactions: substitution, addition, elimination and rearrangement",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key 49 is not a valid answer for options; verify",
+    "text": "Major product B from H3O⁺ treatment of the given alcohol",
+    "options": [
+      {
+        "key": "1",
+        "text": "[structure: see PDF]",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "[structure: see PDF]",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "[structure: see PDF]",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "[structure: see PDF]",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "49"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "common types of organic reactions: substitution, addition, elimination and rearrangement"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key 49 not among options Options are chemical structures in the PDF and are not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Some Basic Principles of Organic Chemistry",
+        "subtopic": "Common types of organic reactions: substitution, addition, elimination and rearrangement"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-55",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 55,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Organic Compounds Containing Oxygen",
+    "chapters": [
+      "Organic Compounds Containing Oxygen"
+    ],
+    "topic": "Grignard reagent",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Major product of 3-methylcyclohex-2-enone with MeMgBr/CuI then nPrI",
+    "options": [
+      {
+        "key": "1",
+        "text": "[structure: see PDF]",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "[structure: see PDF]",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "[structure: see PDF]",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "[structure: see PDF]",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "grignard reagent"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. IMG Options are chemical structures in the PDF and are not extracted here.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Organic Compounds Containing Oxygen",
+        "subtopic": "Grignard reagent"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-56",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 56,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Organic Compounds Containing Oxygen",
+    "chapters": [
+      "Organic Compounds Containing Oxygen"
+    ],
+    "topic": "Haloform reaction",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Number of compounds (a)–(f) giving positive iodoform reaction",
+    "options": [],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "haloform reaction"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Organic Compounds Containing Oxygen",
+        "subtopic": "Haloform reaction"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-57",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 57,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Organic Compounds Containing Nitrogen",
+    "chapters": [
+      "Organic Compounds Containing Nitrogen"
+    ],
+    "topic": "Identification of primary, secondary and tertiary amines",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Number of isomeric aromatic amines C8H11N synthesisable by Gabriel phthalimide synthesis",
+    "options": [],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "identification of primary, secondary and tertiary amines"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Organic Compounds Containing Nitrogen",
+        "subtopic": "Identification of primary, secondary and tertiary amines"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-58",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 58,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Biomolecules",
+    "chapters": [
+      "Biomolecules"
+    ],
+    "topic": "Hormones (general introduction)",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Key 5 is not among options; verify",
+    "text": "Statements I and II on morphine (narcotic analgesic, obtained from opium poppy)",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Both I and II true",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) I true, II false",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Both false",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) I false, II true",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "5"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "hormones (general introduction)"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key 5 not among options",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Biomolecules",
+        "subtopic": "Hormones (general introduction)"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-59",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 59,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Purification and Characterisation of Organic Compounds",
+    "chapters": [
+      "Purification and Characterisation of Organic Compounds"
+    ],
+    "topic": "Qualitative analysis: detection of nitrogen, sulphur, phosphorus and halogens",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Complex that is not a confirmatory test for Pb²⁺",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Lead sulphate",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) Lead nitrate",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Lead chromate",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Lead iodide",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "qualitative analysis: detection of nitrogen, sulphur, phosphorus and halogens"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Purification and Characterisation of Organic Compounds",
+        "subtopic": "Qualitative analysis: detection of nitrogen, sulphur, phosphorus and halogens"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-60",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 60,
+    "subject": "Chemistry",
+    "unit": "Organic Chemistry",
+    "chapter": "Biomolecules",
+    "chapters": [
+      "Biomolecules"
+    ],
+    "topic": "Alpha-amino acids and peptide bond",
+    "question_type": "single",
+    "difficulty": "easy",
+    "difficulty_reason": "Key 5 is not among options; verify",
+    "text": "Matching natural amino acids (arginine, aspartic acid, asparagine, alanine) with one-letter codes",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) A-IV, B-I, C-II, D-III",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) A-I, B-II, C-III, D-IV",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) A-III, B-IV, C-I, D-II",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) A-II, B-III, C-IV, D-I",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "5"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "alpha-amino acids and peptide bond"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key 5 not among options; list stated as (A)-(D) with (I)-(IV) codes",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Biomolecules",
+        "subtopic": "Alpha-amino acids and peptide bond"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-61",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 61,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Complex Numbers and Quadratic Equations",
+    "chapters": [
+      "Complex Numbers and Quadratic Equations"
+    ],
+    "topic": "Algebra of complex numbers",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Set X of complex z with Re(az²+bz) = a and Re(bz²+az) = b for non-zero real a ≠ b; number of elements",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 0",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 1",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 3",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 2",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "algebra of complex numbers"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Complex Numbers and Quadratic Equations",
+        "subtopic": "Algebra of complex numbers"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-62",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 62,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Complex Numbers and Quadratic Equations",
+    "chapters": [
+      "Complex Numbers and Quadratic Equations"
+    ],
+    "topic": "Argand diagram",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Radius of circle |z−α|² + |z−β|² = 2λ is √(λ−1); value of |α−β|",
+    "options": [],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "argand diagram"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Complex Numbers and Quadratic Equations",
+        "subtopic": "Argand diagram"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-63",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 63,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Permutations and Combinations",
+    "chapters": [
+      "Permutations and Combinations"
+    ],
+    "topic": "Permutations",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Serial number of word PUBLIC among all arrangements of PUBLIC in dictionary order",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 576",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 578",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 580",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 582",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "permutations"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Permutations and Combinations",
+        "subtopic": "Permutations"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-64",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 64,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Permutations and Combinations",
+    "chapters": [
+      "Permutations and Combinations"
+    ],
+    "topic": "Combinations",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Number of 4-letter words with 2 vowels and 2 consonants from UNIVERSE without repetition",
+    "options": [],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "combinations"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key 1 looks low for this count; verify",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Permutations and Combinations",
+        "subtopic": "Combinations"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-65",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 65,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Sequence and Series",
+    "chapters": [
+      "Sequence and Series"
+    ],
+    "topic": "Arithmetic progression",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "gcd(m,n)=1 and sum of alternating squares 1²−2²+…+(2023)² = 1012m²n; m²−n²",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 240",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 200",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 220",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 180",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "arithmetic progression"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Sequence and Series",
+        "subtopic": "Arithmetic progression"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-66",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 66,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Binomial Theorem",
+    "chapters": [
+      "Binomial Theorem"
+    ],
+    "topic": "General term",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Sum (20)^19 + 2(21)(20)^18 + ... + 20(21)^19 = k(20)^19; value of k",
+    "options": [],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "general term"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Binomial Theorem",
+        "subtopic": "General term"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-67",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 67,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Binomial Theorem",
+    "chapters": [
+      "Binomial Theorem"
+    ],
+    "topic": "General term",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Coefficients of x⁷ in (ax² + 1/(2bz))^11 and x⁻⁷ in (ax − 1/(3bz²))^11 are equal",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 729ab = 32",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 32ab = 729",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 64ab = 243",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 243ab = 64",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "general term"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. Option text approximate; check",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Binomial Theorem",
+        "subtopic": "General term"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-68",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 68,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Sets, Relations and Functions",
+    "chapters": [
+      "Sets, Relations and Functions",
+      "Binomial Theorem"
+    ],
+    "topic": "Logical statements",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Statements S1: 2023^2022 − 1999^2022 divisible by 8; S2: 13(13)^n − 11n − 13 divisible by 144 for infinitely many n",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Only S2 correct",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) Only S1 correct",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Both correct",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Both incorrect",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "logical statements"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Binomial Theorem",
+        "subtopic": "Simple applications"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-69",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 69,
+    "subject": "Maths",
+    "unit": "Trigonometry",
+    "chapter": "Trigonometry",
+    "chapters": [
+      "Trigonometry"
+    ],
+    "topic": "Trigonometrical functions",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "tan 9° − tan 27° − tan 63° + tan 81°",
+    "options": [],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "trigonometrical functions"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Trigonometry",
+        "subtopic": "Trigonometrical functions"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-70",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 70,
+    "subject": "Maths",
+    "unit": "Coordinate Geometry",
+    "chapter": "Co-ordinate Geometry",
+    "chapters": [
+      "Co-ordinate Geometry"
+    ],
+    "topic": "Sections of conics: parabola, ellipse and hyperbola in standard forms",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Tangents at P and Q on circle x²+y²−2x+y=5 meet at R(9/4, 2); area of triangle PQR",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 5/4",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 13/8",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 5/8",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 13/4",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "sections of conics: parabola, ellipse and hyperbola in standard forms"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Co-ordinate Geometry",
+        "subtopic": "Standard form of equation of a circle"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-71",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 71,
+    "subject": "Maths",
+    "unit": "Coordinate Geometry",
+    "chapter": "Co-ordinate Geometry",
+    "chapters": [
+      "Co-ordinate Geometry"
+    ],
+    "topic": "Sections of conics: parabola, ellipse and hyperbola in standard forms",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Ellipse eccentricity reciprocal to hyperbola 2x²−2y²... ; square of latus rectum of ellipse",
+    "options": [],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "sections of conics: parabola, ellipse and hyperbola in standard forms"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. Stem transcribed approximately; check",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Co-ordinate Geometry",
+        "subtopic": "Sections of conics: parabola, ellipse and hyperbola in standard forms"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-72",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 72,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Limit, Continuity and Differentiability",
+    "chapters": [
+      "Limit, Continuity and Differentiability"
+    ],
+    "topic": "Limits",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "lim (n→∞) of product (2^(1/x) − 2^(1/x)) ... expression",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 1",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 0",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) √2",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 1/√2",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "limits"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. Stem transcribed approximately; check",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Limit, Continuity and Differentiability",
+        "subtopic": "Limits"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-73",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 73,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Sets, Relations and Functions",
+    "chapters": [
+      "Sets, Relations and Functions"
+    ],
+    "topic": "Union, intersection and complement of sets and their algebraic properties",
+    "question_type": "single",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "S1: (p⇒q) ∨ ((¬p)∧q) is a tautology; S2: (q⇒p) ⇒ ((¬p)∧q) is a contradiction",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Neither S1 nor S2 is true",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) Both S1 and S2 are true",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Only S2 is true",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Only S1 is true",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "union, intersection and complement of sets and their algebraic properties"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Sets, Relations and Functions",
+        "subtopic": "Union, intersection and complement of sets and their algebraic properties"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-74",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 74,
+    "subject": "Maths",
+    "unit": "Statistics & Probability",
+    "chapter": "Statistics and Probability",
+    "chapters": [
+      "Statistics and Probability"
+    ],
+    "topic": "Mean, median and mode of grouped and ungrouped data",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Frequency distribution with mean 9 and variance 15.08; value of α² + β² − αβ",
+    "options": [],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "mean, median and mode of grouped and ungrouped data"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Statistics and Probability",
+        "subtopic": "Mean, median and mode of grouped and ungrouped data"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-75",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 75,
+    "subject": "Maths",
+    "unit": "Coordinate Geometry",
+    "chapter": "Co-ordinate Geometry",
+    "chapters": [
+      "Co-ordinate Geometry"
+    ],
+    "topic": "Sections of conics: parabola, ellipse and hyperbola in standard forms",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Eccentricity of ellipse 25(β²x² + α²y²) = α²β² with α, β from 100 persons (75 English, 40 Hindi)",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) √119/12",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) √117/12",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) √15/12",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) √129/12",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "sections of conics: parabola, ellipse and hyperbola in standard forms"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Co-ordinate Geometry",
+        "subtopic": "Sections of conics: parabola, ellipse and hyperbola in standard forms"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-76",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 76,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Matrices and Determinants",
+    "chapters": [
+      "Matrices and Determinants"
+    ],
+    "topic": "Matrices and algebra of matrices",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "P² = I − P; P^α + P^β = γI − 29P; P^α − P^β = δI − 13P; value of α + β + γ − δ",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 18",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 40",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 22",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 24",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "3"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "matrices and algebra of matrices"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Matrices and Determinants",
+        "subtopic": "Matrices and algebra of matrices"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-77",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 77,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Matrices and Determinants",
+    "chapters": [
+      "Matrices and Determinants"
+    ],
+    "topic": "Test of consistency of linear equations",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "System x+y+z=6, x+2y+αz=10, x+3y+5z=β; which statement is NOT true",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) No solution for α=3, β=24",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) Unique solution for α=−3, β=14",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Infinitely many solutions for α=3, β=14",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Unique solution for α=3, β≠14",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "test of consistency of linear equations"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Matrices and Determinants",
+        "subtopic": "Test of consistency of linear equations"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-78",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 78,
+    "subject": "Maths",
+    "unit": "Algebra",
+    "chapter": "Sets, Relations and Functions",
+    "chapters": [
+      "Sets, Relations and Functions"
+    ],
+    "topic": "Functions",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Domain A and range B of f(x) = 1/√(|x|−x) with ceiling function; S1: A∩B; S2: A∪B",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) Only S2 true",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) Only S1 true",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) Neither S1 nor S2 true",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) Both S1 and S2 true",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "functions"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. Stem transcribed approximately; check",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Sets, Relations and Functions",
+        "subtopic": "Functions"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-79",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 79,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Limit, Continuity and Differentiability",
+    "chapters": [
+      "Limit, Continuity and Differentiability"
+    ],
+    "topic": "Rate of change of quantities",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Curve y = f(x) through P(1, 3/2) and Q(a, 1/2); tangent at R(b, f(b)) meets y-axis at S(0,c) with bc = 3; (PQ)²",
+    "options": [],
+    "correct_answer": [
+      "1"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "rate of change of quantities"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Limit, Continuity and Differentiability",
+        "subtopic": "Rate of change of quantities"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-80",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 80,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Limit, Continuity and Differentiability",
+    "chapters": [
+      "Limit, Continuity and Differentiability"
+    ],
+    "topic": "Maxima and minima of functions of one variable",
+    "question_type": "integer",
+    "difficulty": "medium",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Number of points where y = x⁵ − 20x³ + 50x + 2 crosses the x-axis",
+    "options": [],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "maxima and minima of functions of one variable"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Limit, Continuity and Differentiability",
+        "subtopic": "Maxima and minima of functions of one variable"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-81",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 81,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Integral Calculus",
+    "chapters": [
+      "Integral Calculus"
+    ],
+    "topic": "Evaluation of definite integrals",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "f(x) + f(π−x) = π²; value of ∫₀^π f(x) sin x dx",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) π²/4",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 2π²",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) π²",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) π²/2",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "evaluation of definite integrals"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Integral Calculus",
+        "subtopic": "Evaluation of definite integrals"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-82",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 82,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Integral Calculus",
+    "chapters": [
+      "Integral Calculus"
+    ],
+    "topic": "Evaluation of definite integrals",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "f(x) = x/(1+xⁿ)^(1/n); limit of ∫₀¹ x^(n−2) f^n(x) dx as n→∞",
+    "options": [],
+    "correct_answer": [
+      "432"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "evaluation of definite integrals"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Integral Calculus",
+        "subtopic": "Evaluation of definite integrals"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-83",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 83,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Integral Calculus",
+    "chapters": [
+      "Integral Calculus"
+    ],
+    "topic": "Determining areas of regions bounded by simple curves in standard forms",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "CHECK: printed key 400 not among options",
+    "text": "Area bounded by y = |x−1| + |x−2| and y = 3",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 4",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 6",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 3",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 5",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "400"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "determining areas of regions bounded by simple curves in standard forms"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key 400 not among options",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Integral Calculus",
+        "subtopic": "Determining areas of regions bounded by simple curves in standard forms"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-84",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 84,
+    "subject": "Maths",
+    "unit": "Calculus",
+    "chapter": "Differential Equations",
+    "chapters": [
+      "Differential Equations"
+    ],
+    "topic": "Solution of linear differential equations of the type dy/dx + p(x)y = q(x)",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Solution curve f(x,y)=0 of (1+log x)dx/dy − x log x = e^y through (1,0) and (a,2); a^a value",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) e^(2e²)",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) e^(e²)",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) e^(√(2e)−2)",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) e^(2e√2)",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "4"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "solution of linear differential equations of the type dy/dx + p(x)y = q(x)"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. Stem transcribed approximately; check",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Differential Equations",
+        "subtopic": "Solution of linear differential equations of the type dy/dx + p(x)y = q(x)"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-85",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 85,
+    "subject": "Maths",
+    "unit": "Vectors & 3D Geometry",
+    "chapter": "Vector Algebra",
+    "chapters": [
+      "Vector Algebra"
+    ],
+    "topic": "Scalar product",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Parallelepiped volume V from coterminous vectors a, b, c; volume with edges a, b+c, a+2b+3c",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 2V",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 6V",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) V",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 3V",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "2"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "scalar product"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Vector Algebra",
+        "subtopic": "Scalar product"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-86",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 86,
+    "subject": "Maths",
+    "unit": "Vectors & 3D Geometry",
+    "chapter": "Three Dimensional Geometry",
+    "chapters": [
+      "Three Dimensional Geometry"
+    ],
+    "topic": "Skew lines",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Sum of all α for which four given position vectors are coplanar",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) −2",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 2",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 6",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 4",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "25"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "skew lines"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key 25 not among options",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Three Dimensional Geometry",
+        "subtopic": "Skew lines"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-87",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 87,
+    "subject": "Maths",
+    "unit": "Vectors & 3D Geometry",
+    "chapter": "Three Dimensional Geometry",
+    "chapters": [
+      "Three Dimensional Geometry"
+    ],
+    "topic": "Equation of a line in space",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key 5 is not among options; verify",
+    "text": "Line L through (0,1,2) intersecting given line and parallel to plane; distance of P(1,−9,2) from L",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) √74",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) √69",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) √54",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 9",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "5"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "equation of a line in space"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key 5 not among options",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Three Dimensional Geometry",
+        "subtopic": "Equation of a line in space"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-88",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 88,
+    "subject": "Maths",
+    "unit": "Vectors & 3D Geometry",
+    "chapter": "Three Dimensional Geometry",
+    "chapters": [
+      "Three Dimensional Geometry"
+    ],
+    "topic": "Equation of a plane",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key 5 is not among options; verify",
+    "text": "Plane containing the line of intersection of two given planes and passing through (0,2,−2); square of distance of (12,12,18) from plane",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 620",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 155",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 310",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 1240",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "5"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "equation of a plane"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key 5 not among options",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Three Dimensional Geometry",
+        "subtopic": "Direction ratios and direction cosines"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-89",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 89,
+    "subject": "Maths",
+    "unit": "Vectors & 3D Geometry",
+    "chapter": "Three Dimensional Geometry",
+    "chapters": [
+      "Three Dimensional Geometry"
+    ],
+    "topic": "Skew lines",
+    "question_type": "integer",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Lines intersect; magnitude of minimum value of 8αβ",
+    "options": [],
+    "correct_answer": [
+      "0"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "skew lines"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key.",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Three Dimensional Geometry",
+        "subtopic": "Skew lines"
+      }
+    ]
+  },
+  {
+    "id": "main-2023-apr-s2-sh2-06apr-p-90",
+    "exam": "main",
+    "year": 2023,
+    "session": "Apr-S2",
+    "session_number": 2,
+    "session_month": "Apr",
+    "shift": 2,
+    "shift_label": "Shift 2",
+    "date": "2023-04-06",
+    "paper": null,
+    "paper_section": null,
+    "question_number": 90,
+    "subject": "Maths",
+    "unit": "Statistics & Probability",
+    "chapter": "Statistics and Probability",
+    "chapters": [
+      "Statistics and Probability"
+    ],
+    "topic": "Probability of an event",
+    "question_type": "single",
+    "difficulty": "hard",
+    "difficulty_reason": "Key from printed answer key page",
+    "text": "Three dice rolled; probability of different numbers is p/q; q − p",
+    "options": [
+      {
+        "key": "1",
+        "text": "(1) 2",
+        "image": null
+      },
+      {
+        "key": "2",
+        "text": "(2) 1",
+        "image": null
+      },
+      {
+        "key": "3",
+        "text": "(3) 3",
+        "image": null
+      },
+      {
+        "key": "4",
+        "text": "(4) 4",
+        "image": null
+      }
+    ],
+    "correct_answer": [
+      "18"
+    ],
+    "marks_correct": 4,
+    "marks_incorrect": -1,
+    "marks_unattempted": 0,
+    "solution": null,
+    "solution_source": null,
+    "image": null,
+    "figure_refs": [],
+    "tags": [
+      "probability of an event"
+    ],
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key 18 not among options (1)2 (2)1 (3)3 (4)4; verify",
+    "verified": false,
+    "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
+    "subtopics": [
+      {
+        "chapter": "Statistics and Probability",
+        "subtopic": "Probability of an event"
+      }
+    ]
+  }
+]

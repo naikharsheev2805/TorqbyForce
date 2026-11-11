@@ -1392,7 +1392,7 @@
     "paper": null,
     "paper_section": null,
     "question_number": 21,
-    "subject": "Maths",
+    "subject": "Physics",
     "unit": "Vectors & 3D Geometry",
     "chapter": "Vector Algebra",
     "chapters": [
@@ -1425,7 +1425,9 @@
         "chapter": "Vector Algebra",
         "subtopic": "Addition of vectors"
       }
-    ]
+    ],
+    "subject_original": "Maths",
+    "classification_note": "Subject set to Physics by paper position (block 1-30); original label Maths did not match block."
   },
   {
     "id": "main-2024-apr-s2-sh1-09apr-p-22",
