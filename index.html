@@ -862,6 +862,8 @@ textarea{min-height:64px; resize:vertical;}
 .topline{display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:14px; min-width:0;}
 .topline .mid{flex:1; min-width:0; font-size:var(--fs-2); color:var(--muted); text-align:center; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
 .topline .right{display:flex; gap:var(--sp-2); align-items:center; flex-shrink:0;}
+/* Custom test / mock: keep the timer and Submit clear of the fixed Back button in the top-right corner */
+.topline.mock-top{ padding-right:132px; }
 .palette{display:grid; grid-template-columns:repeat(auto-fill,minmax(42px,1fr)); gap:var(--sp-2);}
 .pal{height:42px; border-radius:var(--r-sm); border:1px solid var(--border); background:var(--surface); color:var(--text); font:500 13px Inter,sans-serif; cursor:pointer; min-width:0;}
 .pal.done{background:var(--accent); border-color:var(--accent-text); color:var(--accent-ink);}
@@ -2165,7 +2167,7 @@ img{ -webkit-user-drag:none; }
 .fx2-hint{font:500 11px Inter,sans-serif; color:var(--muted); text-align:center; letter-spacing:.04em; opacity:.8; flex-shrink:0;}
 .fx2-actions{display:grid; grid-template-columns:1fr 1fr; gap:10px; max-width:360px; margin:0 auto;}
 .fx2-btn{border:0; border-radius:14px; padding:14px; font:600 14.5px Inter,sans-serif; cursor:pointer; transition:filter .15s, transform .12s;}
-.fx2-btn:active{transform:scale(.97);}
+.fx2-btn:active{filter:brightness(.92);}
 .fx2-btn.primary{background:var(--accent); color:var(--accent-ink,#1f1e1d);}
 .fx2-btn.quiet{background:transparent; color:var(--text); border:1px solid var(--border);}
 @media (prefers-reduced-motion:reduce){ .fx2-card{transition:none;} .fx2-out-r,.fx2-out-l,.fx2-enter{animation:none;} }
@@ -2236,7 +2238,9 @@ img{ -webkit-user-drag:none; }
 .fx2-split{ display:flex; flex-direction:column; align-items:center; gap:18px; }
 .fx2-deck{ position:relative; width:100%; display:flex; justify-content:center; }
 .fx2-under{ position:absolute; left:50%; top:0; width:min(88vw,380px); aspect-ratio:1 / 1.42; transform:translateX(-50%); pointer-events:none; }
-.fx2-under.u1{ transform:translate(-50%,14px) scale(.95); opacity:.7; z-index:0; }
+.fx2-under.u1{ transform:translate(-50%,14px) scale(.95); opacity:1; z-index:0; }
+/* The card behind is solid, so nothing from the cards beneath it shows through */
+.fx2-under > .fx2-face{ background:linear-gradient(170deg,var(--surface),var(--surface-2)); }
 .fx2-under.u2{ transform:translate(-50%,26px) scale(.9); opacity:.4; z-index:0; }
 .fx2-ghost{ position:absolute; inset:0; border-radius:22px; border:1px solid var(--border); background:linear-gradient(170deg,var(--surface),var(--surface-2)); display:flex; flex-direction:column; padding:22px; }
 .fx2-ghost .fx2-meta{ position:relative; }
@@ -2624,7 +2628,10 @@ body.has-nav .build-stamp{ margin-bottom:calc(16px + env(safe-area-inset-bottom,
 .fx2-under.fx2-promote{ transition:transform .46s cubic-bezier(.4,0,.2,1), opacity .46s ease; transform:translate(-50%,0) scale(1); opacity:1; }
 .fx2-split.fx2-swap-in{ animation:fx2SwapIn .55s cubic-bezier(.2,.7,.2,1) both; }
 @keyframes fx2SwapIn{ from{ opacity:0; transform:translateY(16px) scale(.97); } to{ opacity:1; transform:none; } }
-@media (prefers-reduced-motion:reduce){ .fx2-card.fx2-out-r,.fx2-card.fx2-out-l,.fx2-split.fx2-swap-in{ animation-duration:.01s !important; } .fx2-under.fx2-promote{ transition:none; } }
+/* The next card fades in on the same spot: opacity only, so nothing grows or shrinks around it */
+.fx2-stage.fx2-fade{ animation:fx2Fade .24s ease both; }
+@keyframes fx2Fade{ from{ opacity:0; } to{ opacity:1; } }
+@media (prefers-reduced-motion:reduce){ .fx2-card.fx2-out-r,.fx2-card.fx2-out-l,.fx2-split.fx2-swap-in,.fx2-stage.fx2-fade{ animation-duration:.01s !important; } .fx2-under.fx2-promote{ transition:none; } }
 
 /* ---------- Login headline: huge, with vector art behind it ---------- */
 .onb-hero{ isolation:isolate; }
@@ -4519,7 +4526,7 @@ body.lefty .navback{ right:auto; left:14px; }
 <script>
 // ---------- Data paths (adjust here if the folder layout changes) ----------
 // Serve the repo root with a local server (e.g. `python3 -m http.server`); opening the file directly blocks fetch().
-const APP_BUILD = '2026-11-05-y';   // bumped with every release; the app compares it with the hosted file
+const APP_BUILD = '2026-11-11-a';   // bumped with every release; the app compares it with the hosted file
 const PATHS = {
   index: 'data/index.json',  // lists every paper; each paper's "file" field points at its question JSON
   solutions: 'data/solutions/'    // one file per paper: data/solutions/<paper-id>.json
@@ -4651,9 +4658,13 @@ function readSolutions(data){
 }
 // Convert one raw question from the extracted JSON into the shape the app renders.
 function normaliseQuestion(raw, paper, solution){
-  const isInt = raw.question_type === 'integer';
   const opts = raw.options || [];
   const key = (raw.correct_answer || [])[0];
+  // A question is integer type if the data says so, or if its answer is not one of its option keys.
+  // (Some integer questions were saved as single-choice with placeholder options 1 to 4; with no matching
+  // option the answer could never be marked right, so a correct guess was counted wrong.)
+  const keyIsOption = opts.some(o => String(o.key) === String(key));
+  const isInt = raw.question_type === 'integer' || !keyIsOption;
   return {
     id: raw.id,
     paperId: paper.id,
@@ -4754,7 +4765,7 @@ function liveSave(){
 function answerNumeric(v){
   const q = session.queue[session.idx];
   const prev = session.answers[q.id];
-  if(prev && !prev.skip) return;
+  if(prev && !prev.skip && !prev.pending) return;
   const val = String(v).replace(/\u2212/g,'-');
   const sec = Math.round((Date.now()-qStartOf(q))/1000);
   session.answers[q.id] = {sel:val, pending:true, time:sec, conf:session.conf[q.id]||null, nullified:!session.conf[q.id], prevPts:(prev && prev.pts) || 0};
@@ -5723,7 +5734,7 @@ function exitSession(){ if(window.__t){ clearInterval(window.__t); window.__t=nu
 function answerPYQ(i){
   const q = session.queue[session.idx];
   const prev = session.answers[q.id];
-  if(prev && !prev.skip) return;                 // already chosen: locked until submit
+  if(prev && !prev.skip && !prev.pending) return;   // submitted: final. Before submit, a new pick replaces the old one
   const sec = Math.round((Date.now()-qStartOf(q))/1000);
   if(navigator.vibrate) navigator.vibrate(8);
   session.answers[q.id] = {sel:i, pending:true, time:sec, conf:session.conf[q.id]||null, nullified:!session.conf[q.id], prevPts:(prev && prev.pts) || 0};
@@ -6359,7 +6370,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.12.04';
+const APP_VERSION = 'v01.12.07';
 const LAST_UPDATED = 'November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -6855,6 +6866,9 @@ const JEE_MAIN_SYLLABUS = [
 ];
 
 
+// Footnotes: units from the 2021 to 2023 syllabi that the 2027 syllabus has dropped. Generated from syllabus_map.json (legacy_units).
+const JEE_LEGACY_SYLLABUS = [{"s": "Mathematics", "u": [{"t": "Mathematical Induction", "x": "Seen in the 2021, 2022 and 2023 syllabus. Principle of Mathematical Induction and its simple applications."}, {"t": "Mathematical Reasoning", "x": "Seen in the 2021, 2022 and 2023 syllabus. Statement logical operations and; implies; implied by; if and only if; understanding of tautology; contradiction; converse; and contrapositive."}]}, {"s": "Physics", "u": [{"t": "Communication Systems", "x": "Seen in the 2021, 2022 and 2023 syllabus. Propagation of electromagnetic waves in the atmosphere; Sky and space wave propagation; Need for modulation; Amplitude and Frequency Modulation; Bandwidth of signals; the bandwidth of Transmission medium; Basic Elements of a Communication System (Block Diagram only)."}]}, {"s": "Chemistry", "u": [{"t": "States of Matter", "x": "Seen in the 2021, 2022 and 2023 syllabus. Classification of matter into solid; liquid; and gaseous states; Gaseous State: Measurable properties of gases: Gas laws - Boyle's law; Charle's law; Graham's law of diffusion; Avogadro's law; Dalton's law of partial pressure; Concept of Absolute scale of temperature; Ideal gas equation; Kinetic theory of gases (only postulates); Concept of average; root mean square and most probable velocities; Real gases; deviation from Ideal behaviour; compressibility factor; and van der Waals equation; Liquid State: Properties of liquids - vapour pressure; viscosity and surface tension; and effect of temperature on them (qualitative treatment only); Solid State: Classification of solids: molecular; ionic; covalent and metallic solids; amorphous and crystalline solids (elementary idea); Bragg's Law and its applications: Unit cell and lattices; packing in solids (fcc, bcc and hcp lattices); voids; calculations involving unit cell parameters; an imperfection in solids; Electrical and magnetic properties."}, {"t": "Surface Chemistry", "x": "Seen in the 2021, 2022 and 2023 syllabus. Adsorption- Physisorption and chemisorption and their characteristics; factors affecting adsorption of gases on solids - Freundlich and Langmuir adsorption isotherms; adsorption from solutions; Catalysis - Homogeneous and heterogeneous; activity and selectivity of solid catalysts; enzyme catalysis; and its mechanism; Colloidal state- distinction among true solutions; colloids; and suspensions; classification of colloids - lyophilic; lyophobic; multi-molecular; macromolecular and associated colloids (micelles); preparation and properties of colloids - Tyndall effect; Brownian movement; electrophoresis; dialysis; coagulation; and flocculation: Emulsions and their characteristics."}, {"t": "General Principles and Processes of Isolation of Metals", "x": "Seen in the 2021, 2022 and 2023 syllabus. Modes of occurrence of elements in nature; minerals; ores; Steps involved in the extraction of metals - concentration; reduction (chemical and electrolytic methods); and refining with special reference to the extraction of Al; and Fe; Thermodynamic and electrochemical principles involved in the extraction of metals."}, {"t": "Hydrogen", "x": "Seen in the 2021, 2022 and 2023 syllabus. Position of hydrogen in periodic table; isotopes; preparation; properties and uses of hydrogen; Physical and chemical properties of water and heavy water; Structure; reactions; and uses of hydrogen peroxide; Classification of hydrides - ionic; covalent; and interstitial; Hydrogen as a fuel."}, {"t": "s-Block Elements (Alkali and Alkaline Earth Metals)", "x": "Seen in the 2021, 2022 and 2023 syllabus. Group -1 and 2 Elements General introduction; electronic configuration; and general trends in physical and chemical properties of elements; anomalous properties of the first element of each group; diagonal relationships; Preparation and properties of some important compounds - sodium carbonate and sodium hydroxide and sodium hydrogen carbonate; Industrial uses of lime; limestone; Plaster of Paris and cement: Biological significance of Na; and Ca."}, {"t": "Environmental Chemistry", "x": "Seen in the 2021, 2022 and 2023 syllabus. Environmental pollution - Atmospheric; water; and soil; Atmospheric pollution - Tropospheric and Stratospheric Tropospheric pollutants - Gaseous pollutants: Oxides of carbon; nitrogen; and sulphur; hydrocarbons; their sources; harmful effects; and prevention; Greenhouse effect and Global warming: Acid rain; Particulate pollutants: Smoke; dust; smog; fumes; mist; Stratospheric pollution- Formation and breakdown of ozone; depletion of the ozone layer - its mechanism and effects; Water Pollution - Major pollutants such as; pathogens; organic wastes; and chemical pollutants; their harmful effects and prevention; Soil pollution - Major pollutants such as; Pesticides (insecticides. herbicides and fungicides); their harmful effects; Strategies to control environmental pollution."}, {"t": "Polymers", "x": "Seen in the 2021, 2022 and 2023 syllabus. General introduction and classification of polymers; general methods of polymerization; Addition and condensation; copolymerization; Natural and synthetic; rubber and vulcanization; some important polymers with emphasis on their monomers and uses – polythene; nylon; polyester; and bakelite."}, {"t": "Chemistry in Everyday Life", "x": "Seen in the 2021, 2022 and 2023 syllabus. Chemicals in Medicines - Analgesics; tranquilizers; antiseptics; disinfectants; antimicrobials; anti-fertility drugs; antibiotics; antacids; Anti-histamines -their meaning and common examples; Chemicals in food - Preservatives; artificial sweetening agents - common examples; Cleansing Agents - Soaps and detergents; cleansing action."}]}];
+
 const SYL_PAPERS = [
  {id:'main', label:'JEE Main', sub:'JEE Main 2027, Paper 1 (B.E./B.Tech.)', subjects:JEE_MAIN_SYLLABUS},
  {id:'adv', label:'JEE Advanced', sub:'JEE Advanced 2027', subjects:null}
@@ -6935,6 +6949,14 @@ function syllabusView(){
       d.appendChild(sylUnits(sec.u));
     });
     w.appendChild(d);
+  });
+  // Footnotes: chapters the 2027 syllabus has dropped. Older papers still ask them, so they stay here, one card per subject.
+  w.appendChild(el('<h2 class="field" style="margin:24px 0 2px">Footnotes</h2>'));
+  w.appendChild(el('<p class="note-line" style="margin:0">Chapters the 2027 syllabus has dropped. They were in the 2021 to 2023 syllabi, so older papers may still ask them.</p>'));
+  JEE_LEGACY_SYLLABUS.forEach(sub=>{
+    const card = el('<div class="card syl-legacy" style="margin-top:14px"><div class="eyebrow">Footnotes · '+esc(tc(sub.s))+' · '+sub.u.length+' units</div></div>');
+    card.appendChild(sylUnits(sub.u));
+    w.appendChild(card);
   });
   w.appendChild(el('<p class="note-line" style="margin-top:18px">Check the official NTA brochure for the current syllabus.</p>'));
   return w;
@@ -7706,14 +7728,15 @@ function flashCardsBuild(c){
   const out = [];
   if(!NOTES[c]) return out;
   const LBL = ['What it means','Why it works','Memory trick'];
+  // The idea comes first, then the formula that uses it: a formula never shows before the concept it explains
+  NOTES[c].concepts.forEach((k,n)=>{
+    const back = [{label:'Idea', text:k.analogy}].concat((k.body||[]).map(p=>({label:'', text:p})));
+    out.push({key:'c'+n, ch:c, kind:'Concept', front:esc(k.title), back, oos:!!k.oos});
+  });
   NOTES[c].formulas.forEach((f,n)=>{
     const ex = (FL_EXPLAIN[c]||[])[n];
     const back = ex ? ex.map((t,j)=>({label:LBL[j], text:t})) : [{label:'Use', text:f.use}];
     out.push({key:'f'+n, ch:c, kind:'Formula', front:'$'+texify(f.eq)+'$', back, oos:!!f.oos});
-  });
-  NOTES[c].concepts.forEach((k,n)=>{
-    const back = [{label:'Idea', text:k.analogy}].concat((k.body||[]).map(p=>({label:'', text:p})));
-    out.push({key:'c'+n, ch:c, kind:'Concept', front:esc(k.title), back, oos:!!k.oos});
   });
   return out;
 }
@@ -13567,19 +13590,19 @@ function pyqPractice(w){
     const val = (answered || locked) ? String(a.sel||'') : (session.draft[q.id]||'');
     const state = answered && !sk ? (isOk?'ok':'bad') : '';
     card.appendChild(numpad(q, val, v=>{ session.draft[q.id]=v; render(); liveSave(); scheduleAutoLock(q.id); },
-      ()=>{ const v = session.draft[q.id]; if(v){ answerNumeric(v); liveSave(); } }, answered || locked, state));
+      ()=>{ const v = session.draft[q.id]; if(v){ answerNumeric(v); liveSave(); } }, answered, state));
   } else { const qo = optsBox(q); card.appendChild(qo); q.options.forEach((o,i)=>{
     const picked = (answered || locked) && a && a.sel===i;
     const cls = answered ? (sk ? (i===q.correct ? 'skipans' : '') : (i===q.correct ? 'ok' : (picked ? 'bad' : ''))) : (picked ? 'sel' : '');
     const row = el('<div class="opt '+cls+(fresh?' fx':'')+(q.optionImages && q.optionImages[i] ? ' hasimg' : '')+'"><span class="k">'+L(i)+'</span>'+optBody(q,i)+'</div>');
-    if(!answered && !locked) row.onclick = ()=>answerPYQ(i);
+    if(!answered) row.onclick = ()=>answerPYQ(i);
     qo.appendChild(row);
   }); }
 
   const side = el('<div class="qside"></div>');
   let noteTa = null;
   if(locked){
-    card.appendChild(el('<div class="note">Your answer is locked in. It is marked when you submit this set.</div>'));
+    card.appendChild(el('<div class="note">Your answer is saved. You can change it until you submit this set.</div>'));
   } else if(!answered){
     if(q.hint){
       if(!session.hints[q.id]){
@@ -13695,7 +13718,7 @@ function mockPractice(w){
   const answered = Object.keys(session.answers).length;
   const marked = !!session.marks[q.id];
   const el0 = session.limit ? Math.min(100,Math.max(0,(Date.now()-session.sessionStart)/1000/session.limit*100)) : 0;
-  const top = el('<div class="topline"><div class="qgroup"><span class="qring" role="img" aria-label="Question '+(session.idx+1)+' of '+n+', timer ring"><svg viewBox="0 0 44 44" aria-hidden="true"><circle class="qa" cx="22" cy="22" r="19"/><circle class="qb" id="timerArc" cx="22" cy="22" r="19" pathLength="100" stroke-dasharray="100" style="stroke-dashoffset:'+el0.toFixed(1)+'"/></svg><b>'+(session.idx+1)+'</b></span>'
+  const top = el('<div class="topline mock-top"><div class="qgroup"><span class="qring" role="img" aria-label="Question '+(session.idx+1)+' of '+n+', timer ring"><svg viewBox="0 0 44 44" aria-hidden="true"><circle class="qa" cx="22" cy="22" r="19"/><circle class="qb" id="timerArc" cx="22" cy="22" r="19" pathLength="100" stroke-dasharray="100" style="stroke-dashoffset:'+el0.toFixed(1)+'"/></svg><b>'+(session.idx+1)+'</b></span>'
     +'<span class="tag subj subj-'+q.subject.toLowerCase()+'">'+esc(q.subject)+' · of '+n+'</span></div>'
     +'<div class="right"><span class="timer" id="timerSpan" role="timer"></span><button class="btn small">Submit</button></div></div>');
   top.querySelector('.btn').onclick = ()=>{
@@ -13737,7 +13760,7 @@ function mockPractice(w){
   };
   nv.appendChild(prev); nv.appendChild(next);
   card.appendChild(nv);
-  w.appendChild(card);
+  w.appendChild(splitQuestionCard(card));   // same two-column layout as the practice sets: question left, options right
 
   w.appendChild(qNavDrawer());
   return w;
@@ -14401,7 +14424,7 @@ function buildGutter(){
 // Layout for question text: statements and the closing line start on their own lines
 function qtextHTML_raw(t){
   // Statements I, II... Assertion/Reason, and lettered statements A., B., C... each start on their own line
-  return esc(t).replace(/\s*(Statement[\s-]*(?:I{1,2}|1|2)\s*:|Assertion\s*\(A\)\s*:|Reason\s*\(R\)\s*:|In the light of)/gi,
+  return esc(t).replace(/\s*(Statement[\s-]*\(?\s*(?:I{1,2}|1|2)\s*\)?\s*:|Assertion\s*\(A\)\s*:|Reason\s*\(R\)\s*:|In the light of)/gi,
     (m, p1, off)=> off===0 ? p1 : '<span class="stmt-break"></span>'+p1)
     .replace(/([.:;?])\s+(?=[A-H]\.\s+[A-Za-z(\\])/g, (m,p1)=> p1+'<span class="stmt-break"></span>')
     .replace(/(^|[.:;?!])\s*(\((?:[A-H]|I{1,3}|IV|V)\)\s)/g, (m,pre,p1)=> pre==='' ? p1 : pre+'<span class="stmt-break"></span>'+p1);
@@ -14838,7 +14861,8 @@ function flashSession(w){
   const deck = el('<div class="fx2-deck"></div>');
   for(let k=Math.min(2, n-st.i-1); k>=1; k--){
     const under = st.pool[st.i+k];
-    deck.appendChild(el('<div class="fx2-under u'+k+'"><div class="fx2-face front fx2-ghost"><div class="fx2-meta"><span class="fx2-kind">'+esc(under.kind)+'</span></div></div></div>'));
+    // The card behind shows its real content, so the next question is already visible while the current one leaves
+    deck.appendChild(el('<div class="fx2-under u'+k+'">'+fxFace(under,'front')+'</div>'));
   }
   const stage = el('<div class="fx2-stage" role="button" tabindex="0" aria-label="Flip card"><div class="fx2-stack"><div class="fx2-card'+(st.flipped?' flip':'')+'">'
     +fxFace(c,'front')+fxFace(c,'back')+'</div></div></div>');
@@ -14960,7 +14984,8 @@ function flashAnswer(ok){
                   {duration:460, easing:'cubic-bezier(.4,0,.2,1)', fill:'forwards'});
     } else top.classList.add(ok ? 'fx2-out-r' : 'fx2-out-l');
   }
-  const next = document.querySelector('.fx2-under.u1');         // the next card rises into place
+  // The next card rises into place behind the one leaving, showing its real content
+  const next = document.querySelector('.fx2-under.u1');
   if(next) next.classList.add('fx2-promote');
   setTimeout(swapFlashCard, 460);
 }
