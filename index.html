@@ -5815,6 +5815,10 @@ function saveSessionSnapshot(){
     localStorage.setItem(SESSION_SNAP_KEY, JSON.stringify(snap));
   }catch(e){}
 }
+function clearSessionSnapshot(){
+  try{ localStorage.removeItem(SESSION_SNAP_KEY); }catch(e){}
+  if(store.liveSession){ store.liveSession = null; persist(); }
+}
 function restoreSessionSnapshot(){
   let snap = null;
   try{ snap = JSON.parse(localStorage.getItem(SESSION_SNAP_KEY)); }catch(e){}
@@ -6321,8 +6325,11 @@ function practiceLeavePending(){ return !!(session && session.mode!=='mock' && !
 function finalizeLeave(){
   if(!session) return;
   if(window.__t){ clearInterval(window.__t); window.__t=null; }
-  try{ submitPractice(true); }catch(e){ console.error(e); }
+  let done = false;
+  try{ submitPractice(true); done = !!(session && session.submitted); }catch(e){ console.error(e); }
   try{ finalizeSkips(); }catch(e){}
+  // The set is now marked and kept in history. Drop the live copy too, or reopening would bring back the unsubmitted pick.
+  if(done) clearSessionSnapshot();
   session = null;
   leaveArmed = 0;
 }
@@ -6350,7 +6357,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.11.97';
+const APP_VERSION = 'v01.11.99';
 const LAST_UPDATED = 'November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -16712,13 +16719,14 @@ function phoneTabsSync(){
 // Tablets and widescreens: seven quick actions, PYQs in the centre (4th of 7). Friends and Notebooks are the two added here.
 const QUICK7 = ['home','mocks','friends','pyq','notebooks','leaderboard','notehub'];
 const CRADLE_SVG = '<svg class="ptab-cradle" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="ptCradleGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="var(--accent)" stop-opacity="0"/><stop offset="0.35" stop-color="var(--accent)" stop-opacity=".55"/><stop offset="0.5" stop-color="var(--accent)" stop-opacity=".9"/><stop offset="0.65" stop-color="var(--accent)" stop-opacity=".55"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs><path class="cr-body" d="M0,14 L33,14 C38,14 39,34 50,34 C61,34 62,14 67,14 L100,14 L100,100 L0,100 Z"/><path class="cr-edge" d="M0,14 L33,14 C38,14 39,34 50,34 C61,34 62,14 67,14 L100,14"/></svg>';
+const LAND_CRADLE_SVG = '<svg class="ptab-cradle cr-land" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="qLandGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="var(--accent)" stop-opacity="0"/><stop offset="0.3" stop-color="var(--accent)" stop-opacity=".6"/><stop offset="0.5" stop-color="var(--accent)" stop-opacity=".95"/><stop offset="0.7" stop-color="var(--accent)" stop-opacity=".6"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs><path class="cr-body" d="M0,0 L33,0 C38,0 39,20 50,20 C61,20 62,0 67,0 L100,0 L100,100 L0,100 Z"/><path class="cr-edge" d="M0,0 L33,0 C38,0 39,20 50,20 C61,20 62,0 67,0 L100,0"/></svg>';
 function quickBarSync(){
   if(typeof TABS === 'undefined' || !document.body) return;
   let qb = document.getElementById('qbar');
   if(!qb){
     qb = document.createElement('nav');
     qb.id = 'qbar'; qb.className = 'ptabbar qbar'; qb.setAttribute('aria-label', 'Quick actions');
-    qb.insertAdjacentHTML('afterbegin', CRADLE_SVG.replace('id="ptCradleGrad"', 'id="qCradleGrad"').replace('url(#ptCradleGrad)', 'url(#qCradleGrad)'));
+    qb.insertAdjacentHTML('afterbegin', CRADLE_SVG.replace('id="ptCradleGrad"', 'id="qCradleGrad"').replace('url(#ptCradleGrad)', 'url(#qCradleGrad)') + LAND_CRADLE_SVG);
     QUICK7.forEach(function(id){
       const t = TABS.find(function(x){ return x.id === id; });
       if(!t) return;
@@ -16824,6 +16832,35 @@ body:not(.lefty) .bottomnav.navpanel{ left:14px !important; right:auto !importan
   .ptabbar.qbar .ptab-lbl{ font-size:12px; }
   .ptabbar.qbar .ptab-cradle{ z-index:0; pointer-events:none; }
   .ptabbar.qbar .ptab{ position:relative; z-index:1; }
+}
+</style>
+<style id="bar-land-v4">
+/* Landscape tablets and wide screens: the quick-action bar, rebuilt to sit cleanly under the content.
+   The cradle's top edge is the bar's top edge, so icons start below the dip and nothing overlaps the line. */
+:root{ --qh:86px; }
+.ptabbar.qbar .cr-land{ display:none; }
+@media (min-width:700px) and (orientation:landscape){
+  .ptabbar.qbar .ptab-cradle:not(.cr-land){ display:none !important; }
+  .ptabbar.qbar .cr-land{ display:block !important; position:absolute; left:0; top:0; width:100%; height:100%; z-index:0; pointer-events:none; overflow:visible; }
+  .ptabbar.qbar .cr-land .cr-body{ fill:var(--surface) !important; fill-opacity:1 !important; }
+  .ptabbar.qbar .cr-land .cr-edge{ fill:none; stroke:url(#qLandGrad) !important; stroke-width:4px !important; vector-effect:non-scaling-stroke; }
+  .ptabbar.qbar{ height:calc(var(--qh) + env(safe-area-inset-bottom,0px)) !important; min-height:0 !important; padding:30px 12px calc(4px + env(safe-area-inset-bottom,0px)) !important; box-sizing:border-box !important; display:grid !important; grid-template-columns:repeat(7,minmax(0,1fr)) !important; align-items:start !important; gap:0 !important; background:none !important; border:none !important; box-shadow:none !important; -webkit-backdrop-filter:none !important; backdrop-filter:none !important; }
+  .ptabbar.qbar::before{ display:none !important; }
+  .ptabbar.qbar .ptab{ all:unset; box-sizing:border-box; position:relative; z-index:1; display:flex !important; flex-direction:column; align-items:center; gap:4px; min-height:0 !important; padding:0 !important; color:var(--muted); font-family:Inter,sans-serif; font-size:12px; font-weight:600; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .ptabbar.qbar .ptab-ico{ width:50px !important; height:32px !important; margin:0 !important; border-radius:999px; display:grid; place-items:center; background:none !important; box-shadow:none !important; border:none !important; }
+  .ptabbar.qbar .ptab svg{ width:26px !important; height:26px !important; fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
+  .ptabbar.qbar .ptab-lbl{ line-height:1.1; font-size:12px; margin:0 !important; }
+  .ptabbar.qbar .ptab.on{ color:var(--accent-text); }
+  .ptabbar.qbar .ptab.on .ptab-ico svg{ stroke:var(--accent-text); }
+  .ptabbar.qbar .ptab.on .ptab-lbl{ font-weight:700; }
+  /* PYQs: a flat item in the dip, no floating orb */
+  .ptabbar.qbar .ptab[data-id="pyq"]{ min-height:0 !important; }
+  .ptabbar.qbar .ptab[data-id="pyq"] .ptab-ico{ margin-top:0 !important; width:50px !important; height:32px !important; }
+  .ptabbar.qbar .ptab[data-id="pyq"] .ptab-ico::after{ display:none !important; }
+  .ptabbar.qbar .ptab[data-id="pyq"] .ptab-lbl{ position:static !important; top:auto !important; margin-top:0 !important; }
+  .ptabbar.qbar .ptab[data-id="pyq"].on .ptab-ico{ background:none !important; }
+  /* Content stops above the bar, with a little air */
+  body.has-ptabs:not(.msg-fit):not(.chat-full) #app{ padding-bottom:calc(var(--qh) + 16px + env(safe-area-inset-bottom,0px)) !important; }
 }
 </style>
 </body>
