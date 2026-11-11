@@ -4922,7 +4922,7 @@ function go(v, patch){
   if(TAB_OF[v]) nav.tab = TAB_OF[v];
   Object.assign(nav, patch||{});
   if(cloudDirty) flushCloud();
-  const __prevView = view; view = v; if(__prevView !== v) feedback('whoosh', false); saveLastView(); render(); window.scrollTo(0,0);
+  const __prevView = view; view = v; if(__prevView !== v) feedback('whoosh', false); saveLastView(); const __keepY = window.scrollY; render(); if(__prevView !== v) window.scrollTo(0,0); else window.scrollTo(0, __keepY);   // a filter or subject change stays where it is; only a new page starts at the top
   const __a = document.getElementById('app');
   if(__a){ __a.classList.remove('page-in'); void __a.offsetWidth; __a.classList.add('page-in'); }
   keepTabInView();
@@ -6357,7 +6357,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.11.99';
+const APP_VERSION = 'v01.12.03';
 const LAST_UPDATED = 'November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -6524,8 +6524,22 @@ function renderInner(){
   fitToScreen();
   renderMath();
 }
+/* Sentences wrapped in $...$ are words, not maths: KaTeX would drop their spaces, so they stay plain text */
+const PROSE_RE = /^[A-Za-z\s,.'’()\-–:;!?]+$/;
+function isProse(inner){ return PROSE_RE.test(inner) && /\s/.test(inner.trim()); }
+function proseSpans(root){
+  if(!root) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const nodes = []; while(w.nextNode()) nodes.push(w.currentNode);
+  nodes.forEach(n=>{
+    if(n.nodeValue.indexOf('$') < 0) return;
+    const v = n.nodeValue.replace(/\$([^$\n]+)\$/g, (m, inner) => isProse(inner) ? inner.trim() : m);
+    if(v !== n.nodeValue) n.nodeValue = v;
+  });
+}
 function renderMath(){
   if(typeof renderMathInElement!=='function') return;
+  proseSpans(document.getElementById('app'));
   try{ renderMathInElement(document.getElementById('app'), {
     delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}], throwOnError:false
   }); }catch(e){}
@@ -11892,6 +11906,7 @@ function chatScreen(f){
     if(ex) list.appendChild(ex);
   });
   if(fr.peerActivity) list.appendChild(activityBubble(fr.peerActivity));
+  proseSpans(list);
   if(typeof renderMathInElement==='function'){ try{ renderMathInElement(list, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}], throwOnError:false}); }catch(e){} }
   list.onscroll = ()=>{ fr.waAtBottom = list.scrollHeight - list.scrollTop - list.clientHeight < 40; fr.waTop = list.scrollTop; };
   w.appendChild(list);
@@ -12594,7 +12609,9 @@ function mathCardHTML(text){
   const esc2 = t => String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   return String(text || '').split(/(\$\$[\s\S]+?\$\$|\$[^$\n]+?\$)/g).map(p=>{
     const m = p.match(/^\$\$([\s\S]+)\$\$$/) || p.match(/^\$([^$\n]+)\$$/);
-    if(!m || typeof katex === 'undefined') return esc2(p);
+    if(!m) return esc2(p);
+    if(isProse(m[1])) return esc2(m[1].trim());
+    if(typeof katex === 'undefined') return esc2(p);
     try { return katex.renderToString(m[1].trim(), { displayMode: p.startsWith('$$'), throwOnError: false }); }
     catch(e){ return esc2(p); }
   }).join('');
@@ -14738,6 +14755,7 @@ function fitFront(){
       tgt.dataset.lines = JSON.stringify(parts);
       tgt.innerHTML = parts.map(p=>'<span class="fx2-ln">$'+p+'$</span>').join('');
       tgt.classList.add('fx2-stacked');
+      proseSpans(tgt);
       if(window.renderMathInElement) renderMathInElement(tgt, {delimiters:[{left:'$',right:'$',display:false}]});
     }
     fitFront();
@@ -15125,7 +15143,7 @@ function ptBoardPlaces(){ return ptLocal().boardPlace || {}; }
 // A rank theme (gold for #1, platinum for #2, ...) is unlocked only by holding that exact place on some board
 function ptWon(id){ const i = PT_TOP5.indexOf(id); if(i < 0) return false; return Object.values(ptBoardPlaces()).some(p => p === i + 1); }
 // ...and it only shows on the board where the user holds that place. Other themes show everywhere.
-function ptAllowedHere(id, place){ const i = PT_TOP5.indexOf(id); if(i < 0) return true; return place === i + 1; }
+function ptAllowedHere(id, place){ if(isGuard()) return true; const i = PT_TOP5.indexOf(id); if(i < 0) return true; return place === i + 1; }
 PT_LIST.push({id:"doodle-sketch",name:"Doodle Sketch",play:"doodle",bg:"#fff8ec",acc:"#e0457b"});
 const DOODLE_SVG = '<svg class="pt-doodle" viewBox="0 0 400 700" preserveAspectRatio="none" aria-hidden="true"><path d="M30 60 C 60 20, 110 30, 120 70 S 90 130, 40 110 S 10 70, 30 60 Z"/><path class="d2" d="M300 40 q 20 -30 40 0 t 40 0 t 40 0"/><path d="M330 180 l 22 -40 l 22 40 l -44 0 z"/><path class="d2" d="M20 300 c 40 -20 60 20 100 0 s 60 20 100 0"/><path d="M250 380 c 30 -40 90 -10 60 30 c -20 26 -60 10 -40 -10"/><path class="d2" d="M30 520 l 60 -20 l -20 40 l 70 -10"/><path d="M300 600 c 0 -30 40 -30 40 0 c 0 30 -50 30 -50 -10 c 0 -40 60 -40 60 0"/></svg>';
 function ptDefault(place){ return ['gold','platinum','royal-emerald','amethyst-crown','ruby-regal'][(place||1)-1] || 'gold'; }
@@ -15158,13 +15176,14 @@ function themeStats(){
 }
 // Open or locked for this student, plus the requirement text
 function ptUnlockState(id){
+  if(isGuard()) return {open:true};                 // admins can try every theme
   if(PT_TOP5.indexOf(id) >= 0){ const k = PT_TOP5.indexOf(id) + 1; return ptWon(id) ? {open:true} : {open:false, text: k === 1 ? 'Reach #1 on a leaderboard stat' : 'Reach #' + k + ' on a leaderboard stat'}; }
   const m = PT_MILESTONES[id];
   if(!m) return {open:true};
   return {open: !!m.ok(themeStats()), text: m.text};
 }
 // The pencil and the editor show when at least one theme is open
-function ptCanEdit(){ const st = themeStats(); return PT_LIST.some(t=>{ const m = PT_MILESTONES[t.id]; if(PT_TOP5.indexOf(t.id)>=0) return ptWon(t.id); return !m || !!m.ok(st); }); }
+function ptCanEdit(){ if(isGuard()) return true; const st = themeStats(); return PT_LIST.some(t=>{ const m = PT_MILESTONES[t.id]; if(PT_TOP5.indexOf(t.id)>=0) return ptWon(t.id); return !m || !!m.ok(st); }); }
 
 function pubProfileHTML(p){
   const top = nav.pubRow && nav.pubRow.place <= 5;
@@ -16861,6 +16880,75 @@ body:not(.lefty) .bottomnav.navpanel{ left:14px !important; right:auto !importan
   .ptabbar.qbar .ptab[data-id="pyq"].on .ptab-ico{ background:none !important; }
   /* Content stops above the bar, with a little air */
   body.has-ptabs:not(.msg-fit):not(.chat-full) #app{ padding-bottom:calc(var(--qh) + 16px + env(safe-area-inset-bottom,0px)) !important; }
+}
+</style>
+<style id="bar-v5">
+/* Menu button: glass. A faint tint of the menu colour over a blur, no solid grey square */
+.navtog{ background:color-mix(in srgb,var(--surface) 28%,transparent) !important; -webkit-backdrop-filter:blur(16px) saturate(170%) !important; backdrop-filter:blur(16px) saturate(170%) !important; border:1px solid color-mix(in srgb,var(--border) 60%,transparent) !important; box-shadow:0 10px 24px -16px var(--shadow) !important; }
+
+/* Tablets and wide screens (landscape): a floating glass bar at the bottom centre, PYQs orb in the middle */
+@media (min-width:700px) and (orientation:landscape){
+  :root{ --qh:74px; }
+  body.has-ptabs .ptabbar.qbar.qbar.qbar{ left:50% !important; right:auto !important; top:auto !important; bottom:calc(14px + env(safe-area-inset-bottom,0px)) !important; width:min(580px,86vw) !important; height:var(--qh) !important; transform:translateX(-50%) !important; box-sizing:border-box !important; padding:8px 14px 6px !important; display:grid !important; grid-template-columns:repeat(7,minmax(0,1fr)) !important; align-items:start !important; gap:0 !important; border-radius:26px !important; border:1px solid color-mix(in srgb,var(--border) 60%,transparent) !important; background:color-mix(in srgb,var(--surface) 84%,transparent) !important; -webkit-backdrop-filter:blur(16px) saturate(170%) !important; backdrop-filter:blur(16px) saturate(170%) !important; box-shadow:0 18px 40px -18px var(--shadow) !important; overflow:visible !important; }
+  .ptabbar.qbar::before{ display:none !important; }
+  .ptabbar.qbar .cr-land{ display:block !important; position:absolute; left:-1px; top:-1px; width:calc(100% + 2px); height:calc(100% + 2px); z-index:0; pointer-events:none; overflow:visible; }
+  .ptabbar.qbar .cr-land .cr-body{ fill:none !important; fill-opacity:0 !important; }
+  .ptabbar.qbar .cr-land .cr-edge{ fill:none; stroke:url(#qLandGrad) !important; stroke-width:3px !important; vector-effect:non-scaling-stroke; }
+  .ptabbar.qbar .ptab-cradle:not(.cr-land){ display:none !important; }
+  .ptabbar.qbar .ptab{ all:unset; box-sizing:border-box; position:relative; z-index:1; display:flex !important; flex-direction:column; align-items:center; gap:3px; min-height:0 !important; padding:0 !important; color:var(--muted); font-family:Inter,sans-serif; font-size:12px; font-weight:600; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .ptabbar.qbar .ptab-ico{ width:54px !important; height:36px !important; margin:0 !important; border-radius:999px; display:grid; place-items:center; background:none !important; box-shadow:none !important; border:none !important; }
+  .ptabbar.qbar .ptab svg{ width:28px !important; height:28px !important; fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
+  .ptabbar.qbar .ptab-lbl{ line-height:1.1; font-size:12px; margin:0 !important; }
+  .ptabbar.qbar .ptab.on{ color:var(--accent-text); }
+  .ptabbar.qbar .ptab.on .ptab-lbl{ font-weight:700; }
+  /* The PYQs orb: the same floating orb as the phone bar, sitting in the cradle, with a larger icon */
+  .ptabbar.qbar .ptab[data-id="pyq"] .ptab-ico{ position:relative; width:60px !important; height:60px !important; margin-top:-30px !important; border-radius:50%; background:radial-gradient(circle at 35% 30%,var(--surface-2),var(--surface)) !important; border:1px solid color-mix(in srgb,var(--border) 70%,transparent); box-shadow:0 12px 24px -12px var(--shadow); color:var(--muted); }
+  .ptabbar.qbar .ptab[data-id="pyq"] .ptab-ico svg{ width:28px !important; height:28px !important; }
+  .ptabbar.qbar .ptab[data-id="pyq"].on .ptab-ico{ background:radial-gradient(circle at 35% 30%,#f2906c,var(--accent) 60%,color-mix(in srgb,var(--accent) 80%,#000)) !important; color:var(--accent-ink); }
+  .ptabbar.qbar .ptab[data-id="pyq"].on .ptab-ico svg{ stroke:var(--accent-ink); }
+  .ptabbar.qbar .ptab[data-id="pyq"] .ptab-ico::after{ display:none !important; }
+  .ptabbar.qbar .ptab[data-id="pyq"] .ptab-lbl{ position:static !important; top:auto !important; margin-top:2px !important; }
+  .ptabbar.qbar .ptab[data-id="pyq"].on .ptab-lbl{ color:var(--accent-text); }
+  /* Content stops above the floating bar */
+  body.has-ptabs:not(.msg-fit):not(.chat-full) #app{ padding-bottom:calc(var(--qh) + 34px + env(safe-area-inset-bottom,0px)) !important; }
+}
+</style>
+<style id="back-corner-v1">
+/* Back button: always in the top corner, opposite the menu button (right-handed: top-right, left-handed: top-left) */
+body:not(.lefty) #navBack.navback{ left:auto !important; right:14px !important; top:calc(12px + env(safe-area-inset-top,0px)) !important; transform:none !important; }
+body.lefty #navBack.navback{ right:auto !important; left:14px !important; top:calc(12px + env(safe-area-inset-top,0px)) !important; transform:none !important; }
+</style>
+<style id="top-glass-v1">
+/* Tablets: the top row (where the menu button sits) is a full-width transparent blur, not a flat band. Content scrolls under it. */
+@media (min-width:700px){
+  body::before{ content:""; position:fixed; left:0; right:0; top:0; height:calc(62px + env(safe-area-inset-top,0px)); z-index:60; pointer-events:none; background:color-mix(in srgb,var(--surface) 46%,transparent); -webkit-backdrop-filter:blur(18px) saturate(170%); backdrop-filter:blur(18px) saturate(170%); border-bottom:1px solid color-mix(in srgb,var(--border) 45%,transparent); }
+}
+</style>
+<script id="auto-fullscreen">
+/* Asks for full screen as soon as the page opens; browsers only allow it after a tap, so the first tap or key press does it.
+   Once it is on, it is not re-requested, so leaving full screen on purpose is respected. */
+(function(){
+  var on = false;
+  function enter(){
+    if(on || document.fullscreenElement) { on = true; return; }
+    var de = document.documentElement;
+    if(!de.requestFullscreen) return;
+    try{ var pr = de.requestFullscreen({navigationUI:'hide'}); if(pr && pr.then) pr.then(function(){ on = true; }, function(){}); }catch(e){}
+  }
+  enter();
+  ['pointerdown','keydown','touchstart'].forEach(function(t){ window.addEventListener(t, enter, {passive:true}); });
+  document.addEventListener('fullscreenchange', function(){ if(document.fullscreenElement) on = true; });
+})();
+</script>
+<style id="cards-v2">
+/* Every card: words wrap, nothing is squeezed onto one line, and cards get room. Landscape tablets get a roomier grid. */
+.fcard, .fcard-eq, .fcard-use, .fcard-ch, .big-card, .card, figure.qcard, .fx2-front, .fx2-sec, .fx2-plain, .fx2-math{ min-width:0; overflow-wrap:anywhere; word-break:normal; }
+.fcard-eq{ white-space:normal !important; }
+.fcard-ch{ white-space:normal; line-height:1.4; }
+@media (min-width:700px) and (orientation:landscape){
+  .fcards{ grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; }
+  .fcard{ padding:20px 20px 18px; }
+  .fcard-eq{ font-size:19px; line-height:1.35; }
 }
 </style>
 </body>
