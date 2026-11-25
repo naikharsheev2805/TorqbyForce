@@ -4526,7 +4526,7 @@ body.lefty .navback{ right:auto; left:14px; }
 <script>
 // ---------- Data paths (adjust here if the folder layout changes) ----------
 // Serve the repo root with a local server (e.g. `python3 -m http.server`); opening the file directly blocks fetch().
-const APP_BUILD = '2026-11-11-a';   // bumped with every release; the app compares it with the hosted file
+const APP_BUILD = '2026-11-25-c';   // bumped with every release; the app compares it with the hosted file
 const PATHS = {
   index: 'data/index.json',  // lists every paper; each paper's "file" field points at its question JSON
   solutions: 'data/solutions/'    // one file per paper: data/solutions/<paper-id>.json
@@ -4796,7 +4796,7 @@ function answerNumeric(v){
   if(prev && !prev.skip && !prev.pending) return;
   const val = String(v).replace(/\u2212/g,'-');
   const sec = Math.round((Date.now()-qStartOf(q))/1000);
-  session.answers[q.id] = {sel:val, pending:true, time:sec, conf:session.conf[q.id]||null, nullified:!session.conf[q.id], prevPts:(prev && prev.pts) || 0};
+  session.answers[q.id] = {sel:val, pending:true, time:(prev && prev.pending && prev.time!=null) ? prev.time : sec, conf:session.conf[q.id]||null, nullified:!session.conf[q.id], prevPts:(prev && prev.pts) || 0};
   session.draft[q.id] = '';
   render();
 }
@@ -4822,7 +4822,7 @@ const SYLLABUS = {"Physics": ["Units and Dimensions", "Errors in Units and Measu
 // Chapter order used across the app. Each subject ends with a MISC chapter for multi-chapter questions.
 const CANON_ALIAS = {"Physics": {"Units and Dimensions": "Units and Dimensions", "Kinematics": "Kinematics", "Laws of Motion": "Laws of Motion", "Work, Energy and Power": "Work, Energy and Power", "Rotational Motion": "Rotational Motion", "Gravitation": "Gravitation", "Mechanical Properties of Solids": "Mechanical Properties of Solids", "Thermodynamics": "Thermodynamics", "Kinetic Theory of Gases": "Kinetic Theory of Gases", "Simple Harmonic Motion": "Simple Harmonic Motion", "Electrostatics": "Electrostatics", "Current Electricity": "Current Electricity", "Moving Charges and Magnetism": "Moving Charges and Magnetism", "Electromagnetic Induction and Alternating Current": "Electromagnetic Induction and Alternating Current", "Wave Optics": "Wave Optics", "Ray Optics and Optical Instruments": "Ray Optics and Optical Instruments", "Dual Nature of Matter and Radiation": "Dual Nature of Matter and Radiation", "Atoms and Nuclei": "Atoms and Nuclei", "Semiconductor Electronics": "Semiconductor Electronics", "Errors in Units and Measurements": "Errors in Units and Measurements", "Ray Optics": "Ray Optics and Optical Instruments", "Waves": "Waves", "Heat and Thermodynamics": "Thermodynamics", "Electromagnetism": "Moving Charges and Magnetism", "Magnetism": "Moving Charges and Magnetism", "Electromagnetic Induction": "Electromagnetic Induction and Alternating Current", "Alternating Currents": "Electromagnetic Induction and Alternating Current", "Modern Physics": "Dual Nature of Matter and Radiation", "Atomic Physics": "Atoms and Nuclei", "Nuclear Physics": "Atoms and Nuclei", "Semiconductors": "Semiconductor Electronics", "Fluids": "Mechanical Properties of Fluids", "Elasticity": "Mechanical Properties of Solids", "Gravity": "Gravitation", "Circular Motion": "Laws of Motion", "Friction": "Laws of Motion", "Center of Mass": "Rotational Motion", "Centre of Mass": "Rotational Motion", "Work and Energy": "Work, Energy and Power", "Energy": "Work, Energy and Power", "Capacitors": "Capacitance", "Electric Circuits": "Current Electricity", "Circuits": "Current Electricity"}, "Chemistry": {"Some Basic Concepts in Chemistry": "Some Basic Concepts in Chemistry", "Atomic Structure": "Atomic Structure", "Chemical Bonding and Molecular Structure": "Chemical Bonding and Molecular Structure", "Thermodynamics and Thermochemistry": "Thermodynamics and Thermochemistry", "Solutions": "Solutions", "Chemical Equilibrium": "Chemical Equilibrium", "Redox Reactions": "Redox Reactions", "Chemical Kinetics": "Chemical Kinetics", "Periodicity and Periodic Properties": "Periodicity and Periodic Properties", "p-Block Elements": "p-Block Elements", "d- and f-Block Elements": "d- and f-Block Elements", "Coordination Compounds": "Coordination Compounds", "Practical Organic Chemistry": "Practical Organic Chemistry", "General Organic Chemistry and Isomerism": "General Organic Chemistry and Isomerism", "Alkanes, Alkenes and Alkynes": "Alkanes, Alkenes and Alkynes", "Haloalkanes and Haloarenes": "Haloalkanes and Haloarenes", "Alcohols, Phenols and Ethers": "Alcohols, Phenols and Ethers", "Amines and Nitrogen Compounds": "Amines and Nitrogen Compounds", "Biomolecules": "Biomolecules", "Practical Organic Chemistry": "Practical Organic Chemistry", "Some Basic Concepts": "Some Basic Concepts in Chemistry", "Periodicity": "Periodicity and Periodic Properties", "Electrochemistry": "Electrochemistry", "Redox Reactions": "Redox Reactions", "d and f Block Elements": "d- and f-Block Elements", "d-block Elements": "d- and f-Block Elements", "f-block Elements": "d- and f-Block Elements", "Coordination Chemistry": "Coordination Compounds", "Co-ordination Compounds": "Coordination Compounds", "Stereochemistry": "General Organic Chemistry and Isomerism", "Organic Nomenclature": "General Organic Chemistry and Isomerism", "Organic Basics": "General Organic Chemistry and Isomerism", "Aromatic Compounds": "Alkanes, Alkenes and Alkynes", "Alkanes": "Alkanes, Alkenes and Alkynes", "Alkenes": "Alkanes, Alkenes and Alkynes", "Alkynes": "Alkanes, Alkenes and Alkynes", "Aldehydes and Ketones": "Alcohols, Phenols and Ethers", "Alcohols and Phenols": "Alcohols, Phenols and Ethers", "Carboxylic Acids": "Alcohols, Phenols and Ethers", "Amines": "Amines and Nitrogen Compounds", "Haloalkanes and Haloarenes": "Haloalkanes and Haloarenes", "Haloalkanes": "Haloalkanes and Haloarenes", "Nuclear Chemistry (Kinetics)": "Chemical Kinetics", "Nuclear Chemistry": "Atomic Structure", "Chemical Equilibrium": "Chemical Equilibrium", "Ionic Equilibrium": "Chemical Equilibrium", "Chemical Thermodynamics and Equilibrium": "Thermodynamics and Thermochemistry", "Thermochemistry": "Thermodynamics and Thermochemistry", "Solution": "Solutions", "Mole Concept": "Some Basic Concepts in Chemistry", "Stoichiometry": "Some Basic Concepts in Chemistry", "Chemical Bonding": "Chemical Bonding and Molecular Structure", "Hydrogen Bonding": "Chemical Bonding and Molecular Structure", "Biology in Chemistry": "Biomolecules"}, "Maths": {"Sets, Relations and Functions": "Sets, Relations and Functions", "Complex Numbers": "Complex Numbers", "Matrices and Determinants": "Matrices and Determinants", "Permutations and Combinations": "Permutations and Combinations", "Binomial Theorem": "Binomial Theorem", "Sequence and Series": "Sequence and Series", "Limits, Continuity and Differentiability": "Limits, Continuity and Differentiability", "Indefinite Integration": "Indefinite Integration", "Differential Equations": "Differential Equations", "Straight Lines": "Straight Lines", "Three-Dimensional Geometry": "Three-Dimensional Geometry", "Vectors": "Vectors", "Probability": "Probability", "Trigonometric Ratios and Identities": "Trigonometric Ratios and Identities", "Sets, Relations and Function": "Sets, Relations and Functions", "Sets and Relations": "Sets, Relations and Functions", "Complex Numbers": "Complex Numbers", "Quadratic Equations": "Complex Numbers", "Matrices": "Matrices and Determinants", "Determinants": "Matrices and Determinants", "Permutation and Combination": "Permutations and Combinations", "Binomial Theorem and its Simple Applications": "Binomial Theorem", "Sequence": "Sequence and Series", "Series": "Sequence and Series", "Limits and Continuity": "Limits, Continuity and Differentiability", "Differentiability": "Limits, Continuity and Differentiability", "Continuity and Differentiability": "Limits, Continuity and Differentiability", "Differentiation": "Limits, Continuity and Differentiability", "Application of Derivatives": "Limits, Continuity and Differentiability", "Logarithmic and Exponential Functions": "Limits, Continuity and Differentiability", "Integration": "Indefinite Integration", "Integrals": "Indefinite Integration", "Definite Integrals": "Indefinite Integration", "Area under curves": "Indefinite Integration", "Differential Equation": "Differential Equations", "Coordinate Geometry": "Straight Lines", "Co-ordinate geometry": "Straight Lines", "Straight Lines": "Straight Lines", "Straight Line": "Straight Lines", "Conic Sections": "Straight Lines", "Circles": "Straight Lines", "Parabola": "Straight Lines", "Ellipse": "Straight Lines", "Hyperbola": "Straight Lines", "3D Geometry": "Three-Dimensional Geometry", "3-D Geometry": "Three-Dimensional Geometry", "Vectors": "Vectors", "Vector": "Vectors", "Probability": "Probability", "Statistics": "Probability", "Inverse Trigonometric Functions": "Trigonometric Ratios and Identities", "Trigonometric Functions": "Trigonometric Ratios and Identities", "Trigonometric Equations": "Trigonometric Ratios and Identities", "Sets": "Sets, Relations and Functions", "Relations and Functions": "Sets, Relations and Functions", "Complex Number": "Complex Numbers"}};
 // Old chapter names (from stored PYQs) and alternative names resolve to the current chapter here.
-const EXAM_TAG = {"Units and Dimensions": "Advanced", "Errors in Units and Measurements": "Advanced", "Kinematics": "Advanced", "Laws of Motion": "Advanced", "Work, Energy and Power": "Advanced", "Centre of Mass and Momentum": "Advanced", "Rotational Motion": "Advanced", "Gravitation": "Advanced", "Simple Harmonic Motion": "Advanced", "Waves": "Advanced", "Mechanical Properties of Solids": "Advanced", "Mechanical Properties of Fluids": "Advanced", "Thermal Properties of Matter": "Advanced", "Kinetic Theory of Gases": "Advanced", "Thermodynamics": "Advanced", "Electrostatics": "Advanced", "Capacitance": "Advanced", "Current Electricity": "Advanced", "Moving Charges and Magnetism": "Advanced", "Magnetic Materials": "Mains only", "Electromagnetic Induction and Alternating Current": "Advanced", "Ray Optics and Optical Instruments": "Advanced", "Wave Optics": "Advanced", "Dual Nature of Matter and Radiation": "Advanced", "Atoms and Nuclei": "Advanced", "Semiconductor Electronics": "Mains only", "Some Basic Concepts in Chemistry": "Advanced", "Mole Concept": "Advanced", "Atomic Structure": "Advanced", "Chemical Bonding and Molecular Structure": "Advanced", "States of Matter": "Advanced", "Thermodynamics and Thermochemistry": "Advanced", "Solutions": "Advanced", "Chemical Equilibrium": "Advanced", "Ionic Equilibrium": "Advanced", "Redox Reactions": "Advanced", "Electrochemistry": "Advanced", "Chemical Kinetics": "Advanced", "Surface Chemistry": "Advanced", "Solid State": "Advanced", "Periodicity and Periodic Properties": "Advanced", "Hydrogen and Its Compounds": "Advanced", "s-Block Elements": "Advanced", "p-Block Elements": "Advanced", "d- and f-Block Elements": "Advanced", "Coordination Compounds": "Advanced", "Metallurgy": "Advanced", "Salt Analysis": "Advanced", "Environmental Chemistry": "Advanced", "Chemistry in Everyday Life": "Advanced", "General Organic Chemistry and Isomerism": "Advanced", "IUPAC Nomenclature": "Advanced", "Practical Organic Chemistry": "Advanced", "Alkanes, Alkenes and Alkynes": "Advanced", "Benzene and Aromatic Compounds": "Advanced", "Haloalkanes and Haloarenes": "Advanced", "Alcohols, Phenols and Ethers": "Advanced", "Aldehydes, Ketones and Carboxylic Acids": "Advanced", "Carboxylic Acid Derivatives": "Advanced", "Amines and Nitrogen Compounds": "Advanced", "Biomolecules": "Advanced", "Polymers": "Advanced", "Named Reactions": null, "Sets, Relations and Functions": "Advanced", "Complex Numbers": "Advanced", "Quadratic Equations": "Advanced", "Matrices and Determinants": "Advanced", "Permutations and Combinations": "Advanced", "Binomial Theorem": "Advanced", "Sequence and Series": "Advanced", "Logarithms": "Advanced", "Probability": "Advanced", "Statistics": "Advanced", "Trigonometric Ratios and Identities": "Advanced", "Compound Angles": "Advanced", "Trigonometric Equations": "Advanced", "Inverse Trigonometric Functions": "Advanced", "Solutions of Triangles": "Mains only", "Limits, Continuity and Differentiability": "Advanced", "Methods of Differentiation": "Advanced", "Application of Derivatives": "Advanced", "Indefinite Integration": "Advanced", "Definite Integration": "Advanced", "Area Under Curve": "Advanced", "Differential Equations": "Advanced", "Straight Lines": "Advanced", "Circles": "Advanced", "Parabola": "Advanced", "Ellipse": "Advanced", "Hyperbola": "Advanced", "Vectors": "Advanced", "Three-Dimensional Geometry": "Advanced", "Fundamentals of Mathematics": "Mains only", "MISC (Physics)": null, "MISC (Chemistry)": null, "MISC (Maths)": null};
+const EXAM_TAG = {"Units and Dimensions": null, "Errors in Units and Measurements": null, "Kinematics": null, "Laws of Motion": null, "Work, Energy and Power": null, "Centre of Mass and Momentum": null, "Rotational Motion": null, "Gravitation": null, "Simple Harmonic Motion": null, "Waves": null, "Mechanical Properties of Solids": null, "Mechanical Properties of Fluids": null, "Thermal Properties of Matter": null, "Kinetic Theory of Gases": null, "Thermodynamics": null, "Electrostatics": null, "Capacitance": null, "Current Electricity": null, "Moving Charges and Magnetism": null, "Magnetic Materials": "Mains only", "Electromagnetic Induction and Alternating Current": null, "Ray Optics and Optical Instruments": null, "Wave Optics": null, "Dual Nature of Matter and Radiation": null, "Atoms and Nuclei": null, "Semiconductor Electronics": "Mains only", "Some Basic Concepts in Chemistry": null, "Mole Concept": null, "Atomic Structure": null, "Chemical Bonding and Molecular Structure": null, "States of Matter": null, "Thermodynamics and Thermochemistry": null, "Solutions": null, "Chemical Equilibrium": null, "Ionic Equilibrium": null, "Redox Reactions": null, "Electrochemistry": null, "Chemical Kinetics": null, "Surface Chemistry": null, "Solid State": null, "Periodicity and Periodic Properties": null, "Hydrogen and Its Compounds": null, "s-Block Elements": null, "p-Block Elements": null, "d- and f-Block Elements": null, "Coordination Compounds": null, "Metallurgy": null, "Salt Analysis": null, "Environmental Chemistry": null, "Chemistry in Everyday Life": null, "General Organic Chemistry and Isomerism": null, "IUPAC Nomenclature": null, "Practical Organic Chemistry": null, "Alkanes, Alkenes and Alkynes": null, "Benzene and Aromatic Compounds": null, "Haloalkanes and Haloarenes": null, "Alcohols, Phenols and Ethers": null, "Aldehydes, Ketones and Carboxylic Acids": null, "Carboxylic Acid Derivatives": null, "Amines and Nitrogen Compounds": null, "Biomolecules": null, "Polymers": null, "Named Reactions": null, "Sets, Relations and Functions": null, "Complex Numbers": null, "Quadratic Equations": null, "Matrices and Determinants": null, "Permutations and Combinations": null, "Binomial Theorem": null, "Sequence and Series": null, "Logarithms": null, "Probability": null, "Statistics": null, "Trigonometric Ratios and Identities": null, "Compound Angles": null, "Trigonometric Equations": null, "Inverse Trigonometric Functions": null, "Solutions of Triangles": "Mains only", "Limits, Continuity and Differentiability": null, "Methods of Differentiation": null, "Application of Derivatives": null, "Indefinite Integration": null, "Definite Integration": null, "Area Under Curve": null, "Differential Equations": null, "Straight Lines": null, "Circles": null, "Parabola": null, "Ellipse": null, "Hyperbola": null, "Vectors": null, "Three-Dimensional Geometry": null, "Fundamentals of Mathematics": "Mains only", "MISC (Physics)": null, "MISC (Chemistry)": null, "MISC (Maths)": null};
 // Every chapter is tagged Advanced or Mains only. Used on the syllabus screen, chapter cards, notes and flashcards.
 // Chapter names are matched loosely: case, spaces, punctuation and "&" versus "and" are ignored.
 const chapKey = x => String(x||'').toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]/g,'');
@@ -5769,7 +5769,7 @@ function answerPYQ(i){
   if(prev && !prev.skip && !prev.pending) return;   // submitted: final. Before submit, a new pick replaces the old one
   const sec = Math.round((Date.now()-qStartOf(q))/1000);
   if(navigator.vibrate) navigator.vibrate(8);
-  session.answers[q.id] = {sel:i, pending:true, time:sec, conf:session.conf[q.id]||null, nullified:!session.conf[q.id], prevPts:(prev && prev.pts) || 0};
+  session.answers[q.id] = {sel:i, pending:true, time:(prev && prev.pending && prev.time!=null) ? prev.time : sec, conf:session.conf[q.id]||null, nullified:!session.conf[q.id], prevPts:(prev && prev.pts) || 0};
   render();
 }
 function selectMock(i){
@@ -5833,7 +5833,7 @@ function submitPractice(silent){
     }
     const ok = q.type==='integer' ? sameAnswer(String(a.sel), q.answer) : a.sel===q.correct;
     const pts = scoreFor(ok, a.conf || 'guess', a.time || 0);
-    const att = recordAttempt(q, ok, a.time || 0); att.conf = a.conf || null;
+    const att = recordAttempt(q, ok, a.time || 0); att.conf = a.conf || null; att.pts = pts;
     addPoints(pts - (a.prevPts || 0));
     session.answers[q.id] = {sel:a.sel, correct:ok, time:a.time || 0, att:att, at:Date.now(), pts:pts};
   });
@@ -5841,6 +5841,7 @@ function submitPractice(silent){
     checkDailyDone();
     saveSessionRecord();
     session.submitted = true;
+    clearSessionSnapshot();
   }catch(err){
     console.error('Submit failed', err);
     appNotice('Could not submit', 'Your answers are still here, nothing was lost. Error: ' + ((err && err.message) || err));
@@ -6017,7 +6018,7 @@ function attemptFields(a){
     skipped: !!a.skipped,
     time_ms: a.t != null ? Math.round(a.t * 1000) : null,
     confidence: (a.conf === 'sure' || a.conf === 'guess') ? a.conf : null,
-    points: a.skipped ? (a.pts || 0) : scoreFor(!!a.c, a.conf, a.t || 0),
+    points: a.skipped ? (a.pts || 0) : (typeof a.pts === 'number' ? a.pts : scoreFor(!!a.c, a.conf, a.t || 0)),
     created_at: a.at ? new Date(a.at).toISOString() : (a.d ? new Date(a.d + 'T12:00:00').toISOString() : new Date().toISOString())
   };
 }
@@ -6402,7 +6403,7 @@ function isGuard(){
 // Every gate in the app asks this. A guard passes all of them.
 function hasFullAccess(){ return isGuard(); }
 // Build stamp: version code on the main pages (everyone), last-updated line on every page (admin only)
-const APP_VERSION = 'v01.12.07';
+const APP_VERSION = 'v01.12.10';
 const LAST_UPDATED = 'November 2026';
 const VERSION_VIEWS = ['home','pyq','me','notehub','notes','contact','friends','messages'];
 function addBuildStamp(app){
@@ -6857,7 +6858,7 @@ function examTagHTML(c){
   // Advanced / Mains-only label. Chapters with no tag (MISC, Named Reactions) show nothing.
   const t = (typeof EXAM_TAG !== 'undefined') ? EXAM_TAG[c] : null;
   if(!t) return '';
-  return '<span class="wt exam '+(t==='Mains only'?'mains':'adv')+'">'+esc(t)+'</span>';
+  return '<span class="wt exam '+(t==='Mains only'?'mains':'adv')+'">'+esc(t==='Advanced'?'Advanced only':t)+'</span>';
 }
 function wtTag(s, c){
   const p = chapterWeight(s, c);
@@ -7472,9 +7473,31 @@ function pyqView(){
   if(nav.pyqTab==='papers'){ w.appendChild(papersPart()); return w; }
   if(nav.pyqTab==='custom'){ w.appendChild(customTestPart()); return w; }
   w.appendChild(subjectCards());
+  const search = el('<input class="pyq-search" type="search" placeholder="Search chapters and topics" aria-label="Search chapters and topics" value="'+esc(window.__pyqQ||'')+'">');
   const list = el('<div class="list"></div>');
+  const qv = ()=> String(window.__pyqQ||'').trim().toLowerCase();
+  search.oninput = ()=>{ window.__pyqQ = search.value; fill(); };
+  w.appendChild(search);
+  const fill = ()=>{
+  list.innerHTML = '';
   let lastSec = null;
+  const q0 = qv();
   chaptersOf(nav.subject).forEach(c=>{
+    if(q0){
+      const chapHit = c.toLowerCase().includes(q0);
+      const topHits = topicsOf(nav.subject, c).filter(t=>t && String(t).toLowerCase().includes(q0));
+      if(!chapHit && !topHits.length) return;
+      if(!chapHit){
+        topHits.forEach(t=>{
+          const st2 = statsOf(attemptsWhere(q=>q.chapter===c && q.topic===t));
+          const row2 = barRow(t, st2.acc, c, '');
+          row2.style.cursor='pointer';
+          row2.onclick = ()=>go('chapter',{chapter:c, topicSel:[t]});
+          list.appendChild(row2);
+        });
+        return;
+      }
+    }
     if(nav.subject==='Chemistry'){ const sec = chemSection(c); if(sec!==lastSec){ list.appendChild(el('<div class="sec-head">'+esc(sec)+'</div>')); lastSec = sec; } }
     const st = chapterStats(c);
     const nq = QUESTIONS.filter(q=>q.subject===nav.subject && q.chapter===c).length;
@@ -7484,6 +7507,8 @@ function pyqView(){
     row.onclick = ()=>go('chapter',{chapter:c, topicSel:[]});
     list.appendChild(row);
   });
+  };
+  fill();
   w.appendChild(list);
   return w;
 }
@@ -8358,7 +8383,47 @@ function pyqAnalyticsEl(s, c){
   trendCard.appendChild(tBtns);
   trendCard.appendChild(el('<div>'+svg+'</div>'));
   trendCard.appendChild(el('<div style="margin-top:8px">'+legend+'</div>'));
-  wrap.appendChild(trendCard);
+  // Tap anywhere on the chart: the nearest year gets a dotted line, a circle dot where each line crosses it, and the exact count
+  const NS = 'http://www.w3.org/2000/svg';
+  const svgEl = trendCard.querySelector('svg');
+  const selG = document.createElementNS(NS, 'g');
+  svgEl.appendChild(selG);
+  const drawSel = (yr) => {
+    while(selG.firstChild) selG.removeChild(selG.firstChild);
+    const i = years.indexOf(yr);
+    if(i < 0) return;
+    const x = xs(i);
+    const mk = (tag, attrs) => { const n = document.createElementNS(NS, tag); Object.keys(attrs).forEach(k => n.setAttribute(k, attrs[k])); selG.appendChild(n); return n; };
+    mk('line', {x1:x, x2:x, y1:PD-10, y2:H-PD, stroke:'currentColor', 'stroke-opacity':'.55', 'stroke-dasharray':'3 3', 'stroke-width':'1'});
+    const labels = [];
+    Object.keys(series).forEach(k => {
+      const v = series[k][i], y = ys(v);
+      mk('circle', {cx:x, cy:y, r:'5', fill:'none', stroke:COL[k], 'stroke-width':'1.5'});
+      mk('circle', {cx:x, cy:y, r:'1.8', fill:COL[k]});
+      labels.push({v:v, y:y, col:COL[k]});
+    });
+    labels.sort((a,b) => a.y - b.y);
+    let last = -1e9;
+    labels.forEach(L => { L.ly = Math.max(L.y, last + 17); last = L.ly; });
+    labels.forEach(L => {
+      const txt = String(L.v), w = txt.length * 7 + 12, h = 16;
+      const rx = (x + 10 + w < W) ? x + 10 : x - 10 - w;
+      mk('rect', {x:rx, y:L.ly - h/2, width:w, height:h, rx:6, style:'fill:var(--surface);stroke:' + L.col});
+      const t = mk('text', {x:rx + w/2, y:L.ly + 4, 'font-size':'10', 'font-weight':'700', 'text-anchor':'middle', fill:L.col});
+      t.textContent = txt;
+    });
+  };
+  svgEl.style.cursor = 'pointer';
+  svgEl.onclick = (e) => {
+    const pt = svgEl.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+    const p = pt.matrixTransform(svgEl.getScreenCTM().inverse());
+    let bi = 0, bd = Infinity;
+    years.forEach((y, i) => { const d = Math.abs(xs(i) - p.x); if(d < bd){ bd = d; bi = i; } });
+    const yr = years[bi];
+    nav.trendSel = (nav.trendSel === yr) ? null : yr;
+    drawSel(nav.trendSel);
+  };
+  drawSel(nav.trendSel);
 
   // ---- Topic breakdown ----
   const kY = nav.topicYears || 10;
@@ -8395,7 +8460,10 @@ function pyqAnalyticsEl(s, c){
     html += '<p class="note-line" style="margin-top:8px">E = easy, M = medium, H = hard. Counts are questions in the selected period.</p>';
     tableCard.appendChild(el('<div>'+html+'</div>'));
   }
-  wrap.appendChild(tableCard);
+  // Trend and topic breakdown sit side by side on wide screens, one above the other on phones
+  const grid = el('<div class="pyqa-grid"></div>');
+  grid.appendChild(trendCard); grid.appendChild(tableCard);
+  wrap.appendChild(grid);
   return wrap;
 }
 function chapterView(){
@@ -13893,20 +13961,21 @@ function pyqPractice(w){
   const isOk = hasAns && (a.correct!=null ? !!a.correct : (q.type==='integer' ? sameAnswer(a.sel,q.answer) : a.sel===q.correct));
   const sk = reviewing && !hasAns;   // skipped: yellow, never red
   const n = session.queue.length;
-  const elapsed = answered && a && a.time!=null ? a.time : Math.floor((Date.now()-qStartOf(q))/1000);
+  const stopped = answered || locked;   // chosen or revealed: the clock stays frozen at the first pick
+  const elapsed = stopped && a && a.time!=null ? a.time : Math.floor((Date.now()-qStartOf(q))/1000);
   const left = 120 - elapsed;
   const fresh = !!(answered && a.at && Date.now()-a.at < 900);
   const doneCount = session.queue.filter(x=>{ const y=session.answers[x.id]; return y && !y.skip; }).length;
   w.appendChild(topRow(session.title, '<span class="tag">'+(session.idx+1)+' / '+n+'</span>',
     ()=>requestLeave(exitSession)));
   w.appendChild(el('<div class="progress"><i style="width:'+Math.round((session.idx+1)/n*100)+'%"></i></div>'));
-  const over = !answered && left<0, warn = !answered && left<=20 && left>=0;
+  const over = !stopped && left<0, warn = !stopped && left<=20 && left>=0;
   const glow = Math.min(1, Math.max(0, (elapsed-120)/120)).toFixed(2);   // grows the longer the student runs over
   w.appendChild(el('<div class="qclock'+(over?' over':(warn?' warn':''))+'" style="--glow:'+glow+'">'
     +'<svg viewBox="0 0 44 44" aria-hidden="true"><circle class="qc-bg" cx="22" cy="22" r="18"/>'
     +'<circle id="qArc" class="qc-fg" cx="22" cy="22" r="18" style="stroke-dashoffset:'+ringOffset(elapsed)+'"/></svg>'
-    +'<div class="qc-txt"><span id="qTimer">'+clockLabel(answered, elapsed, left)+'</span>'
-    +'<small>'+(answered?'The exam expects this in under 2 minutes':'Aim to solve this in under 2 minutes')+'</small></div>'
+    +'<div class="qc-txt"><span id="qTimer">'+clockLabel(stopped, elapsed, left)+'</span>'
+    +'<small>'+(stopped?'The exam expects this in under 2 minutes':'Aim to solve this in under 2 minutes')+'</small></div>'
     +'<div class="qc-pts">'+(session.points||0)+' pts</div></div>'));
 
   const card = el('<div class="card qcard" style="--bar:'+(SUBJ_VAR[q.subject]||'')+'"></div>');
@@ -13920,7 +13989,9 @@ function pyqPractice(w){
     const cr0 = el('<div class="chips"></div>');
     [['sure','Sure'],['guess','Guessing']].forEach(p=>{
       const b = el('<button class="sog-choice sog-'+p[0]+(pre===p[0]?' on':'')+'" aria-pressed="'+(pre===p[0])+'"><span class="sog-ico">'+(p[0]==='sure'?'<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>':'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6M12 17h.01"/></svg>')+'</span><span>'+p[1]+'</span></button>');
-      b.onclick = ()=>{ session.conf[q.id] = pre===p[0] ? null : p[0]; render(); liveSave(); scheduleAutoLock(q.id); };
+      b.onclick = ()=>{ session.conf[q.id] = pre===p[0] ? null : p[0];
+        const pa = session.answers[q.id]; if(pa && pa.pending){ pa.conf = session.conf[q.id] || null; pa.nullified = !pa.conf; }
+        render(); liveSave(); scheduleAutoLock(q.id); };
       cr0.appendChild(b);
     });
     card.appendChild(cr0);
@@ -14929,7 +15000,7 @@ function cloudSync(){
     if(!sbSession) return;
     if(!cloudReady){ restoreCloudState(sbSession.user.id).then(()=>{ if(typeof render==='function' && !authBusy) render(); }); }
     else { flushCloud(); uploadPending(); flushReports(); }
-  }, 15000);
+  }, 5000);
   const saveNow = (u)=>{ if(typeof sessionTick === 'function') sessionTick(u); };
   document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState === 'hidden'){ saveNow(true); flushCloud(); } });
   window.addEventListener('pagehide', ()=>{ saveNow(true); flushCloud(); });
@@ -17381,8 +17452,8 @@ body.has-nav .navpanel, .navpanel{ max-height:calc(100dvh - 66px - env(safe-area
 <style id="exam-tag-v8">
 /* Advanced / Mains-only chapter labels */
 .wt.exam{ margin-right:6px; }
-.wt.exam.adv{ color:#1f7a4d; background:rgba(31,122,77,.14); }
-.wt.exam.mains{ color:#8a5a00; background:rgba(138,90,0,.16); }
+.wt.exam.adv{ color:var(--accent-text); background:var(--accent-soft); border-color:color-mix(in srgb,var(--accent) 45%, transparent); }
+.wt.exam.mains{ color:var(--muted); background:var(--surface-2); border-color:var(--border); }
 </style>
 <style id="pyqa-v9">
 .pyqa-card{ margin-bottom:12px; }
@@ -17418,6 +17489,30 @@ body.has-nav .navpanel, .navpanel{ max-height:calc(100dvh - 66px - env(safe-area
 .fcards .fcard-eq .katex, .fcards .fcard-eq .katex-display{ white-space:nowrap !important; }
 .fcards .fcard-use{ white-space:normal !important; }
 @media (max-width:600px){ .fcards{ grid-template-columns:1fr !important; } }
+</style>
+<style id="qbar-round-v11">
+.ptabbar.qbar{ border-radius:24px 24px 0 0; }
+.ptabbar.qbar::before{ border-radius:24px 24px 0 0; }
+@media (min-width:700px) and (orientation:landscape){ .ptabbar.qbar{ border-radius:28px; } .ptabbar.qbar::before{ border-radius:28px; } }
+.pyq-search{ width:100%; box-sizing:border-box; margin:14px 0 10px; padding:12px 14px; border-radius:var(--r-lg); border:1px solid var(--border); background:var(--surface-2); color:var(--text); font:500 15px Inter,sans-serif; outline:none; }
+.pyq-search:focus{ border-color:var(--accent); box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
+</style>
+<style id="pyq-grid-v12">
+.pyqa-grid{ display:grid; grid-template-columns:minmax(0,1fr); gap:14px; margin-bottom:14px; }
+.pyqa-grid > .card{ margin-bottom:0 !important; min-width:0; }
+@media (min-width:900px){
+  .pyqa-grid{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:start; }
+  .pyqa-grid .pyqa-scroll{ max-height:calc(100dvh - 300px); overflow:auto; }
+}
+/* Less empty space above the header on tablets and wide screens */
+@media (min-width:700px){
+  body.has-nav:not(.chat-full) #app{ padding-top:44px !important; }
+  .header{ margin-bottom:12px !important; }
+}
+@media (max-width:959px){
+  body.has-nav:not(.chat-full) #app{ padding-top:calc(env(safe-area-inset-top,0px) + 56px) !important; }
+  .header{ margin-bottom:10px !important; }
+}
 </style>
 </body>
 </html>
