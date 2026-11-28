@@ -26,7 +26,7 @@
     "options": [
       {
         "key": "1",
-        "text": "tan^-1((2Q-2P)/(2Q+2P))",
+        "text": "$tan^{-1}$((2Q-2P)/(2Q+2P))",
         "image": null
       },
       {
@@ -36,12 +36,12 @@
       },
       {
         "key": "3",
-        "text": "tan^-1(P/Q)",
+        "text": "$tan^{-1}$(P/Q)",
         "image": null
       },
       {
         "key": "4",
-        "text": "tan^-1(2Q/P)",
+        "text": "$tan^{-1}$(2Q/P)",
         "image": null
       }
     ],
@@ -237,7 +237,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "net downward force on the combined system is (M+m)g - (M+m)a, normal force gives the action force",
-    "text": "A wooden block of mass 5 kg rests on a soft horizontal floor. When an iron cylinder of mass 25 kg is placed on the top of the block, the floor yields and the block and the cylinder together go down with an acceleration of 0.1 m/s^2. The action force of the system on the floor is equal to (g = 9.8 m/s^2) :",
+    "text": "A wooden block of mass 5 kg rests on a soft horizontal floor. When an iron cylinder of mass 25 kg is placed on the top of the block, the floor yields and the block and the cylinder together go down with an acceleration of 0.1 m/$s^{2.}$ The action force of the system on the floor is equal to (g = 9.8 m/$s^{2}$) :",
     "options": [
       {
         "key": "1",
@@ -535,22 +535,22 @@
     "options": [
       {
         "key": "1",
-        "text": "10^39",
+        "text": "$10^{39}$",
         "image": null
       },
       {
         "key": "2",
-        "text": "10^29",
+        "text": "$10^{29}$",
         "image": null
       },
       {
         "key": "3",
-        "text": "10^19",
+        "text": "$10^{19}$",
         "image": null
       },
       {
         "key": "4",
-        "text": "10^36",
+        "text": "$10^{36}$",
         "image": null
       }
     ],
@@ -1043,22 +1043,22 @@
     "options": [
       {
         "key": "1",
-        "text": "mu0 pi b^2 / (2a)",
+        "text": "mu0 pi $b^{2}$ / (2a)",
         "image": null
       },
       {
         "key": "2",
-        "text": "(mu0/2pi)(b^2/a)",
+        "text": "(mu0/2pi)($b^{2}$/a)",
         "image": null
       },
       {
         "key": "3",
-        "text": "(mu0/2pi)(a^2/b)",
+        "text": "(mu0/2pi)($a^{2}$/b)",
         "image": null
       },
       {
         "key": "4",
-        "text": "mu0 pi a^2 / (2b)",
+        "text": "mu0 pi $a^{2}$ / (2b)",
         "image": null
       }
     ],
@@ -1517,7 +1517,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "treat the whole hanging system as one body: T1 = (total mass)(g + a)",
-    "text": "Three blocks M1, M2, M3 having masses 4 kg, 6 kg and 10 kg respectively are hanging from a smooth pulley using rope 1, 2 and 3 as shown in figure. The tension in the rope 1, T1, when they are moving upward with acceleration of 2 m/s^2 is ______ N (g = 10 m/s^2).",
+    "text": "Three blocks M1, M2, M3 having masses 4 kg, 6 kg and 10 kg respectively are hanging from a smooth pulley using rope 1, 2 and 3 as shown in figure. The tension in the rope 1, T1, when they are moving upward with acceleration of 2 m/$s^{2}$ is ______ N (g = 10 m/$s^{2}$).",
     "options": [],
     "correct_answer": [
       "240"
@@ -1569,7 +1569,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "length L = breaking stress / (density x g of planet), with g = 10/3",
-    "text": "The density and breaking stress of a wire are 6x10^4 kg/m^3 and 1.2x10^8 N/m^2 respectively. The wire is suspended from a rigid support on a planet where acceleration due to gravity is one-third of the value on the surface of earth. The maximum length of the wire with breaking is ______ m (take g = 10 m/s^2).",
+    "text": "The density and breaking stress of a wire are $6x10^{4}$ kg/$m^{3}$ and 1.$2x10^{8}$ N/$m^{2}$ respectively. The wire is suspended from a rigid support on a planet where acceleration due to gravity is one-third of the value on the surface of earth. The maximum length of the wire with breaking is ______ m (take g = 10 m/$s^{2}$).",
     "options": [],
     "correct_answer": [
       "600"
@@ -1726,7 +1726,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "extract slope and intercept from the 1/theta vs R graph, get the galvanometer resistance, then the figure of merit",
-    "text": "In the experiment to determine the galvanometer resistance by half-deflection method, the plot of 1/theta vs the resistance (R) of the resistance box is shown in the figure. The figure of merit of the galvanometer is ______ x 10^-1 A/division. [The source has emf 2 V]",
+    "text": "In the experiment to determine the galvanometer resistance by half-deflection method, the plot of 1/theta vs the resistance (R) of the resistance box is shown in the figure. The figure of merit of the galvanometer is ______ x $10^{-1}$ A/division. [The source has emf 2 V]",
     "options": [],
     "correct_answer": [
       "5"
@@ -1774,7 +1774,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "wire length from R and resistivity (L = RA/rho = 5 m), then magnetic force balances weight: B = 0.5 T",
-    "text": "A 2 A current carrying straight metal wire of resistance 1 ohm, resistivity 2x10^-6 ohm m, area of cross-section 10 mm^2 and mass 500 g is suspended horizontally in mid air by applying a uniform magnetic field B. The magnitude of B is ______ x 10^-1 T (given g = 10 m/s^2).",
+    "text": "A 2 A current carrying straight metal wire of resistance 1 ohm, resistivity $2x10^{-6}$ ohm m, area of cross-section 10 $mm^{2}$ and mass 500 g is suspended horizontally in mid air by applying a uniform magnetic field B. The magnitude of B is ______ x $10^{-1}$ T (given g = 10 m/$s^{2}$).",
     "options": [],
     "correct_answer": [
       "5"
@@ -1926,7 +1926,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "mass defect from atomic masses (3 x 4.002603 - 12 u), then E = dm x 931 MeV",
-    "text": "If three helium nuclei combine to form a carbon nucleus then the energy released in this reaction is ______ x 10^-2 MeV. (Given 1 u = 931 MeV/c^2, atomic mass of helium = 4.002603 u)",
+    "text": "If three helium nuclei combine to form a carbon nucleus then the energy released in this reaction is ______ x $10^{-2}$ MeV. (Given 1 u = 931 MeV/$c^{2}$, atomic mass of helium = 4.002603 u)",
     "options": [],
     "correct_answer": [
       "727"
@@ -2818,26 +2818,26 @@
     "question_type": "single",
     "difficulty": "easy",
     "difficulty_reason": "add the given molar ionic conductivities",
-    "text": "Molar ionic conductivities of divalent cation and anion are 57 S cm^2 mol^-1 and 73 S cm^2 mol^-1 respectively. The molar conductivity of solution of an electrolyte with the above cation and anion will be :",
+    "text": "Molar ionic conductivities of divalent cation and anion are 57 S $cm^{2}$ $mol^{-1}$ and 73 S $cm^{2}$ $mol^{-1}$ respectively. The molar conductivity of solution of an electrolyte with the above cation and anion will be :",
     "options": [
       {
         "key": "1",
-        "text": "187 S cm^2 mol^-1",
+        "text": "187 S $cm^{2}$ $mol^{-1}$",
         "image": null
       },
       {
         "key": "2",
-        "text": "260 S cm^2 mol^-1",
+        "text": "260 S $cm^{2}$ $mol^{-1}$",
         "image": null
       },
       {
         "key": "3",
-        "text": "130 S cm^2 mol^-1",
+        "text": "130 S $cm^{2}$ $mol^{-1}$",
         "image": null
       },
       {
         "key": "4",
-        "text": "65 S cm^2 mol^-1",
+        "text": "65 S $cm^{2}$ $mol^{-1}$",
         "image": null
       }
     ],
@@ -3427,7 +3427,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "kinetic energy from the Rydberg energy, then v = sqrt(2E/m)",
-    "text": "The value of Rydberg constant (R_H) is 2.18x10^-18 J. The velocity of electron having mass 9.1x10^-31 kg in Bohr's first orbit of hydrogen atom is ______ x 10^5 m/s (nearest integer).",
+    "text": "The value of Rydberg constant ($R_{H}$) is 2.$18x10^{-18}$ J. The velocity of electron having mass 9.$1x10^{-31}$ kg in Bohr's first orbit of hydrogen atom is ______ x $10^{5}$ m/s (nearest integer).",
     "options": [],
     "correct_answer": [
       "22"
@@ -3575,7 +3575,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "net osmotic difference: glucose 0.2 M inside against NaCl giving 0.1 osmolar outside, so 0.1 M difference",
-    "text": "An artificial cell is made by encapsulating 0.2 M glucose solution within a semipermeable membrane. The osmotic pressure developed when the artificial cell is placed within a 0.05 M solution of NaCl at 300 K is ______ x 10^-1 bar (nearest integer). [Given: R = 0.083 L bar mol^-1 K^-1] Assume complete dissociation of NaCl.",
+    "text": "An artificial cell is made by encapsulating 0.2 M glucose solution within a semipermeable membrane. The osmotic pressure developed when the artificial cell is placed within a 0.05 M solution of NaCl at 300 K is ______ x $10^{-1}$ bar (nearest integer). [Given: R = 0.083 L bar $mol^{-1}$ $K^{-1}$] Assume complete dissociation of NaCl.",
     "options": [],
     "correct_answer": [
       "25"
@@ -3623,7 +3623,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "find the exponents of A and B from rate ratios, then add them",
-    "text": "During kinetic study of reaction 2A + B -> C + D, the following results were obtained (A and B in M, initial rate of formation of D): I: 0.1, 0.1, 6.0x10^-3; II: 0.3, 0.2, 7.20x10^-2; III: 0.3, 0.4, 2.88x10^-1; IV: 0.4, 0.1, 2.40x10^-2. Based on above data, overall order of the reaction is ______.",
+    "text": "During kinetic study of reaction 2A + B -> C + D, the following results were obtained (A and B in M, initial rate of formation of D): I: 0.1, 0.1, 6.$0x10^{-3}$; II: 0.3, 0.2, 7.$20x10^{-2}$; III: 0.3, 0.4, 2.$88x10^{-1}$; IV: 0.4, 0.1, 2.$40x10^{-2.}$ Based on above data, overall order of the reaction is ______.",
     "options": [],
     "correct_answer": [
       "3"
@@ -3863,7 +3863,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "test the triangle-type inequality for Statement I and the identity for Statement II",
-    "text": "Consider the following two statements : Statement I : For any two non-zero complex numbers z1, z2, (|z1| + |z2|) |z1/|z1| + z2/|z2|| <= 2(|z1| + |z2|). Statement II : If x, y, z are three distinct complex numbers and a, b, c are three positive real numbers such that a/|y-z| = b/|z-x| = c/|x-y|, then a^2/(y-z) + b^2/(z-x) + c^2/(x-y) = 1. Between the above two statements,",
+    "text": "Consider the following two statements : Statement I : For any two non-zero complex numbers z1, z2, (|z1| + |z2|) |z1/|z1| + z2/|z2|| <= 2(|z1| + |z2|). Statement II : If x, y, z are three distinct complex numbers and a, b, c are three positive real numbers such that a/|y-z| = b/|z-x| = c/|x-y|, then $a^{2}$/(y-z) + $b^{2}$/(z-x) + $c^{2}$/(x-y) = 1. Between the above two statements,",
     "options": [
       {
         "key": "1",
@@ -4074,7 +4074,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "distance from O to 3x+4y=12 gives the isosceles right triangle geometry, then l = OP^2 + PQ^2 + QO^2",
-    "text": "Let two straight lines drawn from the origin O intersect the line 3x+4y=12 at the points P and Q such that triangle OPQ is an isosceles triangle and angle POQ = 90 degrees. If l = OP^2 + PQ^2 + QO^2, then the greatest integer less than or equal to l is :",
+    "text": "Let two straight lines drawn from the origin O intersect the line 3x+4y=12 at the points P and Q such that triangle OPQ is an isosceles triangle and angle POQ = 90 degrees. If l = $OP^{2}$ + $PQ^{2}$ + $QO^{2}$, then the greatest integer less than or equal to l is :",
     "options": [
       {
         "key": "1",
@@ -4294,7 +4294,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "find k from the circle on AB as diameter, then the latus rectum of the ellipse",
-    "text": "Let the line 2x+3y-k = 0, k > 0, intersect the x-axis and y-axis at A and B respectively. If the equation of the circle having AB as a diameter is x^2+y^2-3x-2y = 0 and the length of the latus rectum of the ellipse x^2+9y^2 = k^2 is m/n, where m and n are coprime, then 2m+n is equal to",
+    "text": "Let the line 2x+3y-k = 0, k > 0, intersect the x-axis and y-axis at A and B respectively. If the equation of the circle having AB as a diameter is $x^{2}$+$y^{2}$-3x-2y = 0 and the length of the latus rectum of the ellipse $x^{2}$+$9y^{2}$ = $k^{2}$ is m/n, where m and n are coprime, then 2m+n is equal to",
     "options": [
       {
         "key": "1",
@@ -4367,7 +4367,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "use det(adj M) = det(M)^(n-1) and det(A^T) = det(A), with |A| = 3, |B| = 2",
-    "text": "Let A and B be two square matrices of order 3 such that |A| = 3 and |B| = 2. Then |A^T A (adj 2A)^-1 (adj 4B) (adj AB)^-1 A A^T| is equal to :",
+    "text": "Let A and B be two square matrices of order 3 such that |A| = 3 and |B| = 2. Then |$A^{T}$ A (adj 2A)^-1 (adj 4B) (adj AB)^-1 A $A^{T}$| is equal to :",
     "options": [
       {
         "key": "1",
@@ -4440,7 +4440,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "the determinant must vanish for infinitely many solutions, then the consistency condition fixes mu",
-    "text": "If the system of equations 11x + y + lambda z = -5, 2x + 3y + 5z = 3, 8x - 19y - 39z = mu has infinitely many solutions, then lambda^4 - mu is equal to :",
+    "text": "If the system of equations 11x + y + lambda z = -5, 2x + 3y + 5z = 3, 8x - 19y - 39z = mu has infinitely many solutions, then $lambda^{4}$ - mu is equal to :",
     "options": [
       {
         "key": "1",
@@ -4579,7 +4579,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "derivative of the inverse at f(x) = 7 uses g'(7) = 1/f'(x) at x = 1",
-    "text": "Let f(x) = x^5 + 2x^3 + 3x + 1, x in R, and g(x) be a function such that g(f(x)) = x for all x in R. Then g(7)/g'(7) is equal to :",
+    "text": "Let f(x) = $x^{5}$ + $2x^{3}$ + 3x + 1, x in R, and g(x) be a function such that g(f(x)) = x for all x in R. Then g(7)/g'(7) is equal to :",
     "options": [
       {
         "key": "1",
@@ -4652,7 +4652,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "expand the numerator as a series to find the limit at 0, then continuity fixes f(0)",
-    "text": "If f(x) = (sin 3x + alpha sin x - beta cos 3x)/x^3, x in R, is continuous at x = 0, then f(0) is equal to :",
+    "text": "If f(x) = (sin 3x + alpha sin x - beta cos 3x)/$x^{3}$, x in R, is continuous at x = 0, then f(0) is equal to :",
     "options": [
       {
         "key": "1",
@@ -4794,7 +4794,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "check the sign of f' and f'' on (0, pi/2)",
-    "text": "For the function f(x) = sin x + 3x - (2/pi)(x^2 + x), x in [0, pi/2], consider : (I) f is increasing in (0, pi/2). (II) f' is decreasing in (0, pi/2). Between the above two statements,",
+    "text": "For the function f(x) = sin x + 3x - (2/pi)($x^{2}$ + x), x in [0, pi/2], consider : (I) f is increasing in (0, pi/2). (II) f' is decreasing in (0, pi/2). Between the above two statements,",
     "options": [
       {
         "key": "1",
@@ -4863,16 +4863,16 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "the odd part of the integrand over (-pi, pi) vanishes, leaving a symmetric integral that evaluates to pi^2",
-    "text": "The value of integral from -pi to pi of 2y(1 + sin y)/(1 + cos^2 y) dy is :",
+    "text": "The value of integral from -pi to pi of 2y(1 + sin y)/(1 + $cos^{2}$ y) dy is :",
     "options": [
       {
         "key": "1",
-        "text": "2 pi^2",
+        "text": "2 $pi^{2}$",
         "image": null
       },
       {
         "key": "2",
-        "text": "pi^2/2",
+        "text": "$pi^{2}$/2",
         "image": null
       },
       {
@@ -4882,7 +4882,7 @@
       },
       {
         "key": "4",
-        "text": "pi^2",
+        "text": "$pi^{2}$",
         "image": null
       }
     ],
@@ -4940,22 +4940,22 @@
     "options": [
       {
         "key": "1",
-        "text": "3pi - 50 log_e 2 + 20 log_e 5",
+        "text": "3pi - 50 $log_{e}$ 2 + 20 $log_{e}$ 5",
         "image": null
       },
       {
         "key": "2",
-        "text": "3pi - 25 log_e 2 + 10 log_e 5",
+        "text": "3pi - 25 $log_{e}$ 2 + 10 $log_{e}$ 5",
         "image": null
       },
       {
         "key": "3",
-        "text": "3pi - 10 log_e(2 sqrt2) + 10 log_e 5",
+        "text": "3pi - 10 $log_{e}$(2 sqrt2) + 10 $log_{e}$ 5",
         "image": null
       },
       {
         "key": "4",
-        "text": "3pi - 30 log_e 2 + 20 log_e 5",
+        "text": "3pi - 30 $log_{e}$ 2 + 20 $log_{e}$ 5",
         "image": null
       }
     ],
@@ -5013,22 +5013,22 @@
     "options": [
       {
         "key": "1",
-        "text": "e^(pi/8)",
+        "text": "$e^{pi/8}$",
         "image": null
       },
       {
         "key": "2",
-        "text": "e^(pi/4)",
+        "text": "$e^{pi/4}$",
         "image": null
       },
       {
         "key": "3",
-        "text": "e^(-pi/4)",
+        "text": "$e^{-pi/4}$",
         "image": null
       },
       {
         "key": "4",
-        "text": "e^(-pi/8)",
+        "text": "$e^{-pi/8}$",
         "image": null
       }
     ],
@@ -5151,7 +5151,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "find the intersection point of the two lines, then its distance d from (7,8,9), and d^2 + 6 = 75",
-    "text": "Let d be the distance of the point of intersection of the lines (x+6)/3 = y/2 = (z+1)/1 and (x-7)/4 = (y-9)/3 = (z-4)/2 from the point (7,8,9). Then d^2 + 6 is equal to :",
+    "text": "Let d be the distance of the point of intersection of the lines (x+6)/3 = y/2 = (z+1)/1 and (x-7)/4 = (y-9)/3 = (z-4)/2 from the point (7,8,9). Then $d^{2}$ + 6 is equal to :",
     "options": [
       {
         "key": "1",
@@ -5224,7 +5224,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "count ordered triples (a,b,c) from {1..8} with b^2 = 4ac, divided by 8^3",
-    "text": "The coefficients a, b, c in the quadratic equation ax^2 + bx + c = 0 are chosen from the set {1, 2, 3, 4, 5, 6, 7, 8}. The probability of this equation having repeated roots is :",
+    "text": "The coefficients a, b, c in the quadratic equation $ax^{2}$ + bx + c = 0 are chosen from the set {1, 2, 3, 4, 5, 6, 7, 8}. The probability of this equation having repeated roots is :",
     "options": [
       {
         "key": "1",
@@ -5345,7 +5345,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "use A3 = -153, A5 = -435 and the sum of squares to find the AP, then a17 - A7",
-    "text": "Let a1, a2, a3, ... be in an arithmetic progression of positive terms. Let A_k = a1^2 - a2^2 + a3^2 - a4^2 + ... + a(2k-1)^2 - a(2k)^2. If A3 = -153, A5 = -435 and a1^2 + a2^2 + a3^2 = 66, then a17 - A7 is equal to ______.",
+    "text": "Let a1, a2, a3, ... be in an arithmetic progression of positive terms. Let $A_{k}$ = $a1^{2}$ - $a2^{2}$ + $a3^{2}$ - $a4^{2}$ + ... + a(2k-1)^2 - a(2k)^2. If A3 = -153, A5 = -435 and $a1^{2}$ + $a2^{2}$ + $a3^{2}$ = 66, then a17 - A7 is equal to ______.",
     "options": [],
     "correct_answer": [
       "910"
@@ -5393,7 +5393,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "general term of (3/2 x^2 - 1/(3x))^9, match powers to get the constant term p",
-    "text": "If the constant term in the expansion of (1 + 2x - 3x^3)(3/2 x^2 - 1/(3x))^9 is p, then 108p is equal to ______.",
+    "text": "If the constant term in the expansion of (1 + 2x - $3x^{3}$)(3/2 $x^{2}$ - 1/(3x))^9 is p, then 108p is equal to ______.",
     "options": [],
     "correct_answer": [
       "54"
@@ -5445,7 +5445,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "parametrise the focal chord of y^2 = 12x with slope m, then use length and distance from origin",
-    "text": "Suppose AB is a focal chord of the parabola y^2 = 12x of length l and slope m < sqrt3. If the distance of the chord AB from the origin is d, then l d^2 is equal to ______.",
+    "text": "Suppose AB is a focal chord of the parabola $y^{2}$ = 12x of length l and slope m < sqrt3. If the distance of the chord AB from the origin is d, then l $d^{2}$ is equal to ______.",
     "options": [],
     "correct_answer": [
       "108"
@@ -5493,7 +5493,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "differentiate the limit relation to get a first-order ODE for f",
-    "text": "Let f be a differentiable function in (0, infinity) such that f(1) = 1 and lim (t->x) (t^2 f(x) - x^2 f(t))/(t - x) = 1 for each x > 0. Then 2f(2) + 3f(3) is equal to ______.",
+    "text": "Let f be a differentiable function in (0, infinity) such that f(1) = 1 and lim (t->x) ($t^{2}$ f(x) - $x^{2}$ f(t))/(t - x) = 1 for each x > 0. Then 2f(2) + 3f(3) is equal to ______.",
     "options": [],
     "correct_answer": [
       "24"
@@ -5545,7 +5545,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "hypergeometric distribution (N=10, K=3, n=5), then variance times 96",
-    "text": "From a lot of 10 items, which include 3 defective items, a sample of 5 items is drawn at random. Let the random variable X denote the number of defective items in the sample. If the variance of X is sigma^2, then 96 sigma^2 is equal to ______.",
+    "text": "From a lot of 10 items, which include 3 defective items, a sample of 5 items is drawn at random. Let the random variable X denote the number of defective items in the sample. If the variance of X is $sigma^{2}$, then 96 $sigma^{2}$ is equal to ______.",
     "options": [],
     "correct_answer": [
       "56"
@@ -5689,7 +5689,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "find intersection points of the two parabolas, then integrate the difference",
-    "text": "The area of the region enclosed by the parabolas y = x^2 - 5x and y = 7x - x^2 is ______.",
+    "text": "The area of the region enclosed by the parabolas y = $x^{2}$ - 5x and y = 7x - $x^{2}$ is ______.",
     "options": [],
     "correct_answer": [
       "72"

@@ -1800,7 +1800,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Rated from the stem: power dissipated by loop.",
-    "text": "A rectangular loop of sides $12$ cm and $5$ cm, with its sides parallel to the $x$-axis and $y$-axis respectively moves with a velocity of $5$ cm s$^{-1}$ in the positive $x$ axis direction, in a space containing a variable magnetic field in the positive $z$ direction. The field has a gradient of $10^{-3}$ T cm$^{-1}$ along the negative $x$ direction and it is decreasing with time at the rate of $10^{-3}$ T s$^{-1}$. If the resistance of the loop is $6$ m$\\\\Omega$, the power dissipated by the loop as heat is ______ $\\\\times10^{-9}$ W.",
+    "text": "A rectangular loop of sides $12$ cm and $5$ cm, with its sides parallel to the $x$-axis and $y$-axis respectively moves with a velocity of $5$ cm s$^{-1}$ in the positive $x$ axis direction, in a space containing a variable magnetic field in the positive $z$ direction. The field has a gradient of $10^{-3}$ T cm$^{-1}$ along the negative $x$ direction and it is decreasing with time at the rate of $10^{-3}$ T s$^{-1}$. If the resistance of the loop is $6$ m$\\Omega$, the power dissipated by the loop as heat is ______ $\\times10^{-9}$ W.",
     "options": [],
     "correct_answer": [
       "216"

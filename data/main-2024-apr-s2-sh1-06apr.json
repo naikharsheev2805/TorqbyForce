@@ -91,7 +91,7 @@
     "question_type": "single",
     "difficulty": "easy",
     "difficulty_reason": "Direct recall of dimensional formulas for torque, magnetic field, magnetic moment and permeability",
-    "text": "Match List I (A Torque, B Magnetic field, C Magnetic moment, D Permeability of free space) with List II (I [M L T^-2 A^-2], II [L^2 A], III [M T^-2 A^-1], IV [M L^2 T^-2])",
+    "text": "Match List I (A Torque, B Magnetic field, C Magnetic moment, D Permeability of free space) with List II (I [M L $T^{-2}$ $A^{-2}$], II [$L^{2}$ A], III [M $T^{-2}$ $A^{-1}$], IV [M $L^{2}$ $T^{-2}$])",
     "options": [
       {
         "key": "1",
@@ -436,26 +436,26 @@
     "question_type": "single",
     "difficulty": "easy",
     "difficulty_reason": "Direct: energy needed = GMm/R = mgR_E",
-    "text": "Kinetic energy required to project a body of mass m from Earth's surface to infinity (R_E radius, g surface gravity)",
+    "text": "Kinetic energy required to project a body of mass m from Earth's surface to infinity ($R_{E}$ radius, g surface gravity)",
     "options": [
       {
         "key": "1",
-        "text": "(1) 2mgR_E",
+        "text": "(1) $2mgR_{E}$",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) 4mgR_E",
+        "text": "(2) $4mgR_{E}$",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) mgR_E",
+        "text": "(3) $mgR_{E}$",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) (1/2)mgR_E",
+        "text": "(4) (1/2)$mgR_{E}$",
         "image": null
       }
     ],
@@ -643,21 +643,21 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Needs the given equation of state PV^2 = RT to derive Cp, which is not a standard relation",
-    "text": "Specific heat at constant pressure of a real gas obeying PV^2 = RT is",
+    "text": "Specific heat at constant pressure of a real gas obeying $PV^{2}$ = RT is",
     "options": [
       {
         "key": "1",
-        "text": "(1) R/3 + C_V",
+        "text": "(1) R/3 + $C_{V}$",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) C_V + R",
+        "text": "(2) $C_{V}$ + R",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) C_V + R/(2V)",
+        "text": "(3) $C_{V}$ + R/(2V)",
         "image": null
       },
       {
@@ -679,7 +679,7 @@
     "tags": [
       "first law of thermodynamics"
     ],
-    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 1, 06 Apr 2024); answer is the printed key. Stated equation PV^2 = RT is taken as printed in the PDF; check this item",
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 1, 06 Apr 2024); answer is the printed key. Stated equation $PV^{2}$ = RT is taken as printed in the PDF; check this item",
     "verified": false,
     "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
     "subtopics": [
@@ -854,22 +854,22 @@
     "options": [
       {
         "key": "1",
-        "text": "(1) 4 x 10^-8 T",
+        "text": "(1) 4 x $10^{-8}$ T",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) 10 x 10^-8 T",
+        "text": "(2) 10 x $10^{-8}$ T",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) 8 x 10^-8 T",
+        "text": "(3) 8 x $10^{-8}$ T",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) 12 x 10^-8 T",
+        "text": "(4) 12 x $10^{-8}$ T",
         "image": null
       }
     ],
@@ -988,7 +988,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Two steps: n = c/v = 2, then epsilon_r = n^2 / mu_r",
-    "text": "EM wave travels in a medium at 1.5 x 10^8 m/s; relative permeability 2.0; relative permittivity",
+    "text": "EM wave travels in a medium at 1.5 x $10^{8}$ m/s; relative permeability 2.0; relative permittivity",
     "options": [
       {
         "key": "1",
@@ -1692,7 +1692,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Work = MB with M = NIA = 200 x 100e-6 x 2.5e-4 = 5e-6 J/T, B = 1 T",
-    "text": "200-turn coil of area 2.5 x 10^-4 m^2 carrying 100 microA, in a 1 T field, initially aligned with B; work to turn it 90 degrees (microjoule, integer)",
+    "text": "200-turn coil of area 2.5 x $10^{-4}$ $m^{2}$ carrying 100 microA, in a 1 T field, initially aligned with B; work to turn it 90 degrees (microjoule, integer)",
     "options": [],
     "correct_answer": [
       "5"
@@ -2298,7 +2298,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Equal numbers of molecules give equal partial pressures, so Kp = 1 and x x 10^-1 = 1",
-    "text": "At -20 C and 1 atm a cylinder holds equal numbers of H2, I2 and HI for H2 + I2 <=> 2HI; Kp = x x 10^-1; find x",
+    "text": "At -20 C and 1 atm a cylinder holds equal numbers of H2, I2 and HI for H2 + I2 <=> 2HI; Kp = x x $10^{-1}$; find x",
     "options": [
       {
         "key": "1",
@@ -3264,7 +3264,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Two steps: lambda = h/mv gives f = v/lambda = mv^2/h = 2 KE / h, with KE = R_H = 2.18 x 10^-18 J for the first Bohr orbit",
-    "text": "Frequency of de Broglie wave of electron in first Bohr orbit of hydrogen atom is x x 10^13 Hz (nearest integer); R_H = 2.18 x 10^-18 J, h = 6.6 x 10^-34 J s",
+    "text": "Frequency of de Broglie wave of electron in first Bohr orbit of hydrogen atom is x x $10^{13}$ Hz (nearest integer); $R_{H}$ = 2.18 x $10^{-18}$ J, h = 6.6 x $10^{-34}$ J s",
     "options": [],
     "correct_answer": [
       "661"
@@ -3456,7 +3456,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Get the degree of dissociation from Ka, then the van't Hoff factor i, then pi = i C R T",
-    "text": "Weak acid HX (Ka = 1.2 x 10^-5) dissociates; osmotic pressure of 0.03 M aqueous solution at 300 K is x x 10^-2 bar (nearest integer), R = 0.083 L bar mol^-1 K^-1",
+    "text": "Weak acid HX (Ka = 1.2 x $10^{-5}$) dissociates; osmotic pressure of 0.03 M aqueous solution at 300 K is x x $10^{-2}$ bar (nearest integer), R = 0.083 L bar $mol^{-1}$ $K^{-1}$",
     "options": [],
     "correct_answer": [
       "76"
@@ -3552,7 +3552,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Spin-only moments: CrO (Cr2+, d4) 4.90 BM and Cr2O3 (Cr3+, d3) 3.87 BM; sum 8.77 BM",
-    "text": "Among CrO, Cr2O3 and CrO3, sum of spin-only magnetic moments of basic and amphoteric oxides is x x 10^-2 BM (Cr = 24)",
+    "text": "Among CrO, Cr2O3 and CrO3, sum of spin-only magnetic moments of basic and amphoteric oxides is x x $10^{-2}$ BM (Cr = 24)",
     "options": [],
     "correct_answer": [
       "877"
@@ -3744,7 +3744,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Since a(n+1) + a(n-1) = s a(n) with s = t^2 - 5t + 6, the ratio equals s, whose minimum over real t is -1/4",
-    "text": "Roots alpha, beta of x^2 - (t^2 - 5t + 6)x + 1 = 0 with t real; a_n = alpha^n + beta^n; minimum of (a2023 + a2025)/a2024",
+    "text": "Roots alpha, beta of $x^{2}$ - ($t^{2}$ - 5t + 6)x + 1 = 0 with t real; $a_{n}$ = $alpha^{n}$ + $beta^{n}$; minimum of (a2023 + a2025)/a2024",
     "options": [
       {
         "key": "1",
@@ -4089,7 +4089,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Inradius = 2√3; inscribed square has side 2√6, so area m = 24 and perimeter n = 8√6, n^2 = 384; m + n^2 = 408",
-    "text": "Circle inscribed in an equilateral triangle of side 12; a square inscribed in this circle has area m and perimeter n; m + n^2 equals",
+    "text": "Circle inscribed in an equilateral triangle of side 12; a square inscribed in this circle has area m and perimeter n; m + $n^{2}$ equals",
     "options": [
       {
         "key": "1",
@@ -4158,7 +4158,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Minimum-area circle touching a parabola and two lines needs a constrained optimisation before the point test",
-    "text": "Let C be the circle of minimum area touching the parabola y = 6 - x^2 and the lines y = √3|x|; which point lies on C",
+    "text": "Let C be the circle of minimum area touching the parabola y = 6 - $x^{2}$ and the lines y = √3|x|; which point lies on C",
     "options": [
       {
         "key": "1",
@@ -4227,7 +4227,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Uses f'(1) = lim a^2 f(1/a) as a condition on f, then a limit with tan^-1 and log; key from printed answer",
-    "text": "Given f differentiable on R minus {0} with f'(1) = lim (a -> inf) a^2 f(1/a); find lim (a -> inf) [ a(a+1)/2 tan^-1(1/a) + a^2 - 2 log_e a ]",
+    "text": "Given f differentiable on R minus {0} with f'(1) = lim (a -> inf) $a^{2}$ f(1/a); find lim (a -> inf) [ a(a+1)/2 $tan^{-1}$(1/a) + $a^{2}$ - 2 $log_{e}$ a ]",
     "options": [
       {
         "key": "1",
@@ -4434,7 +4434,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Column operations reduce the determinant to a linear combination of alpha and beta; the printed answer is 4 alpha + 2 beta",
-    "text": "For alpha, beta in R and natural n, let A_r be the determinant with rows (r, 1, n^2/2 + alpha), (2r, 2, n^2 - beta), (3r - 2, 3, n(3n-1)/2); then",
+    "text": "For alpha, beta in R and natural n, let $A_{r}$ be the determinant with rows (r, 1, $n^{2}$/2 + alpha), (2r, 2, $n^{2}$ - beta), (3r - 2, 3, n(3n-1)/2); then",
     "options": [
       {
         "key": "1",
@@ -4503,7 +4503,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Check injectivity and surjectivity of the rational function f(x) = (x^2 + 2x - 15)/(x^2 - 4x + 9) on R",
-    "text": "f: R -> R, f(x) = (x^2 + 2x - 15)/(x^2 - 4x + 9), x in R; nature of f",
+    "text": "f: R -> R, f(x) = ($x^{2}$ + 2x - 15)/($x^{2}$ - 4x + 9), x in R; nature of f",
     "options": [
       {
         "key": "1",
@@ -4572,16 +4572,16 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Second derivative of x^3 sin(1/x) for x != 0 and at x = 0 from the definition",
-    "text": "f(x) = x^3 sin(1/x) for x != 0, f(0) = 0; which statement is correct",
+    "text": "f(x) = $x^{3}$ sin(1/x) for x != 0, f(0) = 0; which statement is correct",
     "options": [
       {
         "key": "1",
-        "text": "(1) f''(2/π) = (24 - π^2)/(2π)",
+        "text": "(1) f''(2/π) = (24 - $π^{2}$)/(2π)",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) f''(2/π) = (12 - π^2)/(2π)",
+        "text": "(2) f''(2/π) = (12 - $π^{2}$)/(2π)",
         "image": null
       },
       {
@@ -4641,7 +4641,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "f = x^x has f' = x^x (1 + ln x) >= 0 for x >= 1/e",
-    "text": "Interval in which f(x) = x^x, x > 0, is strictly increasing",
+    "text": "Interval in which f(x) = $x^{x}$, x > 0, is strictly increasing",
     "options": [
       {
         "key": "1",
@@ -4660,7 +4660,7 @@
       },
       {
         "key": "4",
-        "text": "(4) [1/e^2, 1)",
+        "text": "(4) [1/$e^{2}$, 1)",
         "image": null
       }
     ],
@@ -4710,7 +4710,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Needs a substitution that reduces the integrand; key from printed answer",
-    "text": "Value of the definite integral from 0 to π/4 of (cos^2 x sin x) / (cos^3 x + sin^3 x)^2 dx; integrand transcribed from PDF, check it",
+    "text": "Value of the definite integral from 0 to π/4 of ($cos^{2}$ x sin x) / ($cos^{3}$ x + $sin^{3}$ x)^2 dx; integrand transcribed from PDF, check it",
     "options": [
       {
         "key": "1",
@@ -4848,26 +4848,26 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Integrating factor e^(tan^-1 x) reduces the equation to a standard linear form; apply y(1) = 0",
-    "text": "(1 + x^2) dy/dx + y = e^(tan^-1 x), y(1) = 0; find y(0)",
+    "text": "(1 + $x^{2}$) dy/dx + y = $e^{tan^-1 x}$, y(1) = 0; find y(0)",
     "options": [
       {
         "key": "1",
-        "text": "(1) (1/2)(e^(π/2) - 1)",
+        "text": "(1) (1/2)($e^{π/2}$ - 1)",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) (1/2)(1 - e^(π/2))",
+        "text": "(2) (1/2)(1 - $e^{π/2}$)",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) (1/4)(1 - e^(π/2))",
+        "text": "(3) (1/4)(1 - $e^{π/2}$)",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) (1/4)(e^(π/2) - 1)",
+        "text": "(4) (1/4)($e^{π/2}$ - 1)",
         "image": null
       }
     ],
@@ -4917,7 +4917,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Rearrange to standard linear form in log x and apply the initial condition at x = 1/e; key from printed answer",
-    "text": "(2x log_e x) dy/dx + 2y = (3/x) log_e x, x > 0, with y(1/e) = 0; find y(e)",
+    "text": "(2x $log_{e}$ x) dy/dx + 2y = (3/x) $log_{e}$ x, x > 0, with y(1/e) = 0; find y(e)",
     "options": [
       {
         "key": "1",
@@ -5124,7 +5124,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Needs the product of (4 + x_i^2) over the four roots of the quartic, expressed through its coefficients; key from printed answer",
-    "text": "Roots x1, x2, x3, x4 of 4x^4 + 8x^3 - 17x^2 - 12x + 9 = 0; (4 + x1^2)(4 + x2^2)(4 + x3^2)(4 + x4^2) = (125/16) m; find m (integer)",
+    "text": "Roots x1, x2, x3, x4 of $4x^{4}$ + $8x^{3}$ - $17x^{2}$ - 12x + 9 = 0; (4 + $x1^{2}$)(4 + $x2^{2}$)(4 + $x3^{2}$)(4 + $x4^{2}$) = (125/16) m; find m (integer)",
     "options": [],
     "correct_answer": [
       "221"
@@ -5172,7 +5172,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Recurrence T_r = 3 T_(r-1) + 6^r with a closed-form sum; key from printed answer",
-    "text": "T1 = 6 and T_r = 3 T_(r-1) + 6^r for r = 2, 3, ...; if the sum of the first n terms is (1/5)(n^2 - 12n + 39)(4·6^n - 5·3^n + 1), find n (integer)",
+    "text": "T1 = 6 and $T_{r}$ = 3 $T_{r-1}$ + $6^{r}$ for r = 2, 3, ...; if the sum of the first n terms is (1/5)($n^{2}$ - 12n + 39)(4·$6^{n}$ - 5·$3^{n}$ + 1), find n (integer)",
     "options": [],
     "correct_answer": [
       "6"
@@ -5220,7 +5220,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Use the second, third and fourth terms to find n and x, y; key from printed answer",
-    "text": "Second, third and fourth terms in the expansion of (x + y)^n are 135, 30 and 10/3; find 6(n^3 + x^2 + y) (integer)",
+    "text": "Second, third and fourth terms in the expansion of (x + y)^n are 135, 30 and 10/3; find 6($n^{3}$ + $x^{2}$ + y) (integer)",
     "options": [],
     "correct_answer": [
       "806"
@@ -5316,7 +5316,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Tangent lines from P(0, 1) to the parabola 9x^2 + 12x + 18y - 14 = 0 and an isosceles-triangle condition; key from printed answer",
-    "text": "L1, L2 through P(0, 1) touching 9x^2 + 12x + 18y - 14 = 0; Q and R on L1, L2 with triangle PQR isosceles with base QR; slopes of QR are m1, m2; find 16(m1^2 + m2^2) (integer)",
+    "text": "L1, L2 through P(0, 1) touching $9x^{2}$ + 12x + 18y - 14 = 0; Q and R on L1, L2 with triangle PQR isosceles with base QR; slopes of QR are m1, m2; find 16($m1^{2}$ + $m2^{2}$) (integer)",
     "options": [],
     "correct_answer": [
       "68"
@@ -5412,7 +5412,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Combine the cot^-1 terms using the tangent addition formula to solve for n; key from printed answer",
-    "text": "For n in N, cot^-1 3 + cot^-1 4 + cot^-1 5 + cot^-1 n = π/4; find n (integer)",
+    "text": "For n in N, $cot^{-1}$ 3 + $cot^{-1}$ 4 + $cot^{-1}$ 5 + $cot^{-1}$ n = π/4; find n (integer)",
     "options": [],
     "correct_answer": [
       "47"
@@ -5460,7 +5460,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Reduce the ratio of integrals and sum over k = 1 to 10; key from printed answer",
-    "text": "r_k = (integral 0 to 1 of (1 - z^7)^k dz) / (integral 0 to 1 of (1 - z^7)^(k+1) dz), k in N; find sum over k = 1 to 10 of 1/(7(r_k - 1)) (integer)",
+    "text": "$r_{k}$ = (integral 0 to 1 of (1 - $z^{7}$)^k dz) / (integral 0 to 1 of (1 - $z^{7}$)^(k+1) dz), k in N; find sum over k = 1 to 10 of 1/(7($r_{k}$ - 1)) (integer)",
     "options": [],
     "correct_answer": [
       "65"

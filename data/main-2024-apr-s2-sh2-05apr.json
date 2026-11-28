@@ -95,26 +95,26 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "dimensions of a from P and V, of b from V, then combine",
-    "text": "What is the dimensional formula of ab^-1 in the equation (P + a/V^2)(V - b) = RT, where letters have their usual meaning.",
+    "text": "What is the dimensional formula of $ab^{-1}$ in the equation (P + a/$V^{2}$)(V - b) = RT, where letters have their usual meaning.",
     "options": [
       {
         "key": "1",
-        "text": "[M^-1 L^5 T^3]",
+        "text": "[$M^{-1}$ $L^{5}$ $T^{3}$]",
         "image": null
       },
       {
         "key": "2",
-        "text": "[M^6 L^7 T^4]",
+        "text": "[$M^{6}$ $L^{7}$ $T^{4}$]",
         "image": null
       },
       {
         "key": "3",
-        "text": "[ML^2 T^-2]",
+        "text": "[$ML^{2}$ $T^{-2}$]",
         "image": null
       },
       {
         "key": "4",
-        "text": "[M^0 L^3 T^-2]",
+        "text": "[$M^{0}$ $L^{3}$ $T^{-2}$]",
         "image": null
       }
     ],
@@ -168,11 +168,11 @@
     "question_type": "single",
     "difficulty": "easy",
     "difficulty_reason": "a = omega^2 r with omega = 2 pi (120)/180 s^-1 and r = 9 m",
-    "text": "A man carrying a monkey on his shoulder does cycling smoothly on a circular track of radius 9 m and completes 120 revolutions in 3 minutes. The magnitude of centripetal acceleration of monkey is (in m/s^2) :",
+    "text": "A man carrying a monkey on his shoulder does cycling smoothly on a circular track of radius 9 m and completes 120 revolutions in 3 minutes. The magnitude of centripetal acceleration of monkey is (in m/$s^{2}$) :",
     "options": [
       {
         "key": "1",
-        "text": "57600 pi^2 m/s^2",
+        "text": "57600 $pi^{2}$ m/$s^{2}$",
         "image": null
       },
       {
@@ -182,12 +182,12 @@
       },
       {
         "key": "3",
-        "text": "4 pi^2 m/s^2",
+        "text": "4 $pi^{2}$ m/$s^{2}$",
         "image": null
       },
       {
         "key": "4",
-        "text": "16 pi^2 m/s^2",
+        "text": "16 $pi^{2}$ m/$s^{2}$",
         "image": null
       }
     ],
@@ -319,17 +319,17 @@
       },
       {
         "key": "2",
-        "text": "t^(3/2)",
+        "text": "$t^{3/2}$",
         "image": null
       },
       {
         "key": "3",
-        "text": "t^2",
+        "text": "$t^{2}$",
         "image": null
       },
       {
         "key": "4",
-        "text": "t^(2/3)",
+        "text": "$t^{2/3}$",
         "image": null
       }
     ],
@@ -383,26 +383,26 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Kepler's third law: r is proportional to (M T^2)^(1/3), with M = M/4 and T = 6 h, gives 1.05 x 10^4 km",
-    "text": "A satellite revolving around a planet in stationary orbit has time period 6 hours. The mass of planet is one-fourth the mass of earth. The radius orbit of planet is : (Given radius of geo-stationary orbit for earth is 4.2 x 10^4 km)",
+    "text": "A satellite revolving around a planet in stationary orbit has time period 6 hours. The mass of planet is one-fourth the mass of earth. The radius orbit of planet is : (Given radius of geo-stationary orbit for earth is 4.2 x $10^{4}$ km)",
     "options": [
       {
         "key": "1",
-        "text": "1.4 x 10^4 km",
+        "text": "1.4 x $10^{4}$ km",
         "image": null
       },
       {
         "key": "2",
-        "text": "1.05 x 10^4 km",
+        "text": "1.05 x $10^{4}$ km",
         "image": null
       },
       {
         "key": "3",
-        "text": "8.4 x 10^4 km",
+        "text": "8.4 x $10^{4}$ km",
         "image": null
       },
       {
         "key": "4",
-        "text": "1.68 x 10^5 km",
+        "text": "1.68 x $10^{5}$ km",
         "image": null
       }
     ],
@@ -602,22 +602,22 @@
     "options": [
       {
         "key": "1",
-        "text": "sqrt(2) n pi d^2",
+        "text": "sqrt(2) n pi $d^{2}$",
         "image": null
       },
       {
         "key": "2",
-        "text": "1/(sqrt(2 n pi d^2))",
+        "text": "1/(sqrt(2 n pi $d^{2}$))",
         "image": null
       },
       {
         "key": "3",
-        "text": "1/(sqrt(2) n pi d^2)",
+        "text": "1/(sqrt(2) n pi $d^{2}$)",
         "image": null
       },
       {
         "key": "4",
-        "text": "1/(sqrt(2) n^2 pi^2 d^2)",
+        "text": "1/(sqrt(2) $n^{2}$ $pi^{2}$ $d^{2}$)",
         "image": null
       }
     ],
@@ -736,7 +736,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "full-scale current from the voltmeter range (10 V / 500 ohm = 0.02 A), then the shunt S = 0.02 x 100/(10 - 0.02)",
-    "text": "A galvanometer of resistance 100 ohm when connected in series with 400 ohm measures a voltage of upto 10 V. The value of resistance required to convert the galvanometer into ammeter to read upto 10 A is x x 10^-2 ohm. The value of x is :",
+    "text": "A galvanometer of resistance 100 ohm when connected in series with 400 ohm measures a voltage of upto 10 V. The value of resistance required to convert the galvanometer into ammeter to read upto 10 A is x x $10^{-2}$ ohm. The value of x is :",
     "options": [
       {
         "key": "1",
@@ -1016,7 +1016,7 @@
     "question_type": "single",
     "difficulty": "easy",
     "difficulty_reason": "recall the EM spectrum wavelength ranges",
-    "text": "Match List-I with List-II. List-I: (A) Infra-red (B) Ultraviolet (C) X-rays (D) Gamma rays. List-II: (I) less than 10^-3 nm (II) 400 nm to 1 nm (III) 1 mm to 700 nm (IV) 1 nm to 10^-3 nm.",
+    "text": "Match List-I with List-II. List-I: (A) Infra-red (B) Ultraviolet (C) X-rays (D) Gamma rays. List-II: (I) less than $10^{-3}$ nm (II) 400 nm to 1 nm (III) 1 mm to 700 nm (IV) 1 nm to $10^{-3}$ nm.",
     "options": [
       {
         "key": "1",
@@ -1718,7 +1718,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "B = mu0 n I, with n = m/L, gives m = 500",
-    "text": "A solenoid of length 0.5 m has a radius of 1 cm and is made up of m number of turns. It carries a current of 5 A. If the magnitude of the magnetic field inside the solenoid is 6.28 x 10^-3 T then the value of m is ______.",
+    "text": "A solenoid of length 0.5 m has a radius of 1 cm and is made up of m number of turns. It carries a current of 5 A. If the magnitude of the magnetic field inside the solenoid is 6.28 x $10^{-3}$ T then the value of m is ______.",
     "options": [],
     "correct_answer": [
       "500"
@@ -1814,7 +1814,7 @@
     "question_type": "integer",
     "difficulty": "easy",
     "difficulty_reason": "first minimum at y = lambda D / a = 550e-9 x 1 / 0.2e-3 = 2.75 mm",
-    "text": "In a single slit experiment, a parallel beam of green light of wavelength 550 nm passes through a slit of width 0.20 mm. The transmitted light is collected on a screen 100 cm away. The distance of first order minima from the central maximum will be x x 10^-5 m. The value of x is ______.",
+    "text": "In a single slit experiment, a parallel beam of green light of wavelength 550 nm passes through a slit of width 0.20 mm. The transmitted light is collected on a screen 100 cm away. The distance of first order minima from the central maximum will be x x $10^{-5}$ m. The value of x is ______.",
     "options": [],
     "correct_answer": [
       "275"
@@ -2687,12 +2687,12 @@
       },
       {
         "key": "2",
-        "text": "E_cell = 0.80 V",
+        "text": "$E_{cell}$ = 0.80 V",
         "image": null
       },
       {
         "key": "3",
-        "text": "E_cell = -0.80 V",
+        "text": "$E_{cell}$ = -0.80 V",
         "image": null
       },
       {
@@ -3303,7 +3303,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "for n = 4, |m_l| = 1 occurs for l = 1, 2, 3 (two orbitals each), and each orbital gives one electron with m_s = -1/2",
-    "text": "In an atom, total number of electrons having quantum numbers n = 4, |m_l| = 1 and m_s = -1/2 is ______.",
+    "text": "In an atom, total number of electrons having quantum numbers n = 4, |$m_{l}$| = 1 and $m_{s}$ = -1/2 is ______.",
     "options": [],
     "correct_answer": [
       "6"
@@ -3447,7 +3447,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Rf = distance moved by sample / distance moved by solvent front: Rf(A) = 5.0/12.5 = 0.4, Rf(C) = 10.0/12.5 = 0.8, so ratio 0.5",
-    "text": "Using the given figure, the ratio of Rf values of sample A and sample C is x x 10^-2. Value of x is ______.",
+    "text": "Using the given figure, the ratio of Rf values of sample A and sample C is x x $10^{-2.}$ Value of x is ______.",
     "options": [],
     "correct_answer": [
       "50"
@@ -3496,7 +3496,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "get the degree of dissociation from Ka, then the freezing point depression with the van't Hoff factor",
-    "text": "Considering acetic acid dissociates in water, its dissociation constant is 6.25 x 10^-5. If 5 mL of acetic acid (density 1.2 g/mL) is dissolved in 1 litre water, the solution will freeze at -x x 10^-2 degrees C, provided pure water freezes at 0 degrees C. Given Kf = 1.86 K kg/mol, molar mass of acetic acid = 60 g/mol, molar mass of water = 18 g/mol, density of water = 1 g/cm^3.",
+    "text": "Considering acetic acid dissociates in water, its dissociation constant is 6.25 x $10^{-5.}$ If 5 mL of acetic acid (density 1.2 g/mL) is dissolved in 1 litre water, the solution will freeze at -x x $10^{-2}$ degrees C, provided pure water freezes at 0 degrees C. Given Kf = 1.86 K kg/mol, molar mass of acetic acid = 60 g/mol, molar mass of water = 18 g/mol, density of water = 1 g/$cm^{3.}$",
     "options": [],
     "correct_answer": [
       "19"
@@ -3548,7 +3548,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "find the rate law exponents from the rates, then the ratio of rates using the gas pressures given",
-    "text": "For the single step gas phase reaction 2A(g) + B(g) -> C(g) at constant temperature, the initial rate r1 is recorded when the reaction starts with 1.5 atm of A and 0.7 atm of B. After some time, the rate r2 is recorded when the pressure of C becomes 0.5 atm. The ratio r1 : r2 is ______ x 10^-1 (nearest integer).",
+    "text": "For the single step gas phase reaction 2A(g) + B(g) -> C(g) at constant temperature, the initial rate r1 is recorded when the reaction starts with 1.5 atm of A and 0.7 atm of B. After some time, the rate r2 is recorded when the pressure of C becomes 0.5 atm. The ratio r1 : r2 is ______ x $10^{-1}$ (nearest integer).",
     "options": [],
     "correct_answer": [
       "315"
@@ -3930,7 +3930,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "the AP condition gives a quadratic in 4^(...), minimise K; least K gives 10",
-    "text": "For x >= 0, the least value of K, for which 4^(1+x) + 4^(1-x), K/2, 16^x + 16^(-x) are three consecutive terms of an A.P., is equal to :",
+    "text": "For x >= 0, the least value of K, for which $4^{1+x}$ + $4^{1-x}$, K/2, $16^{x}$ + $16^{-x}$ are three consecutive terms of an A.P., is equal to :",
     "options": [
       {
         "key": "1",
@@ -3999,7 +3999,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "general term of (cuberoot(3)/x + 2x/cuberoot(5))^12, set the power of x to zero, then compute the constant term",
-    "text": "If the constant term in the expansion of (cuberoot(3)/x + 2x/cuberoot(5))^12, x != 0, is alpha x 2^8 x cuberoot(3), then 25 alpha is equal to :",
+    "text": "If the constant term in the expansion of (cuberoot(3)/x + 2x/cuberoot(5))^12, x != 0, is alpha x $2^{8}$ x cuberoot(3), then 25 alpha is equal to :",
     "options": [
       {
         "key": "1",
@@ -4154,17 +4154,17 @@
       },
       {
         "key": "2",
-        "text": "2r^2 - 4r + 1 = 0",
+        "text": "$2r^{2}$ - 4r + 1 = 0",
         "image": null
       },
       {
         "key": "3",
-        "text": "2r^2 - 8r + 7 = 0",
+        "text": "$2r^{2}$ - 8r + 7 = 0",
         "image": null
       },
       {
         "key": "4",
-        "text": "r^2 - 8r + 8 = 0",
+        "text": "$r^{2}$ - 8r + 8 = 0",
         "image": null
       }
     ],
@@ -4214,7 +4214,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "find the common chord of C1 and C2, its y-intercept P, then the distance from the centre of C1",
-    "text": "Let the circle C1: x^2 + y^2 - 2(x+y) + 1 = 0 and C2 be a circle having centre at (-1, 0) and radius 2. If the line of the common chord of C1 and C2 intersects the y-axis at the point P, then the square of the distance of P from the centre of C1 is :",
+    "text": "Let the circle C1: $x^{2}$ + $y^{2}$ - 2(x+y) + 1 = 0 and C2 be a circle having centre at (-1, 0) and radius 2. If the line of the common chord of C1 and C2 intersects the y-axis at the point P, then the square of the distance of P from the centre of C1 is :",
     "options": [
       {
         "key": "1",
@@ -4437,22 +4437,22 @@
     "options": [
       {
         "key": "1",
-        "text": "m^2 + n^2 - mn = 39",
+        "text": "$m^{2}$ + $n^{2}$ - mn = 39",
         "image": null
       },
       {
         "key": "2",
-        "text": "m^2 + n^2 - m - n = 46",
+        "text": "$m^{2}$ + $n^{2}$ - m - n = 46",
         "image": null
       },
       {
         "key": "3",
-        "text": "m^2 + n^2 + m + n = 64",
+        "text": "$m^{2}$ + $n^{2}$ + m + n = 64",
         "image": null
       },
       {
         "key": "4",
-        "text": "m^2 + n^2 + mn = 68",
+        "text": "$m^{2}$ + $n^{2}$ + mn = 68",
         "image": null
       }
     ],
@@ -4502,7 +4502,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "f(g(x)) = |g(x) - 1|; both pieces give value 0 at x = 0, so it is not one-one. Printed key says neither one-one nor onto; the range looks like [0, inf), so verify",
-    "text": "Let f, g: R -> R be defined as f(x) = |x - 1| and g(x) = e^x for x >= 0, x + 1 for x <= 0. Then the function f(g(x)) is",
+    "text": "Let f, g: R -> R be defined as f(x) = |x - 1| and g(x) = $e^{x}$ for x >= 0, x + 1 for x <= 0. Then the function f(g(x)) is",
     "options": [
       {
         "key": "1",
@@ -4575,7 +4575,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "the floor-function jumps of x^2 and x inside [-1, 2] give the discontinuities",
-    "text": "Let f: [-1, 2] -> R be given by f(x) = 2x^2 + x + [x^2] - [x], where [t] denotes the greatest integer less than or equal to t. The number of points, where f is not continuous, is :",
+    "text": "Let f: [-1, 2] -> R be given by f(x) = $2x^{2}$ + x + [$x^{2}$] - [x], where [t] denotes the greatest integer less than or equal to t. The number of points, where f is not continuous, is :",
     "options": [
       {
         "key": "1",
@@ -4713,7 +4713,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "substitute to express the integral as a Beta function, then compare with a x beta(b, c)",
-    "text": "Let beta(m, n) = integral from 0 to 1 of x^(m-1)(1-x)^(n-1) dx, m, n > 0. If integral from 0 to 1 of (1 - x^10)^20 dx = a x beta(b, c), then 100(a + b + c) equals",
+    "text": "Let beta(m, n) = integral from 0 to 1 of $x^{m-1}$(1-x)^(n-1) dx, m, n > 0. If integral from 0 to 1 of (1 - $x^{10}$)^20 dx = a x beta(b, c), then 100(a + b + c) equals",
     "options": [
       {
         "key": "1",
@@ -4855,22 +4855,22 @@
     "options": [
       {
         "key": "1",
-        "text": "(x^2 - y^2 + 2xy) dx = (x^2 - y^2 - 2xy) dy",
+        "text": "($x^{2}$ - $y^{2}$ + 2xy) dx = ($x^{2}$ - $y^{2}$ - 2xy) dy",
         "image": null
       },
       {
         "key": "2",
-        "text": "(x^2 + y^2 + 2xy) dx = (x^2 + y^2 - 2xy) dy",
+        "text": "($x^{2}$ + $y^{2}$ + 2xy) dx = ($x^{2}$ + $y^{2}$ - 2xy) dy",
         "image": null
       },
       {
         "key": "3",
-        "text": "(x^2 + y^2 - 2xy) dx = (x^2 + y^2 + 2xy) dy",
+        "text": "($x^{2}$ + $y^{2}$ - 2xy) dx = ($x^{2}$ + $y^{2}$ + 2xy) dy",
         "image": null
       },
       {
         "key": "4",
-        "text": "(x^2 - y^2 + 2xy) dx = (x^2 - y^2 + 2xy) dy",
+        "text": "($x^{2}$ - $y^{2}$ + 2xy) dx = ($x^{2}$ - $y^{2}$ + 2xy) dy",
         "image": null
       }
     ],
@@ -5139,7 +5139,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "count (a,b,c) with one real root larger than the other, out of 6^3 total cases, and find p",
-    "text": "The coefficients a, b, c in ax^2 + bx + c = 0 are chosen from {1, 2, 3, 4, 5, 6}. If the probability of this equation having one real root bigger than the other is p, then 216 p equals :",
+    "text": "The coefficients a, b, c in $ax^{2}$ + bx + c = 0 are chosen from {1, 2, 3, 4, 5, 6}. If the probability of this equation having one real root bigger than the other is p, then 216 p equals :",
     "options": [
       {
         "key": "1",
@@ -5257,7 +5257,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "sum the given series in closed form to get log form, then match a, b with gcd(a,b) = 1",
-    "text": "If 1 + (sqrt3 - sqrt2)/(2 sqrt3) + (5 - 2 sqrt6)/18 + ... upto infinity = 2 + (sqrt(b/a) + 1) log_e(a/b), where a and b are integers with gcd(a, b) = 1, then 11a + 18b is equal to ______.",
+    "text": "If 1 + (sqrt3 - sqrt2)/(2 sqrt3) + (5 - 2 sqrt6)/18 + ... upto infinity = 2 + (sqrt(b/a) + 1) $log_{e}$(a/b), where a and b are integers with gcd(a, b) = 1, then 11a + 18b is equal to ______.",
     "options": [],
     "correct_answer": [
       "76"
@@ -5309,7 +5309,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "factor the equation in sin x, then count roots in [-pi, pi]",
-    "text": "The number of solutions of sin^2 x + (2 + 2x - x^2) sin x - 3(x - 1)^2 = 0, where -pi <= x <= pi, is ______.",
+    "text": "The number of solutions of $sin^{2}$ x + (2 + 2x - $x^{2}$) sin x - 3(x - 1)^2 = 0, where -pi <= x <= pi, is ______.",
     "options": [],
     "correct_answer": [
       "2"
@@ -5357,7 +5357,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "the tangent to y^2 = 4(x-9) perpendicular to 2x - y = 10 gives P, then its distance from the circle's centre",
-    "text": "Let a line perpendicular to the line 2x - y = 10 touch the parabola y^2 = 4(x - 9) at the point P. The distance of the point P from the centre of the circle x^2 + y^2 - 14x - 8y + 56 = 0 is ______.",
+    "text": "Let a line perpendicular to the line 2x - y = 10 touch the parabola $y^{2}$ = 4(x - 9) at the point P. The distance of the point P from the centre of the circle $x^{2}$ + $y^{2}$ - 14x - 8y + 56 = 0 is ______.",
     "options": [],
     "correct_answer": [
       "10"
@@ -5409,7 +5409,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "a is the positive root of 2x^2 + x - 2 = 0; expand the cosine limit to get alpha + beta sqrt(17)",
-    "text": "Let a > 0 be a root of the equation 2x^2 + x - 2 = 0. If limit as x -> 1/a of 16(1 - cos(2 + x - 2x^2))/(1 - ax)^2 = alpha + beta sqrt(17), where alpha, beta are integers, then alpha + beta is equal to ______.",
+    "text": "Let a > 0 be a root of the equation $2x^{2}$ + x - 2 = 0. If limit as x -> 1/a of 16(1 - cos(2 + x - $2x^{2}$))/(1 - ax)^2 = alpha + beta sqrt(17), where alpha, beta are integers, then alpha + beta is equal to ______.",
     "options": [],
     "correct_answer": [
       "170"
@@ -5505,7 +5505,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "find the extremes of the expression, then the required difference of squares",
-    "text": "Let the maximum and minimum values of (sqrt(8x - x^2 - 12) - 4)^2 + (x - 7)^2, x in R, be M and m, respectively. Then M^2 - m^2 is equal to ______.",
+    "text": "Let the maximum and minimum values of (sqrt(8x - $x^{2}$ - 12) - 4)^2 + (x - 7)^2, x in R, be M and m, respectively. Then $M^{2}$ - $m^{2}$ is equal to ______.",
     "options": [],
     "correct_answer": [
       "1600"
@@ -5553,7 +5553,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "evaluate f(t) in closed form, then integrate pi^2/f(t) over (0, pi/2)",
-    "text": "If f(t) = integral from 0 to pi of 2x dx/(1 - cos^2 t sin^2 x), 0 < t < pi, then the value of integral from 0 to pi/2 of pi^2 dt/f(t) equals ______.",
+    "text": "If f(t) = integral from 0 to pi of 2x dx/(1 - $cos^{2}$ t $sin^{2}$ x), 0 < t < pi, then the value of integral from 0 to pi/2 of $pi^{2}$ dt/f(t) equals ______.",
     "options": [],
     "correct_answer": [
       "1"
@@ -5602,7 +5602,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "solve the linear ODE with y(0) = 0, then integrate the area between f(x) and y - x = 4",
-    "text": "Let y = y(x) be the solution of the differential equation dy/dx + 2x y/(1+x^2)^2 = x e^(1/(1+x^2)), y(0) = 0. Then the area enclosed by the curve f(x) = y(x) e^(-1/(1+x^2)) and the line y - x = 4 is ______.",
+    "text": "Let y = y(x) be the solution of the differential equation dy/dx + 2x y/(1+$x^{2}$)^2 = x e^(1/(1+$x^{2}$)), y(0) = 0. Then the area enclosed by the curve f(x) = y(x) e^(-1/(1+$x^{2}$)) and the line y - x = 4 is ______.",
     "options": [],
     "correct_answer": [
       "18"

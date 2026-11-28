@@ -22,7 +22,7 @@
     "question_type": "single",
     "difficulty": "easy",
     "difficulty_reason": "Direct recall: specific heat is L^2 T^-2 K^-1 (correct); gas constant dimensions are ML^2 T^-2 K^-1, so the stated ML^2 T^-1 K^-1 is wrong",
-    "text": "Statement I: dimensions of specific heat are L^2 T^-2 K^-1. Statement II: dimensions of gas constant are ML^2 T^-1 K^-1; choose the correct option",
+    "text": "Statement I: dimensions of specific heat are $L^{2}$ $T^{-2}$ $K^{-1.}$ Statement II: dimensions of gas constant are $ML^{2}$ $T^{-1}$ $K^{-1}$; choose the correct option",
     "options": [
       {
         "key": "1",
@@ -160,7 +160,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Chain and body form one system; force from branch equals total weight of body plus chain",
-    "text": "Body of weight 200 N suspended from a tree branch through a chain of mass 10 kg; force by which branch pulls the chain (g = 10 m/s^2)",
+    "text": "Body of weight 200 N suspended from a tree branch through a chain of mass 10 kg; force by which branch pulls the chain (g = 10 m/$s^{2}$)",
     "options": [
       {
         "key": "1",
@@ -578,12 +578,12 @@
     "options": [
       {
         "key": "1",
-        "text": "(1) 70 K_B T",
+        "text": "(1) 70 $K_{B}$ T",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) 35 K_B T",
+        "text": "(2) 35 $K_{B}$ T",
         "image": null
       },
       {
@@ -712,26 +712,26 @@
     "question_type": "single",
     "difficulty": "easy",
     "difficulty_reason": "Current I = P/V = 0.5 A; number of electrons per second n = I/e = 3.125 x 10^18",
-    "text": "Number of electrons flowing per second in the filament of a 110 W bulb operating at 220 V (e = 1.6 x 10^-19 C)",
+    "text": "Number of electrons flowing per second in the filament of a 110 W bulb operating at 220 V (e = 1.6 x $10^{-19}$ C)",
     "options": [
       {
         "key": "1",
-        "text": "(1) 6.25 x 10^17",
+        "text": "(1) 6.25 x $10^{17}$",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) 1.25 x 10^19",
+        "text": "(2) 1.25 x $10^{19}$",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) 6.25 x 10^18",
+        "text": "(3) 6.25 x $10^{18}$",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) 31.25 x 10^17",
+        "text": "(4) 31.25 x $10^{17}$",
         "image": null
       }
     ],
@@ -919,7 +919,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Intensity I = c eps0 E0^2 / 2 with E0 = 600 V/m gives 486 W/m^2",
-    "text": "Electromagnetic wave E_y = 600 sin(ωt - kx) V/m; intensity of the associated beam (W/m^2), eps0 = 9 x 10^-12",
+    "text": "Electromagnetic wave $E_{y}$ = 600 sin(ωt - kx) V/m; intensity of the associated beam (W/$m^{2}$), eps0 = 9 x $10^{-12}$",
     "options": [
       {
         "key": "1",
@@ -1195,26 +1195,26 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Paschen longest wavelength is n = 4 to 3: 1/λ = R(1/9 - 1/16) = 7R/144, so λ = 1.876 x 10^-6 m",
-    "text": "Longest wavelength of the Paschen series of hydrogen (R_H = 1.097 x 10^7 per m)",
+    "text": "Longest wavelength of the Paschen series of hydrogen ($R_{H}$ = 1.097 x $10^{7}$ per m)",
     "options": [
       {
         "key": "1",
-        "text": "(1) 3.646 x 10^-6 m",
+        "text": "(1) 3.646 x $10^{-6}$ m",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) 1.876 x 10^-6 m",
+        "text": "(2) 1.876 x $10^{-6}$ m",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) 2.973 x 10^-6 m",
+        "text": "(3) 2.973 x $10^{-6}$ m",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) 1.094 x 10^-6 m",
+        "text": "(4) 1.094 x $10^{-6}$ m",
         "image": null
       }
     ],
@@ -1402,7 +1402,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "x^2 = 1 + t^2 gives v = t/x and a = 1/x^3, so n = 3",
-    "text": "Particle moves so that displacement x satisfies x^2 = 1 + t^2; acceleration at time t is x^(-n); find n (integer)",
+    "text": "Particle moves so that displacement x satisfies $x^{2}$ = 1 + $t^{2}$; acceleration at time t is $x^{-n}$; find n (integer)",
     "options": [],
     "correct_answer": [
       "3"
@@ -1450,7 +1450,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Balls at the mid-points of the sides lie at distance 1/sqrt(3) from the centroid, so I = (2+4+6)(1/3) = 4 kg m^2",
-    "text": "Three balls of masses 2 kg, 4 kg and 6 kg at the centre of the edges of an equilateral triangle of side 2 m; moment of inertia about axis through centroid and perpendicular to plane (kg m^2)",
+    "text": "Three balls of masses 2 kg, 4 kg and 6 kg at the centre of the edges of an equilateral triangle of side 2 m; moment of inertia about axis through centroid and perpendicular to plane (kg $m^{2}$)",
     "options": [],
     "correct_answer": [
       "4"
@@ -1498,7 +1498,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Sag of a wire under load from geometry and Y = (F L)/(A ΔL), with small angle approximation; key from printed answer",
-    "text": "Wire of cross-section A, Young's modulus 2 x 10^11 N/m^2, length 2 m, stretched between rigid supports; 2 kg mass at middle sags; value of A in units of 10^-4 m^2 with angle θ = 1/100 rad",
+    "text": "Wire of cross-section A, Young's modulus 2 x $10^{11}$ N/$m^{2}$, length 2 m, stretched between rigid supports; 2 kg mass at middle sags; value of A in units of $10^{-4}$ $m^{2}$ with angle θ = 1/100 rad",
     "options": [],
     "correct_answer": [
       "1"
@@ -1594,7 +1594,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Capacitor with half-dielectric filling: requires force formula and dielectric partition; key from printed answer",
-    "text": "Capacitor 10 uF with plates 10 mm apart and area 4 cm^2 is half filled with media K1 = 2 and K2 = 3 (as in figure); new force between the plates is 8 N; supply voltage in units of 10^-4 V",
+    "text": "Capacitor 10 uF with plates 10 mm apart and area 4 $cm^{2}$ is half filled with media K1 = 2 and K2 = 3 (as in figure); new force between the plates is 8 N; supply voltage in units of $10^{-4}$ V",
     "options": [],
     "correct_answer": [
       "93"
@@ -1690,7 +1690,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Work = N I A B = 100 x 1e-3 x 5e-3 x 0.2 = 1e-4 J = 100 μJ",
-    "text": "Coil of 100 turns, area 5 x 10^-3 m^2, current 1 mA, in uniform field 0.20 T with plane perpendicular to field; work done in turning through 90 degrees (μJ)",
+    "text": "Coil of 100 turns, area 5 x $10^{-3}$ $m^{2}$, current 1 mA, in uniform field 0.20 T with plane perpendicular to field; work done in turning through 90 degrees (μJ)",
     "options": [],
     "correct_answer": [
       "100"
@@ -1738,7 +1738,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "At maximum current f = 1/(2π sqrt(LC)); with L = 0.1 H and C = 25 nF this gives about 3.16 kHz, not the printed 10; check this item",
-    "text": "Series LCR circuit with R = 200 ohm, L = 100 mH, variable C set to 25 nF gives maximum current; frequency of ac source in units of 10^3 Hz (π^2 = 10)",
+    "text": "Series LCR circuit with R = 200 ohm, L = 100 mH, variable C set to 25 nF gives maximum current; frequency of ac source in units of $10^{3}$ Hz ($π^{2}$ = 10)",
     "options": [],
     "correct_answer": [
       "10"
@@ -2641,7 +2641,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Match each species with its e and t2 electron counts and the redox type; key from printed answer",
-    "text": "Match List I (A TiCl4, B [FeO4]2-, C [FeCl4]-, D [CoCl4]2-) with List II (I e2 t2^0, II e4 t2^3, III e0 t2^0, IV e2 t2^3); choose the correct answer",
+    "text": "Match List I (A TiCl4, B [FeO4]2-, C [FeCl4]-, D [CoCl4]2-) with List II (I e2 $t2^{0}$, II e4 $t2^{3}$, III e0 $t2^{0}$, IV e2 $t2^{3}$); choose the correct answer",
     "options": [
       {
         "key": "1",
@@ -3074,7 +3074,7 @@
       },
       {
         "key": "4",
-        "text": "(4) CO3^2-",
+        "text": "(4) $CO3^{2}$-",
         "image": null
       }
     ],
@@ -3310,7 +3310,7 @@
     "question_type": "integer",
     "difficulty": "easy",
     "difficulty_reason": "E_n = -3.4 eV for n = 2 so KE = +3.4 eV = 34 x 10^-1 eV",
-    "text": "Energy of an electron in the first excited state of hydrogen is -3.4 eV; kinetic energy of the same electron is x x 10^-1 eV (nearest integer)",
+    "text": "Energy of an electron in the first excited state of hydrogen is -3.4 eV; kinetic energy of the same electron is x x $10^{-1}$ eV (nearest integer)",
     "options": [],
     "correct_answer": [
       "34"
@@ -3454,7 +3454,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Two first-order reactions with half-life ratio 5:2; times to 2/3 completion and 45th... combine logarithms (log 3 and log 5 given); key from printed answer",
-    "text": "Reaction 1 (A + B -> C) and Reaction 2 (P -> Q) first order with half-life ratio 5:2; t1 and t2 are times for 2/3 completion of Reaction 1 and 45 min...; ratio t1 : t2 in units of 10^-1 (nearest integer)",
+    "text": "Reaction 1 (A + B -> C) and Reaction 2 (P -> Q) first order with half-life ratio 5:2; t1 and t2 are times for 2/3 completion of Reaction 1 and 45 min...; ratio t1 : t2 in units of $10^{-1}$ (nearest integer)",
     "options": [],
     "correct_answer": [
       "17"
@@ -3502,7 +3502,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Compare oxidising ability of VO2+, MnO4- and Cr2O7^2-; the species with least oxidising ability has zero unpaired electrons",
-    "text": "Among VO2+, MnO4- and Cr2O7^2-, spin-only magnetic moment of the species with least oxidising ability (BM, nearest integer; V 23, Mn 25, Cr 24)",
+    "text": "Among VO2+, MnO4- and $Cr2O7^{2}$-, spin-only magnetic moment of the species with least oxidising ability (BM, nearest integer; V 23, Mn 25, Cr 24)",
     "options": [],
     "correct_answer": [
       "0"
@@ -3598,7 +3598,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Freezing-point depression from the vapour-pressure diagram gives Kf and molality; solve for x from mass of methanol and density",
-    "text": "Methanol (molar mass 32 g/mol, density 0.792 g/cm^3) of x x 10^-2 mL is added to 100 mL water; freezing point shifts from 273.15 K to 270.65 K (Kf = 1.86 K kg/mol); x (nearest integer)",
+    "text": "Methanol (molar mass 32 g/mol, density 0.792 g/$cm^{3}$) of x x $10^{-2}$ mL is added to 100 mL water; freezing point shifts from 273.15 K to 270.65 K (Kf = 1.86 K kg/mol); x (nearest integer)",
     "options": [],
     "correct_answer": [
       "543"
@@ -3646,7 +3646,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Nitration then bromination gives P and Q; count oxygen and bromine atoms in Q and compute the ratio",
-    "text": "Ethoxybenzene treated with HNO3/H2SO4 gives P, then 2Br2/Fe gives Q; ratio of number of oxygen atoms to bromine atoms in Q is x x 10^-1",
+    "text": "Ethoxybenzene treated with HNO3/H2SO4 gives P, then 2Br2/Fe gives Q; ratio of number of oxygen atoms to bromine atoms in Q is x x $10^{-1}$",
     "options": [],
     "correct_answer": [
       "6"
@@ -3694,7 +3694,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Nitration gives P (nitro ethoxybenzene); two Br2 give Q; ratio of O to Br atoms",
-    "text": "Ethoxybenzene (OC2H5) treated with HNO3/H2SO4 gives major product P, then 2Br2/Fe gives major product Q; ratio of number of oxygen atoms to bromine atoms in Q is x x 10^-1",
+    "text": "Ethoxybenzene (OC2H5) treated with HNO3/H2SO4 gives major product P, then 2Br2/Fe gives major product Q; ratio of number of oxygen atoms to bromine atoms in Q is x x $10^{-1}$",
     "options": [],
     "correct_answer": [
       "15"
@@ -3953,22 +3953,22 @@
     "options": [
       {
         "key": "1",
-        "text": "(1) P^2 = 6 sqrt(3) Q",
+        "text": "(1) $P^{2}$ = 6 sqrt(3) Q",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) P^2 = 36 sqrt(3) Q",
+        "text": "(2) $P^{2}$ = 36 sqrt(3) Q",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) P = 36 sqrt(3) Q^2",
+        "text": "(3) P = 36 sqrt(3) $Q^{2}$",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) P^2 = 72 sqrt(3) Q",
+        "text": "(4) $P^{2}$ = 72 sqrt(3) Q",
         "image": null
       }
     ],
@@ -4091,22 +4091,22 @@
     "options": [
       {
         "key": "1",
-        "text": "(1) x^2 + y^2 - 61 = 0",
+        "text": "(1) $x^{2}$ + $y^{2}$ - 61 = 0",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) x^2 + y^2 - 52 = 0",
+        "text": "(2) $x^{2}$ + $y^{2}$ - 52 = 0",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) x^2 + y^2 - 65 = 0",
+        "text": "(3) $x^{2}$ + $y^{2}$ - 65 = 0",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) x^2 + y^2 - 74 = 0",
+        "text": "(4) $x^{2}$ + $y^{2}$ - 74 = 0",
         "image": null
       }
     ],
@@ -4156,7 +4156,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Apollonius circle: (x-2)^2 + (y-1)^2 : (x-1)^2 + (y-3)^2 = 25 : 16, expanded and compared with the given equation gives a^2 + 2b + 3c + 4d + e = 37",
-    "text": "Locus of a point whose distances from (2,1) and (1,3) are in ratio 5:4 is a x^2 + b y^2 + c xy + d x + e y + 170 = 0; find a^2 + 2b + 3c + 4d + e",
+    "text": "Locus of a point whose distances from (2,1) and (1,3) are in ratio 5:4 is a $x^{2}$ + b $y^{2}$ + c xy + d x + e y + 170 = 0; find $a^{2}$ + 2b + 3c + 4d + e",
     "options": [
       {
         "key": "1",
@@ -4225,7 +4225,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Ratio of sums of n-th powers reduces to a limit of the form 1/3 as n tends to infinity",
-    "text": "lim (n -> inf) of [ (1^2-1)(n-1) + ... ] / [ (1^3 + ... + n^3) - (1^2 + ... + n^2) ]",
+    "text": "lim (n -> inf) of [ ($1^{2}$-1)(n-1) + ... ] / [ ($1^{3}$ + ... + $n^{3}$) - ($1^{2}$ + ... + $n^{2}$) ]",
     "options": [
       {
         "key": "1",
@@ -4363,7 +4363,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Use det(adj M) = det(M)^(n-1) and det(kM) = k^n det(M) repeatedly on the nested adjugates; gives m + 2n = 4",
-    "text": "det(A) = 3 for square matrix A of order 3; det(adj(-4 adj(-3 adj(3 adj((2A)^-1))))) = 2^m 3^n; m + 2n",
+    "text": "det(A) = 3 for square matrix A of order 3; det(adj(-4 adj(-3 adj(3 adj((2A)^-1))))) = $2^{m}$ $3^{n}$; m + 2n",
     "options": [
       {
         "key": "1",
@@ -4501,7 +4501,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Chain rule on g(x) = h(e^x) e^(h(x)) gives g'(0) from h(0), h(1), h'(0), h'(1)",
-    "text": "h differentiable with h(0) = 0, h(1) = 1, h'(0) = h'(1) = 2; g(x) = h(e^x) e^(h(x)); g'(0)",
+    "text": "h differentiable with h(0) = 0, h(1) = 1, h'(0) = h'(1) = 2; g(x) = h($e^{x}$) e^(h(x)); g'(0)",
     "options": [
       {
         "key": "1",
@@ -4574,22 +4574,22 @@
     "options": [
       {
         "key": "1",
-        "text": "(1) e^pi < pi^e",
+        "text": "(1) $e^{pi}$ < $pi^{e}$",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) e^pi > pi^e",
+        "text": "(2) $e^{pi}$ > $pi^{e}$",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) (2e)^pi > pi^(2e)",
+        "text": "(3) (2e)^pi > $pi^{2e}$",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) e^(2pi) < (2 pi)^e",
+        "text": "(4) $e^{2pi}$ < (2 pi)^e",
         "image": null
       }
     ],
@@ -4639,7 +4639,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Substitution t = tan 3x gives the standard arctangent form; then maximise a sin x + b cos x",
-    "text": "Integral of 1/(a^2 sin^2 x + b^2 cos^2 x) ... = (1/12) tan^-1(3 tan x) + constant; maximum of a sin x + b cos x",
+    "text": "Integral of 1/($a^{2}$ $sin^{2}$ x + $b^{2}$ $cos^{2}$ x) ... = (1/12) $tan^{-1}$(3 tan x) + constant; maximum of a sin x + b cos x",
     "options": [
       {
         "key": "1",
@@ -4708,7 +4708,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Area between y = a/x^2 and y = 1/x over 1 <= x <= 2 is log2 - 1/7; solve for a and compute 7a - 3 = -1",
-    "text": "Area of region {(x, y): a/x^2 <= y <= 1/x, 1 <= x <= 2, 0 < a < 1} equals (log_e 2) - 1/7; value of 7a - 3",
+    "text": "Area of region {(x, y): a/$x^{2}$ <= y <= 1/x, 1 <= x <= 2, 0 < a < 1} equals ($log_{e}$ 2) - 1/7; value of 7a - 3",
     "options": [
       {
         "key": "1",
@@ -4984,7 +4984,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Find the image P of Q(3,-3,1) in the line (x)/1 = (y-3)/1 = (z-1)/-1, then the area of triangle PQR; lambda^2 = 14K gives K = 81",
-    "text": "Image P of Q(3,-3,1) in the line x/1 = (y-3)/1 = (z-1)/(-1), and R(2,5,-1); area of triangle PQR is lambda, lambda^2 = 14K; K",
+    "text": "Image P of Q(3,-3,1) in the line x/1 = (y-3)/1 = (z-1)/(-1), and R(2,5,-1); area of triangle PQR is lambda, $lambda^{2}$ = 14K; K",
     "options": [
       {
         "key": "1",
@@ -5122,7 +5122,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Recurrence U_n = alpha^n + beta^n with alpha + beta = -sqrt 2 and alpha beta = -8; ratio of combined terms reduces to an integer",
-    "text": "alpha, beta roots of x^2 + sqrt 2 x - 8 = 0; U_n = alpha^n + beta^n; (U10 + sqrt 2 U9) / (2 U8) (integer)",
+    "text": "alpha, beta roots of $x^{2}$ + sqrt 2 x - 8 = 0; $U_{n}$ = $alpha^{n}$ + $beta^{n}$; (U10 + sqrt 2 U9) / (2 U8) (integer)",
     "options": [],
     "correct_answer": [
       "4"
@@ -5218,7 +5218,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Hyperbola with eccentricity 9, latus rectum and directrix conditions; tangent line condition gives focal distances product; key from printed answer",
-    "text": "Latus rectum and directrices of hyperbola with eccentricity e = 9 and x = +- 4/sqrt 13; line y - sqrt3 x + sqrt3 = 0 touches hyperbola at (x0, y0); m = product of focal distances of (x0, y0); find 4e^2 + m (integer)",
+    "text": "Latus rectum and directrices of hyperbola with eccentricity e = 9 and x = +- 4/sqrt 13; line y - sqrt3 x + sqrt3 = 0 touches hyperbola at (x0, y0); m = product of focal distances of (x0, y0); find $4e^{2}$ + m (integer)",
     "options": [],
     "correct_answer": [
       "61"
@@ -5410,7 +5410,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Integral of floor functions over [0,3] with sqrt terms; compare coefficients of a, b, c",
-    "text": "Integral from 0 to 3 of ([x^2] + [x^2/2]) dx = a + b sqrt2 - sqrt3 - sqrt5 + c sqrt6 - sqrt7 with a, b, c in Z; a + b + c (integer)",
+    "text": "Integral from 0 to 3 of ([$x^{2}$] + [$x^{2}$/2]) dx = a + b sqrt2 - sqrt3 - sqrt5 + c sqrt6 - sqrt7 with a, b, c in Z; a + b + c (integer)",
     "options": [],
     "correct_answer": [
       "23"
@@ -5458,7 +5458,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Separate variables: (e^y + 1) cos x dx + e^y sin x dy = 0 with the point (pi/2, 0) gives e^(y(pi/6)) integer; key from printed answer",
-    "text": "Solution y(x) of (e^y + 1) cos x dx + e^y sin x dy = 0 passes through (pi/2, 0); value of e^(y(pi/6)) (integer)",
+    "text": "Solution y(x) of ($e^{y}$ + 1) cos x dx + $e^{y}$ sin x dy = 0 passes through (pi/2, 0); value of e^(y(pi/6)) (integer)",
     "options": [],
     "correct_answer": [
       "3"

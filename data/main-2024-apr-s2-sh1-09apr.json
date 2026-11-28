@@ -26,22 +26,22 @@
     "options": [
       {
         "key": "1",
-        "text": "(1) [M L^2 T^-2]",
+        "text": "(1) [M $L^{2}$ $T^{-2}$]",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) [M^0 L^2 T^-2]",
+        "text": "(2) [$M^{0}$ $L^{2}$ $T^{-2}$]",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) [M L T^-2]",
+        "text": "(3) [M L $T^{-2}$]",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) [M^0 L T^-2]",
+        "text": "(4) [$M^{0}$ L $T^{-2}$]",
         "image": null
       }
     ],
@@ -233,22 +233,22 @@
     "options": [
       {
         "key": "1",
-        "text": "(1) m/(2 alpha^2 d)",
+        "text": "(1) m/(2 $alpha^{2}$ d)",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) md/(2 alpha^2)",
+        "text": "(2) md/(2 $alpha^{2}$)",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) 2 m alpha^2 d",
+        "text": "(3) 2 m $alpha^{2}$ d",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) m alpha^2 d/2",
+        "text": "(4) m $alpha^{2}$ d/2",
         "image": null
       }
     ],
@@ -367,7 +367,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Change in mechanical energy from surface to orbit at altitude 318.5 km with R = 6370 km gives x = 11",
-    "text": "Astronaut takes ball of mass m to space and throws it into circular orbit at altitude 318.5 km; change in total mechanical energy is x G M_e m / (2 R_e); value of x (R_e = 6370 km)",
+    "text": "Astronaut takes ball of mass m to space and throws it into circular orbit at altitude 318.5 km; change in total mechanical energy is x G $M_{e}$ m / (2 $R_{e}$); value of x ($R_{e}$ = 6370 km)",
     "options": [
       {
         "key": "1",
@@ -992,22 +992,22 @@
     "options": [
       {
         "key": "1",
-        "text": "(1) B_z = 2 x 10^-7 sin[(pi/2) x 10^3 (x - 3 x 10^8 t)] k^ T",
+        "text": "(1) $B_{z}$ = 2 x $10^{-7}$ sin[(pi/2) x $10^{3}$ (x - 3 x $10^{8}$ t)] k^ T",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) B_z = 60 sin[(pi/2)(x - 3 x 10^8 t)] k^ T",
+        "text": "(2) $B_{z}$ = 60 sin[(pi/2)(x - 3 x $10^{8}$ t)] k^ T",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) B_z = 60 sin[(pi/2)(x - 3 x 10^8 t)] i^ T",
+        "text": "(3) $B_{z}$ = 60 sin[(pi/2)(x - 3 x $10^{8}$ t)] i^ T",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) B_z = 2 x 10^-7 sin[(pi/2)(x - 3 x 10^8 t)] k^ T",
+        "text": "(4) $B_{z}$ = 2 x $10^{-7}$ sin[(pi/2)(x - 3 x $10^{8}$ t)] k^ T",
         "image": null
       }
     ],
@@ -1130,22 +1130,22 @@
     "options": [
       {
         "key": "1",
-        "text": "(1) lambda_a < lambda_p < lambda_e",
+        "text": "(1) $lambda_{a}$ < $lambda_{p}$ < $lambda_{e}$",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) lambda_e > lambda_a > lambda_p",
+        "text": "(2) $lambda_{e}$ > $lambda_{a}$ > $lambda_{p}$",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) lambda_p > lambda_e > lambda_a",
+        "text": "(3) $lambda_{p}$ > $lambda_{e}$ > $lambda_{a}$",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) lambda_p < lambda_e < lambda_a",
+        "text": "(4) $lambda_{p}$ < $lambda_{e}$ < $lambda_{a}$",
         "image": null
       }
     ],
@@ -1199,17 +1199,17 @@
     "options": [
       {
         "key": "1",
-        "text": "(1) 5.6 x 10^12 MeV",
+        "text": "(1) 5.6 x $10^{12}$ MeV",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) 5.6 x 10^26 MeV",
+        "text": "(2) 5.6 x $10^{26}$ MeV",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) 11.2 x 10^24 MeV",
+        "text": "(3) 11.2 x $10^{24}$ MeV",
         "image": null
       },
       {
@@ -1402,7 +1402,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Use |a+b|^2 = 2|a-b|^2 with cos(theta) = 5/9 and |a| = n|b| to find n",
-    "text": "Vectors a and b make angle cos^-1(5/9); |a+b| = sqrt 2 |a-b| = n|a||b|; integer value of n",
+    "text": "Vectors a and b make angle $cos^{-1}$(5/9); |a+b| = sqrt 2 |a-b| = n|a||b|; integer value of n",
     "options": [],
     "correct_answer": [
       "3"
@@ -1452,7 +1452,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "tau = F r = 40 x 0.1 = 4 N m, alpha = tau/I = 10 rad/s^2, omega = 10 x 10 = 100 rad/s",
-    "text": "Wheel of moment of inertia 0.40 kg m^2 and radius 10 cm, string pulled by 40 N; angular velocity after 10 s is x rad/s",
+    "text": "Wheel of moment of inertia 0.40 kg $m^{2}$ and radius 10 cm, string pulled by 40 N; angular velocity after 10 s is x rad/s",
     "options": [],
     "correct_answer": [
       "100"
@@ -1500,7 +1500,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Each person pulls 200 N, so tension is 200 N; extension = F L/(A Y) = 200 x 2/(2e-4 x 1e11) = 2e-5 m = 20 micrometre",
-    "text": "Two persons pull a wire with 200 N each; Young's modulus 1e11 N/m^2; original length 2 m; cross section 2 cm^2; extension in micrometre",
+    "text": "Two persons pull a wire with 200 N each; Young's modulus 1e11 N/$m^{2}$; original length 2 m; cross section 2 $cm^{2}$; extension in micrometre",
     "options": [],
     "correct_answer": [
       "20"
@@ -1548,7 +1548,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "a = omega^2 x gives omega = 2; v^2 = omega^2 (A^2 - x^2) gives A^2 = 17",
-    "text": "At an instant displacement, velocity and acceleration of SHM particle have magnitudes 4 m, 2 m/s and 16 m/s^2; amplitude is sqrt(x) m; find x",
+    "text": "At an instant displacement, velocity and acceleration of SHM particle have magnitudes 4 m, 2 m/s and 16 m/$s^{2}$; amplitude is sqrt(x) m; find x",
     "options": [],
     "correct_answer": [
       "17"
@@ -1836,7 +1836,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Q = (3 x 4.0026 - 12) u c^2 = 7.27 MeV; power 5.808e30 W gives 4.99e42 reactions/s; 3 He per reaction gives 1.5e43 = 15 x 10^42",
-    "text": "Star of 100% He converts three 4He into 12C with triple alpha; rate of converting 4He is n x 10^42 per s; mass 2e32 kg, power 5.808e30 W; find n",
+    "text": "Star of 100% He converts three 4He into 12C with triple alpha; rate of converting 4He is n x $10^{42}$ per s; mass 2e32 kg, power 5.808e30 W; find n",
     "options": [],
     "correct_answer": [
       "15"
@@ -3265,7 +3265,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Convert molarity to molality using density 1.25 g/mL and the molar mass of CuSO4; key from printed answer",
-    "text": "Molarity of aqueous CuSO4 solution with x g in 500 mL is 2 x 10^-1 M at 32 C; molality in units of 10^-3 m (nearest integer), density 1.25 g/mL",
+    "text": "Molarity of aqueous CuSO4 solution with x g in 500 mL is 2 x $10^{-1}$ M at 32 C; molality in units of $10^{-3}$ m (nearest integer), density 1.25 g/mL",
     "options": [],
     "correct_answer": [
       "164"
@@ -3313,7 +3313,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Count molecules and species with one unpaired electron among N2, O2, C2, O2^-, O2^2-, H2+, CN-, He2+",
-    "text": "Number of species from N2, O2, C2, O2+, O2^2-, H2+, CN-, He2+ in which one unpaired electron is present",
+    "text": "Number of species from N2, O2, C2, O2+, $O2^{2}$-, H2+, CN-, He2+ in which one unpaired electron is present",
     "options": [],
     "correct_answer": [
       "4"
@@ -3505,7 +3505,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Metals more reactive than the reduced form of Cr2O7^2- (E0 = 1.33 V) are oxidised; Fe, Ni are oxidised, Ag and Au are not, giving 3 metals; key from printed answer",
-    "text": "Standard reduction potentials: Cr2O7^2-/Cr3+ 1.33 V, Fe3+/Fe -0.04 V, Ni2+/Ni -0.25 V, Ag+/Ag 0.80 V, Au3+/Au 1.40 V; number of metals oxidised by Cr2O7^2- in aqueous solution",
+    "text": "Standard reduction potentials: $Cr2O7^{2}$-/Cr3+ 1.33 V, Fe3+/Fe -0.04 V, Ni2+/Ni -0.25 V, Ag+/Ag 0.80 V, Au3+/Au 1.40 V; number of metals oxidised by $Cr2O7^{2}$- in aqueous solution",
     "options": [],
     "correct_answer": [
       "3"
@@ -3649,7 +3649,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Ambidentate ligands among NO2-, SCN-, C2O4^2-, NH3, CN-, SO4^2-, H2O: NO2-, SCN- and CN- ; key from printed answer",
-    "text": "Number of ambidentate ligands among NO2-, SCN-, C2O4^2-, NH3, CN-, SO4^2-, H2O",
+    "text": "Number of ambidentate ligands among NO2-, SCN-, $C2O4^{2}$-, NH3, CN-, $SO4^{2}$-, H2O",
     "options": [],
     "correct_answer": [
       "3"
@@ -3745,26 +3745,26 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Newton-type recurrence for power sums of alpha, beta with alpha + beta = -2 sqrt2 and alpha beta = -1; key from printed answer",
-    "text": "alpha, beta roots of x^2 + 2 sqrt2 x - 1 = 0; quadratic whose roots are alpha^4 + beta^4 and (1/10)(alpha^6 + beta^6)",
+    "text": "alpha, beta roots of $x^{2}$ + 2 sqrt2 x - 1 = 0; quadratic whose roots are $alpha^{4}$ + $beta^{4}$ and (1/10)($alpha^{6}$ + $beta^{6}$)",
     "options": [
       {
         "key": "1",
-        "text": "(1) x^2 - 190x + 9466 = 0",
+        "text": "(1) $x^{2}$ - 190x + 9466 = 0",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) x^2 - 180x + 9506 = 0",
+        "text": "(2) $x^{2}$ - 180x + 9506 = 0",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) x^2 - 195x + 9506 = 0",
+        "text": "(3) $x^{2}$ - 195x + 9506 = 0",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) x^2 - 195x + 9466 = 0",
+        "text": "(4) $x^{2}$ - 195x + 9466 = 0",
         "image": null
       }
     ],
@@ -3883,7 +3883,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Coefficient of x^70 in the given sum of products expressed as 99Cp - 46Cq; key from printed answer",
-    "text": "Coefficient of x^70 in x^2(1+x)^98 + x^3(1+x)^97 + x^4(1+x)^96 + ... + x^54(1+x)^46 is 99Cp - 46Cq; possible value of p+q",
+    "text": "Coefficient of $x^{70}$ in $x^{2}$(1+x)^98 + $x^{3}$(1+x)^97 + $x^{4}$(1+x)^96 + ... + $x^{54}$(1+x)^46 is 99Cp - 46Cq; possible value of p+q",
     "options": [
       {
         "key": "1",
@@ -4021,7 +4021,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Reflection of P(1,2) in the x-axis gives image; line through image and R(4,3) meets x-axis at Q; parallelogram gives S; key from printed answer",
-    "text": "Ray from P(1,2) reflects at Q on x-axis and passes through R(4,3); S(h,k) makes PQRS a parallelogram; value of hk^2",
+    "text": "Ray from P(1,2) reflects at Q on x-axis and passes through R(4,3); S(h,k) makes PQRS a parallelogram; value of $hk^{2}$",
     "options": [
       {
         "key": "1",
@@ -4090,26 +4090,26 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Limits of intersection point of the two given lines as c tends to 1 give h and k; circle through (2,0) with centre (h,k)",
-    "text": "Circle through (2,0) with centre (h,k), where h and k are limits as c -> 1 of the intersection of 3x+5y=1 and (2+c)x+5c^2 y=1",
+    "text": "Circle through (2,0) with centre (h,k), where h and k are limits as c -> 1 of the intersection of 3x+5y=1 and (2+c)x+$5c^{2}$ y=1",
     "options": [
       {
         "key": "1",
-        "text": "(1) 25x^2+25y^2-2x+2y-60=0",
+        "text": "(1) $25x^{2}$+$25y^{2}$-2x+2y-60=0",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) 5x^2+5y^2-4x+2y-12=0",
+        "text": "(2) $5x^{2}$+$5y^{2}$-4x+2y-12=0",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) 5x^2+5y^2-4x-2y-12=0",
+        "text": "(3) $5x^{2}$+$5y^{2}$-4x-2y-12=0",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) 25x^2+25y^2-20x+2y-60=0",
+        "text": "(4) $25x^{2}$+$25y^{2}$-20x+2y-60=0",
         "image": null
       }
     ],
@@ -4159,7 +4159,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Compose f(g(10)) and g(f(3)) with f = x^2+9, g = x/(x-9); eccentricity and latus rectum of ellipse give 8e^2 + l^2 = 8",
-    "text": "f(x) = x^2 + 9 and g(x) = x/(x-9); a = f(g(10)), b = g(f(3)); eccentricity e and latus rectum length l of ellipse x^2/a + y^2/b = 1; 8e^2 + l^2",
+    "text": "f(x) = $x^{2}$ + 9 and g(x) = x/(x-9); a = f(g(10)), b = g(f(3)); eccentricity e and latus rectum length l of ellipse $x^{2}$/a + $y^{2}$/b = 1; $8e^{2}$ + $l^{2}$",
     "options": [
       {
         "key": "1",
@@ -4366,7 +4366,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Domain of sin^-1((x-1)/(2x+3)) excludes an interval (alpha, beta); compute 12 alpha beta = 32",
-    "text": "Domain of f(x) = sin^-1((x-1)/(2x+3)) is R - (alpha, beta); find 12 alpha beta",
+    "text": "Domain of f(x) = $sin^{-1}$((x-1)/(2x+3)) is R - (alpha, beta); find 12 alpha beta",
     "options": [
       {
         "key": "1",
@@ -4435,7 +4435,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Conditions f(1)=40, f'(1)=2, f''(1)=4 with cubic a x^3 + b x^2 + c x + 41 give a^2 + b^2 + c^2 = 51",
-    "text": "f(x) = a x^3 + b x^2 + c x + 41 with f(1)=40, f'(1)=2 and f''(1)=4; a^2 + b^2 + c^2",
+    "text": "f(x) = a $x^{3}$ + b $x^{2}$ + c x + 41 with f(1)=40, f'(1)=2 and f''(1)=4; $a^{2}$ + $b^{2}$ + $c^{2}$",
     "options": [
       {
         "key": "1",
@@ -4642,26 +4642,26 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Intersection of y^2 = 4x and x^2 + y^2 = 5 gives the chord x = 1; area of the smaller segment",
-    "text": "Parabola y^2 = 4x divides area of circle x^2 + y^2 = 5 into two parts; area of smaller part",
+    "text": "Parabola $y^{2}$ = 4x divides area of circle $x^{2}$ + $y^{2}$ = 5 into two parts; area of smaller part",
     "options": [
       {
         "key": "1",
-        "text": "(1) 1/3 + 5 sin^-1(2/sqrt5)",
+        "text": "(1) 1/3 + 5 $sin^{-1}$(2/sqrt5)",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) 1/3 + sqrt5 sin^-1(2/sqrt5)",
+        "text": "(2) 1/3 + sqrt5 $sin^{-1}$(2/sqrt5)",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) 2/3 + 5 sin^-1(2/sqrt5)",
+        "text": "(3) 2/3 + 5 $sin^{-1}$(2/sqrt5)",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) 2/3 + sqrt5 sin^-1(2/sqrt5)",
+        "text": "(4) 2/3 + sqrt5 $sin^{-1}$(2/sqrt5)",
         "image": null
       }
     ],
@@ -4780,26 +4780,26 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Homogeneous DE (x^2 + y^2) dx - 5xy dy = 0 with y(1) = 0; key from printed answer",
-    "text": "Solution of (x^2 + y^2) dx - 5xy dy = 0 with y(1) = 0",
+    "text": "Solution of ($x^{2}$ + $y^{2}$) dx - 5xy dy = 0 with y(1) = 0",
     "options": [
       {
         "key": "1",
-        "text": "(1) |x^2 - 2y^2|^6 = x",
+        "text": "(1) |$x^{2}$ - $2y^{2}$|^6 = x",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) |x^2 - 4y^2|^6 = x",
+        "text": "(2) |$x^{2}$ - $4y^{2}$|^6 = x",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) |x^2 - 4y^2|^5 = x^2",
+        "text": "(3) |$x^{2}$ - $4y^{2}$|^5 = $x^{2}$",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) |x^2 - 2y^2|^5 = x^2",
+        "text": "(4) |$x^{2}$ - $2y^{2}$|^5 = $x^{2}$",
         "image": null
       }
     ],
@@ -5173,7 +5173,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "428 = 1 mod 21 and 428 = 2^... reduces 428^2024 modulo 21 to 1; key from printed answer",
-    "text": "Remainder when 428^2024 is divided by 21",
+    "text": "Remainder when $428^{2024}$ is divided by 21",
     "options": [],
     "correct_answer": [
       "1"
@@ -5221,7 +5221,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Circle through (0,0) and (1,0) touching x^2+y^2=9 gives centres (h,k); sum of 4(h^2+k^2) over all centres = 9",
-    "text": "Circle through (0,0) and (1,0) touching x^2+y^2=9; for all possible centres (h,k), value of 4(h^2+k^2)",
+    "text": "Circle through (0,0) and (1,0) touching $x^{2}$+$y^{2}$=9; for all possible centres (h,k), value of 4($h^{2}$+$k^{2}$)",
     "options": [],
     "correct_answer": [
       "9"
@@ -5269,7 +5269,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Telescoping limit of inverse tangent series with principal values gives pi/k; k^2 = 32",
-    "text": "Limit as n tends to infinity of the given series of inverse trigonometric terms equals pi/k; k^2",
+    "text": "Limit as n tends to infinity of the given series of inverse trigonometric terms equals pi/k; $k^{2}$",
     "options": [],
     "correct_answer": [
       "32"
@@ -5365,7 +5365,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Determinant identities for adj of 3x3 matrices give 3m + 2n = 14 in absolute value; key from printed answer",
-    "text": "Non-singular matrix A of order 3 with det(3 adj(2 adj((det A) A))) = 3^-13 2^-10 and det(3 adj(2A)) = 2^m 3^n; |3m + 2n|",
+    "text": "Non-singular matrix A of order 3 with det(3 adj(2 adj((det A) A))) = $3^{-13}$ $2^{-10}$ and det(3 adj(2A)) = $2^{m}$ $3^{n}$; |3m + 2n|",
     "options": [],
     "correct_answer": [
       "14"
@@ -5461,7 +5461,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Continuity at x = pi/2 requires two one-sided limits to equal a - 8; a^2 + b^2 = 81",
-    "text": "f continuous at x = pi/2 on (0,pi) with the piecewise definition involving tan and cot; a, b integers; find a^2 + b^2",
+    "text": "f continuous at x = pi/2 on (0,pi) with the piecewise definition involving tan and cot; a, b integers; find $a^{2}$ + $b^{2}$",
     "options": [],
     "correct_answer": [
       "81"
@@ -5509,7 +5509,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Local minimum of (1+x)(lambda^2-x^2) with inequality (x^2+x+2)/(x^2+5x+6) < 0 gives alpha, beta; key from printed answer",
-    "text": "Set of positive lambda for which the local minimum of (1+x)(lambda^2 - x^2) satisfies (x^2+x+2)/(x^2+5x+6) < 0 is (alpha, beta); alpha^2 + beta^2",
+    "text": "Set of positive lambda for which the local minimum of (1+x)($lambda^{2}$ - $x^{2}$) satisfies ($x^{2}$+x+2)/($x^{2}$+5x+6) < 0 is (alpha, beta); $alpha^{2}$ + $beta^{2}$",
     "options": [],
     "correct_answer": [
       "39"
@@ -5557,7 +5557,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Probability that the quadratic ax^2 + bx + c = 0 has real roots from fair tetrahedral die outcomes; m/n with gcd 1 gives m + n = 19",
-    "text": "Three rolls of fair tetrahedral die (faces 1,2,3,4); probability that ax^2 + bx + c = 0 has all real roots is m/n with gcd(m,n) = 1; m + n",
+    "text": "Three rolls of fair tetrahedral die (faces 1,2,3,4); probability that $ax^{2}$ + bx + c = 0 has all real roots is m/n with gcd(m,n) = 1; m + n",
     "options": [],
     "correct_answer": [
       "19"

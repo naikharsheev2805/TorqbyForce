@@ -26,22 +26,22 @@
     "options": [
       {
         "key": "1",
-        "text": "(1) [M L^2 T^-1]",
+        "text": "(1) [M $L^{2}$ $T^{-1}$]",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) [M L^-1 T^-2]",
+        "text": "(2) [M $L^{-1}$ $T^{-2}$]",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) [M L T^-2]",
+        "text": "(3) [M L $T^{-2}$]",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) [M^2 L^2 T^-2]",
+        "text": "(4) [$M^{2}$ $L^{2}$ $T^{-2}$]",
         "image": null
       }
     ],
@@ -91,7 +91,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Each car stops in v^2/(2a) = 100 m, so gap = 300 - 200 = 100 m",
-    "text": "Two cars at 20 m/s each approach, 300 m apart; both retard at 2 m/s^2; distance between them when they stop",
+    "text": "Two cars at 20 m/s each approach, 300 m apart; both retard at 2 m/$s^{2}$; distance between them when they stop",
     "options": [
       {
         "key": "1",
@@ -229,7 +229,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Energy supplied raises the orbit; with E = GMm/(2R') type relation and g R^2 = GM, new radius gives 4R; key from printed answer",
-    "text": "10^3 kg satellite in circular orbit of radius 2R; 10^4 R/6 J energy supplied; new orbit radius (g = 10, R = Earth radius)",
+    "text": "$10^{3}$ kg satellite in circular orbit of radius 2R; $10^{4}$ R/6 J energy supplied; new orbit radius (g = 10, R = Earth radius)",
     "options": [
       {
         "key": "1",
@@ -367,7 +367,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Ball falls freely through h, then enters water and moves with terminal velocity; h from v_t^2 = 2gh with Stokes' law; key from printed answer",
-    "text": "Spherical ball of radius 1e-4 m and density 1e5 kg/m^3 falls freely through height h, enters water and velocity does not change; approximate h (eta = 9.8e-6 N s/m^2)",
+    "text": "Spherical ball of radius 1e-4 m and density 1e5 kg/$m^{3}$ falls freely through height h, enters water and velocity does not change; approximate h (eta = 9.8e-6 N s/$m^{2}$)",
     "options": [
       {
         "key": "1",
@@ -436,7 +436,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Net work of the cycle is the enclosed area of the P-V loop",
-    "text": "Real gas in chamber at 27 C undergoes cyclic process A -> B -> C -> A with PV^3 = RT for path A to B; net work in cycle (R = 8 J/mol K)",
+    "text": "Real gas in chamber at 27 C undergoes cyclic process A -> B -> C -> A with $PV^{3}$ = RT for path A to B; net work in cycle (R = 8 J/mol K)",
     "options": [
       {
         "key": "1",
@@ -850,26 +850,26 @@
     "question_type": "single",
     "difficulty": "easy",
     "difficulty_reason": "E0 = c B0 = 3e8 x 3.5e-7 = 105 V/m, field along z",
-    "text": "Magnetic field of a plane EM wave B_y = 3.5e-7 sin(1.5e3 x + 0.5e11 t) T; corresponding electric field",
+    "text": "Magnetic field of a plane EM wave $B_{y}$ = 3.5e-7 sin(1.5e3 x + 0.5e11 t) T; corresponding electric field",
     "options": [
       {
         "key": "1",
-        "text": "(1) E_y = 10.5 sin(...) V/m",
+        "text": "(1) $E_{y}$ = 10.5 sin(...) V/m",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) E_z = 1.17 sin(...) V/m",
+        "text": "(2) $E_{z}$ = 1.17 sin(...) V/m",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) E_y = 1.17 sin(...) V/m",
+        "text": "(3) $E_{y}$ = 1.17 sin(...) V/m",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) E_z = 105 sin(...) V/m",
+        "text": "(4) $E_{z}$ = 105 sin(...) V/m",
         "image": null
       }
     ],
@@ -1195,7 +1195,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Fusion energy per 2 kg of hydrogen divided by fission energy per 2 kg of U-235 (200 MeV per fission); key from printed answer",
-    "text": "Energy released in fusion of 2 kg of hydrogen E_H and fission of 2 kg of U-235 E_U (200 MeV per fission, N_A = 6.023e23); approximate E_H/E_U",
+    "text": "Energy released in fusion of 2 kg of hydrogen $E_{H}$ and fission of 2 kg of U-235 $E_{U}$ (200 MeV per fission, $N_{A}$ = 6.023e23); approximate $E_{H}$/$E_{U}$",
     "options": [
       {
         "key": "1",
@@ -1453,7 +1453,7 @@
     "question_type": "integer",
     "difficulty": "easy",
     "difficulty_reason": "Work = integral of (3x^2 + 2x - 5) dx from 2 to 4 = 58 J",
-    "text": "Force (3x^2 + 2x - 5) N displaces a body from x = 2 m to x = 4 m; work done in joule",
+    "text": "Force ($3x^{2}$ + 2x - 5) N displaces a body from x = 2 m to x = 4 m; work done in joule",
     "options": [],
     "correct_answer": [
       "58"
@@ -1742,7 +1742,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Bent strip of same length into semicircle with same current: moment scales by 2/pi times; with pi = 22/7 gives 28 A m^2",
-    "text": "Straight magnetic strip with magnetic moment 44 A m^2 bent into semicircle; new magnetic moment (pi = 22/7)",
+    "text": "Straight magnetic strip with magnetic moment 44 A $m^{2}$ bent into semicircle; new magnetic moment (pi = 22/7)",
     "options": [],
     "correct_answer": [
       "28"
@@ -1886,7 +1886,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Luminous intensity of a monochromatic source: 540 x 10^12 Hz corresponds to 683 lm/W; key from printed answer",
-    "text": "Source of luminous intensity emitting monochromatic radiation of frequency A x 10^12 Hz with radiant intensity 1/683 W/sr; A and B",
+    "text": "Source of luminous intensity emitting monochromatic radiation of frequency A x $10^{12}$ Hz with radiant intensity 1/683 W/sr; A and B",
     "options": [
       {
         "key": "1",
@@ -2304,22 +2304,22 @@
     "options": [
       {
         "key": "1",
-        "text": "(1) 6.91 x 10^-12",
+        "text": "(1) 6.91 x $10^{-12}$",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) 0.276 x 10^-12",
+        "text": "(2) 0.276 x $10^{-12}$",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) 27.65 x 10^-12",
+        "text": "(3) 27.65 x $10^{-12}$",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) 0.069 x 10^-12",
+        "text": "(4) 0.069 x $10^{-12}$",
         "image": null
       }
     ],
@@ -2511,22 +2511,22 @@
     "options": [
       {
         "key": "1",
-        "text": "(1) Lambda_m - Lambda_m^0 + A C^(1/2) = 0",
+        "text": "(1) $Lambda_{m}$ - $Lambda_{m}$^0 + A $C^{1/2}$ = 0",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) Lambda_m^2 C - K_a Lambda_m^0 2 + K_a Lambda_m Lambda_m = 0",
+        "text": "(2) $Lambda_{m}$^2 C - $K_{a}$ $Lambda_{m}$^0 2 + $K_{a}$ $Lambda_{m}$ $Lambda_{m}$ = 0",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) Lambda_m^2 C + K_a Lambda_m^0 2 - K_a Lambda_m Lambda_m^0 = 0",
+        "text": "(3) $Lambda_{m}$^2 C + $K_{a}$ $Lambda_{m}$^0 2 - $K_{a}$ $Lambda_{m}$ $Lambda_{m}$^0 = 0",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) Lambda_m - Lambda_m^0 - A C^(1/2) = 0",
+        "text": "(4) $Lambda_{m}$ - $Lambda_{m}$^0 - A $C^{1/2}$ = 0",
         "image": null
       }
     ],
@@ -3266,7 +3266,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Delta v = h / (4 pi m Delta x) with Delta x = 1e-15 m gives about 58e9 m/s",
-    "text": "Uncertainty in velocity of electron confined to nucleus of diameter 1e-15 m; value in units of 10^9 m/s",
+    "text": "Uncertainty in velocity of electron confined to nucleus of diameter 1e-15 m; value in units of $10^{9}$ m/s",
     "options": [],
     "correct_answer": [
       "58"
@@ -3410,7 +3410,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Rf of B relative to A from distances from the bottom (5 cm and 7 cm) and solvent front (10 cm); key from printed answer",
-    "text": "TLC plate of height 10 cm with spots A (5 cm) and B (7 cm) from bottom; Rf of B is x times 10^-1 more than A; x",
+    "text": "TLC plate of height 10 cm with spots A (5 cm) and B (7 cm) from bottom; Rf of B is x times $10^{-1}$ more than A; x",
     "options": [],
     "correct_answer": [
       "15"
@@ -3506,7 +3506,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Ideal solution: P_total = 80 x_B + 24 x_T; equimolar liquids give x_T in vapour = 0.23",
-    "text": "Vapour pressures of pure benzene 80 Torr and methyl benzene 24 Torr at 27 C; mole fraction of methyl benzene in vapour above equimolar ideal mixture (x 10^-2)",
+    "text": "Vapour pressures of pure benzene 80 Torr and methyl benzene 24 Torr at 27 C; mole fraction of methyl benzene in vapour above equimolar ideal mixture (x $10^{-2}$)",
     "options": [],
     "correct_answer": [
       "23"
@@ -3554,7 +3554,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "First order decomposition with total pressure increasing from P0 to 200 and 300 Torr; k from ln form; key from printed answer",
-    "text": "First-order gas phase decomposition A -> 2B + C at constant T; total pressure 200 Torr at 23 s and 300 Torr at completion; rate constant (x 10^-2 s^-1), log 2 = 0.301",
+    "text": "First-order gas phase decomposition A -> 2B + C at constant T; total pressure 200 Torr at 23 s and 300 Torr at completion; rate constant (x $10^{-2}$ $s^{-1}$), log 2 = 0.301",
     "options": [],
     "correct_answer": [
       "3"
@@ -3746,7 +3746,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Roots alpha, beta of x^2 - sqrt2 x - sqrt3 = 0; P_n = alpha^n - beta^n; identity gives 10 sqrt3 P9",
-    "text": "alpha > beta roots of x^2 - sqrt2 x - sqrt3 = 0; P_n = alpha^n - beta^n; value of (11 sqrt3 - 10 sqrt2) P10 + (11 sqrt2 + 10) P11 - 11 P12",
+    "text": "alpha > beta roots of $x^{2}$ - sqrt2 x - sqrt3 = 0; $P_{n}$ = $alpha^{n}$ - $beta^{n}$; value of (11 sqrt3 - 10 sqrt2) P10 + (11 sqrt2 + 10) P11 - 11 P12",
     "options": [
       {
         "key": "1",
@@ -3884,7 +3884,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Infinite GP a, ar, ar^2: a/(1-r) = 57 and a^3/(1-r^3) = 9747 give a and r; a + 18r = 31; key from printed answer",
-    "text": "Infinite G.P. a, ar, ar^2 with sum of ar^n = 57 and sum of a^3 r^(3n) = 9747; a + 18r",
+    "text": "Infinite G.P. a, ar, $ar^{2}$ with sum of $ar^{n}$ = 57 and sum of $a^{3}$ $r^{3n}$ = 9747; a + 18r",
     "options": [
       {
         "key": "1",
@@ -3953,7 +3953,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Coefficient of x^(2/3) and x^(-2/5) in (x^(2/3) + (1/2) x^(-2/5))^9 summed; key from printed answer",
-    "text": "Sum of coefficients of x^(2/3) and x^(-2/5) in the expansion of (x^(2/3) + (1/2) x^(-2/5))^9",
+    "text": "Sum of coefficients of $x^{2/3}$ and $x^{-2/5}$ in the expansion of ($x^{2/3}$ + (1/2) $x^{-2/5}$)^9",
     "options": [
       {
         "key": "1",
@@ -4091,7 +4091,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Foci of hyperbola coincide with those of ellipse; eccentricities reciprocal; 3 alpha^2 + 2 beta^2 = 225; key from printed answer",
-    "text": "Hyperbola H has foci of ellipse (x-1)^2/100 + (y-1)^2/75 = 1; eccentricity of H is reciprocal of ellipse eccentricity; 3 alpha^2 + 2 beta^2",
+    "text": "Hyperbola H has foci of ellipse (x-1)^2/100 + (y-1)^2/75 = 1; eccentricity of H is reciprocal of ellipse eccentricity; 3 $alpha^{2}$ + 2 $beta^{2}$",
     "options": [
       {
         "key": "1",
@@ -4160,26 +4160,26 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Limit of integral over (x - pi/2)^2 with Taylor expansion of integrand; key from printed answer",
-    "text": "lim (x -> pi/2) of [integral from (pi/2)^(2/3) to x^3 of (sin(2t^(1/3)) + cos(t^(1/3))) dt] / (x - pi/2)^2",
+    "text": "lim (x -> pi/2) of [integral from (pi/2)^(2/3) to $x^{3}$ of (sin($2t^{1/3}$) + cos($t^{1/3}$)) dt] / (x - pi/2)^2",
     "options": [
       {
         "key": "1",
-        "text": "(1) 5 pi^2 / 9",
+        "text": "(1) 5 $pi^{2}$ / 9",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) 9 pi^2 / 8",
+        "text": "(2) 9 $pi^{2}$ / 8",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) 11 pi^2 / 10",
+        "text": "(3) 11 $pi^{2}$ / 10",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) 3 pi^2 / 2",
+        "text": "(4) 3 $pi^{2}$ / 2",
         "image": null
       }
     ],
@@ -4248,7 +4248,7 @@
       },
       {
         "key": "4",
-        "text": "(4) e - e^2",
+        "text": "(4) e - $e^{2}$",
         "image": null
       }
     ],
@@ -4367,7 +4367,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Condition AB^-1 = A^-1 and BCB^-1 = A determine C, then C^4 + alpha C^2 + beta I = 0 gives 2 beta - alpha = 10; key from printed answer",
-    "text": "B = [[1,3],[1,5]], A 2x2 with AB^-1 = A^-1; C with BCB^-1 = A; C^4 + alpha C^2 + beta I = O; find 2 beta - alpha",
+    "text": "B = [[1,3],[1,5]], A 2x2 with $AB^{-1}$ = $A^{-1}$; C with $BCB^{-1}$ = A; $C^{4}$ + alpha $C^{2}$ + beta I = O; find 2 beta - alpha",
     "options": [
       {
         "key": "1",
@@ -4436,7 +4436,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Substitution x = cos 2theta reduces the integrand; integral evaluates to -1/4; key from printed answer",
-    "text": "Integral from 1/4 to 3/4 of cos(2 cot^-1 sqrt((1-x)/(1+x))) dx",
+    "text": "Integral from 1/4 to 3/4 of cos(2 $cot^{-1}$ sqrt((1-x)/(1+x))) dx",
     "options": [
       {
         "key": "1",
@@ -4574,26 +4574,26 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "log y = 3 sin^-1 x gives (1 - x^2) y'' - x y' = 9 y; at x = 1/2 with y = e^(3 pi/6) gives 9 e^(pi/2); key from printed answer",
-    "text": "log_e y = 3 sin^-1 x; value of (1 - x^2) y'' - x y' at x = 1/2",
+    "text": "$log_{e}$ y = 3 $sin^{-1}$ x; value of (1 - $x^{2}$) y'' - x y' at x = 1/2",
     "options": [
       {
         "key": "1",
-        "text": "(1) 3 e^(pi/6)",
+        "text": "(1) 3 $e^{pi/6}$",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) 9 e^(pi/2)",
+        "text": "(2) 9 $e^{pi/2}$",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) 3 e^(pi/2)",
+        "text": "(3) 3 $e^{pi/2}$",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) 9 e^(pi/6)",
+        "text": "(4) 9 $e^{pi/6}$",
         "image": null
       }
     ],
@@ -4712,26 +4712,26 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Integrate log(x + sqrt(x^2 + 1)) over -1 to 2 by parts; key from printed answer",
-    "text": "Value of the definite integral from -1 to 2 of log_e(x + sqrt(x^2 + 1)) dx",
+    "text": "Value of the definite integral from -1 to 2 of $log_{e}$(x + sqrt($x^{2}$ + 1)) dx",
     "options": [
       {
         "key": "1",
-        "text": "(1) sqrt5 - sqrt2 + log_e((7+4sqrt5)/(1+sqrt2))",
+        "text": "(1) sqrt5 - sqrt2 + $log_{e}$((7+4sqrt5)/(1+sqrt2))",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) sqrt5 - sqrt2 + log_e((9+4sqrt5)/(1+sqrt2))",
+        "text": "(2) sqrt5 - sqrt2 + $log_{e}$((9+4sqrt5)/(1+sqrt2))",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) sqrt2 - sqrt5 + log_e((7+4sqrt5)/(1+sqrt2))",
+        "text": "(3) sqrt2 - sqrt5 + $log_{e}$((7+4sqrt5)/(1+sqrt2))",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) sqrt2 - sqrt5 + log_e((9+4sqrt5)/(1+sqrt2))",
+        "text": "(4) sqrt2 - sqrt5 + $log_{e}$((9+4sqrt5)/(1+sqrt2))",
         "image": null
       }
     ],
@@ -4781,7 +4781,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Area of ellipse x^2 + 3y^2 = 18 in the first quadrant below y = x; key from printed answer",
-    "text": "Area in the first quadrant enclosed by ellipse x^2 + 3y^2 = 18 below the line y = x",
+    "text": "Area in the first quadrant enclosed by ellipse $x^{2}$ + $3y^{2}$ = 18 below the line y = x",
     "options": [
       {
         "key": "1",
@@ -4919,7 +4919,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Area of parallelogram with diagonals a+b and b+c equals sqrt21/2; key from printed answer",
-    "text": "a = 2i + alpha j + k, b = -i + j + k, c = beta j - k with alpha beta = -6; area of parallelogram of diagonals (a+b) and (b+c) = sqrt21/2; (alpha1, beta1), (alpha2, beta2); alpha1^2 + beta1^2 - alpha2 beta2",
+    "text": "a = 2i + alpha j + k, b = -i + j + k, c = beta j - k with alpha beta = -6; area of parallelogram of diagonals (a+b) and (b+c) = sqrt21/2; (alpha1, beta1), (alpha2, beta2); $alpha1^{2}$ + $beta1^{2}$ - alpha2 beta2",
     "options": [
       {
         "key": "1",
@@ -5126,7 +5126,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Roots of x^2 + sqrt2 x - 8 = 0 and recurrence U_n = alpha^n + beta^n; ratio (U10 + sqrt2 U9)/(2 U8) = 70 ... key from printed answer",
-    "text": "alpha, beta roots of x^2 + sqrt2 x - 8 = 0; U_n = alpha^n + beta^n; (U10 + sqrt2 U9)/(2 U8)",
+    "text": "alpha, beta roots of $x^{2}$ + sqrt2 x - 8 = 0; $U_{n}$ = $alpha^{n}$ + $beta^{n}$; (U10 + sqrt2 U9)/(2 U8)",
     "options": [],
     "correct_answer": [
       "70"
@@ -5174,7 +5174,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "S(x) = sum k(1+x)^k; evaluate at x = 60 and match to a(b)^b + b; a + b = 1011; key from printed answer",
-    "text": "S(x) = (1+x) + 2(1+x)^2 + ... + 60(1+x)^60 for x != 0; (60)^2 S(60) = a b^b + b with a, b in N; a + b",
+    "text": "S(x) = (1+x) + 2(1+x)^2 + ... + 60(1+x)^60 for x != 0; (60)^2 S(60) = a $b^{b}$ + b with a, b in N; a + b",
     "options": [],
     "correct_answer": [
       "1011"
@@ -5222,7 +5222,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Parabola y^2 = 6x; line AB meets line L through C at D; M, N feet of perpendiculars; (AM BN / CD)^2 = 36; key from printed answer",
-    "text": "Points A, B on y^2 = 6x; line AB meets line L through C parallel to x-axis at D; M, N feet of perpendiculars from A, B to L; (AM.BN/CD)^2",
+    "text": "Points A, B on $y^{2}$ = 6x; line AB meets line L through C parallel to x-axis at D; M, N feet of perpendiculars from A, B to L; (AM.BN/CD)^2",
     "options": [],
     "correct_answer": [
       "36"
@@ -5270,7 +5270,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Chords of circle x^2+y^2=4 through (alpha,0) bisected by parabola y^2=8x; interval (p,q) for alpha; (2q-p)^2 = 80; key from printed answer",
-    "text": "Circle x^2+y^2=4 and parabola y^2=8x; chords of circle through (alpha,0) on three distinct lines bisected by parabola; set of alpha is (p,q); (2q-p)^2",
+    "text": "Circle $x^{2}$+$y^{2}$=4 and parabola $y^{2}$=8x; chords of circle through (alpha,0) on three distinct lines bisected by parabola; set of alpha is (p,q); (2q-p)^2",
     "options": [],
     "correct_answer": [
       "80"
@@ -5318,7 +5318,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "AX = B has negative solution for m in (a,b); 8 integral |A| dm = 450; key from printed answer",
-    "text": "A = [[2,-5],[3,m]], B = [[20],[m]]; set of m for which AX = B has negative solution (x<0, y<0) is (a,b); value of 8 integral_a^b |A| dm",
+    "text": "A = [[2,-5],[3,m]], B = [[20],[m]]; set of m for which AX = B has negative solution (x<0, y<0) is (a,b); value of 8 $integral_{a}$^b |A| dm",
     "options": [],
     "correct_answer": [
       "450"
@@ -5366,7 +5366,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "2 sin^-1 x + 3 cos^-1 x = 2pi/5 has no real solution with principal values; key from printed answer",
-    "text": "Number of real solutions of 2 sin^-1 x + 3 cos^-1 x = 2pi/5 with principal values",
+    "text": "Number of real solutions of 2 $sin^{-1}$ x + 3 $cos^{-1}$ x = 2pi/5 with principal values",
     "options": [],
     "correct_answer": [
       "0"
@@ -5462,7 +5462,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "f' = 3f + alpha with f(0) = 1 and lim f = 7 gives f(x) = 7 - 6e^(3x); f(-log 3) = 7 - 6/27... key from printed answer",
-    "text": "f: R -> R, f'(x) = 3f(x) + alpha, f(0) = 1, lim_(x -> -inf) f(x) = 7; value of 9 f(-log_e 3)",
+    "text": "f: R -> R, f'(x) = 3f(x) + alpha, f(0) = 1, $lim_{x -> -inf}$ f(x) = 7; value of 9 f(-$log_{e}$ 3)",
     "options": [],
     "correct_answer": [
       "61"
@@ -5510,7 +5510,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Critical point condition for f(x) = (p^2 - 6p + 8)(sin^2 2x - cos^2 2x) + 2(2-p)x + 7; set of p with no critical point gives (a,b); 16ab = 252; key from printed answer",
-    "text": "f(x) = (p^2 - 6p + 8)(sin^2 2x - cos^2 2x) + 2(2-p)x + 7 has no critical point for p in (a,b); 16ab",
+    "text": "f(x) = ($p^{2}$ - 6p + 8)($sin^{2}$ 2x - $cos^{2}$ 2x) + 2(2-p)x + 7 has no critical point for p in (a,b); 16ab",
     "options": [],
     "correct_answer": [
       "252"

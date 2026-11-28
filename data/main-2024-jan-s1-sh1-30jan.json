@@ -32,7 +32,7 @@
     "question_type": "single",
     "difficulty": "easy",
     "difficulty_reason": "Rated from the stem: matching dimensions.",
-    "text": "Match List-I with List-II. List-I: A. Coefficient of viscosity; B. Surface Tension; C. Angular momentum; D. Rotational kinetic energy. List-II: I. [ML^2T^-2]; II. [ML^2T^-1]; III. [ML^-1T^-1]; IV. [ML^0T^-2].",
+    "text": "Match List-I with List-II. List-I: A. Coefficient of viscosity; B. Surface Tension; C. Angular momentum; D. Rotational kinetic energy. List-II: I. [$ML^{2T}$^-2]; II. [$ML^{2T}$^-1]; III. [$ML^{-1T}$^-1]; IV. [$ML^{0T}$^-2].",
     "options": [
       {
         "key": "1",

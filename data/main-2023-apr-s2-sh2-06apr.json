@@ -532,7 +532,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Key from printed answer key page",
-    "text": "Metal block of mass m on wire of diameter 14 mm with tensile stress 7×10^5 N/m²; mass m (kg), g = 9.8, π = 22/7",
+    "text": "Metal block of mass m on wire of diameter 14 mm with tensile stress 7×$10^{5}$ N/m²; mass m (kg), g = 9.8, π = 22/7",
     "options": [],
     "correct_answer": [
       "4"
@@ -754,7 +754,7 @@
     "tags": [
       "rms speed of gas molecules"
     ],
-    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key (1) = v0/4; expected 2v0 (option 4) if v_rms ∝ √T",
+    "source_notes": "Stem, options and answer key transcribed from the MathonGo PDF (Shift 2, 06 Apr 2023); answer is the printed key. CHECK: printed key (1) = v0/4; expected 2v0 (option 4) if $v_{rms}$ ∝ √T",
     "verified": false,
     "verified_against": "stem and options read from PDF page images; answer taken from printed key; second-pass check pending",
     "subtopics": [
@@ -973,7 +973,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Key from printed answer key page",
-    "text": "12.8 eV needed to separate hydrogen atom; orbital radius of electron given as (9/x)×10^−10 m; value of x",
+    "text": "12.8 eV needed to separate hydrogen atom; orbital radius of electron given as (9/x)×$10^{-10}$ m; value of x",
     "options": [],
     "correct_answer": [
       "2"
@@ -1304,7 +1304,7 @@
     "question_type": "integer",
     "difficulty": "medium",
     "difficulty_reason": "Key from printed answer key page",
-    "text": "Concentric coils radii 1 cm and 1000 cm with 10 and 200 turns; mutual inductance (×10^−8 H), π² = 10",
+    "text": "Concentric coils radii 1 cm and 1000 cm with 10 and 200 turns; mutual inductance (×$10^{-8}$ H), π² = 10",
     "options": [],
     "correct_answer": [
       "5"
@@ -1425,22 +1425,22 @@
     "options": [
       {
         "key": "1",
-        "text": "(1) U_E = E²/(2ε0), U_B = B²/(2μ0)",
+        "text": "(1) $U_{E}$ = E²/(2ε0), $U_{B}$ = B²/(2μ0)",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) U_E = ε0E²/2, U_B = B²/(2μ0)",
+        "text": "(2) $U_{E}$ = ε0E²/2, $U_{B}$ = B²/(2μ0)",
         "image": null
       },
       {
         "key": "3",
-        "text": "(3) U_E = ε0E²/2, U_B = μ0B²/2",
+        "text": "(3) $U_{E}$ = ε0E²/2, $U_{B}$ = μ0B²/2",
         "image": null
       },
       {
         "key": "4",
-        "text": "(4) U_E = E²/(2ε0), U_B = μ0B²/2",
+        "text": "(4) $U_{E}$ = E²/(2ε0), $U_{B}$ = μ0B²/2",
         "image": null
       }
     ],
@@ -1628,7 +1628,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Key from printed answer key page",
-    "text": "Two wavelengths 7000 Å and 5500 Å in Young's double slit; slit separation 2.5 mm, screen at 150 cm; least distance of coincidence from central fringe n × 10^−5 m; value of n",
+    "text": "Two wavelengths 7000 Å and 5500 Å in Young's double slit; slit separation 2.5 mm, screen at 150 cm; least distance of coincidence from central fringe n × $10^{-5}$ m; value of n",
     "options": [],
     "correct_answer": [
       "20"
@@ -2217,7 +2217,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Key from printed answer key page",
-    "text": "PCl3 + Cl2 ⇌ PCl5 at 298 K; equilibrium concentrations given; equilibrium PCl5 after adding 0.2 mol Cl2 (×10^−2 mol/L)",
+    "text": "PCl3 + Cl2 ⇌ PCl5 at 298 K; equilibrium concentrations given; equilibrium PCl5 after adding 0.2 mol Cl2 (×$10^{-2}$ mol/L)",
     "options": [],
     "correct_answer": [
       "4"
@@ -4147,7 +4147,7 @@
     "question_type": "single",
     "difficulty": "medium",
     "difficulty_reason": "Key from printed answer key page",
-    "text": "Statements S1: 2023^2022 − 1999^2022 divisible by 8; S2: 13(13)^n − 11n − 13 divisible by 144 for infinitely many n",
+    "text": "Statements S1: $2023^{2022}$ − $1999^{2022}$ divisible by 8; S2: 13(13)^n − 11n − 13 divisible by 144 for infinitely many n",
     "options": [
       {
         "key": "1",
@@ -4381,7 +4381,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Key from printed answer key page",
-    "text": "lim (n→∞) of product (2^(1/x) − 2^(1/x)) ... expression",
+    "text": "lim (n→∞) of product ($2^{1/x}$ − $2^{1/x}$) ... expression",
     "options": [
       {
         "key": "1",
@@ -5008,7 +5008,7 @@
     "question_type": "integer",
     "difficulty": "hard",
     "difficulty_reason": "Key from printed answer key page",
-    "text": "f(x) = x/(1+xⁿ)^(1/n); limit of ∫₀¹ x^(n−2) f^n(x) dx as n→∞",
+    "text": "f(x) = x/(1+xⁿ)^(1/n); limit of ∫₀¹ $x^{n-2}$ $f^{n}$(x) dx as n→∞",
     "options": [],
     "correct_answer": [
       "432"
@@ -5125,16 +5125,16 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Key from printed answer key page",
-    "text": "Solution curve f(x,y)=0 of (1+log x)dx/dy − x log x = e^y through (1,0) and (a,2); a^a value",
+    "text": "Solution curve f(x,y)=0 of (1+log x)dx/dy − x log x = $e^{y}$ through (1,0) and (a,2); $a^{a}$ value",
     "options": [
       {
         "key": "1",
-        "text": "(1) e^(2e²)",
+        "text": "(1) $e^{2e²}$",
         "image": null
       },
       {
         "key": "2",
-        "text": "(2) e^(e²)",
+        "text": "(2) $e^{e²}$",
         "image": null
       },
       {
@@ -5144,7 +5144,7 @@
       },
       {
         "key": "4",
-        "text": "(4) e^(2e√2)",
+        "text": "(4) $e^{2e√2}$",
         "image": null
       }
     ],

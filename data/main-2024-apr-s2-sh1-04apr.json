@@ -4937,7 +4937,7 @@
     "question_type": "single",
     "difficulty": "hard",
     "difficulty_reason": "Rated from the stem: value of alpha squared plus beta squared for continuity.",
-    "text": "Let $f:\\mathbb R\\to\\mathbb R$ be a function given by $f(x)=\\begin{cases}\\frac{1-\\cos2\\alpha x}{x^2},&x<0\\\\\\alpha,&x=0\\\\\\frac{\\\\beta\\\\sqrt{1-\\\\cos x}}{x},&x>0\\end{cases}$, where $\\alpha,\\beta\\in\\mathbb R$. If $f$ is continuous at $x=0$, then $\\alpha^2+\\beta^2$ is equal to:",
+    "text": "Let $f:\\mathbb R\\to\\mathbb R$ be a function given by $f(x)=\\begin{cases}\\frac{1-\\cos2\\alpha x}{x^2},&x<0\\\\\\alpha,&x=0\\\\\\frac{\\beta\\sqrt{1-\\cos x}}{x},&x>0\\end{cases}$, where $\\alpha,\\beta\\in\\mathbb R$. If $f$ is continuous at $x=0$, then $\\alpha^2+\\beta^2$ is equal to:",
     "options": [
       {
         "key": "1",
